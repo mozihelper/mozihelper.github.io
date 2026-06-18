@@ -3689,7 +3689,7 @@ window.showMyDevices = function () {
         $$\alpha_0 \mathcal{A}^{m-1} v + \alpha_1 \mathcal{A}^m v + \ldots + \alpha_{m-1} \mathcal{A}^{2m-2} v = 0.$$
         Так как $\mathcal{A}^m = 0$, все слагаемые кроме первого обнуляются: $\alpha_0 \mathcal{A}^{m-1} v = 0$. Но $\mathcal{A}^{m-1} v \ne 0$, значит $\alpha_0 = 0$.
         <br><br>
-        Получаем зависимость $\alpha_1 \mathcal{A} v + \ldots + \alpha_{m-1} \mathcal{A}^{m-1} v = 0$. Применяя $\mathcal{A}^{m-2}$, аналогично получаем $\alpha_1 = 0$. По индукции все $\alpha_j = 0$. Значит, система линейно независима. ∎
+        Получаем зависимость $\alpha_1 \mathcal{A} v + \ldots + \alpha_{m-1} \mathcal{A}^{m-1} v = 0$. Применяя $\mathcal{A}^{m-2}$, аналогично получаем $\alpha_1 = 0$. По индукции все $\alpha_j = 0$. Значит, система линейно независима.
       </div>
     </div>
 
@@ -3844,7 +3844,7 @@ window.showMyDevices = function () {
       <div class="def-text">
         Пусть $u, v \in V(\lambda)$: $(\mathcal{A} - \lambda\mathcal{E})^s u = 0$, $(\mathcal{A} - \lambda\mathcal{E})^t v = 0$. Возьмём $m = \max(s, t)$, тогда
         $$(\mathcal{A} - \lambda\mathcal{E})^m(\alpha u + \beta v) = \alpha(\mathcal{A} - \lambda\mathcal{E})^m u + \beta(\mathcal{A} - \lambda\mathcal{E})^m v = 0.$$
-        Значит, $\alpha u + \beta v \in V(\lambda)$. ∎
+        Значит, $\alpha u + \beta v \in V(\lambda)$.
       </div>
     </div>
 
@@ -5377,7 +5377,7 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
         <div class="ra73-ln" data-step="6">Поэтому $\langle \overrightarrow{M_1 M_0}, N\rangle = \langle \overrightarrow{M_1 F}, N\rangle + \langle \overrightarrow{F M_0}, N\rangle = d\,|N|$, откуда длина проекции $\overrightarrow{M_1 M_0}$ на $N$ равна</div>
         <div class="ra73-ln" data-step="7">$$\frac{|\langle \overrightarrow{M_1 M_0},\, N\rangle|}{|N|} = \frac{d\,|N|}{|N|} = d.$$</div>
         <div class="ra73-ln" data-step="8">Вычислим $\langle \overrightarrow{M_1 M_0}, N\rangle$ в координатах: $\overrightarrow{M_1 M_0} = \{x_0 - x_1,\, y_0 - y_1\}$, поэтому $\langle \overrightarrow{M_1 M_0}, N\rangle = A(x_0 - x_1) + B(y_0 - y_1) = A x_0 + B y_0 + C$.</div>
-        <div class="ra73-ln" data-step="9">Итог: $d = \dfrac{|A x_0 + B y_0 + C|}{\sqrt{A^2 + B^2}}$. $\;\blacksquare$</div>
+        <div class="ra73-ln" data-step="9">Итог: $d = \dfrac{|A x_0 + B y_0 + C|}{\sqrt{A^2 + B^2}}$.</div>
       </div></div>
 
       <div class="ra73-block"><div class="ra73-sec">Расстояние от точки до плоскости</div><div class="ra73-text">
@@ -5393,7 +5393,7 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
         <div class="ra73-ln" data-step="16">Поэтому $\langle \overrightarrow{M_1 M_0}, N\rangle = \langle \overrightarrow{M_1 F}, N\rangle + \langle \overrightarrow{F M_0}, N\rangle = d\,|N|$, откуда длина проекции $\overrightarrow{M_1 M_0}$ на $N$ равна</div>
         <div class="ra73-ln" data-step="17">$$\frac{|\langle \overrightarrow{M_1 M_0},\, N\rangle|}{|N|} = \frac{d\,|N|}{|N|} = d.$$</div>
         <div class="ra73-ln" data-step="18">Вычислим $\langle \overrightarrow{M_1 M_0}, N\rangle$ в координатах: $\overrightarrow{M_1 M_0} = \{x_0 - x_1,\, y_0 - y_1,\, z_0 - z_1\}$, поэтому $\langle \overrightarrow{M_1 M_0}, N\rangle = A x_0 + B y_0 + C z_0 + D$.</div>
-        <div class="ra73-ln" data-step="19">Итог: $d = \dfrac{|A x_0 + B y_0 + C z_0 + D|}{\sqrt{A^2 + B^2 + C^2}}$. $\;\blacksquare$</div>
+        <div class="ra73-ln" data-step="19">Итог: $d = \dfrac{|A x_0 + B y_0 + C z_0 + D|}{\sqrt{A^2 + B^2 + C^2}}$.</div>
       </div></div>
 
       <div class="ra73-block"><div class="ra73-sec">Угол между прямыми</div><div class="ra73-text">
@@ -6080,6 +6080,8 @@ function DOT(x,y,r,c,a){ctx.fillStyle=hxa(c,a);ctx.beginPath();ctx.arc(x,y,r,0,6
 function TX(s,x,y,c,sz,al,a,wt){ctx.fillStyle=hxa(c,a);ctx.font=(wt||"600")+" "+(sz||13)+"px -apple-system,system-ui,'Segoe UI',sans-serif";ctx.textAlign=al||"left";ctx.textBaseline="alphabetic";ctx.fillText(s,x,y);}
 function lerp(a,b,g){return a+(b-a)*g;}
 function dist(a,b){return Math.hypot(a[0]-b[0],a[1]-b[1]);}
+function cl(v){return v<0?0:(v>1?1:v);}
+function LD(x1,y1,x2,y2,fr,c,w,a){if(fr<=0)return;L(x1,y1,x1+(x2-x1)*fr,y1+(y2-y1)*fr,c,w,a);}
 
 // геометрия эллипса
 var cx=340,cy=215,A=210,B=130,Cc=165;
@@ -6087,8 +6089,14 @@ var F1=[cx-Cc,cy],F2=[cx+Cc,cy];
 function E(th){return [cx+A*Math.cos(th),cy-B*Math.sin(th)];}
 var CURVE=[];for(var k=0;k<=120;k++)CURVE.push(E(k/120*2*Math.PI));
 
-function axes(al){L(95,cy,585,cy,C.mute,1,0.5*al);L(cx,55,cx,378,C.mute,1,0.4*al);}
-function foci(al){DOT(F1[0],F1[1],5,C.ink,al);TX("F\u2081",F1[0]-7,F1[1]+22,C.ink,14,"center",al);DOT(F2[0],F2[1],5,C.ink,al);TX("F\u2082",F2[0]+1,F2[1]+22,C.ink,14,"center",al);DOT(cx,cy,3,C.mute,0.8*al);}
+function setup(p){
+  var ax=eC(cl(p/0.55));
+  LD(cx,cy,95,cy,ax,C.mute,1,0.5);LD(cx,cy,585,cy,ax,C.mute,1,0.5);
+  LD(cx,cy,cx,55,ax,C.mute,1,0.4);LD(cx,cy,cx,378,ax,C.mute,1,0.4);
+  var d=eC(cl((p-0.6)/0.4));
+  if(d>0){DOT(F1[0],F1[1],5*d,C.ink,1);DOT(F2[0],F2[1],5*d,C.ink,1);DOT(cx,cy,3*d,C.mute,0.8);
+    TX("F\u2081",F1[0]-7,F1[1]+22,C.ink,14,"center",d);TX("F\u2082",F2[0]+1,F2[1]+22,C.ink,14,"center",d);}
+}
 function sumBar(r1,r2){var bx=158,by=400,sc=372/(2*A);var w1=r1*sc,w2=r2*sc;
   L(bx,by,bx+372,by,C.mute,7,0.18);
   ctx.strokeStyle=hxa(C.blue,0.95);ctx.lineWidth=7;ctx.lineCap="butt";ctx.beginPath();ctx.moveTo(bx,by);ctx.lineTo(bx+w1,by);ctx.stroke();
@@ -6097,8 +6105,7 @@ function sumBar(r1,r2){var bx=158,by=400,sc=372/(2*A);var w1=r1*sc,w2=r2*sc;
   TX("r\u2081+r\u2082 = 2a",bx+186,by+16,C.soft,12,"center",0.9);}
 
 function figDraw(ph,t){ctx.clearRect(0,0,Wd,Ht);var te=eC(t);
-  axes(ph===0?te:1);
-  foci(ph===0?te:1);
+  setup(ph===0?t:1);
   if(ph>=1)PLf(CURVE,ph===1?te:1,C.blue,2.6,ph===1?1:0.95);
   if(ph>=2){
     var th=(ph>=3)?(Math.PI/2+2*Math.PI*te):Math.PI/2;
@@ -6113,7 +6120,7 @@ function figDraw(ph,t){ctx.clearRect(0,0,Wd,Ht);var te=eC(t);
 }
 
 var PH=[
-  {d:2000,cap:"\u0414\u0432\u0430 \u0444\u043e\u043a\u0443\u0441\u0430 F\u2081 \u0438 F\u2082"},
+  {d:2400,cap:"\u0414\u0432\u0430 \u0444\u043e\u043a\u0443\u0441\u0430 F\u2081 \u0438 F\u2082"},
   {d:2800,cap:"\u0427\u0435\u0440\u0442\u0438\u043c \u044d\u043b\u043b\u0438\u043f\u0441"},
   {d:2400,cap:"\u0424\u043e\u043a\u0430\u043b\u044c\u043d\u044b\u0435 \u0440\u0430\u0434\u0438\u0443\u0441\u044b r\u2081 \u0438 r\u2082"},
   {d:6000,cap:"\u0421\u0443\u043c\u043c\u0430 r\u2081 + r\u2082 = 2a \u043f\u043e\u0441\u0442\u043e\u044f\u043d\u043d\u0430"}
@@ -6287,6 +6294,9 @@ function DOT(x,y,r,c,a){ctx.fillStyle=hxa(c,a);ctx.beginPath();ctx.arc(x,y,r,0,6
 function TX(s,x,y,c,sz,al,a,wt){ctx.fillStyle=hxa(c,a);ctx.font=(wt||"600")+" "+(sz||13)+"px -apple-system,system-ui,'Segoe UI',sans-serif";ctx.textAlign=al||"left";ctx.textBaseline="alphabetic";ctx.fillText(s,x,y);}
 function lerp(a,b,g){return a+(b-a)*g;}
 function dist(a,b){return Math.hypot(a[0]-b[0],a[1]-b[1]);}
+function cl(v){return v<0?0:(v>1?1:v);}
+function LD(x1,y1,x2,y2,fr,c,w,a){if(fr<=0)return;L(x1,y1,x1+(x2-x1)*fr,y1+(y2-y1)*fr,c,w,a);}
+function DLp(x1,y1,x2,y2,fr,c,w,a){if(fr<=0)return;ctx.save();ctx.setLineDash([6,5]);L(x1,y1,x1+(x2-x1)*fr,y1+(y2-y1)*fr,c,w,a);ctx.restore();}
 
 // геометрия гиперболы x²/a²−y²/b²=1
 var cx=340,cy=215,A=90,B=130,Cc=158;
@@ -6297,9 +6307,17 @@ function HL(u){return [cx-A*Math.cosh(u),cy-B*Math.sinh(u)];}  // левая в�
 var RB=[],LB=[];for(var k=0;k<=60;k++){var u=-UM+k/60*2*UM;RB.push(HR(u));LB.push(HL(u));}
 var asW=170*A/B; // полу-х-диапазон асимптот, чтобы y не вышел
 
-function axes(al){L(95,cy,585,cy,C.mute,1,0.5*al);L(cx,52,cx,380,C.mute,1,0.4*al);}
-function asymp(al){DL(cx-asW,cy+170,cx+asW,cy-170,C.mute,1.3,0.55*al);DL(cx-asW,cy-170,cx+asW,cy+170,C.mute,1.3,0.55*al);}
-function foci(al){DOT(F1[0],F1[1],5,C.ink,al);TX("F\u2081",F1[0]-2,F1[1]+22,C.ink,14,"center",al);DOT(F2[0],F2[1],5,C.ink,al);TX("F\u2082",F2[0]+2,F2[1]+22,C.ink,14,"center",al);DOT(V1[0],V1[1],3,C.mute,0.85*al);DOT(V2[0],V2[1],3,C.mute,0.85*al);DOT(cx,cy,2.5,C.mute,0.7*al);}
+function setup(p){
+  var ax=eC(cl(p/0.42));
+  LD(cx,cy,95,cy,ax,C.mute,1,0.5);LD(cx,cy,585,cy,ax,C.mute,1,0.5);
+  LD(cx,cy,cx,52,ax,C.mute,1,0.4);LD(cx,cy,cx,380,ax,C.mute,1,0.4);
+  var asy=eC(cl((p-0.38)/0.4));
+  DLp(cx,cy,cx-asW,cy+170,asy,C.mute,1.3,0.55);DLp(cx,cy,cx+asW,cy-170,asy,C.mute,1.3,0.55);
+  DLp(cx,cy,cx-asW,cy-170,asy,C.mute,1.3,0.55);DLp(cx,cy,cx+asW,cy+170,asy,C.mute,1.3,0.55);
+  var d=eC(cl((p-0.72)/0.28));
+  if(d>0){DOT(F1[0],F1[1],5*d,C.ink,1);DOT(F2[0],F2[1],5*d,C.ink,1);DOT(V1[0],V1[1],3*d,C.mute,0.85);DOT(V2[0],V2[1],3*d,C.mute,0.85);DOT(cx,cy,2.5*d,C.mute,0.7);
+    TX("F\u2081",F1[0]-2,F1[1]+22,C.ink,14,"center",d);TX("F\u2082",F2[0]+2,F2[1]+22,C.ink,14,"center",d);}
+}
 function diffBar(r1,r2){var bx=150,sc=300/(2*Cc);var y1=392,y2=408;var w1=r1*sc,w2=r2*sc;
   L(bx,y1,bx+w1,y1,C.blue,6,0.9);TX("r\u2081",bx-14,y1+4,C.blue,11,"center",1);
   L(bx,y2,bx+w2,y2,C.mm,6,0.9);TX("r\u2082",bx-14,y2+4,C.mm,11,"center",1);
@@ -6308,9 +6326,7 @@ function diffBar(r1,r2){var bx=150,sc=300/(2*Cc);var y1=392,y2=408;var w1=r1*sc,
   TX("2a",bx+(w2+w1)/2,y1-7,C.ink,12,"center",1);}
 
 function figDraw(ph,t){ctx.clearRect(0,0,Wd,Ht);var te=eC(t);
-  axes(ph===0?te:1);
-  if(ph>=0)asymp(ph===0?te:0.9);
-  foci(ph===0?te:1);
+  setup(ph===0?t:1);
   if(ph>=1){PLf(RB,ph===1?te:1,C.blue,2.6,0.95);PLf(LB,ph===1?te:1,C.blue,2.6,0.95);}
   if(ph>=2){
     var u=(ph>=3)?lerp(-UM*0.92,UM*0.92,te):0.62;
@@ -6325,7 +6341,7 @@ function figDraw(ph,t){ctx.clearRect(0,0,Wd,Ht);var te=eC(t);
 }
 
 var PH=[
-  {d:2200,cap:"\u0424\u043e\u043a\u0443\u0441\u044b F\u2081, F\u2082 \u0438 \u0430\u0441\u0438\u043c\u043f\u0442\u043e\u0442\u044b"},
+  {d:2800,cap:"\u0424\u043e\u043a\u0443\u0441\u044b F\u2081, F\u2082 \u0438 \u0430\u0441\u0438\u043c\u043f\u0442\u043e\u0442\u044b"},
   {d:2800,cap:"\u0427\u0435\u0440\u0442\u0438\u043c \u043e\u0431\u0435 \u0432\u0435\u0442\u0432\u0438"},
   {d:2400,cap:"\u0424\u043e\u043a\u0430\u043b\u044c\u043d\u044b\u0435 \u0440\u0430\u0434\u0438\u0443\u0441\u044b r\u2081 \u0438 r\u2082"},
   {d:6000,cap:"\u0420\u0430\u0437\u043d\u043e\u0441\u0442\u044c |r\u2081 \u2212 r\u2082| = 2a \u043f\u043e\u0441\u0442\u043e\u044f\u043d\u043d\u0430"}
@@ -6542,153 +6558,131 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
 <div class="q-card" data-q="84" data-text="парабола фокус директриса фокальный параметр эксцентриситет фокальный радиус">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">84</span>
-    <span class="q-title">Парабола. Фокус, директриса, фокальный параметр, эксцентриситет</span>
+    <span class="q-title">Парабола. Фокус, директриса, фокальный параметр, эксцентриситет параболы, фокальный радиус</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
 <style>
-.q-card[data-q="84"] .ra84-fig{margin:.3rem 0 0}
-.q-card[data-q="84"] .ra84-frame{display:block;background:var(--bg-soft);padding:.6rem;border:1px solid var(--border);border-radius:8px}
-.q-card[data-q="84"] #ra84-cv{width:100%;aspect-ratio:680/430;display:block;background:transparent}
-.q-card[data-q="84"] .ra84-cap{margin-top:.4rem;font-size:.85rem;color:var(--ink-soft);text-align:center;min-height:1em;font-weight:500}
-.q-card[data-q="84"] .ra84-track{height:5px;background:var(--border-soft);border-radius:999px;margin:10px 0 4px;overflow:hidden}
-.q-card[data-q="84"] .ra84-fill{height:100%;width:0;background:var(--ruby);border-radius:999px;transition:width .1s linear}
-.q-card[data-q="84"] .ra84-ctl{display:flex;align-items:center;gap:8px;margin:8px 0 2px;flex-wrap:wrap}
-.q-card[data-q="84"] .ra84-btn{font:inherit;font-size:14px;padding:8px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:.15s}
-.q-card[data-q="84"] .ra84-btn:hover{background:var(--bg-soft);border-color:var(--ink-mute)}
-.q-card[data-q="84"] .ra84-primary{background:var(--ruby);color:#fff;border-color:var(--ruby)}
-.q-card[data-q="84"] .ra84-primary:hover{background:var(--ruby-deep);border-color:var(--ruby-deep);color:#fff}
-.q-card[data-q="84"] .ra84-btn:disabled{opacity:.5;cursor:default}
-.q-card[data-q="84"] .ra84-phase{font-size:13px;color:var(--ink-soft);margin-left:auto}
-.q-card[data-q="84"] .ra84-ico{width:15px;height:15px;display:inline-block;vertical-align:-2px}
-.q-card[data-q="84"] .ra84-scroll{max-height:42vh;overflow-y:auto;-webkit-overflow-scrolling:touch;position:relative;margin-top:.7rem;padding:.2rem .55rem 0 .1rem;border-top:1px solid var(--border-soft)}
-.q-card[data-q="84"] .ra84-scroll{scrollbar-width:thin;scrollbar-color:var(--ink-mute) transparent}
-.q-card[data-q="84"] .ra84-scroll::-webkit-scrollbar{width:9px}
-.q-card[data-q="84"] .ra84-scroll::-webkit-scrollbar-track{background:transparent}
-.q-card[data-q="84"] .ra84-scroll::-webkit-scrollbar-thumb{background:var(--ink-mute);border-radius:8px;border:2px solid var(--bg-card)}
-.q-card[data-q="84"] .ra84-ln{margin:5px 0;line-height:2;color:var(--ink);transition:color .2s ease}
-.q-card[data-q="84"] .ra84-ln.ra84-dim{color:var(--ink-mute)}
-.q-card[data-q="84"] .ra84-ln.ra84-hot{color:var(--ruby)}
-.q-card[data-q="84"] .ra84-ln .ra84-u{transition:color .12s linear}
-.q-card[data-q="84"] .ra84-ln mjx-container{color:inherit}
+.q-card[data-q="84"] .af-fig{margin:.5rem 0 .2rem}
+.q-card[data-q="84"] .af-frame{display:block;background:var(--bg-soft);padding:.6rem;border:1px solid var(--border);border-radius:8px}
+.q-card[data-q="84"] #af84-cv{width:100%;aspect-ratio:680/430;display:block;background:transparent}
+.q-card[data-q="84"] .af-cap{margin-top:.45rem;font-size:.9rem;color:var(--ink-soft);text-align:center;min-height:1.2em;font-weight:600}
+.q-card[data-q="84"] .af-track{height:5px;background:var(--border-soft);border-radius:999px;margin:10px 0 4px;overflow:hidden}
+.q-card[data-q="84"] .af-fill{height:100%;width:0;background:var(--ruby);border-radius:999px;transition:width .08s linear}
+.q-card[data-q="84"] .af-ctl{display:flex;align-items:center;gap:8px;margin:8px 0 2px;flex-wrap:wrap}
+.q-card[data-q="84"] .af-btn{font:inherit;font-size:14px;padding:8px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:.15s}
+.q-card[data-q="84"] .af-btn:hover{background:var(--bg-soft);border-color:var(--ink-mute)}
+.q-card[data-q="84"] .af-primary{background:var(--ruby);color:#fff;border-color:var(--ruby)}
+.q-card[data-q="84"] .af-primary:hover{background:var(--ruby-deep);border-color:var(--ruby-deep);color:#fff}
+.q-card[data-q="84"] .af-btn:disabled{opacity:.5;cursor:default}
+.q-card[data-q="84"] .af-ico{width:15px;height:15px;display:inline-block;vertical-align:-2px}
 </style>
 
     <div class="def-block"><div class="section-tag">Определение</div><div class="def-text">
       <span class="term">Параболой</span> называется геометрическое место точек плоскости, равноудалённых от фиксированной точки $F$ (фокуса) и фиксированной прямой $d$ (директрисы), не проходящей через $F$. Расстояние от фокуса до директрисы — <span class="em">фокальный параметр</span> $p$. Эксцентриситет параболы по определению равен $1$.
     </div></div>
 
-    <div class="ra84-fig">
-      <div class="ra84-frame"><canvas id="ra84-cv"></canvas></div>
-      <div class="ra84-cap" id="ra84-cap">|MF| = расстоянию от M до директрисы</div>
-      <div class="ra84-track"><div class="ra84-fill" id="ra84-prog"></div></div>
-      <div class="ra84-ctl">
-        <button class="ra84-btn ra84-primary ra84-start" disabled><svg class="ra84-ico" viewBox="0 0 16 16" fill="currentColor"><path d="M4 3l9 5-9 5z"/></svg><span class="ra84-starttx">Старт</span></button>
-        <button class="ra84-btn ra84-prev"><svg class="ra84-ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M10 3 5 8l5 5"/></svg>Назад</button>
-        <button class="ra84-btn ra84-next">Далее<svg class="ra84-ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 3l5 5-5 5"/></svg></button>
-        <button class="ra84-btn ra84-replay" title="Сначала"><svg class="ra84-ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 8a5 5 0 1 1-1.5-3.6M13 2.5V5h-2.5"/></svg></button>
-        <span class="ra84-phase">загрузка формул…</span>
+    <div class="af-fig">
+      <div class="af-frame"><canvas id="af84-cv"></canvas></div>
+      <div class="af-cap" id="af84-cap">точки, равноудалённые от фокуса и директрисы</div>
+      <div class="af-track"><div class="af-fill" id="af84-prog"></div></div>
+      <div class="af-ctl">
+        <button class="af-btn af-primary af84-start"><svg class="af-ico" viewBox="0 0 16 16" fill="currentColor"><path d="M4 3l9 5-9 5z"/></svg><span class="af84-tx">Старт</span></button>
+        <button class="af-btn af84-prev"><svg class="af-ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M10 3 5 8l5 5"/></svg>Назад</button>
+        <button class="af-btn af84-next">Далее<svg class="af-ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 3l5 5-5 5"/></svg></button>
+        <button class="af-btn af84-replay" title="Сначала"><svg class="af-ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 8a5 5 0 1 1-1.5-3.6M13 2.5V5h-2.5"/></svg></button>
+        <span class="af-cap" style="margin:0 0 0 auto;min-height:0" id="af84-phase"></span>
       </div>
     </div>
 
-    <div class="ra84-scroll" id="ra84-scroll">
-      <div class="derivation"><div class="derivation-title">Определяющее свойство</div><div class="def-text">
-        <div class="ra84-ln" data-step="0">Парабола — множество точек, равноудалённых от фокуса $F$ и директрисы $d$ (прямой, не проходящей через $F$).</div>
-        <div class="ra84-ln" data-step="1">Фокальный параметр $p$ — это расстояние от фокуса до директрисы; эксцентриситет параболы по определению равен $1$.</div>
-        <div class="ra84-ln" data-step="2">Возьмём точку $M$ на параболе. Её фокальный радиус $r=|MF|$ равен расстоянию от $M$ до директрисы — длине перпендикуляра $MM'$.</div>
-        <div class="ra84-ln" data-step="3">Когда $M$ пробегает параболу, равенство $|MF|=\rho(M,d)$ сохраняется — в этом и состоит определение.</div>
-        <div class="ra84-ln" data-step="4">В канонической системе $F\left(\tfrac{p}{2},0\right)$, директриса $x=-\tfrac{p}{2}$, а фокальный радиус $r=x+\tfrac{p}{2}$.</div>
+    <div class="def-block"><div class="section-tag">В канонической системе</div><div class="def-text">
+        $F\left(\dfrac{p}{2},0\right)$, директриса $x=-\dfrac{p}{2}$, $p>0$. Фокальный радиус точки $M(x,y)$ параболы: $r=x+\dfrac{p}{2}$.
       </div></div>
 
-      <div class="example-card"><div class="example-card-title my-example">Простой пример</div><div class="example-card-body">
+    <div class="example-card"><div class="example-card-title my-example">Простой пример</div><div class="example-card-body">
         $y^2=4x$: здесь $2p=4$, значит $p=2$. Фокус $F(1,0)$, директриса $x=-1$. Точка $(1,2)$ лежит на параболе ($4=4$): расстояние до фокуса $r=1+1=2$, до директрисы $1-(-1)=2$ — равны. ✓
       </div></div>
-    </div>
 
 <script>
 (function(){
-var cv=document.getElementById("ra84-cv");if(!cv)return;var card=cv.closest(".q-card");if(!card)return;
+var cv=document.getElementById("af84-cv");if(!cv)return;var card=cv.closest(".q-card");if(!card)return;
 var ctx=cv.getContext("2d");
-var C={blue:"#1877f2",slate:"#444950",axis:"#8a8d91",lab:"#8a8d91",ink:"#1c1e21",mm:"#e8870c"};
-var INK="#1c1e21",BLUE="#1877f2";
-function readColors(){var cs=getComputedStyle(document.documentElement);function v(n,f){var x=(cs.getPropertyValue(n)||"").trim();return x||f;}C.blue=v('--ruby','#1877f2');C.slate=v('--ink-soft','#444950');C.axis=v('--ink-mute','#8a8d91');C.lab=v('--ink-mute','#8a8d91');C.ink=v('--ink','#1c1e21');C.mm="#e8870c";INK=C.ink;BLUE=C.blue;}
+var C={blue:"#1877f2",ink:"#1c1e21",soft:"#444950",mute:"#8a8d91",mm:"#e8870c"};
+function readColors(){var cs=getComputedStyle(document.documentElement);function v(n,f){var x=(cs.getPropertyValue(n)||"").trim();return x||f;}C.blue=v('--ruby','#1877f2');C.ink=v('--ink','#1c1e21');C.soft=v('--ink-soft','#444950');C.mute=v('--ink-mute','#8a8d91');C.mm="#e8870c";}
 readColors();
 var Wd=680,Ht=430;
-function fit(){var w=cv.clientWidth||640,dpr=Math.min(2,window.devicePixelRatio||1);cv.width=Math.round(w*dpr);cv.height=Math.round(w*Ht/Wd*dpr);var k=w*dpr/Wd;ctx.setTransform(k,0,0,k,0,0);}
+function fit(){var w=cv.clientWidth||640,dpr=Math.min(2,window.devicePixelRatio||1);cv.width=Math.round(w*dpr);cv.height=Math.round(w*Ht/Wd*dpr);ctx.setTransform(w*dpr/Wd,0,0,w*dpr/Wd,0,0);}
 var eC=function(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;};
 function hxa(h,a){h=(h||"#000").trim();if(h[0]!=="#")return h;var s=h.slice(1);if(s.length===3)s=s[0]+s[0]+s[1]+s[1]+s[2]+s[2];var n=parseInt(s,16);return "rgba("+((n>>16)&255)+","+((n>>8)&255)+","+(n&255)+","+(a==null?1:a)+")";}
 function L(x1,y1,x2,y2,c,w,a){ctx.strokeStyle=hxa(c,a);ctx.lineWidth=w||1;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();}
-function DL(a,b,c,w,al){ctx.save();ctx.setLineDash([6,5]);L(a[0],a[1],b[0],b[1],c,w,al==null?0.85:al);ctx.restore();}
-function PL(p,c,w,a){if(p.length<2)return;ctx.strokeStyle=hxa(c,a);ctx.lineWidth=w||1;ctx.lineJoin="round";ctx.lineCap="round";ctx.beginPath();for(var i=0;i<p.length;i++)i?ctx.lineTo(p[i][0],p[i][1]):ctx.moveTo(p[i][0],p[i][1]);ctx.stroke();}
+function DL(x1,y1,x2,y2,c,w,a){ctx.save();ctx.setLineDash([6,5]);L(x1,y1,x2,y2,c,w,a);ctx.restore();}
+function PLf(p,frac,c,w,a){if(p.length<2)return;var m=Math.max(2,Math.floor((p.length-1)*frac)+1);ctx.strokeStyle=hxa(c,a);ctx.lineWidth=w||1;ctx.lineJoin="round";ctx.lineCap="round";ctx.beginPath();for(var i=0;i<m;i++)i?ctx.lineTo(p[i][0],p[i][1]):ctx.moveTo(p[i][0],p[i][1]);ctx.stroke();}
 function DOT(x,y,r,c,a){ctx.fillStyle=hxa(c,a);ctx.beginPath();ctx.arc(x,y,r,0,6.2832);ctx.fill();}
-function TX(s,x,y,c,sz,al,a,wt){ctx.fillStyle=hxa(c,a);ctx.font=(wt||"600")+" "+(sz||11)+"px -apple-system,system-ui,'Segoe UI',sans-serif";ctx.textAlign=al||"left";ctx.textBaseline="alphabetic";ctx.fillText(s,x,y);}
-function ARR(x,y,dx,dy,c,al){var l=Math.hypot(dx,dy);if(l<0.01)return;dx/=l;dy/=l;var h=9,w=4.4;PL([[x,y],[x-dx*h-dy*w,y-dy*h+dx*w],[x-dx*h+dy*w,y-dy*h-dx*w]],c,1,al);ctx.fillStyle=hxa(c,al);ctx.fill();}
-function rAng(cx,cy,ux,uy,vx,vy,sz,c,al){var p1=[cx+ux*sz,cy+uy*sz],p2=[cx+(ux+vx)*sz,cy+(uy+vy)*sz],p3=[cx+vx*sz,cy+vy*sz];PL([p1,p2,p3],c,1.2,al==null?0.8:al);}
-
-// геометрия параболы (открыта вправо, ось горизонтальна)
-var Vx=250,Vy=215,f=60,Fx=310,Dx=190;
-function PXY(Y){return Vx+(Y-Vy)*(Y-Vy)/(4*f);}
-var CURVE=[];for(var _y=58;_y<=372;_y+=4)CURVE.push([PXY(_y),_y]);
-function drawParab(al){PL(CURVE,C.blue,2.5,al);}
-function drawDir(al){L(Dx,46,Dx,384,C.slate,2,al);TX("d",Dx-16,60,C.slate,14,"left",al);}
+function TX(s,x,y,c,sz,al,a,wt){ctx.fillStyle=hxa(c,a);ctx.font=(wt||"600")+" "+(sz||13)+"px -apple-system,system-ui,'Segoe UI',sans-serif";ctx.textAlign=al||"left";ctx.textBaseline="alphabetic";ctx.fillText(s,x,y);}
 function lerp(a,b,g){return a+(b-a)*g;}
-function figDraw(s,t){ctx.clearRect(0,0,Wd,Ht);var te=eC(t);
-  var My=(s===3)?lerp(130,300,te):(s<3?130:300); var Mx=PXY(My);
-  drawDir(1);
-  drawParab(1);
-  DOT(Fx,Vy,4.5,C.ink,1);TX("F",Fx+7,Vy+16,C.ink,14,"left",1);
-  DOT(Vx,Vy,3.5,C.slate,0.9);TX("O",Vx-4,Vy+20,C.lab,12,"left",0.85);
-  if(s>=1){L(Dx,Vy,Fx,Vy,C.slate,1.4,0.6);TX("p",(Dx+Fx)/2-4,Vy-8,C.slate,13,"center",0.9);}
-  if(s>=2){
-    var Mfoot=[Dx,My];
-    L(Mx,My,Fx,Vy,C.mm,2.4,1); // r = MF
-    DL([Mx,My],Mfoot,C.mm,2,1); // перпендикуляр к директрисе
-    rAng(Dx,My,(My<Vy?1:1),0,0,(My<Vy?-1:1),9,C.mm,0.8);
-    DOT(Mx,My,5,C.blue,1);TX("M",Mx+8,My-6,C.ink,14,"left",1);
-    DOT(Dx,My,3.5,C.slate,1);TX("M\u2032",Dx-22,My+5,C.slate,12,"left",0.9);
-    var mid1=[(Mx+Fx)/2,(My+Vy)/2],mid2=[(Mx+Dx)/2,My];
-    TX("r",mid1[0]+4,mid1[1]-4,C.mm,13,"left",1);
-    TX("r",mid2[0]-4,My-7,C.mm,13,"center",1);
-  }
-  if(s>=4){
-    L(150,Vy,470,Vy,C.axis,1,0.6);ARR(470,Vy,1,0,C.axis,0.6);TX("x",466,Vy-7,C.lab,11,"left",0.7);
-    TX("x=\u2212p/2",Dx-2,398,C.slate,12,"center",0.9);
-    TX("p/2",(Vx+Fx)/2-2,Vy+34,C.lab,11,"center",0.85);
+function dist(a,b){return Math.hypot(a[0]-b[0],a[1]-b[1]);}
+function cl(v){return v<0?0:(v>1?1:v);}
+function LD(x1,y1,x2,y2,fr,c,w,a){if(fr<=0)return;L(x1,y1,x1+(x2-x1)*fr,y1+(y2-y1)*fr,c,w,a);}
+
+// геометрия параболы (раскрыта вправо), вершина (Vx,Vy), фокусное расст. f
+var Vx=255,Vy=215,f=62,dymax=140;
+var F=[Vx+f,Vy],DX=Vx-f; // фокус и x директрисы
+function PY(Y){return Vx+(Y-Vy)*(Y-Vy)/(4*f);} // x по вертикали Y
+function P(Y){return [PY(Y),Y];}
+var CURVE=[];for(var k=0;k<=80;k++){var Y=Vy-dymax+k/80*2*dymax;CURVE.push(P(Y));}
+
+function setup(p){
+  var ax=eC(cl(p/0.45));
+  LD(Vx,Vy,150,Vy,ax,C.mute,1,0.5);LD(Vx,Vy,560,Vy,ax,C.mute,1,0.5);
+  LD(Vx,Vy,Vx,58,ax,C.mute,1,0.4);LD(Vx,Vy,Vx,374,ax,C.mute,1,0.4);
+  var dir=eC(cl((p-0.4)/0.4));
+  LD(DX,Vy,DX,60,dir,C.mm,2,0.85);LD(DX,Vy,DX,372,dir,C.mm,2,0.85);
+  if(dir>0.3)TX("d",DX-12,72,C.mm,14,"center",eC(cl((p-0.55)/0.3)));
+  var d=eC(cl((p-0.7)/0.3));
+  if(d>0){DOT(F[0],F[1],5*d,C.ink,1);DOT(Vx,Vy,2.5*d,C.mute,0.7);TX("F",F[0]+4,F[1]+20,C.ink,14,"center",d);}
+}
+function rang(x,y,dx,dy){var s=9;ctx.strokeStyle=hxa(C.mute,0.8);ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(x+dx*s,y);ctx.lineTo(x+dx*s,y+dy*s);ctx.lineTo(x,y+dy*s);ctx.stroke();}
+
+function figDraw(ph,t){ctx.clearRect(0,0,Wd,Ht);var te=eC(t);
+  setup(ph===0?t:1);
+  if(ph>=1)PLf(CURVE,ph===1?te:1,C.blue,2.6,0.95);
+  if(ph>=2){
+    var Y=(ph>=3)?lerp(Vy-dymax*0.96,Vy+dymax*0.96,te):(Vy-95);
+    var M=P(Y);var Mp=[DX,Y];var g=(ph===2)?te:1;
+    var toF=[lerp(M[0],F[0],g),lerp(M[1],F[1],g)];
+    var toD=[lerp(M[0],Mp[0],g),M[1]];
+    L(M[0],M[1],toF[0],toF[1],C.blue,2.4,1);
+    L(M[0],M[1],toD[0],toD[1],C.mm,2.4,1);
+    if(g>0.6)rang(Mp[0],Y,1,(Y<Vy?1:-1));
+    if(g>0.2){TX("r",(M[0]+F[0])/2+3,(M[1]+F[1])/2-5,C.blue,13,"center",g);TX("r",(M[0]+DX)/2,M[1]-7,C.mm,13,"center",g);}
+    DOT(M[0],M[1],5.5,C.ink,1);TX("M",M[0]+11,M[1]+(Y<Vy?-7:16),C.ink,14,"center",1);
+    if(g>0.8)DOT(Mp[0],Mp[1],3.5,C.mm,1);
   }
 }
-var CAP={0:"\u0444\u043e\u043a\u0443\u0441 F \u0438 \u0434\u0438\u0440\u0435\u043a\u0442\u0440\u0438\u0441\u0430 d",1:"p \u2014 \u0440\u0430\u0441\u0441\u0442\u043e\u044f\u043d\u0438\u0435 \u043e\u0442 F \u0434\u043e \u0434\u0438\u0440\u0435\u043a\u0442\u0440\u0438\u0441\u044b",2:"r = |MF| = \u0440\u0430\u0441\u0441\u0442\u043e\u044f\u043d\u0438\u0435 \u0434\u043e d",3:"M \u0434\u0432\u0438\u0436\u0435\u0442\u0441\u044f \u2014 \u0440\u0430\u0432\u0435\u043d\u0441\u0442\u0432\u043e \u0441\u043e\u0445\u0440\u0430\u043d\u044f\u0435\u0442\u0441\u044f",4:"\u043a\u0430\u043d\u043e\u043d: F(p/2,0), x=\u2212p/2, r=x+p/2"};
-var lines=[],durs=[],ri=0,lt=0,running=false,started=false,inited=false,raf=null,lastRi=-1,lastFig="x",hotK=0;
-var NST=5;var ANIM={3:1};
-var STEPDUR={0:3800,1:4200,2:4600,3:5200,4:4600};
+
+var PH=[
+  {d:2600,cap:"\u0424\u043e\u043a\u0443\u0441 F \u0438 \u0434\u0438\u0440\u0435\u043a\u0442\u0440\u0438\u0441\u0430 d"},
+  {d:2800,cap:"\u0427\u0435\u0440\u0442\u0438\u043c \u043f\u0430\u0440\u0430\u0431\u043e\u043b\u0443"},
+  {d:2400,cap:"r = MF = \u0440\u0430\u0441\u0441\u0442\u043e\u044f\u043d\u0438\u0435 \u0434\u043e d"},
+  {d:6000,cap:"|MF| = \u03c1(M, d) \u2014 \u0432\u0441\u0435\u0433\u0434\u0430 \u0440\u0430\u0432\u043d\u044b"}
+];
+var pi=0,lt=0,running=false,started=false,inited=false,raf=null,t0=0;
 function $(s){return card.querySelector(s);}
-function lstep(i){return lines[i]&&lines[i].hasAttribute("data-step")?+lines[i].getAttribute("data-step"):-1;}
-function wrapLine(ln){var kids=[].slice.call(ln.childNodes),frag=document.createDocumentFragment(),units=[];kids.forEach(function(node){if(node.nodeType===3){var t=node.nodeValue;for(var i=0;i<t.length;i++){var s=document.createElement("span");s.className="ra84-u";s.textContent=t[i];frag.appendChild(s);units.push(s);}}else if(node.nodeType===1){node.classList.add("ra84-u");frag.appendChild(node);units.push(node);}});ln.innerHTML="";ln.appendChild(frag);ln._u=units;}
-function figState(){var s=lstep(ri);if(s>=0)return{s:s,t:lt};for(var i=ri-1;i>=0;i--){var ss=lstep(i);if(ss>=0)return{s:ss,t:1};}return{s:0,t:0};}
-function setStates(){INK=C.ink;BLUE=C.blue;for(var i=0;i<lines.length;i++){var ln=lines[i];ln.classList.remove("ra84-dim","ra84-hot");if(!started){if(ln._u)for(var u=0;u<ln._u.length;u++)ln._u[u].style.color="";continue;}if(i<ri){if(ln._u)for(var ua=0;ua<ln._u.length;ua++)ln._u[ua].style.color="";}else if(i>ri){ln.classList.add("ra84-dim");if(ln._u)for(var ub=0;ub<ln._u.length;ub++)ln._u[ub].style.color="";}else{ln.classList.add("ra84-hot");if(ln._u)for(var uc=0;uc<ln._u.length;uc++)ln._u[uc].style.color=INK;}}hotK=0;fillHot();}
-function fillHot(){if(!started)return;var hl=lines[ri];if(!hl||!hl._u)return;var N=hl._u.length,k=Math.round(lt*N);if(k>hotK){for(var i=hotK;i<k;i++)hl._u[i].style.color=BLUE;}else if(k<hotK){for(var j=k;j<hotK;j++)hl._u[j].style.color=INK;}hotK=k;}
-function paint(force){if(!inited)return;if(force||ri!==lastRi){setStates();lastRi=ri;}else{fillHot();}var ff=figState();if(force||ff.s!==lastFig||ANIM[ff.s]){figDraw(ff.s,ff.t);lastFig=ff.s;}var pr=document.getElementById("ra84-prog");if(pr)pr.style.width=((ri+lt)/Math.max(1,lines.length)*100).toFixed(1)+"%";var cap=document.getElementById("ra84-cap");if(cap&&CAP[ff.s])cap.textContent=CAP[ff.s];var ph=$(".ra84-phase");if(ph&&started)ph.textContent="\u0448\u0430\u0433 "+(ri+1)+" / "+lines.length;}
-function intoView(){var sc=document.getElementById("ra84-scroll");if(!sc||!lines[ri])return;var lr=lines[ri].getBoundingClientRect(),sr=sc.getBoundingClientRect();var rel=lr.top-sr.top+sc.scrollTop;var target=rel-sr.height*0.40;sc.scrollTo({top:target<0?0:target,behavior:"smooth"});}
-var _so=document.createElement("canvas");_so.width=168;_so.height=106;var _sc=_so.getContext("2d");
-function sigOf(){try{_sc.clearRect(0,0,168,106);_sc.drawImage(cv,0,0,168,106);var d=_sc.getImageData(0,0,168,106).data,a=0;for(var i=0;i<d.length;i+=4){a=(a*131+d[i]*7+d[i+1]*13+d[i+2]*17+d[i+3]*5)>>>0;}return a;}catch(e){return -1;}}
-var keyLines=[];
-function computeKeySteps(){keyLines=[];if(!lines.length)return;var prev=null;for(var i=0;i<lines.length;i++){var s=lstep(i);if(s<0)continue;figDraw(s,1);var sg=sigOf();if(prev===null||sg!==prev)keyLines.push(i);prev=sg;}if(keyLines.length===0||keyLines[keyLines.length-1]!==lines.length-1)keyLines.push(lines.length-1);}
-function nextKey(){if(!keyLines.length)return Math.min(lines.length-1,ri+1);for(var k=0;k<keyLines.length;k++)if(keyLines[k]>ri)return keyLines[k];return ri;}
-function prevKey(){if(!keyLines.length)return Math.max(0,ri-1);for(var k=keyLines.length-1;k>=0;k--)if(keyLines[k]<ri)return keyLines[k];return ri;}
-var t0=0;
-function frame(ts){if(!running)return;lt=Math.min(1,(ts-t0)/durs[ri]);paint(false);if(lt>=1){if(ri<lines.length-1){ri++;lt=0;t0=ts;intoView();paint(false);raf=requestAnimationFrame(frame);return;}running=false;setBtn();return;}raf=requestAnimationFrame(frame);}
-function run(){started=true;running=true;t0=performance.now()-lt*durs[ri];setBtn();paint(true);raf=requestAnimationFrame(frame);}
+function draw(){figDraw(pi,lt);var pr=document.getElementById("af84-prog");if(pr)pr.style.width=((pi+lt)/PH.length*100).toFixed(1)+"%";var cap=document.getElementById("af84-cap");if(cap)cap.textContent=PH[pi].cap;var ph=document.getElementById("af84-phase");if(ph)ph.textContent=(pi+1)+" / "+PH.length;}
+function setBtn(){var b=$(".af84-start");if(!b)return;var tx=b.querySelector(".af84-tx"),ic=b.querySelector("svg");if(running){if(tx)tx.textContent="\u041f\u0430\u0443\u0437\u0430";if(ic)ic.innerHTML='<rect x="3.6" y="2.4" width="3.5" height="11.2" rx="0.8"></rect><rect x="8.9" y="2.4" width="3.5" height="11.2" rx="0.8"></rect>';}else{if(tx)tx.textContent=(started?(pi===PH.length-1&&lt>=1?"\u0421\u043d\u0430\u0447\u0430\u043b\u0430":"\u041f\u0440\u043e\u0434\u043e\u043b\u0436\u0438\u0442\u044c"):"\u0421\u0442\u0430\u0440\u0442");if(ic)ic.innerHTML='<path d="M4 3l9 5-9 5z"></path>';}}
+function frame(ts){if(!running)return;lt=Math.min(1,(ts-t0)/PH[pi].d);draw();if(lt>=1){if(pi<PH.length-1){pi++;lt=0;t0=ts;raf=requestAnimationFrame(frame);return;}running=false;setBtn();return;}raf=requestAnimationFrame(frame);}
+function play(){started=true;running=true;t0=performance.now()-lt*PH[pi].d;setBtn();raf=requestAnimationFrame(frame);}
 function halt(){running=false;if(raf)cancelAnimationFrame(raf);setBtn();}
-function setBtn(){var btn=$(".ra84-start");if(!btn)return;var el=btn.querySelector(".ra84-starttx");var ic=btn.querySelector("svg.ra84-ico");if(running){if(el)el.textContent="\u041f\u0430\u0443\u0437\u0430";if(ic)ic.innerHTML='<rect x="3.6" y="2.4" width="3.5" height="11.2" rx="0.8"></rect><rect x="8.9" y="2.4" width="3.5" height="11.2" rx="0.8"></rect>';}else{if(el)el.textContent=(started?(ri===lines.length-1&&lt>=1?"\u0421\u043d\u0430\u0447\u0430\u043b\u0430":"\u041f\u0440\u043e\u0434\u043e\u043b\u0436\u0438\u0442\u044c"):"\u0421\u0442\u0430\u0440\u0442");if(ic)ic.innerHTML='<path d="M4 3l9 5-9 5z"></path>';}}
-$(".ra84-start").onclick=function(){if(!inited)return;if(running){halt();}else{if(ri===lines.length-1&&lt>=1){ri=0;lt=0;var _s=document.getElementById("ra84-scroll");if(_s)_s.scrollTo({top:0,behavior:"smooth"});}run();}};
-$(".ra84-replay").onclick=function(){if(!inited)return;halt();ri=0;lt=0;var _s=document.getElementById("ra84-scroll");if(_s)_s.scrollTo({top:0,behavior:"smooth"});started=true;run();};
-$(".ra84-next").onclick=function(){if(!inited)return;halt();started=true;ri=nextKey();lt=1;intoView();paint(true);setBtn();};
-$(".ra84-prev").onclick=function(){if(!inited)return;halt();started=true;ri=prevKey();lt=1;intoView();paint(true);setBtn();};
-function initRA(){if(inited)return;inited=true;lines=[].slice.call(card.querySelectorAll(".ra84-ln"));durs=lines.map(function(ln,i){var s=lstep(i);return s>=0&&STEPDUR[s]?STEPDUR[s]:Math.max(2600,700+ln.textContent.length*15);});lines.forEach(wrapLine);var sb=$(".ra84-start");if(sb)sb.disabled=false;var ph=$(".ra84-phase");if(ph)ph.textContent="\u043d\u0430\u0436\u043c\u0438\u0442\u0435 \u00ab\u0421\u0442\u0430\u0440\u0442\u00bb";readColors();fit();computeKeySteps();paint(true);}
-function rendered(){return card.querySelector(".ra84-ln mjx-container");}
-function pollInit(){var n=0;(function p(){if(inited)return;if(card.classList.contains("open")&&rendered()){fit();setTimeout(initRA,220);return;}if(++n>70)return;setTimeout(p,200);})();}
+$(".af84-start").onclick=function(){if(!inited)return;if(running)halt();else{if(pi===PH.length-1&&lt>=1){pi=0;lt=0;}play();}};
+$(".af84-replay").onclick=function(){if(!inited)return;halt();pi=0;lt=0;started=true;play();};
+$(".af84-next").onclick=function(){if(!inited)return;halt();started=true;if(pi<PH.length-1){pi++;}lt=1;draw();setBtn();};
+$(".af84-prev").onclick=function(){if(!inited)return;halt();started=true;if(pi>0){pi--;}lt=1;draw();setBtn();};
+function initAF(){if(inited)return;inited=true;readColors();fit();pi=0;lt=0;draw();setBtn();}
+function pollInit(){var n=0;(function p(){if(inited)return;if(card.classList.contains("open")&&cv.clientWidth>0){setTimeout(initAF,60);return;}if(++n>80)return;setTimeout(p,180);})();}
 new MutationObserver(function(){if(card.classList.contains("open")&&!inited)pollInit();}).observe(card,{attributes:true,attributeFilter:["class"]});
 if(card.classList.contains("open"))pollInit();
-new MutationObserver(function(){readColors();if(inited){fit();paint(true);}}).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
-if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(true);}}).observe(cv);}else{window.addEventListener("resize",function(){if(inited){fit();paint(true);}});}
+new MutationObserver(function(){readColors();if(inited){fit();draw();}}).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
+if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();draw();}}).observe(cv);}
 })();
 </script>
 
@@ -6761,7 +6755,7 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
         <div class="ra85-ln" data-step="4">По определению параболы $r = \rho$, то есть $\sqrt{\left(x - \frac{p}{2}\right)^2 + y^2} = x + \frac{p}{2}$.</div>
         <div class="ra85-ln" data-step="5">Возводим обе части в квадрат: $\left(x - \frac{p}{2}\right)^2 + y^2 = \left(x + \frac{p}{2}\right)^2$.</div>
         <div class="ra85-ln" data-step="6">Раскрываем: $x^2 - px + \frac{p^2}{4} + y^2 = x^2 + px + \frac{p^2}{4}$.</div>
-        <div class="ra85-ln" data-step="7">Сокращаем $x^2$ и $\frac{p^2}{4}$: получаем $y^2 = 2px$. $\;\blacksquare$</div>
+        <div class="ra85-ln" data-step="7">Сокращаем $x^2$ и $\frac{p^2}{4}$: получаем $y^2 = 2px$.</div>
       </div></div>
     </div>
 
@@ -7195,18 +7189,18 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
   </div>
   <div class="q-body">
 <style>
-.q-card[data-q="90"] .s90-intro{font-size:.95rem;color:var(--ink-soft);margin:.3rem 0 1rem;line-height:1.75}
+.q-card[data-q="90"] .s90-intro{font-size:.95rem;color:var(--ink);margin:.3rem 0 1rem;line-height:1.75}
 .q-card[data-q="90"] .s90-group{margin:1rem 0}
 .q-card[data-q="90"] .s90-gtitle{display:inline-block;font-size:.84rem;font-weight:600;color:var(--ruby);background:var(--purple-glow);padding:3px 12px;border-radius:6px;margin-bottom:.55rem}
 .q-card[data-q="90"] .s90-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:.65rem}
 .q-card[data-q="90"] .s90-tile{background:var(--bg-soft);border:1px solid var(--border-soft);border-radius:10px;padding:.65rem .55rem .7rem;text-align:center;display:flex;flex-direction:column}
 .q-card[data-q="90"] .s90-fig{display:block;width:100%;max-width:165px;height:auto;margin:0 auto .4rem;background:var(--bg-card);border:1px solid var(--border-soft);border-radius:7px}
 .q-card[data-q="90"] .s90-name{font-weight:600;color:var(--ink);font-size:.9rem;line-height:1.25;margin-bottom:.18rem;min-height:2.3em;display:flex;align-items:center;justify-content:center}
-.q-card[data-q="90"] .s90-eq{color:var(--ink);font-size:.86rem;margin-top:auto}
-.q-card[data-q="90"] .s90-note{background:var(--bg-soft);border:1px solid var(--border-soft);border-radius:9px;padding:.6rem .85rem;color:var(--ink-soft);font-size:.9rem;line-height:1.7;margin-top:.3rem}
-.q-card[data-q="90"] .s90-cu{stroke:var(--ruby);stroke-width:1.15;fill:none;stroke-linecap:round;stroke-linejoin:round;opacity:.9}
+.q-card[data-q="90"] .s90-eq{color:var(--ink);font-size:.9rem;font-weight:500;margin-top:auto}
+.q-card[data-q="90"] .s90-note{background:var(--bg-soft);border:1px solid var(--border-soft);border-radius:9px;padding:.6rem .85rem;color:var(--ink);font-size:.9rem;line-height:1.7;margin-top:.3rem}
+.q-card[data-q="90"] .s90-cu{stroke:var(--ruby);stroke-width:1.3;fill:none;stroke-linecap:round;stroke-linejoin:round;opacity:1}
 .q-card[data-q="90"] .s90-out{stroke:var(--ruby);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
-.q-card[data-q="90"] .s90-hid{stroke:var(--ink-mute);stroke-width:.8;fill:none;stroke-dasharray:2.5 2.5;opacity:.4;stroke-linecap:round;stroke-linejoin:round}
+.q-card[data-q="90"] .s90-hid{stroke:var(--ink-mute);stroke-width:.9;fill:none;stroke-dasharray:2.5 2.5;opacity:.6;stroke-linecap:round;stroke-linejoin:round}
 </style>
 
     <div class="s90-intro">Невырожденные поверхности второго порядка в каноническом виде. На каркасах сплошные линии видимы, штриховые — «задние» (скрытые). Центральные имеют центр симметрии, нецентральные — нет.</div>
