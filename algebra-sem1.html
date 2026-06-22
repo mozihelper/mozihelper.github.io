@@ -1913,7 +1913,7 @@ window.showMyDevices = function () {
 </div>
 
 <!-- 2. Идея линейности -->
-<div class="q-card" data-q="2" data-text="идея линейности векторное линейное пространство аксиомы сложение умножение на скаляр поле">
+<div class="q-card" data-q="2" data-text="идея линейности линейные уравнения системы нагретая пластинка линейные методы все разделы математики">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">02</span>
     <span class="q-title">Идея линейности в математике</span>
@@ -1922,30 +1922,25 @@ window.showMyDevices = function () {
   <div class="q-body">
 
     <div class="def-block">
-      <div class="section-tag">Определение</div>
+      <div class="section-tag">Идея линейности</div>
       <div class="def-text">
-        <span class="term">Идея линейности</span> — фундаментальная алгебраическая концепция, основанная на двух операциях: <span class="em">сложении</span> и <span class="em">умножении на скаляр</span> (элемент некоторого поля). Объект, замкнутый относительно этих операций и удовлетворяющий стандартным аксиомам, называется <span class="term">линейным (векторным) пространством</span>.
+        Многие задачи из самых разных разделов математики и её приложений сводятся к <span class="term">линейным уравнениям</span> и их системам. От простейших школьных систем вида
+        $$\begin{cases}ax+by=e,\\ cx+dy=f\end{cases}$$
+        переходят к системе линейных алгебраических уравнений (<span class="term">линейной системе</span>) самого общего вида:
+        $$\begin{cases}a_{11}x_1+a_{12}x_2+\dots+a_{1n}x_n=b_1,\\ a_{21}x_1+a_{22}x_2+\dots+a_{2n}x_n=b_2,\\ \quad\cdots\quad\\ a_{m1}x_1+a_{m2}x_2+\dots+a_{mn}x_n=b_m,\end{cases}$$
+        где $m$ и $n$ — произвольные натуральные числа.
       </div>
     </div>
 
-    <div class="def-block">
-      <div class="section-tag">Аксиомы векторного пространства</div>
-      <div class="def-text">
-        <ul class="props">
-          <li>ассоциативность сложения;</li>
-          <li>коммутативность сложения;</li>
-          <li>существование нулевого вектора;</li>
-          <li>существование противоположного вектора;</li>
-          <li>дистрибутивность умножения на скаляр относительно сложения векторов;</li>
-          <li>дистрибутивность умножения на скаляр относительно сложения скаляров;</li>
-          <li>ассоциативность умножения на скаляры;</li>
-          <li>унитарность (нейтральность единицы поля).</li>
-        </ul>
+    <div class="example-card">
+      <div class="example-card-title my-example">Модельная задача: нагретая пластинка</div>
+      <div class="example-card-body">
+        На пластинку нанесена квадратная сетка; её вершины делятся на <span class="em">граничные</span> (лежащие на контурах) и <span class="em">внутренние</span>. При любом нагревании или охлаждении температура в каждой внутренней вершине равна среднему арифметическому температур четырёх ближайших вершин. Если граничные температуры заданы, то относительно температур во внутренних вершинах возникает система линейных уравнений, а вопрос о существовании и единственности распределения температур — это вопрос о разрешимости и определённости этой линейной системы.
       </div>
     </div>
 
     <div class="explain">
-      Линейные структуры — наиболее простые и хорошо изученные. Сведение задачи к линейной часто позволяет решить её эффективно и точно.
+      Усложнение при переходе от простейших систем к общим имеет принципиальное значение: системы линейных уравнений встречаются практически во всех разделах математики, а <span class="term">линейные методы</span>, конечным продуктом которых часто является решение линейных систем, составляют её наиболее развитую часть. Теория линейных систем в конце XIX века послужила прототипом для создания теории интегральных уравнений.
     </div>
 
   </div>
@@ -6676,10 +6671,108 @@ window.showMyDevices = function () {
   </div>
 </section>
 
+<section class="topic-page" id="page-s25">
+  <div class="topic-header">
+    <div class="topic-eyebrow">Дополнительная тема</div>
+    <h1 class="topic-title">Экономическая модель Леонтьева</h1>
+  </div>
+  <div class="questions-list">
+
+<!-- 169. Модель Леонтьева -->
+<div class="q-card" data-q="169" data-text="модель леонтьева межотраслевой баланс валовой выпуск конечный продукт матрица прямых полных затрат продуктивная">
+  <div class="q-head" onclick="toggleCard(this)">
+    <span class="q-num">169</span>
+    <span class="q-title">Модель Леонтьева многоотраслевой экономики (балансовый анализ)</span>
+    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  </div>
+  <div class="q-body">
+
+    <div class="def-block">
+      <div class="section-tag">Постановка</div>
+      <div class="def-text">
+        Рассматривается $n$ отраслей промышленности, каждая производит свою продукцию; часть её идёт на внутрипроизводственное потребление (своё и других отраслей), часть — на конечное потребление. Обозначим: $x_i$ — валовой объём продукции $i$-й отрасли; $x_{ij}$ — объём продукции $i$-й отрасли, потребляемой $j$-й отраслью; $y_i$ — объём конечного продукта $i$-й отрасли. Соотношения баланса:
+        $$x_i=\sum_{j=1}^{n}x_{ij}+y_i,\quad i=1,\ldots,n.$$
+      </div>
+    </div>
+
+    <div class="def-block">
+      <div class="section-tag">Коэффициенты прямых затрат. Линейность модели</div>
+      <div class="def-text">
+        <span class="term">Коэффициенты прямых затрат</span>
+        $$a_{ij}=\frac{x_{ij}}{x_j}\quad(i,j=1,\ldots,n)$$
+        показывают затраты продукции $i$-й отрасли на производство единицы продукции $j$-й отрасли. В предположении, что $a_{ij}$ постоянны, $\;x_{ij}=a_{ij}x_j$ — это линейная зависимость затрат от валового выпуска, поэтому модель называется <span class="term">линейной</span>. Соотношения баланса принимают вид $\;x_i=\sum_{j=1}^{n}a_{ij}x_j+y_i$.
+      </div>
+    </div>
+
+    <div class="def-block">
+      <div class="section-tag">Матричная форма</div>
+      <div class="def-text">
+        Пусть $X=(x_1,\ldots,x_n)^{\mathsf T}$ — вектор валового выпуска, $Y=(y_1,\ldots,y_n)^{\mathsf T}$ — вектор конечного продукта, $A=(a_{ij})$ — <span class="term">матрица прямых затрат</span> (технологическая, структурная). Тогда баланс записывается в матричном виде:
+        $$X=AX+Y\quad\Longleftrightarrow\quad (E-A)X=Y.$$
+        Если матрица $E-A$ невырождена ($\det(E-A)\neq 0$), то
+        $$X=(E-A)^{-1}Y=SY,$$
+        где $S=(E-A)^{-1}$ — <span class="term">матрица полных затрат</span>. Её элемент $s_{ij}$ — валовой выпуск продукции $i$-й отрасли, необходимый для обеспечения единицы конечного продукта $j$-й отрасли.
+      </div>
+    </div>
+
+    <div class="thm-box">
+      <div class="thm-label">Продуктивная матрица</div>
+      <div class="def-text">
+        Матрица $A\ge 0$ называется <span class="term">продуктивной</span>, если для любого вектора $Y\ge 0$ существует решение $X\ge 0$ уравнения $(E-A)X=Y$; в этом случае и модель Леонтьева называется продуктивной. <span class="em">Один из критериев продуктивности:</span> матрица $A$ ($a_{ij}\ge 0$) продуктивна, если максимум сумм элементов её столбцов не превосходит единицы,
+        $$\max_{j}\sum_{i=1}^{n}a_{ij}\le 1,$$
+        причём хотя бы для одного столбца эта сумма строго меньше $1$.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 170. Пример -->
+<div class="q-card" data-q="170" data-text="модель леонтьева пример энергетика машиностроение матрица полных затрат валовой выпуск расчёт">
+  <div class="q-head" onclick="toggleCard(this)">
+    <span class="q-num">170</span>
+    <span class="q-title">Модель Леонтьева: пример балансового расчёта</span>
+    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  </div>
+  <div class="q-body">
+
+    <div class="example-card">
+      <div class="example-card-title my-example">Пример</div>
+      <div class="example-card-body">
+        Две отрасли — <span class="em">энергетика</span> и <span class="em">машиностроение</span>. По отчётному балансу: $x_1=100$, $x_2=150$, $x_{11}=7$, $x_{12}=21$, $x_{21}=12$, $x_{22}=15$, $y_1=72$, $y_2=123$.
+      </div>
+    </div>
+
+    <div class="derivation">
+      <div class="derivation-title">Решение</div>
+      <div class="def-text">
+        Коэффициенты прямых затрат $a_{ij}=x_{ij}/x_j$:
+        $$A=\begin{pmatrix}0{,}07 & 0{,}14\\ 0{,}12 & 0{,}10\end{pmatrix}.$$
+        Матрица неотрицательна и продуктивна: $\;\max\{0{,}07+0{,}12;\ 0{,}14+0{,}10\}=\max\{0{,}19;\ 0{,}24\}=0{,}24\lt 1$.
+        <br>Найдём валовой выпуск при новом конечном продукте $Y=\begin{pmatrix}144\\ 123\end{pmatrix}$ (потребление энергетики увеличилось вдвое, машиностроения — без изменений):
+        $$E-A=\begin{pmatrix}0{,}93 & -0{,}14\\ -0{,}12 & 0{,}90\end{pmatrix},\qquad \det(E-A)=0{,}8202,$$
+        $$S=(E-A)^{-1}=\frac{1}{0{,}8202}\begin{pmatrix}0{,}90 & 0{,}14\\ 0{,}12 & 0{,}93\end{pmatrix},$$
+        $$X=SY=\frac{1}{0{,}8202}\begin{pmatrix}0{,}90 & 0{,}14\\ 0{,}12 & 0{,}93\end{pmatrix}\begin{pmatrix}144\\ 123\end{pmatrix}=\begin{pmatrix}179{,}0\\ 160{,}5\end{pmatrix}.$$
+      </div>
+    </div>
+
+    <div class="def-block">
+      <div class="section-tag">Ответ</div>
+      <div class="def-text">
+        Необходимый валовой выпуск: энергетика — $179{,}0$, машиностроение — $160{,}5$ (усл. ден. ед.).
+      </div>
+    </div>
+
+  </div>
+</div>
+
+  </div>
+</section>
+
 </main>
 
 <footer>
-  MoziHelper · справочник по линейной алгебре · 1-й семестр · 168 вопросов
+  MoziHelper · справочник по линейной алгебре · 1-й семестр · 170 вопросов
   <div class="footer-note">Сайт находится в разработке и будет дорабатываться со временем.</div>
 </footer>
 
@@ -7024,6 +7117,15 @@ const TOPICS = [
       { n: 168, t: "Условие бездефицитности торговли" },
     ]
   },
+  {
+    id: "s25",
+    title: "Экономическая модель Леонтьева",
+    subtitle: "Дополнительная тема",
+    questions: [
+      { n: 169, t: "Модель Леонтьева многоотраслевой экономики (балансовый анализ)" },
+      { n: 170, t: "Модель Леонтьева: пример балансового расчёта" },
+    ]
+  },
 ];
 
 // ─────────────────────────────────────────────
@@ -7065,6 +7167,8 @@ function buildSidebar() {
       ${sideIcon('moon','navThemeIc')}<span class="side-nav-label" id="navThemeLabel">Светлая тема</span>
     </a>
     <a class="side-nav-item" onclick="showMyDevices()">${sideIcon('devices')}<span class="side-nav-label">Мои устройства</span></a>
+    <a class="side-nav-item" href="literatura.html">${sideIcon('book')}<span class="side-nav-label">Литература</span></a>
+    <a class="side-nav-item" href="links.html"><svg class="side-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span class="side-nav-label">Полезные ссылки</span></a>
   `;
   wrap.appendChild(nav);
 

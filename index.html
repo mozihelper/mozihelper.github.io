@@ -119,6 +119,22 @@
     width: 100%;
   }
 
+  .resources {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    flex-wrap: wrap;
+    font-size: 0.95rem;
+  }
+  .resources a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .resources a:hover { color: var(--accent); }
+  .resources .dot { color: var(--ink-mute); }
+
   .sem-btn {
     flex: 1 1 0;
     min-width: 150px;
@@ -191,6 +207,12 @@
         2 семестр
       </a>
     </nav>
+
+    <div class="resources">
+      <a href="literatura.html">Литература</a>
+      <span class="dot">·</span>
+      <a href="links.html">Полезные ссылки</a>
+    </div>
   </main>
 
   <script>

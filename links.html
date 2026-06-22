@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dusk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MoziHelper — Полезные ссылки</title>
+<script>
+  try { document.documentElement.setAttribute('data-theme', localStorage.getItem('la_theme') || 'dusk'); }
+  catch (e) { document.documentElement.setAttribute('data-theme', 'dusk'); }
+</script>
+<style>
+  :root, [data-theme="dusk"] {
+    --bg:#0a0c10; --bg-card:#13161c; --bg-elev:#1f242c;
+    --ink:#eceef2; --ink-soft:#a4abb8; --ink-mute:#687081;
+    --accent:#5ba4ff; --accent-strong:#2d88ff; --accent-deep:#1877f2;
+    --border:#2a2f38; --topbar-bg:rgba(10,12,16,0.85);
+  }
+  [data-theme="paper"] {
+    --bg:#f0f2f5; --bg-card:#ffffff; --bg-elev:#ffffff;
+    --ink:#1c1e21; --ink-soft:#444950; --ink-mute:#8a8d91;
+    --accent:#1877f2; --accent-strong:#1877f2; --accent-deep:#0d5dc9;
+    --border:#dadde1; --topbar-bg:rgba(255,255,255,0.9); color-scheme:light;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg); color:var(--ink); min-height:100svh;
+    -webkit-font-smoothing:antialiased; line-height:1.5;
+    transition:background .3s,color .3s;
+  }
+  .topbar {
+    position:sticky; top:0; z-index:50; display:flex; align-items:center; gap:1rem;
+    padding:1rem 1.25rem; background:var(--topbar-bg);
+    backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+    border-bottom:1px solid var(--border);
+  }
+  .topbar-home {
+    margin-right:auto; display:inline-flex; align-items:center; gap:.4rem;
+    font-size:.95rem; font-weight:600; color:var(--ink-soft); text-decoration:none; transition:color .2s;
+  }
+  .topbar-home:hover { color:var(--accent); }
+  .topbar-home svg { flex-shrink:0; }
+  .theme-btn {
+    width:40px; height:40px; border:1px solid var(--border); background:var(--bg-card);
+    color:var(--ink-soft); border-radius:10px; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; transition:.2s;
+  }
+  .theme-btn:hover { border-color:var(--accent-strong); color:var(--accent); }
+  .theme-btn svg { width:18px; height:18px; }
+  .theme-btn .icon-sun { display:none; } .theme-btn .icon-moon { display:block; }
+  [data-theme="paper"] .theme-btn .icon-sun { display:block; }
+  [data-theme="paper"] .theme-btn .icon-moon { display:none; }
+
+  main { max-width:760px; margin:0 auto; padding:2rem 1.25rem 4rem; }
+  .page-title { font-size:clamp(1.8rem,5vw,2.4rem); font-weight:600; letter-spacing:-0.015em; margin-bottom:.4rem; }
+  .page-sub { color:var(--ink-soft); margin-bottom:2rem; }
+
+  .res {
+    display:block; background:var(--bg-card); border:1px solid var(--border); border-radius:14px;
+    padding:1.1rem 1.25rem; margin-bottom:1rem; text-decoration:none; color:inherit;
+    transition:border-color .18s, transform .18s;
+  }
+  .res:hover { border-color:var(--accent-strong); transform:translateY(-2px); }
+  .res-title { font-size:1.08rem; font-weight:600; margin-bottom:.25rem; display:flex; align-items:center; gap:.45rem; }
+  .res-title .ext { width:15px; height:15px; color:var(--ink-mute); flex-shrink:0; }
+  .res-url { color:var(--accent); font-size:.88rem; word-break:break-all; margin-bottom:.5rem; }
+  .res-note { color:var(--ink-soft); font-size:.95rem; }
+  @media (prefers-reduced-motion:reduce){ body,.theme-btn,.res{transition:none;} .res:hover{transform:none;} }
+</style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="topbar-home" href="index.html"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg><span>На главную</span></a>
+    <button class="theme-btn" onclick="toggleTheme()" aria-label="Сменить тему">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+  </header>
+
+  <main>
+    <h1 class="page-title">Полезные ссылки</h1>
+    <p class="page-sub">Математическая литература и онлайн-инструменты.</p>
+
+    <a class="res" href="https://eqworld.ipmnet.ru/ru/library/mathematics/algebra.htm" target="_blank" rel="noopener">
+      <div class="res-title">EqWorld — Мир математических уравнений (раздел «Алгебра»)
+        <svg class="ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </div>
+      <div class="res-url">eqworld.ipmnet.ru/ru/library/mathematics/algebra.htm</div>
+      <div class="res-note">Библиотека по математике: книги и материалы по алгебре и другим разделам.</div>
+    </a>
+
+    <a class="res" href="https://matlab.mathworks.com/" target="_blank" rel="noopener">
+      <div class="res-title">MATLAB Online
+        <svg class="ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </div>
+      <div class="res-url">matlab.mathworks.com</div>
+      <div class="res-note">Онлайн-версия пакета MATLAB — вычисления прямо в браузере (нужен аккаунт MathWorks).</div>
+    </a>
+
+    <a class="res" href="https://www.wolframalpha.com/" target="_blank" rel="noopener">
+      <div class="res-title">Wolfram|Alpha
+        <svg class="ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </div>
+      <div class="res-url">wolframalpha.com</div>
+      <div class="res-note">Онлайн-движок на ядре Mathematica: символьные и численные вычисления, матрицы, уравнения.</div>
+    </a>
+  </main>
+
+  <script>
+    function toggleTheme() {
+      var cur = document.documentElement.getAttribute('data-theme') || 'dusk';
+      var next = cur === 'dusk' ? 'paper' : 'dusk';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('la_theme', next); } catch (e) {}
+    }
+  </script>
+</body>
+</html>

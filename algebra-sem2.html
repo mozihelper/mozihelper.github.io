@@ -5208,6 +5208,15 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
       </div>
     </div>
 
+    <div class="derivation">
+      <div class="derivation-title">Доказательство: вектор $N=(A,B)$ ортогонален прямой</div>
+      <div class="def-text">
+        Уравнение $Ax + By + C = 0$ имеет хотя бы одно решение $(x_0, y_0)$, то есть $Ax_0 + By_0 + C = 0$. Вычитая это тождество из общего уравнения, получаем равносильное ему уравнение
+        $$A(x - x_0) + B(y - y_0) = 0.$$
+        Точка $M(x, y)$ лежит на прямой тогда и только тогда, когда векторы $N = (A, B)$ и $\overline{M_0M} = (x - x_0,\ y - y_0)$ ортогональны — их скалярное произведение $A(x - x_0) + B(y - y_0)$ равно нулю. Значит, прямая ортогональна вектору $N = (A, B)$, который и называется <span class="term">нормальным вектором (нормалью) прямой</span>.
+      </div>
+    </div>
+
     <div class="def-block">
       <div class="section-tag">Уравнение в отрезках</div>
       <div class="def-text">
@@ -7678,6 +7687,8 @@ function buildSidebar() {
       ${sideIcon('moon','navThemeIc')}<span class="side-nav-label" id="navThemeLabel">Светлая тема</span>
     </a>
     <a class="side-nav-item" onclick="showMyDevices()">${sideIcon('devices')}<span class="side-nav-label">Мои устройства</span></a>
+    <a class="side-nav-item" href="literatura.html">${sideIcon('book')}<span class="side-nav-label">Литература</span></a>
+    <a class="side-nav-item" href="links.html"><svg class="side-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span class="side-nav-label">Полезные ссылки</span></a>
   `;
   wrap.appendChild(nav);
 
