@@ -110,8 +110,8 @@
 
   .wordmark {
     font-size: clamp(2.8rem, 8vw, 4.4rem);
-    font-weight: 700;
-    letter-spacing: -0.025em;
+    font-weight: 600;
+    letter-spacing: -0.015em;
     line-height: 1.0;
     white-space: nowrap;
     display: flex;
@@ -267,9 +267,11 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    body, .sem-btn, .theme-btn, .res-pill, .sem-arrow { transition: none; }
-    .wordmark .wm-part, .prompt, .semesters, .resources { animation: none; opacity: 1; transform: none; filter: none; }
+    /* появление блоков (название, подзаголовок, карточки, ссылки) оставляем всегда —
+       оно лёгкое и не мешает; гасим только hover-движение, которое может раздражать */
     .sem-btn:hover { transform: none; }
+    .sem-btn:hover .sem-arrow { transform: none; }
+    .res-pill:hover { transform: none; }
   }
 </style>
 </head>
