@@ -170,15 +170,36 @@
     background: var(--bg-card);
     color: var(--ink);
     overflow: hidden;
-    transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    transform-style: preserve-3d;
+    will-change: transform;
+    transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.18s ease, background 0.18s ease;
   }
+  /* блик, пробегающий по карточке при наведении */
+  .sem-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -60%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(255,255,255,0.06), transparent);
+    transform: skewX(-18deg);
+    transition: left 0.6s ease;
+    pointer-events: none;
+  }
+  .sem-btn:hover::after { left: 130%; }
   .sem-btn:hover {
-    transform: translateY(-3px);
     border-color: var(--accent-strong);
     background: var(--bg-soft);
   }
-  .sem-btn:active { transform: translateY(-1px); }
+  .sem-btn:active { transform: translateY(-1px) scale(0.99); }
   .sem-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  /* стрелка улетает вправо при клике */
+  .sem-btn.is-launching .sem-arrow { animation: arrowLaunch 0.26s ease-in forwards; }
+  @keyframes arrowLaunch {
+    to { transform: translateX(28px); opacity: 0; }
+  }
 
   /* левая марка с номером семестра */
   .sem-mark {
@@ -266,17 +287,35 @@
     100% { opacity: 1; transform: translateY(0) rotate(0); filter: blur(0); }
   }
 
+  /* ── Плавная смена темы: круговая волна от кнопки ── */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+  /* старая тема лежит снизу, новая «раскрывается» кругом поверх неё */
+  ::view-transition-old(root) { z-index: 1; }
+  ::view-transition-new(root) { z-index: 2; }
+  ::view-transition-new(root) {
+    animation: waveReveal 0.55s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+  @keyframes waveReveal {
+    from { clip-path: circle(0 at var(--wave-x, 100%) var(--wave-y, 0)); }
+    to   { clip-path: circle(var(--wave-r, 150vmax) at var(--wave-x, 100%) var(--wave-y, 0)); }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     /* появление блоков (название, подзаголовок, карточки, ссылки) оставляем всегда —
        оно лёгкое и не мешает; гасим только hover-движение, которое может раздражать */
     .sem-btn:hover { transform: none; }
     .sem-btn:hover .sem-arrow { transform: none; }
+    .sem-btn::after { display: none; }
     .res-pill:hover { transform: none; }
   }
 </style>
 </head>
 <body>
-  <button class="theme-btn" onclick="toggleTheme()" aria-label="Сменить тему">
+  <button class="theme-btn" onclick="toggleTheme(event)" aria-label="Сменить тему">
     <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
     <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
   </button>
@@ -324,12 +363,65 @@
   </main>
 
   <script>
-    function toggleTheme() {
-      var cur = document.documentElement.getAttribute('data-theme') || 'dusk';
-      var next = cur === 'dusk' ? 'paper' : 'dusk';
+    function applyTheme(next) {
       document.documentElement.setAttribute('data-theme', next);
       try { localStorage.setItem('la_theme', next); } catch (e) {}
     }
+
+    function toggleTheme(ev) {
+      var cur = document.documentElement.getAttribute('data-theme') || 'dusk';
+      var next = cur === 'dusk' ? 'paper' : 'dusk';
+
+      // координаты клика — центр круговой волны (по умолчанию правый верхний угол, где кнопка)
+      var x = (ev && ev.clientX) || window.innerWidth - 32;
+      var y = (ev && ev.clientY) || 32;
+
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // View Transitions API + clip-path круговая волна
+      if (document.startViewTransition && !reduce) {
+        document.documentElement.style.setProperty('--wave-x', x + 'px');
+        document.documentElement.style.setProperty('--wave-y', y + 'px');
+        var end = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+        document.documentElement.style.setProperty('--wave-r', end + 'px');
+        var t = document.startViewTransition(function () { applyTheme(next); });
+        return;
+      }
+      applyTheme(next);
+    }
+
+    // ── 3D-наклон карточек вслед за курсором (только мышь, не трогаем touch) ──
+    (function () {
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var fine = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      if (reduce || !fine) return;
+
+      document.querySelectorAll('.sem-btn').forEach(function (card) {
+        card.addEventListener('pointermove', function (e) {
+          var r = card.getBoundingClientRect();
+          var px = (e.clientX - r.left) / r.width - 0.5;   // -0.5..0.5
+          var py = (e.clientY - r.top) / r.height - 0.5;
+          var MAX = 7; // градусы
+          card.style.transform =
+            'perspective(700px) rotateX(' + (-py * MAX) + 'deg) rotateY(' + (px * MAX) + 'deg) translateY(-3px)';
+        });
+        card.addEventListener('pointerleave', function () {
+          card.style.transform = '';
+        });
+      });
+    })();
+
+    // ── Стрелка «улетает» при клике, затем переход ──
+    document.querySelectorAll('.sem-btn').forEach(function (card) {
+      card.addEventListener('click', function (e) {
+        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var href = card.getAttribute('href');
+        if (reduce || !href) return;            // обычный переход
+        e.preventDefault();
+        card.classList.add('is-launching');
+        setTimeout(function () { window.location.href = href; }, 260);
+      });
+    });
   </script>
 </body>
 </html>

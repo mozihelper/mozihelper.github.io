@@ -1753,6 +1753,12 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
   .q-card { break-inside: avoid; border-color: #999; }
   body { background: white; color: black; }
 }
+
+/* ── Плавная смена темы: круговая волна от кнопки ── */
+::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal;}
+::view-transition-old(root){z-index:1;}
+::view-transition-new(root){z-index:2;animation:waveReveal .55s cubic-bezier(.4,0,.2,1) forwards;}
+@keyframes waveReveal{from{clip-path:circle(0 at var(--wave-x,100%) var(--wave-y,0));}to{clip-path:circle(var(--wave-r,150vmax) at var(--wave-x,100%) var(--wave-y,0));}}
 </style>
 <style id="ra79-style">
 .q-card[data-q="79"] .ra-ln{margin:4px 0;line-height:2;color:var(--ink);transition:color .2s ease}
@@ -7163,7 +7169,7 @@ function buildSidebar() {
   nav.className = 'side-nav';
   nav.innerHTML = `
     <a class="side-nav-item is-home" onclick="showTopic('start')">${sideIcon('home')}<span class="side-nav-label">На главную</span></a>
-    <a class="side-nav-item" id="navTheme" onclick="toggleTheme();updateThemeNavItem();">
+    <a class="side-nav-item" id="navTheme" onclick="toggleTheme(event);updateThemeNavItem();">
       ${sideIcon('moon','navThemeIc')}<span class="side-nav-label" id="navThemeLabel">Светлая тема</span>
     </a>
     <a class="side-nav-item" onclick="showMyDevices()">${sideIcon('devices')}<span class="side-nav-label">Мои устройства</span></a>
@@ -7201,11 +7207,24 @@ function buildSidebar() {
 // ─────────────────────────────────────────────
 // ПЕРЕКЛЮЧЕНИЕ ТЕМЫ (Сумерки / Бумага)
 // ─────────────────────────────────────────────
-function toggleTheme() {
-  var cur = document.documentElement.getAttribute('data-theme') || 'dusk';
-  var next = cur === 'dusk' ? 'paper' : 'dusk';
+function applyTheme(next){
   document.documentElement.setAttribute('data-theme', next);
   try { localStorage.setItem('la_theme', next); } catch(e) {}
+}
+function toggleTheme(ev){
+  var cur = document.documentElement.getAttribute('data-theme') || 'dusk';
+  var next = cur === 'dusk' ? 'paper' : 'dusk';
+  var x = (ev && ev.clientX) || window.innerWidth - 32;
+  var y = (ev && ev.clientY) || 32;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (document.startViewTransition && !reduce) {
+    var r = document.documentElement.style;
+    r.setProperty('--wave-x', x+'px'); r.setProperty('--wave-y', y+'px');
+    r.setProperty('--wave-r', Math.hypot(Math.max(x,innerWidth-x), Math.max(y,innerHeight-y))+'px');
+    document.startViewTransition(function(){ applyTheme(next); });
+    return;
+  }
+  applyTheme(next);
 }
 
 // ─────────────────────────────────────────────

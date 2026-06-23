@@ -66,12 +66,22 @@
   .res-url { color:var(--accent); font-size:.88rem; word-break:break-all; margin-bottom:.5rem; }
   .res-note { color:var(--ink-soft); font-size:.95rem; }
   @media (prefers-reduced-motion:reduce){ body,.theme-btn,.res{transition:none;} .res:hover{transform:none;} }
+
+  /* ── Плавная смена темы: круговая волна от кнопки ── */
+  ::view-transition-old(root),
+  ::view-transition-new(root) { animation:none; mix-blend-mode:normal; }
+  ::view-transition-old(root) { z-index:1; }
+  ::view-transition-new(root) { z-index:2; animation:waveReveal .55s cubic-bezier(.4,0,.2,1) forwards; }
+  @keyframes waveReveal {
+    from { clip-path: circle(0 at var(--wave-x,100%) var(--wave-y,0)); }
+    to   { clip-path: circle(var(--wave-r,150vmax) at var(--wave-x,100%) var(--wave-y,0)); }
+  }
 </style>
 </head>
 <body>
   <header class="topbar">
     <a class="topbar-home" href="index.html"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg><span>На главную</span></a>
-    <button class="theme-btn" onclick="toggleTheme()" aria-label="Сменить тему">
+    <button class="theme-btn" onclick="toggleTheme(event)" aria-label="Сменить тему">
       <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
     </button>
@@ -107,11 +117,24 @@
   </main>
 
   <script>
-    function toggleTheme() {
-      var cur = document.documentElement.getAttribute('data-theme') || 'dusk';
-      var next = cur === 'dusk' ? 'paper' : 'dusk';
+    function applyTheme(next){
       document.documentElement.setAttribute('data-theme', next);
       try { localStorage.setItem('la_theme', next); } catch (e) {}
+    }
+    function toggleTheme(ev){
+      var cur = document.documentElement.getAttribute('data-theme') || 'dusk';
+      var next = cur === 'dusk' ? 'paper' : 'dusk';
+      var x = (ev && ev.clientX) || window.innerWidth - 32;
+      var y = (ev && ev.clientY) || 32;
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (document.startViewTransition && !reduce) {
+        var r = document.documentElement.style;
+        r.setProperty('--wave-x', x+'px'); r.setProperty('--wave-y', y+'px');
+        r.setProperty('--wave-r', Math.hypot(Math.max(x,innerWidth-x), Math.max(y,innerHeight-y))+'px');
+        document.startViewTransition(function(){ applyTheme(next); });
+        return;
+      }
+      applyTheme(next);
     }
   </script>
 </body>
