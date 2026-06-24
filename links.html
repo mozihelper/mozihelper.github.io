@@ -67,6 +67,10 @@
   .res-note { color:var(--ink-soft); font-size:.95rem; }
   @media (prefers-reduced-motion:reduce){ body,.theme-btn,.res{transition:none;} .res:hover{transform:none;} }
 
+  /* ── Scroll-reveal: карточки всплывают при прокрутке ── */
+  .reveal { opacity:0; transform:translateY(22px); transition:opacity .55s ease, transform .55s cubic-bezier(.22,1,.36,1); }
+  .reveal.in { opacity:1; transform:none; }
+
   /* ── Плавная смена темы: круговая волна от кнопки ── */
   ::view-transition-old(root),
   ::view-transition-new(root) { animation:none; mix-blend-mode:normal; }
@@ -136,6 +140,26 @@
       }
       applyTheme(next);
     }
+    // ── Scroll-reveal карточек ──
+    (function(){
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var items = document.querySelectorAll('.res, .page-title, .page-sub');
+      if (!('IntersectionObserver' in window)) {
+        items.forEach(function(el){ el.classList.add('reveal','in'); });
+        return;
+      }
+      items.forEach(function(el){ el.classList.add('reveal'); });
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(en){
+          if (!en.isIntersecting) return;
+          var el = en.target;
+          el.style.transitionDelay = (el._d || 0) + 'ms';
+          el.classList.add('in');
+          io.unobserve(el);
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+      items.forEach(function(el, i){ el._d = (i % 4) * 70; io.observe(el); });
+    })();
   </script>
 </body>
 </html>

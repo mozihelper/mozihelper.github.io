@@ -1381,6 +1381,24 @@ details.topic-group .topic-link {
 }
 .q-card.open .q-body { display: block; }
 
+/* Сноска на источник — ненавязчивая строка внизу карточки */
+.src-ref {
+  margin-top: 1.4rem;
+  padding-top: 0.6rem;
+  border-top: 1px dashed var(--border);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--ink-mute);
+}
+.src-ref::before {
+  content: "📖";
+  margin-right: 0.4rem;
+  opacity: 0.7;
+  font-size: 0.72rem;
+}
+.src-ref .src-book { font-style: italic; }
+.src-ref .src-pg { white-space: nowrap; }
+
 /* Content blocks inside body */
 .def-block {
   margin: 1.2rem 0 0.5rem;
@@ -1754,6 +1772,9 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
   body { background: white; color: black; }
 }
 
+/* ── Scroll-reveal карточек вопросов ── */
+.q-card.reveal { opacity:0; transform:translateY(20px); transition:opacity .5s ease, transform .5s cubic-bezier(.22,1,.36,1); }
+.q-card.reveal.in { opacity:1; transform:none; }
 /* ── Плавная смена темы: круговая волна от кнопки ── */
 ::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal;}
 ::view-transition-old(root){z-index:1;}
@@ -1788,17 +1809,6 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 </style>
 </head>
 <body>
-<script>
-// ============================================================
-// Гейт авторизации (Telegram + Supabase) удалён для публичного
-// статичного хостинга (Netlify). Справочник открывается напрямую.
-// Заглушка, чтобы кнопка «Мои устройства» в меню не падала.
-// ============================================================
-window.showMyDevices = function () {
-  alert('Будет доступно в основной версии сайта.');
-};
-</script>
-
 <!-- ========== TOPBAR ========== -->
 <header class="topbar">
   <a class="topbar-home" href="index.html" aria-label="К выбору семестра"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg><span>Семестры</span></a>
@@ -2613,6 +2623,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+    <div class="src-ref">Кремер, с. 9–10</div>
+
   </div>
 </div>
 
@@ -2673,6 +2685,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Кремер, с. 10–12</div>
   </div>
 </div>
 
@@ -2697,6 +2711,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Кремер, с. 9</div>
   </div>
 </div>
 
@@ -2724,6 +2740,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Кремер, с. 15</div>
   </div>
 </div>
 
@@ -2768,6 +2786,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Кремер, с. 12–13</div>
   </div>
 </div>
 
@@ -2795,6 +2815,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Кремер, с. 13–14</div>
   </div>
 </div>
 
@@ -2825,6 +2847,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Кремер, с. 38</div>
   </div>
 </div>
 
@@ -2855,6 +2879,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Кремер, с. 38–39, 46</div>
   </div>
 </div>
 
@@ -2889,6 +2915,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Кремер, с. 38–39</div>
   </div>
 </div>
 
@@ -2912,6 +2940,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Кремер, с. 39</div>
   </div>
 </div>
 
@@ -2945,6 +2975,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Кремер, с. 46</div>
   </div>
 </div>
 
@@ -2970,6 +3002,8 @@ window.showMyDevices = function () {
 
     <div class="note">Аналогично определяются элементарные преобразования столбцов.</div>
 
+
+    <div class="src-ref">Кремер, с. 39, 46</div>
   </div>
 </div>
 
@@ -3003,6 +3037,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Кремер, с. 39</div>
   </div>
 </div>
 
@@ -3049,6 +3085,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
   </div>
 </div>
 
@@ -3073,6 +3111,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
   </div>
 </div>
 
@@ -3107,6 +3147,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
   </div>
 </div>
 
@@ -3127,6 +3169,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
   </div>
 </div>
 
@@ -3157,6 +3201,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
   </div>
 </div>
 
@@ -3184,6 +3230,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
   </div>
 </div>
 
@@ -3207,6 +3255,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
   </div>
 </div>
 
@@ -3236,6 +3286,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
   </div>
 </div>
 
@@ -3255,6 +3307,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
   </div>
 </div>
 
@@ -3297,6 +3351,8 @@ window.showMyDevices = function () {
       Базис — это наименьший набор векторов, достаточный для получения всего пространства (полнота) и не содержащий лишних элементов (минимальность).
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
   </div>
 </div>
 
@@ -3317,6 +3373,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
   </div>
 </div>
 
@@ -3342,21 +3400,26 @@ window.showMyDevices = function () {
     <div class="def-block">
       <div class="section-tag">Пространство столбцов</div>
       <div class="def-text">
-        <span class="term">Пространство столбцов</span> (или <span class="em">образ</span>) матрицы $A$ — линейная оболочка её вектор-столбцов. Обозначается $\operatorname{Col}(A)$ или $R(A)$:
-        $$\operatorname{Col}(A)=L\{a_1,\ldots,a_n\}=\{y\in\mathbb{R}^m\mid \exists x\in\mathbb{R}^n:\,y=Ax\}\subset\mathbb{R}^m,$$
-        где $a_j$ — $j$-й столбец матрицы $A$.
+        Обозначим через $A^{(j)}$ ($j$ — верхний индекс в круглых скобках) <span class="em">$j$-й столбец</span> матрицы $A$.
+        <br><br>
+        <span class="term">Пространство столбцов</span> (или <span class="em">образ</span>) матрицы $A$ — линейная оболочка её столбцов $\langle A^{(1)},\ldots,A^{(n)}\rangle$ (в литературе также $\operatorname{Col}(A)$, $R(A)$):
+        $$\langle A^{(1)},\ldots,A^{(n)}\rangle=\{y\in\mathbb{R}^m\mid \exists x\in\mathbb{R}^n:\,y=Ax\}\subset\mathbb{R}^m.$$
       </div>
     </div>
 
     <div class="def-block">
       <div class="section-tag">Пространство строк</div>
       <div class="def-text">
-        <span class="term">Пространство строк</span> матрицы $A$ — линейная оболочка её вектор-строк. Обозначается $\operatorname{Row}(A)$:
-        $$\operatorname{Row}(A)=L\{r_1,\ldots,r_m\}\subset\mathbb{R}^n,$$
-        где $r_i$ — $i$-я строка матрицы $A$. Эквивалентно, $\operatorname{Row}(A)=\operatorname{Col}(A^T)$.
+        Обозначим через $A_i$ ($i$ — нижний индекс) <span class="em">$i$-ю строку</span> матрицы $A$.
+        <br><br>
+        <span class="term">Пространство строк</span> матрицы $A$ — линейная оболочка её строк $\langle A_1,\ldots,A_m\rangle$ (в литературе также $\operatorname{Row}(A)$):
+        $$\langle A_1,\ldots,A_m\rangle\subset\mathbb{R}^n.$$
+        Эквивалентно, $\langle A_1,\ldots,A_m\rangle$ совпадает с пространством столбцов матрицы $A^T$.
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
   </div>
 </div>
 
@@ -3373,7 +3436,7 @@ window.showMyDevices = function () {
       <div class="section-tag">Вертикальный (столбцовый) ранг</div>
       <div class="def-text">
         Пусть $A\in\mathbb{R}^{m\times n}$. <span class="term">Вертикальный ранг</span> — максимальное число линейно независимых столбцов матрицы $A$; он равен размерности пространства столбцов (образа):
-        $$r_{\text{верт}}=\dim\operatorname{Col}(A)=\dim\{Ax\mid x\in\mathbb{R}^n\}.$$
+        $$r_{\text{верт}}=\dim\langle A^{(1)},\ldots,A^{(n)}\rangle=\dim\{Ax\mid x\in\mathbb{R}^n\}.$$
       </div>
     </div>
 
@@ -3381,10 +3444,12 @@ window.showMyDevices = function () {
       <div class="section-tag">Горизонтальный (строчный) ранг</div>
       <div class="def-text">
         <span class="term">Горизонтальный ранг</span> — максимальное число линейно независимых строк матрицы $A$; он равен размерности пространства строк:
-        $$r_{\text{гор}}=\dim\operatorname{Row}(A)=\dim\operatorname{Col}(A^T).$$
+        $$r_{\text{гор}}=\dim\langle A_1,\ldots,A_m\rangle.$$
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
   </div>
 </div>
 
@@ -3412,6 +3477,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
   </div>
 </div>
 
@@ -3438,6 +3505,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
   </div>
 </div>
 
@@ -3492,6 +3561,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
   </div>
 </div>
 
@@ -3515,6 +3586,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
   </div>
 </div>
 
@@ -3539,6 +3612,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
   </div>
 </div>
 
@@ -3897,6 +3972,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Кремер, с. 18–19</div>
   </div>
 </div>
 
@@ -3990,6 +4067,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Кремер, с. 21–25</div>
   </div>
 </div>
 
@@ -4019,6 +4098,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Кремер, с. 19</div>
   </div>
 </div>
 
@@ -4040,6 +4121,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Кремер, с. 20</div>
   </div>
 </div>
 
@@ -4078,6 +4161,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Кремер, с. 16–18</div>
   </div>
 </div>
 
@@ -4117,6 +4202,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Кремер, с. 24</div>
   </div>
 </div>
 
@@ -4145,6 +4232,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Кремер, с. 25</div>
   </div>
 </div>
 
@@ -4175,6 +4264,8 @@ window.showMyDevices = function () {
 
     <div class="note">Следствие: если $\det A\neq 0$, то $A^{-1}=\dfrac{1}{\det A}\,\widetilde{A}$.</div>
 
+
+    <div class="src-ref">Кремер, с. 28</div>
   </div>
 </div>
 
@@ -4203,6 +4294,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Кремер, с. 28</div>
   </div>
 </div>
 
@@ -4226,6 +4319,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Кремер, с. 42–43</div>
   </div>
 </div>
 
@@ -4255,6 +4350,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
   </div>
 </div>
 
@@ -4274,6 +4371,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
   </div>
 </div>
 
@@ -4300,6 +4399,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
   </div>
 </div>
 
@@ -4324,6 +4425,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
   </div>
 </div>
 
@@ -4359,6 +4462,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
   </div>
 </div>
 
@@ -4392,6 +4497,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
   </div>
 </div>
 
@@ -5461,6 +5568,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 10–11 «Линейные операторы»</div>
   </div>
 </div>
 
@@ -5485,6 +5594,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 10–11 «Линейные операторы»</div>
   </div>
 </div>
 
@@ -5504,6 +5615,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 10–11 «Линейные операторы»</div>
   </div>
 </div>
 
@@ -5527,6 +5640,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 10–11 «Линейные операторы»</div>
   </div>
 </div>
 
@@ -5547,6 +5662,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 10–11 «Линейные операторы»</div>
   </div>
 </div>
 
@@ -5567,6 +5684,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 10–11 «Линейные операторы»</div>
   </div>
 </div>
 
@@ -5586,6 +5705,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 10–11 «Линейные операторы»</div>
   </div>
 </div>
 
@@ -5610,6 +5731,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 10–11 «Линейные операторы»</div>
   </div>
 </div>
 
@@ -5639,6 +5762,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 10–11 «Линейные операторы»</div>
   </div>
 </div>
 
@@ -5658,6 +5783,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 10–11 «Линейные операторы»</div>
   </div>
 </div>
 
@@ -5679,6 +5806,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 10–11 «Линейные операторы»</div>
   </div>
 </div>
 
@@ -5698,6 +5827,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 10–11 «Линейные операторы»</div>
   </div>
 </div>
 
@@ -5717,6 +5848,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 10–11 «Линейные операторы»</div>
   </div>
 </div>
 
@@ -5738,6 +5871,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 10–11 «Линейные операторы»</div>
   </div>
 </div>
 
@@ -5758,6 +5893,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 10–11 «Линейные операторы»</div>
   </div>
 </div>
 
@@ -5791,6 +5928,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 10–11 «Линейные операторы»</div>
   </div>
 </div>
 
@@ -5812,6 +5951,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 10–11 «Линейные операторы»</div>
   </div>
 </div>
 
@@ -5841,6 +5982,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 10–11 «Линейные операторы»</div>
   </div>
 </div>
 
@@ -5860,6 +6003,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 10–11 «Линейные операторы»</div>
   </div>
 </div>
 
@@ -5881,6 +6026,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 10–11 «Линейные операторы»</div>
   </div>
 </div>
 
@@ -5900,6 +6047,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 10–11 «Линейные операторы»</div>
   </div>
 </div>
 
@@ -5920,6 +6069,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 10–11 «Линейные операторы»</div>
   </div>
 </div>
 
@@ -5941,6 +6092,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 10–11 «Линейные операторы»</div>
   </div>
 </div>
 
@@ -5960,6 +6113,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 10–11 «Линейные операторы»</div>
   </div>
 </div>
 
@@ -5980,6 +6135,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 10–11 «Линейные операторы»</div>
   </div>
 </div>
 
@@ -5999,6 +6156,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 10–11 «Линейные операторы»</div>
   </div>
 </div>
 
@@ -6025,6 +6184,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 10–11 «Линейные операторы»</div>
   </div>
 </div>
 
@@ -6045,6 +6206,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 10–11 «Линейные операторы»</div>
   </div>
 </div>
 
@@ -6075,6 +6238,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 10–11 «Линейные операторы»</div>
   </div>
 </div>
 
@@ -6098,6 +6263,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 10–11 «Линейные операторы»</div>
   </div>
 </div>
 
@@ -6121,6 +6288,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 10–11 «Линейные операторы»</div>
   </div>
 </div>
 
@@ -6140,6 +6309,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 10–11 «Линейные операторы»</div>
   </div>
 </div>
 
@@ -6169,6 +6340,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 12 «Евклидовы пространства»</div>
   </div>
 </div>
 
@@ -6197,6 +6370,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 12 «Евклидовы пространства»</div>
   </div>
 </div>
 
@@ -6222,6 +6397,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 12 «Евклидовы пространства»</div>
   </div>
 </div>
 
@@ -6242,6 +6419,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 12 «Евклидовы пространства»</div>
   </div>
 </div>
 
@@ -6280,6 +6459,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 12 «Евклидовы пространства»</div>
   </div>
 </div>
 
@@ -6307,6 +6488,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 12 «Евклидовы пространства»</div>
   </div>
 </div>
 
@@ -6351,6 +6534,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 12 «Евклидовы пространства»</div>
   </div>
 </div>
 
@@ -6378,6 +6563,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 12 «Евклидовы пространства»</div>
   </div>
 </div>
 
@@ -6404,6 +6591,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 12 «Евклидовы пространства»</div>
   </div>
 </div>
 
@@ -6423,6 +6612,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 12 «Евклидовы пространства»</div>
   </div>
 </div>
 
@@ -6452,6 +6643,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 12 «Евклидовы пространства»</div>
   </div>
 </div>
 
@@ -6471,6 +6664,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 12 «Евклидовы пространства»</div>
   </div>
 </div>
 
@@ -6492,6 +6687,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 12 «Евклидовы пространства»</div>
   </div>
 </div>
 
@@ -6513,6 +6710,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 12 «Евклидовы пространства»</div>
   </div>
 </div>
 
@@ -6532,6 +6731,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 12 «Евклидовы пространства»</div>
   </div>
 </div>
 
@@ -6572,6 +6773,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 12 «Евклидовы пространства»</div>
   </div>
 </div>
 
@@ -7168,11 +7371,15 @@ function buildSidebar() {
   const nav = document.createElement('nav');
   nav.className = 'side-nav';
   nav.innerHTML = `
-    <a class="side-nav-item is-home" onclick="showTopic('start')">${sideIcon('home')}<span class="side-nav-label">На главную</span></a>
+    <div class="side-section-title">Настройки</div>
     <a class="side-nav-item" id="navTheme" onclick="toggleTheme(event);updateThemeNavItem();">
       ${sideIcon('moon','navThemeIc')}<span class="side-nav-label" id="navThemeLabel">Светлая тема</span>
     </a>
-    <a class="side-nav-item" onclick="showMyDevices()">${sideIcon('devices')}<span class="side-nav-label">Мои устройства</span></a>
+
+    <div class="side-divider"></div>
+
+    <div class="side-section-title">Материал</div>
+    <a class="side-nav-item is-home" onclick="showTopic('start')">${sideIcon('home')}<span class="side-nav-label">На главную</span></a>
     <a class="side-nav-item" href="literatura.html">${sideIcon('book')}<span class="side-nav-label">Литература</span></a>
     <a class="side-nav-item" href="links.html"><svg class="side-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span class="side-nav-label">Полезные ссылки</span></a>
   `;
@@ -7283,6 +7490,33 @@ function showTopic(topicId) {
       window.MathJax.typesetPromise([target]).catch(err =>  console.log('MJ err:', err));
     }
   }, 50);
+  // Scroll-reveal карточек открытой темы
+  revealCards(target);
+}
+
+// ── Карточки вопросов всплывают при прокрутке ──
+var _revealIO = null;
+function revealCards(scope) {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var root = scope || document;
+  var cards = root.querySelectorAll('.q-card');
+  if (!cards.length) return;
+  if (!('IntersectionObserver' in window)) {
+    cards.forEach(function(c){ c.classList.add('reveal','in'); });
+    return;
+  }
+  if (_revealIO) { _revealIO.disconnect(); }
+  cards.forEach(function(c){ c.classList.remove('in'); c.classList.add('reveal'); });
+  _revealIO = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if (!en.isIntersecting) return;
+      var el = en.target;
+      el.style.transitionDelay = (el._d || 0) + 'ms';
+      el.classList.add('in');
+      _revealIO.unobserve(el);
+    });
+  }, { rootMargin: '0px 0px -6% 0px', threshold: 0.06 });
+  cards.forEach(function(c, i){ c._d = (i % 5) * 55; _revealIO.observe(c); });
 }
 
 function goToQuestion(topicId, qNum) {
@@ -7291,6 +7525,7 @@ function goToQuestion(topicId, qNum) {
     const card = document.querySelector(`#page-${topicId} .q-card[data-q="${qNum}"]`);
     if (card) {
       card.classList.add('open');
+      card.classList.add('reveal','in');
       // Дать MathJax время на рендеринг открытой карточки
       setTimeout(() =>  {
         if (window.MathJax && window.MathJax.typesetPromise) {
@@ -7299,9 +7534,6 @@ function goToQuestion(topicId, qNum) {
         const y = card.getBoundingClientRect().top + window.pageYOffset - 80;
         window.scrollTo({top: y, behavior: 'smooth'});
       }, 80);
-      card.style.transition = 'box-shadow 0.6s';
-      card.style.boxShadow = '0 0 0 3px var(--purple-light)';
-      setTimeout(() =>  card.style.boxShadow = '', 1200);
     }
   }, 150);
 }
@@ -7326,6 +7558,19 @@ function toggleCard(headEl) {
 // ─────────────────────────────────────────────
 // ПОИСК
 // ─────────────────────────────────────────────
+// Рендер формул в выпадающем списке поиска (с дебаунсом, чтобы не дёргать MathJax на каждый символ)
+var _mjSearchTimer = null;
+function typesetSearchResults(box) {
+  if (!box || !window.MathJax || !window.MathJax.typesetPromise) return;
+  clearTimeout(_mjSearchTimer);
+  _mjSearchTimer = setTimeout(function () {
+    try {
+      if (window.MathJax.typesetClear) window.MathJax.typesetClear([box]);
+      window.MathJax.typesetPromise([box]).catch(function () {});
+    } catch (e) {}
+  }, 120);
+}
+
 function doSearch() {
   const inp = document.getElementById('searchInput');
   if (!inp) return;
@@ -7372,6 +7617,7 @@ function doSearch() {
            + '</a>';
     }).join('');
     results.hidden = false;
+    typesetSearchResults(results);
     return;
   }
 
@@ -7381,7 +7627,7 @@ function doSearch() {
 
   if (!q) {
     // Сброс поиска: всё показать
-    allCards.forEach(c =>  { c.classList.remove('hidden'); c.classList.remove('open'); });
+    allCards.forEach(c =>  { c.classList.remove('hidden'); c.classList.remove('open'); c.classList.add('reveal','in'); });
     document.querySelectorAll('.topic-page').forEach(p =>  { p.style.display = ''; });
     return;
   }
@@ -7393,6 +7639,7 @@ function doSearch() {
     if (text.includes(q)) {
       card.classList.remove('hidden');
       card.classList.add('open');
+      card.classList.add('reveal','in');
       visible++;
     } else {
       card.classList.add('hidden');

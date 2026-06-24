@@ -1575,6 +1575,22 @@ ul.props li::before {
   margin-bottom: 0.5rem;
 }
 
+/* Сноска на источник доказательства — ненавязчивая строка в конце вывода */
+.src-ref {
+  margin-top: 1rem;
+  padding-top: 0.55rem;
+  border-top: 1px dashed var(--border);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--ink-mute);
+}
+.src-ref::before {
+  content: "📖";
+  margin-right: 0.4rem;
+  opacity: 0.7;
+  font-size: 0.72rem;
+}
+
 /* Figures from lectures */
 .fig-block {
   margin: 1rem 0;
@@ -1754,6 +1770,9 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
   body { background: white; color: black; }
 }
 
+/* ── Scroll-reveal карточек вопросов ── */
+.q-card.reveal { opacity:0; transform:translateY(20px); transition:opacity .5s ease, transform .5s cubic-bezier(.22,1,.36,1); }
+.q-card.reveal.in { opacity:1; transform:none; }
 /* ── Плавная смена темы: круговая волна от кнопки ── */
 ::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal;}
 ::view-transition-old(root){z-index:1;}
@@ -1788,17 +1807,6 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 </style>
 </head>
 <body>
-<script>
-// ============================================================
-// Гейт авторизации (Telegram + Supabase) удалён для публичного
-// статичного хостинга (Netlify). Справочник открывается напрямую.
-// Заглушка, чтобы кнопка «Мои устройства» в меню не падала.
-// ============================================================
-window.showMyDevices = function () {
-  alert('Будет доступно в основной версии сайта.');
-};
-</script>
-
 <!-- ========== TOPBAR ========== -->
 <header class="topbar">
   <a class="topbar-home" href="index.html" aria-label="К выбору семестра"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg><span>Семестры</span></a>
@@ -1969,6 +1977,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Общие теоретико-групповые конструкции»</div>
   </div>
 </div>
 
@@ -2018,6 +2028,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Общие теоретико-групповые конструкции»</div>
   </div>
 </div>
 
@@ -2068,6 +2080,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Общие теоретико-групповые конструкции»</div>
   </div>
 </div>
 
@@ -2108,6 +2122,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Общие теоретико-групповые конструкции»</div>
   </div>
 </div>
 
@@ -2156,6 +2172,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Общие теоретико-групповые конструкции»</div>
   </div>
 </div>
 
@@ -2192,6 +2210,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Общие теоретико-групповые конструкции»</div>
   </div>
 </div>
 
@@ -2244,6 +2264,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Общие теоретико-групповые конструкции»</div>
   </div>
 </div>
 
@@ -2295,6 +2317,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Общие теоретико-групповые конструкции»</div>
   </div>
 </div>
 
@@ -2336,6 +2360,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Общие теоретико-групповые конструкции»</div>
   </div>
 </div>
 
@@ -2386,6 +2412,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Общие теоретико-групповые конструкции»</div>
   </div>
 </div>
 
@@ -2470,6 +2498,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Комплексные числа»</div>
   </div>
 </div>
 
@@ -2522,6 +2552,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Комплексные числа»</div>
   </div>
 </div>
 
@@ -2564,6 +2596,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Комплексные числа»</div>
   </div>
 </div>
 
@@ -2602,6 +2636,8 @@ window.showMyDevices = function () {
       При $\varphi = \pi$: $e^{i\pi} + 1 = 0$ — знаменитое тождество Эйлера, связывающее пять важнейших констант математики.
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Комплексные числа»</div>
   </div>
 </div>
 
@@ -2672,6 +2708,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Многочлены»</div>
   </div>
 </div>
 
@@ -2721,6 +2759,8 @@ window.showMyDevices = function () {
       Зачем это нужно: формальное определение многочлена не через «переменную» (которая на самом деле не определена), а через конечные последовательности коэффициентов. Это строгий способ ввести $\mathbb{R}[x]$.
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Многочлены»</div>
   </div>
 </div>
 
@@ -2782,6 +2822,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Многочлены»</div>
   </div>
 </div>
 
@@ -2848,6 +2890,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Многочлены»</div>
   </div>
 </div>
 
@@ -2887,6 +2931,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Многочлены»</div>
   </div>
 </div>
 
@@ -2928,6 +2974,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Многочлены»</div>
   </div>
 </div>
 
@@ -2983,6 +3031,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Многочлены»</div>
   </div>
 </div>
 
@@ -3026,6 +3076,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Многочлены»</div>
   </div>
 </div>
 
@@ -3072,6 +3124,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Многочлены»</div>
   </div>
 </div>
 
@@ -3121,6 +3175,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Многочлены»</div>
   </div>
 </div>
 
@@ -3159,6 +3215,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Многочлены»</div>
   </div>
 </div>
 
@@ -3192,6 +3250,8 @@ window.showMyDevices = function () {
       Основная теорема алгебры не имеет «чисто алгебраического» доказательства. Классические доказательства используют топологию или комплексный анализ.
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Многочлены»</div>
   </div>
 </div>
 
@@ -3261,6 +3321,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Многочлены»</div>
   </div>
 </div>
 
@@ -3293,6 +3355,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Многочлены»</div>
   </div>
 </div>
 
@@ -3336,6 +3400,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Многочлены»</div>
   </div>
 </div>
 
@@ -3379,6 +3445,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Многочлены»</div>
   </div>
 </div>
 
@@ -3409,6 +3477,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Многочлены»</div>
   </div>
 </div>
 
@@ -3454,6 +3524,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Многочлены»</div>
   </div>
 </div>
 
@@ -3492,6 +3564,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Многочлены»</div>
   </div>
 </div>
 
@@ -3528,6 +3602,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Многочлены»</div>
   </div>
 </div>
 
@@ -3579,6 +3655,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Жордановы нормальные формы»</div>
   </div>
 </div>
 
@@ -3627,6 +3705,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Жордановы нормальные формы»</div>
   </div>
 </div>
 
@@ -3682,6 +3762,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Жордановы нормальные формы»</div>
   </div>
 </div>
 
@@ -3716,10 +3798,12 @@ window.showMyDevices = function () {
 
     <div class="def-block">
       <div class="def-text">
-        <span class="term">Циклическое подпространство</span>, порождённое вектором $v$, — линейная оболочка $\langle v, \mathcal{A} v, \ldots, \mathcal{A}^{m-1} v\rangle$. Оно инвариантно относительно $\mathcal{A}$.
+        <span class="term">Циклическое подпространство</span>, порождённое вектором $v$, — линейная оболочка $(v, \mathcal{A} v, \ldots, \mathcal{A}^{m-1} v)$. Оно инвариантно относительно $\mathcal{A}$.
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Жордановы нормальные формы»</div>
   </div>
 </div>
 
@@ -3754,6 +3838,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Жордановы нормальные формы»</div>
   </div>
 </div>
 
@@ -3793,6 +3879,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Жордановы нормальные формы»</div>
   </div>
 </div>
 
@@ -3840,6 +3928,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Жордановы нормальные формы»</div>
   </div>
 </div>
 
@@ -3889,6 +3979,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Жордановы нормальные формы»</div>
   </div>
 </div>
 
@@ -3915,7 +4007,7 @@ window.showMyDevices = function () {
         $$x_1 + 2x_2 - 3x_3 = 0 \;\Rightarrow\; x_1 = 3x_3 - 2x_2.$$
         ФСР: $b_1 = (-2, 1, 0)^T$, $b_2 = (3, 0, 1)^T$, $V_2 = \langle b_1, b_2\rangle$.
         <br><br>
-        Пространство столбцов $L_1 = \operatorname{Im}(A - 2E) = \langle c_1\rangle$, $c_1 = (1, 4, 3)^T$. Заметим: $4 b_1 + 3 b_2 = c_1$, значит $c_1 \in V_2$, $L_1 \cap V_2 = L_1$.
+        Пространство столбцов $L_1 = \operatorname{Im}(A - 2E) = (c_1)$, $c_1 = (1, 4, 3)^T$. Заметим: $4 b_1 + 3 b_2 = c_1$, значит $c_1 \in V_2$, $L_1 \cap V_2 = L_1$.
         <br><br>
         $e_1^{(1)} = c_1$ — вектор, с которого начинается жорданова цепочка длины $k = 2$. Присоединённый $e_1^{(2)}$ ищем из $(A - 2E)\,e_1^{(2)} = e_1^{(1)}$:
         $$y_1 + 2y_2 - 3y_3 = 1.$$
@@ -3929,6 +4021,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Жордановы нормальные формы»</div>
   </div>
 </div>
 
@@ -3976,6 +4070,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Жордановы нормальные формы»</div>
   </div>
 </div>
 
@@ -4006,6 +4102,8 @@ window.showMyDevices = function () {
       Идея формулы для рангов: $\dim\operatorname{Ker}(A - \lambda E)^m$ — общее число векторов в цепочках длины не больше $m$. Разность $\dim\operatorname{Ker}(A - \lambda E)^{m+1} - \dim\operatorname{Ker}(A - \lambda E)^m$ — число цепочек длины $\ge m+1$. Формула получается из чередующейся разности этих величин.
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Жордановы нормальные формы»</div>
   </div>
 </div>
 
@@ -4062,6 +4160,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Жордановы нормальные формы»</div>
   </div>
 </div>
 
@@ -4109,6 +4209,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Жордановы нормальные формы»</div>
   </div>
 </div>
 
@@ -4150,6 +4252,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Жордановы нормальные формы»</div>
   </div>
 </div>
 
@@ -4166,7 +4270,7 @@ window.showMyDevices = function () {
       <div class="section-tag">Определение</div>
       <div class="def-text">
         Пусть $V$ — евклидово (или унитарное) пространство, $\mathcal{A}\colon V \to V$ — линейный оператор. <span class="term">Сопряжённый оператор</span> $\mathcal{A}^*$ определяется условием
-        $$\langle \mathcal{A} x, y\rangle \;=\; \langle x, \mathcal{A}^* y\rangle \qquad \forall x, y \in V.$$
+        $$(\mathcal{A} x, y) \;=\; (x, \mathcal{A}^* y) \qquad \forall x, y \in V.$$
       </div>
     </div>
 
@@ -4190,6 +4294,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Жордановы нормальные формы»</div>
   </div>
 </div>
 
@@ -4233,6 +4339,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Жордановы нормальные формы»</div>
   </div>
 </div>
 
@@ -4255,7 +4363,7 @@ window.showMyDevices = function () {
     <div class="def-block">
       <div class="def-text">
         <span class="term">Изометрический оператор</span> — линейный оператор $\mathcal{A}\colon V \to V$, сохраняющий скалярное произведение:
-        $$\langle \mathcal{A} x,\, \mathcal{A} y\rangle \;=\; \langle x, y\rangle \quad \forall x, y \in V.$$
+        $$(\mathcal{A} x,\, \mathcal{A} y) \;=\; (x, y) \quad \forall x, y \in V.$$
       </div>
     </div>
 
@@ -4263,6 +4371,8 @@ window.showMyDevices = function () {
       Изометрический оператор сохраняет скалярное произведение, а значит — длины векторов и углы между ними. Это в точности соответствует геометрической идее «жёсткого движения через начало координат».
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Жордановы нормальные формы»</div>
   </div>
 </div>
 
@@ -4282,7 +4392,7 @@ window.showMyDevices = function () {
         <ol style="padding-left:1.4rem;margin:0.5rem 0;">
           <li>$\mathcal{A}$ — ортогональный (матрица в ОНБ ортогональна);</li>
           <li>$\mathcal{A}^* = \mathcal{A}^{-1}$ (сопряжённый совпадает с обратным);</li>
-          <li>$\langle \mathcal{A} x, \mathcal{A} y\rangle = \langle x, y\rangle$ для всех $x, y \in V$ (изометрия);</li>
+          <li>$(\mathcal{A} x, \mathcal{A} y) = (x, y)$ для всех $x, y \in V$ (изометрия);</li>
           <li>$|\mathcal{A} x| = |x|$ для всех $x \in V$ (сохранение длин);</li>
           <li>$\mathcal{A}$ переводит некоторый (а тогда и любой) ортонормированный базис в ортонормированный базис.</li>
         </ol>
@@ -4290,9 +4400,11 @@ window.showMyDevices = function () {
     </div>
 
     <div class="note">
-      Из (4) — сохранения длин — автоматически следует (3) — сохранение скалярного произведения. Это благодаря тождеству поляризации: $\langle x, y\rangle = \tfrac{1}{4}(|x+y|^2 - |x-y|^2)$.
+      Из (4) — сохранения длин — автоматически следует (3) — сохранение скалярного произведения. Это благодаря тождеству поляризации: $(x, y) = \tfrac{1}{4}(|x+y|^2 - |x-y|^2)$.
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Жордановы нормальные формы»</div>
   </div>
 </div>
 
@@ -4317,6 +4429,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Жордановы нормальные формы»</div>
   </div>
 </div>
 
@@ -4342,6 +4456,8 @@ window.showMyDevices = function () {
       Смысл: любое ортогональное преобразование разлагается на «независимые» части — повороты в попарно ортогональных плоскостях, отражения по «минус-осям» и тождественные действия на «плюс-осях».
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Жордановы нормальные формы»</div>
   </div>
 </div>
 
@@ -4374,6 +4490,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Жордановы нормальные формы»</div>
   </div>
 </div>
 
@@ -4390,7 +4508,7 @@ window.showMyDevices = function () {
       <div class="section-tag">Определение</div>
       <div class="def-text">
         Линейный оператор $\mathcal{A}\colon V \to V$ называется <span class="term">симметрическим (самосопряжённым)</span>, если $\mathcal{A}^* = \mathcal{A}$, то есть
-        $$\langle \mathcal{A} x, y\rangle \;=\; \langle x, \mathcal{A} y\rangle \quad \forall x, y \in V.$$
+        $$(\mathcal{A} x, y) \;=\; (x, \mathcal{A} y) \quad \forall x, y \in V.$$
         Эквивалентно: матрица $\mathcal{A}$ в ОНБ симметрическая, $A^T = A$.
       </div>
     </div>
@@ -4424,12 +4542,14 @@ window.showMyDevices = function () {
         <br><br>
         Собственные векторы: $\lambda_1 = 3$: $v_1 = (1, 1)^T$; $\lambda_2 = -1$: $v_2 = (1, -1)^T$.
         <br>
-        Проверка ортогональности: $\langle v_1, v_2\rangle = 1\cdot 1 + 1\cdot(-1) = 0$. ✓
+        Проверка ортогональности: $(v_1, v_2) = 1\cdot 1 + 1\cdot(-1) = 0$. ✓
         <br><br>
         Нормируя, получаем ортонормированный базис $\;\tfrac{1}{\sqrt 2}(1, 1)^T,\; \tfrac{1}{\sqrt 2}(1, -1)^T$. В нём $A = \operatorname{diag}(3, -1)$.
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция «Жордановы нормальные формы»</div>
   </div>
 </div>
 
@@ -4458,18 +4578,18 @@ window.showMyDevices = function () {
     <div class="def-block">
       <div class="section-tag">Определение</div>
       <div class="def-text">
-        Пусть $V$ — векторное пространство, $L \subseteq V$ — подпространство, $x_0 \in V$. Множество
-        $$H \;=\; x_0 + L \;=\; \{x_0 + x \mid x \in L\}$$
-        называется <span class="term">линейным (аффинным) многообразием</span>.
+        Пусть $V$ — векторное пространство (ВП), $L \subseteq V$ — подпространство, $x_0 \in V$. Множество
+        $$H \;=\; \{x_0 + x \mid x \in L\}$$
+        называется <span class="term">линейным аффинным многообразием</span> ВП $V$, полученным сдвигом подпространства $L$ на вектор $x_0$ (далее — линейное многообразие, ЛМ).
         <br><br>
-        $x_0$ — <span class="em">вектор сдвига</span>; $L$ — <span class="em">направляющее подпространство</span> (определено однозначно).
+        $x_0$ — <span class="em">вектор сдвига</span>; $L$ — <span class="em">направляющее подпространство</span> линейного многообразия.
       </div>
     </div>
 
     <div class="def-block">
       <div class="section-tag">Размерность</div>
       <div class="def-text">
-        Размерность ЛМ: $\dim H = \dim L$.
+        <span class="em">Размерность ЛМ</span> — размерность его направляющего подпространства: $\dim H = \dim L$.
         <ul class="props">
           <li><span class="em">Прямая</span> — ЛМ размерности $1$;</li>
           <li><span class="em">Гиперплоскость</span> — ЛМ размерности $n - 1$ (где $\dim V = n$).</li>
@@ -4485,6 +4605,8 @@ window.showMyDevices = function () {
         Тогда $H = x_0 + L = \{(1, t, 0) : t \in \mathbb{R}\}$ — прямая, параллельная оси $Oy$, проходящая через точку $(1, 0, 0)$.
       </div>
     </div>
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 22 «Линейные многообразия», §1</div>
 
   </div>
 </div>
@@ -4511,6 +4633,8 @@ window.showMyDevices = function () {
       </div>
     </div>
 
+    <div class="src-ref">Г. Н. Клюшников, лекция 22 «Линейные многообразия», §1</div>
+
   </div>
 </div>
 
@@ -4526,17 +4650,17 @@ window.showMyDevices = function () {
     <div class="def-block">
       <div class="section-tag">Нормальный вектор</div>
       <div class="def-text">
-        Пусть $V$ — евклидово пространство, $H = x_0 + L$ — ЛМ. <span class="term">Нормальный вектор ЛМ $H$</span> — такой вектор $a \in H$, что $a \perp L$ (ортогонален всему направляющему подпространству).
+        Пусть $H = x_0 + L$ — линейное многообразие в евклидовом векторном пространстве (ЕВП). Если $a \in H$, $a \perp L$, то $a$ — <span class="term">нормальный вектор ЛМ $H$</span>.
       </div>
     </div>
 
     <div class="def-block">
       <div class="def-text">
-        Свойства:
+        Свойства нормального вектора ЛМ:
         <ol style="padding-left:1.4rem;margin:0.5rem 0;">
-          <li>нормальный вектор существует для любого ЛМ в евклидовом пространстве;</li>
-          <li>нормальный вектор — ортогональная проекция любого $v \in H$ на $L^\perp$;</li>
-          <li>нормальный вектор имеет наименьшую длину среди всех векторов из $H$.</li>
+          <li>для любого ЛМ в ЕВП существует нормальный вектор;</li>
+          <li>нормальный вектор ЛМ совпадает с перпендикуляром, опущенным из любого вектора ЛМ на направляющее подпространство (нормальный вектор $a$ — ортогональная составляющая $v$ относительно $L$ $\;\forall v \in H$);</li>
+          <li>среди всех векторов ЛМ нормальный вектор имеет наименьшую длину.</li>
         </ol>
       </div>
     </div>
@@ -4544,10 +4668,14 @@ window.showMyDevices = function () {
     <div class="def-block">
       <div class="section-tag">Гиперплоскость в ЕВП</div>
       <div class="def-text">
-        Если $\dim V = n$, $H$ — гиперплоскость, $\dim L = n - 1$, то $\dim L^\perp = 1$. Берём $N \in L^\perp$, $N \ne 0$. Тогда уравнение гиперплоскости:
-        $$x \in H \;\Leftrightarrow\; \langle x - x_0,\, N\rangle = 0 \;\Leftrightarrow\; \langle x, N\rangle = \langle x_0, N\rangle.$$
+        Пусть $H = x_0 + L$ — гиперплоскость в ЕВП $V$, $\dim V = n$, $\dim L = n - 1$. Значит, $\dim L^\perp = 1$, $L^\perp = (a)$. Тогда
+        $$x \in H \;\Leftrightarrow\; x - x_0 \in L \;\Leftrightarrow\; (x - x_0,\, a) = 0.$$
+        Таким образом, гиперплоскость может быть задана уравнением
+        $$(x,\, a) = (x_0,\, a).$$
       </div>
     </div>
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 22 «Линейные многообразия», §1</div>
 
   </div>
 </div>
@@ -4614,7 +4742,8 @@ window.showMyDevices = function () {
         <div class="ra60-ln" data-step="4">Отсюда $\overrightarrow{OM}=\dfrac{\overrightarrow{OA}+\lambda\,\overrightarrow{OB}}{1+\lambda}.$</div>
         <div class="ra60-ln" data-step="5">Покоординатно это и даёт $x_3=\dfrac{x_1+\lambda x_2}{1+\lambda}$ (так же $y_3,z_3$): каждая координата делит свою проекцию на ось в том же отношении $\lambda$.</div>
         <div class="ra60-ln" data-step="6">При $\lambda=1$ точка $M$ — середина отрезка: $M=\left(\dfrac{x_1+x_2}{2},\;\dfrac{y_1+y_2}{2},\;\dfrac{z_1+z_2}{2}\right).$</div>
-      </div></div>
+      </div>
+      <div class="src-ref">Доказательство: Ильин, Позняк, с. 18–19</div></div>
 
       <div class="example-card"><div class="example-card-title my-example">Простой пример</div><div class="example-card-body">
         $A(0,0,0)$, $B(3,6,9)$. Точка $M$, делящая $AB$ в отношении $\lambda=\tfrac12$:
@@ -4724,10 +4853,9 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
       <div class="def-text">
         В $\mathbb{R}^3$ упорядоченная тройка некомпланарных векторов $\{a, b, c\}$ называется <span class="em">правой</span>, если, глядя с конца вектора $c$, кратчайший поворот от $a$ к $b$ виден против часовой стрелки; в противном случае — <span class="em">левая</span>.
         <br><br>
-        Стандартный базис $\{i, j, k\}$ — правая тройка. Аналитический критерий: тройка $\{a, b, c\}$ правая $\Leftrightarrow$ $\det\,[a\,|\,b\,|\,c] \gt  0$.
+        Стандартный базис $\{\mathbf{i}, \mathbf{j}, \mathbf{k}\}$ — правая тройка. Аналитический критерий: тройка $\{\mathbf{a}, \mathbf{b}, \mathbf{c}\}$ правая $\Leftrightarrow$ $\det\,[\mathbf{a}\,|\,\mathbf{b}\,|\,\mathbf{c}] \gt  0$.
       </div>
     </div>
-
   </div>
 </div>
 
@@ -4767,7 +4895,7 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
 </style>
 
     <div class="def-block"><div class="section-tag">Определение</div><div class="def-text">
-      <span class="term">Векторным произведением</span> векторов $a,b\in\mathbb{R}^3$ называется вектор $c=a\times b$ такой, что: 1) $|c|=|a|\,|b|\sin\widehat{(a,b)}$; 2) $c\perp a$ и $c\perp b$; 3) тройка $\{a,b,c\}$ — правая. Если $a\parallel b$, то $a\times b=0$.
+      <span class="term">Векторным произведением</span> векторов $\mathbf{a},\mathbf{b}\in\mathbb{R}^3$ называется вектор $\mathbf{c}=\mathbf{a}\times\mathbf{b}$ такой, что: 1) $|\mathbf{c}|=|\mathbf{a}|\,|\mathbf{b}|\sin\widehat{(\mathbf{a},\mathbf{b})}$; 2) $\mathbf{c}\perp\mathbf{a}$ и $\mathbf{c}\perp\mathbf{b}$; 3) тройка $\{\mathbf{a},\mathbf{b},\mathbf{c}\}$ — правая. Если $\mathbf{a}\parallel\mathbf{b}$, то $\mathbf{a}\times\mathbf{b}=\mathbf{0}$.
     </div></div>
 
     <div class="ra62-fig">
@@ -4785,23 +4913,23 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
 
     <div class="ra62-scroll" id="ra62-scroll">
       <div class="derivation"><div class="derivation-title">Геометрический смысл</div><div class="def-text">
-        <div class="ra62-ln" data-step="0">Векторное произведение $a\times b$ задаётся тремя условиями: длина $|a\times b|=|a|\,|b|\sin\varphi$, направление $\perp a$ и $\perp b$, и тройка $a,b,a\times b$ — правая.</div>
-        <div class="ra62-ln" data-step="1">Построим на векторах $a$ и $b$ параллелограмм.</div>
-        <div class="ra62-ln" data-step="2">Его площадь $=$ основание $\times$ высота $=|a|\cdot|b|\sin\varphi$ — то есть ровно $|a\times b|$. В этом и состоит геометрический смысл.</div>
-        <div class="ra62-ln" data-step="3">Сам вектор $a\times b$ перпендикулярен плоскости параллелограмма: его длина равна площади, а нужную из двух сторон выбирает правило правой руки.</div>
-        <div class="ra62-ln" data-step="4">Поэтому $a\times b=-\,b\times a$ (поменяли порядок — вектор смотрит в другую сторону), а для коллинеарных $a\parallel b$ имеем $a\times b=0$. В координатах $a\times b=\begin{vmatrix}i&j&k\\a_1&a_2&a_3\\b_1&b_2&b_3\end{vmatrix}.$</div>
+        <div class="ra62-ln" data-step="0">Векторное произведение $\mathbf{a}\times\mathbf{b}$ задаётся тремя условиями: длина $|\mathbf{a}\times\mathbf{b}|=|\mathbf{a}|\,|\mathbf{b}|\sin\varphi$, направление $\perp\mathbf{a}$ и $\perp\mathbf{b}$, и тройка $\mathbf{a},\mathbf{b},\mathbf{a}\times\mathbf{b}$ — правая.</div>
+        <div class="ra62-ln" data-step="1">Построим на векторах $\mathbf{a}$ и $\mathbf{b}$ параллелограмм.</div>
+        <div class="ra62-ln" data-step="2">Его площадь $=$ основание $\times$ высота $=|\mathbf{a}|\cdot|\mathbf{b}|\sin\varphi$ — то есть ровно $|\mathbf{a}\times\mathbf{b}|$. В этом и состоит геометрический смысл.</div>
+        <div class="ra62-ln" data-step="3">Сам вектор $\mathbf{a}\times\mathbf{b}$ перпендикулярен плоскости параллелограмма: его длина равна площади, а нужную из двух сторон выбирает правило правой руки.</div>
+        <div class="ra62-ln" data-step="4">Поэтому $\mathbf{a}\times\mathbf{b}=-\,\mathbf{b}\times\mathbf{a}$ (поменяли порядок — вектор смотрит в другую сторону), а для коллинеарных $\mathbf{a}\parallel\mathbf{b}$ имеем $\mathbf{a}\times\mathbf{b}=\mathbf{0}$. В координатах $\mathbf{a}\times\mathbf{b}=\begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\a_1&a_2&a_3\\b_1&b_2&b_3\end{vmatrix}.$</div>
       </div></div>
 
       <div class="def-block"><div class="section-tag">Свойства</div><div class="def-text">
         <ul class="props">
-          <li>$a\times b=-\,b\times a$ (антикоммутативность);</li>
-          <li>$(\alpha a+\beta b)\times c=\alpha(a\times c)+\beta(b\times c)$ (линейность);</li>
-          <li>$a\parallel b\Leftrightarrow a\times b=0$; в частности $a\times a=0$.</li>
+          <li>$\mathbf{a}\times\mathbf{b}=-\,\mathbf{b}\times\mathbf{a}$ (антикоммутативность);</li>
+          <li>$(\alpha\mathbf{a}+\beta\mathbf{b})\times\mathbf{c}=\alpha(\mathbf{a}\times\mathbf{c})+\beta(\mathbf{b}\times\mathbf{c})$ (линейность);</li>
+          <li>$\mathbf{a}\parallel\mathbf{b}\Leftrightarrow\mathbf{a}\times\mathbf{b}=\mathbf{0}$; в частности $\mathbf{a}\times\mathbf{a}=\mathbf{0}$.</li>
         </ul>
       </div></div>
 
       <div class="example-card"><div class="example-card-title my-example">Простой пример</div><div class="example-card-body">
-        $a=(1,0,0)$, $b=(0,1,0)$: $\;a\times b=\begin{vmatrix}i&j&k\\1&0&0\\0&1&0\end{vmatrix}=(0,0,1)=k.$ Площадь единичного квадрата равна $1$. ✓
+        $\mathbf{a}\{1,0,0\}$, $\mathbf{b}\{0,1,0\}$: $\;\mathbf{a}\times\mathbf{b}=\begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\1&0&0\\0&1&0\end{vmatrix}=\mathbf{k}\{0,0,1\}.$ Площадь единичного квадрата равна $1$. ✓
       </div></div>
     </div>
 
@@ -4879,7 +5007,6 @@ new MutationObserver(function(){readColors();if(inited){fit();paint(true);}}).ob
 if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(true);}}).observe(cv);}else{window.addEventListener("resize",function(){if(inited){fit();paint(true);}});}
 })();
 </script>
-
   </div>
 </div>
 
@@ -4919,12 +5046,12 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
 </style>
 
     <div class="def-block"><div class="section-tag">Определение</div><div class="def-text">
-      <span class="term">Смешанным произведением</span> трёх векторов $a,b,c$ называется число $(a,b,c)=(a\times b)\cdot c$.
+      <span class="term">Смешанным произведением</span> трёх векторов $\mathbf{a},\mathbf{b},\mathbf{c}$ называется число $(\mathbf{a}\times\mathbf{b})\cdot\mathbf{c}$.
     </div></div>
 
     <div class="ra63-fig">
       <div class="ra63-frame"><canvas id="ra63-cv"></canvas></div>
-      <div class="ra63-cap" id="ra63-cap">|(a,b,c)| = объём параллелепипеда на a, b, c</div>
+      <div class="ra63-cap" id="ra63-cap">|(a×b)·c| = объём параллелепипеда на a, b, c</div>
       <div class="ra63-track"><div class="ra63-fill" id="ra63-prog"></div></div>
       <div class="ra63-ctl">
         <button class="ra63-btn ra63-primary ra63-start" disabled><svg class="ra63-ico" viewBox="0 0 16 16" fill="currentColor"><path d="M4 3l9 5-9 5z"/></svg><span class="ra63-starttx">Старт</span></button>
@@ -4937,23 +5064,23 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
 
     <div class="ra63-scroll" id="ra63-scroll">
       <div class="derivation"><div class="derivation-title">Геометрический смысл</div><div class="def-text">
-        <div class="ra63-ln" data-step="0">Смешанное произведение $(a,b,c)=(a\times b)\cdot c=a\cdot(b\times c)$ — это число.</div>
-        <div class="ra63-ln" data-step="1">Построим на векторах $a,b,c$ параллелепипед.</div>
-        <div class="ra63-ln" data-step="2">Возьмём его основанием параллелограмм на $b$ и $c$. Вектор $b\times c$ перпендикулярен основанию, а его длина равна площади основания $S=|b\times c|$.</div>
-        <div class="ra63-ln" data-step="3">Тогда $a\cdot(b\times c)=|a|\cos\theta\cdot S$ — это (высота) $\times$ (площадь основания), то есть объём параллелепипеда (со знаком).</div>
-        <div class="ra63-ln" data-step="4">Знак $+$ для правой тройки $a,b,c$, $-$ для левой; для компланарных $(a,b,c)=0$. В координатах $(a,b,c)=\begin{vmatrix}a_1&a_2&a_3\\b_1&b_2&b_3\\c_1&c_2&c_3\end{vmatrix}.$</div>
+        <div class="ra63-ln" data-step="0">Смешанное произведение $(\mathbf{a}\times\mathbf{b})\cdot\mathbf{c}=\mathbf{a}\cdot(\mathbf{b}\times\mathbf{c})$ — это число.</div>
+        <div class="ra63-ln" data-step="1">Построим на векторах $\mathbf{a},\mathbf{b},\mathbf{c}$ параллелепипед.</div>
+        <div class="ra63-ln" data-step="2">Возьмём его основанием параллелограмм на $\mathbf{b}$ и $\mathbf{c}$. Вектор $\mathbf{b}\times\mathbf{c}$ перпендикулярен основанию, а его длина равна площади основания $S=|\mathbf{b}\times\mathbf{c}|$.</div>
+        <div class="ra63-ln" data-step="3">Тогда $\mathbf{a}\cdot(\mathbf{b}\times\mathbf{c})=|\mathbf{a}|\cos\theta\cdot S$ — это (высота) $\times$ (площадь основания), то есть объём параллелепипеда (со знаком).</div>
+        <div class="ra63-ln" data-step="4">Знак $+$ для правой тройки $\mathbf{a},\mathbf{b},\mathbf{c}$, $-$ для левой; для компланарных $(\mathbf{a}\times\mathbf{b})\cdot\mathbf{c}=0$. В координатах $(\mathbf{a}\times\mathbf{b})\cdot\mathbf{c}=\begin{vmatrix}a_1&a_2&a_3\\b_1&b_2&b_3\\c_1&c_2&c_3\end{vmatrix}.$</div>
       </div></div>
 
       <div class="def-block"><div class="section-tag">Свойства</div><div class="def-text">
         <ul class="props">
-          <li>$a,b,c$ компланарны $\Leftrightarrow(a,b,c)=0$;</li>
-          <li>$(a,b,c)=(b,c,a)=(c,a,b)=-(b,a,c)=-(c,b,a)=-(a,c,b)$ (циклическая перестановка не меняет знак, перестановка соседних — меняет);</li>
-          <li>$(a,b,c)=a\cdot(b\times c)$ — скобки можно «переставить».</li>
+          <li>$\mathbf{a},\mathbf{b},\mathbf{c}$ компланарны $\Leftrightarrow(\mathbf{a}\times\mathbf{b})\cdot\mathbf{c}=0$;</li>
+          <li>циклическая перестановка не меняет знак, перестановка соседних — меняет: $(\mathbf{a}\times\mathbf{b})\cdot\mathbf{c}=(\mathbf{b}\times\mathbf{c})\cdot\mathbf{a}=(\mathbf{c}\times\mathbf{a})\cdot\mathbf{b}=-(\mathbf{b}\times\mathbf{a})\cdot\mathbf{c}$;</li>
+          <li>$(\mathbf{a}\times\mathbf{b})\cdot\mathbf{c}=\mathbf{a}\cdot(\mathbf{b}\times\mathbf{c})$ — знаки $\times$ и $\cdot$ можно «переставить».</li>
         </ul>
       </div></div>
 
       <div class="example-card"><div class="example-card-title my-example">Простой пример</div><div class="example-card-body">
-        $a=(1,0,0)$, $b=(0,1,0)$, $c=(0,0,1)$: $\;(a,b,c)=\det E=1$ — объём единичного куба. ✓
+        $\mathbf{a}\{1,0,0\}$, $\mathbf{b}\{0,1,0\}$, $\mathbf{c}\{0,0,1\}$: $\;(\mathbf{a}\times\mathbf{b})\cdot\mathbf{c}=\det E=1$ — объём единичного куба. ✓
       </div></div>
     </div>
 
@@ -5040,7 +5167,6 @@ new MutationObserver(function(){readColors();if(inited){fit();paint(true);}}).ob
 if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(true);}}).observe(cv);}else{window.addEventListener("resize",function(){if(inited){fit();paint(true);}});}
 })();
 </script>
-
   </div>
 </div>
 
@@ -5102,14 +5228,14 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
 
     <div class="def-block">
       <div class="def-text">
-        <span class="term">Направляющий вектор прямой</span> — любой ненулевой вектор $a$, коллинеарный данной прямой.
+        <span class="term">Направляющий вектор прямой</span> — любой ненулевой вектор $\mathbf{a}$, коллинеарный данной прямой.
       </div>
     </div>
 
     <div class="def-block">
       <div class="section-tag">Канонические уравнения</div>
       <div class="def-text">
-        Прямая на плоскости задана точкой $M_0(x_0, y_0)$ и направляющим вектором $a = (m, n)$:
+        Прямая на плоскости задана точкой $M_0(x_0, y_0)$ и направляющим вектором $\mathbf{a}\{m, n\}$:
         $$\frac{x - x_0}{m} \;=\; \frac{y - y_0}{n}.$$
         (Если один из знаменателей равен $0$, соответствующий числитель тоже считают равным $0$.)
       </div>
@@ -5126,11 +5252,10 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
     <div class="example-card">
       <div class="example-card-title my-example">Простой пример</div>
       <div class="example-card-body">
-        Прямая через $M_0(1, 2)$ с направляющим вектором $a = (3, 4)$:
+        Прямая через $M_0(1, 2)$ с направляющим вектором $\mathbf{a}\{3, 4\}$:
         $$\frac{x - 1}{3} = \frac{y - 2}{4} \;\Rightarrow\; 4(x - 1) = 3(y - 2) \;\Rightarrow\; 4x - 3y + 2 = 0.$$
       </div>
     </div>
-
   </div>
 </div>
 
@@ -5145,14 +5270,14 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
 
     <div class="def-block">
       <div class="def-text">
-        <span class="term">Направляющие векторы плоскости</span> — два неколлинеарных вектора $p_1 = (l_1, m_1, n_1)$ и $p_2 = (l_2, m_2, n_2)$, параллельных данной плоскости.
+        <span class="term">Направляющие векторы плоскости</span> — два неколлинеарных вектора $\mathbf{p}_1\{l_1, m_1, n_1\}$ и $\mathbf{p}_2\{l_2, m_2, n_2\}$, параллельных данной плоскости.
       </div>
     </div>
 
     <div class="def-block">
       <div class="section-tag">Каноническое уравнение плоскости</div>
       <div class="def-text">
-        Плоскость через $M_0(x_0, y_0, z_0)$ с направляющими $p_1, p_2$:
+        Плоскость через $M_0(x_0, y_0, z_0)$ с направляющими $\mathbf{p}_1, \mathbf{p}_2$:
         $$\begin{vmatrix}x - x_0 & y - y_0 & z - z_0\\ l_1 & m_1 & n_1\\ l_2 & m_2 & n_2\end{vmatrix} = 0.$$
       </div>
     </div>
@@ -5164,7 +5289,6 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
         $$\begin{vmatrix}x - x_0 & y - y_0 & z - z_0\\ x_1 - x_0 & y_1 - y_0 & z_1 - z_0\\ x_2 - x_0 & y_2 - y_0 & z_2 - z_0\end{vmatrix} = 0.$$
       </div>
     </div>
-
   </div>
 </div>
 
@@ -5180,8 +5304,8 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
     <div class="def-block">
       <div class="section-tag">Прямая на плоскости</div>
       <div class="def-text">
-        Через $M_0(x_0, y_0)$ с направляющим $a = (m, n)$:
-        $$r = r_0 + t\, a, \quad \text{то есть}\quad \begin{cases}x = x_0 + tm,\\ y = y_0 + tn,\end{cases} \quad t \in \mathbb{R}.$$
+        Через $M_0(x_0, y_0)$ с направляющим $\mathbf{a}\{m, n\}$:
+        $$\mathbf{r} = \mathbf{r}_0 + t\, \mathbf{a}, \quad \text{то есть}\quad \begin{cases}x = x_0 + tm,\\ y = y_0 + tn,\end{cases} \quad t \in \mathbb{R}.$$
       </div>
     </div>
 
@@ -5189,10 +5313,9 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
       <div class="section-tag">Плоскость в пространстве</div>
       <div class="def-text">
         Через $M_0(x_0, y_0, z_0)$ с направляющими $p_1 = (l_1, m_1, n_1)$ и $p_2 = (l_2, m_2, n_2)$:
-        $$r = r_0 + u\, p_1 + v\, p_2, \quad \text{то есть}\quad \begin{cases}x = x_0 + u l_1 + v l_2,\\ y = y_0 + u m_1 + v m_2,\\ z = z_0 + u n_1 + v n_2,\end{cases} \quad u, v \in \mathbb{R}.$$
+        $$\mathbf{r} = \mathbf{r}_0 + u\, \mathbf{p}_1 + v\, \mathbf{p}_2, \quad \text{то есть}\quad \begin{cases}x = x_0 + u l_1 + v l_2,\\ y = y_0 + u m_1 + v m_2,\\ z = z_0 + u n_1 + v n_2,\end{cases} \quad u, v \in \mathbb{R}.$$
       </div>
     </div>
-
   </div>
 </div>
 
@@ -5210,17 +5333,18 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
       <div class="def-text">
         Любая прямая на плоскости задаётся уравнением
         $$Ax + By + C = 0, \qquad A^2 + B^2 > 0.$$
-        Вектор $N = (A, B)$ — <span class="term">нормаль к прямой</span> (перпендикулярен ей).
+        Вектор $\mathbf{N}\{A, B\}$ — <span class="term">нормаль к прямой</span> (перпендикулярен ей).
       </div>
     </div>
 
     <div class="derivation">
-      <div class="derivation-title">Доказательство: вектор $N=(A,B)$ ортогонален прямой</div>
+      <div class="derivation-title">Доказательство: вектор $\mathbf{N}\{A,B\}$ ортогонален прямой</div>
       <div class="def-text">
         Уравнение $Ax + By + C = 0$ имеет хотя бы одно решение $(x_0, y_0)$, то есть $Ax_0 + By_0 + C = 0$. Вычитая это тождество из общего уравнения, получаем равносильное ему уравнение
         $$A(x - x_0) + B(y - y_0) = 0.$$
-        Точка $M(x, y)$ лежит на прямой тогда и только тогда, когда векторы $N = (A, B)$ и $\overline{M_0M} = (x - x_0,\ y - y_0)$ ортогональны — их скалярное произведение $A(x - x_0) + B(y - y_0)$ равно нулю. Значит, прямая ортогональна вектору $N = (A, B)$, который и называется <span class="term">нормальным вектором (нормалью) прямой</span>.
+        Точка $M(x, y)$ лежит на прямой тогда и только тогда, когда векторы $\mathbf{N}\{A, B\}$ и $\overline{M_0M}\{x - x_0,\ y - y_0\}$ ортогональны — их скалярное произведение $A(x - x_0) + B(y - y_0)$ равно нулю. Значит, прямая ортогональна вектору $\mathbf{N}\{A, B\}$, который и называется <span class="term">нормальным вектором (нормалью) прямой</span>.
       </div>
+      <div class="src-ref">Доказательство: Ильин, Позняк, с. 110–111</div>
     </div>
 
     <div class="def-block">
@@ -5234,7 +5358,7 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
     <div class="example-card">
       <div class="example-card-title my-example">Простой пример</div>
       <div class="example-card-body">
-        Прямая $3x + 4y - 12 = 0$. Нормаль $N = (3, 4)$.
+        Прямая $3x + 4y - 12 = 0$. Нормаль $\mathbf{N}\{3, 4\}$.
         <br>Уравнение в отрезках: $\dfrac{x}{4} + \dfrac{y}{3} = 1$ ($a = 4$, $b = 3$).
         <br>Прямая проходит через точки $(4, 0)$ и $(0, 3)$.
       </div>
@@ -5257,7 +5381,7 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
       <div class="def-text">
         Любая плоскость в пространстве задаётся уравнением
         $$Ax + By + Cz + D = 0, \qquad A^2 + B^2 + C^2 > 0.$$
-        Вектор $N = (A, B, C)$ — <span class="term">нормаль к плоскости</span>.
+        Вектор $\mathbf{N}\{A, B, C\}$ — <span class="term">нормаль к плоскости</span>.
       </div>
     </div>
 
@@ -5268,7 +5392,6 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
         $$\frac{x}{a} + \frac{y}{b} + \frac{z}{c} = 1.$$
       </div>
     </div>
-
   </div>
 </div>
 
@@ -5284,22 +5407,21 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
     <div class="def-block">
       <div class="section-tag">Прямая в пространстве</div>
       <div class="def-text">
-        Через точку с радиус-вектором $r_0$ и направляющим $a$:
-        $$(r - r_0) \times a = 0,$$
-        что эквивалентно условию $r - r_0 \parallel a$.
+        Через точку с радиус-вектором $\mathbf{r}_0$ и направляющим $\mathbf{a}$:
+        $$(\mathbf{r} - \mathbf{r}_0) \times \mathbf{a} = \mathbf{0},$$
+        что эквивалентно условию $\mathbf{r} - \mathbf{r}_0 \parallel \mathbf{a}$.
       </div>
     </div>
 
     <div class="def-block">
       <div class="section-tag">Плоскость</div>
       <div class="def-text">
-        Через точку $r_0$ с нормалью $N$:
-        $$\langle r - r_0,\, N\rangle = 0 \;\Leftrightarrow\; \langle r, N\rangle = \langle r_0, N\rangle.$$
-        Через точку $r_0$ с двумя направляющими $p_1, p_2$:
-        $$\bigl((r - r_0) \times p_1\bigr) \cdot p_2 = 0 \;\Leftrightarrow\; (r - r_0,\, p_1,\, p_2) = 0.$$
+        Через точку $\mathbf{r}_0$ с нормалью $\mathbf{N}$:
+        $$(\mathbf{r} - \mathbf{r}_0,\, \mathbf{N}) = 0 \;\Leftrightarrow\; (\mathbf{r}, \mathbf{N}) = (\mathbf{r}_0, \mathbf{N}).$$
+        Через точку $\mathbf{r}_0$ с двумя направляющими $\mathbf{p}_1, \mathbf{p}_2$:
+        $$\bigl((\mathbf{r} - \mathbf{r}_0) \times \mathbf{p}_1\bigr) \cdot \mathbf{p}_2 = 0.$$
       </div>
     </div>
-
   </div>
 </div>
 
@@ -5403,12 +5525,12 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
         <div class="ra73-ln" data-step="2">Вектор $N = \{A, B\}$ — нормаль к прямой, $|N| = \sqrt{A^2 + B^2}$.</div>
         <div class="ra73-ln" data-step="3">Возьмём точку $M_1(x_1, y_1)$ на прямой: $A x_1 + B y_1 + C = 0$, то есть $C = -(A x_1 + B y_1)$.</div>
         <div class="ra73-ln" data-step="4">Опустим из $M_0$ перпендикуляр на прямую, его основание — $F$. Разложим $\overrightarrow{M_1 M_0} = \overrightarrow{M_1 F} + \overrightarrow{F M_0}$, где $\overrightarrow{M_1 F}$ лежит на прямой, а $\overrightarrow{F M_0} \parallel N$ и $|\overrightarrow{F M_0}| = d$.</div>
-        <div class="ra73-ln" data-step="5">Умножим скалярно на $N$. Так как $\overrightarrow{M_1 F} \perp N$, то $\langle \overrightarrow{M_1 F}, N\rangle = 0$. А из $\overrightarrow{F M_0} = d\,\dfrac{N}{|N|}$ следует $\langle \overrightarrow{F M_0}, N\rangle = d\,|N|$.</div>
-        <div class="ra73-ln" data-step="6">Поэтому $\langle \overrightarrow{M_1 M_0}, N\rangle = \langle \overrightarrow{M_1 F}, N\rangle + \langle \overrightarrow{F M_0}, N\rangle = d\,|N|$, откуда длина проекции $\overrightarrow{M_1 M_0}$ на $N$ равна</div>
-        <div class="ra73-ln" data-step="7">$$\frac{|\langle \overrightarrow{M_1 M_0},\, N\rangle|}{|N|} = \frac{d\,|N|}{|N|} = d.$$</div>
-        <div class="ra73-ln" data-step="8">Вычислим $\langle \overrightarrow{M_1 M_0}, N\rangle$ в координатах: $\overrightarrow{M_1 M_0} = \{x_0 - x_1,\, y_0 - y_1\}$, поэтому $\langle \overrightarrow{M_1 M_0}, N\rangle = A(x_0 - x_1) + B(y_0 - y_1) = A x_0 + B y_0 + C$.</div>
+        <div class="ra73-ln" data-step="5">Умножим скалярно на $N$. Так как $\overrightarrow{M_1 F} \perp N$, то $(\overrightarrow{M_1 F}, N) = 0$. А из $\overrightarrow{F M_0} = d\,\dfrac{N}{|N|}$ следует $(\overrightarrow{F M_0}, N) = d\,|N|$.</div>
+        <div class="ra73-ln" data-step="6">Поэтому $(\overrightarrow{M_1 M_0}, N) = (\overrightarrow{M_1 F}, N) + (\overrightarrow{F M_0}, N) = d\,|N|$, откуда длина проекции $\overrightarrow{M_1 M_0}$ на $N$ равна</div>
+        <div class="ra73-ln" data-step="7">$$\frac{|(\overrightarrow{M_1 M_0},\, N)|}{|N|} = \frac{d\,|N|}{|N|} = d.$$</div>
+        <div class="ra73-ln" data-step="8">Вычислим $(\overrightarrow{M_1 M_0}, N)$ в координатах: $\overrightarrow{M_1 M_0} = \{x_0 - x_1,\, y_0 - y_1\}$, поэтому $(\overrightarrow{M_1 M_0}, N) = A(x_0 - x_1) + B(y_0 - y_1) = A x_0 + B y_0 + C$.</div>
         <div class="ra73-ln" data-step="9">Итог: $d = \dfrac{|A x_0 + B y_0 + C|}{\sqrt{A^2 + B^2}}$.</div>
-      </div></div>
+      </div><div class="src-ref">Доказательство: Ильин, Позняк, с. 118</div></div>
 
       <div class="ra73-block"><div class="ra73-sec">Расстояние от точки до плоскости</div><div class="ra73-text">
         <div class="ra73-ln" data-step="10">От точки $M_0(x_0, y_0, z_0)$ до плоскости $Ax + By + Cz + D = 0$:</div>
@@ -5419,15 +5541,15 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
         <div class="ra73-ln" data-step="12">Вектор $N = \{A, B, C\}$ — нормаль к плоскости, $|N| = \sqrt{A^2 + B^2 + C^2}$.</div>
         <div class="ra73-ln" data-step="13">Возьмём точку $M_1(x_1, y_1, z_1)$ на плоскости: $A x_1 + B y_1 + C z_1 + D = 0$, то есть $D = -(A x_1 + B y_1 + C z_1)$.</div>
         <div class="ra73-ln" data-step="14">Опустим из $M_0$ перпендикуляр на плоскость, его основание — $F$. Разложим $\overrightarrow{M_1 M_0} = \overrightarrow{M_1 F} + \overrightarrow{F M_0}$, где $\overrightarrow{M_1 F}$ лежит в плоскости, а $\overrightarrow{F M_0} \parallel N$ и $|\overrightarrow{F M_0}| = d$.</div>
-        <div class="ra73-ln" data-step="15">Умножим скалярно на $N$. Так как $\overrightarrow{M_1 F} \perp N$, то $\langle \overrightarrow{M_1 F}, N\rangle = 0$. А из $\overrightarrow{F M_0} = d\,\dfrac{N}{|N|}$ следует $\langle \overrightarrow{F M_0}, N\rangle = d\,|N|$.</div>
-        <div class="ra73-ln" data-step="16">Поэтому $\langle \overrightarrow{M_1 M_0}, N\rangle = \langle \overrightarrow{M_1 F}, N\rangle + \langle \overrightarrow{F M_0}, N\rangle = d\,|N|$, откуда длина проекции $\overrightarrow{M_1 M_0}$ на $N$ равна</div>
-        <div class="ra73-ln" data-step="17">$$\frac{|\langle \overrightarrow{M_1 M_0},\, N\rangle|}{|N|} = \frac{d\,|N|}{|N|} = d.$$</div>
-        <div class="ra73-ln" data-step="18">Вычислим $\langle \overrightarrow{M_1 M_0}, N\rangle$ в координатах: $\overrightarrow{M_1 M_0} = \{x_0 - x_1,\, y_0 - y_1,\, z_0 - z_1\}$, поэтому $\langle \overrightarrow{M_1 M_0}, N\rangle = A x_0 + B y_0 + C z_0 + D$.</div>
+        <div class="ra73-ln" data-step="15">Умножим скалярно на $N$. Так как $\overrightarrow{M_1 F} \perp N$, то $(\overrightarrow{M_1 F}, N) = 0$. А из $\overrightarrow{F M_0} = d\,\dfrac{N}{|N|}$ следует $(\overrightarrow{F M_0}, N) = d\,|N|$.</div>
+        <div class="ra73-ln" data-step="16">Поэтому $(\overrightarrow{M_1 M_0}, N) = (\overrightarrow{M_1 F}, N) + (\overrightarrow{F M_0}, N) = d\,|N|$, откуда длина проекции $\overrightarrow{M_1 M_0}$ на $N$ равна</div>
+        <div class="ra73-ln" data-step="17">$$\frac{|(\overrightarrow{M_1 M_0},\, N)|}{|N|} = \frac{d\,|N|}{|N|} = d.$$</div>
+        <div class="ra73-ln" data-step="18">Вычислим $(\overrightarrow{M_1 M_0}, N)$ в координатах: $\overrightarrow{M_1 M_0} = \{x_0 - x_1,\, y_0 - y_1,\, z_0 - z_1\}$, поэтому $(\overrightarrow{M_1 M_0}, N) = A x_0 + B y_0 + C z_0 + D$.</div>
         <div class="ra73-ln" data-step="19">Итог: $d = \dfrac{|A x_0 + B y_0 + C z_0 + D|}{\sqrt{A^2 + B^2 + C^2}}$.</div>
-      </div></div>
+      </div><div class="src-ref">Доказательство: Ильин, Позняк, с. 131</div></div>
 
       <div class="ra73-block"><div class="ra73-sec">Угол между прямыми</div><div class="ra73-text">
-        <div class="ra73-ln" data-step="20">Косинус угла между векторами $a$ и $b$:  $\cos\widehat{(a, b)} = \dfrac{\langle a, b\rangle}{|a|\,|b|}$.</div>
+        <div class="ra73-ln" data-step="20">Косинус угла между векторами $\mathbf{a}$ и $\mathbf{b}$:  $\cos\widehat{(\mathbf{a}, \mathbf{b})} = \dfrac{(\mathbf{a}, \mathbf{b})}{|\mathbf{a}|\,|\mathbf{b}|}$.</div>
         <div class="ra73-ln" data-step="21">Прямые $l_i:\; A_i x + B_i y + C_i = 0$ $(A_i^2 + B_i^2 \ne 0)$, $\,i = 1, 2$. Угол $\varphi$ между прямыми совпадает с углом между их нормалями $\{A_i, B_i\}$:</div>
         <div class="ra73-ln" data-step="22">$$\cos\varphi = \frac{A_1 A_2 + B_1 B_2}{\sqrt{A_1^2 + B_1^2}\,\sqrt{A_2^2 + B_2^2}}.$$</div>
       </div></div>
@@ -5598,7 +5720,7 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
 
     <div class="def-block">
       <div class="def-text">
-        Прямая в пространстве через точку $M_0(x_0, y_0, z_0)$ с направляющим вектором $a = (l, m, n)$.
+        Прямая в пространстве через точку $M_0(x_0, y_0, z_0)$ с направляющим вектором $\mathbf{a}\{l, m, n\}$.
         <br><br>
         <strong>Параметрические уравнения:</strong>
         $$\begin{cases}x = x_0 + t l,\\ y = y_0 + t m,\\ z = z_0 + t n,\end{cases} \quad t \in \mathbb{R}.$$
@@ -5606,7 +5728,6 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
         $$\frac{x - x_0}{l} = \frac{y - y_0}{m} = \frac{z - z_0}{n}.$$
       </div>
     </div>
-
   </div>
 </div>
 
@@ -6041,6 +6162,8 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
       <div class="fig-caption">Кинематическое/алгебраическое построение эллипса</div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 25–26 «Кривые и поверхности 2-го порядка»</div>
   </div>
 </div>
 
@@ -6175,6 +6298,8 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();draw();
 })();
 </script>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 25–26 «Кривые и поверхности 2-го порядка»</div>
   </div>
 </div>
 
@@ -6223,6 +6348,8 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();draw();
         </div>
       </div>
     </div>
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 25–26 «Кривые и поверхности 2-го порядка»</div>
   </div>
 </div>
 
@@ -6254,6 +6381,8 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();draw();
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 25–26 «Кривые и поверхности 2-го порядка»</div>
   </div>
 </div>
 
@@ -6396,6 +6525,8 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();draw();
 })();
 </script>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 25–26 «Кривые и поверхности 2-го порядка»</div>
   </div>
 </div>
 
@@ -6557,6 +6688,8 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
 })();
 </script>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 25–26 «Кривые и поверхности 2-го порядка»</div>
   </div>
 </div>
 
@@ -6581,6 +6714,8 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
       Объединяет эллипс, гиперболу и параболу: фокально-директориальное свойство $r/d = \varepsilon$ работает для всех трёх. $\varepsilon \lt  1$ — эллипс; $\varepsilon = 1$ — парабола; $\varepsilon \gt  1$ — гипербола.
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 25–26 «Кривые и поверхности 2-го порядка»</div>
   </div>
 </div>
 
@@ -6716,6 +6851,8 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();draw();
 })();
 </script>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 25–26 «Кривые и поверхности 2-го порядка»</div>
   </div>
 </div>
 
@@ -6877,6 +7014,8 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
 })();
 </script>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 25–26 «Кривые и поверхности 2-го порядка»</div>
   </div>
 </div>
 
@@ -7046,6 +7185,8 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
 })();
 </script>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 25–26 «Кривые и поверхности 2-го порядка»</div>
   </div>
 </div>
 
@@ -7085,6 +7226,8 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 25–26 «Кривые и поверхности 2-го порядка»</div>
   </div>
 </div>
 
@@ -7174,6 +7317,8 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 25–26 «Кривые и поверхности 2-го порядка»</div>
   </div>
 </div>
 
@@ -7207,6 +7352,8 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 25–26 «Кривые и поверхности 2-го порядка»</div>
   </div>
 </div>
 
@@ -7297,6 +7444,8 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
       <div class="s90-note">Пара пересекающихся плоскостей $\bigl(\tfrac{x^2}{a^2}-\tfrac{y^2}{b^2}=0\bigr)$, пара параллельных плоскостей $(x^2=a^2)$, пара совпавших плоскостей $(x^2=0)$, прямая $\bigl(\tfrac{x^2}{a^2}+\tfrac{y^2}{b^2}=0\bigr)$ и точка $\bigl(\tfrac{x^2}{a^2}+\tfrac{y^2}{b^2}+\tfrac{z^2}{c^2}=0\bigr)$.</div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 25–26 «Кривые и поверхности 2-го порядка»</div>
   </div>
 </div>
 
@@ -7451,6 +7600,8 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();renderL
 })();
 </script>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 25–26 «Кривые и поверхности 2-го порядка»</div>
   </div>
 </div>
 
@@ -7498,6 +7649,8 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();renderL
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекции 25–26 «Кривые и поверхности 2-го порядка»</div>
   </div>
 </div>
 
@@ -7602,7 +7755,7 @@ const TOPICS = [
   },
   {
     id: 't5',
-    title: 'Аналитическая геометрия',
+    title: 'Линейная алгебра и аналитическая геометрия',
     subtitle: 'Глава XIII',
     questions: [
       { n: 57, t: 'Линейное аффинное многообразие' },
@@ -7686,13 +7839,17 @@ function buildSidebar() {
   const nav = document.createElement('nav');
   nav.className = 'side-nav';
   nav.innerHTML = `
-    <a class="side-nav-item is-home" onclick="showTopic('start')">${sideIcon('home')}<span class="side-nav-label">На главную</span></a>
-    <a class="side-nav-item" onclick="openQuizMenu()">${sideIcon('quiz')}<span class="side-nav-label">Подготовка</span></a>
-    <a class="side-nav-item" onclick="showTopic('basics')">${sideIcon('book')}<span class="side-nav-label">Базовые термины</span></a>
+    <div class="side-section-title">Настройки</div>
     <a class="side-nav-item" id="navTheme" onclick="toggleTheme(event);updateThemeNavItem();">
       ${sideIcon('moon','navThemeIc')}<span class="side-nav-label" id="navThemeLabel">Светлая тема</span>
     </a>
-    <a class="side-nav-item" onclick="showMyDevices()">${sideIcon('devices')}<span class="side-nav-label">Мои устройства</span></a>
+
+    <div class="side-divider"></div>
+
+    <div class="side-section-title">Материал</div>
+    <a class="side-nav-item is-home" onclick="showTopic('start')">${sideIcon('home')}<span class="side-nav-label">На главную</span></a>
+    <a class="side-nav-item" onclick="openQuizMenu()">${sideIcon('quiz')}<span class="side-nav-label">Подготовка</span></a>
+    <a class="side-nav-item" onclick="showTopic('basics')">${sideIcon('book')}<span class="side-nav-label">Базовые термины</span></a>
     <a class="side-nav-item" href="literatura.html">${sideIcon('book')}<span class="side-nav-label">Литература</span></a>
     <a class="side-nav-item" href="links.html"><svg class="side-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span class="side-nav-label">Полезные ссылки</span></a>
   `;
@@ -7803,6 +7960,34 @@ function showTopic(topicId) {
       window.MathJax.typesetPromise([target]).catch(err =>  console.log('MJ err:', err));
     }
   }, 50);
+  // Scroll-reveal карточек открытой темы
+  revealCards(target);
+}
+
+// ── Карточки вопросов всплывают при прокрутке ──
+var _revealIO = null;
+function revealCards(scope) {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var root = scope || document;
+  var cards = root.querySelectorAll('.q-card');
+  if (!cards.length) return;
+  if (!('IntersectionObserver' in window)) {
+    cards.forEach(function(c){ c.classList.add('reveal','in'); });
+    return;
+  }
+  // сбрасываем предыдущий observer
+  if (_revealIO) { _revealIO.disconnect(); }
+  cards.forEach(function(c){ c.classList.remove('in'); c.classList.add('reveal'); });
+  _revealIO = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if (!en.isIntersecting) return;
+      var el = en.target;
+      el.style.transitionDelay = (el._d || 0) + 'ms';
+      el.classList.add('in');
+      _revealIO.unobserve(el);
+    });
+  }, { rootMargin: '0px 0px -6% 0px', threshold: 0.06 });
+  cards.forEach(function(c, i){ c._d = (i % 5) * 55; _revealIO.observe(c); });
 }
 
 function goToQuestion(topicId, qNum) {
@@ -7811,6 +7996,7 @@ function goToQuestion(topicId, qNum) {
     const card = document.querySelector(`#page-${topicId} .q-card[data-q="${qNum}"]`);
     if (card) {
       card.classList.add('open');
+      card.classList.add('reveal','in');
       // Дать MathJax время на рендеринг открытой карточки
       setTimeout(() =>  {
         if (window.MathJax && window.MathJax.typesetPromise) {
@@ -7819,9 +8005,6 @@ function goToQuestion(topicId, qNum) {
         const y = card.getBoundingClientRect().top + window.pageYOffset - 80;
         window.scrollTo({top: y, behavior: 'smooth'});
       }, 80);
-      card.style.transition = 'box-shadow 0.6s';
-      card.style.boxShadow = '0 0 0 3px var(--purple-light)';
-      setTimeout(() =>  card.style.boxShadow = '', 1200);
     }
   }, 150);
 }
@@ -7846,6 +8029,19 @@ function toggleCard(headEl) {
 // ─────────────────────────────────────────────
 // ПОИСК
 // ─────────────────────────────────────────────
+// Рендер формул в выпадающем списке поиска (с дебаунсом, чтобы не дёргать MathJax на каждый символ)
+var _mjSearchTimer = null;
+function typesetSearchResults(box) {
+  if (!box || !window.MathJax || !window.MathJax.typesetPromise) return;
+  clearTimeout(_mjSearchTimer);
+  _mjSearchTimer = setTimeout(function () {
+    try {
+      if (window.MathJax.typesetClear) window.MathJax.typesetClear([box]);
+      window.MathJax.typesetPromise([box]).catch(function () {});
+    } catch (e) {}
+  }, 120);
+}
+
 function doSearch() {
   const inp = document.getElementById('searchInput');
   if (!inp) return;
@@ -7892,6 +8088,7 @@ function doSearch() {
            + '</a>';
     }).join('');
     results.hidden = false;
+    typesetSearchResults(results);
     return;
   }
 
@@ -7901,7 +8098,7 @@ function doSearch() {
 
   if (!q) {
     // Сброс поиска: всё показать
-    allCards.forEach(c =>  { c.classList.remove('hidden'); c.classList.remove('open'); });
+    allCards.forEach(c =>  { c.classList.remove('hidden'); c.classList.remove('open'); c.classList.add('reveal','in'); });
     document.querySelectorAll('.topic-page').forEach(p =>  { p.style.display = ''; });
     return;
   }
@@ -7913,6 +8110,7 @@ function doSearch() {
     if (text.includes(q)) {
       card.classList.remove('hidden');
       card.classList.add('open');
+      card.classList.add('reveal','in');
       visible++;
     } else {
       card.classList.add('hidden');
@@ -8161,19 +8359,19 @@ const BASICS_TERMS = [
   },
   {
     t: 'Скалярное произведение',
-    d: 'Операция $\\langle x, y\\rangle$, сопоставляющая паре векторов число, со свойствами: симметричность (или эрмитовость), линейность по аргументу, положительная определённость ($\\langle x, x\\rangle > 0$ при $x \\ne 0$).'
+    d: 'Операция $\(x, y\)$, сопоставляющая паре векторов число, со свойствами: симметричность (или эрмитовость), линейность по аргументу, положительная определённость ($\(x, x\) > 0$ при $x \\ne 0$).'
   },
   {
     t: 'Евклидово пространство',
-    d: 'Вещественное векторное пространство со скалярным произведением. Позволяет говорить о длинах $|x| = \\sqrt{\\langle x, x\\rangle}$ и углах между векторами.'
+    d: 'Вещественное векторное пространство со скалярным произведением. Позволяет говорить о длинах $|x| = \\sqrt{\(x, x\)}$ и углах между векторами.'
   },
   {
     t: 'Ортогональность',
-    d: 'Векторы ортогональны, если $\\langle x, y\\rangle = 0$. Ортонормированный базис (ОНБ) — базис из попарно ортогональных векторов единичной длины.'
+    d: 'Векторы ортогональны, если $\(x, y\) = 0$. Ортонормированный базис (ОНБ) — базис из попарно ортогональных векторов единичной длины.'
   },
   {
     t: 'Норма (длина) вектора',
-    d: '$|x| = \\sqrt{\\langle x, x\\rangle}$. Удовлетворяет неравенству треугольника $|x + y| \\le |x| + |y|$ и неравенству Коши–Буняковского $|\\langle x, y\\rangle| \\le |x|\\,|y|$.'
+    d: '$|x| = \\sqrt{\(x, x\)}$. Удовлетворяет неравенству треугольника $|x + y| \\le |x| + |y|$ и неравенству Коши–Буняковского $|\(x, y\)| \\le |x|\\,|y|$.'
   },
   {
     t: 'Система линейных уравнений (СЛУ)',
@@ -8418,7 +8616,7 @@ var BASICS_QUIZ = [
       n: 0, q: 'Что такое <b>скалярное произведение</b>?',
       opts: [
         'Произведение длин векторов',
-        'Операция $\\langle x, y\\rangle$, дающая число, с симметрией, линейностью и положительной определённостью',
+        'Операция $\(x, y\)$, дающая число, с симметрией, линейностью и положительной определённостью',
         'Векторное произведение',
         'Сумма координат'
       ],
@@ -8429,7 +8627,7 @@ var BASICS_QUIZ = [
       n: 0, q: 'Когда два вектора <b>ортогональны</b>?',
       opts: [
         'Когда они коллинеарны',
-        'Когда $\\langle x, y\\rangle = 0$',
+        'Когда $\(x, y\) = 0$',
         'Когда имеют равную длину',
         'Когда один из них нулевой'
       ],
@@ -8461,13 +8659,13 @@ var BASICS_QUIZ = [
     {
       n: 0, q: 'Что такое <b>норма (длина)</b> вектора?',
       opts: [
-        '$\\langle x, x\\rangle$',
-        '$\\sqrt{\\langle x, x\\rangle}$',
+        '$\(x, x\)$',
+        '$\\sqrt{\(x, x\)}$',
         'Сумма координат',
         'Наибольшая координата'
       ],
       correct: 1,
-      exp: '$|x| = \\sqrt{\\langle x, x\\rangle}$. Подчиняется неравенству треугольника и неравенству Коши–Буняковского.'
+      exp: '$|x| = \\sqrt{\(x, x\)}$. Подчиняется неравенству треугольника и неравенству Коши–Буняковского.'
     }
   ];
 
@@ -8508,7 +8706,7 @@ const TOPIC_NAMES = {
   t2: 'Комплексные числа',
   t3: 'Многочлены',
   t4: 'Жордановы формы',
-  t5: 'Аналитическая геометрия',
+  t5: 'Линейная алгебра и аналитическая геометрия',
   t6: 'КВП и ПВП',
   basics: 'Термины с прошлого семестра'
 };
@@ -17607,7 +17805,7 @@ TICKET_QUIZ[36] = [
     correct: 2,
     exp: {
       tldr: "Кратность 2 у $\\lambda=1$, но собств. вектор один — не простая структура.",
-      detail: "$\\chi=(t-1)^2$. $\\operatorname{Ker}(A-E)=\\operatorname{Ker}\\begin{pmatrix}0&1\\\\0&0\\end{pmatrix}=\\langle(1,0)^T\\rangle$ — одномерное. Геометр. кратность 1 < алгебр. 2 → не простой структуры."
+      detail: "$\\chi=(t-1)^2$. $\\operatorname{Ker}(A-E)=\\operatorname{Ker}\\begin{pmatrix}0&1\\\\0&0\\end{pmatrix}=\((1,0)^T\)$ — одномерное. Геометр. кратность 1 < алгебр. 2 → не простой структуры."
     }
   },
   {
@@ -17707,7 +17905,7 @@ TICKET_QUIZ[36] = [
     correct: 3,
     exp: {
       tldr: "Алгебр. = 2 (двойной корень), геометр. = 1 (один собств. вектор).",
-      detail: "$\\chi=(t-1)^2$: $a=2$. $\\operatorname{Ker}(A-E)=\\langle(1,0)^T\\rangle$: $g=1$. Поэтому простой структуры нет, ЖНФ содержит клетку $J_2(1)$."
+      detail: "$\\chi=(t-1)^2$: $a=2$. $\\operatorname{Ker}(A-E)=\((1,0)^T\)$: $g=1$. Поэтому простой структуры нет, ЖНФ содержит клетку $J_2(1)$."
     }
   },
   {
@@ -18063,13 +18261,13 @@ TICKET_QUIZ[38] = [
     opts: [
       "всё $V$",
       "$\\{v\\}$",
-      "$\\langle v,\\mathcal{A}v,\\dots,\\mathcal{A}^{m-1}v\\rangle$",
+      "$\(v,\\mathcal{A}v,\\dots,\\mathcal{A}^{m-1}v\)$",
       "$\\operatorname{Ker}\\mathcal{A}$"
     ],
     correct: 2,
     exp: {
       tldr: "Циклическое подпространство — линейная оболочка орбиты $v$.",
-      detail: "$\\langle v,\\mathcal{A}v,\\dots,\\mathcal{A}^{m-1}v\\rangle$ — наименьшее $\\mathcal{A}$-инвариантное подпространство, содержащее $v$. Оно инвариантно: $\\mathcal{A}$ переводит каждый элемент в следующий."
+      detail: "$\(v,\\mathcal{A}v,\\dots,\\mathcal{A}^{m-1}v\)$ — наименьшее $\\mathcal{A}$-инвариантное подпространство, содержащее $v$. Оно инвариантно: $\\mathcal{A}$ переводит каждый элемент в следующий."
     }
   },
   {
@@ -18169,7 +18367,7 @@ TICKET_QUIZ[38] = [
     ],
     exp: {
       tldr: "Инвариантно, порождено орбитой, матрица — клетка $J_m(0)$.",
-      detail: "Размерность равна длине цепочки $m$, не обязательно 1 (одномерное циклическое подпространство — это $\\langle v\\rangle$ для собств. вектора $v$).",
+      detail: "Размерность равна длине цепочки $m$, не обязательно 1 (одномерное циклическое подпространство — это $\(v\)$ для собств. вектора $v$).",
       variants: "«Имеет размерность 1» — лишь частный случай."
     }
   },
@@ -19086,7 +19284,7 @@ TICKET_QUIZ[42] = [
     correct: 2,
     exp: {
       tldr: "$V_1$ одномерно (один собств. вектор), $V(1)$ заполняет всё двумерное пространство.",
-      detail: "$V_1=\\operatorname{Ker}(A-E)=\\operatorname{Ker}\\begin{pmatrix}0&1\\\\0&0\\end{pmatrix}=\\langle(1,0)^T\\rangle$ — размерность 1. $(A-E)^2=0$, значит $V(1)=\\operatorname{Ker}(A-E)^2=\\mathbb{R}^2$ — размерность 2."
+      detail: "$V_1=\\operatorname{Ker}(A-E)=\\operatorname{Ker}\\begin{pmatrix}0&1\\\\0&0\\end{pmatrix}=\((1,0)^T\)$ — размерность 1. $(A-E)^2=0$, значит $V(1)=\\operatorname{Ker}(A-E)^2=\\mathbb{R}^2$ — размерность 2."
     }
   },
   {
@@ -20738,12 +20936,12 @@ TICKET_QUIZ[49] = [
       "$\\mathcal{A}^*=\\mathcal{A}^{-1}$",
       "$\\mathcal{A}^*=-\\mathcal{A}$",
       "$\\mathcal{A}^*=\\mathcal{A}$",
-      "$\\langle\\mathcal{A}x,y\\rangle=\\langle x,\\mathcal{A}^*y\\rangle$ для всех $x,y$"
+      "$\(\\mathcal{A}x,y\)=\(x,\\mathcal{A}^*y\)$ для всех $x,y$"
     ],
     correct: 3,
     exp: {
       tldr: "Сопряжённый — «перебрасывает» оператор через скалярное произведение.",
-      detail: "$\\mathcal{A}^*$ определяется условием $\\langle\\mathcal{A}x,y\\rangle=\\langle x,\\mathcal{A}^*y\\rangle$ для всех $x,y\\in V$. Это аналог транспонирования в матричной форме (и эрмитова сопряжения над $\\mathbb{C}$)."
+      detail: "$\\mathcal{A}^*$ определяется условием $\(\\mathcal{A}x,y\)=\(x,\\mathcal{A}^*y\)$ для всех $x,y\\in V$. Это аналог транспонирования в матричной форме (и эрмитова сопряжения над $\\mathbb{C}$)."
     }
   },
   {
@@ -20807,7 +21005,7 @@ TICKET_QUIZ[49] = [
     correct: 3,
     exp: {
       tldr: "При сопряжении произведения порядок обращается — как при транспонировании.",
-      detail: "$(\\mathcal{A}\\mathcal{B})^*=\\mathcal{B}^*\\mathcal{A}^*$. Доказательство: $\\langle\\mathcal{A}\\mathcal{B}x,y\\rangle=\\langle\\mathcal{B}x,\\mathcal{A}^*y\\rangle=\\langle x,\\mathcal{B}^*\\mathcal{A}^*y\\rangle$. Аналогично $(AB)^T=B^TA^T$."
+      detail: "$(\\mathcal{A}\\mathcal{B})^*=\\mathcal{B}^*\\mathcal{A}^*$. Доказательство: $\(\\mathcal{A}\\mathcal{B}x,y\)=\(\\mathcal{B}x,\\mathcal{A}^*y\)=\(x,\\mathcal{B}^*\\mathcal{A}^*y\)$. Аналогично $(AB)^T=B^TA^T$."
     }
   },
   {
@@ -20823,7 +21021,7 @@ TICKET_QUIZ[49] = [
     correct: 2,
     exp: {
       tldr: "Над $\\mathbb{C}$ скаляр выносится с комплексным сопряжением.",
-      detail: "$\\langle\\alpha\\mathcal{A}x,y\\rangle=\\bar\\alpha\\langle\\mathcal{A}x,y\\rangle=\\bar\\alpha\\langle x,\\mathcal{A}^*y\\rangle=\\langle x,\\bar\\alpha\\mathcal{A}^*y\\rangle$. (Над $\\mathbb{R}$ просто $(\\alpha\\mathcal{A})^*=\\alpha\\mathcal{A}^*$.)"
+      detail: "$\(\\alpha\\mathcal{A}x,y\)=\\bar\\alpha\(\\mathcal{A}x,y\)=\\bar\\alpha\(x,\\mathcal{A}^*y\)=\(x,\\bar\\alpha\\mathcal{A}^*y\)$. (Над $\\mathbb{R}$ просто $(\\alpha\\mathcal{A})^*=\\alpha\\mathcal{A}^*$.)"
     }
   },
   {
@@ -20903,12 +21101,12 @@ TICKET_QUIZ[49] = [
       "ошибка",
       "над $\\mathbb{C}$ нет транспонирования",
       "случайно",
-      "эрмитово произведение полуторалинейно: $\\langle\\alpha x,y\\rangle=\\alpha\\langle x,y\\rangle$, но $\\langle x,\\alpha y\\rangle=\\bar\\alpha\\langle x,y\\rangle$"
+      "эрмитово произведение полуторалинейно: $\(\\alpha x,y\)=\\alpha\(x,y\)$, но $\(x,\\alpha y\)=\\bar\\alpha\(x,y\)$"
     ],
     correct: 3,
     exp: {
-      tldr: "Из-за сопряжения во втором аргументе $\\langle,\\rangle$ матрица $\\mathcal{A}^*$ — транспонирование И сопряжение.",
-      detail: "Эрмитово произведение НЕ симметрично, а сопряжённо-симметрично: $\\langle y,x\\rangle=\\overline{\\langle x,y\\rangle}$. Это вынуждает сопрягать матрицу при «перебрасывании» оператора. Без сопряжения определение $\\langle\\mathcal{A}x,y\\rangle=\\langle x,\\mathcal{A}^*y\\rangle$ не было бы согласовано с полуторалинейностью."
+      tldr: "Из-за сопряжения во втором аргументе $\(,\)$ матрица $\\mathcal{A}^*$ — транспонирование И сопряжение.",
+      detail: "Эрмитово произведение НЕ симметрично, а сопряжённо-симметрично: $\(y,x\)=\\overline{\(x,y\)}$. Это вынуждает сопрягать матрицу при «перебрасывании» оператора. Без сопряжения определение $\(\\mathcal{A}x,y\)=\(x,\\mathcal{A}^*y\)$ не было бы согласовано с полуторалинейностью."
     }
   },
   {
@@ -20956,7 +21154,7 @@ TICKET_QUIZ[49] = [
     correct: 2,
     exp: {
       tldr: "Инвариантность $W$ для $\\mathcal{A}^*$ ⟺ инвариантность $W^\\perp$ для $\\mathcal{A}$.",
-      detail: "$\\mathcal{A}^*W\\subseteq W$ ⟺ для $x\\in W,y\\in W^\\perp$: $\\langle\\mathcal{A}^*x,y\\rangle=0$ ⟺ $\\langle x,\\mathcal{A}y\\rangle=0$ ⟺ $\\mathcal{A}y\\in W^\\perp$ ⟺ $\\mathcal{A}W^\\perp\\subseteq W^\\perp$."
+      detail: "$\\mathcal{A}^*W\\subseteq W$ ⟺ для $x\\in W,y\\in W^\\perp$: $\(\\mathcal{A}^*x,y\)=0$ ⟺ $\(x,\\mathcal{A}y\)=0$ ⟺ $\\mathcal{A}y\\in W^\\perp$ ⟺ $\\mathcal{A}W^\\perp\\subseteq W^\\perp$."
     }
   },
   {
@@ -21022,7 +21220,7 @@ TICKET_QUIZ[50] = [
     correct: 0,
     exp: {
       tldr: "$Q^TQ=E$ означает: попарные скалярные произведения столбцов = $\\delta_{ij}$.",
-      detail: "$(Q^TQ)_{ij}=\\sum_k(Q^T)_{ik}Q_{kj}=\\sum_k Q_{ki}Q_{kj}=\\langle\\text{ст. }i,\\text{ст. }j\\rangle$. $Q^TQ=E\\iff$ это $\\delta_{ij}$ ⟺ столбцы ОНС."
+      detail: "$(Q^TQ)_{ij}=\\sum_k(Q^T)_{ik}Q_{kj}=\\sum_k Q_{ki}Q_{kj}=\(\\text{ст. }i,\\text{ст. }j\)$. $Q^TQ=E\\iff$ это $\\delta_{ij}$ ⟺ столбцы ОНС."
     }
   },
   {
@@ -21113,17 +21311,17 @@ TICKET_QUIZ[50] = [
   {
     type: "single",
     level: 2,
-    q: "Скалярное произведение $\\langle Qx,Qy\\rangle$ равно:",
+    q: "Скалярное произведение $\(Qx,Qy\)$ равно:",
     opts: [
       "$0$",
-      "$\\langle x,y\\rangle$ (сохраняется)",
-      "$\\langle x,y\\rangle^2$",
-      "$2\\langle x,y\\rangle$"
+      "$\(x,y\)$ (сохраняется)",
+      "$\(x,y\)^2$",
+      "$2\(x,y\)$"
     ],
     correct: 1,
     exp: {
       tldr: "Ортогональная матрица сохраняет скалярные произведения.",
-      detail: "$\\langle Qx,Qy\\rangle=(Qx)^T(Qy)=x^TQ^TQy=x^TEy=x^Ty=\\langle x,y\\rangle$. Поэтому сохраняются длины ($|Qx|=|x|$) и углы."
+      detail: "$\(Qx,Qy\)=(Qx)^T(Qy)=x^TQ^TQy=x^TEy=x^Ty=\(x,y\)$. Поэтому сохраняются длины ($|Qx|=|x|$) и углы."
     }
   },
   {
@@ -21139,7 +21337,7 @@ TICKET_QUIZ[50] = [
     correct: 0,
     exp: {
       tldr: "Длина сохраняется — это и есть «изометричность».",
-      detail: "$|Qx|^2=\\langle Qx,Qx\\rangle=\\langle x,x\\rangle=|x|^2\\Rightarrow|Qx|=|x|$. Ортогональные преобразования — это изометрии $\\mathbb{R}^n$ (вместе с переносами)."
+      detail: "$|Qx|^2=\(Qx,Qx\)=\(x,x\)=|x|^2\\Rightarrow|Qx|=|x|$. Ортогональные преобразования — это изометрии $\\mathbb{R}^n$ (вместе с переносами)."
     }
   },
   {
@@ -21247,12 +21445,12 @@ TICKET_QUIZ[51] = [
     opts: [
       "сохраняет $\\det$",
       "сохраняет только длины",
-      "сохраняет скалярное произведение: $\\langle\\mathcal{A}x,\\mathcal{A}y\\rangle=\\langle x,y\\rangle$",
+      "сохраняет скалярное произведение: $\(\\mathcal{A}x,\\mathcal{A}y\)=\(x,y\)$",
       "сохраняет только углы"
     ],
     correct: 2,
     exp: {
-      tldr: "Изометрия: $\\langle\\mathcal{A}x,\\mathcal{A}y\\rangle=\\langle x,y\\rangle$ — полное сохранение геометрии.",
+      tldr: "Изометрия: $\(\\mathcal{A}x,\\mathcal{A}y\)=\(x,y\)$ — полное сохранение геометрии.",
       detail: "Сохранение скалярного произведения автоматически даёт сохранение длин ($|\\mathcal{A}x|=|x|$) и углов ($\\cos\\angle(\\mathcal{A}x,\\mathcal{A}y)=\\cos\\angle(x,y)$)."
     }
   },
@@ -21338,7 +21536,7 @@ TICKET_QUIZ[51] = [
     correct: 3,
     exp: {
       tldr: "$\\mathcal{A}\\mathcal{B}$ ортогональна, если $\\mathcal{A},\\mathcal{B}$ ортогональны.",
-      detail: "Сохранение скалярного произведения композицией: $\\langle\\mathcal{A}\\mathcal{B}x,\\mathcal{A}\\mathcal{B}y\\rangle=\\langle\\mathcal{B}x,\\mathcal{B}y\\rangle=\\langle x,y\\rangle$. Это групповое свойство $O(V)$."
+      detail: "Сохранение скалярного произведения композицией: $\(\\mathcal{A}\\mathcal{B}x,\\mathcal{A}\\mathcal{B}y\)=\(\\mathcal{B}x,\\mathcal{B}y\)=\(x,y\)$. Это групповое свойство $O(V)$."
     }
   },
   {
@@ -21380,13 +21578,13 @@ TICKET_QUIZ[51] = [
     opts: [
       "случайно",
       "зависит от поля",
-      "любое сохраняющее длины линейное отображение автоматически сохраняет $\\langle,\\rangle$ — это и есть ортогональный оператор",
+      "любое сохраняющее длины линейное отображение автоматически сохраняет $\(,\)$ — это и есть ортогональный оператор",
       "все изометрии нелинейны"
     ],
     correct: 2,
     exp: {
       tldr: "Линейная изометрия = ортогональный оператор.",
-      detail: "Через поляризацию $\\langle x,y\\rangle=\\frac14(|x+y|^2-|x-y|^2)$ сохранение длин даёт сохранение $\\langle,\\rangle$. Поэтому линейная изометрия = ортогональный оператор. (Изометрии в широком смысле могут включать сдвиги — это аффинные изометрии.)"
+      detail: "Через поляризацию $\(x,y\)=\\frac14(|x+y|^2-|x-y|^2)$ сохранение длин даёт сохранение $\(,\)$. Поэтому линейная изометрия = ортогональный оператор. (Изометрии в широком смысле могут включать сдвиги — это аффинные изометрии.)"
     }
   },
   {
@@ -21394,7 +21592,7 @@ TICKET_QUIZ[51] = [
     level: 3,
     q: "Полное сохранение скалярного произведения следует из сохранения длин — почему?",
     opts: [
-      "через тождество поляризации $\\langle x,y\\rangle=\\frac14(|x+y|^2-|x-y|^2)$",
+      "через тождество поляризации $\(x,y\)=\\frac14(|x+y|^2-|x-y|^2)$",
       "случайно",
       "ошибка",
       "только для ортонормированных"
@@ -21402,7 +21600,7 @@ TICKET_QUIZ[51] = [
     correct: 0,
     exp: {
       tldr: "Поляризация выражает скалярное произведение через длины.",
-      detail: "Если $|\\mathcal{A}x|=|x|$ для всех $x$, то $|\\mathcal{A}(x\\pm y)|=|x\\pm y|$ → подставив в поляризацию, получаем $\\langle\\mathcal{A}x,\\mathcal{A}y\\rangle=\\langle x,y\\rangle$. Это ключ к эквивалентности ортогональности и сохранения длин."
+      detail: "Если $|\\mathcal{A}x|=|x|$ для всех $x$, то $|\\mathcal{A}(x\\pm y)|=|x\\pm y|$ → подставив в поляризацию, получаем $\(\\mathcal{A}x,\\mathcal{A}y\)=\(x,y\)$. Это ключ к эквивалентности ортогональности и сохранения длин."
     }
   },
   {
@@ -21418,7 +21616,7 @@ TICKET_QUIZ[51] = [
     correct: 0,
     exp: {
       tldr: "Ортогональный ЛО переводит любой ОНБ снова в ОНБ.",
-      detail: "Если $\\{e_i\\}$ — ОНБ и $\\mathcal{A}$ ортогонален: $\\langle\\mathcal{A}e_i,\\mathcal{A}e_j\\rangle=\\langle e_i,e_j\\rangle=\\delta_{ij}$. Значит $\\{\\mathcal{A}e_i\\}$ — тоже ОНБ."
+      detail: "Если $\\{e_i\\}$ — ОНБ и $\\mathcal{A}$ ортогонален: $\(\\mathcal{A}e_i,\\mathcal{A}e_j\)=\(e_i,e_j\)=\\delta_{ij}$. Значит $\\{\\mathcal{A}e_i\\}$ — тоже ОНБ."
     }
   },
   {
@@ -21450,7 +21648,7 @@ TICKET_QUIZ[51] = [
     correct: 0,
     exp: {
       tldr: "Ортогональность сохраняется: $\\mathcal{A}(W^\\perp)=(\\mathcal{A}W)^\\perp$.",
-      detail: "Если $y\\in W^\\perp$: $\\langle\\mathcal{A}y,\\mathcal{A}w\\rangle=\\langle y,w\\rangle=0$ для $w\\in W$ → $\\mathcal{A}y\\in(\\mathcal{A}W)^\\perp$. Это важно для теории канонических форм."
+      detail: "Если $y\\in W^\\perp$: $\(\\mathcal{A}y,\\mathcal{A}w\)=\(y,w\)=0$ для $w\\in W$ → $\\mathcal{A}y\\in(\\mathcal{A}W)^\\perp$. Это важно для теории канонических форм."
     }
   },
   {
@@ -21522,7 +21720,7 @@ TICKET_QUIZ[52] = [
   {
     type: "single",
     level: 1,
-    q: "$\\langle\\mathcal{A}x,\\mathcal{A}y\\rangle=\\langle x,y\\rangle$ для всех $x,y$ означает:",
+    q: "$\(\\mathcal{A}x,\\mathcal{A}y\)=\(x,y\)$ для всех $x,y$ означает:",
     opts: [
       "оператор нулевой",
       "оператор ортогональный (изометрический)",
@@ -21548,7 +21746,7 @@ TICKET_QUIZ[52] = [
     correct: 3,
     exp: {
       tldr: "Сохранение длин эквивалентно сохранению скалярного произведения.",
-      detail: "Через поляризацию: $|\\mathcal{A}x|=|x|$ для всех $x$ → $|\\mathcal{A}(x\\pm y)|=|x\\pm y|$ → $\\langle\\mathcal{A}x,\\mathcal{A}y\\rangle=\\langle x,y\\rangle$ → ортогональность."
+      detail: "Через поляризацию: $|\\mathcal{A}x|=|x|$ для всех $x$ → $|\\mathcal{A}(x\\pm y)|=|x\\pm y|$ → $\(\\mathcal{A}x,\\mathcal{A}y\)=\(x,y\)$ → ортогональность."
     }
   },
   {
@@ -21556,7 +21754,7 @@ TICKET_QUIZ[52] = [
     level: 2,
     q: "Какие условия эквивалентны ортогональности линейного оператора?",
     opts: [
-      "$\\langle\\mathcal{A}x,\\mathcal{A}y\\rangle=\\langle x,y\\rangle$",
+      "$\(\\mathcal{A}x,\\mathcal{A}y\)=\(x,y\)$",
       "$\\mathcal{A}^*=\\mathcal{A}^{-1}$",
       "$\\mathcal{A}^*=\\mathcal{A}$",
       "$|\\mathcal{A}x|=|x|$"
@@ -21568,7 +21766,7 @@ TICKET_QUIZ[52] = [
     ],
     exp: {
       tldr: "Все три первые — эквивалентны; $\\mathcal{A}^*=\\mathcal{A}$ — это симметрический оператор.",
-      detail: "Эквивалентные определения: $\\mathcal{A}^*=\\mathcal{A}^{-1}$, сохранение $\\langle,\\rangle$, сохранение длин, матрица в ОНБ ортогональна, перевод ОНБ в ОНБ.",
+      detail: "Эквивалентные определения: $\\mathcal{A}^*=\\mathcal{A}^{-1}$, сохранение $\(,\)$, сохранение длин, матрица в ОНБ ортогональна, перевод ОНБ в ОНБ.",
       variants: "$\\mathcal{A}^*=\\mathcal{A}$ — другое (симметрический), не эквивалентное."
     }
   },
@@ -21578,7 +21776,7 @@ TICKET_QUIZ[52] = [
     q: "Сколько эквивалентных определений ортогонального ЛО в теореме?",
     opts: [
       "$2$",
-      "$5$ (ортогональность матрицы, $\\mathcal{A}^*=\\mathcal{A}^{-1}$, сохранение $\\langle,\\rangle$, длин, перевод ОНБ в ОНБ)",
+      "$5$ (ортогональность матрицы, $\\mathcal{A}^*=\\mathcal{A}^{-1}$, сохранение $\(,\)$, длин, перевод ОНБ в ОНБ)",
       "$1$",
       "$3$"
     ],
@@ -21595,13 +21793,13 @@ TICKET_QUIZ[52] = [
     opts: [
       "ошибка",
       "случайно",
-      "через сохранение $\\langle,\\rangle$ и формулу $\\cos\\alpha=\\frac{\\langle x,y\\rangle}{|x||y|}$",
+      "через сохранение $\(,\)$ и формулу $\\cos\\alpha=\\frac{\(x,y\)}{|x||y|}$",
       "углы не сохраняются"
     ],
     correct: 2,
     exp: {
-      tldr: "Сохранение длин → сохранение $\\langle,\\rangle$ → сохранение углов.",
-      detail: "Поляризация даёт сохранение скалярного произведения. Тогда $\\cos\\angle(\\mathcal{A}x,\\mathcal{A}y)=\\frac{\\langle\\mathcal{A}x,\\mathcal{A}y\\rangle}{|\\mathcal{A}x||\\mathcal{A}y|}=\\frac{\\langle x,y\\rangle}{|x||y|}=\\cos\\angle(x,y)$."
+      tldr: "Сохранение длин → сохранение $\(,\)$ → сохранение углов.",
+      detail: "Поляризация даёт сохранение скалярного произведения. Тогда $\\cos\\angle(\\mathcal{A}x,\\mathcal{A}y)=\\frac{\(\\mathcal{A}x,\\mathcal{A}y\)}{|\\mathcal{A}x||\\mathcal{A}y|}=\\frac{\(x,y\)}{|x||y|}=\\cos\\angle(x,y)$."
     }
   },
   {
@@ -21617,7 +21815,7 @@ TICKET_QUIZ[52] = [
     correct: 0,
     exp: {
       tldr: "Линейный + сохраняет длины = ортогональный.",
-      detail: "По условию линейный. Сохранение длин через поляризацию даёт сохранение $\\langle,\\rangle$ → ортогональность. (Без линейности нужно бы говорить об аффинной изометрии, включающей сдвиги.)"
+      detail: "По условию линейный. Сохранение длин через поляризацию даёт сохранение $\(,\)$ → ортогональность. (Без линейности нужно бы говорить об аффинной изометрии, включающей сдвиги.)"
     }
   },
   {
@@ -21713,7 +21911,7 @@ TICKET_QUIZ[52] = [
     correct: 3,
     exp: {
       tldr: "Над $\\mathbb{C}$ — унитарный оператор: $U^*U=E$, $U^*=\\overline{U^T}$.",
-      detail: "Унитарный — комплексный аналог ортогонального. Сохраняет эрмитово скалярное произведение $\\langle Ux,Uy\\rangle=\\langle x,y\\rangle$. Все собств. значения по модулю 1 (могут быть любые $e^{i\\varphi}$, не только $\\pm1$)."
+      detail: "Унитарный — комплексный аналог ортогонального. Сохраняет эрмитово скалярное произведение $\(Ux,Uy\)=\(x,y\)$. Все собств. значения по модулю 1 (могут быть любые $e^{i\\varphi}$, не только $\\pm1$)."
     }
   }
 ];
@@ -22472,7 +22670,7 @@ TICKET_QUIZ[56] = [
     correct: 3,
     exp: {
       tldr: "Симметрический = равен своему сопряжённому: $\\mathcal{A}^*=\\mathcal{A}$.",
-      detail: "$\\mathcal{A}^*=\\mathcal{A}$ ⟺ $\\langle\\mathcal{A}x,y\\rangle=\\langle x,\\mathcal{A}y\\rangle$ для всех $x,y$. В ОНБ матрица симметрична: $A=A^T$ (над $\\mathbb{R}$) или эрмитова $A=\\overline{A^T}$ (над $\\mathbb{C}$)."
+      detail: "$\\mathcal{A}^*=\\mathcal{A}$ ⟺ $\(\\mathcal{A}x,y\)=\(x,\\mathcal{A}y\)$ для всех $x,y$. В ОНБ матрица симметрична: $A=A^T$ (над $\\mathbb{R}$) или эрмитова $A=\\overline{A^T}$ (над $\\mathbb{C}$)."
     }
   },
   {
@@ -22504,7 +22702,7 @@ TICKET_QUIZ[56] = [
     correct: 3,
     exp: {
       tldr: "Все собств. значения симметрического оператора вещественны.",
-      detail: "Это фундаментальное свойство: даже над $\\mathbb{C}$ (для эрмитовых операторов) собств. значения вещественны. Доказательство — через $\\lambda|v|^2=\\langle\\mathcal{A}v,v\\rangle=\\langle v,\\mathcal{A}v\\rangle=\\bar\\lambda|v|^2$."
+      detail: "Это фундаментальное свойство: даже над $\\mathbb{C}$ (для эрмитовых операторов) собств. значения вещественны. Доказательство — через $\\lambda|v|^2=\(\\mathcal{A}v,v\)=\(v,\\mathcal{A}v\)=\\bar\\lambda|v|^2$."
     }
   },
   {
@@ -22536,7 +22734,7 @@ TICKET_QUIZ[56] = [
     correct: 0,
     exp: {
       tldr: "Собств. векторы с разными $\\lambda$ автоматически ортогональны.",
-      detail: "Если $\\mathcal{A}u=\\lambda u$, $\\mathcal{A}v=\\mu v$, $\\lambda\\ne\\mu$: $\\lambda\\langle u,v\\rangle=\\langle\\mathcal{A}u,v\\rangle=\\langle u,\\mathcal{A}v\\rangle=\\mu\\langle u,v\\rangle$ → $(\\lambda-\\mu)\\langle u,v\\rangle=0$ → $\\langle u,v\\rangle=0$."
+      detail: "Если $\\mathcal{A}u=\\lambda u$, $\\mathcal{A}v=\\mu v$, $\\lambda\\ne\\mu$: $\\lambda\(u,v\)=\(\\mathcal{A}u,v\)=\(u,\\mathcal{A}v\)=\\mu\(u,v\)$ → $(\\lambda-\\mu)\(u,v\)=0$ → $\(u,v\)=0$."
     }
   },
   {
@@ -22545,14 +22743,14 @@ TICKET_QUIZ[56] = [
     q: "Почему собственные значения симметрического оператора вещественны?",
     opts: [
       "по определению",
-      "$\\lambda\\langle x,x\\rangle=\\langle\\mathcal{A}x,x\\rangle=\\langle x,\\mathcal{A}x\\rangle=\\bar\\lambda\\langle x,x\\rangle\\Rightarrow\\lambda=\\bar\\lambda$",
+      "$\\lambda\(x,x\)=\(\\mathcal{A}x,x\)=\(x,\\mathcal{A}x\)=\\bar\\lambda\(x,x\)\\Rightarrow\\lambda=\\bar\\lambda$",
       "случайно",
       "над $\\mathbb{R}$ всегда так"
     ],
     correct: 1,
     exp: {
       tldr: "Из самосопряжённости: $\\lambda=\\bar\\lambda$, значит вещественно.",
-      detail: "Пусть $\\mathcal{A}x=\\lambda x$, $x\\ne0$. Тогда $\\lambda\\langle x,x\\rangle=\\langle\\mathcal{A}x,x\\rangle=\\langle x,\\mathcal{A}x\\rangle=\\langle x,\\lambda x\\rangle=\\bar\\lambda\\langle x,x\\rangle$. Поскольку $\\langle x,x\\rangle\gt 0$: $\\lambda=\\bar\\lambda$ → $\\lambda\\in\\mathbb{R}$."
+      detail: "Пусть $\\mathcal{A}x=\\lambda x$, $x\\ne0$. Тогда $\\lambda\(x,x\)=\(\\mathcal{A}x,x\)=\(x,\\mathcal{A}x\)=\(x,\\lambda x\)=\\bar\\lambda\(x,x\)$. Поскольку $\(x,x\)\gt 0$: $\\lambda=\\bar\\lambda$ → $\\lambda\\in\\mathbb{R}$."
     }
   },
   {
@@ -22614,14 +22812,14 @@ TICKET_QUIZ[56] = [
     q: "Связь симметрических операторов и квадратичных форм:",
     opts: [
       "только над $\\mathbb{C}$",
-      "каждой симметрической матрице соответствует квадратичная форма $Q(x)=\\langle\\mathcal{A}x,x\\rangle$; спектральная теорема даёт приведение формы к каноническому виду",
+      "каждой симметрической матрице соответствует квадратичная форма $Q(x)=\(\\mathcal{A}x,x\)$; спектральная теорема даёт приведение формы к каноническому виду",
       "случайно",
       "нет связи"
     ],
     correct: 1,
     exp: {
       tldr: "Симметрические операторы ↔ квадратичные формы; спектр даёт канонический вид формы.",
-      detail: "$Q(x)=\\langle\\mathcal{A}x,x\\rangle=x^TAx$ — квадратичная форма с симметричной матрицей $A$. ОНБ из собств. векторов приводит $Q$ к виду $\\sum\\lambda_i y_i^2$ (главные оси). Это основа теории квадратичных форм и кривых 2-го порядка."
+      detail: "$Q(x)=\(\\mathcal{A}x,x\)=x^TAx$ — квадратичная форма с симметричной матрицей $A$. ОНБ из собств. векторов приводит $Q$ к виду $\\sum\\lambda_i y_i^2$ (главные оси). Это основа теории квадратичных форм и кривых 2-го порядка."
     }
   },
   {
@@ -22653,7 +22851,7 @@ TICKET_QUIZ[56] = [
     correct: 2,
     exp: {
       tldr: "Индукция: отделяем собств. вектор, его ортогональное дополнение инвариантно, повторяем.",
-      detail: "(1) Собств. значение вещественно → есть собств. вектор $v_1$. (2) $\\mathcal{A}$ симметричен → $\\langle v_1\\rangle^\\perp$ инвариантно. (3) Сужение $\\mathcal{A}$ на $v_1^\\perp$ — снова симметрический оператор меньшей размерности. (4) По индукции получаем ОНБ из собств. векторов."
+      detail: "(1) Собств. значение вещественно → есть собств. вектор $v_1$. (2) $\\mathcal{A}$ симметричен → $\(v_1\)^\\perp$ инвариантно. (3) Сужение $\\mathcal{A}$ на $v_1^\\perp$ — снова симметрический оператор меньшей размерности. (4) По индукции получаем ОНБ из собств. векторов."
     }
   },
   {
@@ -22661,7 +22859,7 @@ TICKET_QUIZ[56] = [
     level: 3,
     q: "Положительно определённый симметрический оператор — это оператор с:",
     opts: [
-      "всеми собств. значениями $\gt 0$ (⟺ $\\langle\\mathcal{A}x,x\\rangle\gt 0$ для $x\\ne0$)",
+      "всеми собств. значениями $\gt 0$ (⟺ $\(\\mathcal{A}x,x\)\gt 0$ для $x\\ne0$)",
       "одним собств. значением",
       "следом 0",
       "$\\det\gt 0$"
@@ -22669,7 +22867,7 @@ TICKET_QUIZ[56] = [
     correct: 0,
     exp: {
       tldr: "Положительно определённый ⟺ все собств. значения положительны.",
-      detail: "$\\mathcal{A}=\\mathcal{A}^*$ положительно определён ⟺ $\\langle\\mathcal{A}x,x\\rangle\gt 0$ для всех $x\\ne0$ ⟺ все $\\lambda_i\gt 0$. Связано с критерием Сильвестра для квадратичных форм.",
+      detail: "$\\mathcal{A}=\\mathcal{A}^*$ положительно определён ⟺ $\(\\mathcal{A}x,x\)\gt 0$ для всех $x\\ne0$ ⟺ все $\\lambda_i\gt 0$. Связано с критерием Сильвестра для квадратичных форм.",
       variants: "$\\det\gt 0$ недостаточно: $\\operatorname{diag}(-1,-1)$ имеет $\\det=1\gt 0$, но не положительно определена."
     }
   },
@@ -22686,7 +22884,7 @@ TICKET_QUIZ[56] = [
     correct: 1,
     exp: {
       tldr: "Эрмитов оператор тоже имеет вещественный спектр.",
-      detail: "То же доказательство: $\\lambda|v|^2=\\langle\\mathcal{A}v,v\\rangle=\\langle v,\\mathcal{A}v\\rangle=\\overline{\\langle\\mathcal{A}v,v\\rangle}=\\bar\\lambda|v|^2\\Rightarrow\\lambda=\\bar\\lambda\\in\\mathbb{R}$. Эрмитовы операторы — комплексный аналог симметрических, спектр вещественный.",
+      detail: "То же доказательство: $\\lambda|v|^2=\(\\mathcal{A}v,v\)=\(v,\\mathcal{A}v\)=\\overline{\(\\mathcal{A}v,v\)}=\\bar\\lambda|v|^2\\Rightarrow\\lambda=\\bar\\lambda\\in\\mathbb{R}$. Эрмитовы операторы — комплексный аналог симметрических, спектр вещественный.",
       variants: "«На единичной окружности» — это про унитарные/ортогональные, не эрмитовы."
     }
   },
@@ -22703,7 +22901,7 @@ TICKET_QUIZ[56] = [
     correct: 3,
     exp: {
       tldr: "Антисимметрический оператор имеет чисто мнимые собств. значения.",
-      detail: "$\\mathcal{A}^*=-\\mathcal{A}$: $\\lambda|v|^2=\\langle\\mathcal{A}v,v\\rangle=\\langle v,\\mathcal{A}^*v\\rangle=\\langle v,-\\mathcal{A}v\\rangle=-\\bar\\lambda|v|^2\\Rightarrow\\lambda=-\\bar\\lambda$ → $\\lambda$ чисто мнимое (или 0). Над $\\mathbb{R}$: блоки поворота, как у ортогональных, но связанные с $e^{i\\varphi}$-структурой."
+      detail: "$\\mathcal{A}^*=-\\mathcal{A}$: $\\lambda|v|^2=\(\\mathcal{A}v,v\)=\(v,\\mathcal{A}^*v\)=\(v,-\\mathcal{A}v\)=-\\bar\\lambda|v|^2\\Rightarrow\\lambda=-\\bar\\lambda$ → $\\lambda$ чисто мнимое (или 0). Над $\\mathbb{R}$: блоки поворота, как у ортогональных, но связанные с $e^{i\\varphi}$-структурой."
     }
   }
 ];
@@ -22934,7 +23132,7 @@ TICKET_QUIZ[57] = [
     correct: 3,
     exp: {
       tldr: "Три неколлинеарные точки задают плоскость.",
-      detail: "Минимальное ЛМ через $A,B,C$ имеет направляющее $L=\\langle B-A, C-A\\rangle$. Если $A,B,C$ не коллинеарны, эти два вектора независимы → $\\dim L=2$ → плоскость."
+      detail: "Минимальное ЛМ через $A,B,C$ имеет направляющее $L=\(B-A, C-A\)$. Если $A,B,C$ не коллинеарны, эти два вектора независимы → $\\dim L=2$ → плоскость."
     }
   },
   {
@@ -23335,7 +23533,7 @@ TICKET_QUIZ[59] = [
   {
     type: "single",
     level: 2,
-    q: "Для плоскости $H$ в $\\mathbb{R}^3$, заданной $\\langle r-r_0, N\\rangle=0$, вектор $N$:",
+    q: "Для плоскости $H$ в $\\mathbb{R}^3$, заданной $\(r-r_0, N\)=0$, вектор $N$:",
     opts: [
       "параллелен плоскости",
       "лежит в плоскости",
@@ -23345,7 +23543,7 @@ TICKET_QUIZ[59] = [
     correct: 3,
     exp: {
       tldr: "$N$ — нормаль к плоскости (направление перпендикуляра).",
-      detail: "$\\langle r-r_0,N\\rangle=0$ означает: вектор от $r_0$ к любой точке плоскости перпендикулярен $N$. Значит $N$ перпендикулярен всей плоскости — это вектор нормали (направление)."
+      detail: "$\(r-r_0,N\)=0$ означает: вектор от $r_0$ к любой точке плоскости перпендикулярен $N$. Значит $N$ перпендикулярен всей плоскости — это вектор нормали (направление)."
     }
   },
   {
@@ -24056,7 +24254,7 @@ TICKET_QUIZ[62] = [
       "$|a\\times b|$",
       "$\\dfrac{1}{2}|a\\times b|$",
       "$|a|\\cdot|b|$",
-      "$\\dfrac{1}{2}\\langle a,b\\rangle$"
+      "$\\dfrac{1}{2}\(a,b\)$"
     ],
     correct: 1,
     exp: {
@@ -24154,7 +24352,7 @@ TICKET_QUIZ[63] = [
       "$(a,b,c)=(a\\times b)\\cdot c$",
       "$(a,b,c)=a\\cdot b\\cdot c$",
       "$(a,b,c)=a\\times b\\times c$",
-      "$(a,b,c)=\\langle a,b\\rangle+\\langle b,c\\rangle$"
+      "$(a,b,c)=\(a,b\)+\(b,c\)$"
     ],
     correct: 0,
     exp: {
@@ -25109,7 +25307,7 @@ TICKET_QUIZ[66] = [
     correct: 1,
     exp: {
       tldr: "Нормаль $\\perp$ направляющему: $N=(-n,m)$ (поворот на $90°$).",
-      detail: "Проверка: $\\langle(m,n),(-n,m)\\rangle=-mn+mn=0$ — перпендикулярны. ✓",
+      detail: "Проверка: $\((m,n),(-n,m)\)=-mn+mn=0$ — перпендикулярны. ✓",
       variants: "$(m,n)$ — сам направляющий. $(m,-n)$ не перпендикулярен в общем случае. Нормаль у прямой есть."
     }
   }
@@ -25136,7 +25334,7 @@ TICKET_QUIZ[67] = [
     q: "Каноническое уравнение плоскости через $M_0$ с направляющими $p_1,p_2$:",
     opts: [
       "$\\begin{vmatrix}x-x_0 & y-y_0 & z-z_0\\\\ l_1 & m_1 & n_1\\\\ l_2 & m_2 & n_2\\end{vmatrix}=0$",
-      "$\\langle r,p_1\\rangle=0$",
+      "$\(r,p_1\)=0$",
       "$p_1\\times p_2=0$",
       "$x+y+z=0$"
     ],
@@ -25144,7 +25342,7 @@ TICKET_QUIZ[67] = [
     exp: {
       tldr: "Определитель $3\\times3$ из $(r-r_0)$, $p_1$, $p_2$ равен нулю.",
       detail: "Нулевой определитель ⟺ строки компланарны ⟺ $r-r_0$ лежит в плоскости $p_1,p_2$.",
-      variants: "$\\langle r,p_1\\rangle=0$ — плоскость через начало $\\perp p_1$. $p_1\\times p_2=0$ — коллинеарность."
+      variants: "$\(r,p_1\)=0$ — плоскость через начало $\\perp p_1$. $p_1\\times p_2=0$ — коллинеарность."
     }
   },
   {
@@ -25153,7 +25351,7 @@ TICKET_QUIZ[67] = [
     opts: [
       "$\\begin{vmatrix}x-x_0 & y-y_0 & z-z_0\\\\ x_1-x_0 & y_1-y_0 & z_1-z_0\\\\ x_2-x_0 & y_2-y_0 & z_2-z_0\\end{vmatrix}=0$",
       "$x_0+x_1+x_2=0$",
-      "$\\langle M_0,M_1\\rangle=0$",
+      "$\(M_0,M_1\)=0$",
       "$M_0+M_1+M_2=0$"
     ],
     correct: 0,
@@ -25232,7 +25430,7 @@ TICKET_QUIZ[67] = [
     q: "Нормаль к плоскости с направляющими $p_1,p_2$ находится как:",
     opts: [
       "$p_1+p_2$",
-      "$\\langle p_1,p_2\\rangle$",
+      "$(\\mathbf{p}_1,\\mathbf{p}_2)$",
       "$p_1\\times p_2$",
       "$p_1-p_2$"
     ],
@@ -25426,7 +25624,7 @@ TICKET_QUIZ[68] = [
     q: "Векторная форма параметрического уравнения прямой:",
     opts: [
       "$r\\times a=0$",
-      "$\\langle r,a\\rangle=0$",
+      "$\(r,a\)=0$",
       "$r=r_0+t\\,a$",
       "$r=t\\,a$"
     ],
@@ -25434,7 +25632,7 @@ TICKET_QUIZ[68] = [
     exp: {
       tldr: "$r=r_0+t\\,a$ — радиус-вектор точки прямой.",
       detail: "Координатная форма получается покомпонентно: $x=x_0+tm$, и т.д.",
-      variants: "$\\langle r,a\\rangle=0$ — плоскость. $r\\times a=0$ — другая (неявная) форма прямой. $r=t\\,a$ — через начало."
+      variants: "$\(r,a\)=0$ — плоскость. $r\\times a=0$ — другая (неявная) форма прямой. $r=t\\,a$ — через начало."
     }
   },
   {
@@ -25803,7 +26001,7 @@ TICKET_QUIZ[69] = [
     correct: 1,
     exp: {
       tldr: "Направляющий $\\perp$ нормали: $(-4,3)$ (или $(4,-3)$).",
-      detail: "Проверка: $\\langle(3,4),(-4,3)\\rangle=-12+12=0$ ⟹ перпендикулярны. ✓",
+      detail: "Проверка: $\((3,4),(-4,3)\)=-12+12=0$ ⟹ перпендикулярны. ✓",
       variants: "$(3,4)$ — сама нормаль. $(4,3)$ не перпендикулярен ($12+12\\ne0$). $(12,0)$ — нет."
     }
   },
@@ -25828,13 +26026,13 @@ TICKET_QUIZ[69] = [
     q: "Как связаны нормаль $N=(A,B)$ и само уравнение $Ax+By+C=0$ геометрически?",
     opts: [
       "$N$ задаёт направление вдоль прямой",
-      "$N$ перпендикулярна прямой; уравнение $\\langle N, (x,y)\\rangle=-C$ — множество точек с фиксированной проекцией на $N$",
+      "$N$ перпендикулярна прямой; уравнение $\(N, (x,y)\)=-C$ — множество точек с фиксированной проекцией на $N$",
       "$N$ — это точка на прямой",
       "Связи нет"
     ],
     correct: 1,
     exp: {
-      tldr: "$Ax+By=\\langle N,(x,y)\\rangle$ постоянно ⟹ все точки имеют одинаковую проекцию на нормаль.",
+      tldr: "$Ax+By=\(N,(x,y)\)$ постоянно ⟹ все точки имеют одинаковую проекцию на нормаль.",
       detail: "Геометрически прямая — множество точек, чья проекция на нормаль $N$ равна $-C/|N|$ (с точностью до нормировки).",
       variants: "$N$ перпендикулярна, не вдоль. $N$ — вектор, не точка. Связь прямая и фундаментальная."
     }
@@ -25896,13 +26094,13 @@ TICKET_QUIZ[70] = [
       "$Ax+By+Cz+D=0$",
       "$\\dfrac{x}{a}+\\dfrac{y}{b}=1$",
       "$\\dfrac{x}{a}+\\dfrac{y}{b}+\\dfrac{z}{c}=1$",
-      "$\\langle r,N\\rangle=0$"
+      "$\(r,N\)=0$"
     ],
     correct: 2,
     exp: {
       tldr: "$\\dfrac{x}{a}+\\dfrac{y}{b}+\\dfrac{z}{c}=1$, где $a,b,c$ — отрезки на трёх осях.",
       detail: "Плоскость пересекает оси в точках $(a,0,0)$, $(0,b,0)$, $(0,0,c)$.",
-      variants: "Общее уравнение — другая форма. С двумя слагаемыми — это для прямой. $\\langle r,N\\rangle=0$ — через начало."
+      variants: "Общее уравнение — другая форма. С двумя слагаемыми — это для прямой. $\(r,N\)=0$ — через начало."
     }
   },
   {
@@ -26088,7 +26286,7 @@ TICKET_QUIZ[71] = [
     q: "Векторное уравнение прямой через точку $r_0$ с направляющим $a$:",
     opts: [
       "$(r-r_0,a,a)=0$",
-      "$\\langle r-r_0,a\\rangle=0$",
+      "$\(r-r_0,a\)=0$",
       "$r-r_0=0$",
       "$(r-r_0)\\times a=0$"
     ],
@@ -26121,37 +26319,37 @@ TICKET_QUIZ[71] = [
     opts: [
       "$(r-r_0)\\times N=0$",
       "$r-r_0=N$",
-      "$\\langle r-r_0,N\\rangle=0$",
-      "$\\langle r,r_0\\rangle=N$"
+      "$\(r-r_0,N\)=0$",
+      "$\(r,r_0\)=N$"
     ],
     correct: 2,
     exp: {
-      tldr: "$\\langle r-r_0,N\\rangle=0$ — скалярное произведение с нормалью равно нулю.",
-      detail: "Вектор $r-r_0$ лежит в плоскости, значит перпендикулярен нормали $N$. Эквивалентно $\\langle r,N\\rangle=\\langle r_0,N\\rangle$.",
+      tldr: "$\(r-r_0,N\)=0$ — скалярное произведение с нормалью равно нулю.",
+      detail: "Вектор $r-r_0$ лежит в плоскости, значит перпендикулярен нормали $N$. Эквивалентно $\(r,N\)=\(r_0,N\)$.",
       variants: "Векторное произведение $=0$ — это прямая (параллельность). $r-r_0=N$ — частный случай."
     }
   },
   {
     type: "single", level: 1,
-    q: "$\\langle r-r_0,N\\rangle=0$ эквивалентно:",
+    q: "$\(r-r_0,N\)=0$ эквивалентно:",
     opts: [
-      "$\\langle r,r_0\\rangle=0$",
-      "$\\langle r,N\\rangle=0$",
+      "$\(r,r_0\)=0$",
+      "$\(r,N\)=0$",
       "$r=r_0$",
-      "$\\langle r,N\\rangle=\\langle r_0,N\\rangle$"
+      "$\(r,N\)=\(r_0,N\)$"
     ],
     correct: 3,
     exp: {
-      tldr: "$\\langle r,N\\rangle=\\langle r_0,N\\rangle$ — проекция на нормаль постоянна.",
-      detail: "Раскрывая $\\langle r-r_0,N\\rangle=\\langle r,N\\rangle-\\langle r_0,N\\rangle=0$, получаем равенство проекций.",
-      variants: "$\\langle r,N\\rangle=0$ — плоскость через начало. $r=r_0$ — одна точка."
+      tldr: "$\(r,N\)=\(r_0,N\)$ — проекция на нормаль постоянна.",
+      detail: "Раскрывая $\(r-r_0,N\)=\(r,N\)-\(r_0,N\)=0$, получаем равенство проекций.",
+      variants: "$\(r,N\)=0$ — плоскость через начало. $r=r_0$ — одна точка."
     }
   },
   {
     type: "single", level: 1,
     q: "Векторное уравнение плоскости через $r_0$ с двумя направляющими $p_1,p_2$:",
     opts: [
-      "$\\langle r-r_0,p_1\\rangle=0$",
+      "$\(r-r_0,p_1\)=0$",
       "$(r-r_0)\\times p_1=0$",
       "$(r-r_0,p_1,p_2)=0$ (смешанное произведение)",
       "$p_1\\times p_2=0$"
@@ -26181,7 +26379,7 @@ TICKET_QUIZ[71] = [
   },
   {
     type: "single", level: 2,
-    q: "Скалярное произведение $\\langle r-r_0,N\\rangle=0$ выражает, что:",
+    q: "Скалярное произведение $\(r-r_0,N\)=0$ выражает, что:",
     opts: [
       "$r-r_0$ перпендикулярен $N$ (лежит в плоскости)",
       "$r-r_0$ параллелен $N$",
@@ -26213,7 +26411,7 @@ TICKET_QUIZ[71] = [
   },
   {
     type: "single", level: 2,
-    q: "Как из векторного уравнения плоскости $\\langle r-r_0,N\\rangle=0$ получить координатное $Ax+By+Cz+D=0$?",
+    q: "Как из векторного уравнения плоскости $\(r-r_0,N\)=0$ получить координатное $Ax+By+Cz+D=0$?",
     opts: [
       "Подставить $N=(A,B,C)$, $r=(x,y,z)$ и раскрыть скалярное произведение",
       "Возвести в квадрат",
@@ -26222,7 +26420,7 @@ TICKET_QUIZ[71] = [
     ],
     correct: 0,
     exp: {
-      tldr: "Раскрыть $\\langle (x,y,z)-(x_0,y_0,z_0), (A,B,C)\\rangle=0$ покоординатно.",
+      tldr: "Раскрыть $\((x,y,z)-(x_0,y_0,z_0), (A,B,C)\)=0$ покоординатно.",
       detail: "Получаем $A(x-x_0)+B(y-y_0)+C(z-z_0)=0$, то есть $Ax+By+Cz+D=0$ с $D=-(Ax_0+By_0+Cz_0)$.",
       variants: "Возведение в квадрат и векторное произведение не нужны. Переход вполне возможен."
     }
@@ -26232,7 +26430,7 @@ TICKET_QUIZ[71] = [
     q: "Нормаль плоскости, заданной двумя направляющими $p_1,p_2$, можно найти как:",
     opts: [
       "$p_1+p_2$",
-      "$\\langle p_1,p_2\\rangle$",
+      "$(\\mathbf{p}_1,\\mathbf{p}_2)$",
       "$p_1\\times p_2$ (векторное произведение)",
       "$p_1-p_2$"
     ],
@@ -26254,23 +26452,23 @@ TICKET_QUIZ[71] = [
     ],
     correct: 1,
     exp: {
-      tldr: "Прямая: $\\times a=0$ (параллельность). Плоскость: $\\langle\\cdot,N\\rangle=0$ (перпендикулярность).",
+      tldr: "Прямая: $\\times a=0$ (параллельность). Плоскость: $\(\\cdot,N\)=0$ (перпендикулярность).",
       detail: "Прямая задаётся направлением вдоль неё, плоскость — направлением поперёк (нормалью). Отсюда разные произведения.",
       variants: "Различие принципиальное. Плоскость через два направляющих использует смешанное, прямая — векторное."
     }
   },
   {
     type: "single", level: 3,
-    q: "Точка $r=(1,1,0)$, $r_0=(0,0,0)$, нормаль $N=(1,1,1)$. Лежит ли точка в плоскости $\\langle r-r_0,N\\rangle=0$?",
+    q: "Точка $r=(1,1,0)$, $r_0=(0,0,0)$, нормаль $N=(1,1,1)$. Лежит ли точка в плоскости $\(r-r_0,N\)=0$?",
     opts: [
       "Да",
-      "Нет: $\\langle(1,1,0),(1,1,1)\\rangle=2\\ne0$",
+      "Нет: $\((1,1,0),(1,1,1)\)=2\\ne0$",
       "Только при $N=0$",
       "Недостаточно данных"
     ],
     correct: 1,
     exp: {
-      tldr: "$\\langle(1,1,0),(1,1,1)\\rangle=1+1+0=2\\ne0$ ⟹ точка <b>не</b> в плоскости.",
+      tldr: "$\((1,1,0),(1,1,1)\)=1+1+0=2\\ne0$ ⟹ точка <b>не</b> в плоскости.",
       detail: "Для принадлежности скалярное произведение должно быть нулём, а здесь $2$.",
       variants: "Данных достаточно. При нужном результате $0$ точка лежала бы."
     }
@@ -26280,20 +26478,20 @@ TICKET_QUIZ[71] = [
     q: "Какие векторные условия и их геометрический смысл сопоставлены <b>верно</b>?",
     opts: [
       "$(r-r_0)\\times a=0$ — точка на прямой (параллельность)",
-      "$\\langle r-r_0,N\\rangle=0$ — точка в плоскости (перпендикулярность нормали)",
+      "$\(r-r_0,N\)=0$ — точка в плоскости (перпендикулярность нормали)",
       "$(r-r_0,p_1,p_2)=0$ — точка в плоскости (компланарность)",
-      "$\\langle r-r_0,a\\rangle=0$ — точка на прямой"
+      "$\(r-r_0,a\)=0$ — точка на прямой"
     ],
     correct: [0,1,2],
     exp: {
       tldr: "Векторное → прямая, скалярное с нормалью → плоскость, смешанное → плоскость через 2 направляющих.",
-      detail: "$\\langle r-r_0,a\\rangle=0$ задаёт плоскость, перпендикулярную $a$, а не прямую — 4-й пункт неверен.",
+      detail: "$\(r-r_0,a\)=0$ задаёт плоскость, перпендикулярную $a$, а не прямую — 4-й пункт неверен.",
       variants: "Скалярное произведение с направляющим даёт плоскость, не прямую."
     }
   },
   {
     type: "single", level: 3,
-    q: "Почему $\\langle r,N\\rangle=\\langle r_0,N\\rangle$ — это «плоскость постоянной проекции»?",
+    q: "Почему $\(r,N\)=\(r_0,N\)$ — это «плоскость постоянной проекции»?",
     opts: [
       "Потому что $N$ — точка",
       "Все точки $r$ имеют одинаковую проекцию на направление $N$, что геометрически и есть плоскость, перпендикулярная $N$",
@@ -26302,7 +26500,7 @@ TICKET_QUIZ[71] = [
     ],
     correct: 1,
     exp: {
-      tldr: "$\\langle r,N\\rangle/|N|$ — проекция $r$ на $N$; её постоянство задаёт плоскость $\\perp N$.",
+      tldr: "$\(r,N\)/|N|$ — проекция $r$ на $N$; её постоянство задаёт плоскость $\\perp N$.",
       detail: "Множество точек с фиксированной проекцией на заданное направление — это плоскость, перпендикулярная этому направлению.",
       variants: "$N$ — вектор, не точка. Смысл вполне определённый. $r=r_0$ — лишь одна из точек плоскости."
     }
@@ -26418,7 +26616,7 @@ TICKET_QUIZ[72] = [
     exp: {
       tldr: "Пропорциональность коэффициентов ⟺ <b>нормали параллельны</b> ⟺ прямые параллельны или совпадают.",
       detail: "Нормали задают наклон; их коллинеарность означает одинаковое направление прямых.",
-      variants: "Перпендикулярность была бы при $\\langle N_1,N_2\\rangle=0$. Совпадение требует ещё пропорц. $C$."
+      variants: "Перпендикулярность была бы при $\(N_1,N_2\)=0$. Совпадение требует ещё пропорц. $C$."
     }
   },
   {
@@ -26603,14 +26801,14 @@ TICKET_QUIZ[73] = [
     type: "single", level: 1,
     q: "Косинус угла между прямыми с направляющими векторами $a_1$, $a_2$:",
     opts: [
-      "$\\cos\\alpha=\\dfrac{\\langle a_1,a_2\\rangle}{|a_1|+|a_2|}$",
-      "$\\cos\\alpha=\\langle a_1,a_2\\rangle$",
-      "$\\cos\\alpha=\\dfrac{|\\langle a_1,a_2\\rangle|}{|a_1|\\cdot|a_2|}$",
+      "$\\cos\\alpha=\\dfrac{(\\mathbf{a}_1,\\mathbf{a}_2)}{|\\mathbf{a}_1|\\,|\\mathbf{a}_2|}$",
+      "$\\cos\\alpha=(\\mathbf{a}_1,\\mathbf{a}_2)$",
+      "$\\cos\\alpha=\\dfrac{|(\\mathbf{a}_1,\\mathbf{a}_2)|}{|\\mathbf{a}_1|\\cdot|\\mathbf{a}_2|}$",
       "$\\cos\\alpha=\\dfrac{|a_1\\times a_2|}{|a_1|\\cdot|a_2|}$"
     ],
     correct: 2,
     exp: {
-      tldr: "$\\cos\\alpha=\\dfrac{|\\langle a_1,a_2\\rangle|}{|a_1|\\,|a_2|}$ — модуль скалярного произведения над произведением длин.",
+      tldr: "$\\cos\\alpha=\\dfrac{|(\\mathbf{a}_1,\\mathbf{a}_2)|}{|\\mathbf{a}_1|\\,|\\mathbf{a}_2|}$ — модуль скалярного произведения над произведением длин.",
       detail: "Модуль нужен, чтобы угол между прямыми был острым (от $0$ до $90°$).",
       variants: "В знаменателе — произведение длин, не сумма. Без нормировки — не косинус. С векторным произведением — это синус."
     }
@@ -26690,7 +26888,7 @@ TICKET_QUIZ[73] = [
     ],
     correct: 2,
     exp: {
-      tldr: "$\\langle a_1,a_2\\rangle=0$ ⟹ $\\cos\\alpha=0$ ⟹ угол $90°$.",
+      tldr: "$(\\mathbf{a}_1,\\mathbf{a}_2)=0$ ⟹ $\\cos\\alpha=0$ ⟹ угол $90°$.",
       detail: "Скалярное произведение $1\\cdot0+0\\cdot1+0\\cdot0=0$ — векторы перпендикулярны.",
       variants: "$0°$ — при параллельных. $45°$ и $180°$ — другие значения скалярного произведения."
     }
@@ -26747,7 +26945,7 @@ TICKET_QUIZ[73] = [
     type: "single", level: 3,
     q: "Прямые перпендикулярны, если для их направляющих $a_1$, $a_2$:",
     opts: [
-      "$\\langle a_1,a_2\\rangle=0$",
+      "$(\\mathbf{a}_1,\\mathbf{a}_2)=0$",
       "$a_1\\times a_2=0$",
       "$|a_1|=|a_2|$",
       "$a_1=a_2$"
@@ -26755,7 +26953,7 @@ TICKET_QUIZ[73] = [
     correct: 0,
     exp: {
       tldr: "Перпендикулярность ⟺ <b>скалярное произведение</b> равно нулю.",
-      detail: "$\\langle a_1,a_2\\rangle=0$ означает $\\cos\\alpha=0$, то есть угол $90°$.",
+      detail: "$(\\mathbf{a}_1,\\mathbf{a}_2)=0$ означает $\\cos\\alpha=0$, то есть угол $90°$.",
       variants: "$a_1\\times a_2=0$ — это параллельность. Равенство длин и равенство векторов перпендикулярности не дают."
     }
   },
@@ -27297,7 +27495,7 @@ TICKET_QUIZ[76] = [
     type: "single", level: 1,
     q: "Расстояние от точки $M$ до прямой $l$ (через $M_0$ с направляющим $a$):",
     opts: [
-      "$d=\\langle\\overrightarrow{M_0M},a\\rangle$",
+      "$d=\(\\overrightarrow{M_0M},a\)$",
       "$d=|\\overrightarrow{M_0M}|$",
       "$d=\\dfrac{|\\overrightarrow{M_0M}\\times a|}{|a|}$",
       "$d=\\dfrac{|a|}{|\\overrightarrow{M_0M}\\times a|}$"
@@ -27363,7 +27561,7 @@ TICKET_QUIZ[76] = [
     opts: [
       "$|\\overrightarrow{M_1M_2}|$",
       "$|a_1|+|a_2|$",
-      "$\\langle a_1,a_2\\rangle$",
+      "$(\\mathbf{a}_1,\\mathbf{a}_2)$",
       "$|a_1\\times a_2|$ — площадь параллелограмма на направляющих"
     ],
     correct: 3,

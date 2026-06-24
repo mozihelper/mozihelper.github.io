@@ -83,6 +83,10 @@
     font-size:clamp(1.3rem,4vw,1.6rem); font-weight:600; letter-spacing:-0.01em;
     margin:2.6rem 0 1.4rem; padding-top:1.8rem; border-top:1px solid var(--border);
   }
+
+  /* ── Scroll-reveal: карточки всплывают при прокрутке ── */
+  .reveal { opacity:0; transform:translateY(22px); transition:opacity .55s ease, transform .55s cubic-bezier(.22,1,.36,1); }
+  .reveal.in { opacity:1; transform:none; }
   @media (prefers-reduced-motion:reduce){ body,.theme-btn,.res,.dl{transition:none;} .res:hover,.dl:hover{transform:none;} }
 
   /* ── Плавная смена темы: круговая волна от кнопки ── */
@@ -284,6 +288,29 @@
       }
       applyTheme(next);
     }
+
+    // ── Scroll-reveal карточек и заголовков ──
+    (function(){
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var items = document.querySelectorAll('.res, .section-head');
+      if (!('IntersectionObserver' in window)) {
+        items.forEach(function(el){ el.classList.add('reveal','in'); });
+        return;
+      }
+      items.forEach(function(el){ el.classList.add('reveal'); });
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(en){
+          if (!en.isIntersecting) return;
+          var el = en.target;
+          // лёгкий каскад для карточек, идущих подряд в одном «экране»
+          el.style.transitionDelay = (el._d || 0) + 'ms';
+          el.classList.add('in');
+          io.unobserve(el);
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+      // присвоим маленькие задержки группами по 4, чтобы соседние всплывали волной
+      items.forEach(function(el, i){ el._d = (i % 4) * 70; io.observe(el); });
+    })();
 
     // ── «Скачать PDF»: лёгкий отскок иконки при клике ──
     (function(){
