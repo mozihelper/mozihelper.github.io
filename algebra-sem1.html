@@ -1593,6 +1593,17 @@ ul.props li::before {
   margin-bottom: 0.5rem;
 }
 
+/* Раскрываемые доказательства (простые видны сразу, сложные по клику) */
+.derivation-title { cursor: pointer; display: flex; align-items: center; gap: 0.4rem; user-select: none; }
+.derivation-title .deriv-chevron { width: 1rem; height: 1rem; transition: transform 0.25s ease; flex-shrink: 0; }
+.derivation.collapsed .derivation-title .deriv-chevron { transform: rotate(-90deg); }
+.derivation .deriv-body { overflow: hidden; transition: max-height 0.3s ease, opacity 0.25s ease, margin 0.25s ease; max-height: 2000px; opacity: 1; }
+.derivation.collapsed .deriv-body { max-height: 0; opacity: 0; margin: 0; }
+.derivation-title .deriv-hint { font-size: 0.72rem; color: var(--ink-mute); font-weight: normal; font-style: italic; margin-left: auto; }
+.derivation.collapsed .derivation-title .deriv-hint::after { content: "нажмите, чтобы раскрыть"; }
+.derivation:not(.collapsed) .derivation-title .deriv-hint::after { content: "свернуть"; }
+
+
 /* Figures from lectures */
 .fig-block {
   margin: 1rem 0;
@@ -2368,11 +2379,13 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     </div>
 
     <div class="derivation">
-      <div class="derivation-title">Доказательство</div>
+      <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Доказательство</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
       <div class="def-text">
         Оба отображения действуют $U\to T$. По определению равенства отображений сравним их значения в произвольной точке $u\in U$. Согласно определению композиции:
         $$\bigl(f\circ(g\circ h)\bigr)(u) = f\bigl((g\circ h)(u)\bigr) = f\bigl(g(h(u))\bigr) = (f\circ g)\bigl(h(u)\bigr) = \bigl((f\circ g)\circ h\bigr)(u).$$
         Значения совпадают для всех $u$, поэтому отображения равны.
+      </div>
       </div>
     </div>
 
@@ -3470,10 +3483,12 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     </div>
 
     <div class="derivation">
-      <div class="derivation-title">Обоснование</div>
+      <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Обоснование</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
       <div class="def-text">
         <span class="em">Горизонтальный ранг</span> сохраняется, потому что элементарные преобразования строк не меняют линейную оболочку строк (пространство строк).
         <br><span class="em">Вертикальный ранг</span> сохраняется, потому что эти преобразования не нарушают линейные зависимости между столбцами: любое соотношение линейной зависимости столбцов до преобразований остаётся верным и после.
+      </div>
       </div>
     </div>
 
@@ -3528,7 +3543,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     </div>
 
     <div class="derivation">
-      <div class="derivation-title">Доказательство</div>
+      <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Доказательство</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
       <div class="def-text">
         <span class="em">Необходимость ($\Rightarrow$).</span> Пусть система совместна и $x^0=(x_1^0,\ldots,x_n^0)^\top$ — её решение. Тогда выполняется векторное равенство
         $$x_1^0 a_1+\ldots+x_n^0 a_n=b,$$
@@ -3536,6 +3552,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
         <br><span class="em">Достаточность ($\Leftarrow$).</span> Пусть $\operatorname{rg}A=\operatorname{rg}(A\mid b)=r$. Тогда максимальное число линейно независимых столбцов в $A$ и в $(A\mid b)$ одно и то же, поэтому столбец $b$ линейно выражается через столбцы $A$: существуют числа $x_1^0,\ldots,x_n^0$ такие, что
         $$x_1^0 a_1+\ldots+x_n^0 a_n=b.$$
         Но это и означает, что вектор $x^0=(x_1^0,\ldots,x_n^0)^\top$ — решение системы. Следовательно, система совместна.
+      </div>
       </div>
     </div>
 
@@ -3548,7 +3565,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     </div>
 
     <div class="derivation">
-      <div class="derivation-title">Доказательство</div>
+      <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Доказательство</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
       <div class="def-text">
         Пусть система совместна и $\operatorname{rg}A=r$. Общее решение неоднородной системы имеет вид
         $$x=x_{\text{ч}}+x_{\text{о}},$$
@@ -3558,6 +3576,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
           <li>если $r\lt n$, то $n-r\gt 0$: однородная система имеет бесконечно много нетривиальных решений, поэтому и неоднородная система имеет бесконечно много решений.</li>
         </ul>
         Таким образом, единственность решения совместной системы достигается именно при условии $r=n$.
+      </div>
       </div>
     </div>
 
@@ -3994,11 +4013,13 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     </div>
 
     <div class="derivation">
-      <div class="derivation-title">Доказательство</div>
+      <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Доказательство</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
       <div class="def-text">
         Пусть $A^T=B$. Распишем оба определителя:
         $$\det(A)=\sum_{\sigma\in S_n}\varepsilon_\sigma\cdot a_{1\sigma(1)}a_{2\sigma(2)}\dots a_{n\sigma(n)},\qquad \det(B)=\sum_{\tau\in S_n}\varepsilon_\tau\cdot b_{1\tau(1)}b_{2\tau(2)}\dots b_{n\tau(n)}.$$
         Каждое слагаемое — произведение элементов, взятых по одному из каждой строки и каждого столбца; слагаемому в $\det A$ соответствует слагаемое в $\det B$, причём соответствующие перестановки взаимно обратны. Проверим равенство знаков: по теореме о знаке произведения $\varepsilon_{\sigma\circ\tau}=\varepsilon_\sigma\cdot\varepsilon_\tau$, а $\varepsilon_\sigma\cdot\varepsilon_{\sigma^{-1}}=\varepsilon_e=1$ (так как $\sigma\circ\sigma^{-1}=e$). Значит $\varepsilon_\sigma=\varepsilon_{\sigma^{-1}}$, и суммы полностью совпадают.
+      </div>
       </div>
     </div>
 
@@ -4011,9 +4032,11 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     </div>
 
     <div class="derivation">
-      <div class="derivation-title">Доказательство</div>
+      <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Доказательство</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
       <div class="def-text">
         Основано на формуле определителя через сумму по перестановкам: каждое слагаемое содержит ровно один элемент из строки $i$, поэтому множители $\alpha$ и $\beta$ выносятся за знак суммы.
+      </div>
       </div>
     </div>
 
@@ -4026,9 +4049,11 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     </div>
 
     <div class="derivation">
-      <div class="derivation-title">Доказательство</div>
+      <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Доказательство</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
       <div class="def-text">
         Для определителя второго порядка свойство проверяется непосредственно: определитель равен $a_{11}a_{22}-a_{12}a_{21}$; поменяв строки местами, получим $a_{21}a_{12}-a_{22}a_{11}=-(a_{11}a_{22}-a_{12}a_{21})$. Для определителей более высокого порядка свойство доказывается разложением по строке или столбцу с учётом изменения знаков алгебраических дополнений.
+      </div>
       </div>
     </div>
 
@@ -4054,9 +4079,11 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     </div>
 
     <div class="derivation">
-      <div class="derivation-title">Доказательство</div>
+      <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Доказательство</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
       <div class="def-text">
         Проводится последовательным разложением по первому столбцу (теорема Лапласа), пока не получится произведение всех диагональных элементов.
+      </div>
       </div>
     </div>
 
@@ -4571,7 +4598,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     <div class="def-block">
       <div class="section-tag">Определение</div>
       <div class="def-text">
-        Пусть в $n$-мерном пространстве $V$ заданы два базиса $E=(e_1,\ldots,e_n)$ и $F=(f_1,\ldots,f_n)$. Если векторы нового базиса $F$ выражаются через старый базис $E$ формулами
+        Пусть в $n$-мерном пространстве $V$ заданы два базиса $E=\\{e_1,\\ldots,e_n\\}$ и $F=\\{f_1,\\ldots,f_n\\}$. Если векторы нового базиса $F$ выражаются через старый базис $E$ формулами
         $$f_j=\sum_{i=1}^{n}c_{ij}e_i,\quad j=1,\ldots,n,$$
         то квадратная матрица $C=(c_{ij})$ порядка $n$ называется <span class="term">матрицей перехода от базиса $E$ к базису $F$</span>. Столбцы матрицы $C$ — это координаты векторов $f_j$ в базисе $E$. Матричная запись: $F=EC$.
       </div>
@@ -4613,9 +4640,11 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     </div>
 
     <div class="derivation">
-      <div class="derivation-title">Обоснование</div>
+      <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Обоснование</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
       <div class="def-text">
         Элементарные преобразования строк соответствуют умножению слева на элементарные матрицы. Если $P$ — произведение этих матриц, то $PE=I_n\Rightarrow P=E^{-1}$. Тогда $PF=E^{-1}F=C$.
+      </div>
       </div>
     </div>
 
@@ -4724,7 +4753,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     </div>
 
     <div class="derivation">
-      <div class="derivation-title">Доказательство (схема)</div>
+      <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Доказательство (схема)</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
       <div class="def-text">
         <span class="em">1. Конечномерность.</span> Поскольку $U_1$ и $U_2$ конечномерны, их сумма порождена конечным множеством (объединением базисов $U_1$ и $U_2$), следовательно, также конечномерна.
         <br><span class="em">2. Выбор базиса.</span> Пусть $\dim(U_1\cap U_2)=r$. Выберем базис $e_1,e_2,\ldots,e_r$ пересечения $U_1\cap U_2$ — он линейно независим как в $U_1$, так и в $U_2$. Дополним его до базиса $U_1$: $\;e_1,\ldots,e_r,a_1,\ldots,a_k$ ($\dim U_1=r+k$), и до базиса $U_2$: $\;e_1,\ldots,e_r,b_1,\ldots,b_m$ ($\dim U_2=r+m$). Здесь $k=\dim U_1-r$, $m=\dim U_2-r$.
@@ -4737,6 +4767,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
         В силу единственности разложения $\;\beta_j=0$ для всех $j$, $\;\alpha_i=\delta_i$ для всех $i$. Тогда исходная комбинация принимает вид $\sum_{i=1}^{r}\alpha_i e_i+\sum_{p=1}^{m}\gamma_p b_p=0$, а так как $e_1,\ldots,e_r,b_1,\ldots,b_m$ — базис $U_2$, все $\alpha_i$ и $\gamma_p$ равны нулю. Значит, вся система линейно независима.
         <br><span class="em">4. Подсчёт размерности.</span> Базис суммы состоит из $r+k+m$ векторов, поэтому
         $$\dim(U_1+U_2)=r+k+m=(r+k)+(r+m)-r=\dim U_1+\dim U_2-\dim(U_1\cap U_2).$$
+      </div>
       </div>
     </div>
 
@@ -4808,7 +4839,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     </div>
 
     <div class="derivation">
-      <div class="derivation-title">Доказательство</div>
+      <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Доказательство</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
       <div class="def-text">
         Пусть $(u_1,\ldots,u_k)$ — базис $U$, а $(w_1,\ldots,w_l)$ — базис $W$. Докажем, что система $(u_1,\ldots,u_k,w_1,\ldots,w_l)$ — базис $V$.
         <br><span class="em">Линейная независимость.</span> Пусть
@@ -4816,6 +4848,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
         Обозначим $u=\alpha_1 u_1+\ldots+\alpha_k u_k\in U$, $w=\beta_1 w_1+\ldots+\beta_l w_l\in W$. Тогда $u+w=0$, откуда $u=-w$. Так как $u\in U$, а $-w\in W$, этот вектор принадлежит $U\cap W$. По определению прямой суммы $U\cap W=\{0\}$, значит $u=0$ и $w=0$, а из линейной независимости базисов $U$ и $W$ все $\alpha_i$ и $\beta_j$ равны нулю.
         <br><span class="em">Порождение.</span> Любой вектор $v\in V$ по условию единственным образом представляется как $v=u+w$, $u\in U$, $w\in W$; векторы $u$ и $w$ линейно выражаются через свои базисы, поэтому $v$ выражается через объединённую систему.
         <br>Итак, построенная система — базис $V$, и число векторов в нём равно $k+l$, то есть $\dim V=\dim U+\dim W$.
+      </div>
       </div>
     </div>
 
@@ -5039,7 +5072,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     <div class="def-block">
       <div class="section-tag">Определение</div>
       <div class="def-text">
-        Пусть $B:V\times W\to F$ — билинейная форма, $(e_1,\ldots,e_m)$ — базис $V$, $(f_1,\ldots,f_n)$ — базис $W$. <span class="term">Матрицей формы</span> называется матрица $B=(b_{ij})_{m\times n}$, где
+        Пусть $B:V\times W\to F$ — билинейная форма, $\\{e_1,\\ldots,e_m\\}$ — базис $V$, $\\{f_1,\\ldots,f_n\\}$ — базис $W$. <span class="term">Матрицей формы</span> называется матрица $B=(b_{ij})_{m\times n}$, где
         $$b_{ij}=B(e_i,f_j).$$
       </div>
     </div>
@@ -5094,11 +5127,13 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     </div>
 
     <div class="derivation">
-      <div class="derivation-title">Доказательство</div>
+      <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Доказательство</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
       <div class="def-text">
         По определению матрицы формы в новых базисах $b_{kl}'=B(e_k',f_l')$. Подставим разложения новых базисных векторов и воспользуемся билинейностью:
         $$b_{kl}'=B\!\left(\sum_{i}c_{ik}e_i,\ \sum_{j}d_{jl}f_j\right)=\sum_{i}\sum_{j}c_{ik}\,B(e_i,f_j)\,d_{jl}=\sum_{i,j}c_{ik}\,b_{ij}\,d_{jl}.$$
         Правая часть — покомпонентная запись произведения $C^\top B D$, поэтому $B'=C^\top B D$. При $V=W$ и $D=C$ получаем $B'=C^\top B C$.
+      </div>
       </div>
     </div>
 
@@ -5158,7 +5193,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     <div class="def-block">
       <div class="section-tag">Определение</div>
       <div class="def-text">
-        Пусть $Q:V\to\mathbb{R}$ — квадратичная форма, $\dim V=n$. В базисе $(e_1,\ldots,e_n)$ форма имеет вид $Q(x)=x^\top A\,x$, где $A$ — симметричная вещественная матрица. <span class="term">Рангом квадратичной формы</span> называется ранг её матрицы: $\;\operatorname{rk}Q=\operatorname{rk}A$.
+        Пусть $Q:V\to\mathbb{R}$ — квадратичная форма, $\dim V=n$. В базисе $\\{e_1,\\ldots,e_n\\}$ форма имеет вид $Q(x)=x^\top A\,x$, где $A$ — симметричная вещественная матрица. <span class="term">Рангом квадратичной формы</span> называется ранг её матрицы: $\;\operatorname{rk}Q=\operatorname{rk}A$.
       </div>
     </div>
 
@@ -5332,7 +5367,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     <div class="thm-box">
       <div class="thm-label">Теорема</div>
       <div class="def-text">
-        Пусть на векторном пространстве $V$ над $\mathbb{R}$ размерности $\dim V=n$ задана квадратичная форма $q$ ранга $r\le n$. Тогда в $V$ существует базис $(e_1,\ldots,e_n)$, в котором форма имеет диагональный (канонический) вид
+        Пусть на векторном пространстве $V$ над $\mathbb{R}$ размерности $\dim V=n$ задана квадратичная форма $q$ ранга $r\le n$. Тогда в $V$ существует базис $\\{e_1,\\ldots,e_n\\}$, в котором форма имеет диагональный (канонический) вид
         $$q(x)=\sum_{j=1}^{n}\lambda_j x_j^2,$$
         где коэффициенты $\lambda_j\in\mathbb{R}$ удовлетворяют условиям: ровно $r$ из них отличны от нуля ($\lambda_1,\ldots,\lambda_r\neq 0$), остальные $n-r$ равны нулю ($\lambda_{r+1}=\cdots=\lambda_n=0$).
       </div>
@@ -5865,7 +5900,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     <div class="thm-box">
       <div class="thm-label">Теорема</div>
       <div class="def-text">
-        Матрица $A'$ линейного оператора $\mathcal{A}$ в базисе $(e_1',\ldots,e_n')$ получается из матрицы $A$ того же оператора в базисе $(e_1,\ldots,e_n)$ по формуле
+        Матрица $A'$ линейного оператора $\mathcal{A}$ в базисе $\\{e_1',\\ldots,e_n'\\}$ получается из матрицы $A$ того же оператора в базисе $\\{e_1,\\ldots,e_n\\}$ по формуле
         $$A'=B^{-1}A B,$$
         где $B$ — матрица перехода от $(e_i)$ к $(e_i')$.
       </div>
@@ -6442,13 +6477,15 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     </div>
 
     <div class="derivation">
-      <div class="derivation-title">Доказательство</div>
+      <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Доказательство</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
       <div class="def-text">
         Из положительной определённости скалярного произведения для любого $\lambda\in\mathbb{R}$:
         $$\lambda^2(x,x)-2\lambda(x,y)+(y,y)=(\lambda x-y,\lambda x-y)\ge 0.$$
         Рассматривая левую часть как квадратный трёхчлен $f(\lambda)\ge 0$, для его дискриминанта $D=(2(x,y))^2-4(x,x)(y,y)$ должно выполняться $D\le 0$, откуда
         $$(x,y)^2\le(x,x)\cdot(y,y).$$
         Извлекая положительный квадратный корень и используя $\|v\|=\sqrt{(v,v)}$, получаем $|(x,y)|\le\|x\|\cdot\|y\|$.
+      </div>
       </div>
     </div>
 
@@ -6510,10 +6547,12 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     </div>
 
     <div class="derivation">
-      <div class="derivation-title">Доказательство</div>
+      <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Доказательство</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
       <div class="def-text">
         $$\|x+y\|^2=(x+y,x+y)=(x,x)+2(x,y)+(y,y).$$
         Поскольку $x\perp y$, то $(x,y)=0$, следовательно $\|x+y\|^2=\|x\|^2+\|y\|^2$.
+      </div>
       </div>
     </div>
 
@@ -6525,12 +6564,14 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     </div>
 
     <div class="derivation">
-      <div class="derivation-title">Доказательство</div>
+      <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Доказательство</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
       <div class="def-text">
         $$\|x\pm y\|^2=\|x\|^2+\|y\|^2\pm 2(x,y)\le\|x\|^2+\|y\|^2+2|(x,y)|.$$
         По неравенству Коши–Буняковского $|(x,y)|\le\|x\|\cdot\|y\|$, поэтому
         $$\|x\pm y\|^2\le\|x\|^2+\|y\|^2+2\|x\|\|y\|=(\|x\|+\|y\|)^2.$$
         Извлекая квадратный корень, получаем $\|x\pm y\|\le\|x\|+\|y\|$.
+      </div>
       </div>
     </div>
 
@@ -6551,7 +6592,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     <div class="def-block">
       <div class="section-tag">Ортогональный базис</div>
       <div class="def-text">
-        Базис $(e_1,\ldots,e_n)$ евклидова пространства $V$ называется <span class="term">ортогональным</span>, если
+        Базис $\\{e_1,\\ldots,e_n\\}$ евклидова пространства $V$ называется <span class="term">ортогональным</span>, если
         $$(e_i,e_j)=0\quad\text{при }i\neq j,\;\; i,j=1,2,\ldots,n.$$
       </div>
     </div>
@@ -6585,9 +6626,11 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     </div>
 
     <div class="derivation">
-      <div class="derivation-title">Доказательство</div>
+      <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Доказательство</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
       <div class="def-text">
         Пусть $\sum_{i=1}^{m}\alpha_i e_i=0$. Домножив скалярно на $e_k$, получим $\alpha_k(e_k,e_k)=0$, откуда (так как $e_k\neq 0$) $\alpha_k=0$ для любого $k$. Значит, система линейно независима. При $m=n=\dim V$ это ортогональный базис.
+      </div>
       </div>
     </div>
 
@@ -6757,11 +6800,13 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     </div>
 
     <div class="derivation">
-      <div class="derivation-title">Нахождение коэффициентов</div>
+      <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Нахождение коэффициентов</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
       <div class="def-text">
         Умножаем равенство $a=x+y$ скалярно на $e_i$:
         $$(a,e_i)=\lambda_i(e_i,e_i)+(y,e_i).$$
         Так как $(e_i,e_i)=1$ (ортонормированность) и $(y,e_i)=0$ (ортогональность $y$ к $V'$), получаем $\lambda_i=(a,e_i)$.
+      </div>
       </div>
     </div>
 
@@ -6953,7 +6998,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     </div>
 
     <div class="derivation">
-      <div class="derivation-title">Решение</div>
+      <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Решение</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
       <div class="def-text">
         Коэффициенты прямых затрат $a_{ij}=x_{ij}/x_j$:
         $$A=\begin{pmatrix}0{,}07 & 0{,}14\\ 0{,}12 & 0{,}10\end{pmatrix}.$$
@@ -6962,6 +7008,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
         $$E-A=\begin{pmatrix}0{,}93 & -0{,}14\\ -0{,}12 & 0{,}90\end{pmatrix},\qquad \det(E-A)=0{,}8202,$$
         $$S=(E-A)^{-1}=\frac{1}{0{,}8202}\begin{pmatrix}0{,}90 & 0{,}14\\ 0{,}12 & 0{,}93\end{pmatrix},$$
         $$X=SY=\frac{1}{0{,}8202}\begin{pmatrix}0{,}90 & 0{,}14\\ 0{,}12 & 0{,}93\end{pmatrix}\begin{pmatrix}144\\ 123\end{pmatrix}=\begin{pmatrix}179{,}0\\ 160{,}5\end{pmatrix}.$$
+      </div>
       </div>
     </div>
 
@@ -7381,6 +7428,7 @@ function buildSidebar() {
     <div class="side-section-title">Материал</div>
     <a class="side-nav-item is-home" onclick="showTopic('start')">${sideIcon('home')}<span class="side-nav-label">На главную</span></a>
     <a class="side-nav-item" href="literatura.html">${sideIcon('book')}<span class="side-nav-label">Литература</span></a>
+    <a class="side-nav-item" href="lekcii-sem1.html"><svg class="side-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span class="side-nav-label">Лекции (презентации)</span></a>
     <a class="side-nav-item" href="links.html"><svg class="side-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span class="side-nav-label">Полезные ссылки</span></a>
   `;
   wrap.appendChild(nav);
@@ -7541,6 +7589,10 @@ function goToQuestion(topicId, qNum) {
 // ─────────────────────────────────────────────
 // КАРТОЧКА: РАСКРЫТИЕ/СВОРАЧИВАНИЕ
 // ─────────────────────────────────────────────
+function toggleProof(titleEl) {
+  var d = titleEl.closest('.derivation');
+  if (d) { d.classList.toggle('collapsed'); }
+}
 function toggleCard(headEl) {
   const card = headEl.parentElement;
   const wasOpen = card.classList.contains('open');

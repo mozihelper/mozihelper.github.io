@@ -1575,6 +1575,17 @@ ul.props li::before {
   margin-bottom: 0.5rem;
 }
 
+/* Раскрываемые доказательства (простые видны сразу, сложные по клику) */
+.derivation-title { cursor: pointer; display: flex; align-items: center; gap: 0.4rem; user-select: none; }
+.derivation-title .deriv-chevron { width: 1rem; height: 1rem; transition: transform 0.25s ease; flex-shrink: 0; }
+.derivation.collapsed .derivation-title .deriv-chevron { transform: rotate(-90deg); }
+.derivation .deriv-body { overflow: hidden; transition: max-height 0.3s ease, opacity 0.25s ease, margin 0.25s ease; max-height: 2000px; opacity: 1; }
+.derivation.collapsed .deriv-body { max-height: 0; opacity: 0; margin: 0; }
+.derivation-title .deriv-hint { font-size: 0.72rem; color: var(--ink-mute); font-weight: normal; font-style: italic; margin-left: auto; }
+.derivation.collapsed .derivation-title .deriv-hint::after { content: "нажмите, чтобы раскрыть"; }
+.derivation:not(.collapsed) .derivation-title .deriv-hint::after { content: "свернуть"; }
+
+
 /* Сноска на источник доказательства — ненавязчивая строка в конце вывода */
 .src-ref {
   margin-top: 1rem;
@@ -2567,9 +2578,11 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
   <div class="q-body">
 
     <div class="derivation">
-      <div class="derivation-title">Вывод</div>
+      <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Вывод</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
       <div class="def-text">
         Возьмём $z_1 = z_2 = \ldots = z_n = r(\cos\varphi + i\sin\varphi)$ и применим теорему об умножении в тригонометрической форме $n$ раз: модули перемножаются, аргументы складываются. Получим:
+      </div>
       </div>
     </div>
 
@@ -2611,7 +2624,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
   <div class="q-body">
 
     <div class="derivation">
-      <div class="derivation-title">Вывод</div>
+      <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Вывод</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
       <div class="def-text">
         Используем ряды Тейлора:
         $$e^x = \sum_{j=0}^{\infty}\frac{x^j}{j!}, \quad \sin x = \sum_{k=0}^{\infty}(-1)^k \frac{x^{2k+1}}{(2k+1)!}, \quad \cos x = \sum_{k=0}^{\infty}(-1)^k \frac{x^{2k}}{(2k)!}.$$
@@ -2619,6 +2633,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
         $$e^{i\varphi} = \sum_{j=0}^{\infty}\frac{(i\varphi)^j}{j!}.$$
         Выделяя вещественную и мнимую части (используя $i^2 = -1$, $i^3 = -i$, $i^4 = 1$):
         $$e^{i\varphi} = \underbrace{\left(1 - \frac{\varphi^2}{2!} + \frac{\varphi^4}{4!} - \ldots\right)}_{\cos\varphi} + i\underbrace{\left(\varphi - \frac{\varphi^3}{3!} + \frac{\varphi^5}{5!} - \ldots\right)}_{\sin\varphi}.$$
+      </div>
       </div>
     </div>
 
@@ -3154,11 +3169,13 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     </div>
 
     <div class="derivation">
-      <div class="derivation-title">Доказательство</div>
+      <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Доказательство</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
       <div class="def-text">
         В цепочке равенств $\deg r_1 \lt  \deg f_2$, $\deg r_2 \lt  \deg r_1$, $\deg r_3 \lt  \deg r_2$, ..., $\deg r_k \lt  \deg r_{k-1}$. Степени остатков $r_j$ уменьшаются, следовательно, последнее деление будет без остатка.
         <br><br>
         Если посмотреть на равенства снизу вверх, то окажется, что $r_{k-1}, r_{k-2}, \ldots, f_2, f_1$ делятся на $r_k$. С другой стороны, если посмотреть сверху вниз, можно заметить, что $r_1, r_2, \ldots, r_k$ делятся на любой общий делитель многочленов $f_1$ и $f_2$. Значит, последний ненулевой остаток $r_k$ есть НОД $f_1$ и $f_2$.
+      </div>
       </div>
     </div>
 
@@ -3784,7 +3801,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     </div>
 
     <div class="derivation">
-      <div class="derivation-title">Доказательство</div>
+      <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Доказательство</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
       <div class="def-text">
         Пусть
         $$\alpha_0 v + \alpha_1 \mathcal{A} v + \ldots + \alpha_{m-1} \mathcal{A}^{m-1} v = 0. \quad (1)$$
@@ -3793,6 +3811,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
         Так как $\mathcal{A}^m = 0$, все слагаемые кроме первого обнуляются: $\alpha_0 \mathcal{A}^{m-1} v = 0$. Но $\mathcal{A}^{m-1} v \ne 0$, значит $\alpha_0 = 0$.
         <br><br>
         Получаем зависимость $\alpha_1 \mathcal{A} v + \ldots + \alpha_{m-1} \mathcal{A}^{m-1} v = 0$. Применяя $\mathcal{A}^{m-2}$, аналогично получаем $\alpha_1 = 0$. По индукции все $\alpha_j = 0$. Значит, система линейно независима.
+      </div>
       </div>
     </div>
 
@@ -3951,11 +3970,13 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     </div>
 
     <div class="derivation">
-      <div class="derivation-title">$V(\lambda)$ — подпространство</div>
+      <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>$V(\lambda)$ — подпространство</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
       <div class="def-text">
         Пусть $u, v \in V(\lambda)$: $(\mathcal{A} - \lambda\mathcal{E})^s u = 0$, $(\mathcal{A} - \lambda\mathcal{E})^t v = 0$. Возьмём $m = \max(s, t)$, тогда
         $$(\mathcal{A} - \lambda\mathcal{E})^m(\alpha u + \beta v) = \alpha(\mathcal{A} - \lambda\mathcal{E})^m u + \beta(\mathcal{A} - \lambda\mathcal{E})^m v = 0.$$
         Значит, $\alpha u + \beta v \in V(\lambda)$.
+      </div>
       </div>
     </div>
 
@@ -5338,13 +5359,15 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
     </div>
 
     <div class="derivation">
-      <div class="derivation-title">Доказательство: вектор $\mathbf{N}\{A,B\}$ ортогонален прямой</div>
+      <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Доказательство: вектор $\mathbf{N}\{A,B\}$ ортогонален прямой</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
       <div class="def-text">
         Уравнение $Ax + By + C = 0$ имеет хотя бы одно решение $(x_0, y_0)$, то есть $Ax_0 + By_0 + C = 0$. Вычитая это тождество из общего уравнения, получаем равносильное ему уравнение
         $$A(x - x_0) + B(y - y_0) = 0.$$
         Точка $M(x, y)$ лежит на прямой тогда и только тогда, когда векторы $\mathbf{N}\{A, B\}$ и $\overline{M_0M}\{x - x_0,\ y - y_0\}$ ортогональны — их скалярное произведение $A(x - x_0) + B(y - y_0)$ равно нулю. Значит, прямая ортогональна вектору $\mathbf{N}\{A, B\}$, который и называется <span class="term">нормальным вектором (нормалью) прямой</span>.
       </div>
       <div class="src-ref">Доказательство: Ильин, Позняк, с. 110–111</div>
+      </div>
     </div>
 
     <div class="def-block">
@@ -6336,7 +6359,8 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();draw();
       </div>
 
       <div class="derivation">
-        <div class="derivation-title">Вывод</div>
+        <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Вывод</span><span class="deriv-hint"></span></div>
+        <div class="deriv-body">
         <div class="def-text">
           <div class="ra-ln" data-step="3">Пусть $F_1(-c, 0)$, $F_2(c, 0)$, точка $M(x, y)$ принадлежит эллипсу. Тогда $r_1 = \sqrt{(x+c)^2 + y^2}$, $r_2 = \sqrt{(x-c)^2 + y^2}$.</div>
           <div class="ra-ln" data-step="4">По определению $r_1 + r_2 = 2a$, отсюда $r_1 = 2a - r_2$. Возведём в квадрат: $(x+c)^2 + y^2 = 4a^2 - 4a r_2 + (x-c)^2 + y^2$.</div>
@@ -6345,6 +6369,7 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();draw();
           <div class="ra-ln" data-step="7">$x^2 - 2cx + c^2 + y^2 = a^2 - 2cx + \frac{c^2}{a^2}x^2$.</div>
           <div class="ra-ln" data-step="8">$x^2\left(1 - \frac{c^2}{a^2}\right) + y^2 = a^2 - c^2 = b^2$.</div>
           <div class="ra-ln" data-step="9">Делим на $b^2$ и используем $1 - c^2/a^2 = b^2/a^2$: $\dfrac{x^2}{a^2} + \dfrac{y^2}{b^2} = 1$.</div>
+        </div>
         </div>
       </div>
     </div>
@@ -6372,12 +6397,14 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();draw();
     </div>
 
     <div class="derivation">
-      <div class="derivation-title">Проверка</div>
+      <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Проверка</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
       <div class="def-text">
         Левая директриса $x = -a/\varepsilon$. Расстояние от $M(x, y)$ до неё:
         $$d_1 = x + \frac{a}{\varepsilon} = \frac{\varepsilon x + a}{\varepsilon}.$$
         Фокальный радиус: $r_1 = a + \varepsilon x$. Тогда
         $$\frac{r_1}{d_1} = \frac{a + \varepsilon x}{(a + \varepsilon x)/\varepsilon} = \varepsilon. \;\checkmark$$
+      </div>
       </div>
     </div>
 
@@ -7851,6 +7878,7 @@ function buildSidebar() {
     <a class="side-nav-item" onclick="openQuizMenu()">${sideIcon('quiz')}<span class="side-nav-label">Подготовка</span></a>
     <a class="side-nav-item" onclick="showTopic('basics')">${sideIcon('book')}<span class="side-nav-label">Базовые термины</span></a>
     <a class="side-nav-item" href="literatura.html">${sideIcon('book')}<span class="side-nav-label">Литература</span></a>
+    <a class="side-nav-item" href="lekcii-sem2.html"><svg class="side-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span class="side-nav-label">Лекции (презентации)</span></a>
     <a class="side-nav-item" href="links.html"><svg class="side-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span class="side-nav-label">Полезные ссылки</span></a>
   `;
   wrap.appendChild(nav);
@@ -8012,6 +8040,10 @@ function goToQuestion(topicId, qNum) {
 // ─────────────────────────────────────────────
 // КАРТОЧКА: РАСКРЫТИЕ/СВОРАЧИВАНИЕ
 // ─────────────────────────────────────────────
+function toggleProof(titleEl) {
+  var d = titleEl.closest('.derivation');
+  if (d) { d.classList.toggle('collapsed'); }
+}
 function toggleCard(headEl) {
   const card = headEl.parentElement;
   const wasOpen = card.classList.contains('open');
