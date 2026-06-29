@@ -1789,6 +1789,9 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 ::view-transition-old(root){z-index:1;}
 ::view-transition-new(root){z-index:2;animation:waveReveal .55s cubic-bezier(.4,0,.2,1) forwards;}
 @keyframes waveReveal{from{clip-path:circle(0 at var(--wave-x,100%) var(--wave-y,0));}to{clip-path:circle(var(--wave-r,150vmax) at var(--wave-x,100%) var(--wave-y,0));}}
+
+.derivation.ra-wrap{border:none;padding:0;background:none;margin:1rem 0;}
+.derivation.ra-wrap>.derivation-title{margin-bottom:0;}
 </style>
 <style id="ra79-style">
 .q-card[data-q="79"] .ra-ln{margin:4px 0;line-height:2;color:var(--ink);transition:color .2s ease}
@@ -2577,7 +2580,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
   </div>
   <div class="q-body">
 
-    <div class="derivation">
+    <div class="derivation collapsed">
       <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Вывод</span><span class="deriv-hint"></span></div>
       <div class="deriv-body">
       <div class="def-text">
@@ -2623,7 +2626,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
   </div>
   <div class="q-body">
 
-    <div class="derivation">
+    <div class="derivation collapsed">
       <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Вывод</span><span class="deriv-hint"></span></div>
       <div class="deriv-body">
       <div class="def-text">
@@ -3168,7 +3171,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
-    <div class="derivation">
+    <div class="derivation collapsed">
       <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Доказательство</span><span class="deriv-hint"></span></div>
       <div class="deriv-body">
       <div class="def-text">
@@ -3800,7 +3803,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
-    <div class="derivation">
+    <div class="derivation collapsed">
       <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Доказательство</span><span class="deriv-hint"></span></div>
       <div class="deriv-body">
       <div class="def-text">
@@ -3969,7 +3972,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
-    <div class="derivation">
+    <div class="derivation collapsed">
       <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>$V(\lambda)$ — подпространство</span><span class="deriv-hint"></span></div>
       <div class="deriv-body">
       <div class="def-text">
@@ -4741,7 +4744,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       $$x_3=\frac{x_1+\lambda x_2}{1+\lambda},\qquad y_3=\frac{y_1+\lambda y_2}{1+\lambda},\qquad z_3=\frac{z_1+\lambda z_2}{1+\lambda}.$$
     </div></div>
 
-    <div class="ra60-fig">
+    <div class="derivation collapsed ra-wrap"><div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Интерактивное доказательство</span><span class="deriv-hint"></span></div><div class="deriv-body">
+<div class="ra60-fig">
       <div class="ra60-frame"><canvas id="ra60-cv"></canvas></div>
       <div class="ra60-cap" id="ra60-cap">точка M делит отрезок AB в отношении λ</div>
       <div class="ra60-track"><div class="ra60-fill" id="ra60-prog"></div></div>
@@ -4772,6 +4776,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
         Проверка: $|AM|=\sqrt{1+4+9}=\sqrt{14}$, $|MB|=\sqrt{4+16+36}=2\sqrt{14}$, значит $|AM|/|MB|=\tfrac12=\lambda.$ ✓
       </div></div>
     </div>
+</div></div>
 
 <script>
 (function(){
@@ -4919,7 +4924,8 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
       <span class="term">Векторным произведением</span> векторов $\mathbf{a},\mathbf{b}\in\mathbb{R}^3$ называется вектор $\mathbf{c}=\mathbf{a}\times\mathbf{b}$ такой, что: 1) $|\mathbf{c}|=|\mathbf{a}|\,|\mathbf{b}|\sin\widehat{(\mathbf{a},\mathbf{b})}$; 2) $\mathbf{c}\perp\mathbf{a}$ и $\mathbf{c}\perp\mathbf{b}$; 3) тройка $\{\mathbf{a},\mathbf{b},\mathbf{c}\}$ — правая. Если $\mathbf{a}\parallel\mathbf{b}$, то $\mathbf{a}\times\mathbf{b}=\mathbf{0}$.
     </div></div>
 
-    <div class="ra62-fig">
+    <div class="derivation collapsed ra-wrap"><div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Интерактивное доказательство</span><span class="deriv-hint"></span></div><div class="deriv-body">
+<div class="ra62-fig">
       <div class="ra62-frame"><canvas id="ra62-cv"></canvas></div>
       <div class="ra62-cap" id="ra62-cap">|a×b| = площадь параллелограмма на a и b</div>
       <div class="ra62-track"><div class="ra62-fill" id="ra62-prog"></div></div>
@@ -4953,6 +4959,7 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
         $\mathbf{a}\{1,0,0\}$, $\mathbf{b}\{0,1,0\}$: $\;\mathbf{a}\times\mathbf{b}=\begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\1&0&0\\0&1&0\end{vmatrix}=\mathbf{k}\{0,0,1\}.$ Площадь единичного квадрата равна $1$. ✓
       </div></div>
     </div>
+</div></div>
 
 <script>
 (function(){
@@ -5070,7 +5077,8 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
       <span class="term">Смешанным произведением</span> трёх векторов $\mathbf{a},\mathbf{b},\mathbf{c}$ называется число $(\mathbf{a}\times\mathbf{b})\cdot\mathbf{c}$.
     </div></div>
 
-    <div class="ra63-fig">
+    <div class="derivation collapsed ra-wrap"><div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Интерактивное доказательство</span><span class="deriv-hint"></span></div><div class="deriv-body">
+<div class="ra63-fig">
       <div class="ra63-frame"><canvas id="ra63-cv"></canvas></div>
       <div class="ra63-cap" id="ra63-cap">|(a×b)·c| = объём параллелепипеда на a, b, c</div>
       <div class="ra63-track"><div class="ra63-fill" id="ra63-prog"></div></div>
@@ -5104,6 +5112,7 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
         $\mathbf{a}\{1,0,0\}$, $\mathbf{b}\{0,1,0\}$, $\mathbf{c}\{0,0,1\}$: $\;(\mathbf{a}\times\mathbf{b})\cdot\mathbf{c}=\det E=1$ — объём единичного куба. ✓
       </div></div>
     </div>
+</div></div>
 
 <script>
 (function(){
@@ -5358,7 +5367,7 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
       </div>
     </div>
 
-    <div class="derivation">
+    <div class="derivation collapsed">
       <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Доказательство: вектор $\mathbf{N}\{A,B\}$ ортогонален прямой</span><span class="deriv-hint"></span></div>
       <div class="deriv-body">
       <div class="def-text">
@@ -5800,7 +5809,8 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
         </ul>
       </div></div>
 
-    <div class="ra75-fig">
+    <div class="derivation collapsed ra-wrap"><div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Интерактивное доказательство</span><span class="deriv-hint"></span></div><div class="deriv-body">
+<div class="ra75-fig">
       <div class="ra75-frame"><canvas id="ra75-cv"></canvas></div>
       <div class="ra75-cap" id="ra75-cap">скрещивающиеся прямые и расстояние между ними</div>
       <div class="ra75-track"><div class="ra75-fill" id="ra75-prog"></div></div>
@@ -5826,6 +5836,7 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
         <div class="ra75-ln" data-step="6">Объём = площадь основания × высота: $V=S\cdot d$. Отсюда $d=\dfrac{V}{S}=\dfrac{\bigl|(\overrightarrow{M_1 M_2},\, a_1,\, a_2)\bigr|}{|a_1 \times a_2|}.$</div>
       </div></div>
     </div>
+</div></div>
 
 <script>
 (function(){
@@ -6358,7 +6369,7 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();draw();
         </div>
       </div>
 
-      <div class="derivation">
+      <div class="derivation collapsed">
         <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Вывод</span><span class="deriv-hint"></span></div>
         <div class="deriv-body">
         <div class="def-text">
@@ -6396,7 +6407,7 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();draw();
       </div>
     </div>
 
-    <div class="derivation">
+    <div class="derivation collapsed">
       <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Проверка</span><span class="deriv-hint"></span></div>
       <div class="deriv-body">
       <div class="def-text">
@@ -7515,7 +7526,8 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
       Через любую точку однополостного гиперболоида и гиперболического параболоида проходят две различные прямые, целиком лежащие на поверхности. Их называют <span class="em">прямолинейными образующими</span> (такие поверхности — линейчатые).
     </div></div>
 
-    <div class="ra91-fig">
+    <div class="derivation collapsed ra-wrap"><div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Интерактивное доказательство</span><span class="deriv-hint"></span></div><div class="deriv-body">
+<div class="ra91-fig">
       <div class="ra91-frame"><canvas id="ra91-cv"></canvas></div>
       <div class="ra91-cap" id="ra91-cap">однополостный гиперболоид целиком состоит из прямых</div>
       <div class="ra91-track"><div class="ra91-fill" id="ra91-prog"></div></div>
@@ -7544,6 +7556,7 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
 
       <div class="note">Это свойство используют в архитектуре: гиперболоидные башни (Шуховская башня, башни Гауди) и градирни электростанций собирают из <em>прямых</em> балок, хотя сама поверхность кривая.</div>
     </div>
+</div></div>
 
 <script>
 (function(){
