@@ -1932,8 +1932,12 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     <div class="def-block">
       <div class="section-tag">Предмет</div>
       <div class="def-text">
-        Предмет изучения алгебры — <span class="term">отношения между объектами</span>.
+        Алгебра изучает <span class="term">алгебраические операции</span> над элементами множеств и общие свойства возникающих при этом структур — <span class="term">отношения между объектами</span>, задаваемые такими операциями, в отвлечении от конкретной природы самих объектов.
       </div>
+    </div>
+
+    <div class="explain">
+      Один и тот же набор правил действия описывает разные по природе объекты — числа, многочлены, матрицы, перестановки. Поэтому алгебру интересуют не сами объекты, а законы операций над ними и структуры, которые эти законы порождают.
     </div>
 
   </div>
@@ -1967,8 +1971,10 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     </div>
 
     <div class="explain">
-      Усложнение при переходе от простейших систем к общим имеет принципиальное значение: системы линейных уравнений встречаются практически во всех разделах математики, а <span class="term">линейные методы</span>, конечным продуктом которых часто является решение линейных систем, составляют её наиболее развитую часть. Теория линейных систем в конце XIX века послужила прототипом для создания теории интегральных уравнений.
+      Усложнение при переходе от простейших систем к общим имеет принципиальное значение: системы линейных уравнений встречаются буквально во всех разделах математики, а <span class="term">линейные методы</span>, конечным продуктом которых часто являются решения линейных систем, составляют её наиболее развитую часть. Теория систем такого вида послужила в конце XIX века прототипом для создания теории интегральных уравнений.
     </div>
+
+    <div class="src-ref">Кострикин, ч. 1, с. 18–19</div>
 
   </div>
 </div>
@@ -1985,30 +1991,41 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     <div class="def-block">
       <div class="section-tag">Разрешимость уравнений в радикалах</div>
       <div class="def-text">
-        Общее уравнение степени $n$: $\;a_0x^n + a_1x^{n-1} + \ldots + a_nx = a$.
-        <ul class="props">
-          <li>$n=1$ — линейное уравнение;</li>
-          <li>$n=2$ — квадратное уравнение;</li>
-          <li>$n=3$ — формула Кардано;</li>
-          <li>$n=4$ — формула Феррари.</li>
-        </ul>
-        В общем случае при $n>4$ уравнение <span class="em">неразрешимо в радикалах</span>.
+        Для квадратного уравнения $ax^2+bx+c=0$ корни даёт известная формула $x_{1,2}=\dfrac{-b\pm\sqrt{b^2-4ac}}{2a}$. Уравнение третьей степени $x^3+ax^2+bx+c=0$ подстановкой $x\mapsto x-\dfrac{a}{3}$ приводится к виду $x^3+px+q=0$, корни которого выражаются <span class="em">формулой Кардано</span> (1545 г.; связана также с именами С. Ферро и Н. Тартальи). Для четвёртой степени аналогичные формулы даёт <span class="em">метод Феррари</span>.
+        <br><br>
+        Почти триста лет попытки «решить в радикалах» общее уравнение пятой степени были безуспешны. В 1813 г. А. Руффини и в 1827 г. (независимо и строго) Н. Абель доказали: общее уравнение
+        $$x^n + a_1x^{n-1} + \ldots + a_n = 0\qquad\text{при } n>4$$
+        <span class="em">неразрешимо в радикалах</span>.
+      </div>
+    </div>
+
+    <div class="def-block">
+      <div class="section-tag">Критерий Галуа</div>
+      <div class="def-text">
+        Универсальный критерий дал Э. Галуа (1831 г.): каждому уравнению степени $n$ он сопоставил <span class="term">поле разложения</span> и конечную группу его автоморфизмов (порядка не более $n!$) — <span class="term">группу Галуа</span>. Уравнение разрешимо в радикалах <span class="em">тогда и только тогда</span>, когда его группа Галуа разрешима. Например, уравнению $x^5-x-1=0$ отвечает группа Галуа, изоморфная симметрической группе $S_5$ порядка $120$; она неразрешима — значит, неразрешимо в радикалах и само уравнение. Так из этой задачи выросла теория групп.
       </div>
     </div>
 
     <div class="def-block">
       <div class="section-tag">Состояния многоатомной молекулы</div>
       <div class="def-text">
-        Молекула характеризуется своей структурой. Всего существует <span class="term">230 кристаллографических групп</span> (пространственных групп симметрии) — используется для исследования влияния симметрии на физические свойства кристалла.
+        Молекулу рассматривают как систему частиц (атомных ядер) вблизи положения устойчивого равновесия. Любое малое колебание молекулы есть суперпозиция <span class="em">нормальных колебаний</span>; их частоты во многом определяются внутренней симметрией молекулы. Симметрия молекулярной структуры описывается <span class="term">точечной группой молекулы</span>, а параметры колебаний — её неприводимыми представлениями и характерами.
+        <ul class="props">
+          <li>молекула воды $\mathrm{H_2O}$ — четверная группа Клейна;</li>
+          <li>молекула фосфора $\mathrm{P_4}$ (тетраэдр) — симметрическая группа $S_4$ порядка $24$.</li>
+        </ul>
+        Близкое применение теории групп — в кристаллографии: Е. С. Фёдоров (1891 г.) и А. Шёнфлис нашли <span class="term">230 пространственных кристаллографических групп</span>, описывающих все симметрии кристаллов.
       </div>
     </div>
 
     <div class="def-block">
       <div class="section-tag">Кодирование сообщений</div>
       <div class="def-text">
-        Сообщение представляется последовательностью сигналов, которые при передаче могут искажаться. <span class="em">Задача кодирования:</span> из всей последовательности выделить такую последовательность $S_0$, чтобы слово распознавалось с учётом ошибок искажения — при условии, что число ошибок достаточно мало.
+        Элементарное сообщение — строка $a=(a_1,a_2,\ldots,a_n)$ длины $n$, где $a_i\in\{0,1\}$ (операции по модулю $2$, поле $\mathrm{GF}(2)$). <span class="em">Задача кодирования:</span> выбрать такое подмножество (код) $S_0$ передаваемых слов из всего множества $S$, чтобы по искажённому слову $a'$ можно было восстановить $a$ — при условии, что произошло не слишком много ошибок. Так возникают <span class="term">коды, исправляющие ошибки</span>.
       </div>
     </div>
+
+    <div class="src-ref">Кострикин, ч. 1, с. 15–18</div>
 
   </div>
 </div>
@@ -2043,9 +2060,11 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     <div class="thm-box">
       <div class="thm-label">Утверждение</div>
       <div class="def-text">
-        Если $\sum_{j=1}^{n} a_{jk}\lt 1$ для любого $k=1,\ldots,n$, то поставленная задача разрешима.
+        Если $\sum_{j=1}^{n} a_{jk}\lt 1$ для любого $k=1,\ldots,n$ (все фабрики работают рентабельно), то поставленная задача разрешима, причём единственным образом.
       </div>
     </div>
+
+    <div class="src-ref">Кострикин, ч. 2, с. 315–316, 321–322</div>
 
   </div>
 </div>
@@ -2072,23 +2091,27 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     <div class="def-block">
       <div class="section-tag">Множество</div>
       <div class="def-text">
-        <span class="term">Множество</span> — совокупность объектов произвольной природы, объединённых по некоторому общему признаку. Пример: $\mathbb{N}$ — множество натуральных чисел.
+        Под <span class="term">множеством</span> понимают любую совокупность объектов, называемых <span class="em">элементами</span> множества. Включение $a\in S$ указывает, что $a$ — элемент множества $S$; в противном случае пишут $a\notin S$. Конечное множество можно задать перечислением элементов в фигурных скобках, например $\{1,2,4,8\}$. Стандартные обозначения: $\mathbb{N},\ \mathbb{Z},\ \mathbb{Q},\ \mathbb{R}$ — множества натуральных, целых, рациональных и вещественных чисел.
       </div>
     </div>
 
     <div class="def-block">
       <div class="section-tag">Подмножество</div>
       <div class="def-text">
-        <span class="term">Подмножество</span> — часть множества, содержащая некоторые (или все) элементы исходного множества. Пример: $\mathbb{N}\subset\mathbb{Z}$ — натуральные числа являются подмножеством целых.
+        $S$ — <span class="term">подмножество</span> множества $T$ (запись $S\subseteq T$, «$S$ содержится в $T$»), если имеет место импликация
+        $$x\in S \;\Rightarrow\; x\in T.$$
+        Два множества <span class="em">совпадают (равны)</span>, $S=T$, если у них одни и те же элементы. Если $S\subseteq T$, но $S\ne\varnothing$ и $S\ne T$, то $S$ — <span class="term">собственное подмножество</span> в $T$. Пустое множество $\varnothing$ по определению входит в число подмножеств любого множества.
       </div>
     </div>
 
     <div class="def-block">
       <div class="section-tag">Элемент</div>
       <div class="def-text">
-        <span class="term">Элемент множества</span> — объект, являющийся частью множества.
+        <span class="term">Элемент множества</span> — объект, входящий в данное множество. Подмножество часто выделяют свойством, присущим только его элементам, например $\{\,n\in\mathbb{Z}\mid n=2m,\ m\in\mathbb{Z}\,\}$ — множество всех чётных чисел.
       </div>
     </div>
+
+    <div class="src-ref">Кострикин, ч. 1, с. 33–34</div>
 
   </div>
 </div>
@@ -2105,23 +2128,26 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     <div class="def-block">
       <div class="section-tag">Пустое множество</div>
       <div class="def-text">
-        <span class="term">Пустое множество</span> $\varnothing$ — множество, не содержащее ни одного элемента.
-      </div>
-    </div>
-
-    <div class="def-block">
-      <div class="section-tag">Собственное подмножество</div>
-      <div class="def-text">
-        <span class="term">Собственное подмножество</span> — непустое подмножество множества, не совпадающее с самим множеством. Запись $A\subset B$ означает, что $A$ — подмножество $B$.
+        <span class="term">Пустое множество</span> $\varnothing$ — множество, совсем не содержащее элементов. По определению оно входит в число подмножеств любого множества: $\varnothing\subseteq S$ для всякого $S$.
       </div>
     </div>
 
     <div class="def-block">
       <div class="section-tag">Совпадающие множества</div>
       <div class="def-text">
-        <span class="term">Совпадающие (равные) множества</span> — множества, состоящие из одних и тех же элементов. Обозначение: $A=B$.
+        Два множества $S$ и $T$ <span class="term">совпадают (равны)</span>, если у них одни и те же элементы. Символически — через взаимное включение:
+        $$S=T \;\iff\; (S\subseteq T)\ \text{и}\ (T\subseteq S).$$
       </div>
     </div>
+
+    <div class="def-block">
+      <div class="section-tag">Собственное подмножество</div>
+      <div class="def-text">
+        Если $S\subseteq T$, но $S\ne\varnothing$ и $S\ne T$, то $S$ называется <span class="term">собственным подмножеством</span> в $T$. Иначе говоря, собственное подмножество — это непустое подмножество, не совпадающее со всем множеством.
+      </div>
+    </div>
+
+    <div class="src-ref">Кострикин, ч. 1, с. 33–34</div>
 
   </div>
 </div>
@@ -2136,28 +2162,35 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
   <div class="q-body">
 
     <div class="def-block">
-      <div class="section-tag">Объединение</div>
+      <div class="section-tag">Пересечение</div>
       <div class="def-text">
-        <span class="term">Объединение</span> множеств $X$ и $Y$ — множество элементов, принадлежащих хотя бы одному из них:
-        $$X\cup Y = \{\,x \mid (x\in X)\lor(x\in Y)\,\}.$$
+        <span class="term">Пересечение</span> множеств $S$ и $T$ — множество элементов, принадлежащих <span class="em">обоим</span> множествам:
+        $$S\cap T = \{\,x \mid (x\in S)\ \text{и}\ (x\in T)\,\}.$$
+        Если $S\cap T=\varnothing$, множества называют <span class="em">непересекающимися</span>.
       </div>
     </div>
 
     <div class="def-block">
-      <div class="section-tag">Пересечение</div>
+      <div class="section-tag">Объединение</div>
       <div class="def-text">
-        <span class="term">Пересечение</span> множеств $X$ и $Y$ — множество элементов, принадлежащих обоим:
-        $$X\cap Y = \{\,x \mid (x\in X)\land(x\in Y)\,\}.$$
+        <span class="term">Объединение</span> множеств $S$ и $T$ — множество элементов, принадлежащих <span class="em">хотя бы одному</span> из них:
+        $$S\cup T = \{\,x \mid (x\in S)\ \text{или}\ (x\in T)\,\}.$$
       </div>
     </div>
 
     <div class="def-block">
       <div class="section-tag">Разность</div>
       <div class="def-text">
-        <span class="term">Разность</span> множеств $X$ и $Y$ — множество элементов $X$, не входящих в $Y$:
-        $$X\setminus Y = \{\,z \mid z\in X \land z\notin Y\,\}.$$
+        <span class="term">Разность</span> множеств $S$ и $T$ — множество элементов $S$, не входящих в $T$:
+        $$S\setminus T = \{\,x \mid (x\in S)\ \text{и}\ (x\notin T)\,\}.$$
       </div>
     </div>
+
+    <div class="explain">
+      Связки «и», «или», «не» в определениях операций над множествами в точности соответствуют логическим операциям. «Или» здесь <span class="em">не исключающее</span>: элемент, лежащий сразу в обоих множествах, входит и в объединение. Разность, в отличие от пересечения и объединения, <span class="em">несимметрична</span>: вообще говоря, $S\setminus T\ne T\setminus S$.
+    </div>
+
+    <div class="src-ref">Кострикин, ч. 1, с. 34</div>
 
   </div>
 </div>
@@ -2174,19 +2207,26 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     <div class="def-block">
       <div class="section-tag">Определение</div>
       <div class="def-text">
-        <span class="term">Декартово (прямое) произведение</span> двух непустых множеств — множество, элементами которого являются все упорядоченные пары их элементов:
+        <span class="term">Декартовым (прямым) произведением</span> множеств $X$ и $Y$ называется множество всех <span class="em">упорядоченных пар</span>:
         $$X\times Y = \{(x,y)\mid x\in X,\;y\in Y\}.$$
+        Две пары равны по определению покоординатно: $(x_1,y_1)=(x_2,y_2)\iff x_1=x_2$ и $y_1=y_2$. Для конечных множеств $|X\times Y| = |X|\cdot|Y|$.
       </div>
     </div>
 
-    <div class="example-card">
-      <div class="example-card-title my-example">Пример</div>
-      <div class="example-card-body">
-        Пусть $A=\{1,3,5\}$, $B=\{2,4,6,8\}$. Тогда
-        $$A\times B = \{(1,2),(1,4),(1,6),(1,8),(3,2),(3,4),(3,6),(3,8),(5,2),(5,4),(5,6),(5,8)\}.$$
-        Число элементов: $|A\times B| = |A|\cdot|B| = 3\cdot 4 = 12$. Порядок важен: $A\times B \ne B\times A$.
+    <div class="def-block">
+      <div class="section-tag">Декартова степень</div>
+      <div class="def-text">
+        $k$-я <span class="term">декартова степень</span> множества $X$ — произведение $k$ его экземпляров:
+        $$X^k = \underbrace{X\times X\times\cdots\times X}_{k}=\{(x_1,\ldots,x_k)\mid x_i\in X\}.$$
+        Именно декартова степень позволяет говорить о функциях многих переменных как об отображениях $X^k\to Y$.
       </div>
     </div>
+
+    <div class="explain">
+      Ключевое слово — <span class="em">упорядоченные</span>: в паре важен порядок, поэтому $(x,y)$ и $(y,x)$ — это, вообще говоря, разные элементы, и $X\times Y\ne Y\times X$. Привычная плоскость — это $\mathbb{R}\times\mathbb{R}=\mathbb{R}^2$, множество пар координат точки.
+    </div>
+
+    <div class="src-ref">Кострикин, ч. 1, с. 35</div>
 
   </div>
 </div>
@@ -2213,31 +2253,29 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     <div class="def-block">
       <div class="section-tag">Отображение</div>
       <div class="def-text">
-        Пусть даны два множества $X$ и $Y$. <span class="term">Отображением</span> $f$ из $X$ в $Y$ называется правило, ставящее каждому элементу $x\in X$ в соответствие <span class="em">единственный</span> элемент $y\in Y$. Обозначение: $f:X\to Y$.
+        Пусть даны два множества $X$ и $Y$. <span class="term">Отображением</span> $f:X\to Y$ называется правило, сопоставляющее каждому элементу $x\in X$ <span class="em">единственный</span> элемент $f(x)\in Y$. Если $Y=X$, отображение называют <span class="em">преобразованием</span> множества $X$. Сопоставление обозначают «ограниченной» стрелкой: $x\mapsto f(x)$.
       </div>
     </div>
 
     <div class="def-block">
       <div class="section-tag">Область определения</div>
       <div class="def-text">
-        <span class="term">Область определения</span> $D(f)$ отображения $f:X\to Y$ — это само множество $X$, то есть множество всех элементов, для которых $f$ определено.
+        <span class="term">Область определения</span> отображения $f:X\to Y$ — множество $X$, то есть множество всех элементов, для которых $f$ определено.
       </div>
     </div>
 
     <div class="def-block">
-      <div class="section-tag">Область значений (образ)</div>
+      <div class="section-tag">Область значений</div>
       <div class="def-text">
-        <span class="term">Область значений</span> (образ) — множество всех образов элементов из $X$:
-        $$\operatorname{Im}(f) = f(X) = \{\,f(x)\mid x\in X\,\}\subseteq Y.$$
+        <span class="term">Область значений</span> отображения $f:X\to Y$ — множество $Y$, в которое $f$ действует. Каждый $f(x)$ лежит в $Y$, но не обязательно покрывает его целиком; та часть $Y$, которая реально достигается, называется <span class="em">образом</span> $f(X)$ (см. следующую карточку).
       </div>
     </div>
 
-    <div class="example-card">
-      <div class="example-card-title my-example">Пример</div>
-      <div class="example-card-body">
-        $X=\{1,2,3\}$, $Y=\{a,b,c,d\}$, $f(1)=a$, $f(2)=b$, $f(3)=a$. Тогда $D(f)=\{1,2,3\}$, а $\operatorname{Im}(f)=\{a,b\}\subset Y$.
-      </div>
+    <div class="explain">
+      По Кострикину задание <span class="em">и</span> области определения $X$, <span class="em">и</span> области значений $Y$ — существенная часть определения отображения. Одно и то же правило $x\mapsto x^2$ задаёт <span class="em">разные</span> отображения: $\mathbb{R}\to\mathbb{R}$, $\mathbb{R}\to\mathbb{R}_{\ge 0}$ и $\mathbb{R}_{>0}\to\mathbb{R}_{>0}$ ведут себя по-разному, хотя формула одна.
     </div>
+
+    <div class="src-ref">Кострикин, ч. 1, с. 35–36</div>
 
   </div>
 </div>
@@ -2252,19 +2290,27 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
   <div class="q-body">
 
     <div class="def-block">
-      <div class="section-tag">Образ элемента</div>
+      <div class="section-tag">Образ элемента и множества</div>
       <div class="def-text">
-        Пусть $f:X\to Y$. <span class="term">Образом</span> элемента $x\in X$ называется элемент $y\in Y$, ставящийся ему в соответствие отображением $f$. Обозначение: $y=f(x)$.
+        Пусть $f:X\to Y$. <span class="term">Образ</span> элемента $x\in X$ — это сопоставляемый ему элемент $f(x)\in Y$. Образ всего множества (или подмножества $S\subseteq X$):
+        $$f(S)=\{\,f(x)\mid x\in S\,\},\qquad \operatorname{Im}f = f(X).$$
       </div>
     </div>
 
     <div class="def-block">
-      <div class="section-tag">Полный прообраз</div>
+      <div class="section-tag">Прообраз</div>
       <div class="def-text">
-        <span class="term">Полным прообразом</span> элемента $y\in Y$ называется множество всех элементов $X$, образ которых равен $y$:
+        <span class="term">Прообразом</span> элемента $y\in Y$ называется множество всех его прообразов:
         $$f^{-1}(y) = \{\,x\in X\mid f(x)=y\,\}.$$
+        Более общо, <span class="term">полный прообраз</span> подмножества $S\subseteq Y$ — это $f^{-1}(S)=\{\,x\in X\mid f(x)\in S\,\}$. Если $y\in Y\setminus\operatorname{Im}f$, то $f^{-1}(y)=\varnothing$.
       </div>
     </div>
+
+    <div class="explain">
+      Образ идёт «вперёд» (от $x$ к $f(x)$) и всегда однозначен; прообраз идёт «назад» и может содержать ноль, один или много элементов. Запись $f^{-1}(y)$ здесь означает <span class="em">множество</span> прообразов и не предполагает существования обратного отображения.
+    </div>
+
+    <div class="src-ref">Кострикин, ч. 1, с. 36</div>
 
   </div>
 </div>
@@ -2281,7 +2327,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     <div class="def-block">
       <div class="section-tag">Сюръекция</div>
       <div class="def-text">
-        <span class="term">Сюръективное</span> отображение $f:X\to Y$ — каждый элемент $Y$ является образом хотя бы одного элемента из $X$:
+        <span class="term">Сюръективное</span> отображение $f:X\to Y$ (отображение «на») — когда образ совпадает со всей областью значений, $\operatorname{Im}f = Y$; равносильно: каждый $y\in Y$ есть образ хотя бы одного $x$:
         $$\forall y\in Y\;\exists x\in X:\; f(x)=y.$$
       </div>
     </div>
@@ -2290,16 +2336,34 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       <div class="section-tag">Инъекция</div>
       <div class="def-text">
         <span class="term">Инъективное</span> отображение $f:X\to Y$ — разным элементам $X$ соответствуют разные элементы $Y$:
-        $$x_1\ne x_2 \;\Rightarrow\; f(x_1)\ne f(x_2).$$
+        $$x\ne x' \;\Rightarrow\; f(x)\ne f(x').$$
       </div>
     </div>
 
     <div class="def-block">
       <div class="section-tag">Биекция</div>
       <div class="def-text">
-        <span class="term">Биективное</span> отображение — одновременно сюръективное и инъективное. Каждому $y\in Y$ соответствует ровно один $x\in X$ с $f(x)=y$, и обратно.
+        <span class="term">Биективное</span> (взаимно однозначное) отображение — одновременно сюръективное и инъективное. Тогда каждому $y\in Y$ отвечает ровно один $x\in X$ с $f(x)=y$ — и только биекция обладает обратным отображением $f^{-1}$.
       </div>
     </div>
+
+    <div class="explain">
+      Инъекция — «без склеек» (разные уходят в разные), сюръекция — «без пропусков» (накрыт весь $Y$), биекция — и то и другое: идеальное парное соответствие. Поэтому и область определения, и область значений важны: меняя их, одно правило можно сделать инъекцией, сюръекцией, биекцией или ни тем ни другим.
+    </div>
+
+    <div class="example-card">
+      <div class="example-card-title from-lecture">Пример (Кострикин)</div>
+      <div class="example-card-body">
+        Одно правило $x\mapsto x^2$ задаёт три разных отображения:
+        <ul class="props">
+          <li>$\mathbb{R}\to\mathbb{R}$ — ни инъективно, ни сюръективно;</li>
+          <li>$\mathbb{R}\to\mathbb{R}_{\ge 0}$ — сюръективно, но не инъективно;</li>
+          <li>$\mathbb{R}_{>0}\to\mathbb{R}_{>0}$ — биективно.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="src-ref">Кострикин, ч. 1, с. 36</div>
 
   </div>
 </div>
@@ -2314,25 +2378,27 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
   <div class="q-body">
 
     <div class="def-block">
-      <div class="section-tag">Вложение</div>
+      <div class="section-tag">Тождественное отображение</div>
       <div class="def-text">
-        Отображение $f:X\to Y$ называется <span class="term">вложением</span>, если оно инъективно (не склеивает разные элементы): $\;x_1\ne x_2\Rightarrow f(x_1)\ne f(x_2)$. Обозначение: $\iota:X\hookrightarrow Y$.
+        <span class="term">Единичным (тождественным)</span> отображением $e_X:X\to X$ называется отображение, переводящее каждый элемент в себя: $e_X(x)=x$ для всех $x\in X$.
       </div>
     </div>
 
     <div class="def-block">
-      <div class="section-tag">Сужение</div>
+      <div class="section-tag">Вложение</div>
       <div class="def-text">
-        Пусть дано $f:X\to Y$ и подмножество $A\subseteq X$. <span class="term">Сужением</span> $f$ на $A$ называется отображение $f|_A:A\to Y$, заданное равенством $f|_A(x)=f(x)$ для всех $x\in A$ — то есть то же $f$, применённое только к элементам $A$.
+        Если $X$ — подмножество в $Y$ ($X\subseteq Y$), то <span class="term">вложением</span> называется отображение $\iota:X\to Y$, сопоставляющее каждому $x\in X$ тот же самый элемент, но уже рассматриваемый во множестве $Y$. Вложение всегда инъективно.
       </div>
     </div>
 
-    <div class="example-card">
-      <div class="example-card-title my-example">Пример</div>
-      <div class="example-card-body">
-        $X=\{1,2,3\}$, $Y=\{a,b,c,d\}$, $f(1)=a$, $f(2)=b$, $f(3)=c$ — вложение (все образы различны).
+    <div class="def-block">
+      <div class="section-tag">Сужение и продолжение</div>
+      <div class="def-text">
+        Отображение $f:X\to Y$ называется <span class="term">сужением</span> (ограничением) отображения $g:X'\to Y'$, когда $X\subseteq X'$, $Y\subseteq Y'$ и $f(x)=g(x)$ для всех $x\in X$. В свою очередь $g$ называется <span class="term">продолжением</span> отображения $f$. Например, вложение $\iota:X\to Y$ есть ограничение тождественного отображения $e_Y:Y\to Y$.
       </div>
     </div>
+
+    <div class="src-ref">Кострикин, ч. 1, с. 36</div>
 
   </div>
 </div>
@@ -2355,8 +2421,14 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     </div>
 
     <div class="note">
-      Композиция определена не для любых $f$ и $g$: у них должно быть общим промежуточное множество $V$. Композиция двух преобразований множества $X$ в себя имеет смысл всегда.
+      Композиция определена не для любых $f$ и $g$: у них должно быть общим промежуточное множество $V$. Композиция двух преобразований множества $X$ в себя имеет смысл всегда. В дальнейшем вместо $f\circ g$ пишут просто $fg$; при этом $f\,e_X = e_Y\,f = f$.
     </div>
+
+    <div class="explain">
+      Композиция, вообще говоря, <span class="em">некоммутативна</span>: $fg\ne gf$. Например, для $X=\{a,b\}$ возьмём $f(a)=b,\ f(b)=a$ и $g(a)=g(b)=a$; тогда $fg$ и $gf$ — разные преобразования.
+    </div>
+
+    <div class="src-ref">Кострикин, ч. 1, с. 37</div>
 
   </div>
 </div>
@@ -2389,6 +2461,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+    <div class="src-ref">Кострикин, ч. 1, с. 37–38</div>
+
   </div>
 </div>
 
@@ -2402,20 +2476,30 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
   <div class="q-body">
 
     <div class="def-block">
-      <div class="section-tag">Обратное отображение</div>
+      <div class="section-tag">Левый, правый и двусторонний обратный</div>
       <div class="def-text">
-        <span class="term">Обратное</span> к $f$ отображение $f^{-1}$ определяется соотношением
-        $$y=f(x)\;\iff\;f^{-1}(y)=x$$
-        для любых $x\in X$, $y\in Y$.
+        Пусть $f:X\to Y$ и $g:Y\to X$. Если $fg=e_Y$, то $f$ называют <span class="em">левым обратным</span> к $g$, а $g$ — <span class="em">правым обратным</span> к $f$. Если же выполнено и то, и другое,
+        $$fg=e_Y,\qquad gf=e_X,$$
+        то $g$ — <span class="term">двусторонний (просто обратный)</span> к $f$, обозначается $f^{-1}$. Тогда $f(u)=v\iff f^{-1}(v)=u$. Двусторонний обратный, если он существует, определён <span class="em">однозначно</span>.
       </div>
     </div>
 
     <div class="thm-box">
-      <div class="thm-label">Теорема о существовании обратного</div>
+      <div class="thm-label">Критерий обратимости (теорема 2)</div>
       <div class="def-text">
-        Отображение $f:X\to Y$ имеет обратное <span class="em">тогда и только тогда</span>, когда $f$ — биекция.
+        Отображение $f:X\to Y$ имеет обратное <span class="em">тогда и только тогда</span>, когда $f$ биективно.
       </div>
     </div>
+
+    <div class="def-block">
+      <div class="section-tag">Свойства</div>
+      <div class="def-text">
+        Из биективности $f$ следует биективность $f^{-1}$, причём $\bigl(f^{-1}\bigr)^{-1}=f$. Если $f:X\to Y$ и $g:Y\to Z$ биективны, то биективна и композиция, и
+        $$(gf)^{-1}=f^{-1}g^{-1}.$$
+      </div>
+    </div>
+
+    <div class="src-ref">Кострикин, ч. 1, с. 38–39</div>
 
   </div>
 </div>
@@ -2430,25 +2514,17 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
   <div class="q-body">
 
     <div class="thm-box">
-      <div class="thm-label">Теорема 1</div>
+      <div class="thm-label">Теорема (для конечного множества)</div>
       <div class="def-text">
-        $f$ — биекция $\;\iff\;$ существует обратное отображение $f^{-1}$.
+        Если $X$ — конечное множество и преобразование $f:X\to X$ <span class="em">инъективно</span>, то оно <span class="em">биективно</span>.
       </div>
     </div>
 
-    <div class="thm-box">
-      <div class="thm-label">Теорема 2</div>
-      <div class="def-text">
-        Пусть $f:X\to X$, где $X$ — конечное множество. Тогда $f$ — сюръекция $\;\Rightarrow\;$ $f$ — биекция.
-      </div>
+    <div class="explain">
+      Для конечного множества $X$ свойства инъективности, сюръективности и биективности преобразования $f:X\to X$ <span class="em">равносильны</span>: ни одно не может выполняться без двух других. Для бесконечных множеств это уже не так: отображение «следования» $\sigma:\mathbb{N}\to\mathbb{N}$, $\sigma(n)=n+1$, инъективно, но не сюръективно (единица не является ничьим образом).
     </div>
 
-    <div class="thm-box">
-      <div class="thm-label">Теорема 3</div>
-      <div class="def-text">
-        Пусть $f:X\to X$, где $X$ — конечное множество. Тогда $f$ — инъекция $\;\Rightarrow\;$ $f$ — биекция.
-      </div>
-    </div>
+    <div class="src-ref">Кострикин, ч. 1, с. 39</div>
 
   </div>
 </div>
@@ -2467,12 +2543,11 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <div class="q-card" data-q="17" data-text="перестановка взаимно однозначное отображение конечное множество табличная запись">
   <div class="q-head" onclick="toggleCard(this)"><span class="q-num">17</span><span class="q-title">Понятие перестановки</span><button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></div>
   <div class="q-body">
-    <div class="def-block"><div class="section-tag">Определение</div><div class="def-text">
-      Пусть $\Omega=\{1,2,\ldots,n\}$ — конечное множество. <span class="term">Перестановки</span> — все взаимно однозначные отображения $f:\Omega\to\Omega$.
+    <div class="def-block"><div class="section-tag">Перестановка</div><div class="def-text">
+      Пусть $\Omega$ — конечное множество из $n$ элементов; природа элементов несущественна, поэтому считают $\Omega=\{1,2,\ldots,n\}$. <span class="term">Перестановками</span> называют все взаимно однозначные преобразования $\Omega\to\Omega$; обозначают их строчными греческими буквами, а единичное преобразование — буквой $e$. Перестановку $\pi$ записывают двумя строками, явно указывая все образы:
+      $$\pi=\begin{pmatrix}1&2&\cdots&n\\ \pi(1)&\pi(2)&\cdots&\pi(n)\end{pmatrix}.$$
     </div></div>
-    <div class="example-card"><div class="example-card-title my-example">Пример</div><div class="example-card-body">
-      Для $n=3$: $\;\sigma=\begin{pmatrix}1&2&3\\2&3&1\end{pmatrix}$ означает $\sigma(1)=2$, $\sigma(2)=3$, $\sigma(3)=1$.
-    </div></div>
+    <div class="src-ref">Кострикин, ч. 1, с. 50–51</div>
   </div>
 </div>
 
@@ -2480,9 +2555,22 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <div class="q-card" data-q="18" data-text="симметрическая группа степени перестановки элемент группы">
   <div class="q-head" onclick="toggleCard(this)"><span class="q-num">18</span><span class="q-title">Перестановка как группа элементов</span><button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></div>
   <div class="q-body">
-    <div class="def-block"><div class="section-tag">Симметрическая группа</div><div class="def-text">
-      Перестановку можно рассматривать как элемент <span class="term">симметрической группы</span>. <span class="term">Симметрическая группа степени $n$</span> ($S_n$) — группа всех перестановок $n$ элементов.
+    <div class="def-block"><div class="section-tag">Умножение перестановок</div><div class="def-text">
+      Перестановки $\sigma,\tau\in S_n$ перемножаются по общему правилу композиции отображений:
+      $$(\sigma\tau)(i)=\sigma\bigl(\tau(i)\bigr).$$
     </div></div>
+
+    <div class="example-card"><div class="example-card-title from-lecture">Пример (Кострикин)</div><div class="example-card-body">
+      Для $\sigma=\begin{pmatrix}1&2&3&4\\2&3&4&1\end{pmatrix}$, $\tau=\begin{pmatrix}1&2&3&4\\4&3&2&1\end{pmatrix}$:
+      $$\sigma\tau=\begin{pmatrix}1&2&3&4\\1&4&3&2\end{pmatrix},\qquad \tau\sigma=\begin{pmatrix}1&2&3&4\\3&2&1&4\end{pmatrix},$$
+      так что $\sigma\tau\ne\tau\sigma$ — умножение перестановок некоммутативно.
+    </div></div>
+
+    <div class="def-block"><div class="section-tag">Свойства. Симметрическая группа</div><div class="def-text">
+      Умножение перестановок обладает тремя свойствами: оно <span class="em">ассоциативно</span> $(\alpha\beta)\gamma=\alpha(\beta\gamma)$; есть <span class="em">единичный элемент</span> $e$, $\pi e=\pi=e\pi$; у каждой $\pi$ есть <span class="em">обратная</span> $\pi^{-1}$, $\pi\pi^{-1}=\pi^{-1}\pi=e$. Эти свойства дают основание называть $S_n$ <span class="term">группой</span>. Множество всех перестановок с операцией умножения называется <span class="term">симметрической группой степени $n$</span>. Её порядок:
+      $$\bigl|S_n\bigr|=n!.$$
+    </div></div>
+    <div class="src-ref">Кострикин, ч. 1, с. 51–52</div>
   </div>
 </div>
 
@@ -2490,14 +2578,20 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <div class="q-card" data-q="19" data-text="цикл длины независимый цикл циклическая перестановка">
   <div class="q-head" onclick="toggleCard(this)"><span class="q-num">19</span><span class="q-title">Независимый цикл длины L</span><button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></div>
   <div class="q-body">
-    <div class="def-block"><div class="section-tag">Определение</div><div class="def-text">
+    <div class="def-block"><div class="section-tag">Цикл длины L</div><div class="def-text">
       <span class="term">Циклом длины $L$</span> называется перестановка $\sigma\in S_n$, действующая по правилу
       $$\sigma(a_1)=a_2,\;\sigma(a_2)=a_3,\;\ldots,\;\sigma(a_{L-1})=a_L,\;\sigma(a_L)=a_1,$$
-      а все остальные элементы оставляющая на месте ($a_1,\ldots,a_L$ — различные числа из $\{1,\ldots,n\}$).
+      а все остальные элементы оставляющая на месте ($a_1,\ldots,a_L$ — различные числа из $\{1,\ldots,n\}$). Запись цикла определена с точностью до <span class="em">циклического сдвига</span>: $(a_1\,a_2\,\ldots\,a_L)=(a_2\,a_3\,\ldots\,a_L\,a_1)=\ldots$
     </div></div>
-    <div class="example-card"><div class="example-card-title my-example">Пример</div><div class="example-card-body">
-      В $\{1,2,3,4,5\}$ цикл длины 3: $(2\ 4\ 5)$, то есть $2\to4\to5\to2$, элементы 1 и 3 неподвижны. В табличной записи $\begin{pmatrix}1&2&3&4&5\\1&4&3&5&2\end{pmatrix}$.
+
+    <div class="def-block"><div class="section-tag">Независимые циклы</div><div class="def-text">
+      Два цикла называются <span class="term">независимыми (непересекающимися)</span>, если у них нет общих перемещаемых символов. Независимые циклы <span class="em">перестановочны</span> (их можно умножать в любом порядке).
     </div></div>
+
+    <div class="example-card"><div class="example-card-title from-lecture">Пример (Кострикин)</div><div class="example-card-body">
+      Перестановка $(2\ 3\ 4\ 1)=(3\ 4\ 1\ 2)=(4\ 1\ 2\ 3)$ — цикл длины 4. Перестановка $(1\ 4)(2\ 3)$ — произведение двух независимых циклов длины 2.
+    </div></div>
+    <div class="src-ref">Кострикин, ч. 1, с. 53</div>
   </div>
 </div>
 
@@ -2506,8 +2600,13 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
   <div class="q-head" onclick="toggleCard(this)"><span class="q-num">20</span><span class="q-title">Порядок перестановки</span><button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></div>
   <div class="q-body">
     <div class="def-block"><div class="section-tag">Определение</div><div class="def-text">
-      <span class="term">Порядком перестановки</span> $\sigma\in S_n$ называется наименьшее натуральное $m$ такое, что $\sigma^m=\varepsilon$, где $\varepsilon$ — тождественная перестановка, а $\sigma^m$ — $m$-кратная композиция $\sigma$ с собой.
+      <span class="term">Порядком перестановки</span> $\pi\in S_n$ называется наименьшее натуральное число $q$ такое, что $\pi^{q}=e$ (где $e$ — единичная перестановка); тогда все различные степени $\pi$ исчерпываются множеством $\{e,\pi,\pi^{2},\ldots,\pi^{q-1}\}$.
     </div></div>
+
+    <div class="explain">
+      Порядок перестановки равен <span class="em">наименьшему общему кратному</span> длин независимых циклов в её разложении. Так, у перестановок $\sigma$ и $\tau$ из примера выше порядки равны $4$ и $2$ соответственно.
+    </div>
+    <div class="src-ref">Кострикин, ч. 1, с. 53</div>
   </div>
 </div>
 
@@ -2515,13 +2614,14 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <div class="q-card" data-q="21" data-text="разложение перестановки произведение независимых циклов единственность">
   <div class="q-head" onclick="toggleCard(this)"><span class="q-num">21</span><span class="q-title">Теорема о разложении перестановки в произведение циклов</span><button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></div>
   <div class="q-body">
-    <div class="thm-box"><div class="thm-label">Теорема</div><div class="def-text">
-      Любая перестановка $\sigma\in S_n$ представляется, и притом <span class="em">единственным образом</span> (с точностью до порядка циклов), в виде произведения независимых циклов длины $\ge 2$.
+    <div class="thm-box"><div class="thm-label">Теорема 1</div><div class="def-text">
+      Каждая перестановка $\pi\ne e$ в $S_n$ является произведением независимых циклов длины $\ge 2$. Это разложение определено <span class="em">однозначно</span> с точностью до порядка следования циклов.
     </div></div>
-    <div class="example-card"><div class="example-card-title my-example">Пример</div><div class="example-card-body">
-      Для $\sigma=\begin{pmatrix}1&2&3&4&5&6&7&8\\4&3&2&7&5&1&6&8\end{pmatrix}$ строим циклы: $1\to4\to7\to6\to1$ даёт $(1\ 4\ 7\ 6)$; $2\to3\to2$ даёт $(2\ 3)$; элементы 5 и 8 неподвижны. Итог:
-      $$\sigma=(1\ 4\ 7\ 6)(2\ 3).$$
+    <div class="example-card"><div class="example-card-title from-lecture">Пример (Кострикин)</div><div class="example-card-body">
+      $$\begin{pmatrix}1&2&3&4&5&6&7&8\\2&3&4&5&1&7&6&8\end{pmatrix}=(1\ 2\ 3\ 4\ 5)(6\ 7),$$
+      циклы длины 1 (неподвижный символ 8) в записи опускают.
     </div></div>
+    <div class="src-ref">Кострикин, ч. 1, с. 55</div>
   </div>
 </div>
 
@@ -2530,14 +2630,23 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
   <div class="q-head" onclick="toggleCard(this)"><span class="q-num">22</span><span class="q-title">Транспозиция. Теорема о разложении на транспозиции</span><button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></div>
   <div class="q-body">
     <div class="def-block"><div class="section-tag">Транспозиция</div><div class="def-text">
-      <span class="term">Транспозиция</span> — перестановка $\tau\in S_n$, меняющая местами два различных символа $i$ и $j$ и оставляющая остальные на месте: $\tau(i)=j$, $\tau(j)=i$, $\tau(k)=k$ при $k\ne i,j$. Обозначение $\tau=(i,j)$.
+      <span class="term">Транспозицией</span> называется цикл длины 2. Любая транспозиция имеет вид $\tau=(i\ j)$: она меняет местами символы $i$ и $j$ и оставляет на месте все остальные.
     </div></div>
-    <div class="thm-box"><div class="thm-label">Теорема</div><div class="def-text">
-      Всякая перестановка $\pi\in S_n$ представима в виде произведения транспозиций.
+
+    <div class="thm-box"><div class="thm-label">Следствие (из теоремы 1)</div><div class="def-text">
+      Каждая перестановка $\pi\in S_n$ является произведением транспозиций. Достаточно разложить в транспозиции каждый цикл:
+      $$(i_1\,i_2\,\ldots\,i_{l-1}\,i_l)=(i_1\,i_l)(i_1\,i_{l-1})\cdots(i_1\,i_2).$$
     </div></div>
-    <div class="example-card"><div class="example-card-title my-example">Пример</div><div class="example-card-body">
-      $(1,4,7,2)(3,5)$, где $(1,4,7,2)=(1,2)(1,7)(1,4)$, поэтому $\pi=(1,2)(1,7)(1,4)(3,5)$.
+
+    <div class="explain">
+      В отличие от разложения на независимые циклы, разложение на транспозиции <span class="em">не единственно</span>, и число транспозиций не является инвариантом перестановки. Инвариантна лишь <span class="em">чётность</span> этого числа (см. следующую карточку).
+    </div>
+
+    <div class="example-card"><div class="example-card-title from-lecture">Пример (Кострикин)</div><div class="example-card-body">
+      В $S_4$ одну и ту же перестановку можно записать по-разному:
+      $$(1\ 2\ 3)=(1\ 3)(1\ 2)=(2\ 3)(1\ 3)=(1\ 3)(2\ 4)(1\ 2)(1\ 4).$$
     </div></div>
+    <div class="src-ref">Кострикин, ч. 1, с. 55</div>
   </div>
 </div>
 
@@ -2551,6 +2660,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       (<span class="em">знак</span>, или чётность) полностью определяется самой $\pi$ и не зависит от способа разложения. Кроме того, знак мультипликативен:
       $$\varepsilon(\alpha\beta)=\varepsilon(\alpha)\,\varepsilon(\beta)\quad\forall\,\alpha,\beta\in S_n.$$
     </div></div>
+    <div class="src-ref">Кострикин, ч. 1, с. 56</div>
   </div>
 </div>
 
@@ -2559,25 +2669,25 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
   <div class="q-head" onclick="toggleCard(this)"><span class="q-num">24</span><span class="q-title">Чётные и нечётные перестановки. Правила определения знака</span><button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></div>
   <div class="q-body">
     <div class="def-block"><div class="section-tag">Чётные и нечётные</div><div class="def-text">
-      Перестановка $\pi\in S_n$ называется <span class="term">чётной</span>, если раскладывается в произведение чётного числа транспозиций, и <span class="term">нечётной</span> — если нечётного. Чётность числа транспозиций не зависит от выбора разложения. Знак:
-      $$\varepsilon(\pi)=\begin{cases}1,&\pi\text{ — чётная},\\-1,&\pi\text{ — нечётная}.\end{cases}$$
+      Перестановка $\pi\in S_n$ называется <span class="term">чётной</span>, если её знак $\varepsilon(\pi)=1$, и <span class="term">нечётной</span>, если $\varepsilon(\pi)=-1$. Все транспозиции — нечётные перестановки.
     </div></div>
-    <div class="def-block"><div class="section-tag">Правило 1 — по числу инверсий</div><div class="def-text">
-      <span class="em">Инверсия</span> — пара $(i,j)$ с $i\lt j$, но $\pi(i)\gt\pi(j)$. Если $N(\pi)$ — число инверсий, то $\varepsilon(\pi)=(-1)^{N(\pi)}$.
-      <div class="example-card" style="margin-top:.7rem;"><div class="example-card-title my-example">Пример</div><div class="example-card-body">
-        $\pi=\begin{pmatrix}1&2&3&4\\3&1&4&2\end{pmatrix}$: инверсии $(3,1),(3,2),(4,2)$, значит $N=3$, $\varepsilon=(-1)^3=-1$ (нечётная).
-      </div></div>
+
+    <div class="def-block"><div class="section-tag">Правило по транспозициям</div><div class="def-text">
+      Если дано какое-либо разложение $\pi=\tau_1\tau_2\ldots\tau_k$ в произведение транспозиций, то
+      $$\varepsilon(\pi)=(-1)^{k}.$$
+      Знак не зависит от выбора разложения (теорема о знаке).
     </div></div>
-    <div class="def-block"><div class="section-tag">Правило 2 — по циклам</div><div class="def-text">
-      Знак цикла длины $m$ равен $(-1)^{m-1}$. По мультипликативности для $\pi=\gamma_1\ldots\gamma_t$ с длинами $m_i$:
-      $$\varepsilon(\pi)=(-1)^{(m_1-1)+\cdots+(m_t-1)}.$$
-      <div class="example-card" style="margin-top:.7rem;"><div class="example-card-title my-example">Пример</div><div class="example-card-body">
-        $\pi=(1\ 3\ 5)(2\ 4\ 6\ 7)$: цикл длины 3 даёт $(-1)^2=1$, длины 4 — $(-1)^3=-1$; итог $1\cdot(-1)=-1$ (нечётная).
-      </div></div>
+
+    <div class="def-block"><div class="section-tag">Правило по циклам</div><div class="def-text">
+      Цикл длины $l$ имеет знак $(-1)^{l-1}$ (он есть произведение $l-1$ транспозиций). Если $\pi$ разложена в независимые циклы длин $l_1,l_2,\ldots,l_m$, то по мультипликативности знака
+      $$\varepsilon(\pi)=(-1)^{\,(l_1-1)+(l_2-1)+\cdots+(l_m-1)}.$$
     </div></div>
-    <div class="def-block"><div class="section-tag">Правило 3 — по транспозициям</div><div class="def-text">
-      Если дано разложение $\pi=\tau_1\tau_2\ldots\tau_k$, то $\varepsilon(\pi)=(-1)^k$.
+
+    <div class="example-card"><div class="example-card-title from-lecture">Пример (Кострикин)</div><div class="example-card-body">
+      $\pi=(1\ 5\ 2\ 4\ 7)(3\ 6\ 9\ 8)(10\ 11)$ имеет циклы длин $l_1=5,\ l_2=4,\ l_3=2$, поэтому
+      $$\varepsilon(\pi)=(-1)^{4+3+1}=1\quad(\pi\text{ — чётная}).$$
     </div></div>
+    <div class="src-ref">Кострикин, ч. 1, с. 56–57</div>
   </div>
 </div>
 
@@ -2603,29 +2713,23 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     <div class="def-block">
       <div class="section-tag">Матрица</div>
       <div class="def-text">
-        <span class="term">Матрица</span> — таблица из $mn$ чисел, записанных по строкам и столбцам.
-        $$A=\begin{pmatrix}1 & 0 & -2 \\ 4 & 3 & 5\end{pmatrix}$$
+        <span class="term">Матрицей размера $m\times n$</span> называется прямоугольная таблица из $m\cdot n$ чисел, расположенных в $m$ строк и $n$ столбцов:
+        $$A=(a_{ij})=\begin{pmatrix}a_{11} & a_{12} & \cdots & a_{1n}\\ a_{21} & a_{22} & \cdots & a_{2n}\\ \vdots & \vdots & \ddots & \vdots\\ a_{m1} & a_{m2} & \cdots & a_{mn}\end{pmatrix}.$$
+        Элемент $a_{ij}$ (читается «а-и-жи») стоит в $i$-й строке и $j$-м столбце. При $m=n$ матрицу называют квадратной порядка $n$.
       </div>
     </div>
 
     <div class="def-block">
-      <div class="section-tag">Размер</div>
+      <div class="section-tag">Строки и столбцы</div>
       <div class="def-text">
-        <span class="term">Размер матрицы</span> определяется числом строк $m$ и столбцов $n$; записывается как $m\times n$.
-      </div>
-    </div>
-
-    <div class="def-block">
-      <div class="section-tag">Элементы</div>
-      <div class="def-text">
-        <span class="term">Элементы матрицы</span> обозначаются $a_{ij}$, где $i$ — номер строки, $j$ — номер столбца.
+        $i$-я <span class="term">строка</span> матрицы — $A_i=(a_{i1},a_{i2},\ldots,a_{in})$; $j$-й <span class="term">столбец</span> — $A^{(j)}=(a_{1j},a_{2j},\ldots,a_{mj})$. (Строка — нижний индекс $A_i$, столбец — верхний $A^{(j)}$.)
       </div>
     </div>
 
     <div class="def-block">
       <div class="section-tag">Главная диагональ</div>
       <div class="def-text">
-        <span class="term">Главная диагональ</span> квадратной матрицы — элементы $a_{11},a_{22},\ldots,a_{nn}$, расположенные от левого верхнего угла к правому нижнему.
+        <span class="term">Главная диагональ</span> квадратной матрицы — элементы $a_{11},a_{22},\ldots,a_{nn}$ (от левого верхнего угла к правому нижнему).
       </div>
     </div>
 
@@ -2636,7 +2740,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
-    <div class="src-ref">Кремер, с. 9–10</div>
+    <div class="src-ref">Кострикин, ч. 1, с. 20</div>
 
   </div>
 </div>
@@ -2663,6 +2767,13 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       <div class="def-text">
         <span class="term">Диагональная матрица</span> — квадратная матрица, у которой все элементы вне главной диагонали равны нулю:
         $$\operatorname{diag}(a_{11},\ldots,a_{nn})=\begin{pmatrix}a_{11} & 0 & \cdots & 0 \\ 0 & a_{22} & \cdots & 0 \\ \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \cdots & a_{nn}\end{pmatrix}$$
+      </div>
+    </div>
+
+    <div class="def-block">
+      <div class="section-tag">Скалярная</div>
+      <div class="def-text">
+        <span class="term">Скалярная матрица</span> — диагональная матрица с одинаковыми элементами на главной диагонали, $\operatorname{diag}(a)=aE$.
       </div>
     </div>
 
@@ -2699,7 +2810,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     </div>
 
 
-    <div class="src-ref">Кремер, с. 10–12</div>
+    <div class="src-ref">Кострикин, ч. 1, с. 20</div>
   </div>
 </div>
 
@@ -2720,12 +2831,12 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
           <li><span class="em">Вектор-столбец</span> — матрица размера $n\times 1$ ($n$ строк, 1 столбец);</li>
           <li><span class="em">Вектор-строка</span> — матрица размера $1\times n$ (1 строка, $n$ столбцов).</li>
         </ul>
-        Такое представление позволяет применять к векторам правила матричной алгебры (сложение, умножение на число, умножение матриц) и компактно записывать системы линейных уравнений и линейные преобразования.
+        Такое представление позволяет применять к векторам правила матричной алгебры (сложение, умножение на число, умножение матриц) и компактно записывать системы линейных уравнений и линейные преобразования. В этих обозначениях $i$-я строка матрицы $A_i$ — это вектор-строка, а $j$-й столбец $A^{(j)}$ — вектор-столбец.
       </div>
     </div>
 
 
-    <div class="src-ref">Кремер, с. 9</div>
+    <div class="src-ref">Письменный, с. 16–20</div>
   </div>
 </div>
 
@@ -2753,8 +2864,15 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+    <div class="def-block">
+      <div class="section-tag">Свойства</div>
+      <div class="def-text">
+        $(A^T)^T=A$; $\;(A+B)^T=A^T+B^T$; $\;(kA)^T=kA^T$; $\;(AB)^T=B^T A^T$ (порядок множителей меняется на обратный).
+      </div>
+    </div>
 
-    <div class="src-ref">Кремер, с. 15</div>
+
+    <div class="src-ref">Письменный, с. 16–20</div>
   </div>
 </div>
 
@@ -2791,16 +2909,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
-    <div class="example-card">
-      <div class="example-card-title my-example">Пример</div>
-      <div class="example-card-body">
-        $$\begin{pmatrix}1 & 2 \\ 5 & 6\end{pmatrix}+\begin{pmatrix}3 & 4 \\ 7 & 8\end{pmatrix}=\begin{pmatrix}4 & 6 \\ 12 & 14\end{pmatrix},\qquad\begin{pmatrix}5 & 4 \\ 3 & 2\end{pmatrix}-\begin{pmatrix}2 & 1 \\ 1 & 0\end{pmatrix}=\begin{pmatrix}3 & 3 \\ 2 & 2\end{pmatrix},$$
-        $$3\cdot\begin{pmatrix}1 & 2 \\ 3 & 4\end{pmatrix}=\begin{pmatrix}3 & 6 \\ 9 & 12\end{pmatrix}.$$
-      </div>
-    </div>
 
-
-    <div class="src-ref">Кремер, с. 12–13</div>
+    <div class="src-ref">Письменный, с. 16–20</div>
   </div>
 </div>
 
@@ -2816,20 +2926,24 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     <div class="def-block">
       <div class="section-tag">Определение</div>
       <div class="def-text">
-        Пусть $A=[a_{ik}]$ — матрица размера $m\times n$, $B=[b_{kj}]$ — размера $n\times p$. <span class="term">Произведением</span> $C=A\cdot B$ называется матрица $C=[c_{ij}]$ размера $m\times p$, элементы которой вычисляются по правилу
-        $$c_{ij}=\sum_{k=1}^{n}a_{ik}\cdot b_{kj},\qquad i=1,\ldots,m,\quad j=1,\ldots,p.$$
+        Пусть $A=(a_{ik})$ — матрица размера $m\times n$, $B=(b_{kj})$ — размера $n\times p$. <span class="term">Произведением</span> $C=AB$ называется матрица $C=(c_{ij})$ размера $m\times p$, элементы которой вычисляются по правилу «строка на столбец»:
+        $$c_{ij}=\sum_{k=1}^{n}a_{ik}\,b_{kj},\qquad i=1,\ldots,m,\quad j=1,\ldots,p.$$
       </div>
     </div>
 
     <div class="def-block">
       <div class="section-tag">Условие существования</div>
       <div class="def-text">
-        Произведение $A\cdot B$ определено тогда и только тогда, когда <span class="em">число столбцов матрицы $A$ равно числу строк матрицы $B$</span>. Без этого условия операция не определена.
+        Произведение $AB$ определено тогда и только тогда, когда <span class="em">число столбцов матрицы $A$ равно числу строк матрицы $B$</span>. Без этого условия операция не определена.
       </div>
     </div>
 
+    <div class="explain">
+      Умножение матриц <span class="em">некоммутативно</span>: даже когда определены оба произведения $AB$ и $BA$, вообще говоря $AB\ne BA$. Ассоциативность же выполняется: $(AB)C=A(BC)$.
+    </div>
 
-    <div class="src-ref">Кремер, с. 13–14</div>
+
+    <div class="src-ref">Письменный, с. 16–20</div>
   </div>
 </div>
 
@@ -2855,13 +2969,21 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     <div class="def-block">
       <div class="section-tag">Определение</div>
       <div class="def-text">
-        <span class="term">Система линейных алгебраических уравнений (СЛАУ)</span> — система из $m$ уравнений с $n$ неизвестными вида
+        <span class="term">Системой линейных алгебраических уравнений (СЛАУ)</span> называется система из $m$ уравнений с $n$ неизвестными вида
         $$\begin{cases}a_{11}x_1+a_{12}x_2+\cdots+a_{1n}x_n=b_1 \\ a_{21}x_1+a_{22}x_2+\cdots+a_{2n}x_n=b_2 \\ \qquad\vdots \\ a_{m1}x_1+a_{m2}x_2+\cdots+a_{mn}x_n=b_m\end{cases}$$
+        Коэффициент $a_{ij}$ стоит в $i$-м уравнении при $j$-й неизвестной, а число $b_i$ называется <span class="em">свободным членом</span> $i$-го уравнения; $m$ и $n$ произвольны.
+      </div>
+    </div>
+
+    <div class="def-block">
+      <div class="section-tag">Однородная система</div>
+      <div class="def-text">
+        Система называется <span class="term">однородной</span>, если все свободные члены равны нулю ($b_i=0$ при $i=1,\ldots,m$). Однородную систему с теми же коэффициентами называют <span class="em">ассоциированной (приведённой)</span> для исходной.
       </div>
     </div>
 
 
-    <div class="src-ref">Кремер, с. 38</div>
+    <div class="src-ref">Кострикин, ч. 1, с. 19–20</div>
   </div>
 </div>
 
@@ -2893,7 +3015,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     </div>
 
 
-    <div class="src-ref">Кремер, с. 38–39, 46</div>
+    <div class="src-ref">Кострикин, ч. 1, с. 20</div>
   </div>
 </div>
 
@@ -2929,7 +3051,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     </div>
 
 
-    <div class="src-ref">Кремер, с. 38–39</div>
+    <div class="src-ref">Кострикин, ч. 1, с. 21</div>
   </div>
 </div>
 
@@ -2950,11 +3072,23 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
           <li>обе системы несовместны (не имеют решений), либо</li>
           <li>обе системы совместны и обладают одним и тем же множеством решений.</li>
         </ul>
+        Отношение эквивалентности рефлексивно ($(\alpha)\sim(\alpha)$), симметрично (из $(\alpha)\sim(\beta)$ следует $(\beta)\sim(\alpha)$) и транзитивно.
       </div>
     </div>
 
+    <div class="thm-box">
+      <div class="thm-label">Теорема 1</div>
+      <div class="def-text">
+        Две линейные системы эквивалентны, если одна получается из другой применением конечной последовательности элементарных преобразований.
+      </div>
+    </div>
 
-    <div class="src-ref">Кремер, с. 39</div>
+    <div class="explain">
+      Доказательство опирается на <span class="em">обратимость</span> элементарных преобразований: каждое из них можно отменить таким же преобразованием (перестановку — повторной перестановкой, прибавление $k$-го уравнения, умноженного на $c$, — прибавлением его же, умноженного на $-c$). Поэтому исходная и преобразованная системы имеют одни и те же решения.
+    </div>
+
+
+    <div class="src-ref">Кострикин, ч. 1, с. 22</div>
   </div>
 </div>
 
@@ -2970,26 +3104,33 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     <div class="def-block">
       <div class="section-tag">Ступенчатая СЛАУ</div>
       <div class="def-text">
-        <span class="term">Ступенчатая СЛАУ</span> — система линейных уравнений, расширенная матрица которой является ступенчатой.
+        <span class="term">Ступенчатой</span> называют систему, к которой исходная приводится последовательным применением элементарных преобразований: каждое следующее уравнение начинается с неизвестной, номер которой строго больше, чем у предыдущего. (Термин не является общепринятым — говорят также о трапециевидном или квазитреугольном виде.)
       </div>
     </div>
 
     <div class="def-block">
       <div class="section-tag">Ступенчатая матрица</div>
       <div class="def-text">
-        <span class="term">Ступенчатая матрица</span> — матрица, обладающая свойством: если в какой-либо её строке первый отличный от нуля элемент стоит на $j$-м месте, то во всех следующих строках на первых $j$ местах стоят нули.
+        <span class="term">Ступенчатая матрица</span> обладает свойством: если в какой-либо строке первый отличный от нуля элемент стоит на $j$-м месте, то во всех следующих строках на первых $j$ местах стоят нули.
       </div>
     </div>
 
-    <div class="example-card">
-      <div class="example-card-title my-example">Пример</div>
-      <div class="example-card-body">
-        $$\begin{pmatrix}2 & 3 & 1 & 5 \\ 0 & 4 & -1 & 2 \\ 0 & 0 & 0 & 3 \\ 0 & 0 & 0 & 0\end{pmatrix}$$
+    <div class="thm-box">
+      <div class="thm-label">Теоремы 2 и 2′</div>
+      <div class="def-text">
+        Всякая система линейных уравнений эквивалентна системе ступенчатого вида (теорема 2). Соответственно, всякую матрицу можно элементарными преобразованиями привести к ступенчатому виду (теорема 2′).
+      </div>
+    </div>
+
+    <div class="def-block">
+      <div class="section-tag">Главные и свободные неизвестные</div>
+      <div class="def-text">
+        В ступенчатой системе неизвестные, с которых начинаются её уравнения, называются <span class="term">главными</span> (их ровно $r$ — по числу уравнений ступенчатого вида), а остальные — <span class="term">свободными</span>. Свободным неизвестным придают произвольные значения, после чего главные определяются однозначно.
       </div>
     </div>
 
 
-    <div class="src-ref">Кремер, с. 46</div>
+    <div class="src-ref">Кострикин, ч. 1, с. 24</div>
   </div>
 </div>
 
@@ -3003,20 +3144,25 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
   <div class="q-body">
 
     <div class="def-block">
-      <div class="section-tag">Для строк</div>
+      <div class="section-tag">Тип (I)</div>
       <div class="def-text">
-        <ul class="props">
-          <li>перестановка местами двух строк матрицы;</li>
-          <li>умножение всех элементов строки на число, отличное от нуля;</li>
-          <li>прибавление ко всем элементам строки соответствующих элементов другой строки, умноженных на одно и то же число.</li>
-        </ul>
+        Перестановка местами двух уравнений системы.
       </div>
     </div>
 
-    <div class="note">Аналогично определяются элементарные преобразования столбцов.</div>
+    <div class="def-block">
+      <div class="section-tag">Тип (II)</div>
+      <div class="def-text">
+        Прибавление к одному уравнению другого уравнения, умноженного на произвольное число $c$ (то есть замена $i$-го уравнения на «$i$-е $+\,c\cdot k$-е»).
+      </div>
+    </div>
+
+    <div class="note">
+      У Кострикина элементарных преобразований <span class="em">два</span>. Оба обратимы и потому не меняют множества решений (теорема 1). На расширенной матрице $(a_{ij}\mid b_i)$ им отвечают такие же операции над строками. Умножение уравнения (строки) на ненулевое число иногда добавляют как третий тип, но в исходный список Кострикина оно не входит.
+    </div>
 
 
-    <div class="src-ref">Кремер, с. 39, 46</div>
+    <div class="src-ref">Кострикин, ч. 1, с. 22</div>
   </div>
 </div>
 
@@ -3051,7 +3197,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     </div>
 
 
-    <div class="src-ref">Кремер, с. 39</div>
+    <div class="src-ref">Кострикин, ч. 1, с. 22–24</div>
   </div>
 </div>
 
@@ -3147,17 +3293,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
-    <div class="example-card">
-      <div class="example-card-title my-example">Пример (в координатах)</div>
-      <div class="example-card-body">
-        Пусть в $\mathbb{R}^2$ даны $v_1=(2,1)$, $v_2=(-1,3)$. Примеры линейных комбинаций:
-        <ul class="props">
-          <li>$2v_1+1\cdot v_2=2\cdot(2,1)+1\cdot(-1,3)=(4,2)+(-1,3)=(3,5)$;</li>
-          <li>$0\cdot v_1+3\cdot v_2=(0,0)+(-3,9)=(-3,9)$;</li>
-          <li>$1\cdot v_1+0\cdot v_2=(2,1)$ — сам вектор $v_1$;</li>
-          <li>$0\cdot v_1+0\cdot v_2=(0,0)$ — нулевой вектор (важный частный случай).</li>
-        </ul>
-      </div>
+    <div class="explain">
+      Комбинация, в которой все коэффициенты равны нулю, называется <span class="em">тривиальной</span>; она всегда даёт нулевой вектор. Если же хотя бы один коэффициент отличен от нуля, комбинацию называют <span class="em">нетривиальной</span> — это различие лежит в основе понятия линейной зависимости (следующая карточка).
     </div>
 
 
@@ -3180,6 +3317,10 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
         <span class="term">Линейной оболочкой</span> системы векторов $S=\{a_1,a_2,\ldots,a_k\}$ называется множество всех линейных комбинаций этих векторов. Обозначение: $L(S)$, $\langle a_1,a_2,\ldots,a_k\rangle$. Если $a_1,\ldots,a_k\in V$, то
         $$L(S)=\{\lambda_1 a_1+\lambda_2 a_2+\cdots+\lambda_k a_k\mid \lambda_1,\ldots,\lambda_k\in\mathbb{R}\}.$$
       </div>
+    </div>
+
+    <div class="explain">
+      Линейная оболочка $\langle S\rangle$ сама является подпространством в $V$ — причём <span class="em">наименьшим</span> подпространством, содержащим все векторы системы $S$. Угловые скобки $\langle\,\cdot\,\rangle$ зарезервированы именно за линейной оболочкой.
     </div>
 
 
@@ -3212,6 +3353,10 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
         $$\alpha_1 X_1+\alpha_2 X_2+\ldots+\alpha_k X_k=0\;\implies\;\alpha_1=\alpha_2=\ldots=\alpha_k=0,$$
         то векторы $X_1,X_2,\ldots,X_k$ называются <span class="term">линейно независимыми</span>.
       </div>
+    </div>
+
+    <div class="explain">
+      Два простых следствия из определения: система, содержащая нулевой вектор, всегда линейно зависима (достаточно взять при нём коэффициент $1$, при остальных — $0$); один вектор линейно зависим тогда и только тогда, когда он нулевой.
     </div>
 
 
@@ -3260,12 +3405,16 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     <div class="def-block">
       <div class="section-tag">Определение</div>
       <div class="def-text">
-        Пусть $V$ — непустая линейная оболочка в $\mathbb{R}^n$. Система векторов $X_1,\ldots,X_r\in V$ называется <span class="term">базисом</span> для $V$, если:
+        Пусть $V$ — ненулевая линейная оболочка в $\mathbb{R}^n$. Система векторов $X_1,\ldots,X_r\in V$ называется <span class="term">базисом</span> для $V$, если:
         <ul class="props">
           <li>она линейно независима;</li>
           <li>её линейная оболочка совпадает с $V$: $\;\langle X_1,\ldots,X_r\rangle=V$.</li>
         </ul>
       </div>
+    </div>
+
+    <div class="explain">
+      Ключевое свойство базиса: каждый вектор $X\in V$ разлагается по базису <span class="em">единственным образом</span>, $X=\alpha_1 X_1+\cdots+\alpha_r X_r$. Коэффициенты $\alpha_1,\ldots,\alpha_r$ называются координатами вектора $X$ в этом базисе.
     </div>
 
 
@@ -3538,7 +3687,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       <div class="thm-label">Теорема Кронекера–Капелли</div>
       <div class="def-text">
         (Критерий совместности.) Система линейных уравнений $Ax=b$ совместна тогда и только тогда, когда ранг матрицы системы равен рангу её расширенной матрицы:
-        $$\operatorname{rg}A=\operatorname{rg}(A\mid b).$$
+        $$\operatorname{rang}A=\operatorname{rang}(A\mid b).$$
       </div>
     </div>
 
@@ -3548,8 +3697,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       <div class="def-text">
         <span class="em">Необходимость ($\Rightarrow$).</span> Пусть система совместна и $x^0=(x_1^0,\ldots,x_n^0)^\top$ — её решение. Тогда выполняется векторное равенство
         $$x_1^0 a_1+\ldots+x_n^0 a_n=b,$$
-        где $a_j$ — столбцы матрицы $A$. Значит, столбец $b$ — линейная комбинация столбцов $A$, поэтому добавление $b$ не увеличивает линейную оболочку: $\dim L(a_1,\ldots,a_n)=\dim L(a_1,\ldots,a_n,b)$. В терминах рангов: $\operatorname{rg}A=\operatorname{rg}(A\mid b)$.
-        <br><span class="em">Достаточность ($\Leftarrow$).</span> Пусть $\operatorname{rg}A=\operatorname{rg}(A\mid b)=r$. Тогда максимальное число линейно независимых столбцов в $A$ и в $(A\mid b)$ одно и то же, поэтому столбец $b$ линейно выражается через столбцы $A$: существуют числа $x_1^0,\ldots,x_n^0$ такие, что
+        где $a_j$ — столбцы матрицы $A$. Значит, столбец $b$ — линейная комбинация столбцов $A$, поэтому добавление $b$ не увеличивает линейную оболочку: $\dim L(a_1,\ldots,a_n)=\dim L(a_1,\ldots,a_n,b)$. В терминах рангов: $\operatorname{rang}A=\operatorname{rang}(A\mid b)$.
+        <br><span class="em">Достаточность ($\Leftarrow$).</span> Пусть $\operatorname{rang}A=\operatorname{rang}(A\mid b)=r$. Тогда максимальное число линейно независимых столбцов в $A$ и в $(A\mid b)$ одно и то же, поэтому столбец $b$ линейно выражается через столбцы $A$: существуют числа $x_1^0,\ldots,x_n^0$ такие, что
         $$x_1^0 a_1+\ldots+x_n^0 a_n=b.$$
         Но это и означает, что вектор $x^0=(x_1^0,\ldots,x_n^0)^\top$ — решение системы. Следовательно, система совместна.
       </div>
@@ -3560,7 +3709,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       <div class="thm-label">Теорема об определённости СЛАУ</div>
       <div class="def-text">
         Совместная система $Ax=b$ имеет единственное решение тогда и только тогда, когда ранг матрицы системы равен числу неизвестных:
-        $$\operatorname{rg}A=n.$$
+        $$\operatorname{rang}A=n.$$
       </div>
     </div>
 
@@ -3568,7 +3717,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Доказательство</span><span class="deriv-hint"></span></div>
       <div class="deriv-body">
       <div class="def-text">
-        Пусть система совместна и $\operatorname{rg}A=r$. Общее решение неоднородной системы имеет вид
+        Пусть система совместна и $\operatorname{rang}A=r$. Общее решение неоднородной системы имеет вид
         $$x=x_{\text{ч}}+x_{\text{о}},$$
         где $x_{\text{ч}}$ — частное решение системы $Ax=b$, а $x_{\text{о}}$ — общее решение соответствующей однородной системы $Ax=0$. Размерность пространства решений однородной системы равна $n-r$, то есть $x_{\text{о}}$ зависит от $n-r$ свободных параметров.
         <ul class="props">
@@ -3659,11 +3808,13 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       <div class="section-tag">Определение</div>
       <div class="def-text">
         Для квадратной матрицы $A$ порядка $n$ матрица $A^{-1}$ называется <span class="term">обратной</span>, если выполняется равенство
-        $$A\cdot A^{-1}=A^{-1}\cdot A=E,$$
-        где $E$ — единичная матрица порядка $n$.
+        $$A\,A^{-1}=A^{-1}A=E,$$
+        где $E$ — единичная матрица порядка $n$. Если обратная матрица существует, то она <span class="em">единственна</span>, а сама $A$ называется обратимой.
       </div>
     </div>
 
+
+    <div class="src-ref">Кострикин, ч. 1, с. 94</div>
   </div>
 </div>
 
@@ -3683,6 +3834,12 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+    <div class="explain">
+      Равносильная характеристика (Кострикин): всякая невырожденная $n\times n$-матрица записывается в виде произведения элементарных матриц. Именно поэтому её можно элементарными преобразованиями привести к единичной матрице $E$.
+    </div>
+
+
+    <div class="src-ref">Кострикин, ч. 1, с. 93</div>
   </div>
 </div>
 
@@ -3702,6 +3859,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+
+    <div class="src-ref">Кострикин, ч. 1, с. 93–94</div>
   </div>
 </div>
 
@@ -3722,6 +3881,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+
+    <div class="src-ref">Кострикин, ч. 1, с. 93</div>
   </div>
 </div>
 
@@ -3742,6 +3903,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+
+    <div class="src-ref">Письменный, с. 16–20</div>
   </div>
 </div>
 
@@ -3761,11 +3924,13 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
         $$(P_m\dots P_2 P_1)\,A\,(Q_1 Q_2\dots Q_n)=E.$$
         Тогда
         $$A=P_1^{-1}P_2^{-1}\dots P_m^{-1}\cdot Q_n^{-1}\dots Q_2^{-1}Q_1^{-1},$$
-        и
-        $$A^{-1}=Q_1 Q_2\dots Q_n\cdot P_1 P_2\dots P_m.$$
+        и, обращая обе части,
+        $$A^{-1}=Q_1 Q_2\dots Q_n\cdot P_m P_{m-1}\dots P_1.$$
       </div>
     </div>
 
+
+    <div class="src-ref">Кострикин, ч. 1, с. 92–95</div>
   </div>
 </div>
 
@@ -3797,6 +3962,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+
+    <div class="src-ref">Кострикин, ч. 1, с. 94–95</div>
   </div>
 </div>
 
@@ -3811,7 +3978,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
   <div class="questions-list">
 
 <!-- 63. Теорема о размерности пространства решений ОСЛАУ -->
-<div class="q-card" data-q="63" data-text="теорема размерность пространства решений ослау ранг подпространство dim V = n - rank">
+<div class="q-card" data-q="63" data-text="теорема размерность пространства решений ослау ранг подпространство dim V = n - rang">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">63</span>
     <span class="q-title">Теорема о связи размерности пространства решений ОСЛАУ и ранга матрицы</span>
@@ -3822,11 +3989,13 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     <div class="thm-box">
       <div class="thm-label">Теорема</div>
       <div class="def-text">
-        Пусть дана однородная система линейных алгебраических уравнений (ОСЛАУ) $A\mathbf{x}=\mathbf{0}$, где $A$ — матрица коэффициентов размера $m\times n$. Пространство решений $V$ этой системы является линейным подпространством в $\mathbb{R}^n$, и его размерность связана с рангом матрицы $A$ формулой
-        $$\dim V=n-\operatorname{rank}A.$$
+        Пусть дана однородная система линейных алгебраических уравнений (ОСЛАУ) $Ax=0$, где $A$ — матрица коэффициентов размера $m\times n$. Пространство решений $V$ этой системы является линейным подпространством в $\mathbb{R}^n$, и его размерность связана с рангом матрицы $A$ формулой
+        $$\dim V=n-\operatorname{rang}A.$$
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
   </div>
 </div>
 
@@ -3842,14 +4011,17 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     <div class="def-block">
       <div class="section-tag">Определение</div>
       <div class="def-text">
-        <span class="term">Фундаментальной системой решений (ФСР)</span> однородной системы $A\mathbf{x}=\mathbf{0}$ называется конечный набор её решений $\mathbf{f}_1,\mathbf{f}_2,\ldots,\mathbf{f}_k$, удовлетворяющий двум условиям:
+        <span class="term">Фундаментальной системой решений (ФСР)</span> однородной системы $Ax=0$ называется конечный набор её решений $f_1,f_2,\ldots,f_k$, удовлетворяющий двум условиям:
         <ul class="props">
-          <li>векторы $\mathbf{f}_1,\mathbf{f}_2,\ldots,\mathbf{f}_k$ линейно независимы;</li>
+          <li>векторы $f_1,f_2,\ldots,f_k$ линейно независимы;</li>
           <li>любое решение системы является линейной комбинацией этих векторов.</li>
         </ul>
+        Иными словами, ФСР — это базис пространства решений; в ней ровно $k=n-\operatorname{rang}A$ векторов.
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
   </div>
 </div>
 
@@ -3865,12 +4037,14 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     <div class="thm-box">
       <div class="thm-label">Теорема о структуре общего решения</div>
       <div class="def-text">
-        Пусть система $A\mathbf{x}=\mathbf{b}$ совместна и $\mathbf{x}_{\text{чн}}$ — некоторое её частное решение. Тогда её общее решение имеет вид
-        $$\mathbf{x}=\mathbf{x}_{\text{чн}}+\mathbf{x}_{\text{оо}},$$
-        где $\mathbf{x}_{\text{оо}}$ — общее решение соответствующей однородной системы $A\mathbf{x}=\mathbf{0}$.
+        Пусть система $Ax=b$ совместна и $x_{\text{чн}}$ — некоторое её частное решение. Тогда её общее решение имеет вид
+        $$x=x_{\text{чн}}+x_{\text{оо}},$$
+        где $x_{\text{оо}}$ — общее решение соответствующей однородной системы $Ax=0$.
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
   </div>
 </div>
 
@@ -3902,11 +4076,13 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+
+    <div class="src-ref">Кострикин, ч. 1, с. 22–25</div>
   </div>
 </div>
 
 <!-- 67. Схема исследования произвольной СЛАУ -->
-<div class="q-card" data-q="67" data-text="схема исследования слау rank совместность определённость единственное бесконечно решений">
+<div class="q-card" data-q="67" data-text="схема исследования слау rang совместность определённость единственное бесконечно решений">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">67</span>
     <span class="q-title">Схема исследования произвольной СЛАУ</span>
@@ -3918,13 +4094,13 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       <div class="section-tag">Схема</div>
       <div class="def-text">
         <ol style="padding-left:1.4rem;margin:0.5rem 0;">
-          <li>$\operatorname{rank}A=\operatorname{rank}(A\mid B)$?
+          <li>$\operatorname{rang}A=\operatorname{rang}(A\mid B)$?
             <ul class="props">
               <li><span class="em">Нет</span> → система несовместна;</li>
               <li><span class="em">Да</span> → система совместна, переходим к пункту 2.</li>
             </ul>
           </li>
-          <li>$\operatorname{rank}A=n$?
+          <li>$\operatorname{rang}A=n$?
             <ul class="props">
               <li><span class="em">Да</span> → система определённая (единственное решение);</li>
               <li><span class="em">Нет</span> → система неопределённая (бесконечно много решений).</li>
@@ -3934,6 +4110,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+
+    <div class="src-ref">Кострикин, ч. 1, с. 24–26</div>
   </div>
 </div>
 
@@ -3967,8 +4145,9 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       <div class="section-tag">Комбинаторно-аналитическое</div>
       <div class="def-text">
         Определитель матрицы $A=(a_{ij})$ порядка $n$ есть алгебраическая сумма $n!$ слагаемых вида
-        $$(\operatorname{sgn}\sigma)\cdot a_{1\sigma(1)}a_{2\sigma(2)}\ldots a_{n\sigma(n)},$$
-        где суммирование ведётся по всем перестановкам $\sigma\in S_n$.
+        $$\varepsilon(\sigma)\cdot a_{1\sigma(1)}a_{2\sigma(2)}\ldots a_{n\sigma(n)},$$
+        где $\varepsilon(\sigma)$ — знак перестановки, а суммирование ведётся по всем перестановкам $\sigma\in S_n$:
+        $$\det A=\sum_{\sigma\in S_n}\varepsilon(\sigma)\,a_{1\sigma(1)}a_{2\sigma(2)}\cdots a_{n\sigma(n)}.$$
       </div>
     </div>
 
@@ -3987,12 +4166,12 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     <div class="def-block">
       <div class="section-tag">Рекуррентное (разложение по строке/столбцу)</div>
       <div class="def-text">
-        Определитель $n$-го порядка можно выразить через определители $(n-1)$-го порядка.
+        Определитель $n$-го порядка можно выразить через определители $(n-1)$-го порядка (разложение по строке или столбцу — см. карточки о миноре и алгебраическом дополнении).
       </div>
     </div>
 
 
-    <div class="src-ref">Кремер, с. 18–19</div>
+    <div class="src-ref">Кострикин, ч. 1, с. 102–104</div>
   </div>
 </div>
 
@@ -4095,7 +4274,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     </div>
 
 
-    <div class="src-ref">Кремер, с. 21–25</div>
+    <div class="src-ref">Кострикин, ч. 1, с. 105–110</div>
   </div>
 </div>
 
@@ -4126,7 +4305,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     </div>
 
 
-    <div class="src-ref">Кремер, с. 19</div>
+    <div class="src-ref">Кострикин, ч. 1, с. 110</div>
   </div>
 </div>
 
@@ -4149,7 +4328,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     </div>
 
 
-    <div class="src-ref">Кремер, с. 20</div>
+    <div class="src-ref">Кострикин, ч. 1, с. 110–111</div>
   </div>
 </div>
 
@@ -4189,7 +4368,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     </div>
 
 
-    <div class="src-ref">Кремер, с. 16–18</div>
+    <div class="src-ref">Кострикин, ч. 1, с. 111–113</div>
   </div>
 </div>
 
@@ -4230,7 +4409,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     </div>
 
 
-    <div class="src-ref">Кремер, с. 24</div>
+    <div class="src-ref">Кострикин, ч. 1, с. 116–117</div>
   </div>
 </div>
 
@@ -4260,7 +4439,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     </div>
 
 
-    <div class="src-ref">Кремер, с. 25</div>
+    <div class="src-ref">Кострикин, ч. 1, с. 118–119</div>
   </div>
 </div>
 
@@ -4285,14 +4464,14 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     <div class="def-block">
       <div class="section-tag">Ключевое свойство</div>
       <div class="def-text">
-        $$A\cdot\widetilde{A}=\widetilde{A}\cdot A=(\det A)\,I_n.$$
+        $$A\,\widetilde{A}=\widetilde{A}\,A=(\det A)\,E.$$
       </div>
     </div>
 
     <div class="note">Следствие: если $\det A\neq 0$, то $A^{-1}=\dfrac{1}{\det A}\,\widetilde{A}$.</div>
 
 
-    <div class="src-ref">Кремер, с. 28</div>
+    <div class="src-ref">Кострикин, ч. 1, с. 121–122</div>
   </div>
 </div>
 
@@ -4322,7 +4501,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     </div>
 
 
-    <div class="src-ref">Кремер, с. 28</div>
+    <div class="src-ref">Кострикин, ч. 1, с. 121–122</div>
   </div>
 </div>
 
@@ -4347,7 +4526,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     </div>
 
 
-    <div class="src-ref">Кремер, с. 42–43</div>
+    <div class="src-ref">Кострикин, ч. 1, с. 123–124</div>
   </div>
 </div>
 
@@ -4507,8 +4686,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       <div class="section-tag">Критерии через миноры</div>
       <div class="def-text">
         <ul class="props">
-          <li><span class="em">Совместность:</span> система $Ax=b$ совместна $\Leftrightarrow\;\operatorname{rg}A=\operatorname{rg}(A\mid b)$, где ранг — наибольший порядок ненулевого минора;</li>
-          <li><span class="em">Единственность:</span> если система совместна и $\operatorname{rg}A=n$ (числу неизвестных), то решение единственно и для квадратного случая даётся формулами Крамера.</li>
+          <li><span class="em">Совместность:</span> система $Ax=b$ совместна $\Leftrightarrow\;\operatorname{rang}A=\operatorname{rang}(A\mid b)$, где ранг — наибольший порядок ненулевого минора;</li>
+          <li><span class="em">Единственность:</span> если система совместна и $\operatorname{rang}A=n$ (числу неизвестных), то решение единственно и для квадратного случая даётся формулами Крамера.</li>
         </ul>
       </div>
     </div>
@@ -4516,7 +4695,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     <div class="def-block">
       <div class="section-tag">Базисный минор и переменные</div>
       <div class="def-text">
-        <span class="term">Базисный минор</span> — любой ненулевой минор порядка $r=\operatorname{rg}A$.
+        <span class="term">Базисный минор</span> — любой ненулевой минор порядка $r=\operatorname{rang}A$.
         <ul class="props">
           <li><span class="em">Главные (базисные) переменные</span> ($r$ штук) соответствуют столбцам базисного минора;</li>
           <li><span class="em">Свободные переменные</span> ($n-r$ штук) — остальные переменные, принимающие произвольные значения.</li>
@@ -4562,6 +4741,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
   </div>
 </div>
 
@@ -4577,12 +4758,14 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     <div class="def-block">
       <div class="section-tag">Определение</div>
       <div class="def-text">
-        Пусть $E=(\mathbf{e}_1,\ldots,\mathbf{e}_n)$ — упорядоченный базис векторного пространства $V$. Для любого вектора $\mathbf{x}\in V$ существует <span class="em">единственный</span> набор чисел $(x_1,\ldots,x_n)$ такой, что
-        $$\mathbf{x}=x_1\mathbf{e}_1+\ldots+x_n\mathbf{e}_n.$$
-        Эти числа $x_i$ называются <span class="term">координатами вектора $\mathbf{x}$ в базисе $E$</span>.
+        Пусть $E=(e_1,\ldots,e_n)$ — упорядоченный базис векторного пространства $V$. Для любого вектора $x\in V$ существует <span class="em">единственный</span> набор чисел $(x_1,\ldots,x_n)$ такой, что
+        $$x=x_1 e_1+\ldots+x_n e_n.$$
+        Эти числа $x_i$ называются <span class="term">координатами вектора $x$ в базисе $E$</span>. Единственность набора $(x_1,\ldots,x_n)$ следует из линейной независимости базиса.
       </div>
     </div>
 
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
   </div>
 </div>
 
@@ -4660,6 +4843,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+
+    <div class="src-ref">Кострикин, ч. 2, с. 33–34</div>
   </div>
 </div>
 
@@ -4675,8 +4860,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     <div class="thm-box">
       <div class="thm-label">Теорема</div>
       <div class="def-text">
-        Пусть $E$ и $F$ — базисы пространства $V$, $C$ — матрица перехода от $E$ к $F$ ($F=EC$). Тогда координаты любого вектора $\mathbf{x}$ преобразуются по правилам
-        $$[\mathbf{x}]_E=C\,[\mathbf{x}]_F,\qquad [\mathbf{x}]_F=C^{-1}\,[\mathbf{x}]_E.$$
+        Пусть $E$ и $F$ — базисы пространства $V$, $C$ — матрица перехода от $E$ к $F$ ($F=EC$). Тогда координаты любого вектора $x$ преобразуются по правилам
+        $$[x]_E=C\,[x]_F,\qquad [x]_F=C^{-1}\,[x]_E.$$
       </div>
     </div>
 
@@ -4685,12 +4870,14 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       <div class="example-card-body">
         В $\mathbb{R}^2$: $e_1=\begin{pmatrix}1\\0\end{pmatrix}$, $e_2=\begin{pmatrix}0\\1\end{pmatrix}$; $f_1=\begin{pmatrix}2\\1\end{pmatrix}$, $f_2=\begin{pmatrix}1\\2\end{pmatrix}$. Матрица перехода (столбцы — координаты $f_j$ в $E$) и обратная:
         $$C=\begin{pmatrix}2 & 1\\1 & 2\end{pmatrix},\quad C^{-1}=\frac{1}{3}\begin{pmatrix}2 & -1\\-1 & 2\end{pmatrix}.$$
-        Пусть в новом базисе $[\mathbf{x}]_F=\begin{pmatrix}3\\-1\end{pmatrix}$. Тогда в старом базисе
-        $$[\mathbf{x}]_E=C\,[\mathbf{x}]_F=\begin{pmatrix}2 & 1\\1 & 2\end{pmatrix}\begin{pmatrix}3\\-1\end{pmatrix}=\begin{pmatrix}5\\1\end{pmatrix}.$$
-        Проверка: $\mathbf{x}=5e_1+e_2=\begin{pmatrix}5\\1\end{pmatrix}$ и $\mathbf{x}=3f_1-f_2=3\begin{pmatrix}2\\1\end{pmatrix}-\begin{pmatrix}1\\2\end{pmatrix}=\begin{pmatrix}5\\1\end{pmatrix}$ — вектор один и тот же.
+        Пусть в новом базисе $[x]_F=\begin{pmatrix}3\\-1\end{pmatrix}$. Тогда в старом базисе
+        $$[x]_E=C\,[x]_F=\begin{pmatrix}2 & 1\\1 & 2\end{pmatrix}\begin{pmatrix}3\\-1\end{pmatrix}=\begin{pmatrix}5\\1\end{pmatrix}.$$
+        Проверка: $x=5e_1+e_2=\begin{pmatrix}5\\1\end{pmatrix}$ и $x=3f_1-f_2=3\begin{pmatrix}2\\1\end{pmatrix}-\begin{pmatrix}1\\2\end{pmatrix}=\begin{pmatrix}5\\1\end{pmatrix}$ — вектор один и тот же.
       </div>
     </div>
 
+
+    <div class="src-ref">Кострикин, ч. 2, с. 24</div>
   </div>
 </div>
 
@@ -4732,6 +4919,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+
+    <div class="src-ref">Кострикин, ч. 2, с. 26</div>
   </div>
 </div>
 
@@ -4771,6 +4960,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+
+    <div class="src-ref">Кострикин, ч. 2, с. 27</div>
   </div>
 </div>
 
@@ -4792,6 +4983,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+
+    <div class="src-ref">Кострикин, ч. 2, с. 28–29</div>
   </div>
 </div>
 
@@ -4818,6 +5011,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+
+    <div class="src-ref">Кострикин, ч. 2, с. 28–29</div>
   </div>
 </div>
 
@@ -4852,6 +5047,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+
+    <div class="src-ref">Кострикин, ч. 2, с. 28–29</div>
   </div>
 </div>
 
@@ -4885,6 +5082,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+
+    <div class="src-ref">Кострикин, ч. 2, с. 40</div>
   </div>
 </div>
 
@@ -4908,6 +5107,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+
+    <div class="src-ref">Кострикин, ч. 2, с. 40–41</div>
   </div>
 </div>
 
@@ -4934,12 +5135,14 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       <div class="section-tag">Кососимметричная (знакопеременная)</div>
       <div class="def-text">
         Форма $f$ называется <span class="term">кососимметричной</span> (знакопеременной), если для любой перестановки $\sigma\in S_n$
-        $$f(v_{\sigma(1)},\ldots,v_{\sigma(n)})=\operatorname{sgn}(\sigma)\cdot f(v_1,\ldots,v_n),$$
-        где $\operatorname{sgn}(\sigma)$ — знак перестановки. Эквивалентно (на транспозициях):
+        $$f(v_{\sigma(1)},\ldots,v_{\sigma(n)})=\varepsilon(\sigma)\cdot f(v_1,\ldots,v_n),$$
+        где $\varepsilon(\sigma)$ — знак перестановки. Эквивалентно (на транспозициях):
         $$f(\ldots,v_i,\ldots,v_j,\ldots)=-f(\ldots,v_j,\ldots,v_i,\ldots)\quad\forall\,1\le i\lt j\le n.$$
       </div>
     </div>
 
+
+    <div class="src-ref">Кострикин, ч. 2, с. 40–41, 44</div>
   </div>
 </div>
 
@@ -4968,6 +5171,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+
+    <div class="src-ref">Кострикин, ч. 1, с. 105–110</div>
   </div>
 </div>
 
@@ -4991,6 +5196,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+
+    <div class="src-ref">Кострикин, ч. 2, с. 42</div>
   </div>
 </div>
 
@@ -5014,6 +5221,19 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+    <div class="def-block">
+      <div class="section-tag">Следствия</div>
+      <div class="def-text">
+        <ul class="props">
+          <li>$B(0,w)=0$ и $B(v,0)=0$ для любых $v,w$ (подстановка нулевого вектора);</li>
+          <li>в координатах относительно базиса $\;B(v,w)=[v]^{\top}B\,[w]$, где $B=(b_{ij})$, $b_{ij}=B(e_i,e_j)$ — матрица формы;</li>
+          <li>при замене базиса с матрицей перехода $C$ матрица формы преобразуется по закону $\;B'=C^{\top}B\,C$.</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div class="src-ref">Кострикин, ч. 2, с. 42–43</div>
   </div>
 </div>
 
@@ -5057,6 +5277,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+
+    <div class="src-ref">Кострикин, ч. 2, с. 44</div>
   </div>
 </div>
 
@@ -5086,6 +5308,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+
+    <div class="src-ref">Кострикин, ч. 2, с. 42–43</div>
   </div>
 </div>
 
@@ -5105,6 +5329,12 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+    <div class="explain">
+      Определение корректно: при замене базисов матрица преобразуется по закону $B'=C^{\top}B\,D$ с невырожденными $C,D$, а умножение на невырожденные матрицы не меняет ранга. Поэтому ранг формы <span class="em">не зависит</span> от выбора базисов. Форма называется невырожденной, если её ранг равен размерности пространства.
+    </div>
+
+
+    <div class="src-ref">Кострикин, ч. 2, с. 43, 49</div>
   </div>
 </div>
 
@@ -5137,6 +5367,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+
+    <div class="src-ref">Кострикин, ч. 2, с. 43</div>
   </div>
 </div>
 
@@ -5178,6 +5410,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+
+    <div class="src-ref">Кострикин, ч. 2, с. 45</div>
   </div>
 </div>
 
@@ -5193,10 +5427,12 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     <div class="def-block">
       <div class="section-tag">Определение</div>
       <div class="def-text">
-        Пусть $Q:V\to\mathbb{R}$ — квадратичная форма, $\dim V=n$. В базисе $\\{e_1,\\ldots,e_n\\}$ форма имеет вид $Q(x)=x^\top A\,x$, где $A$ — симметричная вещественная матрица. <span class="term">Рангом квадратичной формы</span> называется ранг её матрицы: $\;\operatorname{rk}Q=\operatorname{rk}A$.
+        Пусть $Q:V\to\mathbb{R}$ — квадратичная форма, $\dim V=n$. В базисе $\\{e_1,\\ldots,e_n\\}$ форма имеет вид $Q(x)=x^\top A\,x$, где $A$ — симметричная вещественная матрица. <span class="term">Рангом квадратичной формы</span> называется ранг её матрицы: $\;\operatorname{rang}Q=\operatorname{rang}A$.
       </div>
     </div>
 
+
+    <div class="src-ref">Кострикин, ч. 2, с. 45–49</div>
   </div>
 </div>
 
@@ -5221,6 +5457,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+
+    <div class="src-ref">Кострикин, ч. 2, с. 45–46</div>
   </div>
 </div>
 
@@ -5247,6 +5485,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+
+    <div class="src-ref">Кострикин, ч. 2, с. 45–46</div>
   </div>
 </div>
 
@@ -5286,6 +5526,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+
+    <div class="src-ref">Кострикин, ч. 2, с. 46–47</div>
   </div>
 </div>
 
@@ -5301,7 +5543,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     <div class="def-block">
       <div class="section-tag">Определение</div>
       <div class="def-text">
-        Для квадратичной формы $Q(x)=\sum_{i,j=1}^{n}a_{ij}x_i x_j$ ($a_{ij}=a_{ji}$) с симметричной матрицей $A=(a_{ij})$ рангом называется ранг матрицы: $\;\operatorname{rk}Q=\operatorname{rk}A$.
+        Для квадратичной формы $Q(x)=\sum_{i,j=1}^{n}a_{ij}x_i x_j$ ($a_{ij}=a_{ji}$) с симметричной матрицей $A=(a_{ij})$ рангом называется ранг матрицы: $\;\operatorname{rang}Q=\operatorname{rang}A$.
       </div>
     </div>
 
@@ -5317,7 +5559,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       <div class="example-card-body">
         Для $Q(x_1,x_2,x_3)=x_1^2+2x_1 x_2+x_2^2$ матрица
         $$A=\begin{pmatrix}1 & 1 & 0\\1 & 1 & 0\\0 & 0 & 0\end{pmatrix}.$$
-        Очевидно, $\operatorname{rk}A=1$ (второй столбец равен первому, третья строка нулевая).
+        Очевидно, $\operatorname{rang}A=1$ (второй столбец равен первому, третья строка нулевая).
       </div>
     </div>
 
@@ -5342,6 +5584,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+
+    <div class="src-ref">Кострикин, ч. 2, с. 45–49</div>
   </div>
 </div>
 
@@ -5373,6 +5617,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+
+    <div class="src-ref">Кострикин, ч. 2, с. 46–47</div>
   </div>
 </div>
 
@@ -5401,6 +5647,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+
+    <div class="src-ref">Кострикин, ч. 2, с. 46–47</div>
   </div>
 </div>
 
@@ -5422,6 +5670,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+
+    <div class="src-ref">Кострикин, ч. 2, с. 49</div>
   </div>
 </div>
 
@@ -5437,10 +5687,18 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     <div class="thm-box">
       <div class="thm-label">Теорема</div>
       <div class="def-text">
-        Пусть угловые миноры $\Delta_1,\Delta_2,\ldots,\Delta_n$ матрицы $(a_{ij})$ квадратичной формы $A(x,x)$ отличны от нуля. Тогда существует единственное преобразование базисных векторов $e_1,e_2,\ldots,e_n$, с помощью которого форму $A(x,x)$ можно привести к каноническому виду.
+        Всякая квадратичная форма на вещественном векторном пространстве некоторой невырожденной заменой переменных приводится к <span class="em">нормальному виду</span>
+        $$Q=x_1^2+\cdots+x_p^2-x_{p+1}^2-\cdots-x_r^2,$$
+        где $r$ — ранг формы. (Достаточно взять канонический вид $\sum\lambda_i y_i^2$ по методу Лагранжа и сделать масштабирующую замену $y_i\mapsto y_i/\sqrt{|\lambda_i|}$, после чего все ненулевые коэффициенты становятся $\pm 1$.)
       </div>
     </div>
 
+    <div class="note">
+      Если все угловые миноры $\Delta_1,\ldots,\Delta_n$ матрицы формы отличны от нуля, канонический вид можно получить методом <span class="em">Якоби</span>: коэффициенты равны $\Delta_i/\Delta_{i-1}$ ($\Delta_0=1$), а число перемен знака в последовательности $1,\Delta_1,\ldots,\Delta_n$ даёт отрицательный индекс инерции.
+    </div>
+
+
+    <div class="src-ref">Кострикин, ч. 2, с. 49</div>
   </div>
 </div>
 
@@ -5460,6 +5718,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+
+    <div class="src-ref">Кострикин, ч. 2, с. 49–50</div>
   </div>
 </div>
 
@@ -5505,6 +5765,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+
+    <div class="src-ref">Кострикин, ч. 2, с. 51–53</div>
   </div>
 </div>
 
@@ -5525,6 +5787,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+
+    <div class="src-ref">Кострикин, ч. 2, с. 54</div>
   </div>
 </div>
 
@@ -5544,6 +5808,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+
+    <div class="src-ref">Кострикин, ч. 2, с. 54</div>
   </div>
 </div>
 
@@ -5565,6 +5831,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+
+    <div class="src-ref">Кострикин, ч. 2, с. 54–55</div>
   </div>
 </div>
 
@@ -5624,7 +5892,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
         <ul class="props">
           <li>$\operatorname{Ker}f$ — подпространство в $V$;</li>
           <li>$\operatorname{Im}f$ — подпространство в $W$;</li>
-          <li>$f$ инъективно $\iff\operatorname{Ker}f=\{0\}$.</li>
+          <li>$f$ инъективно $\iff\operatorname{Ker}f=\{0\}$;</li>
+          <li>размерности связаны соотношением $\dim\operatorname{Ker}f+\dim\operatorname{Im}f=\dim V$ (теорема о ранге и дефекте: $\dim\operatorname{Im}f$ — ранг, $\dim\operatorname{Ker}f$ — дефект отображения).</li>
         </ul>
       </div>
     </div>
@@ -5648,6 +5917,10 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       <div class="def-text">
         Пусть $V,W$ — конечномерные вещественные пространства, $f:V\to W$ — линейное отображение, $(v_1,\ldots,v_n)$ — базис $V$, $(w_1,\ldots,w_m)$ — базис $W$. <span class="term">Матрицей отображения</span> $f$ в этих базисах называется матрица $A\in\mathbb{R}^{m\times n}$, у которой $j$-й столбец — координаты вектора $f(v_j)$ в базисе $(w_1,\ldots,w_m)$.
       </div>
+    </div>
+
+    <div class="explain">
+      Матрица полностью задаёт отображение в координатах: для любого $v\in V$ координатные столбцы связаны равенством $[f(v)]_W=A\,[v]_V$. Размер матрицы — $m\times n$ ($m=\dim W$ строк, $n=\dim V$ столбцов), а её ранг равен рангу отображения $\dim\operatorname{Im}f$.
     </div>
 
 
@@ -5697,6 +5970,10 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+    <div class="explain">
+      В матричных терминах (ранг отображения = ранг матрицы): $\operatorname{rang}(AB)\le\min\bigl(\operatorname{rang}A,\operatorname{rang}B\bigr)$ — то же неравенство, что в свойствах ранга. Образ композиции лежит в образе внешнего отображения $f$, а его размерность не превосходит размерности образа $g$, поскольку $f$ не может увеличить ранг.
+    </div>
+
 
     <div class="src-ref">Г. Н. Клюшников, лекции 10–11 «Линейные операторы»</div>
   </div>
@@ -5738,6 +6015,10 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       <div class="def-text">
         <span class="term">Линейный оператор</span> — линейное отображение векторного пространства $V$ <span class="em">в себя</span>: $\;f:V\to V$.
       </div>
+    </div>
+
+    <div class="explain">
+      Среди операторов выделяют <span class="em">тождественный</span> оператор $E$ ($Ev=v$) и <span class="em">нулевой</span> оператор $O$ ($Ov=0$). Операторы на $V$ можно складывать, умножать на скаляры и перемножать (композиция), причём произведение, вообще говоря, некоммутативно. В фиксированном базисе оператору отвечает <span class="em">квадратная</span> матрица порядка $n=\dim V$.
     </div>
 
 
@@ -6847,10 +7128,12 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       <div class="def-text">
         Пусть есть $n$ стран, торгующих друг с другом; каждая страна может также закупать продукцию внутри себя. Обозначим $x_1,x_2,\ldots,x_n$ — национальные доходы стран, $a_{ij}$ — долю национального дохода $j$-й страны, которую она тратит на закупку товаров у $i$-й страны. Весь национальный доход каждой страны тратится на закупку товаров (внутри страны или за рубежом), поэтому
         $$\sum_{i=1}^{n}a_{ij}=a_{1j}+a_{2j}+\dots+a_{nj}=1,\quad j=1,\ldots,n.$$
-        Вопрос: какую прибыль $p_i$ получает $i$-я страна в результате торговой деятельности?
+        Вопрос: при каких национальных доходах $x_1,\ldots,x_n$ торговля <span class="em">сбалансирована</span> — каждая страна тратит на закупки ровно столько, сколько выручает от продаж (нет дефицита)?
       </div>
     </div>
 
+
+    <div class="src-ref">Кремер, с. 91–93</div>
   </div>
 </div>
 
@@ -6892,12 +7175,14 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     <div class="def-block">
       <div class="section-tag">Балансовое уравнение доходов</div>
       <div class="def-text">
-        Доход страны $i$ складывается из продаж всем странам:
-        $$x_i=\sum_{j=1}^{n}a_{ij}x_j,\quad i=1,\ldots,n.$$
-        В матричной форме $\;p=Ax$, где $x=(x_1,\ldots,x_n)^T$ — вектор национальных доходов, $p=(x_1,\ldots,x_n)^T$ — вектор прибыли.
+        Выручка страны $i$ от продаж всем странам (включая себя) равна $\sum_{j=1}^{n}a_{ij}x_j$ — это $i$-я компонента вектора $Ax$. Условие <span class="em">бездефицитности</span> требует, чтобы выручка каждой страны равнялась её доходу:
+        $$\sum_{j=1}^{n}a_{ij}x_j=x_i\quad(i=1,\ldots,n),\qquad\text{т.е.}\quad Ax=x.$$
+        Значит, вектор доходов $x=(x_1,\ldots,x_n)^T$ — <span class="em">собственный вектор</span> структурной матрицы $A$ при собственном значении $\lambda=1$ (оно всегда существует, поскольку сумма элементов каждого столбца $A$ равна $1$).
       </div>
     </div>
 
+
+    <div class="src-ref">Кремер, с. 91–93</div>
   </div>
 </div>
 
@@ -6919,6 +7204,12 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+    <div class="explain">
+      В матричной форме это $Ax=x$, или $(A-E)x=0$: вектор сбалансированных доходов — собственный вектор структурной матрицы $A$ при $\lambda=1$. Поскольку столбцы $A$ суммируются в $1$, число $\lambda=1$ заведомо является собственным значением, так что ненулевое решение существует; его и берут (с точностью до положительного множителя — общего масштаба доходов).
+    </div>
+
+
+    <div class="src-ref">Кремер, с. 91–93</div>
   </div>
 </div>
 
@@ -6978,6 +7269,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+
+    <div class="src-ref">Кремер, «Высшая математика для экономистов», раздел «Модель Леонтьева многоотраслевой экономики (балансовый анализ)»</div>
   </div>
 </div>
 
@@ -7019,6 +7312,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+
+    <div class="src-ref">Кремер, «Высшая математика для экономистов», раздел «Модель Леонтьева многоотраслевой экономики (балансовый анализ)»</div>
   </div>
 </div>
 
@@ -7900,7 +8195,7 @@ const BASICS_TERMS = [
   },
   {
     t: 'Ранг оператора (матрицы)',
-    d: 'Размерность образа: $\\operatorname{rank}\\mathcal{A} = \\dim \\operatorname{Im}\\mathcal{A}$. Для матрицы — максимальное число линейно независимых строк (или столбцов). Теорема о ранге: $\\dim\\operatorname{Ker}\\mathcal{A} + \\operatorname{rank}\\mathcal{A} = \\dim V$.'
+    d: 'Размерность образа: $\\operatorname{rang}\\mathcal{A} = \\dim \\operatorname{Im}\\mathcal{A}$. Для матрицы — максимальное число линейно независимых строк (или столбцов). Теорема о ранге: $\\dim\\operatorname{Ker}\\mathcal{A} + \\operatorname{rang}\\mathcal{A} = \\dim V$.'
   },
   {
     t: 'Матрица линейного оператора',
@@ -8136,7 +8431,7 @@ var BASICS_QUIZ = [
         'Определитель матрицы'
       ],
       correct: 1,
-      exp: '$\\operatorname{rank}\\mathcal{A} = \\dim\\operatorname{Im}\\mathcal{A}$. Теорема о ранге: $\\dim\\operatorname{Ker} + \\operatorname{rank} = \\dim V$.'
+      exp: '$\\operatorname{rang}\\mathcal{A} = \\dim\\operatorname{Im}\\mathcal{A}$. Теорема о ранге: $\\dim\\operatorname{Ker} + \\operatorname{rang} = \\dim V$.'
     },
     {
       n: 0, q: 'Что такое <b>собственный вектор</b> оператора?',
@@ -10436,7 +10731,7 @@ TICKET_QUIZ[9] = [
     correct: 0,
     exp: {
       tldr: "Ранг = размерность алгебры как векторного пространства.",
-      detail: "$\\operatorname{rk}_PA=\\dim_PA$ — размерность $A$ как $P$-векторного пространства. Эта величина измеряет «насколько $A$ больше, чем $P$».",
+      detail: "$\\operatorname{rang}_PA=\\dim_PA$ — размерность $A$ как $P$-векторного пространства. Эта величина измеряет «насколько $A$ больше, чем $P$».",
       variants: "Число элементов и характеристика — другие величины. $\\det$ к рангу алгебры отношения не имеет."
     }
   },
@@ -18021,7 +18316,7 @@ TICKET_QUIZ[38] = [
     level: 3,
     q: "Число и размеры клеток в ЖНФ нильпотентного оператора однозначно определяются:",
     opts: [
-      "рангами степеней $\\operatorname{rk}\\mathcal{A}^k$",
+      "рангами степеней $\\operatorname{rang}\\mathcal{A}^k$",
       "произвольны",
       "определителем",
       "следом"
@@ -18029,7 +18324,7 @@ TICKET_QUIZ[38] = [
     correct: 0,
     exp: {
       tldr: "Ранги степеней оператора кодируют всю информацию о клетках.",
-      detail: "Число клеток размера $\\ge k$ равно $\\operatorname{rk}\\mathcal{A}^{k-1}-\\operatorname{rk}\\mathcal{A}^k$. Зная все ранги $\\operatorname{rk}\\mathcal{A}^k$ для $k=0,1,2,\\dots$, можно полностью восстановить размеры всех клеток."
+      detail: "Число клеток размера $\\ge k$ равно $\\operatorname{rang}\\mathcal{A}^{k-1}-\\operatorname{rang}\\mathcal{A}^k$. Зная все ранги $\\operatorname{rang}\\mathcal{A}^k$ для $k=0,1,2,\\dots$, можно полностью восстановить размеры всех клеток."
     }
   },
   {
@@ -19520,15 +19815,15 @@ TICKET_QUIZ[45] = [
     level: 1,
     q: "Число клеток размера $\\ge k$ для собств. значения $\\lambda$ выражается через ранги как:",
     opts: [
-      "$n-\\operatorname{rk}(A-\\lambda E)$",
-      "$\\operatorname{rk}(A-\\lambda E)^k$",
+      "$n-\\operatorname{rang}(A-\\lambda E)$",
+      "$\\operatorname{rang}(A-\\lambda E)^k$",
       "$\\det(A-\\lambda E)$",
-      "$\\operatorname{rk}(A-\\lambda E)^{k-1}-\\operatorname{rk}(A-\\lambda E)^k$"
+      "$\\operatorname{rang}(A-\\lambda E)^{k-1}-\\operatorname{rang}(A-\\lambda E)^k$"
     ],
     correct: 3,
     exp: {
       tldr: "Разность рангов соседних степеней оператора даёт число клеток размера $\\ge k$.",
-      detail: "$\\operatorname{rk}(A-\\lambda E)^{k-1}-\\operatorname{rk}(A-\\lambda E)^k$ = число клеток для $\\lambda$ размера $\\ge k$. Это позволяет полностью восстановить структуру клеток через ранги."
+      detail: "$\\operatorname{rang}(A-\\lambda E)^{k-1}-\\operatorname{rang}(A-\\lambda E)^k$ = число клеток для $\\lambda$ размера $\\ge k$. Это позволяет полностью восстановить структуру клеток через ранги."
     }
   },
   {
@@ -19537,14 +19832,14 @@ TICKET_QUIZ[45] = [
     q: "Число клеток размера РОВНО $m$ для $\\lambda$ через ранги:",
     opts: [
       "постоянное",
-      "$n-\\operatorname{rk}(A-\\lambda E)$",
-      "$\\operatorname{rk}(A-\\lambda E)^m$",
-      "$N_m=\\operatorname{rk}(A-\\lambda E)^{m+1}-2\\operatorname{rk}(A-\\lambda E)^m+\\operatorname{rk}(A-\\lambda E)^{m-1}$"
+      "$n-\\operatorname{rang}(A-\\lambda E)$",
+      "$\\operatorname{rang}(A-\\lambda E)^m$",
+      "$N_m=\\operatorname{rang}(A-\\lambda E)^{m+1}-2\\operatorname{rang}(A-\\lambda E)^m+\\operatorname{rang}(A-\\lambda E)^{m-1}$"
     ],
     correct: 3,
     exp: {
       tldr: "Вторая разность рангов — число клеток ровно размера $m$.",
-      detail: "$N_m=$ (клеток размера $\\ge m$) − (клеток размера $\\ge m+1$) = $[\\operatorname{rk}^{m-1}-\\operatorname{rk}^m]-[\\operatorname{rk}^m-\\operatorname{rk}^{m+1}]=\\operatorname{rk}^{m+1}-2\\operatorname{rk}^m+\\operatorname{rk}^{m-1}$ (где $\\operatorname{rk}^k:=\\operatorname{rk}(A-\\lambda E)^k$)."
+      detail: "$N_m=$ (клеток размера $\\ge m$) − (клеток размера $\\ge m+1$) = $[\\operatorname{rang}^{m-1}-\\operatorname{rang}^m]-[\\operatorname{rang}^m-\\operatorname{rang}^{m+1}]=\\operatorname{rang}^{m+1}-2\\operatorname{rang}^m+\\operatorname{rang}^{m-1}$ (где $\\operatorname{rang}^k:=\\operatorname{rang}(A-\\lambda E)^k$)."
     }
   },
   {
@@ -19603,7 +19898,7 @@ TICKET_QUIZ[45] = [
       "поиск собств. значений",
       "вычисление производных",
       "вычисление рангов степеней $(A-\\lambda E)^k$",
-      "формула $N_m=\\operatorname{rk}^{m+1}-2\\operatorname{rk}^m+\\operatorname{rk}^{m-1}$"
+      "формула $N_m=\\operatorname{rang}^{m+1}-2\\operatorname{rang}^m+\\operatorname{rang}^{m-1}$"
     ],
     correct: [
       0,
@@ -19619,7 +19914,7 @@ TICKET_QUIZ[45] = [
   {
     type: "single",
     level: 2,
-    q: "$A\\in M_4$, $\\lambda=2$: $\\operatorname{rk}(A-2E)=2$, $\\operatorname{rk}(A-2E)^2=1$, $\\operatorname{rk}(A-2E)^3=0$. Структура клеток?",
+    q: "$A\\in M_4$, $\\lambda=2$: $\\operatorname{rang}(A-2E)=2$, $\\operatorname{rang}(A-2E)^2=1$, $\\operatorname{rang}(A-2E)^3=0$. Структура клеток?",
     opts: [
       "$J_2(2)+J_2(2)$",
       "$J_2(2)+J_1(2)+J_1(2)$",
@@ -19629,7 +19924,7 @@ TICKET_QUIZ[45] = [
     correct: 3,
     exp: {
       tldr: "Из убывания рангов восстанавливаем клетки: 4→2→1→0.",
-      detail: "$\\operatorname{rk}^0=4$ (для $A-\\lambda E$ нулевой степени = $E$). Число клеток $\\ge1$: $\\operatorname{rk}^0-\\operatorname{rk}^1=4-2=2$. Размера $\\ge2$: $\\operatorname{rk}^1-\\operatorname{rk}^2=2-1=1$. Размера $\\ge3$: $\\operatorname{rk}^2-\\operatorname{rk}^3=1-0=1$. Размера $\\ge4$: $0-0=0$. Итого: 1 клетка размера 3 (есть в $\\ge1,\\ge2,\\ge3$, но нет в $\\ge4$) и 1 клетка размера 1. → $J_3(2)+J_1(2)$."
+      detail: "$\\operatorname{rang}^0=4$ (для $A-\\lambda E$ нулевой степени = $E$). Число клеток $\\ge1$: $\\operatorname{rang}^0-\\operatorname{rang}^1=4-2=2$. Размера $\\ge2$: $\\operatorname{rang}^1-\\operatorname{rang}^2=2-1=1$. Размера $\\ge3$: $\\operatorname{rang}^2-\\operatorname{rang}^3=1-0=1$. Размера $\\ge4$: $0-0=0$. Итого: 1 клетка размера 3 (есть в $\\ge1,\\ge2,\\ge3$, но нет в $\\ge4$) и 1 клетка размера 1. → $J_3(2)+J_1(2)$."
     }
   },
   {
@@ -19638,14 +19933,14 @@ TICKET_QUIZ[45] = [
     q: "Геометрическая кратность $\\lambda$ через ранги:",
     opts: [
       "$\\det A$",
-      "$\\operatorname{rk}A$",
-      "$\\operatorname{rk}(A-\\lambda E)$",
-      "$n-\\operatorname{rk}(A-\\lambda E)$ ($=\\dim\\operatorname{Ker}$)"
+      "$\\operatorname{rang}A$",
+      "$\\operatorname{rang}(A-\\lambda E)$",
+      "$n-\\operatorname{rang}(A-\\lambda E)$ ($=\\dim\\operatorname{Ker}$)"
     ],
     correct: 3,
     exp: {
-      tldr: "$g_\\lambda=\\dim\\operatorname{Ker}(A-\\lambda E)=n-\\operatorname{rk}(A-\\lambda E)$.",
-      detail: "По теореме о ранге: $\\dim\\operatorname{Ker}T+\\operatorname{rk}T=n$ для $n\\times n$-матрицы $T$. Поэтому $\\dim\\operatorname{Ker}(A-\\lambda E)=n-\\operatorname{rk}(A-\\lambda E)$ = число клеток для $\\lambda$."
+      tldr: "$g_\\lambda=\\dim\\operatorname{Ker}(A-\\lambda E)=n-\\operatorname{rang}(A-\\lambda E)$.",
+      detail: "По теореме о ранге: $\\dim\\operatorname{Ker}T+\\operatorname{rang}T=n$ для $n\\times n$-матрицы $T$. Поэтому $\\dim\\operatorname{Ker}(A-\\lambda E)=n-\\operatorname{rang}(A-\\lambda E)$ = число клеток для $\\lambda$."
     }
   },
   {
@@ -19654,20 +19949,20 @@ TICKET_QUIZ[45] = [
     q: "Алгебраическая кратность $\\lambda$ через ранги:",
     opts: [
       "постоянна",
-      "$\\operatorname{rk}A$",
-      "$\\dim V(\\lambda)=n-\\operatorname{rk}(A-\\lambda E)^k$ для $k\\ge$ размера наибольшей клетки",
+      "$\\operatorname{rang}A$",
+      "$\\dim V(\\lambda)=n-\\operatorname{rang}(A-\\lambda E)^k$ для $k\\ge$ размера наибольшей клетки",
       "не вычисляется через ранги"
     ],
     correct: 2,
     exp: {
       tldr: "Когда ранги стабилизируются, ядро = корневому подпространству.",
-      detail: "$\\operatorname{rk}(A-\\lambda E)^k$ убывают и стабилизируются на $n-\\dim V(\\lambda)$ при $k=$ размер наибольшей клетки. Значит $a_\\lambda=\\dim V(\\lambda)=n-\\operatorname{rk}_{\\text{стаб}}$."
+      detail: "$\\operatorname{rang}(A-\\lambda E)^k$ убывают и стабилизируются на $n-\\dim V(\\lambda)$ при $k=$ размер наибольшей клетки. Значит $a_\\lambda=\\dim V(\\lambda)=n-\\operatorname{rang}_{\\text{стаб}}$."
     }
   },
   {
     type: "single",
     level: 2,
-    q: "Если $\\operatorname{rk}(A-\\lambda E)=\\operatorname{rk}(A-\\lambda E)^2$, то для $\\lambda$:",
+    q: "Если $\\operatorname{rang}(A-\\lambda E)=\\operatorname{rang}(A-\\lambda E)^2$, то для $\\lambda$:",
     opts: [
       "нет особенностей",
       "недостаточно данных",
@@ -19693,7 +19988,7 @@ TICKET_QUIZ[45] = [
     correct: 2,
     exp: {
       tldr: "Вторая разность = разность двух первых разностей рангов.",
-      detail: "(клеток размера $\\ge m$) = $\\operatorname{rk}^{m-1}-\\operatorname{rk}^m$. (клеток размера $\\ge m+1$) = $\\operatorname{rk}^m-\\operatorname{rk}^{m+1}$. Разность: $(\\operatorname{rk}^{m-1}-\\operatorname{rk}^m)-(\\operatorname{rk}^m-\\operatorname{rk}^{m+1})=\\operatorname{rk}^{m+1}-2\\operatorname{rk}^m+\\operatorname{rk}^{m-1}=N_m$."
+      detail: "(клеток размера $\\ge m$) = $\\operatorname{rang}^{m-1}-\\operatorname{rang}^m$. (клеток размера $\\ge m+1$) = $\\operatorname{rang}^m-\\operatorname{rang}^{m+1}$. Разность: $(\\operatorname{rang}^{m-1}-\\operatorname{rang}^m)-(\\operatorname{rang}^m-\\operatorname{rang}^{m+1})=\\operatorname{rang}^{m+1}-2\\operatorname{rang}^m+\\operatorname{rang}^{m-1}=N_m$."
     }
   },
   {
@@ -19715,7 +20010,7 @@ TICKET_QUIZ[45] = [
   {
     type: "single",
     level: 3,
-    q: "$\\sum_k\\operatorname{rk}(A-\\lambda E)^k$ ($k\\ge0$) для одной клетки $J_m(\\lambda)$:",
+    q: "$\\sum_k\\operatorname{rang}(A-\\lambda E)^k$ ($k\\ge0$) для одной клетки $J_m(\\lambda)$:",
     opts: [
       "$m$",
       "$1$",
@@ -19725,13 +20020,13 @@ TICKET_QUIZ[45] = [
     correct: 2,
     exp: {
       tldr: "Сумма убывающих рангов одной клетки — арифметическая прогрессия.",
-      detail: "Для клетки $J_m(0)$: $\\operatorname{rk}(J_m(0)-0)^k=m-k$ при $k\\le m$, и 0 при $k\gt m$. Сумма $\\sum_{k=0}^{m-1}(m-k)=m+(m-1)+\\dots+1=\\frac{m(m+1)}{2}$. (Зависит от выбора нижнего предела.)"
+      detail: "Для клетки $J_m(0)$: $\\operatorname{rang}(J_m(0)-0)^k=m-k$ при $k\\le m$, и 0 при $k\gt m$. Сумма $\\sum_{k=0}^{m-1}(m-k)=m+(m-1)+\\dots+1=\\frac{m(m+1)}{2}$. (Зависит от выбора нижнего предела.)"
     }
   },
   {
     type: "single",
     level: 3,
-    q: "$A\\in M_5$, $\\lambda=0$: $\\operatorname{rk}A=3$, $\\operatorname{rk}A^2=2$, $\\operatorname{rk}A^3=2$. Структура для $\\lambda=0$?",
+    q: "$A\\in M_5$, $\\lambda=0$: $\\operatorname{rang}A=3$, $\\operatorname{rang}A^2=2$, $\\operatorname{rang}A^3=2$. Структура для $\\lambda=0$?",
     opts: [
       "$J_5$",
       "$J_2+J_2+J_1$",
@@ -19741,7 +20036,7 @@ TICKET_QUIZ[45] = [
     correct: 1,
     exp: {
       tldr: "Ранги: 5→3→2→2. Клетки: $\\ge1$:2, $\\ge2$:1, $\\ge3$:0. → 2+2+1.",
-      detail: "$\\operatorname{rk}^0=5$. Клеток $\\ge1$: $5-3=2$. Клеток $\\ge2$: $3-2=1$. Клеток $\\ge3$: $2-2=0$. Значит 2 клетки размера $\\ge1$, 1 из них размера $\\ge2$, ни одной размера $\\ge3$. Размеры: одна клетка размера 2, одна размера 1, но сумма 3 — а должно быть 5 (корневое = всё). Значит должна быть ещё одна клетка размера $\\ge1$. Уточнение: формула $\\operatorname{rk}^{k-1}-\\operatorname{rk}^k$ даёт ВСЕ клетки $\\ge k$. Здесь только для $\\lambda=0$. Если $\\operatorname{rk}A^3=2$ постоянна, значит больше нет роста — для $\\lambda=0$ всего 2 клетки общего размера 3.",
+      detail: "$\\operatorname{rang}^0=5$. Клеток $\\ge1$: $5-3=2$. Клеток $\\ge2$: $3-2=1$. Клеток $\\ge3$: $2-2=0$. Значит 2 клетки размера $\\ge1$, 1 из них размера $\\ge2$, ни одной размера $\\ge3$. Размеры: одна клетка размера 2, одна размера 1, но сумма 3 — а должно быть 5 (корневое = всё). Значит должна быть ещё одна клетка размера $\\ge1$. Уточнение: формула $\\operatorname{rang}^{k-1}-\\operatorname{rang}^k$ даёт ВСЕ клетки $\\ge k$. Здесь только для $\\lambda=0$. Если $\\operatorname{rang}A^3=2$ постоянна, значит больше нет роста — для $\\lambda=0$ всего 2 клетки общего размера 3.",
       variants: "Точный ответ зависит от полной информации о других собств. значениях."
     }
   },
@@ -19751,14 +20046,14 @@ TICKET_QUIZ[45] = [
     q: "Преимущество ранговой формулы:",
     opts: [
       "нет",
-      "можно полностью восстановить ЖНФ только из последовательности рангов $\\operatorname{rk}(A-\\lambda E)^k$",
+      "можно полностью восстановить ЖНФ только из последовательности рангов $\\operatorname{rang}(A-\\lambda E)^k$",
       "требует производных",
       "только над $\\mathbb{R}$"
     ],
     correct: 1,
     exp: {
       tldr: "Ранги степеней — полный инвариант ЖНФ.",
-      detail: "Зная для каждого $\\lambda$ всю последовательность $\\operatorname{rk}(A-\\lambda E)^k$ ($k=0,1,2,\\dots$), можно полностью восстановить число клеток каждого размера для $\\lambda$ → восстановить ЖНФ."
+      detail: "Зная для каждого $\\lambda$ всю последовательность $\\operatorname{rang}(A-\\lambda E)^k$ ($k=0,1,2,\\dots$), можно полностью восстановить число клеток каждого размера для $\\lambda$ → восстановить ЖНФ."
     }
   }
 ];
@@ -22836,7 +23131,7 @@ TICKET_QUIZ[58] = [
     correct: 0,
     exp: {
       tldr: "Размерность ЛМ решений = размерность ядра = $n-r$.",
-      detail: "$\\dim(x_0+\\operatorname{Ker}A)=\\dim\\operatorname{Ker}A=n-\\operatorname{rk}A=n-r$ (по теореме о ранге). Это число свободных параметров в общем решении."
+      detail: "$\\dim(x_0+\\operatorname{Ker}A)=\\dim\\operatorname{Ker}A=n-\\operatorname{rang}A=n-r$ (по теореме о ранге). Это число свободных параметров в общем решении."
     }
   },
   {
@@ -22861,7 +23156,7 @@ TICKET_QUIZ[58] = [
       "решения $Ax=0$ — подпространство",
       "решения $Ax=b$ — это ЛМ",
       "решения $Ax=b$ всегда содержат 0",
-      "размерность ЛМ решений = $n-\\operatorname{rk}A$"
+      "размерность ЛМ решений = $n-\\operatorname{rang}A$"
     ],
     correct: [0,1,3],
     exp: {
@@ -22957,7 +23252,7 @@ TICKET_QUIZ[58] = [
     correct: 3,
     exp: {
       tldr: "Каждое независимое уравнение «срезает» одно измерение.",
-      detail: "$k$ независимых уравнений → $\\operatorname{rk}A=k$ → $\\dim$ решений $=n-k$. Например в $\\mathbb{R}^3$: 1 уравнение → плоскость (dim 2), 2 уравнения → прямая (dim 1), 3 → точка (dim 0)."
+      detail: "$k$ независимых уравнений → $\\operatorname{rang}A=k$ → $\\dim$ решений $=n-k$. Например в $\\mathbb{R}^3$: 1 уравнение → плоскость (dim 2), 2 уравнения → прямая (dim 1), 3 → точка (dim 0)."
     }
   }
 ];
