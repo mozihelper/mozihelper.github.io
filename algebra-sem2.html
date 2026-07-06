@@ -1792,6 +1792,12 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 
 .derivation.ra-wrap{border:none;padding:0;background:none;margin:1rem 0;}
 .derivation.ra-wrap>.derivation-title{margin-bottom:0;}
+
+/* ── Практика ── */
+.prax-intro{color:var(--ink-soft);font-size:0.96rem;line-height:1.6;margin-bottom:0.4rem;}
+.prax-sub{margin:2.4rem 0 1.1rem;font-size:0.8rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-mute);display:flex;align-items:center;gap:0.75rem;}
+.prax-sub::after{content:"";flex:1 1 auto;height:1px;background:var(--border-soft);}
+.prax-fig{display:block;max-width:462px;width:100%;height:auto;margin:1rem auto 0.25rem;}
 </style>
 <style id="ra79-style">
 .q-card[data-q="79"] .ra-ln{margin:4px 0;line-height:2;color:var(--ink);transition:color .2s ease}
@@ -7697,10 +7703,691 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();renderL
     </div>
   </section>
 
+  <!-- PRACTICE PAGE — семинарские задачи с решениями -->
+  <section class="topic-page" id="page-practice">
+    <div class="topic-header">
+      <div class="topic-eyebrow">Семинары · задачи с решениями</div>
+      <h1 class="topic-title">Практика</h1>
+    </div>
+    <p class="prax-intro">
+      Задачи семинарского списка — из задачников Е.&nbsp;И.&nbsp;Анно (ч.&nbsp;I–II) и К.&nbsp;Н.&nbsp;Лунгу (ч.&nbsp;I), а также задачи из лекций; у каждой указан точный источник и страница. Решения записаны кратко и по шагам, во всех геометрических задачах есть чертёж. Нажмите на карточку — откроется условие; решение разворачивается отдельной кнопкой.
+    </p>
+    <div class="questions-list">
+
+<div class="prax-sub">Комплексные числа</div>
+
+<!-- П1 -->
+<div class="q-card" data-q="101" data-text="практика комплексные числа корни девятой степени тригонометрическая форма аргумент модуль наименьшая мнимая часть анно">
+  <div class="q-head" onclick="toggleCard(this)">
+    <span class="q-num">01</span>
+    <span class="q-title">Корни девятой степени из $z_0=-3-\sqrt{3}\,i$ и корень с наименьшей мнимой частью</span>
+    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  </div>
+  <div class="q-body">
+    <div class="def-block">
+      <div class="section-tag">Условие</div>
+      <div class="def-text">
+        Запишите в тригонометрической форме все комплексные корни девятой степени из числа $z_0=-3-\sqrt{3}\cdot i$, и выберите корень $z$ с наименьшей мнимой частью.
+      </div>
+    </div>
+    <div class="derivation collapsed">
+      <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Решение</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
+        <div class="def-text">
+          Модуль $|z_0|=\sqrt{9+3}=\sqrt{12}$, аргумент лежит в третьей четверти: $\operatorname{tg}\varphi=\dfrac{\sqrt3}{3}\Rightarrow\varphi=\pi+\dfrac{\pi}{6}=\dfrac{7\pi}{6}$. Тригонометрическая форма
+          $$-3-\sqrt{3}\cdot i=\sqrt{12}\left(\cos\frac{7\pi}{6}+i\sin\frac{7\pi}{6}\right).$$
+          Все девять корней даёт формула
+          $$z_k=\sqrt[18]{12}\left(\cos\frac{7\pi+12\pi k}{54}+i\sin\frac{7\pi+12\pi k}{54}\right),\qquad k=0,1,\dots,8.$$
+          Мнимая часть наименьшая у корня, аргумент которого ближе всего к $\dfrac{3\pi}{2}=\dfrac{81\pi}{54}$ — аргументу числа $-i$. Среди чисел $7+12k$ ближе всего к $81$ оказывается $79$ при $k=6$, поэтому
+          $$z=z_6=\sqrt[18]{12}\left(\cos\frac{79\pi}{54}+i\sin\frac{79\pi}{54}\right).$$
+        </div>
+        <svg class="prax-fig" viewBox="0 0 430 402" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Девять корней девятой степени на окружности радиуса 12 в степени 1/18; выделен корень z6 с наименьшей мнимой частью">
+          <line x1="107.0" y1="376.0" x2="107.0" y2="26.1" stroke="var(--border)" stroke-width="1"/>
+          <line x1="323.0" y1="376.0" x2="323.0" y2="26.1" stroke="var(--border)" stroke-width="1"/>
+          <line x1="26.0" y1="309.0" x2="404.0" y2="309.0" stroke="var(--border)" stroke-width="1"/>
+          <line x1="26.0" y1="93.0" x2="404.0" y2="93.0" stroke="var(--border)" stroke-width="1"/>
+          <line x1="26.0" y1="201.0" x2="404.0" y2="201.0" stroke="var(--ink-soft)" stroke-width="1.5"/>
+          <polygon points="404.0,201.0 395.0,197.0 395.0,205.0" fill="var(--ink-soft)"/>
+          <line x1="215.0" y1="376.0" x2="215.0" y2="26.1" stroke="var(--ink-soft)" stroke-width="1.5"/>
+          <polygon points="215.0,26.1 211.0,35.1 219.0,35.1" fill="var(--ink-soft)"/>
+          <text x="400.0" y="217.0" font-size="12.5" fill="var(--ink-soft)" font-family="inherit" text-anchor="end" font-style="italic">Re z</text>
+          <text x="223.0" y="36.1" font-size="12.5" fill="var(--ink-soft)" font-family="inherit" text-anchor="start" font-style="italic">Im z</text>
+          <text x="210.0" y="215.0" font-size="11" fill="var(--ink-soft)" font-family="inherit" text-anchor="end">O</text>
+          <text x="107.0" y="215.0" font-size="10.5" fill="var(--ink-mute)" font-family="inherit" text-anchor="middle">-1</text>
+          <text x="323.0" y="215.0" font-size="10.5" fill="var(--ink-mute)" font-family="inherit" text-anchor="middle">1</text>
+          <text x="209.0" y="313.0" font-size="10.5" fill="var(--ink-mute)" font-family="inherit" text-anchor="end">-1</text>
+          <text x="209.0" y="97.0" font-size="10.5" fill="var(--ink-mute)" font-family="inherit" text-anchor="end">1</text>
+          <circle cx="215.0" cy="201.0" r="124.0" fill="none" stroke="var(--ink-mute)" stroke-width="1.4" stroke-dasharray="5 4"/>
+          <line x1="215.0" y1="201.0" x2="328.8" y2="151.9" stroke="var(--ink-mute)" stroke-width="1.3" stroke-dasharray="4 4"/>
+          <text x="277.9" y="172.45" font-size="11.5" fill="var(--ink-mute)" font-family="inherit" text-anchor="start">R = ¹⁸√12</text>
+          <path d="M 266.6 178.8 A 56.2 56.2 0 0 0 240.2 150.9" fill="none" stroke="var(--ink-mute)" stroke-width="1.2"/>
+          <text x="271.6" y="151.7" font-size="11" fill="var(--ink-mute)" font-family="inherit" text-anchor="middle">2π/9</text>
+          <circle cx="328.8" cy="151.9" r="3.2" fill="var(--ink-soft)"/>
+          <circle cx="270.6" cy="90.2" r="3.2" fill="var(--ink-soft)"/>
+          <circle cx="186.4" cy="80.4" r="3.2" fill="var(--ink-soft)"/>
+          <circle cx="115.5" cy="127.0" r="3.2" fill="var(--ink-soft)"/>
+          <circle cx="91.2" cy="208.2" r="3.2" fill="var(--ink-soft)"/>
+          <circle cx="124.8" cy="286.1" r="3.2" fill="var(--ink-soft)"/>
+          <circle cx="200.6" cy="324.2" r="5" fill="var(--accent)"/>
+          <circle cx="283.1" cy="304.6" r="3.2" fill="var(--ink-soft)"/>
+          <circle cx="333.8" cy="236.6" r="3.2" fill="var(--ink-soft)"/>
+          <text x="335.8" y="153.9" font-size="12" fill="var(--ink)" font-family="inherit" text-anchor="start">z₀</text>
+          <text x="274.6" y="84.2" font-size="12" fill="var(--ink)" font-family="inherit" text-anchor="start">z₁</text>
+          <text x="196.6" y="346.2" font-size="12.5" fill="var(--accent)" font-family="inherit" text-anchor="middle" font-weight="600">z₆ — наименьшая Im</text>
+        </svg>
+      </div>
+    </div>
+    <div class="src-ref">Анно Е. И., «Задачи по линейной алгебре», ч. I, с. 148, пример 5</div>
+  </div>
+</div>
+
+<!-- П2 -->
+<div class="q-card" data-q="102" data-text="практика комплексные числа геометрическое место точек гмт модуль прямая анно">
+  <div class="q-head" onclick="toggleCard(this)">
+    <span class="q-num">02</span>
+    <span class="q-title">ГМТ: $|z+2-i|^2-|z-1-3i|^2=z+\bar z-1$</span>
+    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  </div>
+  <div class="q-body">
+    <div class="def-block">
+      <div class="section-tag">Условие</div>
+      <div class="def-text">
+        Изобразите на координатной плоскости геометрическое место точек $z=x+yi$, удовлетворяющих соотношению
+        $$|z+2-i|^2-|z-1-3i|^2=z+\bar z-1.$$
+      </div>
+    </div>
+    <div class="derivation collapsed">
+      <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Решение</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
+        <div class="def-text">
+          Запишем каждое выражение через $x$ и $y$:
+          $$z+2-i=(x+2)+(y-1)\,i,\qquad z-1-3i=(x-1)+(y-3)\,i,\qquad z+\bar z-1=2x-1.$$
+          Тогда левая часть
+          $$(x+2)^2+(y-1)^2-(x-1)^2-(y-3)^2=6x+4y-5,$$
+          и уравнение принимает вид $6x+4y-5=2x-1$, то есть $4x+4y=4$. Геометрическое место точек — прямая
+          $$y=-x+1.$$
+        </div>
+        <svg class="prax-fig" viewBox="0 0 430 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Прямая y равно минус x плюс 1 на координатной плоскости">
+          <line x1="62.6" y1="404.0" x2="62.6" y2="26.0" stroke="var(--border)" stroke-width="1"/>
+          <line x1="123.5" y1="404.0" x2="123.5" y2="26.0" stroke="var(--border)" stroke-width="1"/>
+          <line x1="245.5" y1="404.0" x2="245.5" y2="26.0" stroke="var(--border)" stroke-width="1"/>
+          <line x1="306.5" y1="404.0" x2="306.5" y2="26.0" stroke="var(--border)" stroke-width="1"/>
+          <line x1="367.4" y1="404.0" x2="367.4" y2="26.0" stroke="var(--border)" stroke-width="1"/>
+          <line x1="26.0" y1="367.4" x2="404.0" y2="367.4" stroke="var(--border)" stroke-width="1"/>
+          <line x1="26.0" y1="306.5" x2="404.0" y2="306.5" stroke="var(--border)" stroke-width="1"/>
+          <line x1="26.0" y1="184.5" x2="404.0" y2="184.5" stroke="var(--border)" stroke-width="1"/>
+          <line x1="26.0" y1="123.5" x2="404.0" y2="123.5" stroke="var(--border)" stroke-width="1"/>
+          <line x1="26.0" y1="62.6" x2="404.0" y2="62.6" stroke="var(--border)" stroke-width="1"/>
+          <line x1="26.0" y1="245.5" x2="404.0" y2="245.5" stroke="var(--ink-soft)" stroke-width="1.5"/>
+          <polygon points="404.0,245.5 395.0,241.5 395.0,249.5" fill="var(--ink-soft)"/>
+          <line x1="184.5" y1="404.0" x2="184.5" y2="26.0" stroke="var(--ink-soft)" stroke-width="1.5"/>
+          <polygon points="184.5,26.0 180.5,35.0 188.5,35.0" fill="var(--ink-soft)"/>
+          <text x="400.0" y="261.5" font-size="12.5" fill="var(--ink-soft)" font-family="inherit" text-anchor="end" font-style="italic">x</text>
+          <text x="192.5" y="36.0" font-size="12.5" fill="var(--ink-soft)" font-family="inherit" text-anchor="start" font-style="italic">y</text>
+          <text x="179.5" y="259.5" font-size="11" fill="var(--ink-soft)" font-family="inherit" text-anchor="end">O</text>
+          <text x="62.6" y="259.5" font-size="10.5" fill="var(--ink-mute)" font-family="inherit" text-anchor="middle">-2</text>
+          <text x="123.5" y="259.5" font-size="10.5" fill="var(--ink-mute)" font-family="inherit" text-anchor="middle">-1</text>
+          <text x="245.5" y="259.5" font-size="10.5" fill="var(--ink-mute)" font-family="inherit" text-anchor="middle">1</text>
+          <text x="306.5" y="259.5" font-size="10.5" fill="var(--ink-mute)" font-family="inherit" text-anchor="middle">2</text>
+          <text x="367.4" y="259.5" font-size="10.5" fill="var(--ink-mute)" font-family="inherit" text-anchor="middle">3</text>
+          <text x="178.5" y="371.4" font-size="10.5" fill="var(--ink-mute)" font-family="inherit" text-anchor="end">-2</text>
+          <text x="178.5" y="310.5" font-size="10.5" fill="var(--ink-mute)" font-family="inherit" text-anchor="end">-1</text>
+          <text x="178.5" y="188.5" font-size="10.5" fill="var(--ink-mute)" font-family="inherit" text-anchor="end">1</text>
+          <text x="178.5" y="127.5" font-size="10.5" fill="var(--ink-mute)" font-family="inherit" text-anchor="end">2</text>
+          <text x="178.5" y="66.6" font-size="10.5" fill="var(--ink-mute)" font-family="inherit" text-anchor="end">3</text>
+          <line x1="38.2" y1="38.2" x2="391.8" y2="391.8" stroke="var(--accent)" stroke-width="2.6"/>
+          <circle cx="184.5" cy="184.5" r="3.6" fill="var(--ink)"/>
+          <circle cx="245.5" cy="245.5" r="3.6" fill="var(--ink)"/>
+          <text x="132.5" y="182.5" font-size="12.5" fill="var(--ink)" font-family="inherit" text-anchor="start">(0;1)</text>
+          <text x="253.5" y="263.5" font-size="12.5" fill="var(--ink)" font-family="inherit" text-anchor="start">(1;0)</text>
+          <text x="315.6" y="282.1" font-size="13.5" fill="var(--accent)" font-family="inherit" text-anchor="start" font-style="italic" font-weight="600">y = −x + 1</text>
+        </svg>
+      </div>
+    </div>
+    <div class="src-ref">Анно Е. И., «Задачи по линейной алгебре», ч. I, с. 148, пример 6</div>
+  </div>
+</div>
+
+<div class="prax-sub">Многочлены</div>
+
+<!-- П3 -->
+<div class="q-card" data-q="103" data-text="практика многочлены остаток от деления теорема безу линейный остаток анно">
+  <div class="q-head" onclick="toggleCard(this)">
+    <span class="q-num">03</span>
+    <span class="q-title">Остаток от деления $P(x)$ на $(x-2)(x+1)$</span>
+    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  </div>
+  <div class="q-body">
+    <div class="def-block">
+      <div class="section-tag">Условие</div>
+      <div class="def-text">
+        Многочлен $P(x)$ при делении на $Q_1(x)=x-2$ даёт остаток $4$, а при делении на $Q_2(x)=x+1$ даёт остаток $1$. Какой остаток будет у многочлена $P(x)$ при делении на многочлен $Q_3(x)=(x-2)(x+1)$?
+      </div>
+    </div>
+    <div class="derivation collapsed">
+      <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Решение</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
+        <div class="def-text">
+          Пусть $P(x)=S(x)\,Q_3(x)+R(x)$, где $\deg R<2$, то есть $R(x)=kx+b$. Так как $Q_3(2)=Q_3(-1)=0$, значения $P$ в точках $2$ и $-1$ совпадают со значениями остатка:
+          $$\begin{cases}P(2)=R(2)=2k+b=4,\\[2pt] P(-1)=R(-1)=-k+b=1.\end{cases}$$
+          Вычитая уравнения, получим $3k=3$, то есть $k=1$, $b=2$. Ответ:
+          $$R(x)=x+2.$$
+        </div>
+      </div>
+    </div>
+    <div class="src-ref">Анно Е. И., «Задачи по линейной алгебре», ч. I, с. 160, пример 2</div>
+  </div>
+</div>
+
+<!-- П4 -->
+<div class="q-card" data-q="104" data-text="практика многочлены кратный корень кратности параметры производная анно">
+  <div class="q-head" onclick="toggleCard(this)">
+    <span class="q-num">04</span>
+    <span class="q-title">Кратный корень $P(x)=3x^4-bx^3-4ax^2+2x+1$</span>
+    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  </div>
+  <div class="q-body">
+    <div class="def-block">
+      <div class="section-tag">Условие</div>
+      <div class="def-text">
+        При каких значениях параметров $a$ и $b$ число $x_0=1$ является корнем многочлена $P(x)=3x^4-bx^3-4ax^2+2x+1$ кратности больше $1$?
+      </div>
+    </div>
+    <div class="derivation collapsed">
+      <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Решение</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
+        <div class="def-text">
+          Число $x_0$ является корнем кратности больше $1$ тогда и только тогда, когда $P(x_0)=0$ и $P'(x_0)=0$. Здесь $P'(x)=12x^3-3bx^2-8ax+2$, и условия дают систему
+          $$\begin{cases}P(1)=3-b-4a+2+1=0,\\[2pt] P'(1)=12-3b-8a+2=0,\end{cases}\qquad\text{т.е.}\qquad \begin{cases}4a+b=6,\\ 8a+3b=14.\end{cases}$$
+          Её решение: $a=1$, $b=2$. При этом $P''(1)=36-6b-8a=16\ne0$, так что кратность корня равна ровно $2$.
+        </div>
+      </div>
+    </div>
+    <div class="src-ref">Анно Е. И., «Задачи по линейной алгебре», ч. I, с. 160, пример 3</div>
+  </div>
+</div>
+
+<div class="prax-sub">Жордановы нормальные формы</div>
+
+<!-- П5 -->
+<div class="q-card" data-q="105" data-text="практика жнф жорданова нормальная форма жорданов базис цепочка присоединённый образы степеней корневое лекция">
+  <div class="q-head" onclick="toggleCard(this)">
+    <span class="q-num">05</span>
+    <span class="q-title">ЖНФ и жорданов базис (задача из лекции)</span>
+    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  </div>
+  <div class="q-body">
+    <div class="def-block">
+      <div class="section-tag">Условие</div>
+      <div class="def-text">
+        Найдите жорданову нормальную форму $J$ и жорданов базис (матрицу перехода $C$: $\;C^{-1}AC=J$) для матрицы
+        $$A=\begin{pmatrix}3&2&-3\\4&10&-12\\3&6&-7\end{pmatrix}.$$
+      </div>
+    </div>
+    <div class="derivation collapsed">
+      <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Решение</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
+        <div class="def-text">
+          Рассмотрим $\lambda=2$:
+          $$B=A-2E=\begin{pmatrix}1&2&-3\\4&8&-12\\3&6&-9\end{pmatrix}$$
+          — все строки пропорциональны $(1;\,2;\,-3)$, поэтому $\operatorname{rg}B=1$. Непосредственная проверка даёт $B^2=0$: оператор $B$ нильпотентен, значит $\lambda=2$ — единственное собственное значение и $\chi_A(t)=(t-2)^3$.
+          <br><br>
+          Так как $\dim V_2=3-\operatorname{rg}B=2$, жордановых клеток две; из $B^2=0$ длины цепочек не превосходят $2$. Отсюда
+          $$J=J_2(2)\oplus J_1(2).$$
+          Собственное подпространство $V_2$ задаётся уравнением $x_1+2x_2-3x_3=0$; ФСР: $b_1=(-2;1;0)^T$, $b_2=(3;0;1)^T$.
+          <br><br>
+          Пространство столбцов $L_1=\operatorname{Im}B=\langle c_1\rangle$, $c_1=(1;4;3)^T$. Заметим: $4b_1+3b_2=c_1$, значит $c_1\in V_2$ и $L_1\cap V_2=L_1$. С вектора $e_1^{(1)}=c_1$ начинается жорданова цепочка длины $2$. Присоединённый вектор ищем из $B\,e_1^{(2)}=e_1^{(1)}$, то есть $y_1+2y_2-3y_3=1$: можно взять $e_1^{(2)}=(2;1;1)^T$.
+          <br><br>
+          Достраиваем до базиса $V_2$ вектором вне $L_1$: подходит $e_2^{(1)}=(3;0;1)^T$ — цепочка длины $1$. Записываем $e_1^{(1)},e_1^{(2)},e_2^{(1)}$ в столбцы матрицы перехода:
+          $$C=\begin{pmatrix}1&2&3\\4&1&0\\3&1&1\end{pmatrix},\qquad C^{-1}AC=J=\begin{pmatrix}2&1&0\\0&2&0\\0&0&2\end{pmatrix}.$$
+        </div>
+      </div>
+    </div>
+    <div class="src-ref">Задача из лекции «Жордановы нормальные формы» (Г. Н. Клюшников); алгоритм разобран в вопросе 43</div>
+  </div>
+</div>
+
+<div class="prax-sub">Линейные операторы в евклидовых пространствах</div>
+
+<!-- П6 -->
+<div class="q-card" data-q="106" data-text="практика самосопряжённый оператор собственный вектор собственное значение матрица евклидово пространство анно">
+  <div class="q-head" onclick="toggleCard(this)">
+    <span class="q-num">06</span>
+    <span class="q-title">Матрица самосопряжённого оператора: $\mathcal{A}f_1=3f_1$, $f_1=(3;2)$</span>
+    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  </div>
+  <div class="q-body">
+    <div class="def-block">
+      <div class="section-tag">Условие</div>
+      <div class="def-text">
+        Укажите пример матрицы $A_e$ такого самосопряжённого оператора $\mathcal{A}\ne k\cdot\mathcal{E}$ в пространстве $E^2$, что $\mathcal{A}f_1=3f_1$, где $f_1=(3;2)$.
+      </div>
+    </div>
+    <div class="derivation collapsed">
+      <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Решение</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
+        <div class="def-text">
+          Самосопряжённый оператор имеет ортогональный базис из собственных векторов. Один собственный вектор дан: $f_1=(3;2)$; тогда ортогональный ему $f_2=(-2;3)$ тоже должен быть собственным. Положим $\mathcal{A}f_2=0$. Составим операторное равенство $\mathcal{G}=\mathcal{A}\cdot\mathcal{F}$, где $\mathcal{F}e_1=f_1$, $\mathcal{F}e_2=f_2$, $\mathcal{G}e_1=3f_1$, $\mathcal{G}e_2=0$. В матричном виде:
+          $$\begin{pmatrix}9&0\\6&0\end{pmatrix}=A_e\begin{pmatrix}3&-2\\2&3\end{pmatrix},\qquad
+          A_e=\begin{pmatrix}9&0\\6&0\end{pmatrix}\cdot\frac{1}{13}\begin{pmatrix}3&2\\-2&3\end{pmatrix}=\frac{1}{13}\begin{pmatrix}27&18\\18&12\end{pmatrix}.$$
+          Матрица симметрична (в ортонормированном базисе это и означает самосопряжённость), и $\mathcal{A}\ne k\mathcal{E}$.
+        </div>
+      </div>
+    </div>
+    <div class="src-ref">Анно Е. И., «Задачи по линейной алгебре», ч. II, с. 131, пример 1</div>
+  </div>
+</div>
+
+<!-- П7 -->
+<div class="q-card" data-q="107" data-text="практика векторное произведение оператор сопряжённый кососимметрический матрица ядро образ лекция">
+  <div class="q-head" onclick="toggleCard(this)">
+    <span class="q-num">07</span>
+    <span class="q-title">Оператор векторного произведения $x\mapsto[a,x]$ и его сопряжённый</span>
+    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  </div>
+  <div class="q-body">
+    <div class="def-block">
+      <div class="section-tag">Условие</div>
+      <div class="def-text">
+        В пространстве $E^3$ фиксирован вектор $a=(1;2;2)$ и задан оператор $\mathcal{A}x=[a,x]$ (векторное произведение). Найдите матрицу $A_e$ в стандартном ортонормированном базисе и сопряжённый оператор $\mathcal{A}^*$.
+      </div>
+    </div>
+    <div class="derivation collapsed">
+      <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Решение</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
+        <div class="def-text">
+          Столбцы матрицы — образы базисных векторов: $[a,e_1]=(0;2;-2)^T$, $[a,e_2]=(-2;0;1)^T$, $[a,e_3]=(2;-1;0)^T$. Поэтому
+          $$A_e=\begin{pmatrix}0&-2&2\\2&0&-1\\-2&1&0\end{pmatrix}.$$
+          В ортонормированном базисе матрица сопряжённого оператора — транспонированная: $A^*_e=A_e^{T}=-A_e$, то есть
+          $$\mathcal{A}^*=-\mathcal{A}$$
+          — оператор векторного умножения кососимметрический. Попутно: $\operatorname{Ker}\mathcal{A}=\langle a\rangle$, $\operatorname{Im}\mathcal{A}=a^{\perp}$.
+        </div>
+      </div>
+    </div>
+    <div class="src-ref">Пример из лекции: оператор векторного произведения</div>
+  </div>
+</div>
+
+<!-- П8 -->
+<div class="q-card" data-q="108" data-text="практика оператор дифференцирования сопряжённый матрица грама скалярное произведение интеграл многочлены лекция">
+  <div class="q-head" onclick="toggleCard(this)">
+    <span class="q-num">08</span>
+    <span class="q-title">Сопряжённый к оператору дифференцирования в $P_1[x]$</span>
+    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  </div>
+  <div class="q-body">
+    <div class="def-block">
+      <div class="section-tag">Условие</div>
+      <div class="def-text">
+        В пространстве $P_1[x]$ многочленов степени не выше $1$ со скалярным произведением $(p,q)=\displaystyle\int_0^1 p(x)q(x)\,dx$ задан оператор дифференцирования $\mathcal{D}\colon p\mapsto p'$. Найдите матрицу $D^*_e$ сопряжённого оператора в базисе $e=(1,\,x)$. Самосопряжён ли $\mathcal{D}$?
+      </div>
+    </div>
+    <div class="derivation collapsed">
+      <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Решение</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
+        <div class="def-text">
+          Так как $\mathcal{D}1=0$ и $\mathcal{D}x=1$, матрица оператора $D_e=\begin{pmatrix}0&1\\0&0\end{pmatrix}$. Матрица Грама базиса: $(1,1)=1$, $(1,x)=\tfrac12$, $(x,x)=\tfrac13$, то есть $\Gamma=\begin{pmatrix}1&1/2\\1/2&1/3\end{pmatrix}$.
+          В произвольном (неортогональном) базисе $A^*_e=\Gamma^{-1}A_e^{T}\Gamma$, поэтому
+          $$D^*_e=\begin{pmatrix}4&-6\\-6&12\end{pmatrix}\begin{pmatrix}0&0\\1&0\end{pmatrix}\begin{pmatrix}1&1/2\\1/2&1/3\end{pmatrix}=\begin{pmatrix}-6&-3\\12&6\end{pmatrix}.$$
+          $D^*_e\ne D_e$ — оператор дифференцирования не самосопряжён. Проверка: $(\mathcal{D}x,\,1)=\int_0^1 1\,dx=1$ и $(x,\,\mathcal{D}^*1)=\int_0^1 x\,(12x-6)\,dx=4-3=1$.
+        </div>
+      </div>
+    </div>
+    <div class="src-ref">Пример из лекции: дифференциальный оператор</div>
+  </div>
+</div>
+
+<div class="prax-sub">Линейные многообразия</div>
+
+<!-- П9 -->
+<div class="q-card" data-q="109" data-text="практика линейное многообразие пространство многочленов параметрический вид размерность фнр частное решение анно">
+  <div class="q-head" onclick="toggleCard(this)">
+    <span class="q-num">09</span>
+    <span class="q-title">Многообразие в $P_n[x]$: $p(-1)=-p(1)$, $p'(1)=3$</span>
+    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  </div>
+  <div class="q-body">
+    <div class="def-block">
+      <div class="section-tag">Условие</div>
+      <div class="def-text">
+        В пространстве $P_n[x]$ многочленов степени не выше четырёх задайте в параметрическом виде многообразие $H$, ограниченное условиями $p(-1)=-p(1)$ и $p'(1)=3$. Укажите его размерность.
+      </div>
+    </div>
+    <div class="derivation collapsed">
+      <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Решение</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
+        <div class="def-text">
+          Запишем многочлен в виде $p(x)=a_0+a_1x+a_2x^2+a_3x^3+a_4x^4$. Условие $p(-1)=-p(1)$ даёт $a_0-a_1+a_2-a_3+a_4=-a_0-a_1-a_2-a_3-a_4$, то есть $a_0+a_2+a_4=0$; условие $p'(1)=3$ — второе уравнение системы:
+          $$\begin{cases}a_0+a_2+a_4=0,\\[2pt] a_1+2a_2+3a_3+4a_4=3.\end{cases}$$
+          Система имеет ранг $2$, её решением служит трёхмерное многообразие в $\mathbb{R}^5$. Частное решение — вектор $c=(0;3;0;0;0)$, ему соответствует многочлен $p_0(x)=3x$. В качестве ФСР однородной СЛАУ можно выбрать
+          $$f_1=(1;2;-1;0;0),\quad f_2=(0;3;0;-1;0),\quad f_3=(1;4;0;0;-1),$$
+          то есть многочлены
+          $$p_1(x)=-x^2+2x+1,\qquad p_2(x)=-x^3+3x,\qquad p_3(x)=-x^4+4x+1.$$
+          Параметрическое представление $H=p_0(x)+L\{p_1(x),\,p_2(x),\,p_3(x)\}$; $\;\dim H=3$.
+        </div>
+      </div>
+    </div>
+    <div class="src-ref">Анно Е. И., «Задачи по линейной алгебре», ч. I, с. 86–87, пример 1</div>
+  </div>
+</div>
+
+<div class="prax-sub">Прямые и плоскости</div>
+
+<!-- П10 -->
+<div class="q-card" data-q="110" data-text="практика прямая на плоскости равноудалённая точка расстояние серединный перпендикуляр анно">
+  <div class="q-head" onclick="toggleCard(this)">
+    <span class="q-num">10</span>
+    <span class="q-title">Точка на прямой, равноудалённая от $M_1(3;4)$ и $M_2(0;-5)$</span>
+    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  </div>
+  <div class="q-body">
+    <div class="def-block">
+      <div class="section-tag">Условие</div>
+      <div class="def-text">
+        Найдите на прямой, заданной уравнением $L\colon\{2x+3y=6$, точку $M(x;y)$, равноудалённую от точек $M_1(3;4)$ и $M_2(0;-5)$.
+      </div>
+    </div>
+    <div class="derivation collapsed">
+      <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Решение</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
+        <div class="def-text">
+          Равноудалённость точки $M$ от точек $M_1$ и $M_2$ записывается в виде $|M_1M|^2=|M_2M|^2$. Получим систему
+          $$\begin{cases}2x+3y=6,\\ (x-3)^2+(y-4)^2=x^2+(y+5)^2.\end{cases}$$
+          Раскрыв квадраты во втором уравнении: $-6x-8y+25=10y+25$, то есть $x=-3y$ (это серединный перпендикуляр к отрезку $M_1M_2$). Подставляя в первое: $-6y+3y=6$, откуда $y=-2$, $x=6$. Ответ:
+          $$M(6;-2).$$
+        </div>
+        <svg class="prax-fig" viewBox="0 0 460 497" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Прямая L, точки M1 и M2 и равноудалённая от них точка M(6;−2) на прямой; пунктиром серединный перпендикуляр">
+          <line x1="43.0" y1="469.0" x2="43.0" y2="27.6" stroke="var(--border)" stroke-width="1"/>
+          <line x1="80.4" y1="469.0" x2="80.4" y2="27.6" stroke="var(--border)" stroke-width="1"/>
+          <line x1="155.2" y1="469.0" x2="155.2" y2="27.6" stroke="var(--border)" stroke-width="1"/>
+          <line x1="192.6" y1="469.0" x2="192.6" y2="27.6" stroke="var(--border)" stroke-width="1"/>
+          <line x1="230.0" y1="469.0" x2="230.0" y2="27.6" stroke="var(--border)" stroke-width="1"/>
+          <line x1="267.4" y1="469.0" x2="267.4" y2="27.6" stroke="var(--border)" stroke-width="1"/>
+          <line x1="304.8" y1="469.0" x2="304.8" y2="27.6" stroke="var(--border)" stroke-width="1"/>
+          <line x1="342.2" y1="469.0" x2="342.2" y2="27.6" stroke="var(--border)" stroke-width="1"/>
+          <line x1="379.6" y1="469.0" x2="379.6" y2="27.6" stroke="var(--border)" stroke-width="1"/>
+          <line x1="417.0" y1="469.0" x2="417.0" y2="27.6" stroke="var(--border)" stroke-width="1"/>
+          <line x1="28.0" y1="454.0" x2="432.0" y2="454.0" stroke="var(--border)" stroke-width="1"/>
+          <line x1="28.0" y1="416.6" x2="432.0" y2="416.6" stroke="var(--border)" stroke-width="1"/>
+          <line x1="28.0" y1="379.2" x2="432.0" y2="379.2" stroke="var(--border)" stroke-width="1"/>
+          <line x1="28.0" y1="341.8" x2="432.0" y2="341.8" stroke="var(--border)" stroke-width="1"/>
+          <line x1="28.0" y1="304.4" x2="432.0" y2="304.4" stroke="var(--border)" stroke-width="1"/>
+          <line x1="28.0" y1="267.0" x2="432.0" y2="267.0" stroke="var(--border)" stroke-width="1"/>
+          <line x1="28.0" y1="192.2" x2="432.0" y2="192.2" stroke="var(--border)" stroke-width="1"/>
+          <line x1="28.0" y1="154.8" x2="432.0" y2="154.8" stroke="var(--border)" stroke-width="1"/>
+          <line x1="28.0" y1="117.4" x2="432.0" y2="117.4" stroke="var(--border)" stroke-width="1"/>
+          <line x1="28.0" y1="80.0" x2="432.0" y2="80.0" stroke="var(--border)" stroke-width="1"/>
+          <line x1="28.0" y1="42.6" x2="432.0" y2="42.6" stroke="var(--border)" stroke-width="1"/>
+          <line x1="28.0" y1="229.6" x2="432.0" y2="229.6" stroke="var(--ink-soft)" stroke-width="1.5"/>
+          <polygon points="432.0,229.6 423.0,225.6 423.0,233.6" fill="var(--ink-soft)"/>
+          <line x1="117.8" y1="469.0" x2="117.8" y2="27.6" stroke="var(--ink-soft)" stroke-width="1.5"/>
+          <polygon points="117.8,27.6 113.8,36.6 121.8,36.6" fill="var(--ink-soft)"/>
+          <text x="428.0" y="245.6" font-size="12.5" fill="var(--ink-soft)" font-family="inherit" text-anchor="end" font-style="italic">x</text>
+          <text x="125.8" y="37.6" font-size="12.5" fill="var(--ink-soft)" font-family="inherit" text-anchor="start" font-style="italic">y</text>
+          <text x="112.8" y="243.6" font-size="11" fill="var(--ink-soft)" font-family="inherit" text-anchor="end">O</text>
+          <text x="43.0" y="243.6" font-size="10.5" fill="var(--ink-mute)" font-family="inherit" text-anchor="middle">-2</text>
+          <text x="192.6" y="243.6" font-size="10.5" fill="var(--ink-mute)" font-family="inherit" text-anchor="middle">2</text>
+          <text x="267.4" y="243.6" font-size="10.5" fill="var(--ink-mute)" font-family="inherit" text-anchor="middle">4</text>
+          <text x="342.2" y="243.6" font-size="10.5" fill="var(--ink-mute)" font-family="inherit" text-anchor="middle">6</text>
+          <text x="111.8" y="458.0" font-size="10.5" fill="var(--ink-mute)" font-family="inherit" text-anchor="end">-6</text>
+          <text x="111.8" y="383.2" font-size="10.5" fill="var(--ink-mute)" font-family="inherit" text-anchor="end">-4</text>
+          <text x="111.8" y="308.4" font-size="10.5" fill="var(--ink-mute)" font-family="inherit" text-anchor="end">-2</text>
+          <text x="111.8" y="158.8" font-size="10.5" fill="var(--ink-mute)" font-family="inherit" text-anchor="end">2</text>
+          <text x="111.8" y="84.0" font-size="10.5" fill="var(--ink-mute)" font-family="inherit" text-anchor="end">4</text>
+          <line x1="35.5" y1="99.9" x2="424.5" y2="359.3" stroke="var(--accent)" stroke-width="2.6"/>
+          <line x1="35.5" y1="202.2" x2="424.5" y2="331.8" stroke="var(--ink-mute)" stroke-width="1.6" stroke-dasharray="6 5"/>
+          <line x1="342.2" y1="304.4" x2="230.0" y2="80.0" stroke="var(--ink-soft)" stroke-width="1.5" stroke-dasharray="3 4"/>
+          <line x1="342.2" y1="304.4" x2="117.8" y2="416.6" stroke="var(--ink-soft)" stroke-width="1.5" stroke-dasharray="3 4"/>
+          <line x1="280.7" y1="194.9" x2="291.5" y2="189.5" stroke="var(--ink)" stroke-width="1.6"/>
+          <line x1="232.7" y1="365.9" x2="227.3" y2="355.1" stroke="var(--ink)" stroke-width="1.6"/>
+          <circle cx="230.0" cy="80.0" r="3.6" fill="var(--ink)"/>
+          <circle cx="117.8" cy="416.6" r="3.6" fill="var(--ink)"/>
+          <circle cx="342.2" cy="304.4" r="4.6" fill="var(--accent)"/>
+          <text x="238.0" y="74.0" font-size="12.5" fill="var(--ink)" font-family="inherit" text-anchor="start" font-weight="600">M₁(3;4)</text>
+          <text x="127.8" y="422.6" font-size="12.5" fill="var(--ink)" font-family="inherit" text-anchor="start" font-weight="600">M₂(0;−5)</text>
+          <text x="352.2" y="296.4" font-size="12.5" fill="var(--accent)" font-family="inherit" text-anchor="start" font-weight="600">M(6;−2)</text>
+          <text x="39.2" y="88.9" font-size="12.5" fill="var(--accent)" font-family="inherit" text-anchor="start" font-style="italic" font-weight="600">L: 2x + 3y = 6</text>
+          <text x="312.3" y="268.9" font-size="11.5" fill="var(--ink-mute)" font-family="inherit" text-anchor="start" font-style="italic">x = −3y</text>
+        </svg>
+      </div>
+    </div>
+    <div class="src-ref">Анно Е. И., «Задачи по линейной алгебре», ч. I, с. 21, пример 6</div>
+  </div>
+</div>
+
+<!-- П11 -->
+<div class="q-card" data-q="111" data-text="практика плоскость через точку и прямую нормаль общее уравнение анно">
+  <div class="q-head" onclick="toggleCard(this)">
+    <span class="q-num">11</span>
+    <span class="q-title">Плоскость через точку $M_0(-1;1;-5)$ и прямую</span>
+    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  </div>
+  <div class="q-body">
+    <div class="def-block">
+      <div class="section-tag">Условие</div>
+      <div class="def-text">
+        Составьте общее уравнение плоскости $\pi$, проходящей через точку $M_0(-1;1;-5)$ и прямую $L=c(1;0;-2)+t\cdot a(1;-2;1)$, заданную параметрически.
+      </div>
+    </div>
+    <div class="derivation collapsed">
+      <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Решение</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
+        <div class="def-text">
+          Для уравнения плоскости достаточно точки (это $M_0$) и нормали $n$. Нормаль перпендикулярна любому вектору в плоскости — в частности, направляющему вектору $a(1;-2;1)$ и вектору $M_0-c=(-2;1;-3)$. Составим однородную систему
+          $$\begin{cases}(a,\,n)=x-2y+z=0,\\ (M_0-c,\,n)=-2x+y-3z=0.\end{cases}$$
+          Из первого уравнения $x=2y-z$; подстановка во второе даёт $-3y-z=0$, то есть $z=-3y$, $x=5y$. Решением служит вектор $n(5;1;-3)$. Уравнение $(n,M)=(n,M_0)$:
+          $$\pi\colon\{\,5x+y-3z=5\cdot(-1)+1-3\cdot(-5)=11.$$
+        </div>
+        <svg class="prax-fig" viewBox="0 0 460 232" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Плоскость через точку M0 и прямую L: нормаль n перпендикулярна направляющему вектору a и вектору M0 минус c">
+          <polygon points="58,176 224,104 424,140 258,216" fill="var(--bg-elev)" fill-opacity="0.55" stroke="var(--ink-soft)" stroke-width="1.5"/>
+          <text x="70" y="208" font-size="15" fill="var(--ink-soft)" font-family="inherit" text-anchor="start" font-style="italic" font-weight="600">π</text>
+          <line x1="96" y1="172" x2="392" y2="126" stroke="var(--accent)" stroke-width="2.5"/>
+          <polygon points="392,126 380,123 382,133" fill="var(--accent)"/>
+          <text x="398" y="124" font-size="14" fill="var(--accent)" font-family="inherit" text-anchor="start" font-style="italic" font-weight="600">L</text>
+          <circle cx="168" cy="161" r="3.8" fill="var(--ink)"/>
+          <text x="120" y="150" font-size="12" fill="var(--ink)" font-family="inherit" text-anchor="start">c(1;0;−2)</text>
+          <line x1="238" y1="150" x2="310" y2="139" stroke="var(--ink)" stroke-width="2"/>
+          <polygon points="310,139 298,136 300,146" fill="var(--ink)"/>
+          <text x="262" y="136" font-size="12" fill="var(--ink)" font-family="inherit" text-anchor="start" font-style="italic">a(1;−2;1)</text>
+          <circle cx="316" cy="196" r="3.8" fill="var(--ink)"/>
+          <text x="326" y="202" font-size="12" fill="var(--ink)" font-family="inherit" text-anchor="start">M₀(−1;1;−5)</text>
+          <line x1="168" y1="161" x2="316" y2="196" stroke="var(--ink-mute)" stroke-width="1.5" stroke-dasharray="5 4"/>
+          <text x="216" y="190" font-size="11.5" fill="var(--ink-mute)" font-family="inherit" text-anchor="start" font-style="italic">M₀ − c</text>
+          <line x1="252" y1="158" x2="252" y2="52" stroke="var(--ink)" stroke-width="2"/>
+          <polygon points="252,52 247,64 257,64" fill="var(--ink)"/>
+          <circle cx="252" cy="158" r="2.6" fill="var(--ink)"/>
+          <text x="260" y="62" font-size="12.5" fill="var(--ink)" font-family="inherit" text-anchor="start" font-style="italic" font-weight="600">n(5;1;−3)</text>
+        </svg>
+      </div>
+    </div>
+    <div class="src-ref">Анно Е. И., «Задачи по линейной алгебре», ч. I, с. 26, пример 3</div>
+  </div>
+</div>
+
+<!-- П12 -->
+<div class="q-card" data-q="112" data-text="практика прямая в пространстве направляющий вектор параметрическое каноническое уравнение пересечение плоскостей анно">
+  <div class="q-head" onclick="toggleCard(this)">
+    <span class="q-num">12</span>
+    <span class="q-title">Прямая, заданная пересечением плоскостей: направляющий вектор</span>
+    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  </div>
+  <div class="q-body">
+    <div class="def-block">
+      <div class="section-tag">Условие</div>
+      <div class="def-text">
+        Найдите направляющий вектор прямой, заданной системой уравнений
+        $$L\colon\begin{cases}2x-5y+3z=3,\\ -3x+5y-2z=-2,\end{cases}$$
+        и укажите её параметрическое и каноническое представления.
+      </div>
+    </div>
+    <div class="derivation collapsed">
+      <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Решение</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
+        <div class="def-text">
+          Для выбора точки на прямой достаточно любого частного решения системы — например, $c(-1;-1;0)$. Координаты направляющего вектора — решения однородной системы
+          $$\begin{cases}2x-5y+3z=0,\\ -3x+5y-2z=0.\end{cases}$$
+          Сложив уравнения, получим $-x+z=0$, то есть $z=x$; тогда из первого $5x-5y=0$, $y=x$. Направляющий вектор $a(1;1;1)$. Параметрическое уравнение $L=c(-1;-1;0)+t\cdot a(1;1;1)$; каноническое:
+          $$L\colon\ \frac{x+1}{1}=\frac{y+1}{1}=\frac{z}{1}.$$
+        </div>
+        <svg class="prax-fig" viewBox="0 0 460 226" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Две плоскости пересекаются по прямой L с направляющим вектором a(1;1;1) и точкой c(−1;−1;0)">
+          <polygon points="44,64 236,36 320,168 128,196" fill="var(--bg-elev)" fill-opacity="0.5" stroke="var(--ink-soft)" stroke-width="1.5"/>
+          <polygon points="150,38 428,78 344,206 66,166" fill="var(--bg-elev)" fill-opacity="0.5" stroke="var(--ink-soft)" stroke-width="1.5"/>
+          <text x="58" y="60" font-size="12" fill="var(--ink-soft)" font-family="inherit" text-anchor="start" font-style="italic">π₁: 2x−5y+3z=3</text>
+          <text x="316" y="66" font-size="12" fill="var(--ink-soft)" font-family="inherit" text-anchor="start" font-style="italic">π₂: −3x+5y−2z=−2</text>
+          <line x1="196" y1="44" x2="266" y2="192" stroke="var(--accent)" stroke-width="2.8"/>
+          <polygon points="266,192 254,186 262,180" fill="var(--accent)"/>
+          <text x="272" y="196" font-size="14.5" fill="var(--accent)" font-family="inherit" text-anchor="start" font-style="italic" font-weight="600">L</text>
+          <line x1="214" y1="82" x2="238" y2="133" stroke="var(--ink)" stroke-width="2.2"/>
+          <polygon points="238,133 227,128 234,122" fill="var(--ink)"/>
+          <text x="244" y="108" font-size="12.5" fill="var(--ink)" font-family="inherit" text-anchor="start" font-style="italic" font-weight="600">a(1;1;1)</text>
+          <circle cx="228" cy="112" r="4" fill="var(--ink)"/>
+          <text x="148" y="122" font-size="12" fill="var(--ink)" font-family="inherit" text-anchor="start">c(−1;−1;0)</text>
+        </svg>
+      </div>
+    </div>
+    <div class="src-ref">Анно Е. И., «Задачи по линейной алгебре», ч. I, с. 27, пример 5</div>
+  </div>
+</div>
+
+<div class="prax-sub">Кривые второго порядка</div>
+
+<!-- П13 -->
+<div class="q-card" data-q="113" data-text="практика кривые второго порядка эллипс канонический вид центр оси эксцентриситет инварианты лунгу">
+  <div class="q-head" onclick="toggleCard(this)">
+    <span class="q-num">13</span>
+    <span class="q-title">Эллипс $4x^2+3y^2-8x+12y-32=0$: центр, оси, эксцентриситет</span>
+    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  </div>
+  <div class="q-body">
+    <div class="def-block">
+      <div class="section-tag">Условие</div>
+      <div class="def-text">
+        Показать, что уравнение $4x^2+3y^2-8x+12y-32=0$ определяет эллипс, найти его оси, координаты центра и эксцентриситет.
+      </div>
+    </div>
+    <div class="derivation collapsed">
+      <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Решение</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
+        <div class="def-text">
+          Выделим полные квадраты:
+          $$4(x^2-2x)+3(y^2+4y)=32\;\Rightarrow\;4(x-1)^2+3(y+2)^2=48\;\Rightarrow\;\frac{(x-1)^2}{12}+\frac{(y+2)^2}{16}=1.$$
+          Это уравнение эллипса с центром $C(1;-2)$. Здесь $a^2=12$, $b^2=16$, то есть полуоси $a=2\sqrt3$ (вдоль $Ox$) и $b=4$ (вдоль $Oy$); так как $b>a$, большая ось направлена по $Oy$, длины осей $2a=4\sqrt3$ и $2b=8$. Тогда $c=\sqrt{b^2-a^2}=2$, фокусы $F_1(1;0)$ и $F_2(1;-4)$, эксцентриситет
+          $$\varepsilon=\frac{c}{b}=\frac12.$$
+          Через инварианты: $\delta=\begin{vmatrix}4&0\\0&3\end{vmatrix}=12>0$, $\;\Delta=\begin{vmatrix}4&0&-4\\0&3&6\\-4&6&-32\end{vmatrix}=-576\ne0$, $\;I_1=7$, $\;\Delta\cdot I_1<0$ — эллипс. Каноническое уравнение $\lambda_1x'^2+\lambda_2y'^2+\dfrac{\Delta}{\delta}=0$ даёт $4x'^2+3y'^2=48$ — тот же результат.
+        </div>
+        <svg class="prax-fig" viewBox="0 0 440 483" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Эллипс с центром C(1;−2), большой осью вдоль Oy, фокусами F1(1;0) и F2(1;−4)">
+          <line x1="45.1" y1="455.0" x2="45.1" y2="28.3" stroke="var(--border)" stroke-width="1"/>
+          <line x1="87.7" y1="455.0" x2="87.7" y2="28.3" stroke="var(--border)" stroke-width="1"/>
+          <line x1="130.4" y1="455.0" x2="130.4" y2="28.3" stroke="var(--border)" stroke-width="1"/>
+          <line x1="215.7" y1="455.0" x2="215.7" y2="28.3" stroke="var(--border)" stroke-width="1"/>
+          <line x1="258.4" y1="455.0" x2="258.4" y2="28.3" stroke="var(--border)" stroke-width="1"/>
+          <line x1="301.1" y1="455.0" x2="301.1" y2="28.3" stroke="var(--border)" stroke-width="1"/>
+          <line x1="343.7" y1="455.0" x2="343.7" y2="28.3" stroke="var(--border)" stroke-width="1"/>
+          <line x1="386.4" y1="455.0" x2="386.4" y2="28.3" stroke="var(--border)" stroke-width="1"/>
+          <line x1="28.0" y1="416.6" x2="412.0" y2="416.6" stroke="var(--border)" stroke-width="1"/>
+          <line x1="28.0" y1="373.9" x2="412.0" y2="373.9" stroke="var(--border)" stroke-width="1"/>
+          <line x1="28.0" y1="331.3" x2="412.0" y2="331.3" stroke="var(--border)" stroke-width="1"/>
+          <line x1="28.0" y1="288.6" x2="412.0" y2="288.6" stroke="var(--border)" stroke-width="1"/>
+          <line x1="28.0" y1="245.9" x2="412.0" y2="245.9" stroke="var(--border)" stroke-width="1"/>
+          <line x1="28.0" y1="203.3" x2="412.0" y2="203.3" stroke="var(--border)" stroke-width="1"/>
+          <line x1="28.0" y1="117.9" x2="412.0" y2="117.9" stroke="var(--border)" stroke-width="1"/>
+          <line x1="28.0" y1="75.3" x2="412.0" y2="75.3" stroke="var(--border)" stroke-width="1"/>
+          <line x1="28.0" y1="32.6" x2="412.0" y2="32.6" stroke="var(--border)" stroke-width="1"/>
+          <line x1="28.0" y1="160.6" x2="412.0" y2="160.6" stroke="var(--ink-soft)" stroke-width="1.5"/>
+          <polygon points="412.0,160.6 403.0,156.6 403.0,164.6" fill="var(--ink-soft)"/>
+          <line x1="173.1" y1="455.0" x2="173.1" y2="28.3" stroke="var(--ink-soft)" stroke-width="1.5"/>
+          <polygon points="173.1,28.3 169.1,37.3 177.1,37.3" fill="var(--ink-soft)"/>
+          <text x="408.0" y="176.6" font-size="12.5" fill="var(--ink-soft)" font-family="inherit" text-anchor="end" font-style="italic">x</text>
+          <text x="181.1" y="38.3" font-size="12.5" fill="var(--ink-soft)" font-family="inherit" text-anchor="start" font-style="italic">y</text>
+          <text x="168.1" y="174.6" font-size="11" fill="var(--ink-soft)" font-family="inherit" text-anchor="end">O</text>
+          <text x="87.7" y="174.6" font-size="10.5" fill="var(--ink-mute)" font-family="inherit" text-anchor="middle">-2</text>
+          <text x="258.4" y="174.6" font-size="10.5" fill="var(--ink-mute)" font-family="inherit" text-anchor="middle">2</text>
+          <text x="343.7" y="174.6" font-size="10.5" fill="var(--ink-mute)" font-family="inherit" text-anchor="middle">4</text>
+          <text x="167.1" y="420.6" font-size="10.5" fill="var(--ink-mute)" font-family="inherit" text-anchor="end">-6</text>
+          <text x="167.1" y="335.3" font-size="10.5" fill="var(--ink-mute)" font-family="inherit" text-anchor="end">-4</text>
+          <text x="167.1" y="249.9" font-size="10.5" fill="var(--ink-mute)" font-family="inherit" text-anchor="end">-2</text>
+          <text x="167.1" y="79.3" font-size="10.5" fill="var(--ink-mute)" font-family="inherit" text-anchor="end">2</text>
+          <line x1="215.7" y1="442.2" x2="215.7" y2="49.7" stroke="var(--ink-mute)" stroke-width="1.4" stroke-dasharray="6 5"/>
+          <line x1="46.6" y1="245.9" x2="384.9" y2="245.9" stroke="var(--ink-mute)" stroke-width="1.4" stroke-dasharray="6 5"/>
+          <ellipse cx="215.7" cy="245.9" rx="147.8" ry="170.7" fill="none" stroke="var(--accent)" stroke-width="2.6"/>
+          <circle cx="215.7" cy="245.9" r="4" fill="var(--ink)"/>
+          <text x="224.7" y="238.9" font-size="12.5" fill="var(--ink)" font-family="inherit" text-anchor="start" font-weight="600">C(1;−2)</text>
+          <circle cx="215.7" cy="160.6" r="3.4" fill="var(--ink-soft)"/>
+          <circle cx="215.7" cy="331.3" r="3.4" fill="var(--ink-soft)"/>
+          <text x="224.7" y="164.6" font-size="12.5" fill="var(--ink-soft)" font-family="inherit" text-anchor="start">F₁(1;0)</text>
+          <text x="224.7" y="335.3" font-size="12.5" fill="var(--ink-soft)" font-family="inherit" text-anchor="start">F₂(1;−4)</text>
+          <circle cx="215.7" cy="75.3" r="2.6" fill="var(--ink-mute)"/>
+          <circle cx="215.7" cy="416.6" r="2.6" fill="var(--ink-mute)"/>
+          <circle cx="67.9" cy="245.9" r="2.6" fill="var(--ink-mute)"/>
+          <circle cx="363.5" cy="245.9" r="2.6" fill="var(--ink-mute)"/>
+          <text x="157.7" y="75.3" font-size="11.5" fill="var(--ink-mute)" font-family="inherit" text-anchor="start" font-style="italic">b = 4</text>
+          <text x="339.5" y="265.9" font-size="11.5" fill="var(--ink-mute)" font-family="inherit" text-anchor="start" font-style="italic">a = 2√3</text>
+        </svg>
+      </div>
+    </div>
+    <div class="src-ref">Лунгу К. Н., «Сборник задач по высшей математике», ч. I, с. 152, задача 4.3.27 (решается и через инварианты)</div>
+  </div>
+</div>
+
+<div class="prax-sub">Поверхности второго порядка</div>
+
+<!-- П14 -->
+<div class="q-card" data-q="114" data-text="практика поверхности второго порядка гиперболический параболоид касательная плоскость прямолинейные образующие лунгу">
+  <div class="q-head" onclick="toggleCard(this)">
+    <span class="q-num">14</span>
+    <span class="q-title">Касательная плоскость к гиперболическому параболоиду: две прямые</span>
+    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  </div>
+  <div class="q-body">
+    <div class="def-block">
+      <div class="section-tag">Условие</div>
+      <div class="def-text">
+        Дан гиперболический параболоид $x^2-\dfrac{y^2}{4}=z$ и одна из его касательных плоскостей: $10x-2y-z-21=0$. Найти уравнения каждой из тех двух прямых, по которым плоскость пересекается с параболоидом.
+      </div>
+    </div>
+    <div class="derivation collapsed">
+      <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Решение</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
+        <div class="def-text">
+          Точки линии пересечения удовлетворяют обоим уравнениям. Подставим $z=10x-2y-21$ в уравнение параболоида:
+          $$x^2-\frac{y^2}{4}=10x-2y-21\;\Leftrightarrow\;4x^2-y^2-40x+8y+84=0\;\Leftrightarrow\;(2x-y-6)(2x+y-14)=0.$$
+          Значит, линия пересечения распадается на две прямые:
+          $$L_1\colon\begin{cases}10x-2y-z=21,\\ 2x-y=6,\end{cases}\qquad L_2\colon\begin{cases}10x-2y-z=21,\\ 2x+y=14.\end{cases}$$
+          Приведём $L_1$ к каноническому виду. Две её точки: при $z=0$ — $M_1\!\left(\tfrac32;-3;0\right)$, при $y=0$ — $M_2(3;0;9)$; направляющий вектор $\overrightarrow{M_1M_2}=\left(\tfrac32;3;9\right)=\tfrac32\,(1;2;6)$, поэтому
+          $$L_1\colon\ \frac{x-3}{1}=\frac{y}{2}=\frac{z-9}{6}.$$
+          Для $L_2$ направляющий вектор найдём как векторное произведение нормалей: $(10;-2;-1)\times(2;1;0)=(1;-2;14)$; точка $(5;4;21)$ лежит на $L_2$, поэтому
+          $$L_2\colon\ \frac{x-5}{1}=\frac{y-4}{-2}=\frac{z-21}{14}.$$
+          Обе прямые проходят через точку касания $M(5;4;21)$ — это прямолинейные образующие гиперболического параболоида, лежащие в касательной плоскости.
+        </div>
+        <svg class="prax-fig" viewBox="0 0 460 232" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Гиперболический параболоид, касательная плоскость и две прямые L1 и L2, по которым она пересекает поверхность; точка касания M(5;4;21)">
+          <path d="M 92 74 Q 230 146 368 74" fill="none" stroke="var(--ink-soft)" stroke-width="1.7"/>
+          <path d="M 62 128 Q 230 212 398 128" fill="none" stroke="var(--ink-soft)" stroke-width="1.7"/>
+          <path d="M 92 74 Q 42 94 62 128" fill="none" stroke="var(--ink-soft)" stroke-width="1.7"/>
+          <path d="M 368 74 Q 418 94 398 128" fill="none" stroke="var(--ink-soft)" stroke-width="1.7"/>
+          <path d="M 77 101 Q 230 180 383 101" fill="none" stroke="var(--ink-mute)" stroke-width="1.2" stroke-dasharray="5 4"/>
+          <path d="M 230 110 Q 218 138 230 170" fill="none" stroke="var(--ink-mute)" stroke-width="1.2" stroke-dasharray="5 4"/>
+          <polygon points="96,104 348,88 364,178 112,194" fill="var(--bg-elev)" fill-opacity="0.4" stroke="var(--ink-mute)" stroke-width="1.2" stroke-dasharray="6 5"/>
+          <text x="120" y="118" font-size="11.5" fill="var(--ink-mute)" font-family="inherit" text-anchor="start" font-style="italic">π: 10x−2y−z=21</text>
+          <line x1="112" y1="180" x2="352" y2="98" stroke="var(--accent)" stroke-width="2.5"/>
+          <line x1="112" y1="98" x2="352" y2="180" stroke="var(--accent)" stroke-width="2.5"/>
+          <text x="358" y="96" font-size="13.5" fill="var(--accent)" font-family="inherit" text-anchor="start" font-style="italic" font-weight="600">L₁</text>
+          <text x="358" y="188" font-size="13.5" fill="var(--accent)" font-family="inherit" text-anchor="start" font-style="italic" font-weight="600">L₂</text>
+          <circle cx="232" cy="139" r="4.4" fill="var(--ink)"/>
+          <text x="240" y="158" font-size="12.5" fill="var(--ink)" font-family="inherit" text-anchor="start" font-weight="600">M(5;4;21)</text>
+        </svg>
+      </div>
+    </div>
+    <div class="src-ref">Лунгу К. Н., «Сборник задач по высшей математике», ч. I, с. 220–221, задача 5.5.17</div>
+  </div>
+</div>
+
+    </div>
+  </section>
+
 </main>
 
 <footer>
-  MoziHelper · справочник по линейной алгебре · 2-й семестр · 92 вопроса · сборка 17.06
+  MoziHelper · справочник по линейной алгебре · 2-й семестр · 92 вопроса + практика · сборка 17.06
   <div class="footer-note">Сайт находится в разработке и будет дорабатываться со временем.</div>
 </footer>
 
@@ -7852,6 +8539,7 @@ const TOPICS = [
 const SIDE_ICONS = {
   home:    '<path d="M3 11L12 3l9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/>',
   quiz:    '<path d="M2 10L12 5l10 5-10 5z"/><path d="M6 12v5c2 2 10 2 12 0v-5"/><path d="M22 10v6"/>',
+  practice:'<path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>',
   book:    '<path d="M2 4h7a3 3 0 0 1 3 3v14a2 2 0 0 0-2-2H2z"/><path d="M22 4h-7a3 3 0 0 0-3 3v14a2 2 0 0 1 2-2h8z"/>',
   devices: '<path d="M9 17H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v4"/><path d="M8 21h4"/><path d="M10 17v4"/><rect x="14" y="11" width="7" height="10" rx="1"/>',
   moon:    '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>',
@@ -7889,6 +8577,7 @@ function buildSidebar() {
     <div class="side-section-title">Материал</div>
     <a class="side-nav-item is-home" onclick="showTopic('start')">${sideIcon('home')}<span class="side-nav-label">На главную</span></a>
     <a class="side-nav-item" onclick="openQuizMenu()">${sideIcon('quiz')}<span class="side-nav-label">Подготовка</span></a>
+    <a class="side-nav-item" onclick="showTopic('practice')">${sideIcon('practice')}<span class="side-nav-label">Практика</span></a>
     <a class="side-nav-item" onclick="showTopic('basics')">${sideIcon('book')}<span class="side-nav-label">Базовые термины</span></a>
     <a class="side-nav-item" href="literatura.html">${sideIcon('book')}<span class="side-nav-label">Литература</span></a>
     <a class="side-nav-item" href="lekcii-sem2.html"><svg class="side-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span class="side-nav-label">Лекции (презентации)</span></a>
@@ -8753,7 +9442,8 @@ const TOPIC_NAMES = {
   t4: 'Жордановы формы',
   t5: 'Линейная алгебра и аналитическая геометрия',
   t6: 'КВП и ПВП',
-  basics: 'Термины с прошлого семестра'
+  basics: 'Термины с прошлого семестра',
+  practice: 'Практика'
 };
 
 var TICKET_QUIZ = {};
