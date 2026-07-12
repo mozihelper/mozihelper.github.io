@@ -1791,6 +1791,13 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 ::view-transition-old(root){z-index:1;}
 ::view-transition-new(root){z-index:2;animation:waveReveal .55s cubic-bezier(.4,0,.2,1) forwards;}
 @keyframes waveReveal{from{clip-path:circle(0 at var(--wave-x,100%) var(--wave-y,0));}to{clip-path:circle(var(--wave-r,150vmax) at var(--wave-x,100%) var(--wave-y,0));}}
+
+/* ── Рисунки к примерам операторов (вопрос 125) ── */
+.op-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.6rem 1.8rem;margin-top:1rem;}
+.op-item{display:flex;flex-direction:column;gap:0.5rem;}
+.op-cap{font-size:0.94rem;line-height:1.55;}
+.op-fig{display:block;width:100%;max-width:300px;height:auto;margin:0.2rem auto 0;}
+@media (max-width:640px){.op-grid{grid-template-columns:1fr;}}
 </style>
 <style id="ra79-style">
 .q-card[data-q="79"] .ra-ln{margin:4px 0;line-height:2;color:var(--ink);transition:color .2s ease}
@@ -1817,6 +1824,23 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 .q-card[data-q="79"] .ra-scroll::-webkit-scrollbar-track{background:transparent}
 .q-card[data-q="79"] .ra-scroll::-webkit-scrollbar-thumb{background:var(--ink-mute);border-radius:8px;border:2px solid var(--bg-card)}
 .q-card[data-q="79"] .ra-scroll::-webkit-scrollbar-thumb:hover{background:var(--ink-soft)}
+
+/* ── Вступление к главе ── */
+.chapter-intro{margin:0 0 2rem;padding:1.15rem 1.35rem;border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:10px;background:var(--bg-elev);}
+.chapter-intro-label{font-size:0.72rem;font-weight:600;letter-spacing:0.13em;text-transform:uppercase;color:var(--accent);margin-bottom:0.6rem;}
+.chapter-intro p{margin:0 0 0.7rem;font-size:0.96rem;line-height:1.65;color:var(--ink-soft);}
+.chapter-intro p:last-child{margin-bottom:0;}
+.chapter-intro .term{color:var(--ink);}
+
+/* ── Оглавление: заголовок главы в боковом меню ── */
+.side-chapter{margin:1.15rem 0 0.4rem;padding:0 0.25rem;font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);opacity:0.9;}
+.side-chapter:first-of-type{margin-top:0.35rem;}
+
+/* ── Пометка о терминологии ── */
+.note-term{font-weight:600;color:var(--ink);}
+
+/* ── Чертёж в вопросе «Идея линейности» ── */
+.lin-fig{display:block;width:100%;max-width:440px;height:auto;margin:1.1rem auto 0.4rem;}
 </style>
 </head>
 <body>
@@ -1923,7 +1947,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <!-- 1. Предмет алгебры -->
 <div class="q-card" data-q="1" data-text="предмет алгебры отношения между объектами операции">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">01</span>
+    <span class="q-num">1</span>
     <span class="q-title">Предмет алгебры</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -1944,9 +1968,9 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 </div>
 
 <!-- 2. Идея линейности -->
-<div class="q-card" data-q="2" data-text="идея линейности линейные уравнения системы нагретая пластинка линейные методы все разделы математики">
+<div class="q-card" data-q="2" data-text="идея линейности линейные уравнения системы нагретая пластинка линейные методы все разделы математики математический анализ производная касательная касательная плоскость дифференциал приближение леонтьев международная торговля матрица на вектор">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">02</span>
+    <span class="q-num">2</span>
     <span class="q-title">Идея линейности в математике</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -1974,7 +1998,54 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       Усложнение при переходе от простейших систем к общим имеет принципиальное значение: системы линейных уравнений встречаются буквально во всех разделах математики, а <span class="term">линейные методы</span>, конечным продуктом которых часто являются решения линейных систем, составляют её наиболее развитую часть. Теория систем такого вида послужила в конце XIX века прототипом для создания теории интегральных уравнений.
     </div>
 
-    <div class="src-ref">Кострикин, ч. 1, с. 18–19</div>
+    <div class="def-block">
+      <div class="section-tag">Линейность — основная идея математического анализа</div>
+      <div class="def-text">
+        Идея линейности не ограничена алгеброй: она является <span class="term">основной идеей математического анализа</span>. Нелинейные объекты изучать трудно, поэтому их <span class="em">приближают линейными</span> — и всё содержание анализа состоит в том, чтобы делать это точно и оценивать погрешность.
+        <br><br>
+        Производная — как раз инструмент такого приближения. Вблизи точки $x_0$ график функции приближается <span class="term">касательной</span>:
+        $$f(x)\approx f(x_0)+f'(x_0)\,(x-x_0),$$
+        и правая часть здесь — линейная функция от приращения $x-x_0$. Чем ближе $x$ к $x_0$, тем точнее равенство: разность между кривой и прямой стремится к нулю быстрее самого приращения.
+
+        <svg class="lin-fig" viewBox="0 0 440 409" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="График функции и касательная в точке x нулевое: вблизи точки касания кривая практически совпадает с прямой">
+        <line x1="187.4" y1="379.0" x2="187.4" y2="29.8" stroke="var(--border)" stroke-width="1"/>
+        <line x1="296.0" y1="379.0" x2="296.0" y2="29.8" stroke="var(--border)" stroke-width="1"/>
+        <line x1="404.6" y1="379.0" x2="404.6" y2="29.8" stroke="var(--border)" stroke-width="1"/>
+        <line x1="30.0" y1="232.4" x2="410.0" y2="232.4" stroke="var(--border)" stroke-width="1"/>
+        <line x1="30.0" y1="123.9" x2="410.0" y2="123.9" stroke="var(--border)" stroke-width="1"/>
+        <line x1="30.0" y1="341.0" x2="410.0" y2="341.0" stroke="var(--ink-soft)" stroke-width="1.4"/>
+        <polygon points="410.0,341.0 402.0,337.5 402.0,344.5" fill="var(--ink-soft)"/>
+        <line x1="78.9" y1="379.0" x2="78.9" y2="29.8" stroke="var(--ink-soft)" stroke-width="1.4"/>
+        <polygon points="78.9,29.8 75.4,37.8 82.4,37.8" fill="var(--ink-soft)"/>
+        <text x="406.0" y="357.0" font-size="12" fill="var(--ink-soft)" font-family="inherit" font-style="italic" text-anchor="end">x</text>
+        <text x="86.9" y="39.8" font-size="12" fill="var(--ink-soft)" font-family="inherit" font-style="italic">y</text>
+        <text x="72.9" y="355.0" font-size="11" fill="var(--ink-soft)" font-family="inherit" text-anchor="end">O</text>
+        <rect x="203.7" y="178.8" width="86.9" height="86.9" fill="var(--accent)" fill-opacity="0.10" stroke="var(--accent)" stroke-width="1" stroke-dasharray="4 3" rx="4"/>
+        <line x1="111.4" y1="358.2" x2="341.6" y2="127.6" stroke="var(--accent)" stroke-width="2.4"/>
+        <polyline points="78.9,281.3 83.5,282.6 88.1,283.7 92.7,284.7 97.3,285.5 101.9,286.1 106.5,286.6 111.2,286.9 115.8,287.1 120.4,287.1 125.0,286.9 129.6,286.5 134.2,286.0 138.8,285.4 143.5,284.5 148.1,283.5 152.7,282.3 157.3,281.0 161.9,279.5 166.5,277.9 171.1,276.0 175.8,274.0 180.4,271.9 185.0,269.6 189.6,267.1 194.2,264.4 198.8,261.6 203.4,258.6 208.1,255.5 212.7,252.2 217.3,248.7 221.9,245.0 226.5,241.2 231.1,237.3 235.7,233.1 240.4,228.8 245.0,224.4 249.6,219.7 254.2,215.0 258.8,210.0 263.4,204.9 268.0,199.6 272.7,194.1 277.3,188.5 281.9,182.7 286.5,176.8 291.1,170.7 295.7,164.4 300.3,158.0 305.0,151.4 309.6,144.6 314.2,137.7 318.8,130.6 323.4,123.3 328.0,115.9 332.6,108.3 337.3,100.5 341.9,92.6 346.5,84.5 351.1,76.2 355.7,67.8" fill="none" stroke="var(--ink)" stroke-width="2.4"/>
+        <text x="361.7" y="63.8" font-size="13" fill="var(--ink)" font-family="inherit" font-style="italic" font-weight="600">y = f(x)</text>
+        <text x="107.4" y="376.2" font-size="12" fill="var(--accent)" font-family="inherit" font-style="italic" font-weight="600">y = f(x₀) + f′(x₀)(x − x₀)</text>
+        <line x1="247.1" y1="222.2" x2="247.1" y2="341.0" stroke="var(--ink-mute)" stroke-width="1.1" stroke-dasharray="4 4"/>
+        <circle cx="247.1" cy="222.2" r="4.2" fill="var(--accent)"/>
+        <text x="247.1" y="357.0" font-size="12" fill="var(--ink-mute)" font-family="inherit" font-style="italic" text-anchor="middle">x₀</text>
+        <text x="259.1" y="212.2" font-size="12" fill="var(--ink)" font-family="inherit" font-weight="600">M₀</text>
+      </svg>
+
+        Для функции нескольких переменных то же самое: график приближается <span class="term">касательной плоскостью</span>
+        $$f(x,y)\approx f(x_0,y_0)+f'_x(x_0,y_0)(x-x_0)+f'_y(x_0,y_0)(y-y_0),$$
+        а дифференциал функции — это и есть линейное отображение, наилучшим образом приближающее её приращение вблизи точки. В этом смысле дифференцируемость означает не что иное, как <span class="em">возможность локально заменить функцию линейной</span>.
+      </div>
+    </div>
+
+    <div class="explain">
+      В экономических моделях линейность выражается в том, что один вектор представляется как <span class="term">произведение матрицы на другой вектор</span>. Так устроена <span class="em">модель Леонтьева</span>: если $x$ — вектор валового выпуска отраслей, $A$ — матрица прямых затрат, то вектор конечного продукта $y$ связан с $x$ линейно:
+      $$y=x-Ax=(E-A)\,x.$$
+      Так же устроена и <span class="em">модель международной торговли</span>: если $x$ — вектор бюджетов стран, а $A$ — структурная матрица торговли, то вектор выручки есть $Ax$, и условие бездефицитности торговли записывается равенством
+      $$Ax=x,$$
+      то есть бюджеты образуют собственный вектор матрицы $A$ при собственном значении $1$. В обоих случаях содержательный экономический вопрос («какой выпуск обеспечит заданное потребление?», «при каких бюджетах торговля бездефицитна?») превращается в вопрос о решении линейной системы — то есть в задачу линейной алгебры. Подробнее — вопросы 166–168 и 169–170.
+    </div>
+
+    <div class="src-ref">Кострикин, ч. 1, с. 18–19; Г. Н. Клюшников, лекция 1</div>
 
   </div>
 </div>
@@ -1982,8 +2053,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <!-- 3. Модельные задачи: радикалы, молекула, кодирование -->
 <div class="q-card" data-q="3" data-text="модельные задачи разрешимость в радикалах Кардано Феррари кристаллографические группы симметрия кодирование">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">03</span>
-    <span class="q-title">Модельные задачи: разрешимость в радикалах, состояния молекулы, кодирование</span>
+    <span class="q-num">3</span>
+    <span class="q-title">Модельные задачи алгебры: разрешимость уравнений в радикалах, состояния многоатомной молекулы, кодирование сообщения</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -2033,8 +2104,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <!-- 4. Модельные задачи: линейное программирование, неотрицательные матрицы -->
 <div class="q-card" data-q="4" data-text="линейное программирование вектор производства допустимый оптимальный по прибыли неотрицательные матрицы модель Леонтьева">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">04</span>
-    <span class="q-title">Модельные задачи: линейное программирование, неотрицательные матрицы</span>
+    <span class="q-num">4</span>
+    <span class="q-title">Модельные задачи алгебры: линейное программирование, неотрицательные матрицы</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -2082,7 +2153,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <!-- 5. Множество, подмножество, элемент -->
 <div class="q-card" data-q="5" data-text="множество подмножество элемент совокупность объектов натуральные числа">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">05</span>
+    <span class="q-num">5</span>
     <span class="q-title">Множество, подмножество, элементы множества</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -2119,7 +2190,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <!-- 6. Пустое, собственное подмножество, совпадающие -->
 <div class="q-card" data-q="6" data-text="пустое множество собственное подмножество совпадающие равные множества">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">06</span>
+    <span class="q-num">6</span>
     <span class="q-title">Пустое множество. Собственное подмножество. Совпадающие множества</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -2155,7 +2226,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <!-- 7. Пересечение, объединение, разность -->
 <div class="q-card" data-q="7" data-text="объединение пересечение разность множеств теоретико-множественные операции">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">07</span>
+    <span class="q-num">7</span>
     <span class="q-title">Пересечение, объединение, разность двух множеств</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -2198,7 +2269,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <!-- 8. Декартово произведение -->
 <div class="q-card" data-q="8" data-text="декартово прямое произведение упорядоченные пары мощность">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">08</span>
+    <span class="q-num">8</span>
     <span class="q-title">Декартово произведение двух множеств</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -2244,8 +2315,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <!-- 9. Понятие отображения -->
 <div class="q-card" data-q="9" data-text="отображение область определения область значений образ функция правило">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">09</span>
-    <span class="q-title">Понятие отображения. Область определения и область значений</span>
+    <span class="q-num">9</span>
+    <span class="q-title">Понятие отображения. Область определения и область значений отображения</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -2437,7 +2508,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <div class="q-card" data-q="14" data-text="ассоциативность композиции отображений теорема доказательство">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">14</span>
-    <span class="q-title">Теорема об ассоциативности композиции отображений</span>
+    <span class="q-title">Теорема об ассоциативности композиции отображений (с доказательством)</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -2470,7 +2541,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <div class="q-card" data-q="15" data-text="обратное отображение существование теорема биекция">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">15</span>
-    <span class="q-title">Обратное отображение. Теорема о существовании обратного</span>
+    <span class="q-title">Обратное отображение. Теорема о существовании обратного отображения</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -2576,7 +2647,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 
 <!-- 19 -->
 <div class="q-card" data-q="19" data-text="цикл длины независимый цикл циклическая перестановка">
-  <div class="q-head" onclick="toggleCard(this)"><span class="q-num">19</span><span class="q-title">Независимый цикл длины L</span><button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></div>
+  <div class="q-head" onclick="toggleCard(this)"><span class="q-num">19</span><span class="q-title">Независимый цикл длины L (определение)</span><button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></div>
   <div class="q-body">
     <div class="def-block"><div class="section-tag">Цикл длины L</div><div class="def-text">
       <span class="term">Циклом длины $L$</span> называется перестановка $\sigma\in S_n$, действующая по правилу
@@ -2627,7 +2698,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 
 <!-- 22 -->
 <div class="q-card" data-q="22" data-text="транспозиция разложение на транспозиции теорема меняет местами два символа">
-  <div class="q-head" onclick="toggleCard(this)"><span class="q-num">22</span><span class="q-title">Транспозиция. Теорема о разложении на транспозиции</span><button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></div>
+  <div class="q-head" onclick="toggleCard(this)"><span class="q-num">22</span><span class="q-title">Определение транспозиции. Теорема о разложении перестановки на транспозиции</span><button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></div>
   <div class="q-body">
     <div class="def-block"><div class="section-tag">Транспозиция</div><div class="def-text">
       <span class="term">Транспозицией</span> называется цикл длины 2. Любая транспозиция имеет вид $\tau=(i\ j)$: она меняет местами символы $i$ и $j$ и оставляет на месте все остальные.
@@ -2666,7 +2737,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 
 <!-- 24 -->
 <div class="q-card" data-q="24" data-text="чётные нечётные перестановки знак инверсии правила определения по циклам по транспозициям">
-  <div class="q-head" onclick="toggleCard(this)"><span class="q-num">24</span><span class="q-title">Чётные и нечётные перестановки. Правила определения знака</span><button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></div>
+  <div class="q-head" onclick="toggleCard(this)"><span class="q-num">24</span><span class="q-title">Чётные и нечётные перестановки. Правила определения знака перестановки</span><button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></div>
   <div class="q-body">
     <div class="def-block"><div class="section-tag">Чётные и нечётные</div><div class="def-text">
       Перестановка $\pi\in S_n$ называется <span class="term">чётной</span>, если её знак $\varepsilon(\pi)=1$, и <span class="term">нечётной</span>, если $\varepsilon(\pi)=-1$. Все транспозиции — нечётные перестановки.
@@ -2699,13 +2770,21 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     <div class="topic-eyebrow">Глава II</div>
     <h1 class="topic-title">Матрицы</h1>
   </div>
+
+  <div class="chapter-intro">
+    <div class="chapter-intro-label">О чём эта глава</div>
+    <p>Основное предназначение матриц в алгебре — <span class="term">описание линейных отображений</span>. Матрица не самостоятельный объект, а способ записать линейное отображение в координатах: выбрав базисы, мы сопоставляем отображению таблицу чисел, и все действия с отображениями превращаются в действия с матрицами.</p>
+    <p>Отсюда становятся понятны и сами правила действий. Умножение матрицы на столбец — это применение отображения к вектору; произведение матриц — <span class="em">композиция</span> отображений (потому оно и некоммутативно: порядок применения важен); единичная матрица отвечает тождественному отображению, обратная — обратному. Сложение матриц и умножение на число отражают то, что линейные отображения сами образуют векторное пространство.</p>
+    <p>Пока мы изучаем матрицы «сами по себе» — определения, действия, ранг, определитель, обратную матрицу. Но держите в уме: за каждым из этих понятий стоит свойство отображения. К этой связи мы вернёмся в главе VI «Линейные отображения», где она будет сформулирована точно.</p>
+  </div>
+
   <div class="questions-list">
 
 <!-- 25. Понятие матрицы -->
 <div class="q-card" data-q="25" data-text="матрица таблица размер строки столбцы элементы главная диагональ равные равенство матриц">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">25</span>
-    <span class="q-title">Понятие матрицы. Размер, элементы, главная диагональ, равные матрицы</span>
+    <span class="q-title">Понятие матрицы. Размер матрицы. Элементы матрицы. Главная диагональ. Равные матрицы</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -3478,7 +3557,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <div class="q-card" data-q="47" data-text="два подхода базис максимальная линейно независимая минимальная порождающая полная система">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">47</span>
-    <span class="q-title">Два подхода к определению базиса</span>
+    <span class="q-title">Два подхода к определению базиса (через линейно независимые и через порождающие системы)</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -3522,7 +3601,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <div class="q-card" data-q="48" data-text="условие совместности слау линейная комбинация столбцов матрицы правые части критерий">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">48</span>
-    <span class="q-title">Условие совместности СЛАУ через линейную комбинацию столбцов</span>
+    <span class="q-title">Формулировка условия совместности СЛАУ с помощью линейной комбинации столбцов матрицы СЛАУ</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -3619,7 +3698,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <div class="q-card" data-q="51" data-text="сохранение ранга элементарные преобразования строк линейная оболочка зависимости столбцов">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">51</span>
-    <span class="q-title">Сохранение ранга при элементарных преобразованиях строк</span>
+    <span class="q-title">Сохранение вертикального и горизонтального ранга матрицы при элементарных преобразованиях над строками</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -3650,7 +3729,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <div class="q-card" data-q="52" data-text="теорема равенство строчного столбцового ранга вычисление ступенчатый вид ненулевые строки">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">52</span>
-    <span class="q-title">Теорема о равенстве рангов. Вычисление ранга приведением к ступенчатому виду</span>
+    <span class="q-title">Теорема о равенстве вертикального и горизонтального ранга матрицы. Теорема о вычислении ранга матрицы приведением её к ступенчатому виду</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -3678,7 +3757,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <div class="q-card" data-q="53" data-text="теорема кронекера капелли совместность определённость единственность ранг расширенная матрица доказательство">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">53</span>
-    <span class="q-title">Теорема Кронекера–Капелли. Теорема об определённости СЛАУ</span>
+    <span class="q-title">Теорема Кронекера–Капелли (с доказательством). Теорема об определённости СЛАУ (с доказательством)</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -3868,7 +3947,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <div class="q-card" data-q="59" data-text="обратная к произведению невырожденных матриц формула порядок">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">59</span>
-    <span class="q-title">Обратная к произведению невырожденных матриц</span>
+    <span class="q-title">Вычисление матрицы, обратной к произведению невырожденных матриц</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -3890,7 +3969,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <div class="q-card" data-q="60" data-text="транспонированная к произведению матриц формула">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">60</span>
-    <span class="q-title">Транспонированная к произведению матриц</span>
+    <span class="q-title">Вычисление матрицы, транспонированной к произведению матриц</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -3938,7 +4017,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <div class="q-card" data-q="62" data-text="алгоритм обратная матрица элементарные преобразования строк гаусс жордан блочная матрица">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">62</span>
-    <span class="q-title">Алгоритм нахождения обратной матрицы элементарными преобразованиями строк</span>
+    <span class="q-title">Алгоритм нахождения обратной матрицы с помощью элементарных преобразований строк</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -3981,7 +4060,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <div class="q-card" data-q="63" data-text="теорема размерность пространства решений ослау ранг подпространство dim V = n - rang">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">63</span>
-    <span class="q-title">Теорема о связи размерности пространства решений ОСЛАУ и ранга матрицы</span>
+    <span class="q-title">Теорема о связи размерностей пространства решений ОСЛАУ и ранга матрицы СЛАУ</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -4336,7 +4415,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <div class="q-card" data-q="72" data-text="вычисление определителя 2х2 3х3 правило треугольников саррюса разложение по строке столбцу">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">72</span>
-    <span class="q-title">Определители 2×2 и 3×3. Правило треугольников. Разложение по строке/столбцу</span>
+    <span class="q-title">Формулы для вычисления определителей 2×2 и 3×3. Правило треугольников. Вычисление определителя матрицы разложением по элементам строки или столбца</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -4376,7 +4455,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <div class="q-card" data-q="73" data-text="вычисление определителя треугольный вид элементарные преобразования метод">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">73</span>
-    <span class="q-title">Вычисление определителя приведением к треугольному виду</span>
+    <span class="q-title">Вычисление определителя матрицы приведением её к треугольному виду. Метод элементарных преобразований</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -4417,7 +4496,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <div class="q-card" data-q="74" data-text="специальные приёмы рекуррентные соотношения мультипликативность определителя произведение">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">74</span>
-    <span class="q-title">Специальные приёмы: рекуррентные соотношения, мультипликативность</span>
+    <span class="q-title">Использование специальных приёмов для вычисления определителей: метод рекуррентных соотношений, мультипликативность определителя</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -4677,7 +4756,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <div class="q-card" data-q="83" data-text="применение определителей слау базисный минор главные свободные переменные совместность единственность крамер">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">83</span>
-    <span class="q-title">Применение определителей к решению СЛАУ. Базисный минор, главные и свободные переменные</span>
+    <span class="q-title">Применение определителей к решению произвольной СЛАУ. Главные и свободные переменные. Базисный минор</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -4781,7 +4860,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     <div class="def-block">
       <div class="section-tag">Определение</div>
       <div class="def-text">
-        Пусть в $n$-мерном пространстве $V$ заданы два базиса $E=\\{e_1,\\ldots,e_n\\}$ и $F=\\{f_1,\\ldots,f_n\\}$. Если векторы нового базиса $F$ выражаются через старый базис $E$ формулами
+        Пусть в $n$-мерном пространстве $V$ заданы два базиса $E=\{e_1,\ldots,e_n\}$ и $F=\{f_1,\ldots,f_n\}$. Если векторы нового базиса $F$ выражаются через старый базис $E$ формулами
         $$f_j=\sum_{i=1}^{n}c_{ij}e_i,\quad j=1,\ldots,n,$$
         то квадратная матрица $C=(c_{ij})$ порядка $n$ называется <span class="term">матрицей перехода от базиса $E$ к базису $F$</span>. Столбцы матрицы $C$ — это координаты векторов $f_j$ в базисе $E$. Матричная запись: $F=EC$.
       </div>
@@ -5241,7 +5320,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <div class="q-card" data-q="99" data-text="симметричная кососимметричная билинейная форма примеры матрица скалярное произведение поляризация">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">99</span>
-    <span class="q-title">Симметричная и кососимметричная билинейная форма</span>
+    <span class="q-title">Симметричная и кососимметричная билинейная форма (с примерами)</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -5294,7 +5373,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     <div class="def-block">
       <div class="section-tag">Определение</div>
       <div class="def-text">
-        Пусть $B:V\times W\to F$ — билинейная форма, $\\{e_1,\\ldots,e_m\\}$ — базис $V$, $\\{f_1,\\ldots,f_n\\}$ — базис $W$. <span class="term">Матрицей формы</span> называется матрица $B=(b_{ij})_{m\times n}$, где
+        Пусть $B:V\times W\to F$ — билинейная форма, $\{e_1,\ldots,e_m\}$ — базис $V$, $\{f_1,\ldots,f_n\}$ — базис $W$. <span class="term">Матрицей формы</span> называется матрица $B=(b_{ij})_{m\times n}$, где
         $$b_{ij}=B(e_i,f_j).$$
       </div>
     </div>
@@ -5342,7 +5421,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <div class="q-card" data-q="102" data-text="теорема изменение матрицы билинейной формы переход к новому базису доказательство">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">102</span>
-    <span class="q-title">Теорема об изменении матрицы билинейной формы при переходе к новому базису</span>
+    <span class="q-title">Теорема об изменении матрицы билинейной формы при переходе к новому базису (с доказательством)</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -5427,7 +5506,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     <div class="def-block">
       <div class="section-tag">Определение</div>
       <div class="def-text">
-        Пусть $Q:V\to\mathbb{R}$ — квадратичная форма, $\dim V=n$. В базисе $\\{e_1,\\ldots,e_n\\}$ форма имеет вид $Q(x)=x^\top A\,x$, где $A$ — симметричная вещественная матрица. <span class="term">Рангом квадратичной формы</span> называется ранг её матрицы: $\;\operatorname{rang}Q=\operatorname{rang}A$.
+        Пусть $Q:V\to\mathbb{R}$ — квадратичная форма, $\dim V=n$. В базисе $\{e_1,\ldots,e_n\}$ форма имеет вид $Q(x)=x^\top A\,x$, где $A$ — симметричная вещественная матрица. <span class="term">Рангом квадратичной формы</span> называется ранг её матрицы: $\;\operatorname{rang}Q=\operatorname{rang}A$.
       </div>
     </div>
 
@@ -5494,7 +5573,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <div class="q-card" data-q="107" data-text="диагональный канонический вид квадратичной билинейной формы лагранж невырожденная замена">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">107</span>
-    <span class="q-title">Диагональный вид квадратичной и билинейной формы</span>
+    <span class="q-title">Диагональный вид квадратичной формы. Диагональный вид билинейной формы</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -5611,7 +5690,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     <div class="thm-box">
       <div class="thm-label">Теорема</div>
       <div class="def-text">
-        Пусть на векторном пространстве $V$ над $\mathbb{R}$ размерности $\dim V=n$ задана квадратичная форма $q$ ранга $r\le n$. Тогда в $V$ существует базис $\\{e_1,\\ldots,e_n\\}$, в котором форма имеет диагональный (канонический) вид
+        Пусть на векторном пространстве $V$ над $\mathbb{R}$ размерности $\dim V=n$ задана квадратичная форма $q$ ранга $r\le n$. Тогда в $V$ существует базис $\{e_1,\ldots,e_n\}$, в котором форма имеет диагональный (канонический) вид
         $$q(x)=\sum_{j=1}^{n}\lambda_j x_j^2,$$
         где коэффициенты $\lambda_j\in\mathbb{R}$ удовлетворяют условиям: ровно $r$ из них отличны от нуля ($\lambda_1,\ldots,\lambda_r\neq 0$), остальные $n-r$ равны нулю ($\lambda_{r+1}=\cdots=\lambda_n=0$).
       </div>
@@ -5727,7 +5806,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <div class="q-card" data-q="114" data-text="классификация квадратичных форм положительно отрицательно определённая неопределённая полуопределённая сигнатура индекс инерции">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">114</span>
-    <span class="q-title">Классификация квадратичных форм</span>
+    <span class="q-title">Классификация квадратичных форм (с примерами)</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -5796,7 +5875,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <div class="q-card" data-q="116" data-text="критерий сильвестра положительная определённость главные угловые миноры положительны">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">116</span>
-    <span class="q-title">Критерий Сильвестра положительной определённости</span>
+    <span class="q-title">Критерий Сильвестра положительной определённости квадратичной формы</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -5844,6 +5923,14 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     <div class="topic-eyebrow">Глава VI</div>
     <h1 class="topic-title">Линейные отображения</h1>
   </div>
+
+  <div class="chapter-intro">
+    <div class="chapter-intro-label">О чём эта глава</div>
+    <p>Повторим сказанное в главе о матрицах: основное предназначение матриц в алгебре — <span class="term">описание линейных отображений</span>. Теперь мы подходим к этому с другой стороны — начинаем не с таблицы чисел, а с самого отображения, и уже потом сопоставляем ему матрицу.</p>
+    <p>Схема такова: пусть $f:V\to W$ — линейное отображение. Выберем базис в $V$ и базис в $W$ — тогда $f$ однозначно задаётся матрицей $A$, столбцы которой суть координаты образов базисных векторов, и в координатах отображение записывается равенством $[f(v)]_W=A\,[v]_V$. Соответствие «отображение $\leftrightarrow$ матрица» взаимно однозначно и согласовано с операциями: композиции отвечает произведение матриц, обратному отображению — обратная матрица.</p>
+    <p>Поэтому многие понятия главы II получают здесь смысл: ранг матрицы — это размерность образа отображения, невырожденность — обратимость, а замена базиса меняет матрицу по закону $A'=B^{-1}AB$, оставляя само отображение прежним. Матрица зависит от выбора базиса — отображение нет.</p>
+  </div>
+
   <div class="questions-list">
 
 <!-- 118. Ядро и образ -->
@@ -5893,7 +5980,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
           <li>$\operatorname{Ker}f$ — подпространство в $V$;</li>
           <li>$\operatorname{Im}f$ — подпространство в $W$;</li>
           <li>$f$ инъективно $\iff\operatorname{Ker}f=\{0\}$;</li>
-          <li>размерности связаны соотношением $\dim\operatorname{Ker}f+\dim\operatorname{Im}f=\dim V$ (теорема о ранге и дефекте: $\dim\operatorname{Im}f$ — ранг, $\dim\operatorname{Ker}f$ — дефект отображения).</li>
+          <li>размерности связаны соотношением $\dim\operatorname{Ker}f+\dim\operatorname{Im}f=\dim V$ — размерность ядра плюс размерность образа равна размерности пространства-прообраза (см. вопрос 123).</li>
         </ul>
       </div>
     </div>
@@ -5980,7 +6067,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 </div>
 
 <!-- 123. Размерность ядра и образа -->
-<div class="q-card" data-q="123" data-text="теорема размерность ядра образа сумма равна dim V ранг дефект">
+<div class="q-card" data-q="123" data-text="теорема размерность ядра образа сумма равна dim V ранг">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">123</span>
     <span class="q-title">Теорема о размерности ядра и образа линейного отображения</span>
@@ -5996,6 +6083,11 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
       </div>
     </div>
 
+    <div class="explain">
+      Смысл теоремы: размерность пространства-прообраза распределяется между ядром и образом. Чем больше векторов отображение «схлопывает» в нуль (то есть чем больше $\dim\operatorname{Ker}f$), тем меньше остаётся на образ — и наоборот. Отсюда сразу следует: если $\operatorname{Ker}f=\{0\}$, то $\dim\operatorname{Im}f=\dim V$.
+      <br><br>
+      <span class="note-term">О терминологии.</span> В некоторой литературе величину $\dim\operatorname{Im}f$ называют <span class="em">рангом</span>, а $\dim\operatorname{Ker}f$ — <span class="em">дефектом</span> отображения, и саму теорему записывают как «ранг + дефект = $\dim V$». В нашем курсе этими терминами не пользуемся и говорим просто о размерности образа и размерности ядра.
+    </div>
 
     <div class="src-ref">Г. Н. Клюшников, лекции 10–11 «Линейные операторы»</div>
   </div>
@@ -6038,12 +6130,120 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     <div class="example-card">
       <div class="example-card-title my-example">Примеры</div>
       <div class="example-card-body">
-        <span class="em">Нулевой оператор</span> $O$ переводит любой вектор в нулевой; ранг $O=0$.
-        <br><span class="em">Оператор подобия:</span> $Ax=\lambda x$ ($\lambda$ — фиксированный скаляр).
-        <br><span class="em">Оператор поворота</span> плоскости $\mathbb{R}^2$ на угол $\alpha$; в базисе $(1,i)$
-        $$A=\begin{pmatrix}\cos\alpha & -\sin\alpha\\\sin\alpha & \cos\alpha\end{pmatrix}.$$
-        <span class="em">Проектор:</span> пусть $V=U\oplus W$ и $x=x_U+x_W$; если $Px=x_U$, то $P$ — оператор проектирования на $U$ параллельно $W$, причём $P^2=P$.
-        <br><span class="em">Оператор дифференцирования:</span> на $P_n=\langle 1,t,\ldots,t^{n-1}\rangle$ (многочлены степени $\le n-1$) $\;D_t=d/dt$ действует по правилу $D_t f(t)=f'(t)$.
+        <span class="em">Нулевой оператор</span> $O$ переводит любой вектор в нулевой; ранг $O=0$. Противоположный крайний случай — <span class="em">тождественный оператор</span> $\mathcal{E}$, оставляющий каждый вектор на месте.
+
+        <div class="op-grid">
+
+          <div class="op-item">
+            <div class="op-cap"><span class="em">Оператор подобия:</span> $Ax=\lambda x$ ($\lambda$ — фиксированный скаляр). Каждый вектор растягивается в $\lambda$ раз вдоль своей же прямой; матрица в любом базисе — $\lambda E$.</div>
+            <svg class="op-fig" viewBox="0 0 290 266" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Оператор подобия: вектор x растягивается в лямбда раз вдоль той же прямой">
+            <line x1="127.1" y1="240.0" x2="127.1" y2="25.8" stroke="var(--border)" stroke-width="1"/>
+            <line x1="186.7" y1="240.0" x2="186.7" y2="25.8" stroke="var(--border)" stroke-width="1"/>
+            <line x1="246.2" y1="240.0" x2="246.2" y2="25.8" stroke="var(--border)" stroke-width="1"/>
+            <line x1="26.0" y1="138.9" x2="264.0" y2="138.9" stroke="var(--border)" stroke-width="1"/>
+            <line x1="26.0" y1="79.3" x2="264.0" y2="79.3" stroke="var(--border)" stroke-width="1"/>
+            <line x1="26.0" y1="198.3" x2="264.0" y2="198.3" stroke="var(--ink-soft)" stroke-width="1.4"/>
+            <polygon points="264.0,198.3 256.0,194.8 256.0,201.8" fill="var(--ink-soft)"/>
+            <line x1="67.7" y1="240.0" x2="67.7" y2="25.8" stroke="var(--ink-soft)" stroke-width="1.4"/>
+            <polygon points="67.7,25.8 64.2,33.8 71.2,33.8" fill="var(--ink-soft)"/>
+            <text x="261.0" y="213.3" font-size="11.5" fill="var(--ink-soft)" font-family="inherit" text-anchor="end" font-style="italic">x</text>
+            <text x="74.7" y="34.8" font-size="11.5" fill="var(--ink-soft)" font-family="inherit" text-anchor="start" font-style="italic">y</text>
+            <text x="62.7" y="211.3" font-size="10.5" fill="var(--ink-soft)" font-family="inherit" text-anchor="end">O</text>
+            <line x1="67.7" y1="198.3" x2="252.1" y2="75.4" stroke="var(--border)" stroke-width="1" stroke-dasharray="3 3"/>
+            <line x1="67.7" y1="198.3" x2="156.9" y2="138.9" stroke="var(--accent)" stroke-width="2.6"/>
+            <polygon points="156.9,138.9 151.9,146.4 148.1,140.6" fill="var(--accent)"/>
+            <line x1="67.7" y1="198.3" x2="112.3" y2="168.6" stroke="var(--ink)" stroke-width="2.4"/>
+            <polygon points="112.3,168.6 107.3,176.1 103.5,170.3" fill="var(--ink)"/>
+            <text x="98.3" y="181.6" font-size="13" fill="var(--ink)" font-family="inherit" text-anchor="start" font-style="italic" font-weight="600">x</text>
+            <text x="164.9" y="134.9" font-size="13" fill="var(--accent)" font-family="inherit" text-anchor="start" font-style="italic" font-weight="600">λx</text>
+            <text x="186.7" y="177.5" font-size="11.5" fill="var(--ink-mute)" font-family="inherit" text-anchor="start" font-style="italic">λ = 2</text>
+          </svg>
+          </div>
+
+          <div class="op-item">
+            <div class="op-cap"><span class="em">Оператор поворота</span> плоскости $\mathbb{R}^2$ на угол $\alpha$; в базисе $(1,i)$
+            $$A=\begin{pmatrix}\cos\alpha & -\sin\alpha\\\sin\alpha & \cos\alpha\end{pmatrix}.$$
+            Длины векторов и углы между ними сохраняются.</div>
+            <svg class="op-fig" viewBox="0 0 290 216" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Оператор поворота плоскости: вектор x поворачивается на угол альфа, длина сохраняется">
+            <line x1="54.7" y1="190.0" x2="54.7" y2="25.9" stroke="var(--border)" stroke-width="1"/>
+            <line x1="218.9" y1="190.0" x2="218.9" y2="25.9" stroke="var(--border)" stroke-width="1"/>
+            <line x1="26.0" y1="71.0" x2="264.0" y2="71.0" stroke="var(--border)" stroke-width="1"/>
+            <line x1="26.0" y1="153.1" x2="264.0" y2="153.1" stroke="var(--ink-soft)" stroke-width="1.4"/>
+            <polygon points="264.0,153.1 256.0,149.6 256.0,156.6" fill="var(--ink-soft)"/>
+            <line x1="136.8" y1="190.0" x2="136.8" y2="25.9" stroke="var(--ink-soft)" stroke-width="1.4"/>
+            <polygon points="136.8,25.9 133.3,33.9 140.3,33.9" fill="var(--ink-soft)"/>
+            <text x="261.0" y="168.1" font-size="11.5" fill="var(--ink-soft)" font-family="inherit" text-anchor="end" font-style="italic">x</text>
+            <text x="143.8" y="34.9" font-size="11.5" fill="var(--ink-soft)" font-family="inherit" text-anchor="start" font-style="italic">y</text>
+            <text x="131.8" y="166.1" font-size="10.5" fill="var(--ink-soft)" font-family="inherit" text-anchor="end">O</text>
+            <path d="M 224.3 117.7 A 94.4 94.4 0 0 0 145.0 59.0" fill="none" stroke="var(--ink-mute)" stroke-width="1.2" stroke-dasharray="4 3"/>
+            <line x1="136.8" y1="153.1" x2="224.3" y2="117.7" stroke="var(--ink)" stroke-width="2.4"/>
+            <polygon points="224.3,117.7 217.9,124.1 215.3,117.6" fill="var(--ink)"/>
+            <line x1="136.8" y1="153.1" x2="145.0" y2="59.0" stroke="var(--accent)" stroke-width="2.6"/>
+            <polygon points="145.0,59.0 147.8,67.6 140.8,67.0" fill="var(--accent)"/>
+            <text x="162.2" y="122.8" font-size="13" fill="var(--ink-mute)" font-family="inherit" text-anchor="middle" font-style="italic">α</text>
+            <text x="232.3" y="123.7" font-size="13" fill="var(--ink)" font-family="inherit" text-anchor="start" font-style="italic" font-weight="600">x</text>
+            <text x="151.0" y="55.0" font-size="13" fill="var(--accent)" font-family="inherit" text-anchor="start" font-style="italic" font-weight="600">Ax</text>
+          </svg>
+          </div>
+
+          <div class="op-item">
+            <div class="op-cap"><span class="em">Проектор:</span> пусть $V=U\oplus W$ и $x=x_U+x_W$; если $Px=x_U$, то $P$ — оператор проектирования на $U$ параллельно $W$, причём $P^2=P$. Здесь $\operatorname{Im}P=U$, $\operatorname{Ker}P=W$.</div>
+            <svg class="op-fig" viewBox="0 0 290 242" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Проектор: вектор x раскладывается на составляющие в подпространствах U и W, оператор оставляет только составляющую в U">
+            <line x1="121.2" y1="216.0" x2="121.2" y2="25.6" stroke="var(--border)" stroke-width="1"/>
+            <line x1="180.7" y1="216.0" x2="180.7" y2="25.6" stroke="var(--border)" stroke-width="1"/>
+            <line x1="240.2" y1="216.0" x2="240.2" y2="25.6" stroke="var(--border)" stroke-width="1"/>
+            <line x1="26.0" y1="120.8" x2="264.0" y2="120.8" stroke="var(--border)" stroke-width="1"/>
+            <line x1="26.0" y1="61.3" x2="264.0" y2="61.3" stroke="var(--border)" stroke-width="1"/>
+            <line x1="26.0" y1="180.3" x2="264.0" y2="180.3" stroke="var(--ink-soft)" stroke-width="1.4"/>
+            <polygon points="264.0,180.3 256.0,176.8 256.0,183.8" fill="var(--ink-soft)"/>
+            <line x1="61.7" y1="216.0" x2="61.7" y2="25.6" stroke="var(--ink-soft)" stroke-width="1.4"/>
+            <polygon points="61.7,25.6 58.2,33.6 65.2,33.6" fill="var(--ink-soft)"/>
+            <text x="261.0" y="195.3" font-size="11.5" fill="var(--ink-soft)" font-family="inherit" text-anchor="end" font-style="italic">x</text>
+            <text x="68.7" y="34.6" font-size="11.5" fill="var(--ink-soft)" font-family="inherit" text-anchor="start" font-style="italic">y</text>
+            <text x="56.7" y="193.3" font-size="10.5" fill="var(--ink-soft)" font-family="inherit" text-anchor="end">O</text>
+            <line x1="31.9" y1="188.6" x2="258.0" y2="125.3" stroke="var(--accent)" stroke-width="1.8"/>
+            <text x="240.2" y="143.4" font-size="13" fill="var(--accent)" font-family="inherit" text-anchor="start" font-style="italic" font-weight="600">U</text>
+            <line x1="61.7" y1="180.3" x2="39.8" y2="117.8" stroke="var(--ink-mute)" stroke-width="1.6"/>
+            <text x="36.7" y="111.9" font-size="13" fill="var(--ink-mute)" font-family="inherit" text-anchor="start" font-style="italic" font-weight="600">W</text>
+            <line x1="162.7" y1="76.9" x2="186.7" y2="145.3" stroke="var(--ink-mute)" stroke-width="1.3" stroke-dasharray="4 4"/>
+            <line x1="61.7" y1="180.3" x2="162.7" y2="76.9" stroke="var(--ink)" stroke-width="2.4"/>
+            <polygon points="162.7,76.9 159.4,85.3 154.4,80.4" fill="var(--ink)"/>
+            <line x1="61.7" y1="180.3" x2="186.7" y2="145.3" stroke="var(--accent)" stroke-width="2.6"/>
+            <polygon points="186.7,145.3 179.7,150.9 177.8,144.2" fill="var(--accent)"/>
+            <text x="169.7" y="73.9" font-size="13" fill="var(--ink)" font-family="inherit" text-anchor="start" font-style="italic" font-weight="600">x</text>
+            <text x="180.7" y="165.3" font-size="12.5" fill="var(--accent)" font-family="inherit" text-anchor="middle" font-style="italic" font-weight="600">Px = x</text>
+            <text x="216.7" y="168.3" font-size="9.5" fill="var(--accent)" font-family="inherit" text-anchor="start" font-style="italic" font-weight="600">U</text>
+          </svg>
+          </div>
+
+          <div class="op-item">
+            <div class="op-cap"><span class="em">Оператор дифференцирования:</span> на $P_n=\langle 1,t,\ldots,t^{n-1}\rangle$ (многочлены степени $\le n-1$) $\;D_t=d/dt$ действует по правилу $D_t f(t)=f'(t)$. Ядро — константы, поэтому оператор не инъективен.</div>
+            <svg class="op-fig" viewBox="0 0 300 216" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Оператор дифференцирования переводит базисные многочлены 1, t, t в квадрате, t в кубе в 0, 1, 2t, 3t в квадрате; константы образуют ядро">
+            <text x="60" y="24" font-size="11" fill="var(--ink-mute)" font-family="inherit" text-anchor="middle">базис</text>
+            <text x="232" y="24" font-size="11" fill="var(--ink-mute)" font-family="inherit" text-anchor="middle">образ</text>
+            <text x="146.0" y="24" font-size="12.5" fill="var(--accent)" font-family="inherit" text-anchor="middle" font-style="italic" font-weight="600">D</text>
+            <text x="60" y="50" font-size="14" fill="var(--ink)" font-family="inherit" text-anchor="middle" font-style="italic" font-weight="600">1</text>
+            <text x="232" y="50" font-size="14" fill="var(--ink-mute)" font-family="inherit" text-anchor="middle" font-style="italic" font-weight="600">0</text>
+            <line x1="82" y1="46" x2="206" y2="46" stroke="var(--ink-soft)" stroke-width="1.3"/>
+            <polygon points="206,46 198,42.5 198,49.5" fill="var(--ink-soft)"/>
+            <text x="60" y="90" font-size="14" fill="var(--ink)" font-family="inherit" text-anchor="middle" font-style="italic" font-weight="600">t</text>
+            <text x="232" y="90" font-size="14" fill="var(--accent)" font-family="inherit" text-anchor="middle" font-style="italic" font-weight="600">1</text>
+            <line x1="82" y1="86" x2="206" y2="86" stroke="var(--ink-soft)" stroke-width="1.3"/>
+            <polygon points="206,86 198,82.5 198,89.5" fill="var(--ink-soft)"/>
+            <text x="60" y="130" font-size="14" fill="var(--ink)" font-family="inherit" text-anchor="middle" font-style="italic" font-weight="600">t²</text>
+            <text x="232" y="130" font-size="14" fill="var(--accent)" font-family="inherit" text-anchor="middle" font-style="italic" font-weight="600">2t</text>
+            <line x1="82" y1="126" x2="206" y2="126" stroke="var(--ink-soft)" stroke-width="1.3"/>
+            <polygon points="206,126 198,122.5 198,129.5" fill="var(--ink-soft)"/>
+            <text x="60" y="170" font-size="14" fill="var(--ink)" font-family="inherit" text-anchor="middle" font-style="italic" font-weight="600">t³</text>
+            <text x="232" y="170" font-size="14" fill="var(--accent)" font-family="inherit" text-anchor="middle" font-style="italic" font-weight="600">3t²</text>
+            <line x1="82" y1="166" x2="206" y2="166" stroke="var(--ink-soft)" stroke-width="1.3"/>
+            <polygon points="206,166 198,162.5 198,169.5" fill="var(--ink-soft)"/>
+            <rect x="34" y="31" width="52" height="30" rx="6" fill="none" stroke="var(--ink-mute)" stroke-width="1.2" stroke-dasharray="4 3"/>
+            <text x="28" y="50" font-size="10.5" fill="var(--ink-mute)" font-family="inherit" text-anchor="end" font-style="italic">Ker D</text>
+          </svg>
+          </div>
+
+        </div>
       </div>
     </div>
 
@@ -6066,7 +6266,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <div class="q-card" data-q="126" data-text="аннулирующий многочлен линейного оператора обращает в нуль">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">126</span>
-    <span class="q-title">Аннулирующий многочлен линейного оператора</span>
+    <span class="q-title">Аннулирующий многочлен линейного оператора (с примерами)</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -6087,7 +6287,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <div class="q-card" data-q="127" data-text="минимальный многочлен линейного оператора наименьшей степени старший коэффициент единица">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">127</span>
-    <span class="q-title">Минимальный многочлен линейного оператора</span>
+    <span class="q-title">Минимальный многочлен линейного оператора (с примерами)</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -6131,7 +6331,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <div class="q-card" data-q="129" data-text="теорема связь аннулирующего минимального многочлена делится без остатка">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">129</span>
-    <span class="q-title">Теорема о связи аннулирующего и минимального многочлена</span>
+    <span class="q-title">Теорема о связи аннулирующего и минимального многочлена линейного оператора</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -6181,12 +6381,33 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     <div class="thm-box">
       <div class="thm-label">Теорема</div>
       <div class="def-text">
-        Матрица $A'$ линейного оператора $\mathcal{A}$ в базисе $\\{e_1',\\ldots,e_n'\\}$ получается из матрицы $A$ того же оператора в базисе $\\{e_1,\\ldots,e_n\\}$ по формуле
+        Матрица $A'$ линейного оператора $\mathcal{A}$ в базисе $\{e_1',\ldots,e_n'\}$ получается из матрицы $A$ того же оператора в базисе $\{e_1,\ldots,e_n\}$ по формуле
         $$A'=B^{-1}A B,$$
         где $B$ — матрица перехода от $(e_i)$ к $(e_i')$.
       </div>
     </div>
 
+    <div class="derivation collapsed">
+      <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Доказательство</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
+      <div class="def-text">
+        Пусть $x$ — произвольный вектор, $y=\mathcal{A}x$. Обозначим через $[x]$ и $[x]'$ столбцы координат вектора $x$ в старом и новом базисах соответственно. По определению матрицы оператора в каждом из базисов
+        $$[y]=A\,[x],\qquad [y]'=A'\,[x]'.$$
+        По теореме о преобразовании координат при переходе к новому базису (вопрос 87) координатные столбцы связаны матрицей перехода $B$:
+        $$[x]=B\,[x]',\qquad [y]=B\,[y]'.$$
+        Подставим эти выражения в первое равенство:
+        $$B\,[y]'=A\,B\,[x]'.$$
+        Матрица перехода невырождена, поэтому существует $B^{-1}$; умножая обе части слева на $B^{-1}$, получаем
+        $$[y]'=B^{-1}A\,B\,[x]'.$$
+        Сравнивая с равенством $[y]'=A'[x]'$, видим, что матрицы $A'$ и $B^{-1}AB$ дают один и тот же результат на координатном столбце $[x]'$ <span class="em">любого</span> вектора $x$. В частности, взяв в качестве $x$ векторы нового базиса, получим, что столбцы этих матриц совпадают. Следовательно,
+        $$A'=B^{-1}A B.\qquad\blacksquare$$
+      </div>
+      </div>
+    </div>
+
+    <div class="explain">
+      Матрицы $A$ и $A'$, связанные соотношением $A'=B^{-1}AB$ с невырожденной $B$, называются <span class="term">подобными</span>. Таким образом, матрицы одного и того же оператора в разных базисах подобны, и наоборот: подобные матрицы задают один оператор в разных базисах. Именно поэтому величины, не меняющиеся при переходе к подобной матрице (определитель, след, характеристический многочлен, ранг), являются характеристиками самого оператора, а не выбранного базиса.
+    </div>
 
     <div class="src-ref">Г. Н. Клюшников, лекции 10–11 «Линейные операторы»</div>
   </div>
@@ -6218,7 +6439,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <div class="q-card" data-q="133" data-text="инвариантное подпространство оператор образ ядро собственное подпространство примеры">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">133</span>
-    <span class="q-title">Инвариантное подпространство</span>
+    <span class="q-title">Инвариантное подпространство (с примерами)</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -6351,7 +6572,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <div class="q-card" data-q="138" data-text="геометрическая кратность собственного значения размерность собственного подпространства">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">138</span>
-    <span class="q-title">Геометрическая кратность собственного значения</span>
+    <span class="q-title">Геометрическая кратность собственного значения линейного оператора</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -6438,7 +6659,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <div class="q-card" data-q="142" data-text="алгебраическая кратность собственного значения корень характеристического многочлена">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">142</span>
-    <span class="q-title">Алгебраическая кратность собственного значения</span>
+    <span class="q-title">Алгебраическая кратность собственного значения линейного оператора</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -6460,7 +6681,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <div class="q-card" data-q="143" data-text="соотношение алгебраическая геометрическая кратность не превосходит">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">143</span>
-    <span class="q-title">Соотношение между алгебраической и геометрической кратностями</span>
+    <span class="q-title">Соотношение между алгебраической и геометрической кратностями линейного оператора</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -6613,7 +6834,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <div class="q-card" data-q="149" data-text="теорема существование инвариантных подпространств одномерное двумерное вещественный оператор">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">149</span>
-    <span class="q-title">Теорема о существовании инвариантных подпространств вещественного оператора</span>
+    <span class="q-title">Теорема о существовании инвариантных подпространств линейного оператора над векторным пространством V над ℝ</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -6665,7 +6886,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <div class="q-card" data-q="151" data-text="скалярное произведение вычисление сумма произведений координат стандартное">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">151</span>
-    <span class="q-title">Скалярное произведение. Вычисление в ℝⁿ и ℝ³</span>
+    <span class="q-title">Скалярное произведение. Вычисление скалярного произведения векторов из ℝⁿ и ℝ³</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -6722,7 +6943,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <div class="q-card" data-q="153" data-text="норма длина вектора корень скалярного произведения неотрицательное">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">153</span>
-    <span class="q-title">Норма вектора. Вычисление в ℝⁿ и ℝ³</span>
+    <span class="q-title">Норма вектора. Вычисление нормы вектора из ℝⁿ и ℝ³</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -6744,7 +6965,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <div class="q-card" data-q="154" data-text="неравенство коши буняковского доказательство дискриминант стандартное скалярное произведение">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">154</span>
-    <span class="q-title">Неравенство Коши–Буняковского</span>
+    <span class="q-title">Неравенство Коши–Буняковского (с доказательством). Запись неравенства для стандартного скалярного произведения</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -6815,7 +7036,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <div class="q-card" data-q="156" data-text="теорема пифагора неравенство треугольника доказательства ортогональные">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">156</span>
-    <span class="q-title">Теорема Пифагора и неравенство треугольника</span>
+    <span class="q-title">Теорема Пифагора и неравенство треугольника (с доказательствами)</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -6873,7 +7094,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
     <div class="def-block">
       <div class="section-tag">Ортогональный базис</div>
       <div class="def-text">
-        Базис $\\{e_1,\\ldots,e_n\\}$ евклидова пространства $V$ называется <span class="term">ортогональным</span>, если
+        Базис $\{e_1,\ldots,e_n\}$ евклидова пространства $V$ называется <span class="term">ортогональным</span>, если
         $$(e_i,e_j)=0\quad\text{при }i\neq j,\;\; i,j=1,2,\ldots,n.$$
       </div>
     </div>
@@ -6894,7 +7115,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <div class="q-card" data-q="158" data-text="теорема ортогональность линейная независимость доказательство ортогональный базис">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">158</span>
-    <span class="q-title">Теорема о связи ортогональности и линейной независимости</span>
+    <span class="q-title">Теорема о связи ортогональности и линейной независимости системы векторов (с доказательством)</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -7064,7 +7285,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <div class="q-card" data-q="165" data-text="алгоритм нахождения ортогональной проекции составляющей коэффициенты ортонормированный базис">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">165</span>
-    <span class="q-title">Алгоритм нахождения ортогональной проекции и составляющей</span>
+    <span class="q-title">Алгоритм нахождения ортогональной проекции и ортогональной составляющей</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -7141,7 +7362,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <div class="q-card" data-q="167" data-text="структурная матрица торговли элементы столбец строка балансовое уравнение доходов">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">167</span>
-    <span class="q-title">Структурная матрица торговли</span>
+    <span class="q-title">Структурная матрица торговли (значение элементов, связь между элементами)</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -7190,7 +7411,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 <div class="q-card" data-q="168" data-text="условие бездефицитности торговли национальный доход равновесие Ax=x">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">168</span>
-    <span class="q-title">Условие бездефицитности торговли</span>
+    <span class="q-title">Условие бездефицитности торговли в модели международной торговли</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -7339,8 +7560,8 @@ const TOPICS = [
     questions: [
       { n: 1, t: "Предмет алгебры" },
       { n: 2, t: "Идея линейности в математике" },
-      { n: 3, t: "Модельные задачи: разрешимость в радикалах, состояния молекулы, кодирование" },
-      { n: 4, t: "Модельные задачи: линейное программирование, неотрицательные матрицы" },
+      { n: 3, t: "Модельные задачи алгебры: разрешимость уравнений в радикалах, состояния многоатомной молекулы, кодирование сообщения" },
+      { n: 4, t: "Модельные задачи алгебры: линейное программирование, неотрицательные матрицы" },
     ]
   },
   {
@@ -7359,13 +7580,13 @@ const TOPICS = [
     title: "Отображения",
     subtitle: "Глава I",
     questions: [
-      { n: 9, t: "Понятие отображения. Область определения и область значений" },
+      { n: 9, t: "Понятие отображения. Область определения и область значений отображения" },
       { n: 10, t: "Образ и прообраз отображения" },
       { n: 11, t: "Сюръекция, инъекция, биекция" },
       { n: 12, t: "Вложение и сужение отображения" },
       { n: 13, t: "Произведение отображений" },
-      { n: 14, t: "Теорема об ассоциативности композиции отображений" },
-      { n: 15, t: "Обратное отображение. Теорема о существовании обратного" },
+      { n: 14, t: "Теорема об ассоциативности композиции отображений (с доказательством)" },
+      { n: 15, t: "Обратное отображение. Теорема о существовании обратного отображения" },
       { n: 16, t: "Теоремы о биективности отображений конечных множеств" },
     ]
   },
@@ -7376,12 +7597,12 @@ const TOPICS = [
     questions: [
       { n: 17, t: "Понятие перестановки" },
       { n: 18, t: "Перестановка как группа элементов" },
-      { n: 19, t: "Независимый цикл длины L" },
+      { n: 19, t: "Независимый цикл длины L (определение)" },
       { n: 20, t: "Порядок перестановки" },
       { n: 21, t: "Теорема о разложении перестановки в произведение циклов" },
-      { n: 22, t: "Транспозиция. Теорема о разложении на транспозиции" },
+      { n: 22, t: "Определение транспозиции. Теорема о разложении перестановки на транспозиции" },
       { n: 23, t: "Теорема о знаке перестановки" },
-      { n: 24, t: "Чётные и нечётные перестановки. Правила определения знака" },
+      { n: 24, t: "Чётные и нечётные перестановки. Правила определения знака перестановки" },
     ]
   },
   {
@@ -7389,7 +7610,7 @@ const TOPICS = [
     title: "Матрицы",
     subtitle: "Глава II",
     questions: [
-      { n: 25, t: "Понятие матрицы. Размер, элементы, главная диагональ, равные матрицы" },
+      { n: 25, t: "Понятие матрицы. Размер матрицы. Элементы матрицы. Главная диагональ. Равные матрицы" },
       { n: 26, t: "Квадратная, диагональная, единичная, нулевая, треугольная матрицы" },
       { n: 27, t: "Вектор как матрица" },
       { n: 28, t: "Транспонированная матрица" },
@@ -7425,8 +7646,8 @@ const TOPICS = [
       { n: 44, t: "Понятие базиса" },
       { n: 45, t: "Лемма о линейно независимой системе и базисе" },
       { n: 46, t: "Теорема о базисе. Размерность линейной оболочки" },
-      { n: 47, t: "Два подхода к определению базиса" },
-      { n: 48, t: "Условие совместности СЛАУ через линейную комбинацию столбцов" },
+      { n: 47, t: "Два подхода к определению базиса (через линейно независимые и через порождающие системы)" },
+      { n: 48, t: "Формулировка условия совместности СЛАУ с помощью линейной комбинации столбцов матрицы СЛАУ" },
     ]
   },
   {
@@ -7436,9 +7657,9 @@ const TOPICS = [
     questions: [
       { n: 49, t: "Пространства строк и столбцов матрицы" },
       { n: 50, t: "Вертикальный и горизонтальный ранг матрицы" },
-      { n: 51, t: "Сохранение ранга при элементарных преобразованиях строк" },
-      { n: 52, t: "Теорема о равенстве рангов. Вычисление ранга приведением к ступенчатому виду" },
-      { n: 53, t: "Теорема Кронекера–Капелли. Теорема об определённости СЛАУ" },
+      { n: 51, t: "Сохранение вертикального и горизонтального ранга матрицы при элементарных преобразованиях над строками" },
+      { n: 52, t: "Теорема о равенстве вертикального и горизонтального ранга матрицы. Теорема о вычислении ранга матрицы приведением её к ступенчатому виду" },
+      { n: 53, t: "Теорема Кронекера–Капелли (с доказательством). Теорема об определённости СЛАУ (с доказательством)" },
       { n: 54, t: "Понятие линейного отображения" },
       { n: 55, t: "Свойства ранга матрицы" },
     ]
@@ -7451,10 +7672,10 @@ const TOPICS = [
       { n: 56, t: "Обратная матрица" },
       { n: 57, t: "Невырожденная матрица" },
       { n: 58, t: "Теорема о связи обратимости и невырожденности матрицы" },
-      { n: 59, t: "Обратная к произведению невырожденных матриц" },
-      { n: 60, t: "Транспонированная к произведению матриц" },
+      { n: 59, t: "Вычисление матрицы, обратной к произведению невырожденных матриц" },
+      { n: 60, t: "Вычисление матрицы, транспонированной к произведению матриц" },
       { n: 61, t: "Алгоритм PQ-приведения матрицы к нормальному виду" },
-      { n: 62, t: "Алгоритм нахождения обратной матрицы элементарными преобразованиями строк" },
+      { n: 62, t: "Алгоритм нахождения обратной матрицы с помощью элементарных преобразований строк" },
     ]
   },
   {
@@ -7462,7 +7683,7 @@ const TOPICS = [
     title: "ОСЛАУ и метод Гаусса",
     subtitle: "Глава II",
     questions: [
-      { n: 63, t: "Теорема о связи размерности пространства решений ОСЛАУ и ранга матрицы" },
+      { n: 63, t: "Теорема о связи размерностей пространства решений ОСЛАУ и ранга матрицы СЛАУ" },
       { n: 64, t: "Фундаментальная система решений ОСЛАУ" },
       { n: 65, t: "Общее решение неоднородной СЛАУ" },
       { n: 66, t: "Метод Гаусса решения СЛАУ" },
@@ -7478,9 +7699,9 @@ const TOPICS = [
       { n: 69, t: "Свойства определителей (с доказательствами)" },
       { n: 70, t: "Минор" },
       { n: 71, t: "Алгебраическое дополнение" },
-      { n: 72, t: "Определители 2×2 и 3×3. Правило треугольников. Разложение по строке/столбцу" },
-      { n: 73, t: "Вычисление определителя приведением к треугольному виду" },
-      { n: 74, t: "Специальные приёмы: рекуррентные соотношения, мультипликативность" },
+      { n: 72, t: "Формулы для вычисления определителей 2×2 и 3×3. Правило треугольников. Вычисление определителя матрицы разложением по элементам строки или столбца" },
+      { n: 73, t: "Вычисление определителя матрицы приведением её к треугольному виду. Метод элементарных преобразований" },
+      { n: 74, t: "Использование специальных приёмов для вычисления определителей: метод рекуррентных соотношений, мультипликативность определителя" },
       { n: 75, t: "Союзная матрица" },
       { n: 76, t: "Вычисление обратной матрицы с помощью союзной матрицы" },
       { n: 77, t: "Теорема Крамера" },
@@ -7496,7 +7717,7 @@ const TOPICS = [
       { n: 80, t: "Теорема о минорном ранге матрицы. Метод окаймляющих миноров" },
       { n: 81, t: "Свойства ранга матрицы" },
       { n: 82, t: "Методы вычисления ранга матрицы" },
-      { n: 83, t: "Применение определителей к решению СЛАУ. Базисный минор, главные и свободные переменные" },
+      { n: 83, t: "Применение определителей к решению произвольной СЛАУ. Главные и свободные переменные. Базисный минор" },
     ]
   },
   {
@@ -7533,10 +7754,10 @@ const TOPICS = [
       { n: 96, t: "Определитель матрицы как полилинейная функция её строк" },
       { n: 97, t: "Билинейная форма" },
       { n: 98, t: "Свойства билинейной формы" },
-      { n: 99, t: "Симметричная и кососимметричная билинейная форма" },
+      { n: 99, t: "Симметричная и кососимметричная билинейная форма (с примерами)" },
       { n: 100, t: "Матрица билинейной формы" },
       { n: 101, t: "Ранг билинейной формы" },
-      { n: 102, t: "Теорема об изменении матрицы билинейной формы при переходе к новому базису" },
+      { n: 102, t: "Теорема об изменении матрицы билинейной формы при переходе к новому базису (с доказательством)" },
     ]
   },
   {
@@ -7548,7 +7769,7 @@ const TOPICS = [
       { n: 104, t: "Ранг квадратичной формы" },
       { n: 105, t: "Соответствие между симметричными билинейными и квадратичными формами" },
       { n: 106, t: "Матрица квадратичной формы" },
-      { n: 107, t: "Диагональный вид квадратичной и билинейной формы" },
+      { n: 107, t: "Диагональный вид квадратичной формы. Диагональный вид билинейной формы" },
       { n: 108, t: "Ранг квадратичной формы, его вычисление" },
     ]
   },
@@ -7562,9 +7783,9 @@ const TOPICS = [
       { n: 111, t: "Нормальный вид квадратичной формы" },
       { n: 112, t: "Теорема о приведении квадратичной формы к нормальному виду" },
       { n: 113, t: "Закон инерции квадратичных форм" },
-      { n: 114, t: "Классификация квадратичных форм" },
+      { n: 114, t: "Классификация квадратичных форм (с примерами)" },
       { n: 115, t: "Угловые миноры матрицы квадратичной формы" },
-      { n: 116, t: "Критерий Сильвестра положительной определённости" },
+      { n: 116, t: "Критерий Сильвестра положительной определённости квадратичной формы" },
       { n: 117, t: "Теорема об отрицательной определённости квадратичной формы" },
     ]
   },
@@ -7588,14 +7809,14 @@ const TOPICS = [
     title: "Минимальный многочлен и инвариантные подпространства",
     subtitle: "Глава VI",
     questions: [
-      { n: 126, t: "Аннулирующий многочлен линейного оператора" },
-      { n: 127, t: "Минимальный многочлен линейного оператора" },
+      { n: 126, t: "Аннулирующий многочлен линейного оператора (с примерами)" },
+      { n: 127, t: "Минимальный многочлен линейного оператора (с примерами)" },
       { n: 128, t: "Теорема о существовании минимального многочлена линейного оператора" },
-      { n: 129, t: "Теорема о связи аннулирующего и минимального многочлена" },
+      { n: 129, t: "Теорема о связи аннулирующего и минимального многочлена линейного оператора" },
       { n: 130, t: "Нильпотентный линейный оператор. Индекс нильпотентности" },
       { n: 131, t: "Теорема об изменении матрицы линейного оператора при переходе к новому базису" },
       { n: 132, t: "Вычисление матричных многочленов приведением матрицы к диагональному виду" },
-      { n: 133, t: "Инвариантное подпространство" },
+      { n: 133, t: "Инвариантное подпространство (с примерами)" },
       { n: 134, t: "Теорема о клеточно-диагональном виде матрицы линейного оператора" },
     ]
   },
@@ -7607,12 +7828,12 @@ const TOPICS = [
       { n: 135, t: "Собственный вектор линейного оператора" },
       { n: 136, t: "Собственное значение линейного оператора" },
       { n: 137, t: "Собственное подпространство" },
-      { n: 138, t: "Геометрическая кратность собственного значения" },
+      { n: 138, t: "Геометрическая кратность собственного значения линейного оператора" },
       { n: 139, t: "Условие существования собственных векторов" },
       { n: 140, t: "Характеристический многочлен, характеристическое уравнение" },
       { n: 141, t: "Теорема о характеристических многочленах подобных матриц" },
-      { n: 142, t: "Алгебраическая кратность собственного значения" },
-      { n: 143, t: "Соотношение между алгебраической и геометрической кратностями" },
+      { n: 142, t: "Алгебраическая кратность собственного значения линейного оператора" },
+      { n: 143, t: "Соотношение между алгебраической и геометрической кратностями линейного оператора" },
       { n: 144, t: "Спектр линейного оператора. Простой спектр" },
       { n: 145, t: "Свойство собственных векторов, относящихся к различным собственным значениям" },
     ]
@@ -7625,7 +7846,7 @@ const TOPICS = [
       { n: 146, t: "Диагонализируемость линейного оператора" },
       { n: 147, t: "Достаточное условие диагонализируемости линейного оператора" },
       { n: 148, t: "Необходимое и достаточное условие диагонализируемости линейного оператора" },
-      { n: 149, t: "Теорема о существовании инвариантных подпространств вещественного оператора" },
+      { n: 149, t: "Теорема о существовании инвариантных подпространств линейного оператора над векторным пространством V над ℝ" },
     ]
   },
   {
@@ -7634,14 +7855,14 @@ const TOPICS = [
     subtitle: "Глава VII",
     questions: [
       { n: 150, t: "Евклидово векторное пространство" },
-      { n: 151, t: "Скалярное произведение. Вычисление в ℝⁿ и ℝ³" },
+      { n: 151, t: "Скалярное произведение. Вычисление скалярного произведения векторов из ℝⁿ и ℝ³" },
       { n: 152, t: "Свойства скалярного произведения" },
-      { n: 153, t: "Норма вектора. Вычисление в ℝⁿ и ℝ³" },
-      { n: 154, t: "Неравенство Коши–Буняковского" },
+      { n: 153, t: "Норма вектора. Вычисление нормы вектора из ℝⁿ и ℝ³" },
+      { n: 154, t: "Неравенство Коши–Буняковского (с доказательством). Запись неравенства для стандартного скалярного произведения" },
       { n: 155, t: "Угол между векторами. Ортогональность векторов" },
-      { n: 156, t: "Теорема Пифагора и неравенство треугольника" },
+      { n: 156, t: "Теорема Пифагора и неравенство треугольника (с доказательствами)" },
       { n: 157, t: "Ортогональный и ортонормированный базисы" },
-      { n: 158, t: "Теорема о связи ортогональности и линейной независимости" },
+      { n: 158, t: "Теорема о связи ортогональности и линейной независимости системы векторов (с доказательством)" },
       { n: 159, t: "Теорема о существовании ортонормированного базиса" },
     ]
   },
@@ -7655,7 +7876,7 @@ const TOPICS = [
       { n: 162, t: "Процесс ортогонализации Грама–Шмидта" },
       { n: 163, t: "Разложение пространства в прямую сумму ортогональных подпространств" },
       { n: 164, t: "Ортогональная проекция и ортогональная составляющая" },
-      { n: 165, t: "Алгоритм нахождения ортогональной проекции и составляющей" },
+      { n: 165, t: "Алгоритм нахождения ортогональной проекции и ортогональной составляющей" },
     ]
   },
   {
@@ -7664,8 +7885,8 @@ const TOPICS = [
     subtitle: "Глава VIII",
     questions: [
       { n: 166, t: "Модель международной торговли (постановка задачи)" },
-      { n: 167, t: "Структурная матрица торговли" },
-      { n: 168, t: "Условие бездефицитности торговли" },
+      { n: 167, t: "Структурная матрица торговли (значение элементов, связь между элементами)" },
+      { n: 168, t: "Условие бездефицитности торговли в модели международной торговли" },
     ]
   },
   {
@@ -7737,8 +7958,20 @@ function buildSidebar() {
   sec.textContent = 'Темы экзамена';
   wrap.appendChild(sec);
 
-  // Темы и билеты — каждый блок раскрывается по клику
+  // Оглавление: глава → параграф → пункт.
+  // Разделы сгруппированы по главам (поле subtitle); внутри главы — параграфы,
+  // внутри параграфа — пункты (вопросы экзаменационного списка).
+  let currentChapter = null;
   TOPICS.forEach(topic => {
+    const chapter = topic.subtitle || '';
+    if (chapter !== currentChapter) {
+      currentChapter = chapter;
+      const head = document.createElement('div');
+      head.className = 'side-chapter';
+      head.textContent = chapter;
+      wrap.appendChild(head);
+    }
+
     const group = document.createElement('details');
     group.className = 'topic-group';
     let html = `<summary>${topic.title}</summary>`;
