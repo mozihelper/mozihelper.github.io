@@ -1,0 +1,400 @@
+/* ============================================================
+   MoziHelper — слой движения и мобильного интерфейса.
+   Подключается после основных стилей страницы.
+   ============================================================ */
+
+:root {
+  --mh-out:    cubic-bezier(.16, 1, .3, 1);
+  --mh-in:     cubic-bezier(.4, 0, 1, 1);
+  --mh-spring: cubic-bezier(.34, 1.32, .5, 1);
+  --mh-t1: .16s;
+  --mh-t2: .28s;
+  --mh-t3: .42s;
+}
+
+* { -webkit-tap-highlight-color: transparent; }
+a, button, summary, .q-head, .quiz-option { touch-action: manipulation; }
+
+@keyframes mhRise   { from { opacity: 0; transform: translate3d(0, 10px, 0); } to { opacity: 1; transform: none; } }
+@keyframes mhSlideL { from { opacity: 0; transform: translate3d(18px, 0, 0); } to { opacity: 1; transform: none; } }
+@keyframes mhPop    { 0% { transform: scale(1); } 45% { transform: scale(1.018); } 100% { transform: scale(1); } }
+@keyframes mhNudge  { 0%, 100% { transform: none; } 22% { transform: translateX(-5px); } 44% { transform: translateX(4px); } 66% { transform: translateX(-3px); } 84% { transform: translateX(1px); } }
+@keyframes mhSheetUp { from { transform: translateY(100%); } to { transform: none; } }
+
+/* ── Топбар прячется при прокрутке вниз ───────────────────── */
+.topbar { transition: transform .3s var(--mh-out), background .3s ease, border-color .3s ease; will-change: transform; }
+.topbar.mh-tuck { transform: translateY(-101%); }
+
+/* ── Отклик на нажатие ────────────────────────────────────── */
+.theme-btn, .menu-btn, .back-btn, .close-btn, .quiz-back, .quiz-btn, .start-cta, .dl, .res, .sem-btn, .res-pill,
+.mh-tab, .mh-row, .mh-pill, .mh-resume, .mh-rbtn, .mh-reader-foot button {
+  transition: transform var(--mh-t1) var(--mh-out), background var(--mh-t1) ease,
+              border-color var(--mh-t1) ease, color var(--mh-t1) ease, box-shadow var(--mh-t2) ease;
+}
+.theme-btn:active, .menu-btn:active, .back-btn:active, .close-btn:active, .quiz-back:active,
+.quiz-btn:active, .start-cta:active, .dl:active, .res-pill:active, .search-result-item:active,
+.mh-rbtn:active, .mh-reader-foot button:active:not(:disabled), .mh-pill:active { transform: scale(.94); }
+.res:active, .sem-btn:active, .q-head:active, .quiz-mode-card:active, .mh-row:active, .mh-resume:active { transform: scale(.988); }
+.mh-tab:active svg { transform: scale(.88); }
+
+/* ── Сайдбар ──────────────────────────────────────────────── */
+.sidebar { transition: transform var(--mh-t3) var(--mh-out); overscroll-behavior: contain; }
+.backdrop { transition: opacity var(--mh-t2) var(--mh-out); }
+.sidebar.open .sidebar-body > * { animation: mhSlideL .38s var(--mh-out) both; }
+.sidebar.open .sidebar-body > *:nth-child(1)  { animation-delay: .04s; }
+.sidebar.open .sidebar-body > *:nth-child(2)  { animation-delay: .07s; }
+.sidebar.open .sidebar-body > *:nth-child(3)  { animation-delay: .10s; }
+.sidebar.open .sidebar-body > *:nth-child(4)  { animation-delay: .13s; }
+.sidebar.open .sidebar-body > *:nth-child(5)  { animation-delay: .16s; }
+.sidebar.open .sidebar-body > *:nth-child(6)  { animation-delay: .18s; }
+.sidebar.open .sidebar-body > *:nth-child(7)  { animation-delay: .20s; }
+.sidebar.open .sidebar-body > *:nth-child(8)  { animation-delay: .22s; }
+.sidebar.open .sidebar-body > *:nth-child(n+9) { animation-delay: .24s; }
+details.topic-group > summary { transition: background var(--mh-t1) ease, color var(--mh-t1) ease; }
+
+/* ── Карточка вопроса в списке ────────────────────────────── */
+.q-card { transition: border-color var(--mh-t2) ease, box-shadow var(--mh-t2) ease, transform var(--mh-t2) var(--mh-out); }
+.q-card .q-num { transition: background var(--mh-t2) var(--mh-out), color var(--mh-t2) ease, border-color var(--mh-t2) ease; }
+.q-card .q-head { transition: background var(--mh-t1) ease; }
+.q-card .q-toggle { transition: transform var(--mh-t3) var(--mh-spring), color var(--mh-t1) ease; }
+/* вопрос открывается читалкой — шеврон указывает вправо, а не вниз */
+.q-card .q-toggle svg { transform: rotate(-90deg); }
+/* прочитанный вопрос помечается номером */
+.q-card.mh-seen .q-num { border-color: var(--purple); color: var(--purple-light); }
+
+.reveal, .q-card.reveal { opacity: 0; transform: translate3d(0, 14px, 0); transition: opacity .46s var(--mh-out), transform .46s var(--mh-out); }
+.reveal.in, .q-card.reveal.in { opacity: 1; transform: none; }
+
+/* ── Поиск ────────────────────────────────────────────────── */
+.search-results:not([hidden]) .search-result-item { animation: mhRise .28s var(--mh-out) both; }
+.search-results .search-result-item:nth-child(1) { animation-delay: .02s; }
+.search-results .search-result-item:nth-child(2) { animation-delay: .05s; }
+.search-results .search-result-item:nth-child(3) { animation-delay: .08s; }
+.search-results .search-result-item:nth-child(4) { animation-delay: .10s; }
+.search-results .search-result-item:nth-child(n+5) { animation-delay: .12s; }
+.search-input { transition: border-color var(--mh-t1) ease, box-shadow var(--mh-t2) var(--mh-out), background var(--mh-t1) ease; }
+
+/* ── Квиз ─────────────────────────────────────────────────── */
+.quiz-progress-fill { transition: width .55s var(--mh-out); }
+.quiz-option { transition: border-color var(--mh-t1) ease, background var(--mh-t1) ease, transform var(--mh-t1) var(--mh-out); }
+.quiz-option:active:not(:disabled) { transform: scale(.985); }
+.quiz-option.correct { animation: mhPop .42s var(--mh-spring); }
+.quiz-option.wrong   { animation: mhNudge .38s ease-out; }
+.quiz-question-card  { animation: mhRise .42s var(--mh-out) both; }
+.quiz-result-score   { animation: mhRise .5s var(--mh-spring) both; }
+.quiz-result-message { animation: mhRise .5s var(--mh-out) .1s both; }
+.quiz-result-actions { animation: mhRise .5s var(--mh-out) .18s both; }
+.quiz-mode-card { animation: mhRise .44s var(--mh-out) both; }
+.quiz-mode-card:nth-child(2) { animation-delay: .06s; }
+.quiz-mode-card:nth-child(3) { animation-delay: .12s; }
+.quiz-mode-card:nth-child(n+4) { animation-delay: .16s; }
+
+/* ════════════ 1a · Оглавление на стартовом экране ════════════ */
+.start-cta-group { display: none !important; }
+.start-screen { min-height: 0 !important; }
+
+.mh-start {
+  width: 100%;
+  max-width: 620px;
+  margin: .2rem auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.7rem;
+  text-align: left;
+  animation: mhRise .5s var(--mh-out) .34s both;
+}
+.mh-lbl {
+  font-size: .66rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-bottom: .6rem;
+}
+.mh-resume {
+  display: flex;
+  align-items: center;
+  gap: .85rem;
+  width: 100%;
+  padding: .95rem 1rem;
+  border: 1px solid var(--purple);
+  border-radius: 14px;
+  background: var(--bg-card);
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.mh-resume > svg { flex-shrink: 0; color: var(--purple-light); }
+.mh-resume .mh-rt { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.mh-resume .mh-rt b { font-size: .97rem; font-weight: 500; line-height: 1.3; }
+.mh-resume .mh-rt span { font-size: .76rem; color: var(--ink-mute); }
+.mh-resume > .mh-ch { margin-left: auto; color: var(--ink-mute); display: flex; }
+
+.mh-chaps { display: flex; flex-direction: column; }
+.mh-chap {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  margin: 1.15rem 0 .5rem;
+  font-size: .68rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.mh-chap:first-child { margin-top: 0; }
+.mh-chap::after { content: ''; flex: 1; height: 1px; background: var(--border-soft); }
+.mh-row {
+  display: flex;
+  align-items: center;
+  gap: .85rem;
+  width: 100%;
+  padding: .8rem .9rem;
+  margin-bottom: .4rem;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  background: var(--bg-card);
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.mh-row:hover { border-color: var(--purple); background: var(--bg-soft); }
+.mh-row .mh-n {
+  flex-shrink: 0;
+  font-size: .74rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--purple-light);
+  min-width: 1.6rem;
+}
+.mh-row .mh-t { font-size: .95rem; line-height: 1.35; min-width: 0; }
+.mh-row .mh-c { margin-left: auto; font-size: .76rem; color: var(--ink-mute); font-variant-numeric: tabular-nums; }
+.mh-row .mh-ch { display: flex; color: var(--ink-mute); flex-shrink: 0; }
+.mh-row:hover .mh-ch { color: var(--purple-light); }
+
+.mh-extra { display: flex; gap: .5rem; flex-wrap: wrap; }
+.mh-pill {
+  flex: 1 1 auto;
+  padding: .8rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink-soft);
+  font: inherit;
+  font-size: .86rem;
+  cursor: pointer;
+}
+.mh-pill:hover { border-color: var(--purple); color: var(--purple-light); }
+.mh-pill.pri { border-color: var(--purple); color: var(--purple-light); }
+
+/* ════════════ 1b · Нижние вкладки и палитра поиска ════════════ */
+.mh-tabs {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 60;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background: var(--topbar-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid var(--border);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.mh-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 9px 0 11px;
+  border: 0;
+  background: none;
+  color: var(--ink-mute);
+  font: inherit;
+  font-size: .64rem;
+  letter-spacing: .02em;
+  cursor: pointer;
+}
+.mh-tab svg { transition: transform var(--mh-t1) var(--mh-out); }
+.mh-tab.on { color: var(--purple-light); }
+body.mh-has-tabs .main { padding-bottom: 90px; }
+
+.mh-pal {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease;
+}
+.mh-pal.on { opacity: 1; pointer-events: auto; }
+.mh-pal-head {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .85rem 1rem;
+  border-bottom: 1px solid var(--border-soft);
+  background: var(--bg-card);
+}
+.mh-pal-field { flex: 1; min-width: 0; }
+.mh-pal .search-wrap.start-search { margin: 0; max-width: none; opacity: 1; animation: none; }
+.mh-pal .search-wrap.start-search .search-input { box-shadow: none; border-radius: 12px; padding: .8rem 1rem .8rem 2.8rem; }
+.mh-pal .search-wrap.start-search svg { left: 14px; width: 17px; height: 17px; }
+.mh-pal-cancel { border: 0; background: none; color: var(--ink-soft); font: inherit; font-size: .9rem; padding: .4rem .2rem; cursor: pointer; }
+.mh-pal-body { flex: 1; overflow-y: auto; overscroll-behavior: contain; padding: .9rem 1rem 2rem; }
+.mh-pal-body .search-results {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  max-height: none;
+  overflow: visible;
+}
+.mh-pal-body .search-result-item { padding: 13px 2px; border-radius: 0; border-bottom: 1px solid var(--border-soft); }
+.mh-pal-body .search-result-item:hover { background: transparent; color: var(--purple-light); }
+.mh-pal.on .mh-pal-head { animation: mhRise .24s var(--mh-out) both; }
+.mh-pal-hint { font-size: .82rem; color: var(--ink-mute); line-height: 1.6; }
+
+/* ════════════ 1c · Фокус-режим чтения ════════════ */
+.mh-reader {
+  position: fixed;
+  inset: 0;
+  z-index: 130;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  transform: translateX(100%);
+  transition: transform var(--mh-t3) var(--mh-out);
+}
+.mh-reader.on { transform: none; }
+.mh-reader-head {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  padding: .75rem 1rem .7rem;
+}
+.mh-rbtn {
+  width: 40px; height: 40px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  background: transparent;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+.mh-rbtn:hover { border-color: var(--purple); color: var(--purple-light); }
+.mh-rmeta { font-size: .78rem; color: var(--ink-mute); font-variant-numeric: tabular-nums; }
+.mh-rchap { margin-left: auto; font-size: .78rem; color: var(--ink-mute); }
+.mh-reader-prog { height: 2px; background: var(--border-soft); }
+.mh-reader-prog i { display: block; height: 100%; background: var(--purple); transition: width .45s var(--mh-out); }
+.mh-reader-scroll {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding: 1.3rem 1.15rem 2.5rem;
+}
+.mh-reader-title {
+  font-size: 1.32rem;
+  line-height: 1.28;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  text-wrap: pretty;
+  margin: 0 0 1.1rem;
+}
+.mh-reader .q-body { display: block !important; padding: 0 !important; }
+.mh-reader-foot {
+  display: flex;
+  gap: .5rem;
+  padding: .7rem 1rem calc(.85rem + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--border-soft);
+  background: var(--bg-card);
+}
+.mh-reader-foot button {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .45rem;
+  padding: .85rem .6rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: transparent;
+  color: var(--ink-soft);
+  font: inherit;
+  font-size: .9rem;
+  cursor: pointer;
+}
+.mh-reader-foot button.pri {
+  flex: 2;
+  border-color: var(--purple);
+  background: var(--purple);
+  color: #fff;
+  font-weight: 500;
+}
+.mh-reader-foot button:disabled { opacity: .35; cursor: default; }
+body.mh-locked { overflow: hidden; }
+
+/* ════════════ 1d · Квиз: точки и шторка разбора ════════════ */
+.mh-dots { display: flex; gap: 4px; flex: 1; justify-content: center; flex-wrap: wrap; }
+.mh-dots i {
+  width: 7px; height: 7px;
+  border-radius: 999px;
+  background: var(--border);
+  transition: background .3s ease, transform .3s var(--mh-spring);
+}
+.mh-dots i.done { background: var(--purple-deep); }
+.mh-dots i.now  { background: var(--purple-light); transform: scale(1.25); }
+
+.mh-qsheet {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 70;
+  max-height: 64vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border-top: 1px solid var(--border);
+  border-radius: 18px 18px 0 0;
+  background: var(--bg-card);
+  box-shadow: 0 -14px 30px rgba(0, 0, 0, .34);
+  padding: .8rem 1.05rem calc(1rem + env(safe-area-inset-bottom));
+  animation: mhSheetUp .34s var(--mh-out) both;
+}
+.mh-qsheet .mh-grab { display: block; width: 36px; height: 4px; border-radius: 999px; background: var(--border); margin: 0 auto .8rem; }
+.mh-qsheet .quiz-explanation { margin-top: 0; }
+.exp-tldr .bulb { display: flex; color: var(--purple-light); margin-top: 1px; }
+.mh-qsheet .quiz-controls { margin-top: 1rem; }
+body.mh-qsheet-on .main { padding-bottom: 46vh; }
+body.mh-qsheet-on .mh-tabs { display: none; }
+
+/* ── Телефон: попадаемость пальцем ────────────────────────── */
+@media (max-width: 720px) {
+  .q-head { min-height: 58px; padding-top: 1rem; padding-bottom: 1rem; }
+  .q-toggle { width: 40px; height: 40px; }
+  .theme-btn, .menu-btn { width: 44px; height: 44px; }
+  .back-btn, .close-btn { width: 40px; height: 40px; }
+  .quiz-option { padding-top: .95rem; padding-bottom: .95rem; }
+  .dl { padding: .65rem 1rem; }
+  .res-pill { padding: .7rem 1.1rem; }
+  .topbar .menu-btn { display: none; }
+  .start-title { font-size: 2.1rem !important; }
+  .mh-reader-title { font-size: 1.22rem; }
+}
+@media (min-width: 721px) {
+  .mh-tabs { display: none; }
+  body.mh-has-tabs .main { padding-bottom: 2rem; }
+  .mh-reader { left: auto; width: min(760px, 100%); box-shadow: -20px 0 60px rgba(0, 0, 0, .35); }
+}
+
+/* ── Системная настройка «меньше движения» ────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .reveal, .q-card.reveal, .mh-start { opacity: 1; transform: none; }
+  .topbar.mh-tuck { transform: none; }
+}

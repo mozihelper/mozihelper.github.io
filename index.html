@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark light">
 <title>MoziHelper</title>
 <script>
-  // тема запоминается (общий ключ со страницами семестров)
   try {
     var t = localStorage.getItem('la_theme') || 'dusk';
     document.documentElement.setAttribute('data-theme', t);
@@ -58,32 +58,33 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 28px 24px;
-    /* визуальный центр чуть выше геометрического — иначе блок «проваливается» вниз */
-    padding-bottom: clamp(60px, 12vh, 130px);
+    padding: 28px 22px;
+    /* визуальный центр чуть выше геометрического */
+    padding-bottom: clamp(56px, 12vh, 130px);
     -webkit-font-smoothing: antialiased;
-    transition: background 0.3s ease, color 0.3s ease;
+    transition: background .3s ease, color .3s ease;
   }
 
-  /* переключатель темы */
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { color: var(--accent-strong); }
+
   .theme-btn {
     position: fixed;
-    top: 16px;
-    right: 16px;
-    width: 42px;
-    height: 42px;
+    top: 14px;
+    right: 14px;
+    width: 44px;
+    height: 44px;
     border: 1px solid var(--border);
     background: var(--bg-card);
     color: var(--ink-soft);
-    border-radius: 10px;
+    border-radius: 12px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background 0.2s, border-color 0.2s, color 0.2s;
   }
   .theme-btn:hover { border-color: var(--accent-strong); color: var(--accent); }
-  .theme-btn:focus-visible { outline: none; border-color: var(--accent-strong); color: var(--accent); }
+  .theme-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
   .theme-btn svg { width: 19px; height: 19px; }
   .theme-btn .icon-sun { display: none; }
   .theme-btn .icon-moon { display: block; }
@@ -92,227 +93,159 @@
 
   .home {
     width: 100%;
-    max-width: 520px;
+    max-width: 440px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: clamp(28px, 5vh, 44px);
+    gap: clamp(30px, 6vh, 48px);
   }
 
-  /* шапка */
-  .head {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    text-align: center;
-  }
+  .head { display: flex; flex-direction: column; gap: 14px; }
 
+  /* ── Логотип: буквы выезжают из-под линии обреза ── */
   .wordmark {
-    font-size: clamp(2.8rem, 8vw, 4.4rem);
-    font-weight: 600;
-    letter-spacing: -0.015em;
-    line-height: 1.0;
-    white-space: nowrap;
     display: flex;
+    font-size: clamp(2.6rem, 12vw, 3.9rem);
+    font-weight: 600;
+    letter-spacing: -0.022em;
+    line-height: 1;
+    white-space: nowrap;
   }
   .wordmark .wm-part {
     display: inline-block;
-    opacity: 0;
-    transform: translateY(0.5em) rotate(6deg);
-    filter: blur(6px);
-    animation: letterIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    overflow: hidden;
+    padding-bottom: .06em;
+    margin-bottom: -.06em;
   }
-  /* шахматка задержек — буквы появляются волной */
-  .wordmark .wm-part:nth-child(1)  { animation-delay: 0.05s; }
-  .wordmark .wm-part:nth-child(2)  { animation-delay: 0.11s; }
-  .wordmark .wm-part:nth-child(3)  { animation-delay: 0.17s; }
-  .wordmark .wm-part:nth-child(4)  { animation-delay: 0.23s; }
-  .wordmark .wm-part:nth-child(5)  { animation-delay: 0.31s; }
-  .wordmark .wm-part:nth-child(6)  { animation-delay: 0.37s; }
-  .wordmark .wm-part:nth-child(7)  { animation-delay: 0.43s; }
-  .wordmark .wm-part:nth-child(8)  { animation-delay: 0.49s; }
-  .wordmark .wm-part:nth-child(9)  { animation-delay: 0.55s; }
-  .wordmark .wm-part:nth-child(10) { animation-delay: 0.61s; }
+  .wordmark .wm-part > span {
+    display: block;
+    transform: translateY(105%);
+    animation: letterRise .72s cubic-bezier(.16, 1, .3, 1) forwards;
+  }
+  .wordmark .wm-part:nth-child(1) > span  { animation-delay: .02s; }
+  .wordmark .wm-part:nth-child(2) > span  { animation-delay: .05s; }
+  .wordmark .wm-part:nth-child(3) > span  { animation-delay: .08s; }
+  .wordmark .wm-part:nth-child(4) > span  { animation-delay: .11s; }
+  .wordmark .wm-part:nth-child(5) > span  { animation-delay: .15s; }
+  .wordmark .wm-part:nth-child(6) > span  { animation-delay: .18s; }
+  .wordmark .wm-part:nth-child(7) > span  { animation-delay: .21s; }
+  .wordmark .wm-part:nth-child(8) > span  { animation-delay: .24s; }
+  .wordmark .wm-part:nth-child(9) > span  { animation-delay: .27s; }
+  .wordmark .wm-part:nth-child(10) > span { animation-delay: .30s; }
   .wordmark .accent { color: var(--accent); }
 
-  .prompt {
-    font-size: 1rem;
-    font-weight: 400;
-    color: var(--ink-soft);
-    letter-spacing: 0.01em;
-    opacity: 0;
-    animation: rise 0.6s ease 0.78s forwards;
+  /* тонкая линия под логотипом раскрывается слева направо */
+  .rule {
+    height: 1px;
+    background: var(--border);
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: ruleIn .8s cubic-bezier(.16, 1, .3, 1) .34s forwards;
   }
 
-  /* карточки семестров */
-  .semesters {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 14px;
-    width: 100%;
+  .prompt {
+    font-size: .95rem;
+    color: var(--ink-mute);
+    letter-spacing: .01em;
     opacity: 0;
-    animation: rise 0.6s ease 0.92s forwards;
+    animation: rise .55s cubic-bezier(.16, 1, .3, 1) .46s forwards;
   }
+
+  .semesters { display: grid; gap: 10px; }
 
   .sem-btn {
-    flex: 1 1 200px;
-    min-width: 180px;
-    position: relative;
     display: flex;
     align-items: center;
     gap: 14px;
-    padding: 18px;
-    border-radius: 16px;
+    padding: 16px 18px;
+    border-radius: 14px;
     text-decoration: none;
     border: 1px solid var(--border);
     background: var(--bg-card);
     color: var(--ink);
-    overflow: hidden;
-    transform-style: preserve-3d;
-    will-change: transform;
-    transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.18s ease, background 0.18s ease;
+    opacity: 0;
+    animation: rise .6s cubic-bezier(.16, 1, .3, 1) forwards;
   }
-  /* блик, пробегающий по карточке при наведении */
-  .sem-btn::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -60%;
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(100deg, transparent, rgba(255,255,255,0.06), transparent);
-    transform: skewX(-18deg);
-    transition: left 0.6s ease;
-    pointer-events: none;
-  }
-  .sem-btn:hover::after { left: 130%; }
-  .sem-btn:hover {
-    border-color: var(--accent-strong);
-    background: var(--bg-soft);
-  }
-  .sem-btn:active { transform: translateY(-1px) scale(0.99); }
+  .sem-btn:nth-child(1) { animation-delay: .54s; }
+  .sem-btn:nth-child(2) { animation-delay: .62s; }
+  .sem-btn:hover { border-color: var(--accent-strong); background: var(--bg-soft); color: var(--ink); }
   .sem-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
-  /* стрелка улетает вправо при клике */
-  .sem-btn.is-launching .sem-arrow { animation: arrowLaunch 0.26s ease-in forwards; }
-  @keyframes arrowLaunch {
-    to { transform: translateX(28px); opacity: 0; }
-  }
-
-  /* левая марка с номером семестра */
   .sem-mark {
     flex-shrink: 0;
-    width: 46px;
-    height: 46px;
-    border-radius: 12px;
+    width: 42px;
+    height: 42px;
+    border-radius: 11px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.15rem;
-    font-weight: 700;
-    letter-spacing: 0.02em;
+    font-size: 1.02rem;
+    font-weight: 600;
+    letter-spacing: .04em;
     color: #fff;
-    background: linear-gradient(160deg, var(--accent-strong) 0%, var(--accent-deep) 100%);
-    box-shadow: var(--shadow);
+    background: var(--accent-deep);
   }
 
-  .sem-text {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    text-align: left;
-    min-width: 0;
-  }
-  .sem-title {
-    font-size: 1.08rem;
-    font-weight: 600;
-    line-height: 1.2;
-  }
+  .sem-title { font-size: 1.05rem; font-weight: 500; line-height: 1.2; }
 
   .sem-arrow {
     margin-left: auto;
     flex-shrink: 0;
-    color: var(--ink-mute);
     display: flex;
-    transition: transform 0.18s ease, color 0.18s ease;
+    color: var(--ink-mute);
+    transition: transform .22s cubic-bezier(.16, 1, .3, 1), color .18s ease;
   }
-  .sem-btn:hover .sem-arrow {
-    color: var(--accent);
-    transform: translateX(3px);
-  }
+  .sem-btn:hover .sem-arrow { color: var(--accent); transform: translateX(4px); }
   .sem-arrow svg { width: 20px; height: 20px; }
 
-  /* нижние ссылки */
   .resources {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
+    gap: 8px;
     flex-wrap: wrap;
     opacity: 0;
-    animation: rise 0.6s ease 1.04s forwards;
+    animation: rise .6s cubic-bezier(.16, 1, .3, 1) .72s forwards;
   }
   .res-pill {
     display: inline-flex;
     align-items: center;
-    gap: 7px;
-    padding: 9px 15px;
+    gap: 8px;
+    padding: 10px 15px;
     border-radius: 999px;
     border: 1px solid var(--border);
-    background: var(--bg-card);
+    background: transparent;
     color: var(--ink-soft);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: .88rem;
     font-weight: 500;
-    transition: border-color 0.18s ease, color 0.18s ease, background 0.18s ease, transform 0.18s ease;
   }
-  .res-pill:hover {
-    color: var(--accent);
-    border-color: var(--accent-strong);
-    background: var(--bg-soft);
-    transform: translateY(-2px);
-  }
+  .res-pill:hover { color: var(--accent); border-color: var(--accent-strong); background: var(--bg-card); }
+  .res-pill:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
   .res-pill svg { width: 15px; height: 15px; flex-shrink: 0; }
 
+  @keyframes letterRise { to { transform: translateY(0); } }
+  @keyframes ruleIn { to { transform: scaleX(1); } }
   @keyframes rise {
-    from { opacity: 0; transform: translateY(12px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: none; }
   }
 
-  @keyframes letterIn {
-    0%   { opacity: 0; transform: translateY(0.5em) rotate(6deg); filter: blur(6px); }
-    60%  { opacity: 1; filter: blur(0); }
-    100% { opacity: 1; transform: translateY(0) rotate(0); filter: blur(0); }
-  }
-
-  /* ── Плавная смена темы: круговая волна от кнопки ── */
+  /* ── Смена темы: круговая волна от кнопки ── */
   ::view-transition-old(root),
-  ::view-transition-new(root) {
-    animation: none;
-    mix-blend-mode: normal;
-  }
-  /* старая тема лежит снизу, новая «раскрывается» кругом поверх неё */
+  ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
   ::view-transition-old(root) { z-index: 1; }
-  ::view-transition-new(root) { z-index: 2; }
-  ::view-transition-new(root) {
-    animation: waveReveal 0.55s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  }
+  ::view-transition-new(root) { z-index: 2; animation: waveReveal .55s cubic-bezier(.4, 0, .2, 1) forwards; }
   @keyframes waveReveal {
     from { clip-path: circle(0 at var(--wave-x, 100%) var(--wave-y, 0)); }
     to   { clip-path: circle(var(--wave-r, 150vmax) at var(--wave-x, 100%) var(--wave-y, 0)); }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    /* появление блоков (название, подзаголовок, карточки, ссылки) оставляем всегда —
-       оно лёгкое и не мешает; гасим только hover-движение, которое может раздражать */
-    .sem-btn:hover { transform: none; }
+    .wordmark .wm-part > span { animation: none; transform: none; }
+    .rule { animation: none; transform: none; }
+    .prompt, .sem-btn, .resources { animation: none; opacity: 1; }
     .sem-btn:hover .sem-arrow { transform: none; }
-    .sem-btn::after { display: none; }
-    .res-pill:hover { transform: none; }
   }
 </style>
+<link rel="stylesheet" href="motion.css">
 </head>
 <body>
   <button class="theme-btn" onclick="toggleTheme(event)" aria-label="Сменить тему">
@@ -322,18 +255,15 @@
 
   <main class="home">
     <div class="head">
-      <h1 class="wordmark" aria-label="MoziHelper">
-        <span class="wm-part">M</span><span class="wm-part">o</span><span class="wm-part">z</span><span class="wm-part">i</span><span class="wm-part accent">H</span><span class="wm-part accent">e</span><span class="wm-part accent">l</span><span class="wm-part accent">p</span><span class="wm-part accent">e</span><span class="wm-part accent">r</span>
-      </h1>
-      <p class="prompt">Выберите семестр</p>
+      <h1 class="wordmark" aria-label="MoziHelper"><span class="wm-part"><span>M</span></span><span class="wm-part"><span>o</span></span><span class="wm-part"><span>z</span></span><span class="wm-part"><span>i</span></span><span class="wm-part accent"><span>H</span></span><span class="wm-part accent"><span>e</span></span><span class="wm-part accent"><span>l</span></span><span class="wm-part accent"><span>p</span></span><span class="wm-part accent"><span>e</span></span><span class="wm-part accent"><span>r</span></span></h1>
+      <div class="rule"></div>
+      <p class="prompt">Справочник по линейной алгебре — выберите семестр</p>
     </div>
 
     <nav class="semesters">
       <a class="sem-btn" href="algebra-sem1.html">
         <span class="sem-mark">I</span>
-        <span class="sem-text">
-          <span class="sem-title">1 семестр</span>
-        </span>
+        <span class="sem-title">1 семестр</span>
         <span class="sem-arrow">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </span>
@@ -341,9 +271,7 @@
 
       <a class="sem-btn" href="algebra-sem2.html">
         <span class="sem-mark">II</span>
-        <span class="sem-text">
-          <span class="sem-title">2 семестр</span>
-        </span>
+        <span class="sem-title">2 семестр</span>
         <span class="sem-arrow">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </span>
@@ -371,57 +299,21 @@
     function toggleTheme(ev) {
       var cur = document.documentElement.getAttribute('data-theme') || 'dusk';
       var next = cur === 'dusk' ? 'paper' : 'dusk';
-
-      // координаты клика — центр круговой волны (по умолчанию правый верхний угол, где кнопка)
       var x = (ev && ev.clientX) || window.innerWidth - 32;
       var y = (ev && ev.clientY) || 32;
-
       var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      // View Transitions API + clip-path круговая волна
       if (document.startViewTransition && !reduce) {
-        document.documentElement.style.setProperty('--wave-x', x + 'px');
-        document.documentElement.style.setProperty('--wave-y', y + 'px');
-        var end = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
-        document.documentElement.style.setProperty('--wave-r', end + 'px');
-        var t = document.startViewTransition(function () { applyTheme(next); });
+        var root = document.documentElement;
+        root.style.setProperty('--wave-x', x + 'px');
+        root.style.setProperty('--wave-y', y + 'px');
+        root.style.setProperty('--wave-r', Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y)) + 'px');
+        document.startViewTransition(function () { applyTheme(next); });
         return;
       }
       applyTheme(next);
     }
-
-    // ── 3D-наклон карточек вслед за курсором (только мышь, не трогаем touch) ──
-    (function () {
-      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      var fine = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-      if (reduce || !fine) return;
-
-      document.querySelectorAll('.sem-btn').forEach(function (card) {
-        card.addEventListener('pointermove', function (e) {
-          var r = card.getBoundingClientRect();
-          var px = (e.clientX - r.left) / r.width - 0.5;   // -0.5..0.5
-          var py = (e.clientY - r.top) / r.height - 0.5;
-          var MAX = 7; // градусы
-          card.style.transform =
-            'perspective(700px) rotateX(' + (-py * MAX) + 'deg) rotateY(' + (px * MAX) + 'deg) translateY(-3px)';
-        });
-        card.addEventListener('pointerleave', function () {
-          card.style.transform = '';
-        });
-      });
-    })();
-
-    // ── Стрелка «улетает» при клике, затем переход ──
-    document.querySelectorAll('.sem-btn').forEach(function (card) {
-      card.addEventListener('click', function (e) {
-        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        var href = card.getAttribute('href');
-        if (reduce || !href) return;            // обычный переход
-        e.preventDefault();
-        card.classList.add('is-launching');
-        setTimeout(function () { window.location.href = href; }, 260);
-      });
-    });
   </script>
+  <script src="motion.js"></script>
 </body>
 </html>
