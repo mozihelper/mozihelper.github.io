@@ -174,7 +174,7 @@ body::after {
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  display: none;
+  opacity: var(--grain-opacity, 0.03);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
@@ -1596,7 +1596,10 @@ ul.props li::before {
   color: var(--ink-mute);
 }
 .src-ref::before {
-  content: none;
+  content: "📖";
+  margin-right: 0.4rem;
+  opacity: 0.7;
+  font-size: 0.72rem;
 }
 
 /* Figures from lectures */
@@ -1822,7 +1825,6 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 .q-card[data-q="79"] .ra-scroll::-webkit-scrollbar-thumb{background:var(--ink-mute);border-radius:8px;border:2px solid var(--bg-card)}
 .q-card[data-q="79"] .ra-scroll::-webkit-scrollbar-thumb:hover{background:var(--ink-soft)}
 </style>
-<link rel="stylesheet" href="motion.css">
 </head>
 <body>
 <!-- ========== TOPBAR ========== -->
@@ -8685,16 +8687,7 @@ function showTopic(topicId) {
   // Принудительная перерисовка MathJax для содержимого, которое могло не отрендериться
   setTimeout(() =>  {
     if (window.MathJax && window.MathJax.typesetPromise && target) {
-      // Формулы закрытых карточек не рендерим: тема открывается мгновенно,
-      // карточка типсетится в момент раскрытия (см. toggleCard).
-      var nodes = [];
-      try {
-        target.querySelectorAll(':scope > *').forEach(function (el) {
-          if (el.classList.contains('q-card')) { if (el.classList.contains('open')) nodes.push(el); }
-          else nodes.push(el);
-        });
-      } catch (e) { nodes = [target]; }
-      if (nodes.length) window.MathJax.typesetPromise(nodes).catch(function () {});
+      window.MathJax.typesetPromise([target]).catch(err =>  console.log('MJ err:', err));
     }
   }, 50);
   // Scroll-reveal карточек открытой темы
@@ -32693,7 +32686,7 @@ function dqReveal(q, chosen){
   if (typeof e === 'string') {
     html += '<div class="exp-section detail"><div class="sec-body">' + e + '</div></div>';
   } else {
-    if (e.tldr)    html += '<div class="exp-tldr"><span class="bulb"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg></span><span class="t"><span class="lbl">В двух словах. </span>' + e.tldr + '</span></div>';
+    if (e.tldr)    html += '<div class="exp-tldr"><span class="bulb">💡</span><span class="t"><span class="lbl">В двух словах. </span>' + e.tldr + '</span></div>';
     if (e.detail)  html += '<div class="exp-section detail"><div class="sec-lbl">Разбор</div><div class="sec-body">' + e.detail + '</div></div>';
     if (e.variants)html += '<div class="exp-section variants"><div class="sec-lbl">Почему не остальные</div><div class="sec-body">' + e.variants + '</div></div>';
   }
@@ -32914,6 +32907,5 @@ else{window.addEventListener("resize",function(){if(cv.clientWidth>0){fit();pain
   window.addEventListener('resize',padTop);
 })();
 </script>
-<script src="motion.js"></script>
 </body>
 </html>
