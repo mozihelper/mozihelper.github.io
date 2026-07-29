@@ -2093,8 +2093,12 @@ html.sweeping .q-card.reveal { transition: none !important; }
 /* ══ ПРИБЫТИЕ ПОСЛЕ ШТОРКИ ══
    Страница открывается УЖЕ закрытой шторкой и без анимаций входа:
    контент отрисован, шторка просто уезжает вверх — одно движение, без лишних. */
-html.arriving .curtain { transform: translate3d(0,0,0); transition: none; }
-html.arriving .curtain.out { transform: translate3d(0,-100%,0); transition: transform .44s cubic-bezier(.32,0,.2,1); }
+html.arriving .curtain {
+  transform: translate3d(0,0,0);
+  animation: curtainAway .52s cubic-bezier(.32,0,.2,1) .1s forwards;
+}
+html.arriving .curtain.out { transform: translate3d(0,-100%,0); }
+@keyframes curtainAway { to { transform: translate3d(0,-100%,0); } }
 html.arriving .topic-page, html.arriving .topic-page *,
 html.arriving .tl-head, html.arriving .tl-head *,
 html.arriving .topbar, html.arriving .topbar *,
@@ -2366,7 +2370,7 @@ html.arriving .topic-header, html.arriving .q-card { opacity: 1; }
 
 /* разбор — лист, выезжающий снизу. При ответе ничего не должно прыгать:
    лист вынесен из потока, высота карточки зафиксирована, прокрутка не цепляется. */
-#page-quiz { overflow-anchor: none; }
+#page-quiz { overflow-anchor: none; padding-top: 22px; }
 .quiz-explanation {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 70;
   max-height: 76svh; overflow-y: auto; -webkit-overflow-scrolling: touch;
@@ -2515,6 +2519,8 @@ body.sheet-open .tabbar { transform: translateY(118%); }
     padding-bottom: 0;
   }
   .tabbar.hide { transform: translateX(-50%) translateY(140%); }
+  /* лист разбора уводит бар вниз — но центрирование терять нельзя, иначе он прыгает вправо */
+  body.sheet-open .tabbar { transform: translateX(-50%) translateY(140%); }
   .tab { flex-direction: row; gap: 9px; min-height: 46px; padding: 12px 18px; font-size: .8rem; }
   .tab svg { width: 17px; height: 17px; }
   .main { padding-bottom: 104px; }
@@ -2531,7 +2537,9 @@ body.sheet-open .tabbar { transform: translateY(118%); }
    Навигация уходит в шапку — плавающая плашка снизу здесь ни к чему.
    Список билетов получает тему на полях: слева заголовок, справа строки. */
 @media (min-width: 900px) {
-  .main { max-width: 1120px; padding: 30px 40px 60px; }
+  /* шапка фиксированная и в неё же встроен таб-бар — отступаем на всю её высоту,
+     иначе заголовок вопроса уезжает под навигацию */
+  .main { max-width: 1120px; padding: 88px 40px 60px; }
   .topbar { padding: 0 40px; min-height: 64px; }
   .tb-back { font-size: .86rem; }
 
@@ -2543,6 +2551,8 @@ body.sheet-open .tabbar { transform: translateY(118%); }
     border: 0; box-shadow: none; padding: 0;
   }
   .tabbar.hide { transform: translateX(-50%); }
+  /* на десктопе разбор — окно по центру, навигацию прятать не надо и двигать тем более */
+  body.sheet-open .tabbar { transform: translateX(-50%); }
   .tab {
     min-height: 64px; padding: 0 16px; gap: 9px; font-size: .82rem;
     color: var(--ink-mute);
@@ -33453,7 +33463,7 @@ function dqRenderQ(){
 
   QState.answered = false;
   if (window.MathJax && window.MathJax.typesetPromise) setTimeout(function(){ window.MathJax.typesetPromise([c]).catch(function(){}); }, 30);
-  window.scrollTo({top:0, behavior:'smooth'});
+  window.scrollTo({top:0, behavior:'instant'});
 }
 
 function dqPick(i){
@@ -33509,7 +33519,7 @@ function dqReveal(q, chosen){
   if (window.MathJax && window.MathJax.typesetPromise) setTimeout(function(){ window.MathJax.typesetPromise([ex]).catch(function(){}); }, 30);
 }
 
-function dqNext(){ QState.idx++; dqRenderQ(); window.scrollTo({top:0, behavior:'smooth'}); }
+function dqNext(){ QState.idx++; dqRenderQ(); window.scrollTo({top:0, behavior:'instant'}); }
 
 function dqResult(){
   var c = document.getElementById('quizContainer');
@@ -33791,6 +33801,16 @@ else{window.addEventListener("resize",function(){if(cv.clientWidth>0){fit();pain
     c.addEventListener('transitionend', function(e){ if (!e || e.target === c) go(); });
     requestAnimationFrame(function(){ requestAnimationFrame(function(){ c.classList.add('up'); }); });
     setTimeout(go, 620);
+    /* страховка: если переход так и не случился — уводим полотно, а не держим рыжий экран */
+    setTimeout(function(){
+      if (document.visibilityState === 'hidden') return;
+      c.classList.add('out');
+      setTimeout(function(){
+        c.style.transition = 'none'; c.classList.remove('up', 'out');
+        H.classList.remove('sweeping');
+        requestAnimationFrame(function(){ c.style.transition = ''; c.removeAttribute('data-busy'); });
+      }, 460);
+    }, 2600);
   }
   window.leavePage = leave;
 
