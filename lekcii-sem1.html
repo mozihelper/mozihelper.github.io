@@ -1,113 +1,185 @@
 <!DOCTYPE html>
-<html lang="ru" data-theme="dusk">
+<html lang="ru" data-theme="dusk" data-motion="full">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>MoziHelper — Лекции 1 семестр</title>
-<script>
-  try { document.documentElement.setAttribute('data-theme', localStorage.getItem('la_theme') || 'dusk'); }
-  catch (e) { document.documentElement.setAttribute('data-theme', 'dusk'); }
-</script>
+<script>(function(){var h=document.documentElement;try{h.setAttribute('data-theme',localStorage.getItem('la_theme')||'dusk');h.setAttribute('data-motion',localStorage.getItem('la_motion')||'full');if(sessionStorage.getItem('la_sweep')){sessionStorage.removeItem('la_sweep');h.classList.add('arriving');}}catch(e){h.setAttribute('data-theme','dusk');h.setAttribute('data-motion','full');}})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;700&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root, [data-theme="dusk"] {
-    --bg:#0a0c10; --bg-card:#13161c; --bg-elev:#1f242c;
-    --ink:#eceef2; --ink-soft:#a4abb8; --ink-mute:#687081;
-    --accent:#5ba4ff; --accent-strong:#2d88ff; --accent-deep:#1877f2;
-    --border:#2a2f38; --topbar-bg:rgba(10,12,16,0.85);
-  }
-  [data-theme="paper"] {
-    --bg:#f0f2f5; --bg-card:#ffffff; --bg-elev:#eef0f3;
-    --ink:#1c1e21; --ink-soft:#444950; --ink-mute:#8a8d91;
-    --accent:#1877f2; --accent-strong:#1877f2; --accent-deep:#0d5dc9;
-    --border:#dadde1; --topbar-bg:rgba(255,255,255,0.9); color-scheme:light;
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body {
-    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
-    background:var(--bg); color:var(--ink); min-height:100svh;
-    -webkit-font-smoothing:antialiased; line-height:1.5;
-    transition:background .3s,color .3s;
-  }
-  .topbar {
-    position:sticky; top:0; z-index:50; display:flex; align-items:center; gap:1rem;
-    padding:1rem 1.25rem; background:var(--topbar-bg);
-    backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
-    border-bottom:1px solid var(--border);
-  }
-  .topbar-home { margin-right:auto; display:inline-flex; align-items:center; gap:.4rem;
-    font-size:.95rem; font-weight:600; color:var(--ink-soft); text-decoration:none; transition:color .2s; }
-  .topbar-home:hover { color:var(--accent); }
-  .topbar-home svg { flex-shrink:0; }
-  .theme-btn { width:40px; height:40px; border:1px solid var(--border); background:var(--bg-card);
-    color:var(--ink-soft); border-radius:10px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:.2s; }
-  .theme-btn:hover { border-color:var(--accent-strong); color:var(--accent); }
-  .theme-btn svg { width:18px; height:18px; }
-  .theme-btn .icon-sun { display:none; } .theme-btn .icon-moon { display:block; }
-  [data-theme="paper"] .theme-btn .icon-sun { display:block; }
-  [data-theme="paper"] .theme-btn .icon-moon { display:none; }
+[data-theme="dusk"]{
+  --bg:#0c0c0e; --bg-2:#141416; --ink:#f2f0ec; --ink-2:#94918b; --ink-3:#5c5a55;
+  --rule:#26262a; --hot:#ff4a24; --hot-2:#ff4a24; --hot-ink:#fff; --flood:#ff4a24;
+  --bar:rgba(12,12,14,.86);
+  color-scheme:dark;
+}
+[data-theme="paper"]{
+  --bg:#f7f4ef; --bg-2:#ffffff; --ink:#101012; --ink-2:#5a5852; --ink-3:#94918a;
+  --rule:#dedad2; --hot:#e03c14; --hot-2:#e03c14; --hot-ink:#fff; --flood:#e03c14;
+  --bar:rgba(247,244,239,.88);
+  color-scheme:light;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{background:var(--bg);-webkit-text-size-adjust:100%}
+body{
+  font-family:'Golos Text',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  background:var(--bg);color:var(--ink);min-height:100svh;line-height:1.5;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  transition:background .45s ease,color .45s ease;
+}
+a{color:var(--hot)}
+a:hover{color:var(--ink)}
+::selection{background:var(--hot);color:var(--hot-ink)}
 
-  main { max-width:780px; margin:0 auto; padding:2rem 1.25rem 4rem; }
-  .page-title { font-size:clamp(1.8rem,5vw,2.4rem); font-weight:600; letter-spacing:-0.015em; margin-bottom:.4rem; }
-  .page-sub { color:var(--ink-soft); margin-bottom:2rem; }
+/* ── верхняя панель ── */
+.topbar{
+  position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:14px;
+  padding:calc(env(safe-area-inset-top,0px) + 10px) 18px 10px;
+  background:var(--bar);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--rule);
+}
+.topbar-home{
+  margin-right:auto;display:inline-flex;align-items:center;gap:9px;min-height:46px;
+  font-size:.92rem;font-weight:500;color:var(--ink-2);text-decoration:none;
+  transition:color .22s ease;-webkit-tap-highlight-color:transparent;
+}
+.topbar-home:hover{color:var(--ink)}
+.topbar-home svg{flex-shrink:0;transition:transform .3s cubic-bezier(.2,.9,.2,1)}
+.topbar-home:hover svg{transform:translateX(-3px)}
 
-  .res {
-    background:var(--bg-card); border:1px solid var(--border); border-radius:14px;
-    padding:1.1rem 1.25rem; margin-bottom:.9rem; transition:border-color .18s, transform .18s;
-  }
-  .res:hover { border-color:var(--accent-strong); transform:translateY(-2px); }
-  .res-title { font-weight:600; font-size:1.08rem; line-height:1.35; margin-bottom:.4rem; }
-  .res-cite { color:var(--ink-soft); font-size:.92rem; line-height:1.55; margin-bottom:.9rem; }
-  .dl {
-    display:inline-flex; align-items:center; gap:.4rem; padding:.5rem .9rem; border-radius:9px;
-    font-size:.9rem; font-weight:600; text-decoration:none; color:#fff;
-    background:linear-gradient(180deg,var(--accent-strong),var(--accent-deep));
-    border:1px solid var(--accent-strong); transition:transform .15s, box-shadow .15s;
-  }
-  .dl:hover { transform:translateY(-2px); box-shadow:0 6px 18px rgba(24,119,242,.28); }
-  .dl:active { transform:translateY(0) scale(.97); }
-  .dl svg { width:15px; height:15px; }
-  /* при клике стрелка «роняет» файл вниз */
-  .dl.is-dl svg { animation:dlBounce .5s cubic-bezier(.34,1.56,.64,1); }
-  @keyframes dlBounce {
-    0%   { transform:translateY(0); }
-    35%  { transform:translateY(4px); }
-    70%  { transform:translateY(-2px); }
-    100% { transform:translateY(0); }
-  }
+.tsw{position:relative;display:inline-flex;flex-shrink:0;border:1px solid var(--rule)}
+.tsw-knob{position:absolute;top:0;bottom:0;left:0;width:50%;background:var(--hot);transition:transform .42s cubic-bezier(.65,0,.15,1)}
+[data-theme="paper"] .tsw-knob{transform:translateX(100%)}
+.tsw-b{
+  position:relative;z-index:1;border:0;background:transparent;cursor:pointer;font-family:inherit;
+  font-size:.605rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;
+  padding:11px 13px 10px;color:var(--ink-2);line-height:1;
+  transition:color .32s ease;-webkit-tap-highlight-color:transparent;
+}
+.tsw-b::before{content:'';position:absolute;inset:-8px -3px}
+.tsw-b:first-of-type::before{left:-10px}
+.tsw-b:last-of-type::before{right:-10px}
+[data-theme="dusk"] .tsw-b[data-t="dusk"],
+[data-theme="paper"] .tsw-b[data-t="paper"]{color:var(--hot-ink)}
+.tsw-b:focus-visible{outline:2px solid var(--hot);outline-offset:4px}
 
-  .note-box {
-    margin-top:1.8rem; padding:.9rem 1.1rem; border:1px dashed var(--border); border-radius:12px;
-    color:var(--ink-mute); font-size:.86rem; background:var(--bg-elev);
-  }
-  .section-head {
-    font-size:clamp(1.3rem,4vw,1.6rem); font-weight:600; letter-spacing:-0.01em;
-    margin:2.6rem 0 1.4rem; padding-top:1.8rem; border-top:1px solid var(--border);
-  }
+main{max-width:760px;margin:0 auto;padding:34px 20px calc(env(safe-area-inset-bottom,0px) + 64px)}
 
-  /* ── Scroll-reveal: карточки всплывают при прокрутке ── */
-  .reveal { opacity:0; transform:translateY(22px); transition:opacity .55s ease, transform .55s cubic-bezier(.22,1,.36,1); }
-  .reveal.in { opacity:1; transform:none; }
-  @media (prefers-reduced-motion:reduce){ body,.theme-btn,.res,.dl{transition:none;} .res:hover,.dl:hover{transform:none;} }
+/* ── титул страницы ── */
+.page-title{
+  font-family:'Unbounded',sans-serif;font-weight:400;
+  font-size:clamp(1.55rem,7vw,2.3rem);line-height:1.08;letter-spacing:-.03em;
+  margin-bottom:12px;
+  opacity:0;transform:translateY(10px);
+  animation:rise .8s cubic-bezier(.16,1,.3,1) .05s forwards;
+}
+.page-sub{
+  color:var(--ink-2);font-size:.95rem;margin-bottom:34px;max-width:46ch;text-wrap:pretty;
+  opacity:0;animation:fd .7s ease .28s forwards;
+}
+@keyframes rise{to{opacity:1;transform:none}}
+@keyframes fd{to{opacity:1}}
 
-  /* ── Плавная смена темы: круговая волна от кнопки ── */
-  ::view-transition-old(root),
-  ::view-transition-new(root) { animation:none; mix-blend-mode:normal; }
-  ::view-transition-old(root) { z-index:1; }
-  ::view-transition-new(root) { z-index:2; animation:waveReveal .55s cubic-bezier(.4,0,.2,1) forwards; }
-  @keyframes waveReveal {
-    from { clip-path: circle(0 at var(--wave-x,100%) var(--wave-y,0)); }
-    to   { clip-path: circle(var(--wave-r,150vmax) at var(--wave-x,100%) var(--wave-y,0)); }
-  }
+/* ── книга: строка, а не карточка ── */
+.res{
+  display:flex;flex-direction:column;align-items:flex-start;gap:9px;
+  padding:22px 0 24px;border-bottom:1px solid var(--rule);
+}
+.res-title{
+  font-size:1.06rem;font-weight:600;line-height:1.34;letter-spacing:-.013em;
+  text-wrap:pretty;transition:color .25s ease;
+}
+.res-cite{color:var(--ink-2);font-size:.855rem;line-height:1.62;text-wrap:pretty}
+.res:hover .res-title{color:var(--hot-2)}
+
+/* ── кнопка: та же заливка снизу вверх, что на билетах главной ── */
+.dl{
+  position:relative;margin-top:3px;
+  display:inline-flex;align-items:center;gap:9px;min-height:46px;padding:12px 17px;
+  font-family:inherit;font-size:.855rem;font-weight:500;letter-spacing:.01em;
+  color:var(--ink);text-decoration:none;border:1px solid var(--rule);
+  background-image:linear-gradient(var(--hot),var(--hot));
+  background-repeat:no-repeat;background-position:0 100%;background-size:100% 0;
+  transition:background-size .42s cubic-bezier(.66,0,.2,1),color .3s ease .04s,border-color .3s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.dl svg{width:15px;height:15px;flex-shrink:0}
+.dl:hover,.dl:active{color:var(--hot-ink);border-color:var(--hot);background-size:100% 100%}
+.dl:focus-visible{outline:2px solid var(--hot);outline-offset:3px}
+.dl.is-dl svg{animation:dlBounce .52s cubic-bezier(.34,1.56,.64,1)}
+@keyframes dlBounce{
+  0%{transform:translateY(0)}
+  35%{transform:translateY(4px)}
+  70%{transform:translateY(-2px)}
+  100%{transform:translateY(0)}
+}
+
+/* ── примечание ── */
+.note-box{
+  margin-top:40px;padding-top:22px;border-top:1px solid var(--rule);
+  color:var(--ink-3);font-size:.845rem;line-height:1.65;max-width:56ch;text-wrap:pretty;
+}
+
+/* ── разделитель раздела ── */
+.section-head{
+  margin:46px 0 2px;padding-top:32px;border-top:1px solid var(--rule);
+  font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--hot-2);
+}
+
+/* ── появление при прокрутке ── */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.22,1,.36,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* ── шторка смены темы и уход со страницы ── */
+.curtain,.flood{position:fixed;inset:0;background:var(--flood);transform:translate3d(0,100%,0);pointer-events:none}
+.curtain{z-index:98;will-change:transform;contain:strict}
+.flood{z-index:99}
+.curtain.up{transform:translate3d(0,0,0);transition:transform .4s cubic-bezier(.66,0,.2,1)}
+.curtain.out{transform:translate3d(0,-100%,0);transition:transform .46s cubic-bezier(.32,0,.2,1)}
+/* ── приход под шторкой: контент уже отрисован, полотно просто уезжает ── */
+html.arriving .curtain{transform:translate3d(0,0,0);transition:none}
+html.arriving .curtain.out{transform:translate3d(0,-100%,0);transition:transform .44s cubic-bezier(.32,0,.2,1)}
+html.sweeping,html.sweeping body{transition:none!important}
+html.arriving .page-title,html.arriving .page-sub{opacity:1;transform:none;animation:none!important}
+html.arriving .reveal{opacity:1;transform:none;transition:none}
+body.leaving .flood{transform:none;transition:transform .42s cubic-bezier(.66,0,.2,1)}
+
+@media (min-width:760px){
+  .topbar{padding:14px 34px}
+  main{padding:52px 34px 96px}
+  .page-sub{margin-bottom:44px}
+  .res{padding:26px 0 28px}
+  .res-title{font-size:1.14rem}
+  .res-cite{font-size:.885rem}
+}
+
+[data-motion="calm"] *{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important}
+[data-motion="calm"] .page-title,[data-motion="calm"] .page-sub{opacity:1;transform:none}
+[data-motion="calm"] .reveal{opacity:1;transform:none}
 </style>
-<link rel="stylesheet" href="motion.css">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0c0c0e" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f7f4ef" media="(prefers-color-scheme: light)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MoziHelper">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="icon-192.png" type="image/png">
 </head>
 <body>
+<div class="curtain" id="curtain" aria-hidden="true"></div>
+<div class="flood" aria-hidden="true"></div>
+
   <header class="topbar">
-    <a class="topbar-home" href="index.html"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg><span>На главную</span></a>
-    <button class="theme-btn" onclick="toggleTheme(event)" aria-label="Сменить тему">
-      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-    </button>
+    <a class="topbar-home" href="index.html"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg><span>На главную</span></a>
+    <div class="tsw" role="group" aria-label="Тема оформления">
+      <span class="tsw-knob" aria-hidden="true"></span>
+      <button class="tsw-b" data-t="dusk" onclick="pickTheme(event,'dusk')">Ночь</button>
+      <button class="tsw-b" data-t="paper" onclick="pickTheme(event,'paper')">День</button>
+    </div>
   </header>
 
   <main>
@@ -136,62 +208,125 @@
     </div>
   </main>
 
-  <script>
-    function applyTheme(next){
-      document.documentElement.setAttribute('data-theme', next);
-      try { localStorage.setItem('la_theme', next); } catch (e) {}
-    }    function toggleTheme(ev){
-      var cur = document.documentElement.getAttribute('data-theme') || 'dusk';
-      var next = cur === 'dusk' ? 'paper' : 'dusk';
-      var x = (ev && ev.clientX) || window.innerWidth - 32;
-      var y = (ev && ev.clientY) || 32;
-      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (document.startViewTransition && !reduce) {
-        var r = document.documentElement.style;
-        r.setProperty('--wave-x', x+'px'); r.setProperty('--wave-y', y+'px');
-        r.setProperty('--wave-r', Math.hypot(Math.max(x,innerWidth-x), Math.max(y,innerHeight-y))+'px');
-        document.startViewTransition(function(){ applyTheme(next); });
-        return;
-      }
-      applyTheme(next);
-    }
+<script>
+function calm(){return document.documentElement.getAttribute('data-motion')==='calm';}
+function applyTheme(n){
+  document.documentElement.setAttribute('data-theme',n);
+  try{localStorage.setItem('la_theme',n);}catch(e){}
+}
+function sweep(mid){
+  var c=document.getElementById('curtain');
+  if(!c||calm()||c.dataset.busy){if(mid)mid();return;}
+  c.dataset.busy='1';
+  c.classList.remove('out');c.classList.add('up');
+  setTimeout(function(){
+    if(mid)mid();
+    c.classList.add('out');
+    setTimeout(function(){
+      c.style.transition='none';c.classList.remove('up','out');
+      requestAnimationFrame(function(){c.style.transition='';c.removeAttribute('data-busy');});
+    },470);
+  },400);
+}
+function pickTheme(ev,next){
+  if((document.documentElement.getAttribute('data-theme')||'dusk')===next)return;
+  sweep(function(){applyTheme(next);});
+}
 
-    // ── Scroll-reveal карточек и заголовков ──
-    (function(){
-      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      var items = document.querySelectorAll('.res, .section-head');
-      if (!('IntersectionObserver' in window)) {
-        items.forEach(function(el){ el.classList.add('reveal','in'); });
-        return;
-      }
-      items.forEach(function(el){ el.classList.add('reveal'); });
-      var io = new IntersectionObserver(function(entries){
-        entries.forEach(function(en){
-          if (!en.isIntersecting) return;
-          var el = en.target;
-          // лёгкий каскад для карточек, идущих подряд в одном «экране»
-          el.style.transitionDelay = (el._d || 0) + 'ms';
-          el.classList.add('in');
-          io.unobserve(el);
-        });
-      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
-      // присвоим маленькие задержки группами по 4, чтобы соседние всплывали волной
-      items.forEach(function(el, i){ el._d = (i % 4) * 70; io.observe(el); });
-    })();
+/* ── Переход между страницами одним движением ──
+   Уходящая страница закрывает экран шторкой и НЕ уводит её обратно;
+   доигрывает уже новая страница (флаг la_sweep → html.arriving),
+   причём её содержимое отрисовано без анимаций входа. Раньше уход и приход
+   играли по отдельности — отсюда и виделся лаг с лишней анимацией. */
+function leavePage(href){
+  var c=document.getElementById('curtain');
+  if(!c||calm()){location.href=href;return;}
+  if(c.getAttribute('data-busy'))return;
+  c.setAttribute('data-busy','1');
+  document.documentElement.classList.add('sweeping');
+  /* Флаг ставим только страницам, которые умеют доигрывать приход.
+     algebra-sem1 ещё на старой системе — иначе флаг залипнет и сработает не там. */
+  if(/^(index|literatura|links|lekcii-sem1|lekcii-sem2|algebra-sem2)\.html/.test(href)){
+    try{sessionStorage.setItem('la_sweep','1');}catch(e){}
+  }
+  var went=false;
+  function go(){if(went)return;went=true;location.href=href;}
+  c.addEventListener('transitionend',function(e){if(!e||e.target===c)go();});
+  requestAnimationFrame(function(){requestAnimationFrame(function(){c.classList.add('up');});});
+  setTimeout(go,620);
+}
+function finishArrival(){
+  var h=document.documentElement;
+  if(!h.classList.contains('arriving'))return;
+  var c=document.getElementById('curtain');
+  if(!c){h.classList.remove('arriving');return;}
+  c.classList.add('up');
+  requestAnimationFrame(function(){requestAnimationFrame(function(){
+    c.classList.add('out');
+    setTimeout(function(){
+      c.style.transition='none';c.classList.remove('up','out');
+      h.classList.remove('sweeping');
+      requestAnimationFrame(function(){c.style.transition='';});
+    },470);
+  });});
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',finishArrival);
+else finishArrival();
 
-    // ── «Скачать PDF»: лёгкий отскок иконки при клике ──
-    (function(){
-      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (reduce) return;
-      document.querySelectorAll('.dl').forEach(function(btn){
-        btn.addEventListener('click', function(){
-          btn.classList.remove('is-dl');   // рестарт анимации
-          void btn.offsetWidth;
-          btn.classList.add('is-dl');
-        });
-      });
-    })();
-  </script>
-<script src="motion.js"></script>
+/* появление карточек волной */
+(function(){
+  var items=document.querySelectorAll('.res, .section-head');
+  if(calm()||!('IntersectionObserver' in window)){
+    items.forEach(function(el){el.classList.add('reveal','in');});
+    return;
+  }
+  items.forEach(function(el){el.classList.add('reveal');});
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(!en.isIntersecting)return;
+      var el=en.target;
+      el.style.transitionDelay=(el._d||0)+'ms';
+      el.classList.add('in');
+      io.unobserve(el);
+    });
+  },{rootMargin:'0px 0px -8% 0px',threshold:.08});
+  items.forEach(function(el,i){el._d=(i%4)*70;io.observe(el);});
+})();
+
+/* отскок иконки при скачивании */
+(function(){
+  if(calm())return;
+  document.querySelectorAll('.dl').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      btn.classList.remove('is-dl');
+      void btn.offsetWidth;
+      btn.classList.add('is-dl');
+    });
+  });
+})();
+
+/* уход со страницы и открытие PDF — той же шторкой.
+   Если PDF не открывается, а скачивается, шторка сама уходит за верх и страница остаётся */
+(function(){
+  if(calm())return;
+  document.querySelectorAll('a[href$=".html"], a[href$=".pdf"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      if(e.metaKey||e.ctrlKey||e.shiftKey||a.target)return;
+      var href=a.getAttribute('href');
+      if(!href)return;
+      e.preventDefault();
+      leavePage(href);
+    });
+  });
+})();
+</script>
+<script>
+/* офлайн-режим: сайт открывается без сети */
+if ('serviceWorker' in navigator) {
+  addEventListener('load', function(){
+    navigator.serviceWorker.register('sw.js').catch(function(){});
+  });
+}
+</script>
 </body>
 </html>

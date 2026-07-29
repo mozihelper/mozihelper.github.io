@@ -2,318 +2,394 @@
 <html lang="ru" data-theme="dusk">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="dark light">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>MoziHelper</title>
-<script>
-  try {
-    var t = localStorage.getItem('la_theme') || 'dusk';
-    document.documentElement.setAttribute('data-theme', t);
-  } catch (e) {
-    document.documentElement.setAttribute('data-theme', 'dusk');
-  }
-</script>
+<script>(function(){var h=document.documentElement;try{h.setAttribute('data-theme',localStorage.getItem('la_theme')||'dusk');h.setAttribute('data-motion',localStorage.getItem('la_motion')||'full');if(sessionStorage.getItem('la_sweep')){sessionStorage.removeItem('la_sweep');h.classList.add('arriving');}}catch(e){h.setAttribute('data-theme','dusk');h.setAttribute('data-motion','full');}})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root, [data-theme="dusk"] {
-    --bg: #0a0c10;
-    --bg-card: #13161c;
-    --bg-soft: #181c23;
-    --bg-elev: #1f242c;
-    --ink: #eceef2;
-    --ink-soft: #a4abb8;
-    --ink-mute: #687081;
-    --accent: #5ba4ff;
-    --accent-strong: #2d88ff;
-    --accent-deep: #1877f2;
-    --border: #2a2f38;
-    --border-soft: #1c2129;
-    --shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
-  }
+/*TOKENS*/
+[data-theme="dusk"]{
+  --bg:#0c0c0e; --bg-2:#141416; --ink:#f2f0ec; --ink-2:#94918b; --ink-3:#5c5a55;
+  --rule:#26262a; --hot:#ff4a24; --hot-2:#ff4a24; --hot-ink:#fff; --flood:#ff4a24;
+  color-scheme:dark;
+}
+[data-theme="paper"]{
+  --bg:#f7f4ef; --bg-2:#ffffff; --ink:#101012; --ink-2:#5a5852; --ink-3:#94918a;
+  --rule:#dedad2; --hot:#e03c14; --hot-2:#e03c14; --hot-ink:#fff; --flood:#e03c14;
+  color-scheme:light;
+}
+/*ENDTOKENS*/
 
-  [data-theme="paper"] {
-    --bg: #f0f2f5;
-    --bg-card: #ffffff;
-    --bg-soft: #f7f8fa;
-    --bg-elev: #ffffff;
-    --ink: #1c1e21;
-    --ink-soft: #444950;
-    --ink-mute: #8a8d91;
-    --accent: #1877f2;
-    --accent-strong: #1877f2;
-    --accent-deep: #0d5dc9;
-    --border: #dadde1;
-    --border-soft: #e7e9ec;
-    --shadow: 0 2px 10px rgba(0, 0, 0, 0.10);
-    color-scheme: light;
-  }
+*{margin:0;padding:0;box-sizing:border-box}
+html{background:var(--bg);-webkit-text-size-adjust:100%}
+body{
+  font-family:'Golos Text',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  background:var(--bg);color:var(--ink);min-height:100svh;overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  transition:background .45s ease,color .45s ease;
+}
+a{color:var(--hot)}
+a:hover{color:var(--ink)}
+::selection{background:var(--hot);color:var(--hot-ink)}
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { height: 100%; }
+.page{
+  position:relative;min-height:100svh;
+  display:grid;grid-template-rows:1fr auto;justify-items:center;
+  padding:calc(env(safe-area-inset-top,0px) + 72px) 0 calc(env(safe-area-inset-bottom,0px) + 10px);
+  text-align:center;
+}
+.gut{width:100%;padding-inline:20px}
 
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    background: var(--bg);
-    color: var(--ink);
-    min-height: 100svh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 28px 22px;
-    /* визуальный центр чуть выше геометрического */
-    padding-bottom: clamp(56px, 12vh, 130px);
-    -webkit-font-smoothing: antialiased;
-    transition: background .3s ease, color .3s ease;
-  }
+/* ── переключатель темы: в углу, зона нажатия 46px ── */
+.top{
+  position:absolute;z-index:5;
+  top:calc(env(safe-area-inset-top,0px) + 18px);
+  right:calc(env(safe-area-inset-right,0px) + 16px);
+  opacity:0;animation:fd .55s ease .1s forwards;
+}
+.tsw{position:relative;display:inline-flex;border:1px solid var(--rule)}
+.tsw-knob{
+  position:absolute;top:0;bottom:0;left:0;width:50%;background:var(--hot);
+  transition:transform .42s cubic-bezier(.65,0,.15,1);
+}
+[data-theme="paper"] .tsw-knob{transform:translateX(100%)}
+.tsw-b{
+  position:relative;z-index:1;border:0;background:transparent;cursor:pointer;font-family:inherit;
+  font-size:.605rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;
+  padding:11px 13px 10px;color:var(--ink-2);line-height:1;
+  transition:color .32s ease;-webkit-tap-highlight-color:transparent;
+}
+.tsw-b::before{content:'';position:absolute;inset:-8px -3px}
+.tsw-b:first-of-type::before{left:-10px}
+.tsw-b:last-of-type::before{right:-10px}
+[data-theme="dusk"] .tsw-b[data-t="dusk"],
+[data-theme="paper"] .tsw-b[data-t="paper"]{color:var(--hot-ink)}
+.tsw-b:focus-visible{outline:2px solid var(--hot);outline-offset:4px}
 
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { color: var(--accent-strong); }
+/* ── центральный блок ── */
+.core{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  width:100%;max-width:980px;padding-block:4px;
+}
 
-  .theme-btn {
-    position: fixed;
-    top: 14px;
-    right: 14px;
-    width: 44px;
-    height: 44px;
-    border: 1px solid var(--border);
-    background: var(--bg-card);
-    color: var(--ink-soft);
-    border-radius: 12px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .theme-btn:hover { border-color: var(--accent-strong); color: var(--accent); }
-  .theme-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-  .theme-btn svg { width: 19px; height: 19px; }
-  .theme-btn .icon-sun { display: none; }
-  .theme-btn .icon-moon { display: block; }
-  [data-theme="paper"] .theme-btn .icon-sun { display: block; }
-  [data-theme="paper"] .theme-btn .icon-moon { display: none; }
+.wm{
+  display:block;width:100%;overflow:hidden;
+  font-family:'Unbounded',sans-serif;font-weight:400;
+  line-height:1;letter-spacing:-.02em;
+  padding:.1em 0 .18em;font-size:52px;
+  visibility:hidden;
+}
+.wm.fitted{visibility:visible}
+.wm .i{
+  display:inline-block;white-space:nowrap;
+  transform:translateY(112%);
+  animation:slideUp 1.05s cubic-bezier(.16,1,.3,1) .16s forwards;
+}
+.wm .hot{font-weight:700;letter-spacing:-.05em;color:var(--hot)}
+@keyframes slideUp{to{transform:none}}
 
-  .home {
-    width: 100%;
-    max-width: 440px;
-    display: flex;
-    flex-direction: column;
-    gap: clamp(30px, 6vh, 48px);
-  }
+.kicker{
+  margin-top:15px;font-size:.665rem;font-weight:500;letter-spacing:.26em;
+  text-transform:uppercase;color:var(--ink-2);
+  opacity:0;animation:fd .7s ease .66s forwards;
+}
 
-  .head { display: flex; flex-direction: column; gap: 14px; }
+.resume{
+  display:none;align-items:center;gap:11px;margin-top:20px;padding:12px 16px;
+  background:var(--bg-2);border:1px solid var(--rule);
+  color:var(--ink);text-decoration:none;font-size:.86rem;max-width:100%;min-height:46px;
+  transition:border-color .24s ease;
+}
+.resume.on{display:inline-flex;opacity:0;animation:fd .6s ease .8s forwards}
+.resume:hover{border-color:var(--hot);color:var(--ink)}
+.resume:focus-visible{outline:2px solid var(--hot);outline-offset:3px}
+.resume em{font-style:normal;font-size:.6rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--hot-2);flex-shrink:0}
+.resume span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
-  /* ── Логотип: буквы выезжают из-под линии обреза ── */
-  .wordmark {
-    display: flex;
-    font-size: clamp(2.6rem, 12vw, 3.9rem);
-    font-weight: 600;
-    letter-spacing: -0.022em;
-    line-height: 1;
-    white-space: nowrap;
-  }
-  .wordmark .wm-part {
-    display: inline-block;
-    overflow: hidden;
-    padding-bottom: .06em;
-    margin-bottom: -.06em;
-  }
-  .wordmark .wm-part > span {
-    display: block;
-    transform: translateY(105%);
-    animation: letterRise .72s cubic-bezier(.16, 1, .3, 1) forwards;
-  }
-  .wordmark .wm-part:nth-child(1) > span  { animation-delay: .02s; }
-  .wordmark .wm-part:nth-child(2) > span  { animation-delay: .05s; }
-  .wordmark .wm-part:nth-child(3) > span  { animation-delay: .08s; }
-  .wordmark .wm-part:nth-child(4) > span  { animation-delay: .11s; }
-  .wordmark .wm-part:nth-child(5) > span  { animation-delay: .15s; }
-  .wordmark .wm-part:nth-child(6) > span  { animation-delay: .18s; }
-  .wordmark .wm-part:nth-child(7) > span  { animation-delay: .21s; }
-  .wordmark .wm-part:nth-child(8) > span  { animation-delay: .24s; }
-  .wordmark .wm-part:nth-child(9) > span  { animation-delay: .27s; }
-  .wordmark .wm-part:nth-child(10) > span { animation-delay: .30s; }
-  .wordmark .accent { color: var(--accent); }
+/* ── два билета ── */
+.picks{
+  margin-top:32px;width:100%;display:grid;grid-template-columns:1fr;
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+}
+.pick{
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:flex-start;gap:16px;
+  padding:24px 20px 25px 26px;min-height:88px;
+  text-decoration:none;color:inherit;text-align:left;
+  opacity:0;animation:fd .72s ease var(--d,0s) forwards;
+  -webkit-tap-highlight-color:transparent;
+}
+.pick + .pick{border-top:1px solid var(--rule)}
+.pick::before{
+  content:'';position:absolute;inset:0;background:var(--hot);
+  transform:translateY(101%);transition:transform .46s cubic-bezier(.66,0,.2,1);
+}
+.pick>*{position:relative;z-index:1}
+.pick:hover::before,.pick:active::before{transform:none}
+.pick:hover,.pick:active{color:var(--hot-ink)}
+.pick:focus-visible{outline:3px solid var(--hot);outline-offset:-3px}
 
-  /* тонкая линия под логотипом раскрывается слева направо */
-  .rule {
-    height: 1px;
-    background: var(--border);
-    transform: scaleX(0);
-    transform-origin: left;
-    animation: ruleIn .8s cubic-bezier(.16, 1, .3, 1) .34s forwards;
-  }
+.rn{
+  font-family:'Unbounded',sans-serif;font-weight:700;
+  font-size:2.45rem;line-height:.94;letter-spacing:-.045em;color:var(--hot-2);
+  min-width:1.4em;flex-shrink:0;
+  transition:color .3s ease,transform .46s cubic-bezier(.2,1.2,.4,1);
+}
+.pick:hover .rn,.pick:active .rn{color:var(--hot-ink);transform:translateX(4px)}
+.pl{
+  font-size:1.1rem;font-weight:500;letter-spacing:-.012em;
+  transition:color .3s ease,transform .46s cubic-bezier(.2,1.2,.4,1) .045s;
+}
+.pick:hover .pl,.pick:active .pl{transform:translateX(4px)}
 
-  .prompt {
-    font-size: .95rem;
-    color: var(--ink-mute);
-    letter-spacing: .01em;
-    opacity: 0;
-    animation: rise .55s cubic-bezier(.16, 1, .3, 1) .46s forwards;
-  }
+/* ── подвал ── */
+.tailer{
+  display:flex;align-items:center;justify-content:center;gap:0;
+  flex-wrap:wrap;row-gap:2px;
+  opacity:0;animation:fd .7s ease 1.16s forwards;
+}
+.tl{
+  position:relative;display:inline-flex;align-items:center;justify-content:center;
+  color:var(--ink-2);text-decoration:none;
+  font-size:.92rem;font-weight:500;padding:14px 16px;min-height:46px;
+  transition:color .24s ease;-webkit-tap-highlight-color:transparent;
+}
+.tl::after{
+  content:'';position:absolute;left:16px;right:16px;bottom:13px;height:1.5px;background:var(--hot-2);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .38s cubic-bezier(.2,.9,.2,1);
+}
+.tl:hover{color:var(--ink)}
+.tl:hover::after{transform:scaleX(1)}
+.tl:focus-visible{outline:2px solid var(--hot);outline-offset:0}
+.sep{width:1px;height:13px;background:var(--rule);flex-shrink:0}
 
-  .semesters { display: grid; gap: 10px; }
+@keyframes fd{to{opacity:1}}
 
-  .sem-btn {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 16px 18px;
-    border-radius: 14px;
-    text-decoration: none;
-    border: 1px solid var(--border);
-    background: var(--bg-card);
-    color: var(--ink);
-    opacity: 0;
-    animation: rise .6s cubic-bezier(.16, 1, .3, 1) forwards;
-  }
-  .sem-btn:nth-child(1) { animation-delay: .54s; }
-  .sem-btn:nth-child(2) { animation-delay: .62s; }
-  .sem-btn:hover { border-color: var(--accent-strong); background: var(--bg-soft); color: var(--ink); }
-  .sem-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.flood{position:fixed;inset:0;z-index:99;background:var(--flood);transform:translateY(100%);pointer-events:none}
+body.leaving .flood{transform:none;transition:transform .42s cubic-bezier(.66,0,.2,1)}
 
-  .sem-mark {
-    flex-shrink: 0;
-    width: 42px;
-    height: 42px;
-    border-radius: 11px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.02rem;
-    font-weight: 600;
-    letter-spacing: .04em;
-    color: #fff;
-    background: var(--accent-deep);
-  }
+@media (min-width:760px){
+  .gut{padding-inline:56px}
+  .page{padding-top:82px;padding-bottom:22px}
+  .core{padding-block:14px}
+  .picks{margin-top:48px;grid-template-columns:1fr 1fr}
+  .pick{padding:38px 28px 40px 40px;min-height:0;gap:22px}
+  .pick + .pick{border-top:0;border-left:1px solid var(--rule)}
+  .rn{font-size:3.4rem}
+  .pl{font-size:1.26rem}
+  .kicker{margin-top:20px}
+}
 
-  .sem-title { font-size: 1.05rem; font-weight: 500; line-height: 1.2; }
+/* короткий экран (телефон лёжа) — не ломаем, просто ужимаем ритм */
+@media (max-height:560px){
+  .page{padding-top:64px}
+  .picks{margin-top:22px}
+  .pick{min-height:74px;padding-block:18px}
+  .kicker{margin-top:11px}
+}
 
-  .sem-arrow {
-    margin-left: auto;
-    flex-shrink: 0;
-    display: flex;
-    color: var(--ink-mute);
-    transition: transform .22s cubic-bezier(.16, 1, .3, 1), color .18s ease;
-  }
-  .sem-btn:hover .sem-arrow { color: var(--accent); transform: translateX(4px); }
-  .sem-arrow svg { width: 20px; height: 20px; }
+/* спокойный режим — только по собственному флагу la_motion="calm",
+   системная настройка «уменьшить движение» анимации больше не глушит */
+[data-motion="calm"] *{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important}
+[data-motion="calm"] .top,[data-motion="calm"] .kicker,[data-motion="calm"] .pick,
+[data-motion="calm"] .tailer,[data-motion="calm"] .resume.on{opacity:1}
+[data-motion="calm"] .wm .i{transform:none}
 
-  .resources {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    opacity: 0;
-    animation: rise .6s cubic-bezier(.16, 1, .3, 1) .72s forwards;
-  }
-  .res-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 15px;
-    border-radius: 999px;
-    border: 1px solid var(--border);
-    background: transparent;
-    color: var(--ink-soft);
-    text-decoration: none;
-    font-size: .88rem;
-    font-weight: 500;
-  }
-  .res-pill:hover { color: var(--accent); border-color: var(--accent-strong); background: var(--bg-card); }
-  .res-pill:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-  .res-pill svg { width: 15px; height: 15px; flex-shrink: 0; }
+.curtain{
+  position:fixed;inset:0;z-index:98;background:var(--hot);
+  transform:translate3d(0,100%,0);pointer-events:none;will-change:transform;contain:strict;
+}
+.curtain.up{transform:translate3d(0,0,0);transition:transform .4s cubic-bezier(.66,0,.2,1)}
+.curtain.out{transform:translate3d(0,-100%,0);transition:transform .46s cubic-bezier(.32,0,.2,1)}
 
-  @keyframes letterRise { to { transform: translateY(0); } }
-  @keyframes ruleIn { to { transform: scaleX(1); } }
-  @keyframes rise {
-    from { opacity: 0; transform: translateY(10px); }
-    to   { opacity: 1; transform: none; }
-  }
-
-  /* ── Смена темы: круговая волна от кнопки ── */
-  ::view-transition-old(root),
-  ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
-  ::view-transition-old(root) { z-index: 1; }
-  ::view-transition-new(root) { z-index: 2; animation: waveReveal .55s cubic-bezier(.4, 0, .2, 1) forwards; }
-  @keyframes waveReveal {
-    from { clip-path: circle(0 at var(--wave-x, 100%) var(--wave-y, 0)); }
-    to   { clip-path: circle(var(--wave-r, 150vmax) at var(--wave-x, 100%) var(--wave-y, 0)); }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .wordmark .wm-part > span { animation: none; transform: none; }
-    .rule { animation: none; transform: none; }
-    .prompt, .sem-btn, .resources { animation: none; opacity: 1; }
-    .sem-btn:hover .sem-arrow { transform: none; }
-  }
+/* ── приход под шторкой: контент уже отрисован, полотно просто уезжает ── */
+html.arriving .curtain{transform:translate3d(0,0,0);transition:none}
+html.arriving .curtain.out{transform:translate3d(0,-100%,0);transition:transform .44s cubic-bezier(.32,0,.2,1)}
+html.sweeping,html.sweeping body{transition:none!important}
+html.arriving .top,html.arriving .kicker,html.arriving .pick,
+html.arriving .tailer,html.arriving .resume.on{opacity:1;animation:none!important}
+html.arriving .wm .i{transform:none;animation:none!important}
 </style>
-<link rel="stylesheet" href="motion.css">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0c0c0e" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f7f4ef" media="(prefers-color-scheme: light)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MoziHelper">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="icon-192.png" type="image/png">
 </head>
 <body>
-  <button class="theme-btn" onclick="toggleTheme(event)" aria-label="Сменить тему">
-    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-  </button>
+<div class="flood" aria-hidden="true"></div>
+<div class="curtain" id="curtain" aria-hidden="true"></div>
 
-  <main class="home">
-    <div class="head">
-      <h1 class="wordmark" aria-label="MoziHelper"><span class="wm-part"><span>M</span></span><span class="wm-part"><span>o</span></span><span class="wm-part"><span>z</span></span><span class="wm-part"><span>i</span></span><span class="wm-part accent"><span>H</span></span><span class="wm-part accent"><span>e</span></span><span class="wm-part accent"><span>l</span></span><span class="wm-part accent"><span>p</span></span><span class="wm-part accent"><span>e</span></span><span class="wm-part accent"><span>r</span></span></h1>
-      <div class="rule"></div>
-      <p class="prompt">Справочник по линейной алгебре — выберите семестр</p>
+<div class="page">
+
+  <div class="top">
+    <div class="tsw" role="group" aria-label="Тема оформления">
+      <span class="tsw-knob" aria-hidden="true"></span>
+      <button class="tsw-b" data-t="dusk" onclick="pickTheme(event,'dusk')">Ночь</button>
+      <button class="tsw-b" data-t="paper" onclick="pickTheme(event,'paper')">День</button>
     </div>
+  </div>
 
-    <nav class="semesters">
-      <a class="sem-btn" href="algebra-sem1.html">
-        <span class="sem-mark">I</span>
-        <span class="sem-title">1 семестр</span>
-        <span class="sem-arrow">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </span>
+  <main class="core gut">
+    <h1 class="wm" id="wm" aria-label="MoziHelper"><span class="i">Mozi<span class="hot">Helper</span></span></h1>
+    <p class="kicker">Выберите семестр</p>
+    <a class="resume" id="resume" href="#"><em>Продолжить</em><span id="resumeTitle"></span></a>
+
+    <nav class="picks">
+      <a class="pick" href="algebra-sem1.html" style="--d:.88s">
+        <span class="rn">I</span>
+        <span class="pl">1 семестр</span>
       </a>
-
-      <a class="sem-btn" href="algebra-sem2.html">
-        <span class="sem-mark">II</span>
-        <span class="sem-title">2 семестр</span>
-        <span class="sem-arrow">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </span>
+      <a class="pick" href="algebra-sem2.html" style="--d:.98s">
+        <span class="rn">II</span>
+        <span class="pl">2 семестр</span>
       </a>
     </nav>
-
-    <div class="resources">
-      <a class="res-pill" href="literatura.html">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-        Литература
-      </a>
-      <a class="res-pill" href="links.html">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-        Полезные ссылки
-      </a>
-    </div>
   </main>
 
-  <script>
-    function applyTheme(next) {
-      document.documentElement.setAttribute('data-theme', next);
-      try { localStorage.setItem('la_theme', next); } catch (e) {}
-    }
+  <div class="tailer">
+    <a class="tl" href="literatura.html">Литература</a>
+    <span class="sep" aria-hidden="true"></span>
+    <a class="tl" href="lekcii-sem1.html">Лекции I</a>
+    <span class="sep" aria-hidden="true"></span>
+    <a class="tl" href="lekcii-sem2.html">Лекции II</a>
+    <span class="sep" aria-hidden="true"></span>
+    <a class="tl" href="links.html">Полезные ссылки</a>
+  </div>
 
-    function toggleTheme(ev) {
-      var cur = document.documentElement.getAttribute('data-theme') || 'dusk';
-      var next = cur === 'dusk' ? 'paper' : 'dusk';
-      var x = (ev && ev.clientX) || window.innerWidth - 32;
-      var y = (ev && ev.clientY) || 32;
-      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+</div>
 
-      if (document.startViewTransition && !reduce) {
-        var root = document.documentElement;
-        root.style.setProperty('--wave-x', x + 'px');
-        root.style.setProperty('--wave-y', y + 'px');
-        root.style.setProperty('--wave-r', Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y)) + 'px');
-        document.startViewTransition(function () { applyTheme(next); });
-        return;
-      }
-      applyTheme(next);
+<script>
+/* ── подгонка логотипа: одна строка, размер под ширину колонки ──
+   меряем не сам заголовок (он в overflow:hidden), а образец за экраном */
+(function(){
+  var wm=document.getElementById('wm'),inner=wm.firstElementChild,t=null;
+  var probe=document.createElement('span');
+  probe.innerHTML=inner.innerHTML;
+  probe.setAttribute('aria-hidden','true');
+  probe.style.cssText='position:absolute;left:-99999px;top:0;white-space:nowrap;'+
+    'font-family:Unbounded,sans-serif;font-weight:400;font-size:100px;letter-spacing:-.02em;'+
+    'pointer-events:none;visibility:hidden';
+  var ph=probe.querySelector('.hot');
+  if(ph)ph.style.cssText='font-weight:700;letter-spacing:-.05em';
+  document.body.appendChild(probe);
+
+  function fit(){
+    var avail=wm.clientWidth;
+    if(!avail)return;
+    var w=probe.getBoundingClientRect().width;
+    if(!w)return;
+    /* на телефоне логотип почти во всю колонку, на десктопе — сдержанно */
+    var factor=avail<600?0.96:0.56;
+    var size=Math.min(100*Math.min(avail,1000)*factor/w,124);
+    wm.style.fontSize=size.toFixed(2)+'px';
+    if(inner.scrollWidth-wm.clientWidth>1){
+      wm.style.fontSize=(size*wm.clientWidth/inner.scrollWidth).toFixed(2)+'px';
     }
-  </script>
-  <script src="motion.js"></script>
+    wm.classList.add('fitted');
+  }
+  fit();
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);
+  addEventListener('resize',function(){clearTimeout(t);t=setTimeout(fit,90);},{passive:true});
+  addEventListener('orientationchange',function(){setTimeout(fit,220);});
+})();
+
+function calm(){return document.documentElement.getAttribute('data-motion')==='calm';}
+function applyTheme(n){
+  document.documentElement.setAttribute('data-theme',n);
+  try{localStorage.setItem('la_theme',n);}catch(e){}
+}
+function pickTheme(ev,next){
+  if((document.documentElement.getAttribute('data-theme')||'dusk')===next)return;
+  var c=document.getElementById('curtain');
+  if(!c||calm()){applyTheme(next);return;}
+  if(c.dataset.busy)return;
+  c.dataset.busy='1';
+  c.classList.remove('out');c.classList.add('up');
+  setTimeout(function(){
+    applyTheme(next);
+    c.classList.add('out');
+    setTimeout(function(){
+      c.style.transition='none';c.classList.remove('up','out');
+      requestAnimationFrame(function(){c.style.transition='';c.removeAttribute('data-busy');});
+    },470);
+  },400);
+}
+
+(function(){
+  try{
+    var raw=localStorage.getItem('la_last');if(!raw)return;
+    var d=JSON.parse(raw);if(!d||!d.href||!d.title)return;
+    var a=document.getElementById('resume');
+    a.href=d.href;document.getElementById('resumeTitle').textContent=d.title;
+    a.classList.add('on');
+  }catch(e){}
+})();
+
+(function(){
+  if(calm())return;
+  document.querySelectorAll('a[href]:not([target])').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var href=a.getAttribute('href');
+      if(!href||href.charAt(0)==='#'||e.metaKey||e.ctrlKey||e.shiftKey)return;
+      e.preventDefault();leavePage(href);
+    });
+  });
+})();
+/* ── Переход между страницами одним движением ──
+   Уходящая страница закрывает экран шторкой и НЕ уводит её обратно;
+   доигрывает уже новая страница (флаг la_sweep → html.arriving),
+   причём её содержимое отрисовано без анимаций входа. Раньше уход и приход
+   играли по отдельности — отсюда и виделся лаг с лишней анимацией. */
+function leavePage(href){
+  var c=document.getElementById('curtain');
+  if(!c||calm()){location.href=href;return;}
+  if(c.getAttribute('data-busy'))return;
+  c.setAttribute('data-busy','1');
+  document.documentElement.classList.add('sweeping');
+  /* Флаг ставим только страницам, которые умеют доигрывать приход.
+     algebra-sem1 ещё на старой системе — иначе флаг залипнет и сработает не там. */
+  if(/^(index|literatura|links|lekcii-sem1|lekcii-sem2|algebra-sem2)\.html/.test(href)){
+    try{sessionStorage.setItem('la_sweep','1');}catch(e){}
+  }
+  var went=false;
+  function go(){if(went)return;went=true;location.href=href;}
+  c.addEventListener('transitionend',function(e){if(!e||e.target===c)go();});
+  requestAnimationFrame(function(){requestAnimationFrame(function(){c.classList.add('up');});});
+  setTimeout(go,620);
+}
+function finishArrival(){
+  var h=document.documentElement;
+  if(!h.classList.contains('arriving'))return;
+  var c=document.getElementById('curtain');
+  if(!c){h.classList.remove('arriving');return;}
+  c.classList.add('up');
+  requestAnimationFrame(function(){requestAnimationFrame(function(){
+    c.classList.add('out');
+    setTimeout(function(){
+      c.style.transition='none';c.classList.remove('up','out');
+      h.classList.remove('sweeping');
+      requestAnimationFrame(function(){c.style.transition='';});
+    },470);
+  });});
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',finishArrival);
+else finishArrival();
+
+</script>
+<script>
+/* офлайн-режим: сайт открывается без сети */
+if ('serviceWorker' in navigator) {
+  addEventListener('load', function(){
+    navigator.serviceWorker.register('sw.js').catch(function(){});
+  });
+}
+</script>
 </body>
 </html>

@@ -1842,6 +1842,14 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 /* ── Чертёж в вопросе «Идея линейности» ── */
 .lin-fig{display:block;width:100%;max-width:440px;height:auto;margin:1.1rem auto 0.4rem;}
 </style>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0c0c0e" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f7f4ef" media="(prefers-color-scheme: light)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MoziHelper">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="icon-192.png" type="image/png">
 </head>
 <body>
 <!-- ========== TOPBAR ========== -->
@@ -32280,6 +32288,14 @@ else{window.addEventListener("resize",function(){if(cv.clientWidth>0){fit();pain
   window.addEventListener('load',padTop);
   window.addEventListener('resize',padTop);
 })();
+</script>
+<script>
+/* оффлайн-режим: сайт открывается без сети */
+if ('serviceWorker' in navigator) {
+  addEventListener('load', function(){
+    navigator.serviceWorker.register('sw.js').catch(function(){});
+  });
+}
 </script>
 </body>
 </html>

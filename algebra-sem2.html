@@ -9,11 +9,18 @@
 // Применяем сохранённую тему сразу, до отрисовки — чтобы не мигало.
 // По умолчанию — тёмная «Сумерки».
 (function(){
+  var h = document.documentElement;
   try {
-    var t = localStorage.getItem('la_theme') || 'dusk';
-    document.documentElement.setAttribute('data-theme', t);
+    h.setAttribute('data-theme', localStorage.getItem('la_theme') || 'dusk');
+    h.setAttribute('data-motion', localStorage.getItem('la_motion') || 'full');
+    /* пришли по шторке — открываемся уже закрытыми, без анимаций входа */
+    if (sessionStorage.getItem('la_sweep')) {
+      sessionStorage.removeItem('la_sweep');
+      h.classList.add('arriving');
+    }
   } catch(e) {
-    document.documentElement.setAttribute('data-theme', 'dusk');
+    h.setAttribute('data-theme', 'dusk');
+    h.setAttribute('data-motion', 'full');
   }
 })();
 </script>
@@ -61,75 +68,79 @@ window.MathJax = {
   tryNext();
 })();
 </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;700&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root, [data-theme="dusk"] {
-  /* ═══ НОЧЬ — глубокая тёмная, многослойная ═══ */
-  --bg: #0a0c10;
-  --bg-card: #13161c;
-  --bg-soft: #181c23;
-  --bg-elev: #1f242c;
-  --ink: #eceef2;
-  --ink-soft: #a4abb8;
-  --ink-mute: #687081;
-  /* Facebook-синий */
-  --ruby: #2d88ff;
-  --ruby-light: #5ba4ff;
-  --ruby-deep: #1877f2;
-  --sky: #5ba4ff;
-  --sky-light: #8cc0ff;
-  --sky-deep: #1877f2;
-  --purple: #2d88ff;
-  --purple-light: #5ba4ff;
-  --purple-deep: #1877f2;
-  --purple-glow: rgba(45, 136, 255, 0.20);
-  --border: #2a2f38;
-  --border-soft: #1c2129;
-  --accent: #5ba4ff;
+  /* ═══ НОЧЬ ═══ */
+  --bg: #0c0c0e;
+  --bg-card: #141416;
+  --bg-soft: #101012;
+  --bg-elev: #1a1a1d;
+  --ink: #f2f0ec;
+  --ink-soft: #94918b;
+  --ink-mute: #5c5a55;
+  /* киноварь — единственный акцент */
+  --ruby: #ff4a24;
+  --ruby-light: #ff6a48;
+  --ruby-deep: #e63c18;
+  --sky: #ff4a24;
+  --sky-light: #ff6a48;
+  --sky-deep: #e63c18;
+  --purple: #ff4a24;
+  --purple-light: #ff6a48;
+  --purple-deep: #e63c18;
+  --purple-glow: rgba(255, 74, 36, 0.16);
+  --border: #26262a;
+  --border-soft: #1e1e21;
+  --accent: #ff4a24;
   --white: #ffffff;
-  --black: #060709;
+  --black: #08080a;
   --glow-top: transparent;
   --glow-bot: transparent;
-  --grain-opacity: 0.03;
-  --shadow-card: 0 1px 2px rgba(0,0,0,0.4);
-  --shadow-elev: 0 8px 30px rgba(0,0,0,0.5);
-  --topbar-bg: rgba(10, 12, 16, 0.85);
+  --grain-opacity: 0.026;
+  --shadow-card: none;
+  --shadow-elev: 0 10px 30px rgba(0,0,0,0.45);
+  --topbar-bg: rgba(12, 12, 14, 0.88);
+  --flood: #ff4a24;
   color-scheme: dark;
-  --radius: 8px;
+  --radius: 2px;
 }
 
 [data-theme="paper"] {
-  /* ═══ СВЕТ — в стиле Facebook: прохладный серый фон, белые карточки ═══ */
-  --bg: #f0f2f5;          /* фирменный фон Facebook */
-  --bg-card: #ffffff;     /* белые карточки */
-  --bg-soft: #f7f8fa;
+  /* ═══ ДЕНЬ ═══ */
+  --bg: #f7f4ef;
+  --bg-card: #fffdfa;
+  --bg-soft: #f2efe9;
   --bg-elev: #ffffff;
-  --ink: #1c1e21;         /* фейсбучный почти-чёрный */
-  --ink-soft: #444950;
-  --ink-mute: #8a8d91;
-  /* Facebook-синий */
-  --ruby: #1877f2;
-  --ruby-light: #1877f2;
-  --ruby-deep: #166fe5;
-  --sky: #1877f2;
-  --sky-light: #166fe5;
-  --sky-deep: #0d5dc9;
-  --purple: #1877f2;
-  --purple-light: #166fe5;
-  --purple-deep: #0d5dc9;
-  --purple-glow: rgba(24, 119, 242, 0.12);
-  --border: #dadde1;      /* фирменная серая граница FB */
-  --border-soft: #e4e6eb;
-  --accent: #1877f2;
+  --ink: #101012;
+  --ink-soft: #5a5852;
+  --ink-mute: #94918a;
+  --ruby: #e03c14;
+  --ruby-light: #ff5a2b;
+  --ruby-deep: #c33310;
+  --sky: #e03c14;
+  --sky-light: #ff5a2b;
+  --sky-deep: #c33310;
+  --purple: #e03c14;
+  --purple-light: #ff5a2b;
+  --purple-deep: #c33310;
+  --purple-glow: rgba(224, 60, 20, 0.12);
+  --border: #dedad2;
+  --border-soft: #e8e4dc;
+  --accent: #e03c14;
   --white: #ffffff;
-  --black: #1c1e21;
+  --black: #101012;
   --glow-top: transparent;
   --glow-bot: transparent;
   --grain-opacity: 0;
-  --shadow-card: 0 1px 2px rgba(0,0,0,0.1);
-  --shadow-elev: 0 4px 16px rgba(0,0,0,0.12);
-  --topbar-bg: rgba(255, 255, 255, 0.9);
+  --shadow-card: none;
+  --shadow-elev: 0 6px 20px rgba(0,0,0,0.10);
+  --topbar-bg: rgba(247, 244, 239, 0.9);
+  --flood: #e03c14;
   color-scheme: light;
-  --radius: 8px;
+  --radius: 2px;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -140,17 +151,16 @@ html, body {
   max-width: 100vw;
 }
 
-html { transition: background 0.4s ease; background: var(--bg); }
+html { background: var(--bg); scrollbar-gutter: stable; }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-family: 'Golos Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   background: var(--bg);
   color: var(--ink);
-  line-height: 1.78;
+  line-height: 1.72;
   font-size: 16.5px;
   -webkit-font-smoothing: antialiased;
   position: relative;
-  transition: background 0.4s ease, color 0.4s ease;
 }
 
 /* Decorative background atmosphere — fixed to viewport */
@@ -1825,72 +1835,854 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 .q-card[data-q="79"] .ra-scroll::-webkit-scrollbar-thumb{background:var(--ink-mute);border-radius:8px;border:2px solid var(--bg-card)}
 .q-card[data-q="79"] .ra-scroll::-webkit-scrollbar-thumb:hover{background:var(--ink-soft)}
 </style>
+<style id="mh-mobile">
+/* ══════════════════════════════════════════════════════════════
+   МОБИЛЬНАЯ ОБОЛОЧКА: билеты — экранами, один поиск, таб-бар.
+   Выдвижное меню не используется. Тема — только в верхней панели.
+   ══════════════════════════════════════════════════════════════ */
+
+::selection { background: var(--ruby); color: #fff; }
+a { color: var(--ruby); }
+
+/* сайдбар выключен полностью */
+.sidebar, .backdrop, .menu-btn, .theme-btn { display: none !important; }
+
+/* градиенты, цветные тени, подскоки — убраны */
+.q-card { box-shadow: none; border-radius: 2px; }
+.q-card:hover { transform: none; box-shadow: none; border-color: var(--border); }
+.q-card.open { box-shadow: none; }
+.quiz-progress-fill { background: var(--ruby); }
+.exp-tldr { background: var(--bg-soft); border: 1px solid var(--border); border-left: 2px solid var(--ruby); border-radius: 2px; }
+.search-input:focus { box-shadow: none; border-color: var(--ruby); transform: none; }
+.start-cta:hover { transform: none; box-shadow: none; }
+
+/* дисплейная гарнитура — как на главной */
+.topic-title, .quiz-title, .tk-title { font-family: 'Unbounded', sans-serif; font-weight: 400; letter-spacing: -.03em; }
+.q-num, .tk-num, .tl-num { font-family: 'Unbounded', sans-serif; font-weight: 700; letter-spacing: -.03em; }
+.topic-eyebrow, .tk-eyebrow, .tl-group-eyebrow { letter-spacing: .2em; text-transform: uppercase; font-weight: 600; font-size: .66rem; }
+.topic-eyebrow, .tk-eyebrow { color: var(--ruby); }
+
+/* ── верхняя панель: одна на весь файл, контекстная ── */
+.topbar {
+  gap: 12px;
+  padding: calc(env(safe-area-inset-top, 0px) + 9px) 14px 9px;
+  border-radius: 0;
+}
+.tb-back {
+  flex-shrink: 0; display: inline-flex; align-items: center; gap: 7px;
+  min-height: 44px; padding: 0 8px 0 4px; margin-right: auto;
+  border: 0; background: transparent; cursor: pointer;
+  font-family: inherit; font-size: .88rem; font-weight: 500; color: var(--ink-soft);
+  transition: color .22s ease; -webkit-tap-highlight-color: transparent;
+}
+.tb-back:hover { color: var(--ink); }
+.tb-back svg { width: 18px; height: 18px; flex-shrink: 0; transition: transform .3s cubic-bezier(.2,.9,.2,1); }
+.tb-back:hover svg { transform: translateX(-3px); }
+.tb-back .lbl { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 46vw; }
+
+.tsw { position: relative; display: inline-flex; flex-shrink: 0; border: 1px solid var(--border); }
+.tsw-knob { position: absolute; top: 0; bottom: 0; left: 0; width: 50%; background: var(--ruby); transition: transform .42s cubic-bezier(.65,0,.15,1); }
+[data-theme="paper"] .tsw-knob { transform: translateX(100%); }
+.tsw-b {
+  position: relative; z-index: 1; border: 0; background: transparent; cursor: pointer;
+  font-family: inherit; font-size: .58rem; font-weight: 600; letter-spacing: .14em;
+  text-transform: uppercase; padding: 11px 11px 10px; color: var(--ink-soft); line-height: 1;
+  transition: color .32s ease; -webkit-tap-highlight-color: transparent;
+}
+.tsw-b::before { content: ''; position: absolute; inset: -8px -3px; }
+.tsw-b:first-of-type::before { left: -10px; }
+.tsw-b:last-of-type::before { right: -10px; }
+[data-theme="dusk"] .tsw-b[data-t="dusk"], [data-theme="paper"] .tsw-b[data-t="paper"] { color: #fff; }
+.tsw-b:focus-visible { outline: 2px solid var(--ruby); outline-offset: 4px; }
+
+/* ── нижний таб-бар ── */
+.tabbar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  background: var(--topbar-bg);
+  backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+  border-top: 1px solid var(--border);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  transition: transform .34s cubic-bezier(.2,.9,.2,1);
+}
+.tabbar.hide { transform: translateY(118%); }
+.tab {
+  position: relative; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 4px; min-height: 56px; padding: 8px 4px 7px;
+  border: 0; background: transparent; cursor: pointer; font-family: inherit;
+  font-size: .655rem; font-weight: 500; letter-spacing: .03em; line-height: 1;
+  color: var(--ink-mute); transition: color .24s ease; -webkit-tap-highlight-color: transparent;
+}
+.tab::after {
+  content: ''; position: absolute; top: 0; left: 50%; width: 24px; height: 2px;
+  background: var(--ruby); transform: translateX(-50%) scaleX(0);
+  transition: transform .34s cubic-bezier(.2,.9,.2,1);
+}
+.tab.on { color: var(--ruby); }
+.tab.on::after { transform: translateX(-50%) scaleX(1); }
+.tab svg { width: 21px; height: 21px; stroke-width: 1.7; transition: transform .34s cubic-bezier(.2,1.3,.4,1); }
+.tab:active svg { transform: scale(.87); }
+
+.main { padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 84px); }
+footer { padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 88px); }
+
+/* ══ ЭКРАН 1: СПИСОК БИЛЕТОВ ══ */
+.tl-head { padding: 4px 0 0; text-align: center; }
+.tl-wordmark {
+  font-family: 'Unbounded', sans-serif; font-weight: 400; font-size: 1.5rem;
+  letter-spacing: -.03em; line-height: 1;
+}
+.tl-wordmark .em { font-weight: 700; color: var(--ruby); }
+.tl-sub {
+  margin-top: 7px; font-size: .68rem; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.tl-head .start-greeting { margin-top: 9px; font-size: .95rem; color: var(--ink-soft); }
+.tl-head .start-greeting:empty { display: none; }
+.tl-head .start-status { margin-top: 10px; }
+
+/* один поиск на весь справочник */
+.tl-search { position: relative; margin: 20px auto 4px; max-width: 520px; }
+.tl-search svg {
+  position: absolute; left: 13px; top: 50%; transform: translateY(-50%);
+  width: 17px; height: 17px; color: var(--ink-mute); pointer-events: none;
+}
+.tl-search input {
+  width: 100%; min-height: 50px; padding: 13px 40px 13px 40px;
+  font-family: inherit; font-size: 16px; color: var(--ink);
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 2px;
+  transition: border-color .24s ease;
+}
+.tl-search input::placeholder { color: var(--ink-mute); }
+.tl-search input:focus { outline: none; border-color: var(--ruby); }
+.tl-clear {
+  position: absolute; right: 4px; top: 50%; transform: translateY(-50%);
+  width: 42px; height: 42px; display: none; align-items: center; justify-content: center;
+  border: 0; background: transparent; color: var(--ink-mute); cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.tl-clear.on { display: flex; }
+.tl-clear svg { position: static; transform: none; width: 15px; height: 15px; }
+.tl-count {
+  margin: 12px 0 0; font-size: .74rem; color: var(--ink-mute); letter-spacing: .02em;
+  text-align: center;
+}
+
+.tl-group-head {
+  margin: 30px 0 0; padding: 16px 0 11px;
+  border-top: 1px solid var(--border);
+}
+.tl-group-head:first-of-type { margin-top: 20px; }
+.tl-group-eyebrow { color: var(--ink-mute); }
+.tl-group-title {
+  margin-top: 5px; font-size: 1.02rem; font-weight: 600; letter-spacing: -.015em;
+  line-height: 1.3; text-wrap: pretty;
+}
+
+.tl-row {
+  position: relative; overflow: hidden; display: flex; align-items: center; gap: 14px;
+  width: 100%; min-height: 56px; padding: 14px 12px 14px 2px;
+  border: 0; border-bottom: 1px solid var(--border-soft);
+  background: transparent; cursor: pointer; text-align: left; font-family: inherit;
+  color: var(--ink); -webkit-tap-highlight-color: transparent;
+}
+.tl-row::before {
+  content: ''; position: absolute; inset: 0; background: var(--ruby);
+  transform: translateY(101%); transition: transform .4s cubic-bezier(.66,0,.2,1);
+}
+.tl-row > * { position: relative; z-index: 1; transition: color .3s ease, transform .42s cubic-bezier(.2,1.2,.4,1); }
+.tl-row:hover::before, .tl-row:active::before { transform: none; }
+.tl-row:hover, .tl-row:active { color: #fff; }
+.tl-row:focus-visible { outline: 3px solid var(--ruby); outline-offset: -3px; }
+.tl-num { font-size: 1.02rem; color: var(--ruby); min-width: 2.05em; flex-shrink: 0; }
+.tl-row:hover .tl-num, .tl-row:active .tl-num { color: #fff; transform: translateX(3px); }
+.tl-t { flex: 1; min-width: 0; font-size: .95rem; line-height: 1.34; text-wrap: pretty; }
+.tl-row:hover .tl-t, .tl-row:active .tl-t { transform: translateX(3px); }
+.tl-row .tl-ch { flex-shrink: 0; width: 16px; height: 16px; color: var(--ink-mute); opacity: 0; transform: translateX(-6px); }
+.tl-row:hover .tl-ch, .tl-row:active .tl-ch { color: #fff; opacity: 1; transform: none; }
+.tl-row.gone { display: none; }
+.tl-group-head.gone { display: none; }
+.tl-empty { padding: 34px 2px; color: var(--ink-mute); font-size: .92rem; }
+
+/* «продолжить с места» */
+.tl-resume {
+  display: none; align-items: center; gap: 11px; width: 100%; max-width: 520px;
+  margin: 16px auto 0;
+  padding: 13px 15px; min-height: 50px; text-align: left; font-family: inherit;
+  background: var(--bg-card); border: 1px solid var(--border); border-left: 2px solid var(--ruby);
+  color: var(--ink); cursor: pointer; transition: border-color .22s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.tl-resume.on { display: flex; }
+.tl-resume:hover { border-color: var(--ruby); }
+.tl-resume em {
+  font-style: normal; font-size: .59rem; font-weight: 600; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--ruby); flex-shrink: 0;
+}
+.tl-resume span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: .88rem; }
+
+/* ══ ЭКРАН 2: ОДИН БИЛЕТ ══ */
+.tk-head { padding: 6px 0 20px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.tk-meta { display: flex; align-items: baseline; gap: 12px; }
+.tk-num { font-size: 2.6rem; line-height: .9; color: var(--ruby); }
+.tk-of { font-size: .7rem; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-mute); }
+.tk-eyebrow { margin-top: 14px; color: var(--ink-mute); }
+.tk-title { margin-top: 7px; font-size: 1.32rem; line-height: 1.24; text-wrap: pretty; }
+
+/* карточка внутри экрана билета — без рамки и головы, всегда раскрыта */
+#ticketBody .q-card { border: 0; background: transparent; margin: 0; padding: 0; }
+#ticketBody .q-card:hover { border: 0; }
+#ticketBody .q-head { display: none; }
+#ticketBody .q-body { display: block !important; padding: 0; }
+
+.tk-nav {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+  margin-top: 34px; padding-top: 24px; border-top: 1px solid var(--border);
+}
+.tk-nav-btn {
+  position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 4px;
+  min-height: 62px; padding: 12px 14px; border: 1px solid var(--border);
+  background: transparent; cursor: pointer; font-family: inherit; text-align: left;
+  color: var(--ink); -webkit-tap-highlight-color: transparent;
+}
+.tk-nav-btn:disabled { opacity: .34; cursor: default; }
+.tk-nav-btn::before {
+  content: ''; position: absolute; inset: 0; background: var(--ruby);
+  transform: translateY(101%); transition: transform .4s cubic-bezier(.66,0,.2,1);
+}
+.tk-nav-btn > * { position: relative; z-index: 1; transition: color .3s ease; }
+.tk-nav-btn:not(:disabled):hover::before, .tk-nav-btn:not(:disabled):active::before { transform: none; }
+.tk-nav-btn:not(:disabled):hover, .tk-nav-btn:not(:disabled):active { color: #fff; border-color: var(--ruby); }
+.tk-nav-btn.next { text-align: right; align-items: flex-end; }
+.tk-nav-btn em {
+  font-style: normal; font-size: .58rem; font-weight: 600; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--ink-mute);
+}
+.tk-nav-btn:not(:disabled):hover em, .tk-nav-btn:not(:disabled):active em { color: rgba(255,255,255,.75); }
+.tk-nav-btn b { font-size: .9rem; font-weight: 500; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%; }
+
+.tk-quiz {
+  position: relative; overflow: hidden; display: flex; align-items: center;
+  justify-content: center; gap: 9px; width: 100%; min-height: 52px; margin-top: 10px;
+  padding: 14px 18px; border: 1px solid var(--ruby); background: transparent;
+  cursor: pointer; font-family: inherit; font-size: .9rem; font-weight: 500;
+  color: var(--ruby); -webkit-tap-highlight-color: transparent;
+  background-image: linear-gradient(var(--ruby), var(--ruby));
+  background-repeat: no-repeat; background-position: 0 100%; background-size: 100% 0;
+  transition: background-size .4s cubic-bezier(.66,0,.2,1), color .3s ease .04s;
+}
+.tk-quiz:hover, .tk-quiz:active { color: #fff; background-size: 100% 100%; }
+.tk-quiz svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+/* ── шторка: только transform, на композитном слое ── */
+.curtain {
+  position: fixed; inset: 0; z-index: 98; background: var(--flood);
+  transform: translate3d(0, 100%, 0); pointer-events: none;
+  will-change: transform; contain: strict;
+}
+.curtain.up   { transform: translate3d(0, 0, 0);     transition: transform .4s cubic-bezier(.66,0,.2,1); }
+.curtain.out  { transform: translate3d(0, -100%, 0); transition: transform .44s cubic-bezier(.32,0,.2,1); }
+/* пока идёт шторка — гасим всё, что могло бы конкурировать за кадры */
+html.sweeping, html.sweeping body { transition: none !important; }
+html.sweeping body::after { display: none; }
+html.sweeping .topbar { backdrop-filter: none; -webkit-backdrop-filter: none; }
+html.sweeping .q-card.reveal { transition: none !important; }
+
+[data-motion="calm"] * { animation-duration: .01ms !important; animation-delay: 0s !important; transition-duration: .01ms !important; }
+
+/* ══ ПРИБЫТИЕ ПОСЛЕ ШТОРКИ ══
+   Страница открывается УЖЕ закрытой шторкой и без анимаций входа:
+   контент отрисован, шторка просто уезжает вверх — одно движение, без лишних. */
+html.arriving .curtain { transform: translate3d(0,0,0); transition: none; }
+html.arriving .curtain.out { transform: translate3d(0,-100%,0); transition: transform .44s cubic-bezier(.32,0,.2,1); }
+html.arriving .topic-page, html.arriving .topic-page *,
+html.arriving .tl-head, html.arriving .tl-head *,
+html.arriving .topbar, html.arriving .topbar *,
+html.arriving .tabbar, html.arriving .tabbar * { animation: none !important; }
+html.arriving .tl-head, html.arriving .tl-search, html.arriving .tl-row,
+html.arriving .topic-header, html.arriving .q-card { opacity: 1; }
+
+/* ══ ИНТЕРАКТИВНЫЕ ДОКАЗАТЕЛЬСТВА ══
+   Было: серый ящик со скруглениями. Стало: выкладка с киноварной линейкой
+   на полях — как отчёркнутое место в тетради. Содержание не меняется. */
+.derivation {
+  position: relative;
+  margin: 1.75rem 0;
+  padding: 0 0 .2rem 1.4rem;
+  background: none; border: 0; border-radius: 0;
+}
+.derivation::before {
+  content: '';
+  position: absolute; left: 0; top: 2.55rem; bottom: .3rem;
+  width: 2px; background: var(--ruby);
+  transform-origin: top; transform: scaleY(0);
+  transition: transform .62s cubic-bezier(.22,1,.36,1) .04s;
+}
+.derivation:not(.collapsed)::before { transform: scaleY(1); }
+
+.derivation-title {
+  display: flex; align-items: baseline; gap: .6rem;
+  margin: 0 0 1.05rem -1.4rem; padding: .55rem 0 .6rem;
+  min-height: 44px; box-sizing: border-box;
+  border-bottom: 1px solid var(--border);
+  font-family: 'Golos Text', sans-serif;
+  font-size: .715rem; font-weight: 600; letter-spacing: .19em; text-transform: uppercase;
+  color: var(--ruby);
+  cursor: pointer; user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: color .22s ease, border-color .42s ease;
+}
+.derivation:not(.collapsed) > .derivation-title { border-bottom-color: var(--ruby); }
+.derivation-title:hover { color: var(--ruby-light); }
+.derivation-title .deriv-chevron {
+  width: .8rem; height: .8rem; flex-shrink: 0; stroke-width: 2.8; align-self: center;
+  transition: transform .44s cubic-bezier(.34,1.4,.5,1);
+}
+.derivation.collapsed > .derivation-title .deriv-chevron { transform: rotate(-90deg); }
+.derivation-title .deriv-hint {
+  margin-left: auto; flex-shrink: 0;
+  font-size: .62rem; font-weight: 500; font-style: normal;
+  letter-spacing: .1em; text-transform: none;
+  color: var(--ink-mute);
+}
+
+.derivation .deriv-body {
+  overflow: hidden; max-height: none; opacity: 1;
+  transition: max-height .5s cubic-bezier(.22,1,.36,1), opacity .32s ease .08s;
+}
+.derivation.collapsed .deriv-body { max-height: 0; opacity: 0; margin: 0; }
+.derivation .deriv-body > *:last-child { margin-bottom: .1rem; }
+.derivation .deriv-body mjx-container[display="true"] { margin: 1.2em 0 !important; }
+.derivation .deriv-body .def-text { color: var(--ink); }
+
+/* шаг вывода — узел на линейке */
+.derivation .def-text > [data-step] { position: relative; }
+.derivation .def-text > [data-step]::before {
+  content: ''; position: absolute; top: .62em; left: calc(-1.4rem - 3px);
+  width: 8px; height: 8px; box-sizing: border-box;
+  border: 2px solid var(--ruby); border-radius: 50%;
+  background: var(--bg); transition: background .3s ease;
+}
+.derivation .def-text > [data-step]:hover::before { background: var(--ruby); }
+
+/* вступление шагов по очереди при раскрытии */
+.derivation.lit .deriv-body > *,
+.derivation.lit .def-text > * {
+  animation: stepIn .52s cubic-bezier(.22,1,.36,1) both;
+  animation-delay: calc(var(--i, 0) * 55ms + 90ms);
+}
+@keyframes stepIn {
+  from { opacity: 0; transform: translateY(9px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* вложенные выкладки — тоньше линейка, чтобы читалась иерархия */
+.derivation .derivation::before { width: 1px; background: var(--ink-mute); }
+.derivation .derivation > .derivation-title { color: var(--ink-soft); border-bottom-color: var(--border-soft); }
+.derivation .derivation:not(.collapsed) > .derivation-title { border-bottom-color: var(--ink-mute); }
+.derivation.ra-wrap { padding-left: 0; margin: 1.3rem 0; }
+.derivation.ra-wrap::before { display: none; }
+.derivation.ra-wrap > .derivation-title { margin-left: 0; }
+
+/* ══ БИЛЕТЫ: ПРОГРЕСС ══ */
+.tl-filter { display: flex; gap: 8px; margin: 14px auto 2px; max-width: 520px; }
+.tl-chip {
+  flex: 1; min-height: 44px; padding: 11px 12px;
+  border: 1px solid var(--border); background: transparent; cursor: pointer;
+  font-family: inherit; font-size: .78rem; font-weight: 500; color: var(--ink-soft);
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+  transition: color .24s ease, border-color .24s ease, background .24s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.tl-chip:hover { color: var(--ink); }
+.tl-chip.on { color: #fff; background: var(--ruby); border-color: var(--ruby); }
+.tl-chip b { font-weight: 600; opacity: .72; font-variant-numeric: tabular-nums; }
+
+.tl-bar { position: relative; height: 2px; margin-top: 11px; background: var(--border); overflow: hidden; }
+.tl-bar i {
+  position: absolute; inset: 0 auto 0 0; display: block; background: var(--ruby); width: 0;
+  transition: width .66s cubic-bezier(.22,1,.36,1);
+}
+.tl-group-meta {
+  margin-top: 7px; font-size: .68rem; letter-spacing: .04em; color: var(--ink-mute);
+  font-variant-numeric: tabular-nums;
+}
+.tl-dot {
+  flex-shrink: 0; width: 9px; height: 9px; box-sizing: border-box; border-radius: 50%;
+  border: 1.6px solid var(--border);
+  transition: border-color .28s ease, background .28s ease, transform .34s cubic-bezier(.2,1.4,.4,1);
+}
+.tl-row[data-st="read"] .tl-dot { border-color: var(--ink-mute); }
+.tl-row[data-st="know"] .tl-dot { border-color: var(--ruby); background: var(--ruby); }
+.tl-row:hover .tl-dot, .tl-row:active .tl-dot { border-color: #fff; transform: scale(1.15); }
+.tl-row[data-st="know"]:hover .tl-dot { background: #fff; }
+.tl-row[data-st="know"] .tl-t { color: var(--ink-mute); }
+.tl-row[data-st="know"]:hover .tl-t { color: #fff; }
+
+.tk-know {
+  display: inline-flex; align-items: center; gap: 9px; min-height: 44px;
+  margin-top: 14px; padding: 10px 15px 10px 13px;
+  border: 1px solid var(--border); background: transparent; cursor: pointer;
+  font-family: inherit; font-size: .82rem; font-weight: 500; color: var(--ink-soft);
+  transition: color .24s ease, border-color .24s ease, background .24s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.tk-know:hover { color: var(--ink); border-color: var(--ink-mute); }
+.tk-know .kd {
+  width: 11px; height: 11px; box-sizing: border-box; border-radius: 50%;
+  border: 1.8px solid var(--ink-mute); flex-shrink: 0;
+  transition: border-color .26s ease, background .26s ease;
+}
+.tk-know.on { color: #fff; background: var(--ruby); border-color: var(--ruby); }
+.tk-know.on .kd { border-color: #fff; background: #fff; }
+
+/* ══ КВИЗЫ ══
+   A: выбор — дорожка билетов с результатом прошлой попытки.
+   B: один вопрос на экран, разбор выезжает снизу листом. */
+.quiz-page { padding: 6px 0 0; }
+.quiz-header { padding: 4px 0 18px; margin-bottom: 20px; border-bottom: 1px solid var(--border); }
+.quiz-header-top { align-items: flex-start; }
+.quiz-back {
+  min-height: 44px; padding: 10px 14px; border-radius: 0;
+  background: transparent; border: 1px solid var(--border); color: var(--ink-soft);
+}
+.quiz-back:hover { border-color: var(--ruby); color: var(--ruby); background: transparent; }
+.quiz-title { font-size: 1.5rem; }
+
+.qz-lead { color: var(--ink-soft); font-size: .92rem; margin: 0 0 4px; }
+.qz-theme { color: var(--ink-mute); font-size: .7rem; letter-spacing: .16em; text-transform: uppercase; margin: 18px 0 0; }
+
+/* тематические вкладки — та же плашка, что и фильтр билетов */
+.dq-tabs { gap: 7px; margin: 14px 0 0; }
+.dq-tab {
+  border-radius: 0; background: transparent; min-height: 40px;
+  font-size: .78rem; padding: 9px 13px; color: var(--ink-soft);
+}
+.dq-tab:hover { border-color: var(--ink-mute); color: var(--ink); }
+.dq-tab.active { background: var(--ruby); border-color: var(--ruby); color: #fff; }
+
+/* дорожка билетов */
+.quiz-mode-grid { display: block; margin-top: 4px; }
+.qz-track { margin-top: 6px; border-top: 1px solid var(--border); }
+.qz-item {
+  position: relative; overflow: hidden; display: flex; align-items: center; gap: 13px;
+  width: 100%; min-height: 60px; padding: 15px 12px 15px 2px;
+  border: 0; border-bottom: 1px solid var(--border-soft);
+  background: transparent; cursor: pointer; text-align: left; font-family: inherit; color: var(--ink);
+  -webkit-tap-highlight-color: transparent;
+}
+.qz-item::before {
+  content: ''; position: absolute; inset: 0; background: var(--ruby);
+  transform: translateY(101%); transition: transform .4s cubic-bezier(.66,0,.2,1);
+}
+.qz-item > * { position: relative; z-index: 1; transition: color .3s ease, transform .42s cubic-bezier(.2,1.2,.4,1); }
+.qz-item:hover::before, .qz-item:active::before { transform: none; }
+.qz-item:hover, .qz-item:active { color: #fff; }
+.qz-item:focus-visible { outline: 3px solid var(--ruby); outline-offset: -3px; }
+.qz-item .qn {
+  font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: -.03em;
+  color: var(--ruby); min-width: 2.05em; flex-shrink: 0;
+}
+.qz-item:hover .qn, .qz-item:active .qn { color: #fff; transform: translateX(3px); }
+.qz-item .qt { flex: 1; min-width: 0; font-size: .93rem; line-height: 1.34; text-wrap: pretty; }
+.qz-item:hover .qt, .qz-item:active .qt { transform: translateX(3px); }
+.qz-item .qs {
+  flex-shrink: 0; font-size: .74rem; font-variant-numeric: tabular-nums;
+  color: var(--ink-mute); letter-spacing: .03em;
+}
+.qz-item[data-res="win"] .qs { color: var(--ruby); }
+.qz-item:hover .qs, .qz-item:active .qs { color: rgba(255,255,255,.82); }
+.qz-item .qs.none { opacity: .5; }
+
+/* «продолжить с ошибок» */
+.qz-again {
+  display: none; align-items: center; gap: 11px; width: 100%;
+  margin-top: 16px; padding: 13px 15px; min-height: 50px;
+  border: 1px solid var(--border); border-left: 2px solid var(--ruby);
+  background: var(--bg-card); color: var(--ink); cursor: pointer;
+  font-family: inherit; text-align: left; transition: border-color .22s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.qz-again.on { display: flex; }
+.qz-again:hover { border-color: var(--ruby); }
+.qz-again em {
+  font-style: normal; font-size: .59rem; font-weight: 600; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--ruby); flex-shrink: 0;
+}
+.qz-again span { font-size: .88rem; }
+
+.dq-locknote { border-radius: 0; border-style: solid; text-align: left; }
+
+/* ── один вопрос на экран ── */
+.quiz-progress { gap: 12px; }
+.quiz-progress-bar { height: 2px; border-radius: 0; background: var(--border); }
+.quiz-progress-fill { background: var(--ruby); border-radius: 0; }
+.quiz-question-card {
+  background: transparent; border: 0; border-radius: 0; padding: 0; margin: 0;
+  display: flex; flex-direction: column;
+  min-height: calc(100svh - 250px);
+}
+.quiz-q-num {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
+  font-size: .68rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.dq-lvl {
+  border-radius: 0; margin-left: 0; padding: .2rem .5rem; font-weight: 600;
+  border: 1px solid currentColor; background: transparent !important;
+}
+.dq-lvl-1 { color: var(--ink-mute); }
+.dq-lvl-2 { color: var(--ink-soft); }
+.dq-lvl-3 { color: var(--ruby); }
+.quiz-q-text {
+  font-size: 1.14rem; line-height: 1.5; letter-spacing: -.01em;
+  margin-bottom: 20px; text-wrap: pretty;
+}
+.dq-hint { font-size: .78rem; color: var(--ink-mute); margin: -8px 0 14px; }
+.quiz-options { gap: 9px; margin-top: auto; }
+.quiz-option {
+  border-radius: 0; padding: 14px 15px; min-height: 56px; align-items: center;
+  background: transparent; border: 1px solid var(--border);
+  transition: border-color .24s ease, background .24s ease, color .24s ease;
+}
+.quiz-option:hover:not(:disabled) { border-color: var(--ink-mute); background: transparent; }
+.quiz-option .opt-letter {
+  border-radius: 0; width: 26px; height: 26px; font-size: .78rem;
+  border: 1px solid var(--border); background: transparent; color: var(--ink-mute);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.quiz-option.selected { border-color: var(--ruby); background: transparent; }
+.quiz-option.selected .opt-letter { background: var(--ruby); border-color: var(--ruby); color: #fff; }
+.quiz-option.correct { border-color: var(--ruby); background: var(--purple-glow); }
+.quiz-option.correct .opt-letter { background: var(--ruby); border-color: var(--ruby); color: #fff; }
+.quiz-option.wrong { border-color: var(--ink-mute); background: transparent; opacity: .62; }
+.quiz-option.wrong .opt-letter { background: transparent; border-color: var(--ink-mute); color: var(--ink-mute); text-decoration: line-through; }
+
+.quiz-controls { gap: 9px; margin-top: 18px; }
+.quiz-btn { border-radius: 0; min-height: 50px; padding: 13px 20px; font-size: .9rem; }
+.quiz-btn-primary { background: var(--ruby); }
+.quiz-btn-primary:hover { background: var(--ruby-deep); }
+.quiz-btn-ghost:hover { border-color: var(--ruby); color: var(--ruby); }
+
+/* разбор — лист, выезжающий снизу. При ответе ничего не должно прыгать:
+   лист вынесен из потока, высота карточки зафиксирована, прокрутка не цепляется. */
+#page-quiz { overflow-anchor: none; }
+.quiz-explanation {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 70;
+  max-height: 76svh; overflow-y: auto; -webkit-overflow-scrolling: touch;
+  margin: 0; padding: 20px 18px calc(env(safe-area-inset-bottom, 0px) + 22px);
+  background: var(--bg-card); border-top: 2px solid var(--ruby);
+  box-shadow: 0 -18px 44px rgba(0,0,0,.34);
+  transform: translateY(101%); display: block !important;
+  transition: transform .46s cubic-bezier(.22,1,.36,1);
+  animation: none;
+}
+.quiz-explanation::before {
+  content: ''; display: block; width: 38px; height: 3px; margin: -6px auto 16px;
+  background: var(--border); border-radius: 2px;
+}
+.quiz-explanation.show { transform: translateY(0); }
+body.sheet-open .tabbar { transform: translateY(118%); }
+.exp-verdict {
+  font-size: .72rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.exp-verdict .ic {
+  display: grid; place-items: center; width: 22px; height: 22px; flex-shrink: 0;
+  border: 1.5px solid currentColor; border-radius: 50%; font-size: .72rem;
+}
+.exp-verdict.ok { color: var(--ruby); }
+.exp-verdict.no { color: var(--ink-soft); }
+.exp-tldr .bulb { display: none; }
+.exp-tldr { padding: 13px 15px; }
+.exp-tldr .lbl { font-weight: 600; color: var(--ruby); }
+.exp-section .sec-lbl {
+  font-size: .64rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--ink-mute); margin-bottom: 6px;
+}
+.qz-sheet-close {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; min-height: 50px; margin-top: 18px; padding: 13px 18px;
+  border: 0; background: var(--ruby); color: #fff; cursor: pointer;
+  font-family: inherit; font-size: .92rem; font-weight: 500;
+  -webkit-tap-highlight-color: transparent;
+}
+.qz-sheet-close:hover { background: var(--ruby-deep); }
+
+/* итог: карта ошибок */
+.quiz-result { text-align: left; padding: 10px 0 0; }
+.quiz-result-score { font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 3rem; color: var(--ruby); letter-spacing: -.04em; }
+.quiz-result-label { font-size: .66rem; letter-spacing: .18em; }
+.quiz-result-message { font-size: 1rem; margin: 18px 0 22px; color: var(--ink-soft); }
+.quiz-result-actions { flex-wrap: wrap; }
+.qz-map { margin: 22px 0 4px; border-top: 1px solid var(--border); }
+.qz-map-lbl {
+  font-size: .64rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--ink-mute); padding: 16px 0 10px;
+}
+.qz-miss {
+  display: flex; gap: 12px; padding: 13px 0; border-bottom: 1px solid var(--border-soft);
+  font-size: .9rem; line-height: 1.45; color: var(--ink-soft); text-wrap: pretty;
+}
+.qz-miss i {
+  font-style: normal; flex-shrink: 0; color: var(--ruby); font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ══ БАЗА: по алфавиту, без номеров и буквенных разделителей ══ */
+#basicsList .q-num { display: none; }
+#basicsList .q-head { gap: 0; }
+.bs-search { position: relative; margin: 0 0 4px; }
+.bs-search svg {
+  position: absolute; left: 13px; top: 50%; transform: translateY(-50%);
+  width: 17px; height: 17px; color: var(--ink-mute); pointer-events: none;
+}
+.bs-search input {
+  width: 100%; min-height: 50px; padding: 13px 15px 13px 40px;
+  font-family: inherit; font-size: 16px; color: var(--ink);
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 0;
+  transition: border-color .24s ease;
+}
+.bs-search input::placeholder { color: var(--ink-mute); }
+.bs-search input:focus { outline: none; border-color: var(--ruby); }
+.bs-none { padding: 30px 2px; color: var(--ink-mute); font-size: .92rem; }
+#basicsList .q-card.gone { display: none; }
+
+/* ══ ПРАКТИКА: чертёж липнет, пока читаешь решение ══ */
+@media (min-width: 720px) {
+  .prax-solve { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 46%); gap: 26px; align-items: start; }
+  .prax-solve > .prax-figwrap { position: sticky; top: 78px; }
+  .prax-solve > .prax-figwrap .prax-fig { margin: 0; max-width: none; }
+}
+.prax-figwrap { min-width: 0; }
+#page-practice .prax-sub {
+  position: sticky; top: 56px; z-index: 30;
+  margin: 2.6rem 0 1.1rem; padding: 12px 0 11px;
+  background: var(--bg); letter-spacing: .18em;
+}
+#page-practice .prax-sub::before {
+  content: ''; position: absolute; left: -20px; right: -20px; top: 0; bottom: 0;
+  background: var(--bg); z-index: -1;
+}
+#page-practice .prax-intro { color: var(--ink-soft); }
+
+/* ══ ЧЕРТЕЖИ ПРАКТИКИ ══
+   Было: тонкие линии и подписи в 9–10px — на телефоне неразборчиво.
+   Стало: чертёж на подложке, штрихи толще, подписи крупнее, стыки скруглены. */
+.prax-fig {
+  display: block; width: 100%; max-width: 520px; height: auto;
+  margin: 1.3rem auto .5rem;
+  padding: .85rem .6rem;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  box-sizing: border-box;
+}
+.prax-fig line, .prax-fig path, .prax-fig circle { stroke-linecap: round; stroke-linejoin: round; }
+.prax-fig line[stroke-width="1"]      { stroke-width: 1.15; }
+.prax-fig line[stroke-width="1.2"],
+.prax-fig line[stroke-width="1.3"]    { stroke-width: 1.7; }
+.prax-fig line[stroke-width="1.5"]    { stroke-width: 2.1; }
+.prax-fig line[stroke-width="1.6"],
+.prax-fig line[stroke-width="1.7"],
+.prax-fig line[stroke-width="1.8"]    { stroke-width: 2.4; }
+.prax-fig line[stroke-width="2"],
+.prax-fig line[stroke-width="2.2"]    { stroke-width: 2.7; }
+.prax-fig path[stroke-width="1.2"]    { stroke-width: 1.7; }
+.prax-fig path[stroke-width="1.4"]    { stroke-width: 1.9; }
+.prax-fig path[stroke-width="1.5"]    { stroke-width: 2.1; }
+.prax-fig path[stroke-width="1.8"],
+.prax-fig path[stroke-width="2"]      { stroke-width: 2.6; }
+.prax-fig circle[stroke-width="1.4"]  { stroke-width: 2; }
+.prax-fig circle[stroke-width="1.5"]  { stroke-width: 2.1; }
+.prax-fig text[font-size="10.5"] { font-size: 14px; }
+.prax-fig text[font-size="11"]   { font-size: 14.5px; }
+.prax-fig text[font-size="11.5"] { font-size: 15px; }
+.prax-fig text[font-size="12"]   { font-size: 15.5px; }
+.prax-fig text[font-size="12.5"] { font-size: 16px; }
+.prax-fig text { font-weight: 500; }
+.prax-fig circle[fill="var(--accent)"] { stroke: var(--bg-soft); stroke-width: 2.4; }
+.s90-fig { background: none; border: 0; padding: 0; }
+
+@media (min-width: 860px) {
+  .topbar { padding: 13px 28px; }
+  /* на планшете таб-бар — компактная плашка по центру низа */
+  .tabbar {
+    left: 50%; right: auto; bottom: 22px;
+    transform: translateX(-50%);
+    grid-template-columns: repeat(4, auto);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-elev);
+    padding-bottom: 0;
+  }
+  .tabbar.hide { transform: translateX(-50%) translateY(140%); }
+  .tab { flex-direction: row; gap: 9px; min-height: 46px; padding: 12px 18px; font-size: .8rem; }
+  .tab svg { width: 17px; height: 17px; }
+  .main { padding-bottom: 104px; }
+  footer { padding-bottom: 112px; }
+  .tl-wordmark { font-size: 1.9rem; }
+  .tl-group-title { font-size: 1.12rem; }
+  .tl-t { font-size: 1rem; }
+  .tk-num { font-size: 3.4rem; }
+  .tk-title { font-size: 1.7rem; }
+  .tl-search { max-width: 620px; }
+}
+
+/* ══════════ ДЕСКТОП ══════════
+   Навигация уходит в шапку — плавающая плашка снизу здесь ни к чему.
+   Список билетов получает тему на полях: слева заголовок, справа строки. */
+@media (min-width: 900px) {
+  .main { max-width: 1120px; padding: 30px 40px 60px; }
+  .topbar { padding: 0 40px; min-height: 64px; }
+  .tb-back { font-size: .86rem; }
+
+  .tabbar {
+    position: fixed; top: 0; bottom: auto; left: 50%; right: auto;
+    transform: translateX(-50%); z-index: 51;
+    min-height: 64px; align-items: center;
+    background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none;
+    border: 0; box-shadow: none; padding: 0;
+  }
+  .tabbar.hide { transform: translateX(-50%); }
+  .tab {
+    min-height: 64px; padding: 0 16px; gap: 9px; font-size: .82rem;
+    color: var(--ink-mute);
+  }
+  .tab::after { top: auto; bottom: 0; left: 16px; right: 16px; width: auto; transform: scaleX(0); transform-origin: left; }
+  .tab.on::after { transform: scaleX(1); }
+  .tab svg { width: 16px; height: 16px; }
+  footer { padding-bottom: 40px; }
+
+  /* ── список билетов: тема на полях ── */
+  .tl-head { padding-top: 18px; }
+  .tl-wordmark { font-size: 2.2rem; }
+  .tl-search { margin-top: 26px; }
+
+  #ticketList {
+    display: block; margin-top: 34px;
+    border-top: 1px solid var(--border);
+  }
+  .tl-group-head {
+    position: sticky; top: 64px; z-index: 20; background: var(--bg);
+    margin: 30px 0 0; padding: 18px 0 12px;
+  }
+  #ticketList > .tl-row { padding: 15px 14px 15px 4px; }
+  .tl-bar { max-width: 260px; }
+  .tl-group-title { font-size: 1.05rem; }
+
+  /* ── экран билета: широкая шапка, узкая колонка текста ── */
+  .tk-head { padding: 14px 0 26px; margin-bottom: 30px; }
+  .tk-num { font-size: 4rem; }
+  .tk-title { font-size: 2rem; max-width: 26ch; }
+  #ticketBody { max-width: 76ch; }
+  .tk-nav { max-width: 76ch; }
+  .tk-quiz, .tk-know { width: auto; min-width: 260px; }
+
+  /* ── квизы и база — та же читаемая колонка ── */
+  .qz-track, .qz-again, .qz-lead, .dq-tabs, .dq-locknote { max-width: 76ch; }
+  .quiz-question-card { max-width: 76ch; min-height: 0; }
+  .quiz-options { margin-top: 26px; }
+  .quiz-explanation {
+    left: 50%; right: auto; transform: translate(-50%, 101%);
+    width: min(720px, calc(100vw - 80px));
+    border: 1px solid var(--border); border-top: 2px solid var(--ruby);
+    padding: 24px 28px 26px;
+  }
+  .quiz-explanation.show { transform: translate(-50%, 0); }
+  .qz-map { max-width: 76ch; }
+
+  .bs-search { max-width: 520px; }
+  #basicsList { max-width: 76ch; }
+
+  #page-practice .prax-sub { top: 64px; }
+  .prax-solve { grid-template-columns: minmax(0, 1fr) minmax(0, 44%); gap: 34px; }
+  .prax-solve > .prax-figwrap { top: 92px; }
+}
+</style>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0c0c0e" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f7f4ef" media="(prefers-color-scheme: light)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MoziHelper">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="icon-192.png" type="image/png">
 </head>
 <body>
-<!-- ========== TOPBAR ========== -->
+<div class="curtain" id="curtain" aria-hidden="true"></div>
+<!-- ========== TOPBAR: одна на весь файл, меняет контекст ========== -->
 <header class="topbar">
-  <a class="topbar-home" href="index.html" aria-label="К выбору семестра"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg><span>Семестры</span></a>
-  <button class="menu-btn" onclick="openSidebar()" aria-label="Открыть меню">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <line x1="3" y1="6" x2="21" y2="6"/>
-      <line x1="3" y1="12" x2="21" y2="12"/>
-      <line x1="3" y1="18" x2="21" y2="18"/>
-    </svg>
+  <button class="tb-back" id="tbBack" onclick="tbBackAction()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    <span class="lbl" id="tbBackLabel">Семестры</span>
   </button>
+  <div class="tsw" role="group" aria-label="Тема оформления">
+    <span class="tsw-knob" aria-hidden="true"></span>
+    <button class="tsw-b" data-t="dusk" onclick="pickTheme(event,'dusk')">Ночь</button>
+    <button class="tsw-b" data-t="paper" onclick="pickTheme(event,'paper')">День</button>
+  </div>
 </header>
 
-<!-- ========== SIDEBAR (slide-out from right) ========== -->
-<div class="backdrop" id="backdrop" onclick="closeSidebar()"></div>
-<aside class="sidebar" id="sidebar">
-  <div class="sidebar-header">
-    <button class="back-btn" onclick="closeSidebar();showTopic('start');" aria-label="На главную">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="19" y1="12" x2="5" y2="12"/>
-        <polyline points="12 19 5 12 12 5"/>
-      </svg>
-    </button>
-    <h2 class="sidebar-title">Меню</h2>
-    <button class="close-btn" onclick="closeSidebar()" aria-label="Закрыть">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
-        <line x1="18" y1="6" x2="6" y2="18"/>
-        <line x1="6" y1="6" x2="18" y2="18"/>
-      </svg>
-    </button>
-  </div>
-  <div class="sidebar-body" id="sidebarBody">
-    <!-- Themes are inserted here by JS -->
-  </div>
-</aside>
+<!-- выдвижное меню убрано: навигация живёт в таб-баре и списке билетов -->
 
 <!-- ========== MAIN ========== -->
 <main class="main">
 
-  <!-- START SCREEN -->
+  <!-- ЭКРАН: СПИСОК БИЛЕТОВ (он же главный) -->
   <section class="topic-page active" id="page-start">
-    <div class="start-screen">
-      <h1 class="start-title">
-        <span class="br">Mozi<span class="em" style="display:inline;">Helper</span></span>
-      </h1>
+    <div class="tl-head">
+      <div class="tl-wordmark">Mozi<span class="em">Helper</span></div>
+      <div class="tl-sub">2-й семестр</div>
       <p class="start-greeting" id="startGreeting"></p>
-      <div class="search-wrap start-search">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="11" cy="11" r="8"/>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-        </svg>
-        <input class="search-input" type="text" id="searchInput" placeholder="Найти вопрос…" oninput="doSearch()" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
-      </div>
-      <div class="search-results" id="searchResults" hidden></div>
-      <div class="start-cta-group">
-        <button class="start-cta" onclick="openSidebar()">
-          <span>Выбрать тему</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"/>
-            <polyline points="12 5 19 12 12 19"/>
-          </svg>
-        </button>
-      </div>
       <div class="start-status" id="startStatus" hidden></div>
     </div>
+
+    <div class="tl-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7.5"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input id="searchInput" type="text" placeholder="Найти вопрос…" oninput="filterTickets()" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+      <button class="tl-clear" id="tlClear" onclick="clearTicketSearch()" aria-label="Очистить">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="tl-count" id="tlCount" hidden></div>
+    <div class="tl-filter">
+      <button class="tl-chip on" data-f="all" onclick="setTicketFilter('all')">Все <b id="cntAll"></b></button>
+      <button class="tl-chip" data-f="todo" onclick="setTicketFilter('todo')">Незнакомые <b id="cntTodo"></b></button>
+    </div>
+
+    <button class="tl-resume" id="tlResume" onclick="resumeLast()">
+      <em>Продолжить</em><span id="tlResumeTitle"></span>
+    </button>
+
+    <div id="ticketList"></div>
+    <div class="search-results" id="searchResults" hidden></div>
+  </section>
+
+  <!-- ЭКРАН: ОДИН БИЛЕТ -->
+  <section class="topic-page" id="page-ticket">
+    <div class="tk-head">
+      <div class="tk-meta">
+        <span class="tk-num" id="tkNum">01</span>
+        <span class="tk-of" id="tkOf">из 92</span>
+      </div>
+      <div class="tk-eyebrow" id="tkEyebrow"></div>
+      <h1 class="tk-title" id="tkTitle"></h1>
+    </div>
+    <div id="ticketBody"></div>
+    <div class="tk-nav">
+      <button class="tk-nav-btn prev" id="tkPrev" onclick="stepTicket(-1)">
+        <em>Предыдущий</em><b id="tkPrevT"></b>
+      </button>
+      <button class="tk-nav-btn next" id="tkNext" onclick="stepTicket(1)">
+        <em>Следующий</em><b id="tkNextT"></b>
+      </button>
+    </div>
+    <button class="tk-quiz" id="tkQuiz" onclick="quizForCurrentTicket()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M9.2 9.1a2.9 2.9 0 1 1 4.1 2.7c-.8.4-1.3 1.1-1.3 2v.3"/><line x1="12" y1="17.6" x2="12" y2="17.61"/></svg>
+      <span>Квиз по этому билету</span>
+    </button>
+    <button class="tk-know" id="tkKnow" onclick="toggleKnow()">
+      <span class="kd" aria-hidden="true"></span><span>Знаю</span>
+    </button>
   </section>
 
   <!-- BASICS PAGE — термины с прошлого семестра -->
@@ -8385,6 +9177,26 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();renderL
   </section>
 
 </main>
+
+<!-- ========== TAB BAR: только то, что реально есть в этом файле ========== -->
+<nav class="tabbar" id="tabbar" aria-label="Навигация">
+  <button class="tab" data-tab="start" onclick="showTopic('start')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+    <span>Билеты</span>
+  </button>
+  <button class="tab" data-tab="quiz" onclick="openQuizMenu()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M9.2 9.1a2.9 2.9 0 1 1 4.1 2.7c-.8.4-1.3 1.1-1.3 2v.3"/><line x1="12" y1="17.6" x2="12" y2="17.61"/></svg>
+    <span>Квизы</span>
+  </button>
+  <button class="tab" data-tab="practice" onclick="showTopic('practice')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+    <span>Практика</span>
+  </button>
+  <button class="tab" data-tab="basics" onclick="showTopic('basics')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+    <span>База</span>
+  </button>
+</nav>
 
 <footer>
   MoziHelper · справочник по линейной алгебре · 2-й семестр · 92 вопроса + практика · сборка 17.06
@@ -32906,6 +33718,797 @@ else{window.addEventListener("resize",function(){if(cv.clientWidth>0){fit();pain
   window.addEventListener('load',padTop);
   window.addEventListener('resize',padTop);
 })();
+</script>
+<script>
+/* ══════ МОБИЛЬНАЯ ЛОГИКА: билеты экранами, один поиск, шторка ══════
+   Загружается последним — перекрывает старые функции навигации. */
+(function(){
+  var H = document.documentElement;
+  function calm(){ return H.getAttribute('data-motion') === 'calm'; }
+  var ROMAN = ['I','II','III','IV','V','VI','VII','VIII'];
+  function pad(n){ return String(n).length < 2 ? '0' + n : String(n); }
+  function esc(s){ return String(s == null ? '' : s).replace(/[<>&"]/g, function(c){
+    return { '<':'&lt;', '>':'&gt;', '&':'&amp;', '"':'&quot;' }[c]; }); }
+
+  /* ───── ШТОРКА ─────
+     Гоним только transform на отдельном слое, старт — через два кадра,
+     окончание ловим transitionend, а не таймером. На время движения снимаем
+     конкурирующие переходы фона/цвета и зерно — именно они давали рывок. */
+  function sweep(mid){
+    var c = document.getElementById('curtain');
+    if (!c || calm() || c.getAttribute('data-busy')) { if (mid) mid(); return; }
+    c.setAttribute('data-busy', '1');
+    H.classList.add('sweeping');
+    c.classList.remove('out');
+
+    var midDone = false;
+    function atTop(){
+      if (midDone) return; midDone = true;
+      c.removeEventListener('transitionend', onUp);
+      if (mid) mid();
+      requestAnimationFrame(function(){
+        c.classList.add('out');
+        var outDone = false;
+        function reset(){
+          if (outDone) return; outDone = true;
+          c.removeEventListener('transitionend', onOut);
+          c.style.transition = 'none';
+          c.classList.remove('up', 'out');
+          requestAnimationFrame(function(){
+            c.style.transition = '';
+            c.removeAttribute('data-busy');
+            H.classList.remove('sweeping');
+          });
+        }
+        function onOut(e){ if (!e || e.target === c) reset(); }
+        c.addEventListener('transitionend', onOut);
+        setTimeout(reset, 700);
+      });
+    }
+    function onUp(e){ if (!e || e.target === c) atTop(); }
+    c.addEventListener('transitionend', onUp);
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ c.classList.add('up'); }); });
+    setTimeout(atTop, 800);
+  }
+  window.sweep = sweep;
+
+  /* Уход на другую страницу: шторка закрывает экран и НЕ уезжает обратно —
+     её доигрывает уже новая страница (флаг la_sweep → html.arriving).
+     Именно из-за двойного ухода-прихода был виден лаг. */
+  function leave(href){
+    var c = document.getElementById('curtain');
+    if (!c || calm()) { location.href = href; return; }
+    if (c.getAttribute('data-busy')) return;
+    c.setAttribute('data-busy', '1');
+    H.classList.add('sweeping');
+    /* Флаг ставим только страницам, которые умеют доигрывать приход.
+       algebra-sem1 ещё на старой системе — иначе флаг залипнет и сработает не там. */
+    if (/^(index|literatura|links|lekcii-sem1|lekcii-sem2|algebra-sem2)\.html/.test(href)) {
+      try { sessionStorage.setItem('la_sweep', '1'); } catch(e) {}
+    }
+    var went = false;
+    function go(){ if (went) return; went = true; location.href = href; }
+    c.addEventListener('transitionend', function(e){ if (!e || e.target === c) go(); });
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ c.classList.add('up'); }); });
+    setTimeout(go, 620);
+  }
+  window.leavePage = leave;
+
+  /* Пришли под шторкой — контент уже отрисован, осталось увести полотно. */
+  function finishArrival(){
+    if (!H.classList.contains('arriving')) return;
+    var c = document.getElementById('curtain');
+    if (!c) { H.classList.remove('arriving'); return; }
+    c.classList.add('up');
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){
+      c.classList.add('out');
+      setTimeout(function(){
+        c.style.transition = 'none';
+        c.classList.remove('up', 'out');
+        H.classList.remove('sweeping');
+        requestAnimationFrame(function(){ c.style.transition = ''; });
+      }, 470);
+    }); });
+  }
+
+  /* ───── ТЕМА — одно место управления ───── */
+  function applyTheme(n){
+    H.setAttribute('data-theme', n);
+    try { localStorage.setItem('la_theme', n); } catch(e) {}
+    if (typeof readColors === 'function') { try { readColors(); } catch(e) {} }
+  }
+  window.applyTheme = applyTheme;
+  window.pickTheme = function(ev, next){
+    if ((H.getAttribute('data-theme') || 'dusk') === next) return;
+    sweep(function(){ applyTheme(next); });
+  };
+  window.toggleTheme = function(ev){
+    var c = H.getAttribute('data-theme') || 'dusk';
+    window.pickTheme(ev, c === 'dusk' ? 'paper' : 'dusk');
+  };
+
+  /* выдвижного меню больше нет */
+  window.openSidebar = function(){};
+  window.closeSidebar = function(){};
+  window.buildSidebar = function(){};
+  window.updateThemeNavItem = function(){};
+
+  /* ───── УКАЗАТЕЛЬ БИЛЕТОВ ───── */
+  var TK = [], TKI = {}, TOPIC_POS = {};
+  function buildIndex(){
+    if (typeof TOPICS === 'undefined') return;
+    TK = []; TKI = {}; TOPIC_POS = {};
+    TOPICS.forEach(function(tp, i){
+      TOPIC_POS[tp.id] = i;
+      (tp.questions || []).forEach(function(q){
+        TKI[q.n] = TK.length;
+        TK.push({ n:q.n, t:q.t, topicId:tp.id, topicTitle:tp.title, topicSub:tp.subtitle });
+      });
+    });
+  }
+
+  function buildTickets(){
+    var box = document.getElementById('ticketList');
+    if (!box || typeof TOPICS === 'undefined') return;
+    var html = '';
+    TOPICS.forEach(function(tp, i){
+      html += '<div class="tl-group-head" data-group="' + tp.id + '">'
+           +    '<div class="tl-group-eyebrow">Тема ' + (ROMAN[i] || (i+1))
+           +      (tp.subtitle ? ' · ' + esc(tp.subtitle) : '') + '</div>'
+           +    '<div class="tl-group-title">' + esc(tp.title) + '</div>'
+           +    '<div class="tl-bar"><i></i></div>'
+           +    '<div class="tl-group-meta"></div>'
+           +  '</div>';
+      (tp.questions || []).forEach(function(q){
+        var plain = String(q.t || '').replace(/<[^>]*>/g, ' ').replace(/[$\\{}]/g, ' ');
+        html += '<button class="tl-row" data-n="' + q.n + '" data-group="' + tp.id + '"'
+             +   ' data-s="' + esc((plain + ' ' + (tp.title || '')).toLowerCase()) + '">'
+             +   '<span class="tl-dot" aria-hidden="true"></span>'
+             +   '<span class="tl-num">' + pad(q.n) + '</span>'
+             +   '<span class="tl-t">' + q.t + '</span>'
+             +   '<svg class="tl-ch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>'
+             + '</button>';
+      });
+    });
+    box.innerHTML = html;
+    box.addEventListener('click', function(ev){
+      var row = ev.target.closest && ev.target.closest('.tl-row');
+      if (row) window.openTicket(row.getAttribute('data-n'));
+    });
+    paintProgress();
+    typesetRows();
+  }
+
+  /* Формулы в названиях набираем по мере появления строки на экране:
+     все 92 сразу iOS Safari не переживает. */
+  function typesetRows(){
+    if (!window.MathJax || !window.MathJax.typesetPromise) { setTimeout(typesetRows, 400); return; }
+    var rows = document.querySelectorAll('#ticketList .tl-t');
+    if (!rows.length) return;
+    if (!('IntersectionObserver' in window)) {
+      window.MathJax.typesetPromise([document.getElementById('ticketList')]).catch(function(){});
+      return;
+    }
+    var io = new IntersectionObserver(function(en){
+      var batch = [];
+      en.forEach(function(e){
+        if (!e.isIntersecting) return;
+        batch.push(e.target); io.unobserve(e.target);
+      });
+      if (batch.length) window.MathJax.typesetPromise(batch).catch(function(){});
+    }, { rootMargin: '260px 0px' });
+    rows.forEach(function(r){ if (/[$\\]/.test(r.textContent)) io.observe(r); });
+  }
+  /* ───── ПРОГРЕСС ПО БИЛЕТАМ ─────
+     read — открывал, know — отметил «Знаю». Хранится в localStorage.la_prog. */
+  var filter = 'all';
+  function readProg(){
+    try { var v = JSON.parse(localStorage.getItem('la_prog') || '{}'); return (v && typeof v === 'object') ? v : {}; }
+    catch(e) { return {}; }
+  }
+  function writeProg(p){ try { localStorage.setItem('la_prog', JSON.stringify(p)); } catch(e) {} }
+
+  function paintProgress(){
+    var p = readProg(), know = 0;
+    document.querySelectorAll('#ticketList .tl-row').forEach(function(r){
+      var st = p[r.getAttribute('data-n')];
+      if (st) r.setAttribute('data-st', st); else r.removeAttribute('data-st');
+      if (st === 'know') know++;
+    });
+    if (typeof TOPICS !== 'undefined') {
+      TOPICS.forEach(function(tp){
+        var qs = tp.questions || [], k = 0;
+        qs.forEach(function(q){ if (p[q.n] === 'know') k++; });
+        var head = document.querySelector('#ticketList .tl-group-head[data-group="' + tp.id + '"]');
+        if (!head) return;
+        var fill = head.querySelector('.tl-bar i');
+        var meta = head.querySelector('.tl-group-meta');
+        if (fill) fill.style.width = (qs.length ? (k / qs.length * 100) : 0) + '%';
+        if (meta) meta.textContent = k + ' / ' + qs.length;
+      });
+    }
+    var a = document.getElementById('cntAll'), t = document.getElementById('cntTodo');
+    if (a) a.textContent = TK.length;
+    if (t) t.textContent = Math.max(0, TK.length - know);
+    var kb = document.getElementById('tkKnow');
+    if (kb && openN != null) kb.classList.toggle('on', p[openN] === 'know');
+  }
+
+  window.setTicketFilter = function(f){
+    filter = f;
+    document.querySelectorAll('.tl-chip').forEach(function(c){
+      c.classList.toggle('on', c.getAttribute('data-f') === f);
+    });
+    window.filterTickets();
+  };
+
+  window.toggleKnow = function(){
+    if (openN == null) return;
+    var p = readProg();
+    p[openN] = (p[openN] === 'know') ? 'read' : 'know';
+    writeProg(p);
+    paintProgress();
+  };
+
+  /* ───── ОДИН ПОИСК НА ВЕСЬ СПРАВОЧНИК ───── */
+  var hay = null;
+  function keywords(n){
+    if (!hay) {
+      hay = {};
+      document.querySelectorAll('.q-card[data-q]').forEach(function(c){
+        var ttl = c.querySelector('.q-title');
+        hay[c.getAttribute('data-q')] =
+          ((c.getAttribute('data-text') || '') + ' ' + (ttl ? ttl.textContent : '')).toLowerCase();
+      });
+    }
+    return hay[n] || '';
+  }
+
+  window.filterTickets = function(){
+    var inp = document.getElementById('searchInput');
+    var q = ((inp && inp.value) || '').toLowerCase().trim();
+    var clear = document.getElementById('tlClear');
+    if (clear) clear.classList.toggle('on', !!q);
+
+    var shown = 0, live = {};
+    var prog = readProg();
+    document.querySelectorAll('#ticketList .tl-row').forEach(function(r){
+      var n = r.getAttribute('data-n');
+      var hit = !q
+        || (r.getAttribute('data-s') || '').indexOf(q) >= 0
+        || keywords(n).indexOf(q) >= 0;
+      if (hit && filter === 'todo' && prog[n] === 'know') hit = false;
+      r.classList.toggle('gone', !hit);
+      if (hit) { shown++; live[r.getAttribute('data-group')] = 1; }
+    });
+    document.querySelectorAll('#ticketList .tl-group-head').forEach(function(g){
+      var narrowed = !!q || filter === 'todo';
+      g.classList.toggle('gone', narrowed && !live[g.getAttribute('data-group')]);
+    });
+
+    var count = document.getElementById('tlCount');
+    if (count) {
+      if (!q) { count.hidden = true; count.textContent = ''; }
+      else { count.hidden = false; count.textContent = shown ? ('Найдено: ' + shown) : 'Ничего не нашлось.'; }
+    }
+  };
+  window.clearTicketSearch = function(){
+    var inp = document.getElementById('searchInput');
+    if (inp) { inp.value = ''; inp.focus({ preventScroll: true }); }
+    window.filterTickets();
+  };
+  window.doSearch = function(){ window.filterTickets(); };
+
+  /* ───── ЭКРАН БИЛЕТА ─────
+     Карточка не копируется, а переезжает в экран и потом возвращается
+     на своё место — так содержание и разметка остаются теми же. */
+  var openN = null;
+
+  function quizOK(n){
+    try {
+      if (typeof TICKET_QUIZ === 'undefined' || !TICKET_QUIZ[n]) return false;
+      if (typeof DEMO_LOCKED_THEMES !== 'undefined' && typeof TICKET_THEME !== 'undefined'
+          && DEMO_LOCKED_THEMES.indexOf(TICKET_THEME[n]) >= 0) return false;
+      return true;
+    } catch(e) { return false; }
+  }
+
+  function putCardBack(){
+    if (openN == null) return;
+    var body = document.getElementById('ticketBody');
+    var card = body && body.querySelector('.q-card');
+    var slot = document.querySelector('[data-tk-slot="' + openN + '"]');
+    if (card && slot && slot.parentNode) {
+      card.classList.remove('open');
+      slot.parentNode.replaceChild(card, slot);
+    } else if (slot && slot.parentNode) {
+      slot.parentNode.removeChild(slot);
+    }
+    openN = null;
+  }
+
+  window.openTicket = function(n){
+    n = Number(n);
+    var idx = TKI[n];
+    if (idx == null) return;
+    var e = TK[idx];
+
+    if (openN === n) { showScreen('ticket'); return; }
+    putCardBack();
+
+    var card = document.querySelector('#page-' + e.topicId + ' .q-card[data-q="' + n + '"]')
+            || document.querySelector('.q-card[data-q="' + n + '"]');
+    if (!card) return;
+
+    var slot = document.createElement('span');
+    slot.setAttribute('data-tk-slot', String(n));
+    slot.hidden = true;
+    card.parentNode.insertBefore(slot, card);
+
+    var body = document.getElementById('ticketBody');
+    body.innerHTML = '';
+    body.appendChild(card);
+    card.classList.remove('hidden', 'reveal');
+    card.classList.add('open', 'in');
+    openN = n;
+
+    var ti = TOPIC_POS[e.topicId] || 0;
+    document.getElementById('tkNum').textContent = pad(n);
+    document.getElementById('tkOf').textContent = 'из ' + TK.length;
+    document.getElementById('tkEyebrow').textContent =
+      'Тема ' + (ROMAN[ti] || (ti+1)) + ' · ' + e.topicTitle;
+    document.getElementById('tkTitle').innerHTML = e.t;
+
+    var prev = TK[idx-1], next = TK[idx+1];
+    var pb = document.getElementById('tkPrev'), nb = document.getElementById('tkNext');
+    pb.disabled = !prev; nb.disabled = !next;
+    /* в кнопках листания — только номер: формулы в одну строку не влезают */
+    document.getElementById('tkPrevT').textContent = prev ? ('Билет ' + pad(prev.n)) : '—';
+    document.getElementById('tkNextT').textContent = next ? ('Билет ' + pad(next.n)) : '—';
+
+    var qb = document.getElementById('tkQuiz');
+    if (qb) qb.hidden = !quizOK(n);
+
+    showScreen('ticket');
+    remember(n, e.t);
+
+    /* открыл — значит читал; отметку «Знаю» не перебиваем */
+    var p = readProg();
+    if (p[n] !== 'know') { p[n] = 'read'; writeProg(p); }
+    paintProgress();
+
+    if (window.MathJax && window.MathJax.typesetPromise) {
+      var head = document.querySelector('#page-ticket .tk-head');
+      setTimeout(function(){
+        window.MathJax.typesetPromise(head ? [head, card] : [card]).catch(function(){});
+      }, 40);
+    }
+  };
+
+  window.stepTicket = function(d){
+    if (openN == null) return;
+    var i = TKI[openN] + d;
+    if (i < 0 || i >= TK.length) return;
+    window.openTicket(TK[i].n);
+  };
+
+  window.quizForCurrentTicket = function(){
+    var n = openN;
+    if (n == null || !quizOK(n)) return;
+    showScreen('quiz');
+    try {
+      if (typeof QState === 'object' && QState && typeof TICKET_THEME !== 'undefined') {
+        QState.theme = TICKET_THEME[n];
+      }
+    } catch(e) {}
+    if (typeof dqStartTicket === 'function') dqStartTicket(n);
+  };
+
+  /* ───── «Продолжить с места» ───── */
+  function remember(n, title){
+    try {
+      localStorage.setItem('la_last', JSON.stringify({
+        href: 'algebra-sem2.html#b' + n,
+        title: 'Билет ' + pad(n) + ' · ' + title
+      }));
+    } catch(e) {}
+    renderResume();
+  }
+  function renderResume(){
+    var btn = document.getElementById('tlResume');
+    if (!btn) return;
+    try {
+      var d = JSON.parse(localStorage.getItem('la_last') || 'null');
+      var m = d && d.href && String(d.href).match(/algebra-sem2\.html#b(\d+)/);
+      if (!m || !d.title) { btn.classList.remove('on'); return; }
+      document.getElementById('tlResumeTitle').textContent = d.title;
+      btn.setAttribute('data-n', m[1]);
+      btn.classList.add('on');
+    } catch(e) { btn.classList.remove('on'); }
+  }
+  window.resumeLast = function(){
+    var btn = document.getElementById('tlResume');
+    var n = btn && btn.getAttribute('data-n');
+    if (n) window.openTicket(n);
+  };
+
+  /* ───── ПЕРЕКЛЮЧЕНИЕ ЭКРАНОВ ───── */
+  var SCREENS = ['start','ticket','quiz','practice','basics'];
+
+  function showScreen(id){
+    if (id !== 'ticket') putCardBack();
+    document.querySelectorAll('.topic-page').forEach(function(p){
+      p.classList.remove('active');
+      p.style.display = '';
+    });
+    var t = document.getElementById('page-' + id);
+    if (t) { t.classList.add('active'); t.style.display = 'block'; }
+    if (id === 'basics' && typeof buildBasics === 'function') {
+      try { buildBasics(); } catch(e) {}
+      enhanceBasics();
+    }
+    if (id === 'practice') enhancePractice();
+    if (id !== 'quiz') window.dqCloseSheet();
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    syncChrome(id);
+    /* экран билета типсетит openTicket — второй раз не гоняем */
+    if (id !== 'ticket' && t && window.MathJax && window.MathJax.typesetPromise) {
+      setTimeout(function(){ window.MathJax.typesetPromise([t]).catch(function(){}); }, 50);
+    }
+  }
+  window.showScreen = showScreen;
+
+  window.showTopic = function(id){
+    if (SCREENS.indexOf(id) >= 0) { showScreen(id); return; }
+    /* темы больше не отдельные экраны — ведём в список к нужной группе */
+    showScreen('start');
+    var g = document.querySelector('#ticketList .tl-group-head[data-group="' + id + '"]');
+    if (!g) return;
+    setTimeout(function(){
+      var y = g.getBoundingClientRect().top + window.pageYOffset - 74;
+      window.scrollTo({ top: Math.max(0, y), behavior: calm() ? 'auto' : 'smooth' });
+    }, 60);
+  };
+
+  window.goToQuestion = function(topicId, n){ window.openTicket(n); };
+  window.onSearchResultPick = function(topicId, n){ window.openTicket(n); };
+
+  function syncChrome(id){
+    var lab = document.getElementById('tbBackLabel');
+    if (lab) lab.textContent = (id === 'start') ? 'Семестры' : 'Билеты';
+    document.querySelectorAll('.tab').forEach(function(b){
+      var t = b.getAttribute('data-tab');
+      b.classList.toggle('on', t === id || (id === 'ticket' && t === 'start'));
+    });
+    var bar = document.getElementById('tabbar');
+    if (bar) bar.classList.remove('hide');
+  }
+
+  window.tbBackAction = function(){
+    var act = document.querySelector('.topic-page.active');
+    var id = act ? act.id.replace(/^page-/, '') : 'start';
+    if (id === 'start') { leave('index.html'); return; }
+    showScreen('start');
+  };
+
+  /* таб-бар уезжает при прокрутке вниз и возвращается при прокрутке вверх */
+  var lastY = 0;
+  window.addEventListener('scroll', function(){
+    if (calm()) return;
+    var bar = document.getElementById('tabbar');
+    if (!bar) return;
+    var y = window.pageYOffset;
+    if (Math.abs(y - lastY) < 10) return;
+    bar.classList.toggle('hide', y > lastY && y > 170);
+    lastY = y;
+  }, { passive: true });
+
+  /* уход на другие страницы и PDF — той же шторкой */
+  document.addEventListener('click', function(ev){
+    if (calm()) return;
+    var a = ev.target.closest && ev.target.closest('a[href]');
+    if (!a || a.target || ev.metaKey || ev.ctrlKey || ev.shiftKey) return;
+    var href = a.getAttribute('href');
+    if (!href || !/\.(html|pdf)$/i.test(href)) return;
+    ev.preventDefault();
+    leave(href);
+  });
+
+  /* ───── ВЫКЛАДКИ ДОКАЗАТЕЛЬСТВ ─────
+     Раскрытие по измеренной высоте, а не по фиксированным 2000px:
+     короткие выводы больше не раскрываются рывком, длинные не обрезаются. */
+  window.toggleProof = function(titleEl){
+    var d = titleEl && titleEl.closest ? titleEl.closest('.derivation') : null;
+    if (!d) return;
+    var body = d.querySelector('.deriv-body');
+    if (!body || calm()) { d.classList.toggle('collapsed'); return; }
+
+    if (d.classList.contains('collapsed')) {
+      body.style.maxHeight = '0px';
+      d.classList.remove('collapsed');
+      /* шаги вступают по очереди */
+      var kids = body.children, si = 0, k;
+      for (k = 0; k < kids.length; k++) kids[k].style.setProperty('--i', si++);
+      var dt = body.querySelector('.def-text');
+      if (dt) for (k = 0; k < dt.children.length; k++) dt.children[k].style.setProperty('--i', si++);
+      d.classList.remove('lit');
+      void d.offsetWidth;
+      d.classList.add('lit');
+      var h = body.scrollHeight;
+      requestAnimationFrame(function(){ body.style.maxHeight = h + 'px'; });
+      clearTimeout(d._pt);
+      d._pt = setTimeout(function(){
+        if (!d.classList.contains('collapsed')) body.style.maxHeight = 'none';
+        d.classList.remove('lit');
+      }, 620);
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        setTimeout(function(){ window.MathJax.typesetPromise([body]).catch(function(){}); }, 30);
+      }
+    } else {
+      clearTimeout(d._pt);
+      d.classList.remove('lit');
+      body.style.maxHeight = body.scrollHeight + 'px';
+      requestAnimationFrame(function(){ requestAnimationFrame(function(){
+        d.classList.add('collapsed');
+        body.style.maxHeight = '0px';
+      }); });
+    }
+  };
+
+  /* ───── КВИЗЫ: результаты, дорожка билетов, повтор ошибок ─────
+     Движок квиза (dq*) остаётся прежним — мы только меняем вид выбора,
+     запоминаем результат попытки и промахи, и превращаем разбор в лист. */
+  function readQuiz(){
+    try { var v = JSON.parse(localStorage.getItem('la_quiz') || '{}'); return (v && typeof v === 'object') ? v : {}; }
+    catch(e) { return {}; }
+  }
+  function writeQuiz(q){ try { localStorage.setItem('la_quiz', JSON.stringify(q)); } catch(e) {} }
+
+  window.dqRenderMenu = function(){
+    var c = document.getElementById('quizContainer');
+    if (!c || typeof TICKET_QUIZ === 'undefined') return;
+
+    var res = readQuiz();
+    var locked = (typeof DEMO_LOCKED_THEMES !== 'undefined') ? DEMO_LOCKED_THEMES : [];
+    var names = (typeof THEME_NAMES !== 'undefined') ? THEME_NAMES : {};
+    var themes = Object.keys(names);
+    var tabs = themes.map(function(t){
+      var off = locked.indexOf(t) >= 0;
+      return '<button class="dq-tab' + (String(QState.theme) === String(t) ? ' active' : '')
+           + (off ? ' locked' : '') + '"' + (off ? ' disabled' : ' onclick="dqSelectTheme(\'' + t + '\')"')
+           + '>' + esc(dqThemeShort(t)) + '</button>';
+    }).join('');
+
+    var track = '', last = null;
+    Object.keys(TICKET_QUIZ).map(Number).sort(function(a,b){ return a-b; }).forEach(function(n){
+      if (typeof TICKET_THEME !== 'undefined'
+          && String(TICKET_THEME[n]) !== String(QState.theme)) return;
+      var e = TK[TKI[n]];
+      var name = (typeof TITLES !== 'undefined' && TITLES[n]) ? TITLES[n] : (e ? e.t : ('Билет ' + n));
+      var r = res[n];
+      var badge = r
+        ? '<span class="qs">' + r.score + ' / ' + r.total + '</span>'
+        : '<span class="qs none">—</span>';
+      track += '<button class="qz-item"' + (r && r.score === r.total ? ' data-res="win"' : '')
+            +   ' onclick="dqStartTicket(' + n + ')">'
+            +   '<span class="qn">' + pad(n) + '</span>'
+            +   '<span class="qt">' + name + '</span>'
+            +   badge
+            + '</button>';
+      if (r && r.wrong && r.wrong.length && (!last || n > last.n)) last = { n: n, cnt: r.wrong.length };
+    });
+
+    var again = last
+      ? '<button class="qz-again on" onclick="dqRetryWrong(' + last.n + ')">'
+        + '<em>Ошибки</em><span>Билет ' + pad(last.n) + ' · повторить ' + last.cnt + '</span></button>'
+      : '';
+
+    var locknote = locked.length
+      ? '<div class="dq-locknote">Это демо. Открыта только <b>' + esc(dqThemeShort(QState.theme))
+        + '</b>. Остальные темы и все 92 билета — в полной версии.</div>'
+      : '';
+
+    c.innerHTML =
+        '<div class="quiz-header"><div class="quiz-header-top"><div>'
+      + '<div class="topic-eyebrow">Подготовка по билетам</div>'
+      + '<div class="quiz-title">Квизы</div></div>'
+      + '<button class="quiz-back" onclick="showTopic(\'start\')">← Билеты</button>'
+      + '</div></div>'
+      + '<p class="qz-lead">Выбери тему и билет.</p>'
+      + '<div class="dq-tabs">' + tabs + '</div>'
+      + '<div class="qz-theme">' + esc(names[QState.theme] || '') + '</div>'
+      + again
+      + '<div class="qz-track">' + track + '</div>'
+      + locknote;
+
+    if (window.MathJax && window.MathJax.typesetPromise) {
+      setTimeout(function(){ window.MathJax.typesetPromise([c]).catch(function(){}); }, 30);
+    }
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  };
+
+  /* повтор только промахов последнего билета */
+  window.dqRetryWrong = function(n){
+    var r = readQuiz()[n];
+    if (!r || !r.wrong || !r.wrong.length || typeof TICKET_QUIZ === 'undefined') return;
+    var pool = TICKET_QUIZ[n] || [];
+    var qs = r.wrong.map(function(i){ return pool[i]; }).filter(Boolean);
+    if (!qs.length) return;
+    QState.ticket = n; QState.basics = false;
+    QState.qs = qs.map(function(q){ return dqShuffleQ(q); });
+    QState.map = r.wrong.slice();
+    QState.idx = 0; QState.score = 0; QState.sel = []; QState.wrong = [];
+    showScreen('quiz');
+    dqRenderQ();
+  };
+
+  /* закрыть лист разбора */
+  window.dqCloseSheet = function(){
+    var ex = document.getElementById('quizExplanation');
+    if (ex) ex.classList.remove('show');
+    document.body.classList.remove('sheet-open');
+  };
+
+  function hookQuiz(){
+    if (typeof window.dqStartTicket === 'function' && !window.dqStartTicket.__w) {
+      var _st = window.dqStartTicket;
+      window.dqStartTicket = function(n){
+        _st.apply(this, arguments);
+        QState.wrong = []; QState.map = null;
+        showScreen('quiz');
+      };
+      window.dqStartTicket.__w = true;
+    }
+    /* промахи: индекс в исходном наборе билета */
+    if (typeof window.dqReveal === 'function' && !window.dqReveal.__w) {
+      var _rv = window.dqReveal;
+      window.dqReveal = function(q, chosen){
+        var before = QState.score;
+        _rv.apply(this, arguments);
+        if (QState.score === before) {
+          QState.wrong = QState.wrong || [];
+          var src = QState.map ? QState.map[QState.idx] : QState.idx;
+          if (QState.wrong.indexOf(src) < 0) QState.wrong.push(src);
+        }
+        var ex = document.getElementById('quizExplanation');
+        if (ex && !ex.querySelector('.qz-sheet-close')) {
+          var b = document.createElement('button');
+          b.className = 'qz-sheet-close';
+          b.textContent = 'Понятно';
+          b.onclick = window.dqCloseSheet;
+          ex.appendChild(b);
+        }
+        document.body.classList.add('sheet-open');
+      };
+      window.dqReveal.__w = true;
+    }
+    if (typeof window.dqNext === 'function' && !window.dqNext.__w) {
+      var _nx = window.dqNext;
+      window.dqNext = function(){ window.dqCloseSheet(); _nx.apply(this, arguments); };
+      window.dqNext.__w = true;
+    }
+    if (typeof window.dqResult === 'function' && !window.dqResult.__w) {
+      var _rs = window.dqResult;
+      window.dqResult = function(){
+        window.dqCloseSheet();
+        _rs.apply(this, arguments);
+        var n = QState.ticket;
+        if (n && !QState.basics) {
+          var all = readQuiz();
+          all[n] = { score: QState.score, total: QState.qs.length, wrong: (QState.wrong || []).slice() };
+          writeQuiz(all);
+        }
+        /* карта ошибок под итогом */
+        var miss = QState.wrong || [];
+        if (!miss.length) return;
+        var pool = (n && typeof TICKET_QUIZ !== 'undefined') ? (TICKET_QUIZ[n] || []) : [];
+        var html = '<div class="qz-map"><div class="qz-map-lbl">Разобрать ещё раз</div>';
+        miss.forEach(function(i){
+          var q = pool[i];
+          if (!q) return;
+          html += '<div class="qz-miss"><i>' + (i + 1) + '</i><span>' + q.q + '</span></div>';
+        });
+        html += '</div>';
+        var box = document.querySelector('#quizContainer .quiz-result');
+        if (box) {
+          box.insertAdjacentHTML('beforeend', html);
+          if (window.MathJax && window.MathJax.typesetPromise) {
+            setTimeout(function(){ window.MathJax.typesetPromise([box]).catch(function(){}); }, 30);
+          }
+        }
+      };
+      window.dqResult.__w = true;
+    }
+  }
+
+  /* ───── БАЗА: термины по алфавиту + мгновенный поиск ───── */
+  function enhanceBasics(){
+    var list = document.getElementById('basicsList');
+    if (!list || list.dataset.railed === '1' || !list.children.length) return;
+
+    var cards = Array.prototype.slice.call(list.querySelectorAll('.q-card'));
+    if (!cards.length) return;
+    cards.forEach(function(c){
+      var t = c.querySelector('.q-title');
+      c.setAttribute('data-s', ((t && t.textContent) || '').trim().toLowerCase());
+    });
+    cards.sort(function(a, b){
+      return a.getAttribute('data-s').localeCompare(b.getAttribute('data-s'), 'ru');
+    });
+    list.innerHTML = '';
+    cards.forEach(function(c){ list.appendChild(c); });
+
+    var box = document.createElement('div');
+    box.className = 'bs-search';
+    box.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7.5"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>'
+      + '<input id="bsSearch" type="text" placeholder="Найти термин…" autocomplete="off" spellcheck="false">';
+    list.parentNode.insertBefore(box, list);
+
+    var none = document.createElement('div');
+    none.className = 'bs-none';
+    none.hidden = true;
+    none.textContent = 'Ничего не нашлось.';
+    list.appendChild(none);
+
+    document.getElementById('bsSearch').addEventListener('input', function(){
+      var q = this.value.toLowerCase().trim(), shown = 0;
+      cards.forEach(function(c){
+        var hit = !q || c.getAttribute('data-s').indexOf(q) >= 0;
+        c.classList.toggle('gone', !hit);
+        if (hit) shown++;
+      });
+      none.hidden = shown > 0;
+    });
+
+    list.dataset.railed = '1';
+  }
+
+  /* ───── ПРАКТИКА: чертёж липнет рядом с решением ───── */
+  function enhancePractice(){
+    var page = document.getElementById('page-practice');
+    if (!page || page.dataset.praxed === '1') return;
+    page.querySelectorAll('.prax-fig').forEach(function(fig){
+      var host = fig.parentNode;
+      if (!host || host.classList.contains('prax-figwrap')) return;
+      var w = document.createElement('div');
+      w.className = 'prax-figwrap';
+      host.insertBefore(w, fig);
+      w.appendChild(fig);
+      /* всё, что идёт после чертежа, — текст решения; кладём рядом */
+      var grid = document.createElement('div');
+      grid.className = 'prax-solve';
+      host.insertBefore(grid, w);
+      var rest = document.createElement('div');
+      rest.className = 'prax-steps';
+      var node = w.nextSibling;
+      while (node) { var nx = node.nextSibling; rest.appendChild(node); node = nx; }
+      grid.appendChild(rest);
+      grid.appendChild(w);
+    });
+    page.dataset.praxed = '1';
+  }
+
+  function boot(){
+    buildIndex();
+    buildTickets();
+    renderResume();
+    hookQuiz();
+    var m = (location.hash || '').match(/^#b(\d+)$/);
+    if (m && TKI[Number(m[1])] != null) window.openTicket(m[1]);
+    else showScreen('start');
+    finishArrival();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+})();
+</script>
+<script>
+/* оффлайн-режим: сайт открывается без сети */
+if ('serviceWorker' in navigator) {
+  addEventListener('load', function(){
+    navigator.serviceWorker.register('sw.js').catch(function(){});
+  });
+}
 </script>
 </body>
 </html>
