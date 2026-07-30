@@ -23,6 +23,7 @@
 /*ENDTOKENS*/
 
 *{margin:0;padding:0;box-sizing:border-box}
+html,body{max-width:100%;overflow-x:hidden}
 html{background:var(--bg);-webkit-text-size-adjust:100%}
 body{
   font-family:'Golos Text',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
@@ -146,8 +147,8 @@ a:hover{color:var(--ink)}
 
 /* ── подвал ── */
 .tailer{
-  display:flex;align-items:center;justify-content:center;gap:0;
-  flex-wrap:wrap;row-gap:2px;
+  display:flex;align-items:center;justify-content:center;
+  flex-wrap:wrap;gap:0 0;row-gap:4px;max-width:100%;
   opacity:0;animation:fd .7s ease 1.16s forwards;
 }
 .tl{
@@ -165,6 +166,11 @@ a:hover{color:var(--ink)}
 .tl:hover::after{transform:scaleX(1)}
 .tl:focus-visible{outline:2px solid var(--hot);outline-offset:0}
 .sep{width:1px;height:13px;background:var(--rule);flex-shrink:0}
+@media (max-width:520px){
+  /* два в ряд: «Литература · Лекции I» и «Лекции II · Полезные ссылки» */
+  .tailer{max-width:340px;margin-inline:auto}
+  .tailer .sep:nth-of-type(2){display:none;width:100%;height:0}
+}
 
 @keyframes fd{to{opacity:1}}
 
@@ -206,8 +212,12 @@ body.leaving .flood{transform:none;transition:transform .42s cubic-bezier(.66,0,
 .curtain.out{transform:translate3d(0,-100%,0);transition:transform .46s cubic-bezier(.32,0,.2,1)}
 
 /* ── приход под шторкой: контент уже отрисован, полотно просто уезжает ── */
-html.arriving .curtain{transform:translate3d(0,0,0);transition:none}
-html.arriving .curtain.out{transform:translate3d(0,-100%,0);transition:transform .44s cubic-bezier(.32,0,.2,1)}
+html.arriving .curtain{
+  transform:translate3d(0,0,0);
+  animation:curtainAway .52s cubic-bezier(.32,0,.2,1) .1s forwards;
+}
+html.arriving .curtain.out{transform:translate3d(0,-100%,0)}
+@keyframes curtainAway{to{transform:translate3d(0,-100%,0)}}
 html.sweeping,html.sweeping body{transition:none!important}
 html.arriving .top,html.arriving .kicker,html.arriving .pick,
 html.arriving .tailer,html.arriving .resume.on{opacity:1;animation:none!important}
@@ -281,20 +291,28 @@ html.arriving .wm .i{transform:none;animation:none!important}
   document.body.appendChild(probe);
 
   function fit(){
-    var avail=wm.clientWidth;
-    if(!avail)return;
-    var w=probe.getBoundingClientRect().width;
-    if(!w)return;
+    /* НЕ доверяем clientWidth вслепую: если у страницы есть горизонтальное переполнение,
+       он больше экрана — и логотип раздувается ещё сильнее. Ограничиваем шириной viewport. */
+    var vw = window.visualViewport ? window.visualViewport.width : window.innerWidth;
+    var avail = Math.min(wm.clientWidth || vw, vw - 24);
+    if(avail <= 0) return;
+    var w = probe.getBoundingClientRect().width;
+    if(!w) return;
     /* на телефоне логотип почти во всю колонку, на десктопе — сдержанно */
-    var factor=avail<600?0.96:0.56;
-    var size=Math.min(100*Math.min(avail,1000)*factor/w,124);
-    wm.style.fontSize=size.toFixed(2)+'px';
-    if(inner.scrollWidth-wm.clientWidth>1){
-      wm.style.fontSize=(size*wm.clientWidth/inner.scrollWidth).toFixed(2)+'px';
+    var factor = avail < 600 ? 0.94 : 0.56;
+    var size = Math.min(100 * Math.min(avail, 1000) * factor / w, 124);
+    wm.style.fontSize = size.toFixed(2) + 'px';
+    /* дожимаем, пока строка не влезет — одного прохода на iOS не хватает */
+    for(var i = 0; i < 6; i++){
+      var over = inner.getBoundingClientRect().width - avail;
+      if(over <= 0.5) break;
+      size = size * avail / (avail + over) * 0.995;
+      wm.style.fontSize = size.toFixed(2) + 'px';
     }
     wm.classList.add('fitted');
   }
   fit();
+  requestAnimationFrame(fit);
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);
   addEventListener('resize',function(){clearTimeout(t);t=setTimeout(fit,90);},{passive:true});
   addEventListener('orientationchange',function(){setTimeout(fit,220);});
@@ -363,6 +381,15 @@ function leavePage(href){
   c.addEventListener('transitionend',function(e){if(!e||e.target===c)go();});
   requestAnimationFrame(function(){requestAnimationFrame(function(){c.classList.add('up');});});
   setTimeout(go,620);
+  setTimeout(function(){
+    if(document.visibilityState==='hidden')return;
+    c.classList.add('out');
+    setTimeout(function(){
+      c.style.transition='none';c.classList.remove('up','out');
+      document.documentElement.classList.remove('sweeping');
+      requestAnimationFrame(function(){c.style.transition='';c.removeAttribute('data-busy');});
+    },460);
+  },2600);
 }
 function finishArrival(){
   var h=document.documentElement;
