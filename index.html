@@ -85,11 +85,8 @@ a:hover{color:var(--ink)}
 .wm.fitted{visibility:visible}
 .wm .i{
   display:inline-block;white-space:nowrap;
-  transform:translateY(112%);
-  animation:slideUp 1.05s cubic-bezier(.16,1,.3,1) .16s forwards;
 }
 .wm .hot{font-weight:700;letter-spacing:-.05em;color:var(--hot)}
-@keyframes slideUp{to{transform:none}}
 
 .kicker{
   margin-top:15px;font-size:.665rem;font-weight:500;letter-spacing:.26em;
@@ -202,7 +199,6 @@ body.leaving .flood{transform:none;transition:transform .42s cubic-bezier(.66,0,
 [data-motion="calm"] *{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important}
 [data-motion="calm"] .top,[data-motion="calm"] .kicker,[data-motion="calm"] .pick,
 [data-motion="calm"] .tailer,[data-motion="calm"] .resume.on{opacity:1}
-[data-motion="calm"] .wm .i{transform:none}
 
 .curtain{
   position:fixed;inset:0;z-index:98;background:var(--hot);
@@ -214,14 +210,13 @@ body.leaving .flood{transform:none;transition:transform .42s cubic-bezier(.66,0,
 /* ── приход под шторкой: контент уже отрисован, полотно просто уезжает ── */
 html.arriving .curtain{
   transform:translate3d(0,0,0);
-  animation:curtainAway .52s cubic-bezier(.32,0,.2,1) .1s forwards;
+  animation:curtainAway .5s cubic-bezier(.32,0,.2,1) 2.4s forwards;
 }
-html.arriving .curtain.out{transform:translate3d(0,-100%,0)}
+html.arriving .curtain.out{transform:translate3d(0,-100%,0);transition:transform .46s cubic-bezier(.32,0,.2,1)}
 @keyframes curtainAway{to{transform:translate3d(0,-100%,0)}}
 html.sweeping,html.sweeping body{transition:none!important}
 html.arriving .top,html.arriving .kicker,html.arriving .pick,
 html.arriving .tailer,html.arriving .resume.on{opacity:1;animation:none!important}
-html.arriving .wm .i{transform:none;animation:none!important}
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#0c0c0e" media="(prefers-color-scheme: dark)">
@@ -376,34 +371,22 @@ function leavePage(href){
   if(/^(index|literatura|links|lekcii-sem1|lekcii-sem2|algebra-sem2)\.html/.test(href)){
     try{sessionStorage.setItem('la_sweep','1');}catch(e){}
   }
-  var went=false;
-  function go(){if(went)return;went=true;location.href=href;}
-  c.addEventListener('transitionend',function(e){if(!e||e.target===c)go();});
+  /* переход по таймеру, а НЕ по transitionend: на тяжёлой странице событие может не прийти */
   requestAnimationFrame(function(){requestAnimationFrame(function(){c.classList.add('up');});});
-  setTimeout(go,620);
-  setTimeout(function(){
-    if(document.visibilityState==='hidden')return;
-    c.classList.add('out');
-    setTimeout(function(){
-      c.style.transition='none';c.classList.remove('up','out');
-      document.documentElement.classList.remove('sweeping');
-      requestAnimationFrame(function(){c.style.transition='';c.removeAttribute('data-busy');});
-    },460);
-  },2600);
+  setTimeout(function(){location.href=href;},400);
 }
 function finishArrival(){
   var h=document.documentElement;
   if(!h.classList.contains('arriving'))return;
   var c=document.getElementById('curtain');
   if(!c){h.classList.remove('arriving');return;}
-  c.classList.add('up');
   requestAnimationFrame(function(){requestAnimationFrame(function(){
     c.classList.add('out');
     setTimeout(function(){
       c.style.transition='none';c.classList.remove('up','out');
-      h.classList.remove('sweeping');
+      h.classList.remove('sweeping','arriving');
       requestAnimationFrame(function(){c.style.transition='';});
-    },470);
+    },480);
   });});
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',finishArrival);
