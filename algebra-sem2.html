@@ -1844,6 +1844,14 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 ::selection { background: var(--ruby); color: #fff; }
 a { color: var(--ruby); }
 
+/* ══ ПРОИЗВОДИТЕЛЬНОСТЬ ══
+   Зерно на весь экран плюс два размытых слоя поверх документа в 1.5МБ —
+   телефон пересчитывал размытие каждый кадр прокрутки. На телефоне без них. */
+body::after { display: none; }
+.topbar, .tabbar { backdrop-filter: none; -webkit-backdrop-filter: none; background: var(--bg); }
+.curtain { will-change: auto; }
+html.sweeping .curtain, html.arriving .curtain { will-change: transform; }
+
 /* сайдбар выключен полностью */
 .sidebar, .backdrop, .menu-btn, .theme-btn { display: none !important; }
 
@@ -2530,9 +2538,12 @@ html.arriving .topic-header, html.arriving .q-card { opacity: 1; }
    Навигация уходит в шапку — плавающая плашка снизу здесь ни к чему.
    Список билетов получает тему на полях: слева заголовок, справа строки. */
 @media (min-width: 900px) {
-  /* шапка фиксированная и в неё же встроен таб-бар — отступаем на всю её высоту,
-     иначе заголовок вопроса уезжает под навигацию */
   .main { max-width: 1120px; padding: 88px 40px 60px; }
+  .topbar {
+    padding: 0 40px; min-height: 64px;
+    background: var(--topbar-bg);
+    backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+  }
   .topbar { padding: 0 40px; min-height: 64px; }
   .tb-back { font-size: .86rem; }
 

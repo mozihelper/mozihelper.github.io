@@ -1,7 +1,7 @@
 /* MoziHelper — офлайн-режим.
    Страницы отдаются из кэша сразу и обновляются в фоне (stale-while-revalidate),
    PDF и шрифты кладём в кэш при первом обращении — чтобы работали без сети. */
-const CACHE = 'mozi-v3';
+const CACHE = 'mozi-v4';
 const SHELL = [
   './',
   './index.html',
