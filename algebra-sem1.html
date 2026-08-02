@@ -15,7 +15,7 @@
     h.setAttribute('data-motion', localStorage.getItem('la_motion') || 'full');
     if (sessionStorage.getItem('la_sweep')) {
       sessionStorage.removeItem('la_sweep');
-      h.classList.add('arriving');
+      h.classList.add('arriving', 'no-intro');
     }
   } catch(e) {
     h.setAttribute('data-theme', 'dusk');
@@ -1891,8 +1891,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
   transform: translate3d(0, 100%, 0); pointer-events: none;
   will-change: transform; contain: strict;
 }
-.curtain.up  { transform: translate3d(0, 0, 0);     transition: transform .4s cubic-bezier(.66,0,.2,1); }
-.curtain.out { transform: translate3d(0, -100%, 0); transition: transform .44s cubic-bezier(.32,0,.2,1); }
+.curtain.up  { transform: translate3d(0, 0, 0);     transition: transform .42s cubic-bezier(.65,0,.25,1); }
+.curtain.out { transform: translate3d(0, -100%, 0); transition: transform .5s cubic-bezier(.35,0,.15,1); }
 html.arriving .curtain {
   transform: translate3d(0,0,0);
   animation: curtainAway .5s cubic-bezier(.32,0,.2,1) 2.4s forwards;
@@ -1903,7 +1903,6 @@ html.arriving .curtain.out {
 }
 @keyframes curtainAway { to { transform: translate3d(0,-100%,0); } }
 html.sweeping, html.sweeping body { transition: none !important; }
-html.sweeping body::after { display: none; }
 [data-motion="calm"] * { animation-duration: .01ms !important; animation-delay: 0s !important; transition-duration: .01ms !important; }
 </style>
 <style id="mh-sem1-nav">
@@ -2140,9 +2139,15 @@ footer { padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 88px); }
 .tk-nav-btn:not(:disabled):hover em, .tk-nav-btn:not(:disabled):active em { color: rgba(255,255,255,.75); }
 .tk-nav-btn b { font-size: .9rem; font-weight: 500; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%; }
 
+/* обе кнопки — одной колонкой по центру текстовой колонки */
+.tk-actions {
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  margin-top: 16px;
+}
 .tk-quiz {
   position: relative; overflow: hidden; display: flex; align-items: center;
-  justify-content: center; gap: 9px; width: 100%; min-height: 52px; margin-top: 10px;
+  justify-content: center; gap: 9px; width: fit-content; min-width: 260px; max-width: 100%;
+  min-height: 52px;
   padding: 14px 18px; border: 1px solid var(--ruby); background: transparent;
   cursor: pointer; font-family: inherit; font-size: .9rem; font-weight: 500;
   color: var(--ruby); -webkit-tap-highlight-color: transparent;
@@ -2159,8 +2164,8 @@ footer { padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 88px); }
   transform: translate3d(0, 100%, 0); pointer-events: none;
   will-change: transform; contain: strict;
 }
-.curtain.up   { transform: translate3d(0, 0, 0);     transition: transform .4s cubic-bezier(.66,0,.2,1); }
-.curtain.out  { transform: translate3d(0, -100%, 0); transition: transform .44s cubic-bezier(.32,0,.2,1); }
+.curtain.up   { transform: translate3d(0, 0, 0);     transition: transform .42s cubic-bezier(.65,0,.25,1); }
+.curtain.out  { transform: translate3d(0, -100%, 0); transition: transform .5s cubic-bezier(.35,0,.15,1); }
 /* пока идёт шторка — гасим всё, что могло бы конкурировать за кадры */
 html.sweeping, html.sweeping body { transition: none !important; }
 html.sweeping body::after { display: none; }
@@ -2174,13 +2179,25 @@ html.sweeping .q-card.reveal { transition: none !important; }
    контент отрисован, шторка просто уезжает вверх — одно движение, без лишних. */
 html.arriving .curtain {
   transform: translate3d(0,0,0);
-  animation: curtainAway .5s cubic-bezier(.32,0,.2,1) 2.4s forwards;
+  animation: curtainAway .5s cubic-bezier(.35,0,.15,1) 2.4s forwards !important;
 }
 html.arriving .curtain.out {
   transform: translate3d(0,-100%,0);
-  transition: transform .46s cubic-bezier(.32,0,.2,1);
+  transition: transform .5s cubic-bezier(.35,0,.15,1) !important;
 }
 @keyframes curtainAway { to { transform: translate3d(0,-100%,0); } }
+
+/* пока полотно закрыто — на странице не движется вообще ничего */
+html.arriving *, html.arriving *::before, html.arriving *::after {
+  animation: none !important; transition: none !important;
+}
+/* анимации входа выключены навсегда: текст сразу в конечном виде */
+html.no-intro .start-greeting, html.no-intro .start-status, html.no-intro .start-title,
+html.no-intro .start-message, html.no-intro .start-cta-group, html.no-intro .stats,
+html.no-intro .search-wrap.start-search, html.no-intro .topic-header, html.no-intro .q-card {
+  opacity: 1 !important; transform: none !important; animation: none !important;
+}
+html.no-intro .topic-page { animation: none !important; }
 html.arriving .topic-page, html.arriving .topic-page *,
 html.arriving .tl-head, html.arriving .tl-head *,
 html.arriving .topbar, html.arriving .topbar *,
@@ -2262,8 +2279,43 @@ html.arriving .topic-header, html.arriving .q-card { opacity: 1; }
   to   { opacity: 1; transform: none; }
 }
 
+/* шаги обычных выкладок — те же узлы на линейке, расставляет скрипт */
+.derivation .deriv-body [data-proof-step] { position: relative; }
+.derivation .deriv-body [data-proof-step]::before {
+  content: ''; position: absolute; top: .62em; left: calc(-1.4rem - 3px);
+  width: 8px; height: 8px; box-sizing: border-box;
+  border: 2px solid var(--ruby); border-radius: 50%;
+  background: var(--bg);
+  transition: background .28s ease, transform .28s cubic-bezier(.2,1.4,.4,1);
+}
+.derivation .deriv-body [data-proof-step]:hover::before { background: var(--ruby); transform: scale(1.2); }
+
+/* конец доказательства — классический знак и волосяная линейка */
+.deriv-end {
+  display: flex; align-items: center; gap: .75rem;
+  margin: 1.3rem 0 .2rem;
+}
+.deriv-end::before {
+  content: ''; width: 9px; height: 9px; flex-shrink: 0; background: var(--ruby);
+}
+.deriv-end::after { content: ''; flex: 1 1 auto; height: 1px; background: var(--border); }
+
+/* длинную выкладку можно закрыть снизу, не возвращаясь к заголовку */
+.deriv-up {
+  display: inline-flex; align-items: center; gap: .5rem;
+  min-height: 40px; margin-top: .55rem; padding: 8px 13px 8px 10px;
+  border: 1px solid var(--border); background: transparent; cursor: pointer;
+  font-family: 'Golos Text', sans-serif; font-size: .62rem; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ink-mute);
+  transition: color .22s ease, border-color .22s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.deriv-up:hover { color: var(--ruby); border-color: var(--ruby); }
+.deriv-up svg { width: 13px; height: 13px; flex-shrink: 0; }
+
 /* вложенные выкладки — тоньше линейка, чтобы читалась иерархия */
 .derivation .derivation::before { width: 1px; background: var(--ink-mute); }
+.derivation .derivation .deriv-body [data-proof-step]::before { border-color: var(--ink-mute); }
 .derivation .derivation > .derivation-title { color: var(--ink-soft); border-bottom-color: var(--border-soft); }
 .derivation .derivation:not(.collapsed) > .derivation-title { border-bottom-color: var(--ink-mute); }
 .derivation.ra-wrap { padding-left: 0; margin: 1.3rem 0; }
@@ -2293,7 +2345,10 @@ html.arriving .topic-header, html.arriving .q-card { opacity: 1; }
   margin-top: 7px; font-size: .68rem; letter-spacing: .04em; color: var(--ink-mute);
   font-variant-numeric: tabular-nums;
 }
+/* кружок — самостоятельная цель: отмечает «Знаю», не открывая билет.
+   Сам кружок маленький, но ::before расширяет зону нажатия до 44px. */
 .tl-dot {
+  position: relative; cursor: pointer;
   flex-shrink: 0; width: 9px; height: 9px; box-sizing: border-box; border-radius: 50%;
   border: 1.6px solid var(--border);
   transition: border-color .28s ease, background .28s ease, transform .34s cubic-bezier(.2,1.4,.4,1);
@@ -2302,12 +2357,15 @@ html.arriving .topic-header, html.arriving .q-card { opacity: 1; }
 .tl-row[data-st="know"] .tl-dot { border-color: var(--ruby); background: var(--ruby); }
 .tl-row:hover .tl-dot, .tl-row:active .tl-dot { border-color: #fff; transform: scale(1.15); }
 .tl-row[data-st="know"]:hover .tl-dot { background: #fff; }
+.tl-dot::before { content: ''; position: absolute; left: 50%; top: 50%; width: 44px; height: 44px; transform: translate(-50%, -50%); }
+.tl-dot:hover { transform: scale(1.5); }
+.tl-row[data-st="know"] .tl-dot:hover { background: transparent; }
 .tl-row[data-st="know"] .tl-t { color: var(--ink-mute); }
 .tl-row[data-st="know"]:hover .tl-t { color: #fff; }
 
 .tk-know {
-  display: inline-flex; align-items: center; gap: 9px; min-height: 44px;
-  margin-top: 14px; padding: 10px 15px 10px 13px;
+  display: flex; align-items: center; justify-content: center; gap: 9px; min-height: 44px;
+  width: fit-content; min-width: 260px; max-width: 100%; padding: 10px 15px 10px 13px;
   border: 1px solid var(--border); background: transparent; cursor: pointer;
   font-family: inherit; font-size: .82rem; font-weight: 500; color: var(--ink-soft);
   transition: color .24s ease, border-color .24s ease, background .24s ease;
@@ -2609,31 +2667,13 @@ html.arriving .topic-header, html.arriving .q-card { opacity: 1; }
    Навигация уходит в шапку — плавающая плашка снизу здесь ни к чему.
    Список билетов получает тему на полях: слева заголовок, справа строки. */
 @media (min-width: 900px) {
-  .main { max-width: 1120px; padding: 88px 40px 60px; }
+  .main { max-width: 1120px; padding: 88px 40px 112px; }
   .topbar {
     padding: 0 40px; min-height: 64px;
     background: var(--topbar-bg);
     backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
   }
-  .topbar { padding: 0 40px; min-height: 64px; }
   .tb-back { font-size: .86rem; }
-
-  .tabbar {
-    position: fixed; top: 0; bottom: auto; left: 50%; right: auto;
-    transform: translateX(-50%); z-index: 51;
-    min-height: 64px; align-items: center;
-    background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none;
-    border: 0; box-shadow: none; padding: 0;
-  }
-  .tabbar.hide { transform: translateX(-50%); }
-  .tab {
-    min-height: 64px; padding: 0 16px; gap: 9px; font-size: .82rem;
-    color: var(--ink-mute);
-  }
-  .tab::after { top: auto; bottom: 0; left: 16px; right: 16px; width: auto; transform: scaleX(0); transform-origin: left; }
-  .tab.on::after { transform: scaleX(1); }
-  .tab svg { width: 16px; height: 16px; }
-  footer { padding-bottom: 40px; }
 
   /* ── список билетов: тема на полях ── */
   .tl-head { padding-top: 18px; }
@@ -2658,7 +2698,7 @@ html.arriving .topic-header, html.arriving .q-card { opacity: 1; }
   .tk-title { font-size: 2rem; max-width: 26ch; }
   #ticketBody { max-width: 76ch; }
   .tk-nav { max-width: 76ch; }
-  .tk-quiz, .tk-know { width: auto; min-width: 260px; }
+  .tk-actions { max-width: 76ch; }
 
   /* ── квизы и база — та же читаемая колонка ── */
   .qz-track, .qz-again, .qz-lead, .dq-tabs, .dq-locknote { max-width: 76ch; }
@@ -2675,10 +2715,34 @@ html.arriving .topic-header, html.arriving .q-card { opacity: 1; }
   .prax-solve > .prax-figwrap { top: 92px; }
 }
 
+/* ── Шире 1180px в шапке хватает места: вкладки встают рядом с «Семестры»
+      и переключателем темы, не налезая на них. Уже — плашка снизу. ── */
+@media (min-width: 1180px) {
+  .main { padding-bottom: 60px; }
+  footer { padding-bottom: 40px; }
+  .tabbar {
+    position: fixed; top: 0; bottom: auto; left: 50%; right: auto;
+    transform: translateX(-50%); z-index: 51;
+    min-height: 64px; align-items: center;
+    background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none;
+    border: 0; box-shadow: none; padding: 0;
+  }
+  .tabbar.hide { transform: translateX(-50%); }
+  .tab {
+    min-height: 64px; padding: 0 16px; gap: 9px; font-size: .82rem;
+    color: var(--ink-mute);
+  }
+  .tab::after { top: auto; bottom: 0; left: 16px; right: 16px; width: auto; transform: scaleX(0); transform-origin: left; }
+  .tab.on::after { transform: scaleX(1); }
+  .tab svg { width: 16px; height: 16px; }
+}
+
 /* ══ ТОЛЬКО ДЛЯ 1-го СЕМЕСТРА ══ */
-/* незавершённые разделы приглушены в таб-баре */
-.tab.soon { opacity: .5; }
-.tab.soon.on { opacity: 1; }
+/* незавершённые разделы приглушены в таб-баре.
+   Класс именно `is-soon`, а не `soon`: `.soon` — это экран «В разработке»
+   с padding 18vh, и при совпадении имён он разносил вкладки по экрану. */
+.tab.is-soon { opacity: .5; }
+.tab.is-soon.on { opacity: 1; }
 /* квиза по билету в 1-м семестре пока нет */
 .tk-quiz { display: none !important; }
 
@@ -2765,9 +2829,11 @@ html.arriving .topic-header, html.arriving .q-card { opacity: 1; }
       <h1 class="tk-title" id="tkTitle"></h1>
     </div>
     <div id="ticketBody"></div>
-    <button class="tk-know" id="tkKnow" onclick="toggleKnow()">
-      <span class="kd" aria-hidden="true"></span><span>Знаю</span>
-    </button>
+    <div class="tk-actions">
+      <button class="tk-know" id="tkKnow" onclick="toggleKnow()">
+        <span class="kd" aria-hidden="true"></span><span>Знаю</span>
+      </button>
+    </div>
     <div class="tk-nav">
       <button class="tk-nav-btn prev" id="tkPrev" onclick="stepTicket(-1)">
         <em>Предыдущий</em><b id="tkPrevT"></b>
@@ -8433,15 +8499,15 @@ html.arriving .topic-header, html.arriving .q-card { opacity: 1; }
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
     <span>Билеты</span>
   </button>
-  <button class="tab soon" data-tab="quiz" onclick="showSoon('Квизы')">
+  <button class="tab is-soon" data-tab="quiz" onclick="showSoon('Квизы')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M9.2 9.1a2.9 2.9 0 1 1 4.1 2.7c-.8.4-1.3 1.1-1.3 2v.3"/><line x1="12" y1="17.6" x2="12" y2="17.61"/></svg>
     <span>Квизы</span>
   </button>
-  <button class="tab soon" data-tab="practice" onclick="showSoon('Практика')">
+  <button class="tab is-soon" data-tab="practice" onclick="showSoon('Практика')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
     <span>Практика</span>
   </button>
-  <button class="tab soon" data-tab="basics" onclick="showSoon('База')">
+  <button class="tab is-soon" data-tab="basics" onclick="showSoon('База')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
     <span>База</span>
   </button>
@@ -33205,23 +33271,11 @@ if ('serviceWorker' in navigator) {
     if (c.getAttribute('data-busy')) return;
     c.setAttribute('data-busy', '1');
     H.classList.add('sweeping');
-    if (/^(index|literatura|links|lekcii-sem1|lekcii-sem2|algebra-sem2)\.html/.test(href)) {
-      try { sessionStorage.setItem('la_sweep', '1'); } catch(e) {}
-    }
+    try { sessionStorage.setItem('la_sweep', '1'); } catch(e) {}
     var went = false;
     function go(){ if (went) return; went = true; location.href = href; }
-    c.addEventListener('transitionend', function(e){ if (!e || e.target === c) go(); });
     requestAnimationFrame(function(){ requestAnimationFrame(function(){ c.classList.add('up'); }); });
-    setTimeout(go, 620);
-    setTimeout(function(){
-      if (document.visibilityState === 'hidden') return;
-      c.classList.add('out');
-      setTimeout(function(){
-        c.style.transition = 'none'; c.classList.remove('up', 'out');
-        H.classList.remove('sweeping');
-        requestAnimationFrame(function(){ c.style.transition = ''; c.removeAttribute('data-busy'); });
-      }, 460);
-    }, 2600);
+    setTimeout(go, 420);
   }
   window.leavePage = leavePage;
 
@@ -33372,7 +33426,18 @@ if ('serviceWorker' in navigator) {
     box.innerHTML = html;
     box.addEventListener('click', function(ev){
       var row = ev.target.closest && ev.target.closest('.tl-row');
-      if (row) window.openTicket(row.getAttribute('data-n'));
+      if (!row) return;
+      /* нажали по кружку — переключаем «Знаю» прямо в списке */
+      if (ev.target.closest('.tl-dot')) {
+        ev.preventDefault(); ev.stopPropagation();
+        var n = row.getAttribute('data-n'), p = readProg();
+        p[n] = (p[n] === 'know') ? 'read' : 'know';
+        writeProg(p);
+        paintProgress();
+        if (filter !== 'all') window.filterTickets();
+        return;
+      }
+      window.openTicket(row.getAttribute('data-n'));
     });
     paintProgress();
     typesetRows();
@@ -33617,13 +33682,48 @@ if ('serviceWorker' in navigator) {
   }, { passive: true });
 
   /* ───── доказательства: раскрытие по измеренной высоте ───── */
+  /* Размечаем выкладку один раз: узел на линейке против каждого шага,
+     знак конца доказательства и — у длинных — кнопка «свернуть» внизу.
+     Сам текст выкладки не трогаем. */
+  function decorateProof(d, body){
+    if (d.classList.contains('ra-wrap') || body.getAttribute('data-decor')) return;
+    body.setAttribute('data-decor', '1');
+    var host = body.querySelector('.def-text') || body;
+    var i = 0;
+    [].forEach.call(host.children, function(el){
+      if (!el.tagName || el.classList.contains('derivation')) return;
+      el.setAttribute('data-proof-step', ++i);
+    });
+    var end = document.createElement('div');
+    end.className = 'deriv-end';
+    end.setAttribute('aria-hidden', 'true');
+    body.appendChild(end);
+  }
+
+  function addCollapseTail(d, body){
+    if (body.querySelector('.deriv-up')) return;
+    var up = document.createElement('button');
+    up.className = 'deriv-up';
+    up.type = 'button';
+    up.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg><span>свернуть</span>';
+    up.addEventListener('click', function(ev){
+      ev.stopPropagation();
+      window.toggleProof(d.querySelector('.derivation-title'));
+      var y = d.getBoundingClientRect().top + window.pageYOffset - 92;
+      window.scrollTo({ top: Math.max(0, y), behavior: calm() ? 'auto' : 'smooth' });
+    });
+    body.appendChild(up);
+  }
+
   window.toggleProof = function(titleEl){
     var d = titleEl && titleEl.closest ? titleEl.closest('.derivation') : null;
     if (!d) return;
     var body = d.querySelector('.deriv-body');
-    if (!body || calm()) { d.classList.toggle('collapsed'); return; }
+    if (!body) return;
+    if (calm()) { decorateProof(d, body); d.classList.toggle('collapsed'); return; }
 
     if (d.classList.contains('collapsed')) {
+      decorateProof(d, body);
       body.style.maxHeight = '0px';
       d.classList.remove('collapsed');
       /* шаги вступают по очереди */
@@ -33635,6 +33735,7 @@ if ('serviceWorker' in navigator) {
       void d.offsetWidth;
       d.classList.add('lit');
       var h = body.scrollHeight;
+      if (h > 560) { addCollapseTail(d, body); h = body.scrollHeight; }
       requestAnimationFrame(function(){ body.style.maxHeight = h + 'px'; });
       clearTimeout(d._pt);
       d._pt = setTimeout(function(){
@@ -33655,6 +33756,22 @@ if ('serviceWorker' in navigator) {
     }
   };
 
+  /* Пришли под шторкой — уводим полотно, когда содержимое уже отрисовано. */
+  function finishArrival(){
+    if (!H.classList.contains('arriving')) return;
+    var c = document.getElementById('curtain');
+    if (!c) { H.classList.remove('arriving'); return; }
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){
+      c.classList.add('out');
+      setTimeout(function(){
+        c.style.transition = 'none';
+        c.classList.remove('up', 'out');
+        H.classList.remove('sweeping', 'arriving');
+        requestAnimationFrame(function(){ c.style.transition = ''; });
+      }, 520);
+    }); });
+  }
+
   function boot(){
     buildIndex();
     buildTickets();
@@ -33662,6 +33779,7 @@ if ('serviceWorker' in navigator) {
     var m = (location.hash || '').match(/^#b(\d+)$/);
     if (m && TKI[Number(m[1])] != null) window.openTicket(m[1]);
     else showScreen('start');
+    finishArrival();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();
