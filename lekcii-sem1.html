@@ -4,7 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>MoziHelper — Лекции 1 семестр</title>
-<script>(function(){var h=document.documentElement;try{h.setAttribute('data-theme',localStorage.getItem('la_theme')||'dusk');h.setAttribute('data-motion',localStorage.getItem('la_motion')||'full');if(sessionStorage.getItem('la_sweep')){sessionStorage.removeItem('la_sweep');h.classList.add('arriving');}}catch(e){h.setAttribute('data-theme','dusk');h.setAttribute('data-motion','full');}})();</script>
+<!-- MoziHelper counter -->
+<script>
+(function () {
+  try {
+    var ENDPOINT = "https://mozihelper-counter.mozihelper.workers.dev/hit";
+    fetch(ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ p: location.pathname }),
+      keepalive: true,
+      cache: "no-store"
+    }).catch(function () {});
+  } catch (e) {}
+})();
+</script>
+<script>(function(){var h=document.documentElement;try{h.setAttribute('data-theme',localStorage.getItem('la_theme')||'dusk');h.setAttribute('data-motion',localStorage.getItem('la_motion')||'full');if(sessionStorage.getItem('la_sweep')){sessionStorage.removeItem('la_sweep');h.classList.add('arriving','no-intro');}}catch(e){h.setAttribute('data-theme','dusk');h.setAttribute('data-motion','full');}})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;700&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
@@ -137,18 +152,20 @@ main{max-width:760px;margin:0 auto;padding:34px 20px calc(env(safe-area-inset-bo
 .curtain,.flood{position:fixed;inset:0;background:var(--flood);transform:translate3d(0,100%,0);pointer-events:none}
 .curtain{z-index:98;will-change:transform;contain:strict}
 .flood{z-index:99}
-.curtain.up{transform:translate3d(0,0,0);transition:transform .4s cubic-bezier(.66,0,.2,1)}
-.curtain.out{transform:translate3d(0,-100%,0);transition:transform .46s cubic-bezier(.32,0,.2,1)}
+.curtain.up{transform:translate3d(0,0,0);transition:transform .42s cubic-bezier(.65,0,.25,1)}
+.curtain.out{transform:translate3d(0,-100%,0);transition:transform .5s cubic-bezier(.35,0,.15,1)}
 /* ── приход под шторкой: контент уже отрисован, полотно просто уезжает ── */
 html.arriving .curtain{
   transform:translate3d(0,0,0);
-  animation:curtainAway .5s cubic-bezier(.32,0,.2,1) 2.4s forwards;
+  animation:curtainAway .5s cubic-bezier(.35,0,.15,1) 2.4s forwards!important;
 }
-html.arriving .curtain.out{transform:translate3d(0,-100%,0);transition:transform .46s cubic-bezier(.32,0,.2,1)}
+html.arriving .curtain.out{transform:translate3d(0,-100%,0);transition:transform .5s cubic-bezier(.35,0,.15,1)!important}
+/* пока полотно закрыто — на странице не движется вообще ничего */
+html.arriving *,html.arriving *::before,html.arriving *::after{animation:none!important;transition:none!important}
 @keyframes curtainAway{to{transform:translate3d(0,-100%,0)}}
 html.sweeping,html.sweeping body{transition:none!important}
-html.arriving .page-title,html.arriving .page-sub{opacity:1;transform:none;animation:none!important}
-html.arriving .reveal{opacity:1;transform:none;transition:none}
+html.no-intro .page-title,html.no-intro .page-sub{opacity:1!important;transform:none!important;animation:none!important}
+html.no-intro .reveal{opacity:1!important;transform:none!important;transition:none!important}
 body.leaving .flood{transform:none;transition:transform .42s cubic-bezier(.66,0,.2,1)}
 
 @media (min-width:760px){
@@ -248,14 +265,10 @@ function leavePage(href){
   if(c.getAttribute('data-busy'))return;
   c.setAttribute('data-busy','1');
   document.documentElement.classList.add('sweeping');
-  /* Флаг ставим только страницам, которые умеют доигрывать приход.
-     algebra-sem1 ещё на старой системе — иначе флаг залипнет и сработает не там. */
-  if(/^(index|literatura|links|lekcii-sem1|lekcii-sem2|algebra-sem2)\.html/.test(href)){
-    try{sessionStorage.setItem('la_sweep','1');}catch(e){}
-  }
+  try{sessionStorage.setItem('la_sweep','1');}catch(e){}
   /* переход по таймеру, а НЕ по transitionend: на тяжёлой странице событие может не прийти */
   requestAnimationFrame(function(){requestAnimationFrame(function(){c.classList.add('up');});});
-  setTimeout(function(){location.href=href;},400);
+  setTimeout(function(){location.href=href;},420);
 }
 function finishArrival(){
   var h=document.documentElement;

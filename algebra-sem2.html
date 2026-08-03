@@ -5,6 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 <meta name="color-scheme" content="dark light">
 <title>MoziHelper — справочник по линейной алгебре</title>
+<!-- MoziHelper counter -->
+<script>
+(function () {
+  try {
+    var ENDPOINT = "https://mozihelper-counter.mozihelper.workers.dev/hit";
+    fetch(ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ p: location.pathname }),
+      keepalive: true,
+      cache: "no-store"
+    }).catch(function () {});
+  } catch (e) {}
+})();
+</script>
 <script>
 // Применяем сохранённую тему сразу, до отрисовки — чтобы не мигало.
 // По умолчанию — тёмная «Сумерки».
@@ -2181,6 +2196,10 @@ html.arriving .topic-header, html.arriving .q-card { opacity: 1; }
 
 .derivation .deriv-body {
   overflow: hidden; max-height: none; opacity: 1;
+  /* Отрицательный отступ с компенсацией: overflow:hidden нужен для анимации
+     высоты, но он срезал узлы на линейке — они лежат левее края блока.
+     Теперь блок шире на 6px влево, текст на месте, кружки целые. */
+  margin-left: -6px; padding-left: 6px;
   transition: max-height .5s cubic-bezier(.22,1,.36,1), opacity .32s ease .08s;
 }
 .derivation.collapsed .deriv-body { max-height: 0; opacity: 0; margin: 0; }
@@ -2194,9 +2213,9 @@ html.arriving .topic-header, html.arriving .q-card { opacity: 1; }
   content: ''; position: absolute; top: .62em; left: calc(-1.4rem - 3px);
   width: 8px; height: 8px; box-sizing: border-box;
   border: 2px solid var(--ruby); border-radius: 50%;
-  background: var(--bg); transition: background .3s ease;
+  background: var(--bg); transition: background .3s ease, transform .28s cubic-bezier(.2,1.4,.4,1);
 }
-.derivation .def-text > [data-step]:hover::before { background: var(--ruby); }
+.derivation .def-text > [data-step]:hover::before { background: var(--ruby); transform: scale(1.2); }
 
 /* вступление шагов по очереди при раскрытии */
 .derivation.lit .deriv-body > *,
@@ -2631,6 +2650,7 @@ html.arriving .topic-header, html.arriving .q-card { opacity: 1; }
   #ticketBody { max-width: 76ch; }
   .tk-nav { max-width: 76ch; }
   .tk-actions { max-width: 76ch; }
+  .ra-scroll { max-height: none !important; }
 
   /* ── квизы и база — та же читаемая колонка ── */
   .qz-track, .qz-again, .qz-lead, .dq-tabs, .dq-locknote { max-width: 76ch; }
@@ -2645,6 +2665,63 @@ html.arriving .topic-header, html.arriving .q-card { opacity: 1; }
   #page-practice .prax-sub { top: 64px; }
   .prax-solve { grid-template-columns: minmax(0, 1fr) minmax(0, 44%); gap: 34px; }
   .prax-solve > .prax-figwrap { top: 92px; }
+}
+
+/* ══ CANVAS-ВЫКЛАДКИ: единый вид с остальным сайтом ══
+   Было: скругления 8px, серые кнопки-пилюли, подписи по центру — остатки старого дизайна.
+   Меняем только оформление; canvas и скрипты анимаций не тронуты. */
+.ra60-frame, .ra62-frame, .ra63-frame, .ra75-frame, .ra91-frame, .ra-frame {
+  padding: .7rem !important; border-radius: 0 !important;
+  border: 1px solid var(--border) !important; background: var(--bg-soft) !important;
+}
+.ra60-cap, .ra62-cap, .ra63-cap, .ra75-cap, .ra91-cap, .ra-cap {
+  margin-top: .7rem !important; text-align: left !important;
+  font-size: .72rem !important; font-weight: 600 !important;
+  letter-spacing: .12em !important; text-transform: uppercase !important;
+  color: var(--ruby) !important; text-wrap: pretty;
+}
+/* дорожка прогресса — волосяная линия, а не пилюля */
+.ra60-track, .ra62-track, .ra63-track, .ra75-track, .ra91-track, .ra-track {
+  height: 2px !important; border-radius: 0 !important;
+  background: var(--border) !important; margin: 14px 0 0 !important;
+}
+.ra60-fill, .ra62-fill, .ra63-fill, .ra75-fill, .ra91-fill, .ra-fill {
+  border-radius: 0 !important; background: var(--ruby) !important;
+}
+.ra60-ctl, .ra62-ctl, .ra63-ctl, .ra75-ctl, .ra91-ctl, .ra-ctl {
+  gap: 8px !important; margin: 12px 0 0 !important;
+}
+.ra60-btn, .ra62-btn, .ra63-btn, .ra75-btn, .ra91-btn, .ra-btn {
+  min-height: 44px !important; padding: 11px 15px !important;
+  border-radius: 0 !important; border: 1px solid var(--border) !important;
+  background: transparent !important; color: var(--ink-soft) !important;
+  font-family: 'Golos Text', sans-serif !important;
+  font-size: .82rem !important; font-weight: 500 !important;
+  transition: color .22s ease, border-color .22s ease !important;
+  -webkit-tap-highlight-color: transparent;
+}
+.ra60-btn:hover:not(:disabled), .ra62-btn:hover:not(:disabled), .ra63-btn:hover:not(:disabled),
+.ra75-btn:hover:not(:disabled), .ra91-btn:hover:not(:disabled), .ra-btn:hover:not(:disabled) {
+  color: var(--ruby) !important; border-color: var(--ruby) !important; background: transparent !important;
+}
+.ra60-primary, .ra62-primary, .ra63-primary, .ra75-primary, .ra91-primary, .ra-primary {
+  background: var(--ruby) !important; border-color: var(--ruby) !important; color: #fff !important;
+}
+.ra60-primary:hover:not(:disabled), .ra62-primary:hover:not(:disabled), .ra63-primary:hover:not(:disabled),
+.ra75-primary:hover:not(:disabled), .ra91-primary:hover:not(:disabled), .ra-primary:hover:not(:disabled) {
+  background: var(--ruby-deep) !important; border-color: var(--ruby-deep) !important;
+}
+.ra60-phase, .ra62-phase, .ra63-phase, .ra75-phase, .ra91-phase, .ra-phase {
+  font-size: .68rem !important; letter-spacing: .1em !important;
+  text-transform: uppercase !important; color: var(--ink-mute) !important;
+}
+/* строки вывода: активная — с узлом на полях, как в обычных выкладках */
+.ra-scroll { border-top: 1px solid var(--border) !important; }
+.ra-ln { position: relative; padding-left: 1.15rem; }
+.ra-ln.ra-hot::before {
+  content: ''; position: absolute; left: 0; top: .78em;
+  width: 8px; height: 8px; box-sizing: border-box; border-radius: 50%;
+  border: 2px solid var(--ruby); background: var(--ruby);
 }
 
 /* ── Шире 1180px в шапке хватает места: вкладки встают рядом с «Семестры»

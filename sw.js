@@ -1,7 +1,8 @@
 /* MoziHelper — офлайн-режим.
-   Страницы отдаются из кэша сразу и обновляются в фоне (stale-while-revalidate),
-   PDF и шрифты кладём в кэш при первом обращении — чтобы работали без сети. */
-const CACHE = 'mozi-v4';
+   Страницы (HTML) берём СНАЧАЛА ИЗ СЕТИ и лишь при её отсутствии из кэша:
+   при cache-first обновлённый сайт не доезжал до тех, кто уже заходил.
+   Всё остальное (шрифты, PDF, MathJax, иконки) — сначала из кэша, это неизменяемые файлы. */
+const CACHE = 'mozi-v11';
 const SHELL = [
   './',
   './index.html',
@@ -41,6 +42,27 @@ self.addEventListener('fetch', function(e){
   var url = new URL(req.url);
   if (url.protocol !== 'http:' && url.protocol !== 'https:') return;
 
+  var isPage = req.mode === 'navigate'
+            || req.destination === 'document'
+            || /\.html$/i.test(url.pathname);
+
+  if (isPage) {
+    e.respondWith(
+      fetch(req).then(function(res){
+        if (res && res.ok) {
+          var copy = res.clone();
+          caches.open(CACHE).then(function(c){ c.put(req, copy).catch(function(){}); });
+        }
+        return res;
+      }).catch(function(){
+        return caches.match(req).then(function(hit){
+          return hit || caches.match('./index.html');
+        });
+      })
+    );
+    return;
+  }
+
   e.respondWith(
     caches.open(CACHE).then(function(c){
       return c.match(req).then(function(hit){
@@ -48,7 +70,6 @@ self.addEventListener('fetch', function(e){
           if (res && (res.ok || res.type === 'opaque')) c.put(req, res.clone()).catch(function(){});
           return res;
         }).catch(function(){ return hit; });
-        /* шрифты и PDF — сразу из кэша, если есть; страницы — тоже, но обновляем в фоне */
         return hit || net;
       });
     })
