@@ -19,7 +19,7 @@
   } catch (e) {}
 })();
 </script>
-<script>(function(){var h=document.documentElement;try{h.setAttribute('data-theme',localStorage.getItem('la_theme')||'dusk');h.setAttribute('data-motion',localStorage.getItem('la_motion')||'full');if(sessionStorage.getItem('la_sweep')){sessionStorage.removeItem('la_sweep');h.classList.add('arriving','no-intro');}}catch(e){h.setAttribute('data-theme','dusk');h.setAttribute('data-motion','full');}})();</script>
+<script>(function(){var h=document.documentElement;try{h.setAttribute('data-theme',localStorage.getItem('la_theme')||'dusk');h.setAttribute('data-motion',localStorage.getItem('la_motion')||'full');if(sessionStorage.getItem('la_sweep')){sessionStorage.removeItem('la_sweep');h.classList.add('arriving','no-intro');}else{var nv=(performance.getEntriesByType&&performance.getEntriesByType('navigation')[0])||{};if(nv.type==='reload'||nv.type==='back_forward')h.classList.add('no-intro');}}catch(e){h.setAttribute('data-theme','dusk');h.setAttribute('data-motion','full');}})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;700&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
@@ -180,6 +180,27 @@ body.leaving .flood{transform:none;transition:transform .42s cubic-bezier(.66,0,
 [data-motion="calm"] *{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important}
 [data-motion="calm"] .page-title,[data-motion="calm"] .page-sub{opacity:1;transform:none}
 [data-motion="calm"] .reveal{opacity:1;transform:none}
+
+/* ── iOS/плавность: под no-intro не переигрываем ни одну входную анимацию ──
+   Раньше перечислялись отдельные классы и часть из них забывали (.start-eyebrow,
+   .start-divider, .start-stats), поэтому на перезагрузке текст «проявлялся» заново
+   поверх шторки. Теперь правило универсальное. */
+html.no-intro *:not(.curtain):not(.curtain *){
+  animation:none!important;
+}
+html.no-intro [style*="opacity"],
+html.no-intro .start-greeting,html.no-intro .start-status,html.no-intro .start-eyebrow,
+html.no-intro .start-title,html.no-intro .start-message,html.no-intro .start-divider,
+html.no-intro .start-cta-group,html.no-intro .start-stats,html.no-intro .stats,
+html.no-intro .search-wrap.start-search,html.no-intro .topic-header,html.no-intro .q-card,
+html.no-intro .top,html.no-intro .kicker,html.no-intro .pick,
+html.no-intro .tailer,html.no-intro .resume.on{
+  opacity:1!important;
+}
+
+/* ── iOS: страховка от горизонтального сдвига ── */
+html,body{max-width:100%;overflow-x:hidden;}
+body{-webkit-text-size-adjust:100%;}
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#0c0c0e" media="(prefers-color-scheme: dark)">

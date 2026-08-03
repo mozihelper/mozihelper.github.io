@@ -19,7 +19,7 @@
   } catch (e) {}
 })();
 </script>
-<script>(function(){var h=document.documentElement;try{h.setAttribute('data-theme',localStorage.getItem('la_theme')||'dusk');h.setAttribute('data-motion',localStorage.getItem('la_motion')||'full');if(sessionStorage.getItem('la_sweep')){sessionStorage.removeItem('la_sweep');h.classList.add('arriving','no-intro');}}catch(e){h.setAttribute('data-theme','dusk');h.setAttribute('data-motion','full');}})();</script>
+<script>(function(){var h=document.documentElement;try{h.setAttribute('data-theme',localStorage.getItem('la_theme')||'dusk');h.setAttribute('data-motion',localStorage.getItem('la_motion')||'full');if(sessionStorage.getItem('la_sweep')){sessionStorage.removeItem('la_sweep');h.classList.add('arriving','no-intro');}else{var nv=(performance.getEntriesByType&&performance.getEntriesByType('navigation')[0])||{};if(nv.type==='reload'||nv.type==='back_forward')h.classList.add('no-intro');}}catch(e){h.setAttribute('data-theme','dusk');h.setAttribute('data-motion','full');}})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
@@ -234,6 +234,31 @@ html.arriving *,html.arriving *::before,html.arriving *::after{animation:none!im
 html.sweeping,html.sweeping body{transition:none!important}
 html.no-intro .top,html.no-intro .kicker,html.no-intro .pick,
 html.no-intro .tailer,html.no-intro .resume.on{opacity:1!important;animation:none!important}
+
+/* ── iOS/плавность: под no-intro не переигрываем ни одну входную анимацию ──
+   Раньше перечислялись отдельные классы и часть из них забывали (.start-eyebrow,
+   .start-divider, .start-stats), поэтому на перезагрузке текст «проявлялся» заново
+   поверх шторки. Теперь правило универсальное. */
+html.no-intro *:not(.curtain):not(.curtain *){
+  animation:none!important;
+}
+html.no-intro [style*="opacity"],
+html.no-intro .start-greeting,html.no-intro .start-status,html.no-intro .start-eyebrow,
+html.no-intro .start-title,html.no-intro .start-message,html.no-intro .start-divider,
+html.no-intro .start-cta-group,html.no-intro .start-stats,html.no-intro .stats,
+html.no-intro .search-wrap.start-search,html.no-intro .topic-header,html.no-intro .q-card,
+html.no-intro .top,html.no-intro .kicker,html.no-intro .pick,
+html.no-intro .tailer,html.no-intro .resume.on{
+  opacity:1!important;
+}
+
+/* ── iOS: надпись появляется уже посчитанной, без скачка ── */
+.wm{transition:opacity .28s ease}
+html.no-intro .wm{transition:none}
+/* ── iOS: страховка от горизонтального сдвига/качания ──
+   у Safari при 100vw и safe-area иногда появляется лишний пиксель прокрутки. */
+html,body{max-width:100%;overflow-x:hidden;}
+body{-webkit-text-size-adjust:100%;}
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#0c0c0e" media="(prefers-color-scheme: dark)">
@@ -325,9 +350,29 @@ html.no-intro .tailer,html.no-intro .resume.on{opacity:1!important;animation:non
   }
   fit();
   requestAnimationFrame(fit);
-  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);
-  addEventListener('resize',function(){clearTimeout(t);t=setTimeout(fit,90);},{passive:true});
-  addEventListener('orientationchange',function(){setTimeout(fit,220);});
+  /* Safari на iPhone отдаёт fonts.ready раньше, чем реально применит Unbounded:
+     размер считался по системному шрифту и надпись потом «съезжала».
+     Поэтому ждём именно загрузку нужного начертания и пересчитываем. */
+  if(document.fonts){
+    if(document.fonts.ready)document.fonts.ready.then(function(){fit();setTimeout(fit,60);});
+    try{
+      Promise.all([
+        document.fonts.load('400 100px Unbounded'),
+        document.fonts.load('700 100px Unbounded')
+      ]).then(function(){fit();requestAnimationFrame(fit);}).catch(function(){});
+    }catch(e){}
+  }
+  /* На iOS панели браузера меняют ВЫСОТУ viewport при скролле — ширина та же.
+     Пересчитываем только когда изменилась ширина, иначе логотип дёргается. */
+  var lastW = window.visualViewport ? Math.round(window.visualViewport.width) : window.innerWidth;
+  addEventListener('resize',function(){
+    var w = window.visualViewport ? Math.round(window.visualViewport.width) : window.innerWidth;
+    if(w === lastW) return;
+    lastW = w;
+    clearTimeout(t);t=setTimeout(fit,90);
+  },{passive:true});
+  addEventListener('orientationchange',function(){setTimeout(fit,220);setTimeout(fit,450);});
+  addEventListener('pageshow',function(e){if(e.persisted)setTimeout(fit,50);});
 })();
 
 function calm(){return document.documentElement.getAttribute('data-motion')==='calm';}
