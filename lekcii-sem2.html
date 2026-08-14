@@ -385,6 +385,39 @@ if ('serviceWorker' in navigator) {
   addEventListener('pageshow', resetCurtain);
   addEventListener('popstate', resetCurtain);
 })();
+
+/* Переход между страницами: шторка на новой странице уезжает, как только контент
+   готов к показу, а не по фиксированному таймеру. Раньше стояла задержка 2.4 с —
+   быстрый переход выглядел «залипшим», медленный давал рывок. */
+(function () {
+  var h = document.documentElement;
+  if (!h.classList.contains('arriving')) return;
+  var done = false;
+  function reveal() {
+    if (done) return;
+    done = true;
+    if (typeof finishArrival === 'function') { finishArrival(); return; }
+    var c = document.getElementById('curtain');
+    if (!c) { h.classList.remove('arriving'); return; }
+    c.classList.add('out');
+    setTimeout(function () {
+      c.style.transition = 'none';
+      c.classList.remove('up', 'out');
+      h.classList.remove('sweeping', 'arriving');
+      requestAnimationFrame(function () { c.style.transition = ''; });
+    }, 480);
+  }
+  /* Ждём отрисовки: два кадра после готовности документа, но не мельче 120 мс,
+     чтобы шторка не моргнула, и не дольше 2.5 с — страховка на медленной сети. */
+  function whenReady() {
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () { setTimeout(reveal, 120); });
+    });
+  }
+  if (document.readyState === 'complete') whenReady();
+  else addEventListener('load', whenReady);
+  setTimeout(reveal, 2500);
+})();
 </script>
 <!-- Счётчик визитов -->
 <script>

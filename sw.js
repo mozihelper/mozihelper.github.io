@@ -1,8 +1,9 @@
-/* MoziHelper — офлайн-режим.
-   Страницы (HTML) берём СНАЧАЛА ИЗ СЕТИ и лишь при её отсутствии из кэша:
-   при cache-first обновлённый сайт не доезжал до тех, кто уже заходил.
-   Всё остальное (шрифты, PDF, MathJax, иконки) — сначала из кэша, это неизменяемые файлы. */
-const CACHE = 'mozi-v15';
+/* MoziHelper — офлайн-режим и быстрые переходы.
+   Страницы (HTML): отдаём СРАЗУ ИЗ КЭША и параллельно тянем свежую версию в фоне
+   (stale-while-revalidate). Переход между страницами становится мгновенным —
+   без ожидания сети, — а обновление сайта доезжает со следующего открытия.
+   Всё остальное (шрифты, PDF, MathJax, иконки) — из кэша, это неизменяемые файлы. */
+const CACHE = 'mozi-v16';
 const SHELL = [
   './',
   './index.html',
@@ -48,15 +49,18 @@ self.addEventListener('fetch', function(e){
 
   if (isPage) {
     e.respondWith(
-      fetch(req).then(function(res){
-        if (res && res.ok) {
-          var copy = res.clone();
-          caches.open(CACHE).then(function(c){ c.put(req, copy).catch(function(){}); });
-        }
-        return res;
-      }).catch(function(){
-        return caches.match(req).then(function(hit){
-          return hit || caches.match('./index.html');
+      caches.open(CACHE).then(function(c){
+        return c.match(req).then(function(hit){
+          /* Фоновое обновление: страница в кэше заменяется свежей к следующему заходу. */
+          var net = fetch(req).then(function(res){
+            if (res && res.ok) c.put(req, res.clone()).catch(function(){});
+            return res;
+          }).catch(function(){ return null; });
+          /* Есть в кэше — отдаём немедленно, сеть не ждём. */
+          if (hit) { e.waitUntil(net); return hit; }
+          return net.then(function(res){
+            return res || caches.match('./index.html');
+          });
         });
       })
     );
