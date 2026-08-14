@@ -1798,11 +1798,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 /* ── Scroll-reveal карточек вопросов ── */
 .q-card.reveal { opacity:0; transform:translateY(20px); transition:opacity .5s ease, transform .5s cubic-bezier(.22,1,.36,1); }
 .q-card.reveal.in { opacity:1; transform:none; }
-/* ── Плавная смена темы: круговая волна от кнопки ── */
-::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal;}
-::view-transition-old(root){z-index:1;}
-::view-transition-new(root){z-index:2;animation:waveReveal .55s cubic-bezier(.4,0,.2,1) forwards;}
-@keyframes waveReveal{from{clip-path:circle(0 at var(--wave-x,100%) var(--wave-y,0));}to{clip-path:circle(var(--wave-r,150vmax) at var(--wave-x,100%) var(--wave-y,0));}}
+}
 
 .derivation.ra-wrap{border:none;padding:0;background:none;margin:1rem 0;}
 .derivation.ra-wrap>.derivation-title{margin-bottom:0;}
@@ -1853,7 +1849,6 @@ a { color: var(--ruby); }
    телефон пересчитывал размытие каждый кадр прокрутки. На телефоне без них. */
 body::after { display: none; }
 .topbar, .tabbar { backdrop-filter: none; -webkit-backdrop-filter: none; background: var(--bg); }
-.curtain { will-change: auto; }
 html.sweeping .curtain, html.arriving .curtain { will-change: transform; }
 
 /* сайдбар выключен полностью */

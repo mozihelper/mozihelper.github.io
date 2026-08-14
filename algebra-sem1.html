@@ -1800,11 +1800,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 /* ── Scroll-reveal карточек вопросов ── */
 .q-card.reveal { opacity:0; transform:translateY(20px); transition:opacity .5s ease, transform .5s cubic-bezier(.22,1,.36,1); }
 .q-card.reveal.in { opacity:1; transform:none; }
-/* ── Плавная смена темы: круговая волна от кнопки ── */
-::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal;}
-::view-transition-old(root){z-index:1;}
-::view-transition-new(root){z-index:2;animation:none;}
-@keyframes waveReveal{from{clip-path:circle(0 at var(--wave-x,100%) var(--wave-y,0));}to{clip-path:circle(var(--wave-r,150vmax) at var(--wave-x,100%) var(--wave-y,0));}}
+}
 
 /* ── Рисунки к примерам операторов (вопрос 125) ── */
 .op-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.6rem 1.8rem;margin-top:1rem;}
@@ -1890,17 +1886,8 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 .topic-eyebrow { letter-spacing: .2em; text-transform: uppercase; font-weight: 600; color: var(--ruby); }
 
 /* шторка перехода — та же, что на остальных страницах */
-.curtain {
-  position: fixed; inset: 0; z-index: 98; background: var(--flood);
-  transform: translate3d(0, 100%, 0); pointer-events: none;
-  will-change: transform; contain: strict;
-}
 .curtain.up  { transform: translate3d(0, 0, 0);     transition: transform .42s cubic-bezier(.65,0,.25,1); }
 .curtain.out { transform: translate3d(0, -100%, 0); transition: transform .5s cubic-bezier(.35,0,.15,1); }
-html.arriving .curtain {
-  transform: translate3d(0,0,0);
-  animation: curtainAway .5s cubic-bezier(.32,0,.2,1) 2.4s forwards;
-}
 html.arriving .curtain.out {
   transform: translate3d(0,-100%,0);
   transition: transform .46s cubic-bezier(.32,0,.2,1);
@@ -1923,7 +1910,6 @@ a { color: var(--ruby); }
    телефон пересчитывал размытие каждый кадр прокрутки. На телефоне без них. */
 body::after { display: none; }
 .topbar, .tabbar { backdrop-filter: none; -webkit-backdrop-filter: none; background: var(--bg); }
-.curtain { will-change: auto; }
 html.sweeping .curtain, html.arriving .curtain { will-change: transform; }
 
 /* сайдбар выключен полностью */
