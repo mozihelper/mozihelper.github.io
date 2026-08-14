@@ -400,5 +400,191 @@ if ('serviceWorker' in navigator) {
   } catch (e) {}
 })();
 </script>
+<script>
+/* ═══ Навигация без перезагрузки (Этап 1) ═════════════════════════
+   Лёгкие страницы (главная, лекции, ссылки, литература) переключаются
+   как экраны приложения: документ не перезагружается, шторка идёт одним
+   непрерывным движением — так же, как при смене темы.
+   Тяжёлые страницы (algebra-sem1/sem2) пока открываются обычным способом. */
+(function () {
+  var H = document.documentElement;
+  var LIGHT = ['index.html', 'links.html', 'literatura.html',
+               'lekcii-sem1.html', 'lekcii-sem2.html'];
+
+  /* Уникальные скрипты уже выполненных страниц — чтобы не выполнять повторно
+     общие блоки (тема, офлайн-режим, счётчик) и не плодить обработчики. */
+  var executed = Object.create(null);
+  var busy = false;
+
+  function fileOf(href) {
+    var s = String(href).split('#')[0].split('?')[0];
+    var i = s.lastIndexOf('/');
+    return (i >= 0 ? s.slice(i + 1) : s) || 'index.html';
+  }
+  function isLight(href) { return LIGHT.indexOf(fileOf(href)) !== -1; }
+  function calmMode() { return H.getAttribute('data-motion') === 'calm'; }
+  function supported() {
+    return !!(window.fetch && window.DOMParser && history.pushState &&
+              location.protocol !== 'file:');
+  }
+
+  function hash(str) {                       /* короткая подпись содержимого */
+    var h = 5381, i = str.length;
+    while (i) h = (h * 33 ^ str.charCodeAt(--i)) >>> 0;
+    return h.toString(36);
+  }
+  function rememberCurrentScripts() {
+    var list = document.querySelectorAll('script:not([src])');
+    for (var i = 0; i < list.length; i++) executed[hash(list[i].textContent)] = 1;
+  }
+  rememberCurrentScripts();
+
+  /* Помечаем стили стартовой страницы, чтобы при переходе они заменялись,
+     а не накапливались поверх новых. */
+  (function () {
+    var own = document.head.querySelectorAll('style');
+    for (var i = 0; i < own.length; i++) own[i].setAttribute('data-page-style', '1');
+  })();
+
+  function swapStyles(doc) {
+    var oldTags = document.head.querySelectorAll('style[data-page-style]');
+    var fresh = doc.head.querySelectorAll('style');
+    if (!fresh.length) return;
+    var tag = document.createElement('style');
+    tag.setAttribute('data-page-style', '1');
+    var css = '';
+    for (var i = 0; i < fresh.length; i++) css += fresh[i].textContent + '\n';
+    tag.textContent = css;
+    document.head.appendChild(tag);
+    for (var k = 0; k < oldTags.length; k++) oldTags[k].remove();
+  }
+
+  function runPageScripts(doc) {
+    var list = doc.querySelectorAll('script:not([src])');
+    for (var i = 0; i < list.length; i++) {
+      var code = list[i].textContent;
+      var key = hash(code);
+      if (executed[key]) continue;           /* общий блок — уже работает */
+      executed[key] = 1;
+      var tag = document.createElement('script');
+      tag.textContent = code;
+      document.body.appendChild(tag);
+      tag.remove();
+    }
+  }
+
+  function countVisit(path) {
+    try {
+      fetch("https://mozihelper-counter.mozihelper.workers.dev/hit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ p: path }),
+        keepalive: true, cache: "no-store"
+      }).catch(function () {});
+    } catch (e) {}
+  }
+
+  /* Подменяем содержимое страницы, сохраняя служебные слои (шторку). */
+  function applyDocument(doc, href) {
+    document.title = doc.title || document.title;
+    swapStyles(doc);
+
+    var keep = [];
+    var curtain = document.getElementById('curtain');
+    var flood = document.querySelector('.flood');
+    if (flood) keep.push(flood);
+    if (curtain) keep.push(curtain);
+
+    var kids = Array.prototype.slice.call(document.body.children);
+    for (var i = 0; i < kids.length; i++) {
+      if (keep.indexOf(kids[i]) === -1) kids[i].remove();
+    }
+    var fresh = Array.prototype.slice.call(doc.body.children);
+    for (var j = 0; j < fresh.length; j++) {
+      var node = fresh[j];
+      if (node.id === 'curtain' || node.classList.contains('flood')) continue;
+      if (node.tagName === 'SCRIPT') continue;          /* скрипты — отдельно */
+      document.body.insertBefore(document.importNode(node, true), curtain || null);
+    }
+    runPageScripts(doc);
+    installHook();          /* скрипт новой страницы заново объявляет leavePage — перехватываем снова */
+    scrollTo(0, 0);
+    countVisit(new URL(href, location.href).pathname);
+  }
+
+  function go(href, push) {
+    if (busy) return;
+    busy = true;
+    var c = document.getElementById('curtain');
+
+    function finish(doc) {
+      applyDocument(doc, href);
+      if (push) history.pushState({ mozi: 1 }, '', href);
+      if (!c) { busy = false; return; }
+      c.classList.add('out');
+      setTimeout(function () {
+        c.style.transition = 'none';
+        c.classList.remove('up', 'out');
+        H.classList.remove('sweeping');
+        requestAnimationFrame(function () { c.style.transition = ''; busy = false; });
+      }, 480);
+    }
+
+    var load = fetch(href, { cache: 'default' })
+      .then(function (r) { return r.text(); })
+      .then(function (html) { return new DOMParser().parseFromString(html, 'text/html'); });
+
+    if (!c || calmMode()) {                    /* без анимации — сразу */
+      load.then(finish).catch(function () { busy = false; location.href = href; });
+      return;
+    }
+
+    H.classList.add('sweeping');
+    c.classList.remove('out');
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () { c.classList.add('up'); });
+    });
+    /* Шторка закрывает экран за 420 мс — к этому моменту документ обычно готов. */
+    Promise.all([load, new Promise(function (res) { setTimeout(res, 430); })])
+      .then(function (r) { finish(r[0]); })
+      .catch(function () { busy = false; location.href = href; });
+  }
+
+  if (!supported()) return;
+
+  /* Встраиваемся в существующий переход: лёгкие страницы — без перезагрузки,
+     тяжёлые — прежним способом. Хук ставится заново после каждой подмены,
+     потому что скрипт новой страницы объявляет свою функцию leavePage. */
+  function installHook() {
+    var native = window.leavePage;
+    if (native && native.__mozi) return;
+    var hook = function (href) {
+      if (isLight(href)) return go(href, true);
+      if (typeof native === 'function') return native(href);
+      location.href = href;
+    };
+    hook.__mozi = 1;
+    window.leavePage = hook;
+  }
+  installHook();
+
+  /* Обычные ссылки на лёгкие страницы — тоже без перезагрузки. */
+  document.addEventListener('click', function (e) {
+    if (e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+    if (!a) return;
+    var href = a.getAttribute('href');
+    if (!href || href.charAt(0) === '#' || a.target === '_blank' || a.hasAttribute('download')) return;
+    if (/^(https?:)?\/\//i.test(href) || /^(mailto|tel):/i.test(href)) return;
+    if (!isLight(href)) return;
+    e.preventDefault();
+    go(href, true);
+  });
+
+  addEventListener('popstate', function () {
+    if (isLight(location.pathname)) go(location.pathname + location.search, false);
+  });
+})();
+</script>
 </body>
 </html>
