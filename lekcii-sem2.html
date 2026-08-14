@@ -4,21 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>MoziHelper — Лекции 2 семестр</title>
-<!-- MoziHelper counter -->
-<script>
-(function () {
-  try {
-    var ENDPOINT = "https://mozihelper-counter.mozihelper.workers.dev/hit";
-    fetch(ENDPOINT, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ p: location.pathname }),
-      keepalive: true,
-      cache: "no-store"
-    }).catch(function () {});
-  } catch (e) {}
-})();
-</script>
 <script>(function(){var h=document.documentElement;try{h.setAttribute('data-theme',localStorage.getItem('la_theme')||'dusk');h.setAttribute('data-motion',localStorage.getItem('la_motion')||'full');if(sessionStorage.getItem('la_sweep')){sessionStorage.removeItem('la_sweep');h.classList.add('arriving','no-intro');}else{var nv=(performance.getEntriesByType&&performance.getEntriesByType('navigation')[0])||{};if(nv.type==='reload'||nv.type==='back_forward')h.classList.add('no-intro');}}catch(e){h.setAttribute('data-theme','dusk');h.setAttribute('data-motion','full');}})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -181,32 +166,22 @@ body.leaving .flood{transform:none;transition:transform .42s cubic-bezier(.66,0,
 [data-motion="calm"] .page-title,[data-motion="calm"] .page-sub{opacity:1;transform:none}
 [data-motion="calm"] .reveal{opacity:1;transform:none}
 
-/* ── iOS/плавность: под no-intro не переигрываем ни одну входную анимацию ──
-   Раньше перечислялись отдельные классы и часть из них забывали (.start-eyebrow,
-   .start-divider, .start-stats), поэтому на перезагрузке текст «проявлялся» заново
-   поверх шторки. Теперь правило универсальное. */
-html.no-intro *:not(.curtain):not(.curtain *){
-  animation:none!important;
-}
-html.no-intro [style*="opacity"],
+/* ═══ Правки для iOS/Safari ═══════════════════════════════════
+   1. Запрет автоувеличения текста: Safari «раздувает» шрифт, из-за чего
+      контейнер становится шире экрана и содержимое уезжает вбок.
+   2. Ничто не может быть шире экрана — страховка от горизонтального сдвига.
+   3. Под .no-intro не переигрывается ни одна анимация появления
+      (шторку не трогаем — она должна доиграть свой уход). */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;}
+html,body{max-width:100%;overflow-x:hidden;}
+
+html.no-intro *:not(.curtain):not(.curtain *){animation:none!important;}
 html.no-intro .start-greeting,html.no-intro .start-status,html.no-intro .start-eyebrow,
 html.no-intro .start-title,html.no-intro .start-message,html.no-intro .start-divider,
 html.no-intro .start-cta-group,html.no-intro .start-stats,html.no-intro .stats,
 html.no-intro .search-wrap.start-search,html.no-intro .topic-header,html.no-intro .q-card,
 html.no-intro .top,html.no-intro .kicker,html.no-intro .pick,
-html.no-intro .tailer,html.no-intro .resume.on{
-  opacity:1!important;
-}
-
-/* ── iOS: страховка от горизонтального сдвига ── */
-html,body{max-width:100%;overflow-x:hidden;}
-body{-webkit-text-size-adjust:100%;}
-
-/* ── iOS: жёсткая защита от горизонтального сдвига ──
-   Safari умеет «раздувать» текст (Text Autosizing) и тогда контейнер становится
-   шире экрана: всё центрированное уезжает вправо и обрезается. */
-html{-webkit-text-size-adjust:100%!important;text-size-adjust:100%!important;}
-html,body{max-width:100%!important;overflow-x:hidden!important;}
+html.no-intro .tailer,html.no-intro .resume.on{opacity:1!important;}
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#0c0c0e" media="(prefers-color-scheme: dark)">
@@ -388,6 +363,42 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').catch(function(){});
   });
 }
+</script>
+
+<script>
+/* ═══ Правки поведения ════════════════════════════════════════
+   Возврат «назад»: страница восстанавливается из кэша браузера ровно в том
+   виде, в каком её покинули, — то есть с поднятой шторкой на весь экран
+   (отсюда сплошной оранжевый фон). DOMContentLoaded при этом не срабатывает,
+   поэтому шторку сбрасываем по pageshow. */
+(function () {
+  function resetCurtain() {
+    var c = document.getElementById('curtain');
+    var h = document.documentElement;
+    h.classList.remove('sweeping', 'arriving');
+    if (!c) return;
+    c.style.transition = 'none';
+    c.classList.remove('up', 'out');
+    c.removeAttribute('data-busy');
+    requestAnimationFrame(function () { c.style.transition = ''; });
+  }
+  addEventListener('pageshow', resetCurtain);
+  addEventListener('popstate', resetCurtain);
+})();
+</script>
+<!-- Счётчик визитов -->
+<script>
+(function () {
+  try {
+    fetch("https://mozihelper-counter.mozihelper.workers.dev/hit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ p: location.pathname }),
+      keepalive: true,
+      cache: "no-store"
+    }).catch(function () {});
+  } catch (e) {}
+})();
 </script>
 </body>
 </html>
