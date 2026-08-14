@@ -259,6 +259,17 @@ html.no-intro .wm{transition:none}
    у Safari при 100vw и safe-area иногда появляется лишний пиксель прокрутки. */
 html,body{max-width:100%;overflow-x:hidden;}
 body{-webkit-text-size-adjust:100%;}
+
+/* ── iOS: жёсткая защита от горизонтального сдвига ──
+   Safari умеет «раздувать» текст (Text Autosizing) и тогда контейнер становится
+   шире экрана: всё центрированное уезжает вправо и обрезается. */
+html{-webkit-text-size-adjust:100%!important;text-size-adjust:100%!important;}
+html,body{max-width:100%!important;overflow-x:hidden!important;}
+</style>
+/* ── iOS: контейнеры главной не шире экрана ── */
+.page,.core,.gut,.picks,.wm,.kicker,.resume{max-width:100%!important;}
+.wm{overflow:hidden;}
+.wm .i{max-width:100%;}
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#0c0c0e" media="(prefers-color-scheme: dark)">

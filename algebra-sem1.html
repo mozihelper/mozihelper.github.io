@@ -1818,7 +1818,7 @@ mjx-container[jax="SVG"]::-webkit-scrollbar-thumb {
 /* ── Плавная смена темы: круговая волна от кнопки ── */
 ::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal;}
 ::view-transition-old(root){z-index:1;}
-::view-transition-new(root){z-index:2;animation:waveReveal .55s cubic-bezier(.4,0,.2,1) forwards;}
+::view-transition-new(root){z-index:2;animation:none;}
 @keyframes waveReveal{from{clip-path:circle(0 at var(--wave-x,100%) var(--wave-y,0));}to{clip-path:circle(var(--wave-r,150vmax) at var(--wave-x,100%) var(--wave-y,0));}}
 
 /* ── Рисунки к примерам операторов (вопрос 125) ── */
@@ -2856,6 +2856,12 @@ html.no-intro .tailer,html.no-intro .resume.on{
 /* ── iOS: страховка от горизонтального сдвига ── */
 html,body{max-width:100%;overflow-x:hidden;}
 body{-webkit-text-size-adjust:100%;}
+
+/* ── iOS: жёсткая защита от горизонтального сдвига ──
+   Safari умеет «раздувать» текст (Text Autosizing) и тогда контейнер становится
+   шире экрана: всё центрированное уезжает вправо и обрезается. */
+html{-webkit-text-size-adjust:100%!important;text-size-adjust:100%!important;}
+html,body{max-width:100%!important;overflow-x:hidden!important;}
 </style>
 </head>
 <body>
@@ -9060,14 +9066,8 @@ function toggleTheme(ev){
   var next = cur === 'dusk' ? 'paper' : 'dusk';
   var x = (ev && ev.clientX) || window.innerWidth - 32;
   var y = (ev && ev.clientY) || 32;
-  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (document.startViewTransition && !reduce) {
-    var r = document.documentElement.style;
-    r.setProperty('--wave-x', x+'px'); r.setProperty('--wave-y', y+'px');
-    r.setProperty('--wave-r', Math.hypot(Math.max(x,innerWidth-x), Math.max(y,innerHeight-y))+'px');
-    document.startViewTransition(function(){ applyTheme(next); });
-    return;
-  }
+  /* Каплю (view transition) убрали: смену темы здесь показывает ШТОРКА —
+     её даёт обёртка window.toggleTheme ниже по файлу. Раньше играли обе разом. */
   applyTheme(next);
 }
 

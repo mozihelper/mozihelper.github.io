@@ -213,6 +213,12 @@ html.no-intro .tailer,html.no-intro .resume.on{
 /* ── iOS: страховка от горизонтального сдвига ── */
 html,body{max-width:100%;overflow-x:hidden;}
 body{-webkit-text-size-adjust:100%;}
+
+/* ── iOS: жёсткая защита от горизонтального сдвига ──
+   Safari умеет «раздувать» текст (Text Autosizing) и тогда контейнер становится
+   шире экрана: всё центрированное уезжает вправо и обрезается. */
+html{-webkit-text-size-adjust:100%!important;text-size-adjust:100%!important;}
+html,body{max-width:100%!important;overflow-x:hidden!important;}
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#0c0c0e" media="(prefers-color-scheme: dark)">
