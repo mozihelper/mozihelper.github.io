@@ -204,15 +204,15 @@ body.leaving .flood{transform:none;transition:transform .42s cubic-bezier(.66,0,
   position:fixed;inset:0;z-index:98;background:var(--hot);
   transform:translate3d(0,100%,0);pointer-events:none;will-change:transform;contain:strict;
 }
-.curtain.up{transform:translate3d(0,0,0);transition:transform .42s cubic-bezier(.65,0,.25,1)}
-.curtain.out{transform:translate3d(0,-100%,0);transition:transform .5s cubic-bezier(.35,0,.15,1)}
+.curtain.up{transform:translate3d(0,0,0);transition: transform .62s cubic-bezier(.65,0,.25,1)}
+.curtain.out{transform:translate3d(0,-100%,0);transition: transform .62s cubic-bezier(.35,0,.15,1)}
 
 /* ── приход под шторкой: контент уже отрисован, полотно просто уезжает ── */
 html.arriving .curtain{
   transform:translate3d(0,0,0);
   animation:curtainAway .5s cubic-bezier(.35,0,.15,1) 2.4s forwards!important;
 }
-html.arriving .curtain.out{transform:translate3d(0,-100%,0);transition:transform .5s cubic-bezier(.35,0,.15,1)!important}
+html.arriving .curtain.out{transform:translate3d(0,-100%,0);transition: transform .62s cubic-bezier(.35,0,.15,1)!important}
 /* пока полотно закрыто — на странице не движется вообще ничего */
 html.arriving *,html.arriving *::before,html.arriving *::after{animation:none!important;transition:none!important}
 @keyframes curtainAway{to{transform:translate3d(0,-100%,0)}}
@@ -241,22 +241,6 @@ html.no-intro .tailer,html.no-intro .resume.on{opacity:1!important;}
 .page,.core,.gut,.picks,.wm,.kicker,.resume{max-width:100%;}
 .wm{transition:opacity .28s ease;}
 html.no-intro .wm{transition:none;}
-
-/* ═══ Плавность перехода ══════════════════════════════════════════
-   1. Шторка идёт медленнее и с мягким разгоном — движение читается,
-      а не «проскакивает».
-   2. Содержимое новой страницы не возникает рывком, а проявляется. */
-.curtain{
-  transition:transform .62s cubic-bezier(.33,.02,.18,1)!important;
-  will-change:transform;
-}
-.curtain.out{transition:transform .72s cubic-bezier(.42,0,.14,1)!important;}
-
-.mozi-fade{opacity:0;transform:translateY(8px);}
-.mozi-fade-in{
-  opacity:1;transform:none;
-  transition:opacity .5s cubic-bezier(.2,.6,.2,1),transform .5s cubic-bezier(.2,.6,.2,1);
-}
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#0c0c0e" media="(prefers-color-scheme: dark)">
@@ -461,7 +445,7 @@ function finishArrival(){
     }
     function onEnd(e){ if(e.target===c&&e.propertyName==='transform') clear(); }
     c.addEventListener('transitionend',onEnd);
-    setTimeout(clear,1900);
+    setTimeout(clear,1600);
   });});
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',finishArrival);
@@ -514,7 +498,7 @@ if ('serviceWorker' in navigator) {
       c.classList.remove('up', 'out');
       h.classList.remove('sweeping', 'arriving');
       requestAnimationFrame(function () { c.style.transition = ''; });
-    }, 480);
+    }, 780);
   }, 2600);
 })();
 </script>
@@ -644,27 +628,12 @@ if ('serviceWorker' in navigator) {
       if (keep.indexOf(kids[i]) === -1) kids[i].remove();
     }
     var fresh = Array.prototype.slice.call(doc.body.children);
-    var added = [];
     for (var j = 0; j < fresh.length; j++) {
       var node = fresh[j];
       if (node.id === 'curtain' || node.classList.contains('flood')) continue;
       if (node.tagName === 'SCRIPT') continue;          /* скрипты — отдельно */
-      var copy = document.importNode(node, true);
-      if (copy.classList) { copy.classList.add('mozi-fade'); added.push(copy); }
-      document.body.insertBefore(copy, curtain || null);
+      document.body.insertBefore(document.importNode(node, true), curtain || null);
     }
-    /* Проявляем содержимое вместо мгновенной подстановки. */
-    requestAnimationFrame(function () {
-      requestAnimationFrame(function () {
-        for (var q = 0; q < added.length; q++) {
-          added[q].classList.remove('mozi-fade');
-          added[q].classList.add('mozi-fade-in');
-        }
-        setTimeout(function () {
-          for (var z = 0; z < added.length; z++) added[z].classList.remove('mozi-fade-in');
-        }, 700);
-      });
-    });
     runPageScripts(doc);
     installHook();          /* скрипт новой страницы заново объявляет leavePage — перехватываем снова */
     scrollTo(0, 0);
@@ -769,86 +738,56 @@ if ('serviceWorker' in navigator) {
 </script>
 
 <style>
-/* ═══ Предложение установить приложение ═══ */
-.mozi-install{
+/* ═══ Предложение установить приложение (плавающая панель, вёрстку не двигает) ═══ */
+#moziInstall{
   position:fixed;left:16px;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));
   z-index:120;display:none;gap:12px;align-items:center;
   padding:14px 16px;border-radius:16px;
   background:var(--bg-elev,#15161a);border:1px solid var(--rule,#2a2f38);
   box-shadow:0 12px 32px rgba(0,0,0,.35);
   opacity:0;transform:translateY(12px);
-  transition:opacity .4s ease,transform .4s ease;
-  font-size:.92rem;line-height:1.4;
+  transition:opacity .4s ease,transform .4s ease;font-size:.92rem;line-height:1.4;
 }
-.mozi-install.on{display:flex;opacity:1;transform:none;}
-.mozi-install b{display:block;margin-bottom:2px;}
-.mozi-install .mi-text{flex:1;color:var(--ink,#eceef2);}
-.mozi-install .mi-text span{color:var(--ink-soft,#a4abb8);font-size:.85rem;}
-.mozi-install button{
-  border:0;border-radius:10px;padding:9px 14px;font-size:.9rem;font-weight:600;
-  background:var(--hot,#ff4a24);color:var(--hot-ink,#fff);cursor:pointer;white-space:nowrap;
-}
-.mozi-install .mi-close{
-  background:transparent;color:var(--ink-mute,#687081);font-size:1.3rem;padding:4px 8px;font-weight:400;
-}
-@media (min-width:640px){.mozi-install{left:auto;right:24px;max-width:420px;}}
+#moziInstall.on{display:flex;opacity:1;transform:none;}
+#moziInstall b{display:block;margin-bottom:2px;}
+#moziInstall .mi-text{flex:1;color:var(--ink,#eceef2);}
+#moziInstall .mi-text span{color:var(--ink-soft,#a4abb8);font-size:.85rem;}
+#moziInstall button{border:0;border-radius:10px;padding:9px 14px;font-size:.9rem;font-weight:600;
+  background:var(--hot,#ff4a24);color:var(--hot-ink,#fff);cursor:pointer;white-space:nowrap;}
+#moziInstall .mi-close{background:transparent;color:var(--ink-mute,#687081);font-size:1.3rem;padding:4px 8px;font-weight:400;}
+@media (min-width:640px){#moziInstall{left:auto;right:24px;max-width:420px;}}
 </style>
-<div class="mozi-install" id="moziInstall" role="dialog" aria-label="Установить приложение">
+<div id="moziInstall" role="dialog" aria-label="Установить приложение">
   <div class="mi-text"><b>Установить MoziHelper</b><span id="miHint">Работает офлайн, открывается с домашнего экрана</span></div>
   <button id="miGo" type="button">Установить</button>
   <button class="mi-close" id="miNo" type="button" aria-label="Скрыть">&times;</button>
 </div>
 <script>
-/* Предложение установить приложение.
-   Android/Chrome: браузер сам сообщает о возможности установки — показываем кнопку.
-   iPhone: такого события нет, поэтому показываем короткую инструкцию.
-   Отказ запоминаем, чтобы не надоедать. */
+/* Android: браузер сам сообщает о возможности установки. iPhone такого события
+   не даёт, поэтому там показываем короткую инструкцию. Отказ запоминается. */
 (function () {
   var box = document.getElementById('moziInstall');
   if (!box) return;
-  var goBtn = document.getElementById('miGo');
-  var noBtn = document.getElementById('miNo');
-  var hint = document.getElementById('miHint');
-  var deferred = null;
-
-  function hidden() {
-    try { return localStorage.getItem('mozi_install_off') === '1'; } catch (e) { return false; }
-  }
-  function installed() {
-    return matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
-  }
-  function show() {
-    if (hidden() || installed()) return;
-    box.classList.add('on');
-  }
-  function hide(forever) {
-    box.classList.remove('on');
-    if (forever) { try { localStorage.setItem('mozi_install_off', '1'); } catch (e) {} }
-  }
-
-  addEventListener('beforeinstallprompt', function (e) {
-    e.preventDefault();
-    deferred = e;
-    setTimeout(show, 2500);
-  });
-
-  var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
-              (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-  if (isIOS && !installed()) {
+  var goBtn = document.getElementById('miGo'), noBtn = document.getElementById('miNo'),
+      hint = document.getElementById('miHint'), deferred = null;
+  function off(){ try { return localStorage.getItem('mozi_install_off') === '1'; } catch(e){ return false; } }
+  function inApp(){ return matchMedia('(display-mode: standalone)').matches || navigator.standalone === true; }
+  function show(){ if (!off() && !inApp()) box.classList.add('on'); }
+  function hide(save){ box.classList.remove('on');
+    if (save) { try { localStorage.setItem('mozi_install_off','1'); } catch(e){} } }
+  addEventListener('beforeinstallprompt', function(e){ e.preventDefault(); deferred = e; setTimeout(show, 2500); });
+  var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+            (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  if (iOS && !inApp()) {
     hint.textContent = 'Нажмите «Поделиться», затем «На экран «Домой»»';
     goBtn.textContent = 'Понятно';
     setTimeout(show, 3000);
   }
-
-  goBtn.addEventListener('click', function () {
-    if (deferred) {
-      deferred.prompt();
-      deferred.userChoice.then(function () { deferred = null; hide(true); });
-    } else {
-      hide(true);
-    }
+  goBtn.addEventListener('click', function(){
+    if (deferred) { deferred.prompt(); deferred.userChoice.then(function(){ deferred = null; hide(true); }); }
+    else hide(true);
   });
-  noBtn.addEventListener('click', function () { hide(true); });
+  noBtn.addEventListener('click', function(){ hide(true); });
 })();
 </script>
 </body>
