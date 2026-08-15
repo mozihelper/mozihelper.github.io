@@ -8481,6 +8481,22 @@ html.no-intro .tailer,html.no-intro .resume.on{opacity:1!important;}
   contain-intrinsic-size:auto 96px;
 }
 .topic-page:not(.active){content-visibility:hidden;}
+
+/* ═══ Плавность перехода ══════════════════════════════════════════
+   1. Шторка идёт медленнее и с мягким разгоном — движение читается,
+      а не «проскакивает».
+   2. Содержимое новой страницы не возникает рывком, а проявляется. */
+.curtain{
+  transition:transform .62s cubic-bezier(.33,.02,.18,1)!important;
+  will-change:transform;
+}
+.curtain.out{transition:transform .72s cubic-bezier(.42,0,.14,1)!important;}
+
+.mozi-fade{opacity:0;transform:translateY(8px);}
+.mozi-fade-in{
+  opacity:1;transform:none;
+  transition:opacity .5s cubic-bezier(.2,.6,.2,1),transform .5s cubic-bezier(.2,.6,.2,1);
+}
 </style>
 
     <div class="thm-box"><div class="thm-label">Теорема</div><div class="def-text">
@@ -33977,7 +33993,7 @@ else{window.addEventListener("resize",function(){if(cv.clientWidth>0){fit();pain
         }
         function onEnd(e){ if (e.target === c && e.propertyName === 'transform') clear(); }
         c.addEventListener('transitionend', onEnd);
-        setTimeout(clear, 1600);          /* страховка, если событие не придёт */
+        setTimeout(clear, 1900);          /* страховка, если событие не придёт */
       }); });
     };
     start();
@@ -34892,12 +34908,27 @@ if ('serviceWorker' in navigator) {
       if (keep.indexOf(kids[i]) === -1) kids[i].remove();
     }
     var fresh = Array.prototype.slice.call(doc.body.children);
+    var added = [];
     for (var j = 0; j < fresh.length; j++) {
       var node = fresh[j];
       if (node.id === 'curtain' || node.classList.contains('flood')) continue;
       if (node.tagName === 'SCRIPT') continue;          /* скрипты — отдельно */
-      document.body.insertBefore(document.importNode(node, true), curtain || null);
+      var copy = document.importNode(node, true);
+      if (copy.classList) { copy.classList.add('mozi-fade'); added.push(copy); }
+      document.body.insertBefore(copy, curtain || null);
     }
+    /* Проявляем содержимое вместо мгновенной подстановки. */
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        for (var q = 0; q < added.length; q++) {
+          added[q].classList.remove('mozi-fade');
+          added[q].classList.add('mozi-fade-in');
+        }
+        setTimeout(function () {
+          for (var z = 0; z < added.length; z++) added[z].classList.remove('mozi-fade-in');
+        }, 700);
+      });
+    });
     runPageScripts(doc);
     installHook();
     scrollTo(0, 0);
@@ -34921,7 +34952,7 @@ if ('serviceWorker' in navigator) {
             c.classList.remove('up', 'out');
             H.classList.remove('sweeping');
             requestAnimationFrame(function () { c.style.transition = ''; busy = false; });
-          }, 500);
+          }, 780);
         });
       });
     }
@@ -34946,7 +34977,7 @@ if ('serviceWorker' in navigator) {
       function done(){ if(settled) return; settled = true; c.removeEventListener('transitionend', onEnd); res(); }
       function onEnd(e){ if (e.target === c && e.propertyName === 'transform') done(); }
       c.addEventListener('transitionend', onEnd);
-      setTimeout(done, 900);
+      setTimeout(done, 1300);
     });
     Promise.all([load, closed])
       .then(function (r) { finish(r[0]); })
