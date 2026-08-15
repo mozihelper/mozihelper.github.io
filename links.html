@@ -419,8 +419,12 @@ if ('serviceWorker' in navigator) {
    Тяжёлые страницы (algebra-sem1/sem2) пока открываются обычным способом. */
 (function () {
   var H = document.documentElement;
+  /* Этап 3: все страницы сайта переключаются без перезагрузки документа.
+     Раньше вход в справочники шёл обычной навигацией: шторка обрывалась вместе
+     со старой страницей и рисовалась заново на новой — отсюда рывок. */
   var LIGHT = ['index.html', 'links.html', 'literatura.html',
-               'lekcii-sem1.html', 'lekcii-sem2.html'];
+               'lekcii-sem1.html', 'lekcii-sem2.html',
+               'algebra-sem1.html', 'algebra-sem2.html'];
 
   /* Уникальные скрипты уже выполненных страниц — чтобы не выполнять повторно
      общие блоки (тема, офлайн-режим, счётчик) и не плодить обработчики. */
