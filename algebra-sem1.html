@@ -2826,6 +2826,17 @@ html.arriving .topic-header, html.arriving .q-card { opacity: 1; }
 .tl-head .start-greeting, .tl-head .start-status {
   opacity: 1; animation: none; text-align: center; margin-left: auto; margin-right: auto;
 }
+
+/* Шторка на iOS: держим её на отдельном слое графики и не даём браузеру
+   пересчитывать её содержимое во время движения — на Safari это основная
+   причина подрагивания. */
+.curtain{
+  -webkit-transform:translate3d(0,100%,0);
+  backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  contain:strict;
+}
+.curtain.up{-webkit-transform:translate3d(0,0,0);}
+.curtain.out{-webkit-transform:translate3d(0,-100%,0);}
 </style>
 </head>
 <body>

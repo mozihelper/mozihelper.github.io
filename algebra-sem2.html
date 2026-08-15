@@ -8463,6 +8463,17 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
 .q-card[data-q="91"] .ra91-ln.ra91-hot{color:var(--ruby)}
 .q-card[data-q="91"] .ra91-ln .ra91-u{transition:color .12s linear}
 .q-card[data-q="91"] .ra91-ln mjx-container{color:inherit}
+
+/* Шторка на iOS: держим её на отдельном слое графики и не даём браузеру
+   пересчитывать её содержимое во время движения — на Safari это основная
+   причина подрагивания. */
+.curtain{
+  -webkit-transform:translate3d(0,100%,0);
+  backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  contain:strict;
+}
+.curtain.up{-webkit-transform:translate3d(0,0,0);}
+.curtain.out{-webkit-transform:translate3d(0,-100%,0);}
 </style>
 
     <div class="thm-box"><div class="thm-label">Теорема</div><div class="def-text">

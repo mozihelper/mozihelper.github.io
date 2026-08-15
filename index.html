@@ -224,6 +224,23 @@ html.no-intro .tailer,html.no-intro .resume.on{opacity:1!important;animation:non
    и не создаёт горизонтальной прокрутки. */
 .wm{max-width:100%;}
 html,body{max-width:100%;overflow-x:hidden;}
+
+/* Ничто на главной не может быть шире экрана: раньше один широкий элемент
+   растягивал страницу, и всё центрированное съезжало вбок. */
+html,body{max-width:100%;overflow-x:hidden;}
+.page,.core,.gut,.picks,.wm,.kicker,.resume,.tailer{max-width:100%;min-width:0;}
+.wm{overflow:hidden;}
+
+/* Шторка на iOS: держим её на отдельном слое графики и не даём браузеру
+   пересчитывать её содержимое во время движения — на Safari это основная
+   причина подрагивания. */
+.curtain{
+  -webkit-transform:translate3d(0,100%,0);
+  backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  contain:strict;
+}
+.curtain.up{-webkit-transform:translate3d(0,0,0);}
+.curtain.out{-webkit-transform:translate3d(0,-100%,0);}
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#0c0c0e" media="(prefers-color-scheme: dark)">
@@ -285,7 +302,7 @@ html,body{max-width:100%;overflow-x:hidden;}
   var probe=document.createElement('span');
   probe.innerHTML=inner.innerHTML;
   probe.setAttribute('aria-hidden','true');
-  probe.style.cssText='position:absolute;left:-99999px;top:0;white-space:nowrap;'+
+  probe.style.cssText='position:fixed;left:-99999px;top:0;white-space:nowrap;contain:strict;'+
     'font-family:Unbounded,sans-serif;font-weight:400;font-size:100px;letter-spacing:-.02em;'+
     'pointer-events:none;visibility:hidden';
   var ph=probe.querySelector('.hot');

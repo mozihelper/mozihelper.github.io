@@ -177,6 +177,17 @@ body.leaving .flood{transform:none;transition:transform .42s cubic-bezier(.66,0,
 [data-motion="calm"] *{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important}
 [data-motion="calm"] .page-title,[data-motion="calm"] .page-sub{opacity:1;transform:none}
 [data-motion="calm"] .reveal{opacity:1;transform:none}
+
+/* Шторка на iOS: держим её на отдельном слое графики и не даём браузеру
+   пересчитывать её содержимое во время движения — на Safari это основная
+   причина подрагивания. */
+.curtain{
+  -webkit-transform:translate3d(0,100%,0);
+  backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  contain:strict;
+}
+.curtain.up{-webkit-transform:translate3d(0,0,0);}
+.curtain.out{-webkit-transform:translate3d(0,-100%,0);}
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#0c0c0e" media="(prefers-color-scheme: dark)">
