@@ -407,11 +407,19 @@ function finishArrival(){
   if(!c){h.classList.remove('arriving');return;}
   requestAnimationFrame(function(){requestAnimationFrame(function(){
     c.classList.add('out');
-    setTimeout(function(){
+    /* Снимаем шторку после РЕАЛЬНОГО окончания движения, а не по таймеру:
+       на загруженной странице анимация идёт дольше и её обрывало на полпути. */
+    var settled=false;
+    function clear(){
+      if(settled)return; settled=true;
+      c.removeEventListener('transitionend',onEnd);
       c.style.transition='none';c.classList.remove('up','out');
       h.classList.remove('sweeping','arriving');
       requestAnimationFrame(function(){c.style.transition='';});
-    },480);
+    }
+    function onEnd(e){ if(e.target===c&&e.propertyName==='transform') clear(); }
+    c.addEventListener('transitionend',onEnd);
+    setTimeout(clear,1600);
   });});
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',finishArrival);
@@ -649,13 +657,19 @@ if ('serviceWorker' in navigator) {
       applyDocument(doc, href);
       if (push) history.pushState({ mozi: 1 }, '', href);
       if (!c) { busy = false; return; }
-      c.classList.add('out');
-      setTimeout(function () {
-        c.style.transition = 'none';
-        c.classList.remove('up', 'out');
-        H.classList.remove('sweeping');
-        requestAnimationFrame(function () { c.style.transition = ''; busy = false; });
-      }, 480);
+      /* Даём браузеру отрисовать новое содержимое и только потом уводим шторку —
+         иначе первый кадр ухода теряется и движение выглядит рваным. */
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          c.classList.add('out');
+          setTimeout(function () {
+            c.style.transition = 'none';
+            c.classList.remove('up', 'out');
+            H.classList.remove('sweeping');
+            requestAnimationFrame(function () { c.style.transition = ''; busy = false; });
+          }, 500);
+        });
+      });
     }
 
     var load = fetch(href, { cache: 'default' })
@@ -672,8 +686,24 @@ if ('serviceWorker' in navigator) {
     requestAnimationFrame(function () {
       requestAnimationFrame(function () { c.classList.add('up'); });
     });
-    /* Шторка закрывает экран за 420 мс — к этому моменту документ обычно готов. */
-    Promise.all([load, new Promise(function (res) { setTimeout(res, 430); })])
+
+    /* Ждём, пока шторка ДЕЙСТВИТЕЛЬНО закроет экран (событие окончания перехода),
+       а не приблизительное время. Раньше подмена содержимого начиналась чуть
+       раньше конца движения и съедала последние кадры — отсюда рывок и недоезд. */
+    var closed = new Promise(function (res) {
+      var settled = false;
+      function done() {
+        if (settled) return;
+        settled = true;
+        c.removeEventListener('transitionend', onEnd);
+        res();
+      }
+      function onEnd(e) { if (e.target === c && e.propertyName === 'transform') done(); }
+      c.addEventListener('transitionend', onEnd);
+      setTimeout(done, 900);           /* страховка, если событие не придёт */
+    });
+
+    Promise.all([load, closed])
       .then(function (r) { finish(r[0]); })
       .catch(function () { busy = false; location.href = href; });
   }
