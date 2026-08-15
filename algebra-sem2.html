@@ -11590,5 +11590,48 @@ if ('serviceWorker' in navigator) {
   });
 })();
 </script>
-</body>
+<script>
+/* Диагностический режим: открыть страницу с #diag в конце адреса.
+   Замеряет анимацию шторки прямо здесь, в реальных условиях. */
+(function () {
+  if (location.hash !== '#diag') return;
+  addEventListener('load', function () {
+    setTimeout(function () {
+      var c = document.getElementById('curtain');
+      if (!c) return;
+      var frames = [], last = performance.now(), stop = false;
+      (function tick(){ var n=performance.now(); frames.push(n-last); last=n;
+        if(!stop) requestAnimationFrame(tick); })();
+      c.classList.add('up');
+      setTimeout(function () {
+        c.classList.remove('up'); c.classList.add('out');
+        setTimeout(function () {
+          stop = true;
+          c.style.transition='none'; c.className='curtain';
+          setTimeout(function(){ c.style.transition=''; }, 50);
+          var g = frames.slice(2);
+          var long = g.filter(function(x){return x>32;}).length;
+          var avg = g.reduce(function(a,b){return a+b;},0)/g.length;
+          var bar = document.querySelector('.topbar');
+          var bf = bar ? (getComputedStyle(bar).backdropFilter || getComputedStyle(bar).webkitBackdropFilter || 'нет') : '—';
+          var box = document.createElement('div');
+          box.style.cssText='position:fixed;left:10px;right:10px;bottom:20px;z-index:9999;'+
+            'background:#15161a;color:#eceef2;border:1px solid #2a2f38;border-radius:12px;'+
+            'padding:14px;font:12px/1.5 ui-monospace,Menlo,monospace;white-space:pre-wrap';
+          box.textContent =
+            'ЗАМЕР НА РЕАЛЬНОЙ СТРАНИЦЕ\n' +
+            'страница: ' + location.pathname.split('/').pop() + '\n' +
+            'шторка: ' + Math.round(1000/avg) + ' кадр/с, пропущено ' + long +
+            ', худший ' + Math.round(Math.max.apply(null,g)) + ' мс\n' +
+            'элементов на странице: ' + document.querySelectorAll('*').length + '\n' +
+            'размытие панели: ' + bf + '\n' +
+            'формулы отрисованы: ' + document.querySelectorAll('mjx-container').length;
+          box.onclick = function(){ box.remove(); };
+          document.body.appendChild(box);
+        }, 900);
+      }, 900);
+    }, 1500);
+  });
+})();
+</script></body>
 </html>
