@@ -34370,7 +34370,7 @@ else{window.addEventListener("resize",function(){if(cv.clientWidth>0){fit();pain
   window.tbBackAction = function(){
     var act = document.querySelector('.topic-page.active');
     var id = act ? act.id.replace(/^page-/, '') : 'start';
-    if (id === 'start') { leave('index.html'); return; }
+    if (id === 'start') { (window.leavePage || leave)('index.html'); return; }
     showScreen('start');
   };
 
