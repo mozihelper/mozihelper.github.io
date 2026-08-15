@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>MoziHelper — Список литературы</title>
-<script>(function(){var h=document.documentElement;try{h.setAttribute('data-theme',localStorage.getItem('la_theme')||'dusk');h.setAttribute('data-motion',localStorage.getItem('la_motion')||'full');if(sessionStorage.getItem('la_sweep')){sessionStorage.removeItem('la_sweep');h.classList.add('arriving','no-intro');}else{var nv=(performance.getEntriesByType&&performance.getEntriesByType('navigation')[0])||{};if(nv.type==='reload'||nv.type==='back_forward')h.classList.add('no-intro');}}catch(e){h.setAttribute('data-theme','dusk');h.setAttribute('data-motion','full');}})();</script>
+<script>(function(){var h=document.documentElement;try{h.setAttribute('data-theme',localStorage.getItem('la_theme')||'dusk');h.setAttribute('data-motion',localStorage.getItem('la_motion')||'full');if(sessionStorage.getItem('la_sweep')){sessionStorage.removeItem('la_sweep');h.classList.add('arriving','no-intro');}}catch(e){h.setAttribute('data-theme','dusk');h.setAttribute('data-motion','full');}})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;700&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
@@ -131,14 +131,14 @@ main{max-width:760px;margin:0 auto;padding:34px 20px calc(env(safe-area-inset-bo
 .curtain,.flood{position:fixed;inset:0;background:var(--flood);transform:translate3d(0,100%,0);pointer-events:none}
 .curtain{z-index:98;will-change:transform;contain:strict}
 .flood{z-index:99}
-.curtain.up{transform:translate3d(0,0,0);transition: transform .62s cubic-bezier(.65,0,.25,1)}
-.curtain.out{transform:translate3d(0,-100%,0);transition: transform .62s cubic-bezier(.35,0,.15,1)}
+.curtain.up{transform:translate3d(0,0,0);transition:transform .42s cubic-bezier(.65,0,.25,1)}
+.curtain.out{transform:translate3d(0,-100%,0);transition:transform .5s cubic-bezier(.35,0,.15,1)}
 /* ── приход под шторкой: контент уже отрисован, полотно просто уезжает ── */
 html.arriving .curtain{
   transform:translate3d(0,0,0);
   animation:curtainAway .5s cubic-bezier(.35,0,.15,1) 2.4s forwards!important;
 }
-html.arriving .curtain.out{transform:translate3d(0,-100%,0);transition: transform .62s cubic-bezier(.35,0,.15,1)!important}
+html.arriving .curtain.out{transform:translate3d(0,-100%,0);transition:transform .5s cubic-bezier(.35,0,.15,1)!important}
 /* пока полотно закрыто — на странице не движется вообще ничего */
 html.arriving *,html.arriving *::before,html.arriving *::after{animation:none!important;transition:none!important}
 @keyframes curtainAway{to{transform:translate3d(0,-100%,0)}}
@@ -159,23 +159,6 @@ body.leaving .flood{transform:none;transition:transform .42s cubic-bezier(.66,0,
 [data-motion="calm"] *{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important}
 [data-motion="calm"] .page-title,[data-motion="calm"] .page-sub{opacity:1;transform:none}
 [data-motion="calm"] .reveal{opacity:1;transform:none}
-
-/* ═══ Правки для iOS/Safari ═══════════════════════════════════
-   1. Запрет автоувеличения текста: Safari «раздувает» шрифт, из-за чего
-      контейнер становится шире экрана и содержимое уезжает вбок.
-   2. Ничто не может быть шире экрана — страховка от горизонтального сдвига.
-   3. Под .no-intro не переигрывается ни одна анимация появления
-      (шторку не трогаем — она должна доиграть свой уход). */
-html{-webkit-text-size-adjust:100%;text-size-adjust:100%;}
-html,body{max-width:100%;overflow-x:hidden;}
-
-html.no-intro *:not(.curtain):not(.curtain *){animation:none!important;}
-html.no-intro .start-greeting,html.no-intro .start-status,html.no-intro .start-eyebrow,
-html.no-intro .start-title,html.no-intro .start-message,html.no-intro .start-divider,
-html.no-intro .start-cta-group,html.no-intro .start-stats,html.no-intro .stats,
-html.no-intro .search-wrap.start-search,html.no-intro .topic-header,html.no-intro .q-card,
-html.no-intro .top,html.no-intro .kicker,html.no-intro .pick,
-html.no-intro .tailer,html.no-intro .resume.on{opacity:1!important;}
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#0c0c0e" media="(prefers-color-scheme: dark)">
@@ -407,19 +390,11 @@ function finishArrival(){
   if(!c){h.classList.remove('arriving');return;}
   requestAnimationFrame(function(){requestAnimationFrame(function(){
     c.classList.add('out');
-    /* Снимаем шторку после РЕАЛЬНОГО окончания движения, а не по таймеру:
-       на загруженной странице анимация идёт дольше и её обрывало на полпути. */
-    var settled=false;
-    function clear(){
-      if(settled)return; settled=true;
-      c.removeEventListener('transitionend',onEnd);
+    setTimeout(function(){
       c.style.transition='none';c.classList.remove('up','out');
       h.classList.remove('sweeping','arriving');
       requestAnimationFrame(function(){c.style.transition='';});
-    }
-    function onEnd(e){ if(e.target===c&&e.propertyName==='transform') clear(); }
-    c.addEventListener('transitionend',onEnd);
-    setTimeout(clear,1600);
+    },480);
   });});
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',finishArrival);
@@ -482,13 +457,11 @@ if ('serviceWorker' in navigator) {
 </script>
 
 <script>
-/* ═══ Правки поведения ════════════════════════════════════════
-   Возврат «назад»: страница восстанавливается из кэша браузера ровно в том
-   виде, в каком её покинули, — то есть с поднятой шторкой на весь экран
-   (отсюда сплошной оранжевый фон). DOMContentLoaded при этом не срабатывает,
-   поэтому шторку сбрасываем по pageshow. */
+/* Возврат «назад»: страница восстанавливается из кэша браузера в том виде,
+   в каком её покинули — со шторкой на весь экран. DOMContentLoaded при этом
+   не срабатывает, поэтому сбрасываем шторку по pageshow. */
 (function () {
-  function resetCurtain() {
+  function reset() {
     var c = document.getElementById('curtain');
     var h = document.documentElement;
     h.classList.remove('sweeping', 'arriving');
@@ -498,262 +471,17 @@ if ('serviceWorker' in navigator) {
     c.removeAttribute('data-busy');
     requestAnimationFrame(function () { c.style.transition = ''; });
   }
-  addEventListener('pageshow', resetCurtain);
-  addEventListener('popstate', resetCurtain);
-})();
-
-/* Страховка на приходе: если штатное завершение перехода почему-то не отработало
-   (например, скрипт страницы не успел), уводим шторку сами. Если уход уже идёт
-   (на шторке есть класс out) — не вмешиваемся, чтобы не получилось две волны. */
-(function () {
-  var h = document.documentElement;
-  if (!h.classList.contains('arriving')) return;
-  setTimeout(function () {
-    var c = document.getElementById('curtain');
-    if (!c || !h.classList.contains('arriving')) return;
-    if (c.classList.contains('out')) return;
-    c.classList.add('out');
-    setTimeout(function () {
-      c.style.transition = 'none';
-      c.classList.remove('up', 'out');
-      h.classList.remove('sweeping', 'arriving');
-      requestAnimationFrame(function () { c.style.transition = ''; });
-    }, 780);
-  }, 2600);
+  addEventListener('pageshow', reset);
+  addEventListener('popstate', reset);
 })();
 </script>
-<!-- Счётчик визитов -->
 <script>
 (function () {
   try {
-    fetch("https://mozihelper-counter.mozihelper.workers.dev/hit", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ p: location.pathname }),
-      keepalive: true,
-      cache: "no-store"
+    fetch("https://mozihelper-counter.mozihelper.workers.dev/hit", { method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ p: location.pathname }), keepalive: true, cache: "no-store"
     }).catch(function () {});
   } catch (e) {}
-})();
-</script>
-<script>
-/* ═══ Навигация без перезагрузки (Этап 1) ═════════════════════════
-   Лёгкие страницы (главная, лекции, ссылки, литература) переключаются
-   как экраны приложения: документ не перезагружается, шторка идёт одним
-   непрерывным движением — так же, как при смене темы.
-   Тяжёлые страницы (algebra-sem1/sem2) пока открываются обычным способом. */
-(function () {
-  var H = document.documentElement;
-  /* Этап 3: все страницы сайта переключаются без перезагрузки документа.
-     Раньше вход в справочники шёл обычной навигацией: шторка обрывалась вместе
-     со старой страницей и рисовалась заново на новой — отсюда рывок. */
-  var LIGHT = ['index.html', 'links.html', 'literatura.html',
-               'lekcii-sem1.html', 'lekcii-sem2.html',
-               'algebra-sem1.html', 'algebra-sem2.html'];
-
-  /* Уникальные скрипты уже выполненных страниц — чтобы не выполнять повторно
-     общие блоки (тема, офлайн-режим, счётчик) и не плодить обработчики. */
-  var executed = Object.create(null);
-  var busy = false;
-
-  function fileOf(href) {
-    var s = String(href).split('#')[0].split('?')[0];
-    var i = s.lastIndexOf('/');
-    return (i >= 0 ? s.slice(i + 1) : s) || 'index.html';
-  }
-  function isLight(href) { return LIGHT.indexOf(fileOf(href)) !== -1; }
-  function calmMode() { return H.getAttribute('data-motion') === 'calm'; }
-  function supported() {
-    return !!(window.fetch && window.DOMParser && history.pushState &&
-              location.protocol !== 'file:');
-  }
-
-  function hash(str) {                       /* короткая подпись содержимого */
-    var h = 5381, i = str.length;
-    while (i) h = (h * 33 ^ str.charCodeAt(--i)) >>> 0;
-    return h.toString(36);
-  }
-  function rememberCurrentScripts() {
-    var list = document.querySelectorAll('script:not([src])');
-    for (var i = 0; i < list.length; i++) executed[hash(list[i].textContent)] = 1;
-  }
-  rememberCurrentScripts();
-
-  /* Помечаем стили стартовой страницы, чтобы при переходе они заменялись,
-     а не накапливались поверх новых. */
-  (function () {
-    var own = document.head.querySelectorAll('style');
-    for (var i = 0; i < own.length; i++) own[i].setAttribute('data-page-style', '1');
-  })();
-
-  function swapStyles(doc) {
-    var oldTags = document.head.querySelectorAll('style[data-page-style]');
-    var fresh = doc.head.querySelectorAll('style');
-    if (!fresh.length) return;
-    var tag = document.createElement('style');
-    tag.setAttribute('data-page-style', '1');
-    var css = '';
-    for (var i = 0; i < fresh.length; i++) css += fresh[i].textContent + '\n';
-    tag.textContent = css;
-    document.head.appendChild(tag);
-    for (var k = 0; k < oldTags.length; k++) oldTags[k].remove();
-  }
-
-  /* Общие для всех страниц блоки — они уже работают, повторять их нельзя
-     (иначе множатся обработчики). Всё остальное — код конкретной страницы,
-     его выполняем ВСЕГДА: например, подгонку логотипа на главной, без которой
-     надпись остаётся скрытой. */
-  var SHARED = ['serviceWorker.register', 'Правки поведения', 'Навигация без перезагрузки',
-                'workers.dev/hit', 'Страховка на приходе'];
-  function isShared(code) {
-    for (var i = 0; i < SHARED.length; i++) if (code.indexOf(SHARED[i]) !== -1) return true;
-    return false;
-  }
-  function runPageScripts(doc) {
-    var list = doc.querySelectorAll('body script:not([src])');
-    for (var i = 0; i < list.length; i++) {
-      var code = list[i].textContent;
-      if (!code || isShared(code)) continue;
-      var tag = document.createElement('script');
-      tag.textContent = code;
-      document.body.appendChild(tag);
-      tag.remove();
-    }
-  }
-
-  function countVisit(path) {
-    try {
-      fetch("https://mozihelper-counter.mozihelper.workers.dev/hit", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ p: path }),
-        keepalive: true, cache: "no-store"
-      }).catch(function () {});
-    } catch (e) {}
-  }
-
-  /* Подменяем содержимое страницы, сохраняя служебные слои (шторку). */
-  function applyDocument(doc, href) {
-    document.title = doc.title || document.title;
-    swapStyles(doc);
-
-    var keep = [];
-    var curtain = document.getElementById('curtain');
-    var flood = document.querySelector('.flood');
-    if (flood) keep.push(flood);
-    if (curtain) keep.push(curtain);
-
-    var kids = Array.prototype.slice.call(document.body.children);
-    for (var i = 0; i < kids.length; i++) {
-      if (keep.indexOf(kids[i]) === -1) kids[i].remove();
-    }
-    var fresh = Array.prototype.slice.call(doc.body.children);
-    for (var j = 0; j < fresh.length; j++) {
-      var node = fresh[j];
-      if (node.id === 'curtain' || node.classList.contains('flood')) continue;
-      if (node.tagName === 'SCRIPT') continue;          /* скрипты — отдельно */
-      document.body.insertBefore(document.importNode(node, true), curtain || null);
-    }
-    runPageScripts(doc);
-    installHook();          /* скрипт новой страницы заново объявляет leavePage — перехватываем снова */
-    scrollTo(0, 0);
-    countVisit(new URL(href, location.href).pathname);
-  }
-
-  function go(href, push) {
-    if (busy) return;
-    busy = true;
-    var c = document.getElementById('curtain');
-
-    function finish(doc) {
-      applyDocument(doc, href);
-      if (push) history.pushState({ mozi: 1 }, '', href);
-      if (!c) { busy = false; return; }
-      /* Даём браузеру отрисовать новое содержимое и только потом уводим шторку —
-         иначе первый кадр ухода теряется и движение выглядит рваным. */
-      requestAnimationFrame(function () {
-        requestAnimationFrame(function () {
-          c.classList.add('out');
-          setTimeout(function () {
-            c.style.transition = 'none';
-            c.classList.remove('up', 'out');
-            H.classList.remove('sweeping');
-            requestAnimationFrame(function () { c.style.transition = ''; busy = false; });
-          }, 780);
-        });
-      });
-    }
-
-    var load = fetch(href, { cache: 'default' })
-      .then(function (r) { return r.text(); })
-      .then(function (html) { return new DOMParser().parseFromString(html, 'text/html'); });
-
-    if (!c || calmMode()) {                    /* без анимации — сразу */
-      load.then(finish).catch(function () { busy = false; location.href = href; });
-      return;
-    }
-
-    H.classList.add('sweeping');
-    c.classList.remove('out');
-    requestAnimationFrame(function () {
-      requestAnimationFrame(function () { c.classList.add('up'); });
-    });
-
-    /* Ждём, пока шторка ДЕЙСТВИТЕЛЬНО закроет экран (событие окончания перехода),
-       а не приблизительное время. Раньше подмена содержимого начиналась чуть
-       раньше конца движения и съедала последние кадры — отсюда рывок и недоезд. */
-    var closed = new Promise(function (res) {
-      var settled = false;
-      function done() {
-        if (settled) return;
-        settled = true;
-        c.removeEventListener('transitionend', onEnd);
-        res();
-      }
-      function onEnd(e) { if (e.target === c && e.propertyName === 'transform') done(); }
-      c.addEventListener('transitionend', onEnd);
-      setTimeout(done, 1300);           /* страховка, если событие не придёт */
-    });
-
-    Promise.all([load, closed])
-      .then(function (r) { finish(r[0]); })
-      .catch(function () { busy = false; location.href = href; });
-  }
-
-  if (!supported()) return;
-
-  /* Встраиваемся в существующий переход: лёгкие страницы — без перезагрузки,
-     тяжёлые — прежним способом. Хук ставится заново после каждой подмены,
-     потому что скрипт новой страницы объявляет свою функцию leavePage. */
-  function installHook() {
-    var native = window.leavePage;
-    if (native && native.__mozi) return;
-    var hook = function (href) {
-      if (isLight(href)) return go(href, true);
-      if (typeof native === 'function') return native(href);
-      location.href = href;
-    };
-    hook.__mozi = 1;
-    window.leavePage = hook;
-  }
-  installHook();
-
-  /* Обычные ссылки на лёгкие страницы — тоже без перезагрузки. */
-  document.addEventListener('click', function (e) {
-    if (e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-    var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
-    if (!a) return;
-    var href = a.getAttribute('href');
-    if (!href || href.charAt(0) === '#' || a.target === '_blank' || a.hasAttribute('download')) return;
-    if (/^(https?:)?\/\//i.test(href) || /^(mailto|tel):/i.test(href)) return;
-    if (!isLight(href)) return;
-    e.preventDefault();
-    go(href, true);
-  });
-
-  addEventListener('popstate', function () {
-    if (isLight(location.pathname)) go(location.pathname + location.search, false);
-  });
 })();
 </script>
 </body>
