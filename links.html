@@ -149,14 +149,14 @@ main{max-width:720px;margin:0 auto;padding:34px 20px calc(env(safe-area-inset-bo
 .curtain,.flood{position:fixed;inset:0;background:var(--flood);transform:translate3d(0,100%,0);pointer-events:none}
 .curtain{z-index:98;will-change:transform;contain:strict}
 .flood{z-index:99}
-.curtain.up{transform:translate3d(0,0,0);transition:transform .42s cubic-bezier(.65,0,.25,1)}
-.curtain.out{transform:translate3d(0,-100%,0);transition:transform .5s cubic-bezier(.35,0,.15,1)}
+.curtain.up{transform:translate3d(0,0,0);transition:transform .58s cubic-bezier(.65,0,.25,1)}
+.curtain.out{transform:translate3d(0,-100%,0);transition:transform .66s cubic-bezier(.35,0,.15,1)}
 /* ── приход под шторкой: контент уже отрисован, полотно просто уезжает ── */
 html.arriving .curtain{
   transform:translate3d(0,0,0);
   animation:curtainAway .5s cubic-bezier(.35,0,.15,1) 2.4s forwards!important;
 }
-html.arriving .curtain.out{transform:translate3d(0,-100%,0);transition:transform .5s cubic-bezier(.35,0,.15,1)!important}
+html.arriving .curtain.out{transform:translate3d(0,-100%,0);transition:transform .66s cubic-bezier(.35,0,.15,1)!important}
 /* пока полотно закрыто — на странице не движется вообще ничего */
 html.arriving *,html.arriving *::before,html.arriving *::after{animation:none!important;transition:none!important}
 @keyframes curtainAway{to{transform:translate3d(0,-100%,0)}}
@@ -421,6 +421,11 @@ if ('serviceWorker' in navigator) {
   }
   paintBars();
   new MutationObserver(paintBars).observe(H, { attributes: true, attributeFilter: ['data-theme'] });
+  /* Safari иногда читает цвет полос до того, как применится тема, поэтому
+     повторяем после полной загрузки и ещё раз чуть позже. */
+  addEventListener('load', paintBars);
+  setTimeout(paintBars, 400);
+  setTimeout(paintBars, 1200);
 })();
 </script>
 

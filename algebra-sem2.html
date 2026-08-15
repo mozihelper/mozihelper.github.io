@@ -2104,8 +2104,8 @@ footer { padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 88px); }
   transform: translate3d(0, 100%, 0); pointer-events: none;
   will-change: transform; contain: strict;
 }
-.curtain.up   { transform: translate3d(0, 0, 0);     transition: transform .42s cubic-bezier(.65,0,.25,1); }
-.curtain.out  { transform: translate3d(0, -100%, 0); transition: transform .5s cubic-bezier(.35,0,.15,1); }
+.curtain.up   { transform: translate3d(0, 0, 0);     transition: transform .58s cubic-bezier(.65,0,.25,1); }
+.curtain.out  { transform: translate3d(0, -100%, 0); transition: transform .66s cubic-bezier(.35,0,.15,1); }
 /* пока идёт шторка — гасим всё, что могло бы конкурировать за кадры */
 html.sweeping, html.sweeping body { transition: none !important; }
 html.sweeping body::after { display: none; }
@@ -2123,7 +2123,7 @@ html.arriving .curtain {
 }
 html.arriving .curtain.out {
   transform: translate3d(0,-100%,0);
-  transition: transform .5s cubic-bezier(.35,0,.15,1) !important;
+  transition: transform .66s cubic-bezier(.35,0,.15,1) !important;
 }
 @keyframes curtainAway { to { transform: translate3d(0,-100%,0); } }
 
@@ -11557,6 +11557,11 @@ if ('serviceWorker' in navigator) {
   }
   paintBars();
   new MutationObserver(paintBars).observe(H, { attributes: true, attributeFilter: ['data-theme'] });
+  /* Safari иногда читает цвет полос до того, как применится тема, поэтому
+     повторяем после полной загрузки и ещё раз чуть позже. */
+  addEventListener('load', paintBars);
+  setTimeout(paintBars, 400);
+  setTimeout(paintBars, 1200);
 })();
 </script>
 
