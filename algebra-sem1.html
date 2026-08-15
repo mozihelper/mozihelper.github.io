@@ -33852,8 +33852,10 @@ if ('serviceWorker' in navigator) {
     c.removeAttribute('data-busy');
     requestAnimationFrame(function () { c.style.transition = ''; });
   }
-  addEventListener('pageshow', reset);
-  addEventListener('popstate', reset);
+  /* ТОЛЬКО при возврате из кэша браузера (кнопка «назад»).
+     На обычной загрузке трогать шторку нельзя — она в этот момент штатно
+     закрывает экран, и сброс ломал анимацию прихода на каждой странице. */
+  addEventListener('pageshow', function (e) { if (e && e.persisted) reset(); });
 })();
 </script>
 <script>
