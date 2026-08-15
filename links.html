@@ -423,5 +423,51 @@ if ('serviceWorker' in navigator) {
   new MutationObserver(paintBars).observe(H, { attributes: true, attributeFilter: ['data-theme'] });
 })();
 </script>
+
+<!-- Предварительная подготовка следующей страницы.
+     Приём, которым пользуются крупные сайты: браузер заранее готовит страницу
+     в фоне, и переход происходит мгновенно — разбирать разметку в этот момент
+     уже не нужно. Функционал страниц не меняется. -->
+<script type="speculationrules">
+{
+  "prerender": [{
+    "where": { "href_matches": "/*.html" },
+    "eagerness": "moderate"
+  }]
+}
+</script>
+<script>
+/* Для браузеров без предварительного рендеринга (в том числе Safari):
+   при первом касании ссылки заранее подтягиваем страницу в кэш, чтобы к моменту
+   перехода её не пришлось скачивать. */
+(function () {
+  var done = Object.create(null);
+  function warm(href) {
+    if (!href || done[href]) return;
+    if (!/\.html($|[?#])/.test(href) || /^(https?:)?\/\//.test(href)) return;
+    done[href] = 1;
+    var l = document.createElement('link');
+    l.rel = 'prefetch';
+    l.href = href;
+    l.as = 'document';
+    document.head.appendChild(l);
+    try { fetch(href, { cache: 'force-cache', mode: 'same-origin' }).catch(function () {}); } catch (e) {}
+  }
+  function pick(e) {
+    var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+    if (a) warm(a.getAttribute('href'));
+  }
+  addEventListener('touchstart', pick, { passive: true, capture: true });
+  addEventListener('mouseover', pick, { passive: true, capture: true });
+  /* Переходы на сайте идут не только по ссылкам — прогреваем и основные разделы. */
+  addEventListener('load', function () {
+    setTimeout(function () {
+      var main = ['index.html', 'algebra-sem1.html', 'algebra-sem2.html'];
+      var here = location.pathname.split('/').pop() || 'index.html';
+      for (var i = 0; i < main.length; i++) if (main[i] !== here) warm(main[i]);
+    }, 1800);
+  });
+})();
+</script>
 </body>
 </html>
