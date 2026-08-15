@@ -476,14 +476,9 @@ if ('serviceWorker' in navigator) {
   }
   addEventListener('touchstart', pick, { passive: true, capture: true });
   addEventListener('mouseover', pick, { passive: true, capture: true });
-  /* Переходы на сайте идут не только по ссылкам — прогреваем и основные разделы. */
-  addEventListener('load', function () {
-    setTimeout(function () {
-      var main = ['index.html', 'algebra-sem1.html', 'algebra-sem2.html'];
-      var here = location.pathname.split('/').pop() || 'index.html';
-      for (var i = 0; i < main.length; i++) if (main[i] !== here) warm(main[i]);
-    }, 1800);
-  });
+  /* Автоматический прогрев разделов убран: он тянул в фоне сотни килобайт и
+     мог совпасть с прокруткой или переходом. Прогрев остаётся только по
+     касанию ссылки — ровно тогда, когда переход действительно предстоит. */
 })();
 </script>
 </body>

@@ -9925,11 +9925,26 @@ function buildBasics() {
   }
   addEventListener('DOMContentLoaded', function () {
     ['openQuizMenu', 'dqStartTicket', 'dqSelectTheme', 'renderQuizMenu'].forEach(wrap);
+
+  /* Часть функций викторины живёт в вынесенном файле, поэтому до его загрузки
+     их не существует. Ставим заглушки: они подгружают базу и затем вызывают
+     настоящую функцию. Иначе кнопки «Подготовка» и «База» не сработали бы. */
+  ['openQuizMenu', 'startBasicsQuiz', 'dqSelectTheme', 'dqStartTicket', 'renderQuizMenu'].forEach(function (name) {
+    if (typeof window[name] === 'function') return;      /* уже есть — не трогаем */
+    var stub = function () {
+      var self = this, args = arguments;
+      window.loadQuizBase().then(function () {
+        if (window[name] && window[name] !== stub) window[name].apply(self, args);
+      });
+    };
+    stub.__stub = 1;
+    window[name] = stub;
   });
-  addEventListener('load', function () {
-    var idle = window.requestIdleCallback || function (f) { setTimeout(f, 3000); };
-    idle(function () { window.loadQuizBase(); });
   });
+  /* Раньше база подгружалась в фоне «когда браузер свободен». В Safari такого
+     механизма нет, поэтому срабатывал запасной таймер: через 3 секунды после
+     открытия страницы браузер начинал разбирать больше мегабайта кода и
+     подвисал. Теперь база грузится строго при входе в «Подготовку». */
 })();
 </script>
 
@@ -10724,14 +10739,9 @@ if ('serviceWorker' in navigator) {
   }
   addEventListener('touchstart', pick, { passive: true, capture: true });
   addEventListener('mouseover', pick, { passive: true, capture: true });
-  /* Переходы на сайте идут не только по ссылкам — прогреваем и основные разделы. */
-  addEventListener('load', function () {
-    setTimeout(function () {
-      var main = ['index.html', 'algebra-sem1.html', 'algebra-sem2.html'];
-      var here = location.pathname.split('/').pop() || 'index.html';
-      for (var i = 0; i < main.length; i++) if (main[i] !== here) warm(main[i]);
-    }, 1800);
-  });
+  /* Автоматический прогрев разделов убран: он тянул в фоне сотни килобайт и
+     мог совпасть с прокруткой или переходом. Прогрев остаётся только по
+     касанию ссылки — ровно тогда, когда переход действительно предстоит. */
 })();
 </script>
 <script>
