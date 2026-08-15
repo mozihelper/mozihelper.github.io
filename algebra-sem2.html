@@ -46,6 +46,16 @@ window.MathJax = {
       MathJax.startup.defaultReady();
       window.mathJaxLoaded = true;
       document.body && document.body.classList.add('mathjax-ready');
+      /* Переход по кнопке «Продолжить» открывает карточку сразу при загрузке —
+         в этот момент MathJax ещё не готов, и формулы оставались нетронутыми.
+         Догоняем: как только библиотека поднялась, типсетим открытое. */
+      setTimeout(function () {
+        try {
+          var t = document.getElementById('ticketBody');
+          if (!t || !t.children.length) t = document.querySelector('.q-card.open');
+          if (t && MathJax.typesetPromise) MathJax.typesetPromise([t]).catch(function () {});
+        } catch (e) {}
+      }, 120);
     }
   }
 };
