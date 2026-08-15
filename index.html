@@ -316,6 +316,17 @@ html,body{max-width:100%;overflow-x:hidden;}
   fit();
   requestAnimationFrame(fit);
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);
+  /* Safari сообщает о готовности шрифтов раньше, чем реально применит Unbounded:
+     размер считался по системному шрифту, а после подмены надпись становилась
+     шире и выходила за экран. Пересчитываем именно после загрузки начертаний. */
+  if(document.fonts&&document.fonts.load){
+    try{
+      Promise.all([document.fonts.load('400 100px Unbounded'),
+                   document.fonts.load('700 100px Unbounded')])
+        .then(function(){ fit(); requestAnimationFrame(fit); })
+        .catch(function(){});
+    }catch(e){}
+  }
   addEventListener('resize',function(){clearTimeout(t);t=setTimeout(fit,90);},{passive:true});
   /* Встроенные браузеры (Telegram, открытие из закладок) сообщают итоговую ширину
      не сразу и часто без события resize — надпись оставалась подогнанной под чужой
@@ -446,6 +457,27 @@ if ('serviceWorker' in navigator) {
       body: JSON.stringify({ p: location.pathname }), keepalive: true, cache: "no-store"
     }).catch(function () {});
   } catch (e) {}
+})();
+</script>
+
+<script>
+/* Цвет системных полос Safari (сверху и снизу).
+   Раньше он зависел от системной темы телефона, а не от темы сайта, и вдобавок
+   браузер мог брать цвет у шторки — полосы получались рыжими. Теперь цвет берётся
+   из фона выбранной темы и обновляется при её переключении. */
+(function () {
+  var H = document.documentElement;
+  function paintBars() {
+    var bg = getComputedStyle(H).getPropertyValue('--bg').trim() || '#0c0c0e';
+    var list = document.querySelectorAll('meta[name="theme-color"]');
+    for (var i = 0; i < list.length; i++) list[i].remove();
+    var m = document.createElement('meta');
+    m.setAttribute('name', 'theme-color');
+    m.setAttribute('content', bg);
+    document.head.appendChild(m);
+  }
+  paintBars();
+  new MutationObserver(paintBars).observe(H, { attributes: true, attributeFilter: ['data-theme'] });
 })();
 </script>
 </body>

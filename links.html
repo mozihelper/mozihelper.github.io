@@ -361,5 +361,26 @@ if ('serviceWorker' in navigator) {
   } catch (e) {}
 })();
 </script>
+
+<script>
+/* Цвет системных полос Safari (сверху и снизу).
+   Раньше он зависел от системной темы телефона, а не от темы сайта, и вдобавок
+   браузер мог брать цвет у шторки — полосы получались рыжими. Теперь цвет берётся
+   из фона выбранной темы и обновляется при её переключении. */
+(function () {
+  var H = document.documentElement;
+  function paintBars() {
+    var bg = getComputedStyle(H).getPropertyValue('--bg').trim() || '#0c0c0e';
+    var list = document.querySelectorAll('meta[name="theme-color"]');
+    for (var i = 0; i < list.length; i++) list[i].remove();
+    var m = document.createElement('meta');
+    m.setAttribute('name', 'theme-color');
+    m.setAttribute('content', bg);
+    document.head.appendChild(m);
+  }
+  paintBars();
+  new MutationObserver(paintBars).observe(H, { attributes: true, attributeFilter: ['data-theme'] });
+})();
+</script>
 </body>
 </html>
