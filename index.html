@@ -219,6 +219,11 @@ html.arriving *,html.arriving *::before,html.arriving *::after{animation:none!im
 html.sweeping,html.sweeping body{transition:none!important}
 html.no-intro .top,html.no-intro .kicker,html.no-intro .pick,
 html.no-intro .tailer,html.no-intro .resume.on{opacity:1!important;animation:none!important}
+
+/* Страховка: что бы ни насчитал скрипт, надпись не выходит за пределы экрана
+   и не создаёт горизонтальной прокрутки. */
+.wm{max-width:100%;}
+html,body{max-width:100%;overflow-x:hidden;}
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#0c0c0e" media="(prefers-color-scheme: dark)">
@@ -312,6 +317,19 @@ html.no-intro .tailer,html.no-intro .resume.on{opacity:1!important;animation:non
   requestAnimationFrame(fit);
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);
   addEventListener('resize',function(){clearTimeout(t);t=setTimeout(fit,90);},{passive:true});
+  /* Встроенные браузеры (Telegram, открытие из закладок) сообщают итоговую ширину
+     не сразу и часто без события resize — надпись оставалась подогнанной под чужой
+     размер и вылезала за экран. Следим за шириной самого контейнера: он меняется
+     при любом изменении окна, а от размера шрифта не зависит, поэтому зацикливания нет. */
+  if (window.ResizeObserver && wm.parentElement) {
+    var lastBox = 0;
+    new ResizeObserver(function (entries) {
+      var w = Math.round(entries[0].contentRect.width);
+      if (w === lastBox || !w) return;
+      lastBox = w;
+      clearTimeout(t); t = setTimeout(fit, 60);
+    }).observe(wm.parentElement);
+  }
   addEventListener('orientationchange',function(){setTimeout(fit,220);});
 })();
 
