@@ -487,13 +487,21 @@ if ('serviceWorker' in navigator) {
     for (var k = 0; k < oldTags.length; k++) oldTags[k].remove();
   }
 
+  /* Общие для всех страниц блоки — они уже работают, повторять их нельзя
+     (иначе множатся обработчики). Всё остальное — код конкретной страницы,
+     его выполняем ВСЕГДА: например, подгонку логотипа на главной, без которой
+     надпись остаётся скрытой. */
+  var SHARED = ['serviceWorker.register', 'Правки поведения', 'Навигация без перезагрузки',
+                'workers.dev/hit', 'Страховка на приходе'];
+  function isShared(code) {
+    for (var i = 0; i < SHARED.length; i++) if (code.indexOf(SHARED[i]) !== -1) return true;
+    return false;
+  }
   function runPageScripts(doc) {
-    var list = doc.querySelectorAll('script:not([src])');
+    var list = doc.querySelectorAll('body script:not([src])');
     for (var i = 0; i < list.length; i++) {
       var code = list[i].textContent;
-      var key = hash(code);
-      if (executed[key]) continue;           /* общий блок — уже работает */
-      executed[key] = 1;
+      if (!code || isShared(code)) continue;
       var tag = document.createElement('script');
       tag.textContent = code;
       document.body.appendChild(tag);

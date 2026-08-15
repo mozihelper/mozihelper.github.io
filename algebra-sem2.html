@@ -8469,6 +8469,18 @@ html.no-intro .start-cta-group,html.no-intro .start-stats,html.no-intro .stats,
 html.no-intro .search-wrap.start-search,html.no-intro .topic-header,html.no-intro .q-card,
 html.no-intro .top,html.no-intro .kicker,html.no-intro .pick,
 html.no-intro .tailer,html.no-intro .resume.on{opacity:1!important;}
+
+/* ═══ Этап 2: экономия раскладки ══════════════════════════════════
+   Браузер пропускает раскладку карточек, которых нет на экране, и
+   выполняет её при прокрутке. Элементы остаются в документе целиком,
+   поэтому поиск по сайту и поиск браузером (Ctrl+F) работают полностью.
+   contain-intrinsic-size задаёт примерную высоту, чтобы полоса прокрутки
+   не прыгала. */
+.q-card{
+  content-visibility:auto;
+  contain-intrinsic-size:auto 96px;
+}
+.topic-page:not(.active){content-visibility:hidden;}
 </style>
 
     <div class="thm-box"><div class="thm-label">Теорема</div><div class="def-text">
@@ -34827,13 +34839,21 @@ if ('serviceWorker' in navigator) {
     for (var k = 0; k < oldTags.length; k++) oldTags[k].remove();
   }
 
+  /* Общие для всех страниц блоки — они уже работают, повторять их нельзя
+     (иначе множатся обработчики). Всё остальное — код конкретной страницы,
+     его выполняем ВСЕГДА: например, подгонку логотипа на главной, без которой
+     надпись остаётся скрытой. */
+  var SHARED = ['serviceWorker.register', 'Правки поведения', 'Навигация без перезагрузки',
+                'workers.dev/hit', 'Страховка на приходе'];
+  function isShared(code) {
+    for (var i = 0; i < SHARED.length; i++) if (code.indexOf(SHARED[i]) !== -1) return true;
+    return false;
+  }
   function runPageScripts(doc) {
-    var list = doc.querySelectorAll('script:not([src])');
+    var list = doc.querySelectorAll('body script:not([src])');
     for (var i = 0; i < list.length; i++) {
       var code = list[i].textContent;
-      var key = hash(code);
-      if (executed[key]) continue;           /* общий блок — уже работает */
-      executed[key] = 1;
+      if (!code || isShared(code)) continue;
       var tag = document.createElement('script');
       tag.textContent = code;
       document.body.appendChild(tag);
