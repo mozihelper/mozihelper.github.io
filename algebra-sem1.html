@@ -2867,6 +2867,18 @@ html.sweeping .sidebar,html.arriving .topbar,html.arriving .tabbar,
 html.arriving .backdrop,html.arriving .sidebar{
   -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
 }
+
+/* ═══ Разгрузка тяжёлых страниц ═══════════════════════════════════
+   Браузер пропускает раскладку карточек, которых нет на экране, и делает её
+   при прокрутке. Карточки остаются в документе целиком, поэтому поиск по сайту
+   и поиск браузером (Ctrl+F) работают как прежде.
+   Это снимает основную нагрузку в момент перехода: раскладывать тысячи
+   элементов больше не нужно.
+   contain-intrinsic-size хранит реальную высоту, чтобы прокрутка не прыгала. */
+.q-card{
+  content-visibility:auto;
+  contain-intrinsic-size:auto 92px;
+}
 </style>
 </head>
 <body>
