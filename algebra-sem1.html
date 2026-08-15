@@ -2879,6 +2879,21 @@ html.arriving .backdrop,html.arriving .sidebar{
   content-visibility:auto;
   contain-intrinsic-size:auto 92px;
 }
+
+/* ═══ Плавность на телефонах: отключаем размытие фона ══════════════
+   Размытие под панелями — самый дорогой эффект в Safari: содержимое под
+   полупрозрачной полосой пересчитывается на каждом кадре, из-за чего
+   прокрутка и переходы идут рывками. На телефонах заменяем его сплошным
+   фоном темы: визуально почти то же самое, нагрузка несопоставимо меньше.
+   На компьютере размытие остаётся. */
+@media (hover:none) and (pointer:coarse){
+  .topbar,.tabbar,.sidebar,.backdrop,.quiz-bar,.q-sticky{
+    -webkit-backdrop-filter:none!important;
+    backdrop-filter:none!important;
+  }
+  .topbar,.tabbar{background:var(--bg)!important;}
+  .sidebar{background:var(--bg-2,var(--bg))!important;}
+}
 </style>
 </head>
 <body>

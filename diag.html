@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MoziHelper — диагностика</title>
+<style>
+  :root{--bg:#0c0c0e;--card:#15161a;--ink:#eceef2;--soft:#a4abb8;--mute:#687081;--hot:#ff4a24;--ok:#3ddc84;--bad:#ff5c5c;--rule:#2a2f38}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding:18px}
+  h1{font-size:1.25rem;margin:0 0 4px}
+  .sub{color:var(--mute);font-size:.85rem;margin-bottom:16px}
+  button{width:100%;border:0;border-radius:12px;padding:14px;font-size:1rem;font-weight:600;background:var(--hot);color:#fff;margin-bottom:14px}
+  button:disabled{opacity:.5}
+  .row{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:12px 14px;margin-bottom:8px}
+  .row b{display:block;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);margin-bottom:3px}
+  .v{font-size:1.05rem}
+  .ok{color:var(--ok)} .bad{color:var(--bad)} .warn{color:#ffc23d}
+  #stage{position:fixed;inset:0;background:var(--hot);transform:translate3d(0,100%,0);z-index:9;pointer-events:none;will-change:transform}
+  #stage.up{transform:translate3d(0,0,0);transition:transform .62s cubic-bezier(.33,.02,.18,1)}
+  #stage.out{transform:translate3d(0,-100%,0);transition:transform .62s cubic-bezier(.33,.02,.18,1)}
+  #out{white-space:pre-wrap;font:12px/1.45 ui-monospace,Menlo,monospace;background:var(--card);
+       border:1px solid var(--rule);border-radius:12px;padding:12px;margin-top:12px;color:var(--soft)}
+  .hint{color:var(--mute);font-size:.82rem;margin-top:10px}
+</style>
+</head>
+<body>
+<h1>Диагностика MoziHelper</h1>
+<div class="sub">Открыть на iPhone, нажать кнопку, прислать результат</div>
+
+<button id="go">Запустить проверку</button>
+
+<div id="cards"></div>
+<div id="out" style="display:none"></div>
+<div class="hint">Проверка занимает около 8 секунд. Экран несколько раз мигнёт оранжевым — так и должно быть.</div>
+
+<div id="stage"></div>
+
+<script>
+var R = {};
+function card(name, value, cls) {
+  var d = document.createElement('div');
+  d.className = 'row';
+  d.innerHTML = '<b>' + name + '</b><span class="v ' + (cls || '') + '">' + value + '</span>';
+  document.getElementById('cards').appendChild(d);
+}
+
+/* Замер частоты кадров во время движения шторки */
+function measureCurtain() {
+  return new Promise(function (resolve) {
+    var st = document.getElementById('stage');
+    var frames = [], last = performance.now(), stop = false;
+    (function tick() {
+      var n = performance.now();
+      frames.push(n - last); last = n;
+      if (!stop) requestAnimationFrame(tick);
+    })();
+    st.classList.add('up');
+    setTimeout(function () {
+      st.classList.remove('up'); st.classList.add('out');
+      setTimeout(function () {
+        stop = true;
+        st.className = '';
+        var gaps = frames.slice(2);
+        var long = gaps.filter(function (g) { return g > 32; }).length;
+        var avg = gaps.reduce(function (a, b) { return a + b; }, 0) / gaps.length;
+        resolve({ fps: Math.round(1000 / avg), long: long, worst: Math.round(Math.max.apply(null, gaps)) });
+      }, 800);
+    }, 800);
+  });
+}
+
+/* Сколько времени главный поток был заблокирован */
+function measureBlocking() {
+  return new Promise(function (resolve) {
+    var blocks = [];
+    try {
+      new PerformanceObserver(function (l) {
+        l.getEntries().forEach(function (e) { blocks.push(Math.round(e.duration)); });
+      }).observe({ type: 'longtask', buffered: true });
+    } catch (e) {}
+    setTimeout(function () {
+      resolve({ count: blocks.length, worst: blocks.length ? Math.max.apply(null, blocks) : 0,
+                total: blocks.reduce(function (a, b) { return a + b; }, 0) });
+    }, 2500);
+  });
+}
+
+/* Тяжёлая работа: раскладка большого числа элементов */
+function measureLayout() {
+  var host = document.createElement('div');
+  host.style.cssText = 'position:absolute;left:-99999px;top:0;width:390px';
+  document.body.appendChild(host);
+  var html = '';
+  for (var i = 0; i < 600; i++) html += '<div style="padding:8px;border-bottom:1px solid #222"><b>Вопрос ' + i + '</b><p>Пример текста карточки для замера раскладки.</p></div>';
+  var t0 = performance.now();
+  host.innerHTML = html;
+  host.getBoundingClientRect();
+  var t = Math.round(performance.now() - t0);
+  host.remove();
+  return t;
+}
+
+document.getElementById('go').addEventListener('click', function () {
+  var btn = this; btn.disabled = true; btn.textContent = 'Идёт проверка…';
+  document.getElementById('cards').innerHTML = '';
+
+  R.ua = navigator.userAgent;
+  R.dpr = window.devicePixelRatio;
+  R.mem = navigator.deviceMemory || '—';
+  R.cores = navigator.hardwareConcurrency || '—';
+  R.cv = (CSS.supports && CSS.supports('content-visibility', 'auto')) ? 'да' : 'НЕТ';
+  R.bf = (CSS.supports && (CSS.supports('backdrop-filter', 'blur(1px)') || CSS.supports('-webkit-backdrop-filter', 'blur(1px)'))) ? 'да' : 'нет';
+  R.layout = measureLayout();
+
+  card('Устройство', (R.cores) + ' ядер · экран ×' + R.dpr);
+  card('Пропуск раскладки невидимого', R.cv, R.cv === 'да' ? 'ok' : 'bad');
+  card('Раскладка 600 блоков', R.layout + ' мс', R.layout < 120 ? 'ok' : (R.layout < 300 ? 'warn' : 'bad'));
+
+  measureBlocking().then(function (b) {
+    R.block = b;
+    card('Заморозки потока', b.count + ' шт, худшая ' + b.worst + ' мс', b.worst < 100 ? 'ok' : (b.worst < 300 ? 'warn' : 'bad'));
+    return measureCurtain();
+  }).then(function (c) {
+    R.curtain = c;
+    card('Анимация шторки', c.fps + ' кадр/с, пропущено ' + c.long + ', худший кадр ' + c.worst + ' мс',
+         c.fps > 50 && c.long < 3 ? 'ok' : (c.fps > 35 ? 'warn' : 'bad'));
+
+    var txt = 'РЕЗУЛЬТАТ ДИАГНОСТИКИ\n' +
+      'браузер: ' + R.ua + '\n' +
+      'ядер: ' + R.cores + ' | экран ×' + R.dpr + ' | память: ' + R.mem + '\n' +
+      'пропуск раскладки: ' + R.cv + ' | размытие: ' + R.bf + '\n' +
+      'раскладка 600 блоков: ' + R.layout + ' мс\n' +
+      'заморозки: ' + R.block.count + ' шт, худшая ' + R.block.worst + ' мс, суммарно ' + R.block.total + ' мс\n' +
+      'шторка: ' + R.curtain.fps + ' кадр/с, пропущено кадров ' + R.curtain.long + ', худший ' + R.curtain.worst + ' мс';
+    var o = document.getElementById('out');
+    o.style.display = 'block';
+    o.textContent = txt;
+    btn.textContent = 'Готово — пришлите текст ниже';
+    btn.disabled = false;
+    try { if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).catch(function(){}); } catch (e) {}
+  });
+});
+</script>
+</body>
+</html>
