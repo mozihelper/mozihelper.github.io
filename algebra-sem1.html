@@ -2837,6 +2837,36 @@ html.arriving .topic-header, html.arriving .q-card { opacity: 1; }
 }
 .curtain.up{-webkit-transform:translate3d(0,0,0);}
 .curtain.out{-webkit-transform:translate3d(0,-100%,0);}
+
+/* ═══ Плавность шторки на iOS ═════════════════════════════════════
+   В Safari тормозит не сама анимация, а то, что браузер параллельно
+   пересчитывает страницу под шторкой. На время перехода снимаем с него
+   всю лишнюю работу — так делают нативные приложения. */
+
+/* 1. Шторка живёт на собственном слое графики и не тянет за собой содержимое. */
+.curtain{
+  will-change:transform;
+  contain:layout paint style;
+  -webkit-backface-visibility:hidden;backface-visibility:hidden;
+}
+
+/* 2. Пока идёт переход, страница под шторкой заморожена: ничего не
+      анимируется, не прокручивается и не пересчитывается. */
+html.sweeping,html.arriving{overflow:hidden;}
+html.sweeping body>*:not(.curtain):not(.flood),
+html.arriving body>*:not(.curtain):not(.flood){
+  transition:none!important;
+  animation-play-state:paused!important;
+  contain:paint;
+}
+
+/* 3. Размытие панелей — самый дорогой эффект в Safari. Во время перехода
+      выключаем его полностью. */
+html.sweeping .topbar,html.sweeping .tabbar,html.sweeping .backdrop,
+html.sweeping .sidebar,html.arriving .topbar,html.arriving .tabbar,
+html.arriving .backdrop,html.arriving .sidebar{
+  -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+}
 </style>
 </head>
 <body>
