@@ -302,7 +302,7 @@ html,body{max-width:100%;overflow-x:hidden;}
   var probe=document.createElement('span');
   probe.innerHTML=inner.innerHTML;
   probe.setAttribute('aria-hidden','true');
-  probe.style.cssText='position:fixed;left:-99999px;top:0;white-space:nowrap;contain:strict;'+
+  probe.style.cssText='position:fixed;left:-99999px;top:0;white-space:nowrap;'+
     'font-family:Unbounded,sans-serif;font-weight:400;font-size:100px;letter-spacing:-.02em;'+
     'pointer-events:none;visibility:hidden';
   var ph=probe.querySelector('.hot');
@@ -329,10 +329,13 @@ html,body{max-width:100%;overflow-x:hidden;}
       wm.style.fontSize = size.toFixed(2) + 'px';
     }
     wm.classList.add('fitted');
+    /* Показываем надпись в любом случае: если измерение вдруг не сработает,
+       она не должна остаться невидимой. */
   }
   fit();
   requestAnimationFrame(fit);
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);
+  setTimeout(function(){ if(!wm.classList.contains('fitted')) wm.classList.add('fitted'); },600);
   /* Safari сообщает о готовности шрифтов раньше, чем реально применит Unbounded:
      размер считался по системному шрифту, а после подмены надпись становилась
      шире и выходила за экран. Пересчитываем именно после загрузки начертаний. */
