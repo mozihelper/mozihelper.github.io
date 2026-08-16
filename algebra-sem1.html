@@ -2842,14 +2842,6 @@ html.arriving .topic-header, html.arriving .q-card { opacity: 1; }
 
 /* 2. Пока идёт переход, страница под шторкой заморожена: ничего не
       анимируется, не прокручивается и не пересчитывается. */
-html.sweeping,html.arriving{overflow:hidden;}
-html.sweeping body>*:not(.curtain):not(.flood),
-html.arriving body>*:not(.curtain):not(.flood){
-  transition:none!important;
-  animation-play-state:paused!important;
-  contain:paint;
-}
-
 /* 3. Размытие панелей — самый дорогой эффект в Safari. Во время перехода
       выключаем его полностью. */
 html.sweeping .topbar,html.sweeping .tabbar,html.sweeping .backdrop,
@@ -10703,14 +10695,6 @@ if ('serviceWorker' in navigator) {
      Приём, которым пользуются крупные сайты: браузер заранее готовит страницу
      в фоне, и переход происходит мгновенно — разбирать разметку в этот момент
      уже не нужно. Функционал страниц не меняется. -->
-<script type="speculationrules">
-{
-  "prerender": [{
-    "where": { "href_matches": "/*.html" },
-    "eagerness": "moderate"
-  }]
-}
-</script>
 <script>
 /* Для браузеров без предварительного рендеринга (в том числе Safari):
    при первом касании ссылки заранее подтягиваем страницу в кэш, чтобы к моменту

@@ -23,7 +23,7 @@
 /*ENDTOKENS*/
 
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{max-width:100%;overflow-x:hidden}
+body{max-width:100%;overflow-x:hidden}
 html{background:var(--bg);-webkit-text-size-adjust:100%}
 body{
   font-family:'Golos Text',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
@@ -223,11 +223,11 @@ html.no-intro .tailer,html.no-intro .resume.on{opacity:1!important;animation:non
 /* Страховка: что бы ни насчитал скрипт, надпись не выходит за пределы экрана
    и не создаёт горизонтальной прокрутки. */
 .wm{max-width:100%;}
-html,body{max-width:100%;overflow-x:hidden;}
+body{max-width:100%;}
 
 /* Ничто на главной не может быть шире экрана: раньше один широкий элемент
    растягивал страницу, и всё центрированное съезжало вбок. */
-html,body{max-width:100%;overflow-x:hidden;}
+body{max-width:100%;}
 .page,.core,.gut,.picks,.wm,.kicker,.resume,.tailer{max-width:100%;min-width:0;}
 .wm{overflow:hidden;}
 
@@ -246,14 +246,6 @@ html,body{max-width:100%;overflow-x:hidden;}
 
 /* 2. Пока идёт переход, страница под шторкой заморожена: ничего не
       анимируется, не прокручивается и не пересчитывается. */
-html.sweeping,html.arriving{overflow:hidden;}
-html.sweeping body>*:not(.curtain):not(.flood),
-html.arriving body>*:not(.curtain):not(.flood){
-  transition:none!important;
-  animation-play-state:paused!important;
-  contain:paint;
-}
-
 /* 3. Размытие панелей — самый дорогой эффект в Safari. Во время перехода
       выключаем его полностью. */
 html.sweeping .topbar,html.sweeping .tabbar,html.sweeping .backdrop,
@@ -530,14 +522,6 @@ if ('serviceWorker' in navigator) {
      Приём, которым пользуются крупные сайты: браузер заранее готовит страницу
      в фоне, и переход происходит мгновенно — разбирать разметку в этот момент
      уже не нужно. Функционал страниц не меняется. -->
-<script type="speculationrules">
-{
-  "prerender": [{
-    "where": { "href_matches": "/*.html" },
-    "eagerness": "moderate"
-  }]
-}
-</script>
 <script>
 /* Для браузеров без предварительного рендеринга (в том числе Safari):
    при первом касании ссылки заранее подтягиваем страницу в кэш, чтобы к моменту
