@@ -619,55 +619,5 @@ if ('serviceWorker' in navigator) {
   });
 })();
 </script>
-
-<script>
-/* Жест «назад»: провести пальцем от левого края экрана.
-   Нужен только в установленном приложении — в браузере такой жест уже есть
-   системный, и дублировать его нельзя, иначе сработает дважды. */
-(function () {
-  var standalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
-  if (!standalone || !('ontouchstart' in window)) return;
-
-  var EDGE = 26;        /* насколько близко к краю должно начаться движение */
-  var NEED = 70;        /* насколько далеко провести, чтобы сработало */
-  var x0 = 0, y0 = 0, active = false, moved = 0;
-
-  var hint = document.createElement('div');
-  hint.style.cssText = 'position:fixed;left:0;top:0;bottom:0;width:0;z-index:200;' +
-    'pointer-events:none;background:linear-gradient(90deg,rgba(0,0,0,.28),transparent);' +
-    'opacity:0;transition:opacity .15s ease';
-  document.body.appendChild(hint);
-
-  addEventListener('touchstart', function (e) {
-    if (e.touches.length !== 1) return;
-    var t = e.touches[0];
-    if (t.clientX > EDGE) return;
-    x0 = t.clientX; y0 = t.clientY; active = true; moved = 0;
-  }, { passive: true });
-
-  addEventListener('touchmove', function (e) {
-    if (!active) return;
-    var t = e.touches[0];
-    var dx = t.clientX - x0, dy = Math.abs(t.clientY - y0);
-    if (dy > 40 && dy > dx) { active = false; hint.style.opacity = '0'; hint.style.width = '0'; return; }
-    moved = dx;
-    if (dx > 8) {
-      hint.style.opacity = '1';
-      hint.style.width = Math.min(dx, 120) + 'px';
-    }
-  }, { passive: true });
-
-  function finish() {
-    if (!active) return;
-    active = false;
-    hint.style.opacity = '0';
-    hint.style.width = '0';
-    if (moved >= NEED && history.length > 1) history.back();
-    moved = 0;
-  }
-  addEventListener('touchend', finish, { passive: true });
-  addEventListener('touchcancel', finish, { passive: true });
-})();
-</script>
 </body>
 </html>
