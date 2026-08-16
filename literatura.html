@@ -656,5 +656,96 @@ if ('serviceWorker' in navigator) {
   no.addEventListener('click', function(){ hide(mode === 'install'); });
 })();
 </script>
+
+<style>
+/* ═══ Сохранение материалов для работы без интернета ═══ */
+.mozi-off{margin:26px auto 34px;max-width:720px;padding:16px 18px;border-radius:14px;
+  background:var(--bg-2,#15161a);border:1px solid var(--rule,#2a2f38);}
+.mozi-off h3{margin:0 0 4px;font-size:.95rem;color:var(--ink,#eceef2);}
+.mozi-off p{margin:0 0 12px;font-size:.85rem;color:var(--ink-2,#a4abb8);line-height:1.45;}
+.mozi-off button{border:0;border-radius:10px;padding:10px 16px;font-size:.9rem;font-weight:600;
+  background:var(--hot,#ff4a24);color:var(--hot-ink,#fff);cursor:pointer;}
+.mozi-off button:disabled{opacity:.55;cursor:default;}
+.mozi-off .bar{height:6px;border-radius:4px;background:var(--rule,#2a2f38);overflow:hidden;margin-top:12px;display:none;}
+.mozi-off .bar i{display:block;height:100%;width:0;background:var(--hot,#ff4a24);transition:width .25s ease;}
+.mozi-off .st{margin-top:8px;font-size:.82rem;color:var(--ink-2,#a4abb8);}
+</style>
+<div class="mozi-off" id="moziOff">
+  <h3>Читать без интернета</h3>
+  <p id="moziOffText">Сохранить материалы этой страницы в память устройства — потом они открываются без сети.</p>
+  <button id="moziOffGo" type="button">Сохранить</button>
+  <div class="bar" id="moziOffBar"><i></i></div>
+  <div class="st" id="moziOffSt"></div>
+</div>
+<script>
+/* Скачивает файлы этой страницы в тот же кэш, из которого работает офлайн-режим.
+   По требованию, а не автоматически: материалы весят много, и решать должен
+   пользователь. Уже сохранённые файлы повторно не качаются. */
+(function () {
+  var box = document.getElementById('moziOff');
+  if (!box || !('caches' in window)) { if (box) box.style.display='none'; return; }
+  var go = document.getElementById('moziOffGo'),
+      bar = document.getElementById('moziOffBar'),
+      fill = bar.firstElementChild,
+      st = document.getElementById('moziOffSt'),
+      txt = document.getElementById('moziOffText');
+
+  function files() {
+    var out = [], seen = {};
+    var links = document.querySelectorAll('a[href$=".pdf"], a[href*=".pdf?"]');
+    for (var i = 0; i < links.length; i++) {
+      var h = links[i].getAttribute('href');
+      if (h && !seen[h] && !/^https?:\/\//i.test(h)) { seen[h] = 1; out.push(h); }
+    }
+    return out;
+  }
+
+  var list = files();
+  if (!list.length) { box.style.display = 'none'; return; }
+  txt.textContent = 'Сохранить материалы этой страницы (' + list.length + ' шт.) в память устройства — потом они открываются без сети.';
+
+  /* Показываем, сколько уже сохранено */
+  caches.open('mozi-files').then(function (c) {
+    var done = 0;
+    return Promise.all(list.map(function (u) {
+      return c.match(u).then(function (m) { if (m) done++; });
+    })).then(function () {
+      if (done === list.length) { st.textContent = 'Все материалы уже сохранены'; go.disabled = true; go.textContent = 'Сохранено'; }
+      else if (done) st.textContent = 'Уже сохранено: ' + done + ' из ' + list.length;
+    });
+  }).catch(function(){});
+
+  go.addEventListener('click', function () {
+    go.disabled = true; go.textContent = 'Сохраняю…';
+    bar.style.display = 'block';
+    caches.open('mozi-files').then(function (c) {
+      var done = 0, failed = 0;
+      function step(i) {
+        if (i >= list.length) {
+          st.textContent = failed ? ('Сохранено ' + done + ' из ' + list.length + ', не удалось: ' + failed)
+                                  : 'Готово — материалы доступны без интернета';
+          go.textContent = failed ? 'Повторить' : 'Сохранено';
+          go.disabled = !failed;
+          return;
+        }
+        c.match(list[i]).then(function (hit) {
+          if (hit) { done++; next(i); return; }
+          fetch(list[i], { cache: 'reload' }).then(function (res) {
+            if (res && res.ok) return c.put(list[i], res).then(function(){ done++; });
+            failed++;
+          }).catch(function () { failed++; }).then(function () { next(i); });
+        });
+      }
+      function next(i) {
+        var p = Math.round((i + 1) / list.length * 100);
+        fill.style.width = p + '%';
+        st.textContent = 'Сохранено ' + (i + 1) + ' из ' + list.length;
+        setTimeout(function () { step(i + 1); }, 30);
+      }
+      step(0);
+    }).catch(function () { st.textContent = 'Не удалось сохранить'; go.disabled = false; go.textContent = 'Повторить'; });
+  });
+})();
+</script>
 </body>
 </html>

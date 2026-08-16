@@ -2,7 +2,8 @@
    Страницы (HTML) берём СНАЧАЛА ИЗ СЕТИ и лишь при её отсутствии из кэша:
    при cache-first обновлённый сайт не доезжал до тех, кто уже заходил.
    Всё остальное (шрифты, PDF, MathJax, иконки) — сначала из кэша, это неизменяемые файлы. */
-const CACHE = 'mozi-v43';
+const CACHE = 'mozi-v44';
+const FILES = 'mozi-files';   /* материалы, сохранённые пользователем: не чистится при обновлениях */
 const SHELL = [
   './',
   './index.html',
@@ -45,7 +46,7 @@ self.addEventListener('install', function(e){
 self.addEventListener('activate', function(e){
   e.waitUntil(
     caches.keys().then(function(keys){
-      return Promise.all(keys.map(function(k){ return k === CACHE ? null : caches.delete(k); }));
+      return Promise.all(keys.map(function(k){ return (k === CACHE || k === FILES) ? null : caches.delete(k); }));
     }).then(function(){ return self.clients.claim(); })
   );
 });
@@ -77,14 +78,21 @@ self.addEventListener('fetch', function(e){
     return;
   }
 
+  /* Сначала смотрим в хранилище материалов, сохранённых пользователем вручную
+     («Читать без интернета»): оно не версионируется и переживает обновления. */
   e.respondWith(
-    caches.open(CACHE).then(function(c){
-      return c.match(req).then(function(hit){
-        var net = fetch(req).then(function(res){
-          if (res && (res.ok || res.type === 'opaque')) c.put(req, res.clone()).catch(function(){});
-          return res;
-        }).catch(function(){ return hit; });
-        return hit || net;
+    caches.open(FILES).then(function(fc){
+      return fc.match(req).then(function(saved){
+        if (saved) return saved;
+        return caches.open(CACHE).then(function(c){
+          return c.match(req).then(function(hit){
+            var net = fetch(req).then(function(res){
+              if (res && (res.ok || res.type === 'opaque')) c.put(req, res.clone()).catch(function(){});
+              return res;
+            }).catch(function(){ return hit; });
+            return hit || net;
+          });
+        });
       });
     })
   );
