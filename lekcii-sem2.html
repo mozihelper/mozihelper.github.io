@@ -460,5 +460,93 @@ if ('serviceWorker' in navigator) {
      касанию ссылки — ровно тогда, когда переход действительно предстоит. */
 })();
 </script>
+
+<style>
+/* ═══ Приложение: установка и обновление ═══ */
+.mozi-app{
+  position:fixed;left:14px;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));
+  z-index:130;display:none;gap:12px;align-items:center;padding:13px 15px;border-radius:16px;
+  background:var(--bg-2,#15161a);border:1px solid var(--rule,#2a2f38);
+  box-shadow:0 14px 34px rgba(0,0,0,.4);opacity:0;transform:translateY(14px);
+  transition:opacity .35s ease,transform .35s ease;font-size:.92rem;line-height:1.35;
+}
+.mozi-app.on{display:flex;opacity:1;transform:none;}
+.mozi-app .t{flex:1;color:var(--ink,#eceef2);}
+.mozi-app .t b{display:block;margin-bottom:1px;}
+.mozi-app .t span{color:var(--ink-2,#a4abb8);font-size:.84rem;}
+.mozi-app button{border:0;border-radius:10px;padding:9px 14px;font-size:.88rem;font-weight:600;
+  background:var(--hot,#ff4a24);color:var(--hot-ink,#fff);cursor:pointer;white-space:nowrap;}
+.mozi-app .x{background:transparent;color:var(--ink-3,#687081);font-size:1.25rem;padding:2px 6px;font-weight:400;}
+@media (min-width:640px){.mozi-app{left:auto;right:22px;max-width:400px;}}
+</style>
+
+<div class="mozi-app" id="moziApp" role="dialog" aria-live="polite">
+  <div class="t"><b id="moziAppTitle"></b><span id="moziAppText"></span></div>
+  <button id="moziAppGo" type="button"></button>
+  <button class="x" id="moziAppNo" type="button" aria-label="Скрыть">&times;</button>
+</div>
+
+<script>
+/* Две функции приложения:
+   1. Предложение установить на домашний экран (на iPhone — инструкция,
+      потому что системного диалога установки там нет).
+   2. Уведомление о новой версии: страницы отдаются из кэша ради скорости,
+      поэтому без такого уведомления обновление сайта дошло бы не сразу. */
+(function () {
+  var box = document.getElementById('moziApp');
+  if (!box) return;
+  var title = document.getElementById('moziAppTitle'),
+      text  = document.getElementById('moziAppText'),
+      go    = document.getElementById('moziAppGo'),
+      no    = document.getElementById('moziAppNo'),
+      deferred = null, mode = null;
+
+  function inApp(){ return matchMedia('(display-mode: standalone)').matches || navigator.standalone === true; }
+  function muted(){ try { return localStorage.getItem('mozi_app_off') === '1'; } catch(e){ return false; } }
+  function show(kind, t, s, btn){
+    mode = kind; title.textContent = t; text.textContent = s; go.textContent = btn;
+    box.classList.add('on');
+  }
+  function hide(save){
+    box.classList.remove('on');
+    if (save) { try { localStorage.setItem('mozi_app_off','1'); } catch(e){} }
+  }
+
+  /* ── установка ── */
+  addEventListener('beforeinstallprompt', function (e) {
+    e.preventDefault(); deferred = e;
+    if (!muted() && !inApp()) setTimeout(function(){ if(!mode) show('install','Установить MoziHelper','Работает офлайн, открывается с домашнего экрана','Установить'); }, 2500);
+  });
+  var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+            (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  if (iOS && !inApp() && !muted()) {
+    setTimeout(function(){ if(!mode) show('install','Установить MoziHelper','Нажмите «Поделиться», затем «На экран «Домой»»','Понятно'); }, 3000);
+  }
+
+  /* ── обновление ── */
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.ready.then(function (reg) {
+      function watch(sw){
+        if (!sw) return;
+        sw.addEventListener('statechange', function () {
+          if (sw.state === 'installed' && navigator.serviceWorker.controller) {
+            show('update','Доступно обновление','Новая версия справочника готова','Обновить');
+          }
+        });
+      }
+      watch(reg.installing);
+      reg.addEventListener('updatefound', function(){ watch(reg.installing); });
+      setInterval(function(){ reg.update().catch(function(){}); }, 60 * 60 * 1000);
+    }).catch(function(){});
+  }
+
+  go.addEventListener('click', function () {
+    if (mode === 'update') { location.reload(); return; }
+    if (deferred) { deferred.prompt(); deferred.userChoice.then(function(){ deferred = null; hide(true); }); }
+    else hide(true);
+  });
+  no.addEventListener('click', function(){ hide(mode === 'install'); });
+})();
+</script>
 </body>
 </html>
