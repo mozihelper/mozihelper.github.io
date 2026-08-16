@@ -2,7 +2,7 @@
    Страницы (HTML) берём СНАЧАЛА ИЗ СЕТИ и лишь при её отсутствии из кэша:
    при cache-first обновлённый сайт не доезжал до тех, кто уже заходил.
    Всё остальное (шрифты, PDF, MathJax, иконки) — сначала из кэша, это неизменяемые файлы. */
-const CACHE = 'mozi-v41';
+const CACHE = 'mozi-v43';
 const SHELL = [
   './',
   './index.html',
@@ -15,6 +15,18 @@ const SHELL = [
   './lekcii-sem1.html',
   './lekcii-sem2.html',
   './manifest.webmanifest',
+
+  './splash/splash-1125x2436.png',
+  './splash/splash-1170x2532.png',
+  './splash/splash-1179x2556.png',
+  './splash/splash-1206x2622.png',
+  './splash/splash-1242x2208.png',
+  './splash/splash-1242x2688.png',
+  './splash/splash-1284x2778.png',
+  './splash/splash-1290x2796.png',
+  './splash/splash-1320x2868.png',
+  './splash/splash-750x1334.png',
+  './splash/splash-828x1792.png',
   './icon-192.png',
   './icon-512.png',
   './apple-touch-icon.png'
