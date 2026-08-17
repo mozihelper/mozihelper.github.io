@@ -9,6 +9,30 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;700&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+/* ═══ Old mode: спокойный синий вместо оранжевого ═════════════════
+   Работает поверх любой темы — и тёмной, и светлой. Меняется акцент,
+   шторка перехода и активные элементы. */
+html[data-old="1"][data-theme="dusk"]{
+  --hot:#1877f2; --hot-2:#1877f2; --hot-ink:#fff; --flood:#1877f2;
+  /* карточки и разборы используют свои переменные — красим и их */
+  --ruby:#1877f2; --ruby-light:#4293ff; --ruby-deep:#0d5fd0;
+  --sky:#1877f2;  --sky-light:#4293ff;  --sky-deep:#0d5fd0;
+  --purple:#1877f2; --purple-light:#4293ff; --purple-deep:#0d5fd0;
+  --purple-glow:rgba(24,119,242,.16); --ruby-glow:rgba(24,119,242,.16);
+  --sky-glow:rgba(24,119,242,.16); --glow:rgba(24,119,242,.16);
+  --accent:#1877f2;
+}
+html[data-old="1"][data-theme="paper"]{
+  --hot:#0866ff; --hot-2:#0866ff; --hot-ink:#fff; --flood:#0866ff;
+  --ruby:#0866ff; --ruby-light:#4a92ff; --ruby-deep:#0550cc;
+  --sky:#0866ff;  --sky-light:#4a92ff;  --sky-deep:#0550cc;
+  --purple:#0866ff; --purple-light:#4a92ff; --purple-deep:#0550cc;
+  --purple-glow:rgba(8,102,255,.12); --ruby-glow:rgba(8,102,255,.12);
+  --sky-glow:rgba(8,102,255,.12); --glow:rgba(8,102,255,.12);
+  --accent:#0866ff;
+}
+
+
 [data-theme="dusk"]{
   --bg:#0c0c0e; --bg-2:#141416; --ink:#f2f0ec; --ink-2:#94918b; --ink-3:#5c5a55;
   --rule:#26262a; --hot:#ff4a24; --hot-2:#ff4a24; --hot-ink:#fff; --flood:#ff4a24;
@@ -729,29 +753,6 @@ html[data-fs="l"]  .questions-list,html[data-fs="l"]  .topic-page,
 html[data-fs="l"]  .main,html[data-fs="l"]  .core{zoom:1.12}
 html[data-fs="xl"] .questions-list,html[data-fs="xl"] .topic-page,
 html[data-fs="xl"] .main,html[data-fs="xl"] .core{zoom:1.26}
-
-/* ═══ Old mode: спокойный синий вместо оранжевого ═════════════════
-   Работает поверх любой темы — и тёмной, и светлой. Меняется акцент,
-   шторка перехода и активные элементы. */
-html[data-old="1"][data-theme="dusk"]{
-  --hot:#1877f2; --hot-2:#1877f2; --hot-ink:#fff; --flood:#1877f2;
-  /* карточки и разборы используют свои переменные — красим и их */
-  --ruby:#1877f2; --ruby-light:#4293ff; --ruby-deep:#0d5fd0;
-  --sky:#1877f2;  --sky-light:#4293ff;  --sky-deep:#0d5fd0;
-  --purple:#1877f2; --purple-light:#4293ff; --purple-deep:#0d5fd0;
-  --purple-glow:rgba(24,119,242,.16); --ruby-glow:rgba(24,119,242,.16);
-  --sky-glow:rgba(24,119,242,.16); --glow:rgba(24,119,242,.16);
-  --accent:#1877f2;
-}
-html[data-old="1"][data-theme="paper"]{
-  --hot:#0866ff; --hot-2:#0866ff; --hot-ink:#fff; --flood:#0866ff;
-  --ruby:#0866ff; --ruby-light:#4a92ff; --ruby-deep:#0550cc;
-  --sky:#0866ff;  --sky-light:#4a92ff;  --sky-deep:#0550cc;
-  --purple:#0866ff; --purple-light:#4a92ff; --purple-deep:#0550cc;
-  --purple-glow:rgba(8,102,255,.12); --ruby-glow:rgba(8,102,255,.12);
-  --sky-glow:rgba(8,102,255,.12); --glow:rgba(8,102,255,.12);
-  --accent:#0866ff;
-}
 
 /* Кнопка настроек уходит на время перехода: раньше она оставалась
    поверх шторки и «висела» неподвижно. */
