@@ -12,6 +12,12 @@
   var h = document.documentElement;
   try {
     h.setAttribute('data-theme', localStorage.getItem('la_theme') || 'dusk');
+    /* Оформление применяем сразу, до первой отрисовки: иначе шторка
+       успевала мелькнуть прежним цветом. */
+    if (localStorage.getItem('la_old') === '1') h.setAttribute('data-old','1');
+    if (localStorage.getItem('la_warm') === '1') h.setAttribute('data-warm','1');
+    var _fs = localStorage.getItem('la_fs');
+    if (_fs && _fs !== 'm') h.setAttribute('data-fs', _fs);
     h.setAttribute('data-motion', localStorage.getItem('la_motion') || 'full');
     /* пришли по шторке — открываемся уже закрытыми, без анимаций входа */
     if (sessionStorage.getItem('la_sweep')) {
@@ -11785,6 +11791,11 @@ html[data-old="1"][data-theme="paper"]{
   --sky-glow:rgba(8,102,255,.12); --glow:rgba(8,102,255,.12);
   --accent:#0866ff;
 }
+
+/* Кнопка настроек уходит на время перехода: раньше она оставалась
+   поверх шторки и «висела» неподвижно. */
+#msGear{z-index:90;transition:opacity .2s ease}
+html.sweeping #msGear,html.arriving #msGear{opacity:0;pointer-events:none}
 </style>
 
 <button id="msGear" type="button" aria-label="Настройки">

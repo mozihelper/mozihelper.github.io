@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>MoziHelper</title>
-<script>(function(){var h=document.documentElement;try{h.setAttribute('data-theme',localStorage.getItem('la_theme')||'dusk');h.setAttribute('data-motion',localStorage.getItem('la_motion')||'full');if(sessionStorage.getItem('la_sweep')){sessionStorage.removeItem('la_sweep');h.classList.add('arriving','no-intro');}}catch(e){h.setAttribute('data-theme','dusk');h.setAttribute('data-motion','full');}})();</script>
+<script>(function(){var h=document.documentElement;try{h.setAttribute('data-theme',localStorage.getItem('la_theme')||'dusk');h.setAttribute('data-motion',localStorage.getItem('la_motion')||'full');/* оформление применяем до первой отрисовки, иначе шторка мелькает прежним цветом */if(localStorage.getItem('la_old')==='1')h.setAttribute('data-old','1');if(localStorage.getItem('la_warm')==='1')h.setAttribute('data-warm','1');var _fs=localStorage.getItem('la_fs');if(_fs&&_fs!=='m')h.setAttribute('data-fs',_fs);if(sessionStorage.getItem('la_sweep')){sessionStorage.removeItem('la_sweep');h.classList.add('arriving','no-intro');}}catch(e){h.setAttribute('data-theme','dusk');h.setAttribute('data-motion','full');}})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
@@ -777,6 +777,11 @@ html[data-old="1"][data-theme="paper"]{
   --sky-glow:rgba(8,102,255,.12); --glow:rgba(8,102,255,.12);
   --accent:#0866ff;
 }
+
+/* Кнопка настроек уходит на время перехода: раньше она оставалась
+   поверх шторки и «висела» неподвижно. */
+#msGear{z-index:90;transition:opacity .2s ease}
+html.sweeping #msGear,html.arriving #msGear{opacity:0;pointer-events:none}
 </style>
 
 <button id="msGear" type="button" aria-label="Настройки">
