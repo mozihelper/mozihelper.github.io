@@ -594,6 +594,18 @@ if ('serviceWorker' in navigator) {
   background:var(--hot,#ff4a24);color:var(--hot-ink,#fff);cursor:pointer;white-space:nowrap;}
 .mozi-app .x{background:transparent;color:var(--ink-3,#687081);font-size:1.25rem;padding:2px 6px;font-weight:400;}
 @media (min-width:640px){.mozi-app{left:auto;right:22px;max-width:400px;}}
+
+/* ═══ Тёплый оттенок для чтения перед сном ═══════════════════════
+   Смещает палитру в янтарную сторону: меньше синего свечения, глазам
+   спокойнее ночью. Работает поверх любой темы, переключается отдельно. */
+html[data-warm="1"][data-theme="dusk"]{
+  --bg:#14100c; --bg-2:#1c1712; --ink:#f2e8da; --ink-2:#b0a494; --ink-3:#6d6459;
+  --rule:#2f2820; --topbar-bg:rgba(20,16,12,.88);
+}
+html[data-warm="1"][data-theme="paper"]{
+  --bg:#f7f0e2; --bg-2:#fffaf0; --ink:#191510; --ink-2:#5f574a; --ink-3:#98907f;
+  --rule:#e0d6c2; --topbar-bg:rgba(247,240,226,.88);
+}
 </style>
 
 <div class="mozi-app" id="moziApp" role="dialog" aria-live="polite">
@@ -664,55 +676,23 @@ if ('serviceWorker' in navigator) {
   no.addEventListener('click', function(){ hide(mode === 'install'); });
 })();
 </script>
-
 <script>
-/* Жест «назад»: провести пальцем от левого края экрана.
-   Нужен только в установленном приложении — в браузере такой жест уже есть
-   системный, и дублировать его нельзя, иначе сработает дважды. */
+/* Тёплый оттенок: отдельный переключатель, не связанный с ночь/день.
+   Выбор запоминается. */
 (function () {
-  var standalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
-  if (!standalone || !('ontouchstart' in window)) return;
-
-  var EDGE = 26;        /* насколько близко к краю должно начаться движение */
-  var NEED = 70;        /* насколько далеко провести, чтобы сработало */
-  var x0 = 0, y0 = 0, active = false, moved = 0;
-
-  var hint = document.createElement('div');
-  hint.style.cssText = 'position:fixed;left:0;top:0;bottom:0;width:0;z-index:200;' +
-    'pointer-events:none;background:linear-gradient(90deg,rgba(0,0,0,.28),transparent);' +
-    'opacity:0;transition:opacity .15s ease';
-  document.body.appendChild(hint);
-
-  addEventListener('touchstart', function (e) {
-    if (e.touches.length !== 1) return;
-    var t = e.touches[0];
-    if (t.clientX > EDGE) return;
-    x0 = t.clientX; y0 = t.clientY; active = true; moved = 0;
-  }, { passive: true });
-
-  addEventListener('touchmove', function (e) {
-    if (!active) return;
-    var t = e.touches[0];
-    var dx = t.clientX - x0, dy = Math.abs(t.clientY - y0);
-    if (dy > 40 && dy > dx) { active = false; hint.style.opacity = '0'; hint.style.width = '0'; return; }
-    moved = dx;
-    if (dx > 8) {
-      hint.style.opacity = '1';
-      hint.style.width = Math.min(dx, 120) + 'px';
-    }
-  }, { passive: true });
-
-  function finish() {
-    if (!active) return;
-    active = false;
-    hint.style.opacity = '0';
-    hint.style.width = '0';
-    if (moved >= NEED && history.length > 1) history.back();
-    moved = 0;
+  var H = document.documentElement;
+  function apply(on){
+    if (on) H.setAttribute('data-warm','1'); else H.removeAttribute('data-warm');
+    try { localStorage.setItem('la_warm', on ? '1' : '0'); } catch(e){}
+    var lab = document.getElementById('navWarmLabel');
+    if (lab) lab.textContent = on ? 'Обычные цвета' : 'Тёплый оттенок';
   }
-  addEventListener('touchend', finish, { passive: true });
-  addEventListener('touchcancel', finish, { passive: true });
+  try { if (localStorage.getItem('la_warm') === '1') H.setAttribute('data-warm','1'); } catch(e){}
+  window.toggleWarm = function(){ apply(H.getAttribute('data-warm') !== '1'); };
+  window.updateWarmNavItem = function(){
+    var lab = document.getElementById('navWarmLabel');
+    if (lab) lab.textContent = H.getAttribute('data-warm') === '1' ? 'Обычные цвета' : 'Тёплый оттенок';
+  };
 })();
-</script>
-</body>
+</script></body>
 </html>
