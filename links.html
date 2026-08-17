@@ -561,5 +561,183 @@ html[data-warm="1"][data-theme="paper"]{
     if (lab) lab.textContent = H.getAttribute('data-warm') === '1' ? 'Обычные цвета' : 'Тёплый оттенок';
   };
 })();
-</script></body>
+</script><style>
+/* ═══ Настройки: значок и панель ══════════════════════════════════ */
+#msGear{
+  position:fixed;z-index:140;
+  left:calc(12px + env(safe-area-inset-left,0px));
+  top:calc(10px + env(safe-area-inset-top,0px));
+  width:38px;height:38px;display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--rule,#2a2f38);border-radius:11px;
+  background:var(--bg-2,#15161a);color:var(--ink-2,#a4abb8);cursor:pointer;padding:0;
+}
+#msGear:active{transform:scale(.94)}
+#msGear svg{width:19px;height:19px}
+/* Если у страницы своя шапка — значок встаёт в неё, а не поверх */
+body.ms-inbar #msGear{position:static;margin-right:8px;flex:0 0 auto;}
+
+#msBack{position:fixed;inset:0;z-index:150;background:rgba(0,0,0,.5);
+  opacity:0;pointer-events:none;transition:opacity .25s ease}
+#msBack.on{opacity:1;pointer-events:auto}
+
+#msPanel{
+  position:fixed;z-index:151;left:0;right:0;bottom:0;
+  background:var(--bg-2,#15161a);border-top:1px solid var(--rule,#2a2f38);
+  border-radius:18px 18px 0 0;padding:18px 18px calc(22px + env(safe-area-inset-bottom,0px));
+  transform:translateY(101%);transition:transform .32s cubic-bezier(.3,.02,.2,1);
+  max-height:82vh;overflow-y:auto;
+}
+#msPanel.on{transform:none}
+#msPanel h2{margin:0 0 16px;font-size:1.05rem;color:var(--ink,#eceef2);}
+#msPanel .grp{margin-bottom:20px}
+#msPanel .lbl{font-size:.78rem;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--ink-3,#687081);margin-bottom:9px}
+#msPanel .seg{display:flex;gap:6px;flex-wrap:wrap}
+#msPanel .seg button{flex:1 1 0;min-width:56px;border:1px solid var(--rule,#2a2f38);
+  border-radius:10px;padding:11px 8px;background:transparent;color:var(--ink-2,#a4abb8);
+  font-size:.9rem;cursor:pointer}
+#msPanel .seg button.on{background:var(--hot,#ff4a24);color:var(--hot-ink,#fff);border-color:transparent;font-weight:600}
+#msPanel .row{display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:12px 0;border-top:1px solid var(--rule,#2a2f38)}
+#msPanel .row .t{color:var(--ink,#eceef2);font-size:.94rem}
+#msPanel .row .t i{display:block;font-style:normal;font-size:.8rem;color:var(--ink-3,#687081);margin-top:2px}
+#msPanel .sw{width:48px;height:28px;border-radius:16px;background:var(--rule,#2a2f38);
+  position:relative;cursor:pointer;border:0;flex:0 0 auto}
+#msPanel .sw::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;
+  border-radius:50%;background:#fff;transition:transform .22s ease}
+#msPanel .sw.on{background:var(--hot,#ff4a24)}
+#msPanel .sw.on::after{transform:translateX(20px)}
+#msPanel .done{width:100%;margin-top:6px;border:0;border-radius:12px;padding:13px;
+  background:var(--hot,#ff4a24);color:var(--hot-ink,#fff);font-size:.95rem;font-weight:600;cursor:pointer}
+@media (min-width:640px){
+  #msPanel{left:auto;right:22px;bottom:22px;width:380px;border-radius:18px;
+    border:1px solid var(--rule,#2a2f38);transform:translateY(120%)}
+  #msPanel.on{transform:none}
+}
+/* Размер текста: масштабируется только содержимое, шапки и кнопки не трогаем */
+html[data-fs="s"]  .questions-list,html[data-fs="s"]  .topic-page,
+html[data-fs="s"]  .main,html[data-fs="s"]  .core{zoom:.92}
+html[data-fs="l"]  .questions-list,html[data-fs="l"]  .topic-page,
+html[data-fs="l"]  .main,html[data-fs="l"]  .core{zoom:1.12}
+html[data-fs="xl"] .questions-list,html[data-fs="xl"] .topic-page,
+html[data-fs="xl"] .main,html[data-fs="xl"] .core{zoom:1.26}
+
+/* ═══ Old mode: спокойный синий вместо оранжевого ═════════════════
+   Работает поверх любой темы — и тёмной, и светлой. Меняется акцент,
+   шторка перехода и активные элементы. */
+html[data-old="1"][data-theme="dusk"]{
+  --hot:#1877f2; --hot-2:#1877f2; --hot-ink:#fff; --flood:#1877f2;
+  /* карточки и разборы используют свои переменные — красим и их */
+  --ruby:#1877f2; --ruby-light:#4293ff; --ruby-deep:#0d5fd0;
+  --sky:#1877f2;  --sky-light:#4293ff;  --sky-deep:#0d5fd0;
+  --purple:#1877f2; --purple-light:#4293ff; --purple-deep:#0d5fd0;
+  --purple-glow:rgba(24,119,242,.16); --ruby-glow:rgba(24,119,242,.16);
+  --sky-glow:rgba(24,119,242,.16); --glow:rgba(24,119,242,.16);
+  --accent:#1877f2;
+}
+html[data-old="1"][data-theme="paper"]{
+  --hot:#0866ff; --hot-2:#0866ff; --hot-ink:#fff; --flood:#0866ff;
+  --ruby:#0866ff; --ruby-light:#4a92ff; --ruby-deep:#0550cc;
+  --sky:#0866ff;  --sky-light:#4a92ff;  --sky-deep:#0550cc;
+  --purple:#0866ff; --purple-light:#4a92ff; --purple-deep:#0550cc;
+  --purple-glow:rgba(8,102,255,.12); --ruby-glow:rgba(8,102,255,.12);
+  --sky-glow:rgba(8,102,255,.12); --glow:rgba(8,102,255,.12);
+  --accent:#0866ff;
+}
+</style>
+
+<button id="msGear" type="button" aria-label="Настройки">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1A1.7 1.7 0 0 0 8.9 19a1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1A1.7 1.7 0 0 0 5 8.9a1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9.6a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9.6a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>
+  </svg>
+</button>
+
+<div id="msBack"></div>
+<div id="msPanel" role="dialog" aria-label="Настройки">
+  <h2>Настройки</h2>
+
+  <div class="grp">
+    <div class="lbl">Размер текста</div>
+    <div class="seg" id="msFs">
+      <button data-v="s">Мелкий</button>
+      <button data-v="m">Обычный</button>
+      <button data-v="l">Крупный</button>
+      <button data-v="xl">Очень</button>
+    </div>
+  </div>
+
+  <div class="grp">
+    <div class="lbl">Оформление</div>
+    <div class="row">
+      <div class="t">Тёплый оттенок<i>Меньше синего свечения — для чтения ночью</i></div>
+      <button class="sw" id="msWarm" type="button" aria-label="Тёплый оттенок"></button>
+    </div>
+    <div class="row">
+      <div class="t">Old mode<i>Спокойный синий вместо оранжевого</i></div>
+      <button class="sw" id="msOld" type="button" aria-label="Old mode"></button>
+    </div>
+  </div>
+
+  <button class="done" id="msDone" type="button">Готово</button>
+</div>
+
+<script>
+/* Панель настроек: размер текста, тёплый оттенок, тема.
+   Значок встаёт в шапку страницы, если она есть, иначе — в левый верхний угол. */
+(function () {
+  var H = document.documentElement;
+  var gear = document.getElementById('msGear'),
+      back = document.getElementById('msBack'),
+      panel = document.getElementById('msPanel');
+  if (!gear || !panel) return;
+
+  /* размещение значка */
+  var bar = document.querySelector('.topbar');
+  if (bar) {
+    document.body.classList.add('ms-inbar');
+    bar.insertBefore(gear, bar.firstChild);
+  }
+
+  function open(){ back.classList.add('on'); panel.classList.add('on'); sync(); }
+  function close(){ back.classList.remove('on'); panel.classList.remove('on'); }
+  gear.addEventListener('click', open);
+  back.addEventListener('click', close);
+  document.getElementById('msDone').addEventListener('click', close);
+
+  /* размер текста */
+  var fsWrap = document.getElementById('msFs');
+  function setFs(v){
+    if (v === 'm') H.removeAttribute('data-fs'); else H.setAttribute('data-fs', v);
+    try { localStorage.setItem('la_fs', v); } catch(e){}
+    sync();
+  }
+  fsWrap.addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-v]');
+    if (b) setFs(b.getAttribute('data-v'));
+  });
+  try { var saved = localStorage.getItem('la_fs'); if (saved && saved !== 'm') H.setAttribute('data-fs', saved); } catch(e){}
+
+  /* переключатели */
+  document.getElementById('msWarm').addEventListener('click', function () {
+    if (window.toggleWarm) toggleWarm(); sync();
+  });
+  document.getElementById('msOld').addEventListener('click', function () {
+    var on = H.getAttribute('data-old') === '1';
+    if (on) H.removeAttribute('data-old'); else H.setAttribute('data-old', '1');
+    try { localStorage.setItem('la_old', on ? '0' : '1'); } catch (e) {}
+    sync();
+  });
+  try { if (localStorage.getItem('la_old') === '1') H.setAttribute('data-old', '1'); } catch (e) {}
+
+  function sync(){
+    var cur = H.getAttribute('data-fs') || 'm';
+    var bs = fsWrap.querySelectorAll('button');
+    for (var i = 0; i < bs.length; i++) bs[i].classList.toggle('on', bs[i].getAttribute('data-v') === cur);
+    document.getElementById('msWarm').classList.toggle('on', H.getAttribute('data-warm') === '1');
+    document.getElementById('msOld').classList.toggle('on', H.getAttribute('data-old') === '1');
+  }
+  sync();
+})();
+</script>
+</body>
 </html>
