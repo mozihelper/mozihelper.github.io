@@ -1478,7 +1478,8 @@ details.topic-group .topic-link {
   line-height: 1.7;
 }
 .explain::before {
-  content: '(пояснение) ';
+  /* Правка №110 (замечания, стр. 11): «ПОЯСНЕНИЕ» → «ЗАМЕЧАНИЕ» во всех блоках */
+  content: '(замечание) ';
   color: var(--purple-light);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   font-size: 0.78rem;
@@ -5095,9 +5096,8 @@ html.arriving .topic-header, html.arriving .q-card { opacity: 1; }
       </div>
     </div>
 
-    <div class="explain">
-      Идея формулы для рангов: $\dim\operatorname{Ker}(A - \lambda E)^m$ — общее число векторов в цепочках длины не больше $m$. Разность $\dim\operatorname{Ker}(A - \lambda E)^{m+1} - \dim\operatorname{Ker}(A - \lambda E)^m$ — число цепочек длины $\ge m+1$. Формула получается из чередующейся разности этих величин.
-    </div>
+    <!-- Правка №159 по замечаниям Г. Н. Клюшникова (стр. 16, обведено красным):
+         блок пояснения «Идея формулы для рангов» убран -->
 
 
     <div class="src-ref">Г. Н. Клюшников, лекция «Жордановы нормальные формы»</div>
@@ -8353,13 +8353,15 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
 
     <div class="def-block">
       <div class="def-text">
-        <span class="term">Центральная ПВП</span> — поверхность, имеющая центр симметрии: вместе с любой точкой $(x, y, z)$ принадлежащей поверхности, ей принадлежит и точка, симметричная относительно некоторого фиксированного центра.
+        <!-- Правка №188 по замечаниям Г. Н. Клюшникова (стр. 19, выделено красным):
+             симметричная точка выписана явно, центром считаем начало координат -->
+        <span class="term">Центральная ПВП</span> — поверхность, имеющая центр симметрии: вместе с любой точкой $(x, y, z)$, принадлежащей поверхности, ей принадлежит и точка $(-x, -y, -z)$ (центром считаем начало координат $O(0,0,0)$).
         <br><br>
         В канонической СК с центром в начале координат уравнение центральной ПВП имеет вид
         $$a_{11}x^2 + a_{22}y^2 + a_{33}z^2 + a_{44} = 0$$
         (нет линейных и перекрёстных членов).
         <br><br>
-        <span class="term">Нецентральные ПВП</span> — поверхности, не имеющие единственного центра симметрии (параболоиды, цилиндры с параболической направляющей).
+        <span class="term">Нецентральные ПВП</span> — поверхности, не имеющие единственного центра симметрии (например, параболоиды, цилиндры с параболической направляющей).
       </div>
     </div>
 
@@ -9190,10 +9192,12 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();renderL
       <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Решение</span><span class="deriv-hint"></span></div>
       <div class="deriv-body">
         <div class="def-text">
-          Для уравнения плоскости достаточно точки (это $M_0$) и нормали $n$. Нормаль перпендикулярна любому вектору в плоскости — в частности, направляющему вектору $a(1;-2;1)$ и вектору $M_0-c=(-2;1;-3)$. Составим однородную систему
-          $$\begin{cases}(a,\,n)=x-2y+z=0,\\ (M_0-c,\,n)=-2x+y-3z=0.\end{cases}$$
-          Из первого уравнения $x=2y-z$; подстановка во второе даёт $-3y-z=0$, то есть $z=-3y$, $x=5y$. Решением служит вектор $n(5;1;-3)$. Уравнение $(n,M)=(n,M_0)$:
-          $$\pi\colon\{\,5x+y-3z=5\cdot(-1)+1-3\cdot(-5)=11.$$
+          Для уравнения плоскости достаточно точки (это $M_0$) и нормали $\bar n$. Обозначим её координаты $\bar n\{p;\,q;\,r\}$. Нормаль перпендикулярна любому вектору в плоскости — в частности, направляющему вектору $\bar a\{1;-2;1\}$ и вектору $M_0-c=\{-2;1;-3\}$. Составим однородную систему
+          $$\begin{cases}(\bar a,\,\bar n)=p-2q+r=0,\\ (M_0-c,\,\bar n)=-2p+q-3r=0.\end{cases}$$
+          Из первого уравнения $p=2q-r$; подстановка во второе даёт $-3q-r=0$, то есть $r=-3q$, $p=5q$. При $q=1$ получаем $\bar n\{5;1;-3\}$.
+          <br><br>
+          Точка $M(x;y;z)$ лежит в плоскости тогда и только тогда, когда $(\bar n,\,\overline{OM})=(\bar n,\,\overline{OM_0})$, то есть
+          $$5x+y-3z=5\cdot(-1)+1-3\cdot(-5)=11.$$
         </div>
         <svg class="prax-fig" viewBox="0 0 460 232" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Плоскость через точку M0 и прямую L: нормаль n перпендикулярна направляющему вектору a и вектору M0 минус c">
           <polygon points="58,176 224,104 424,140 258,216" fill="var(--bg-elev)" fill-opacity="0.55" stroke="var(--ink-soft)" stroke-width="1.5"/>
@@ -9290,7 +9294,7 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();renderL
           $$4(x^2-2x)+3(y^2+4y)=32\;\Rightarrow\;4(x-1)^2+3(y+2)^2=48\;\Rightarrow\;\frac{(x-1)^2}{12}+\frac{(y+2)^2}{16}=1.$$
           Это уравнение эллипса с центром $C(1;-2)$. Здесь $a^2=12$, $b^2=16$, то есть полуоси $a=2\sqrt3$ (вдоль $Ox$) и $b=4$ (вдоль $Oy$); так как $b>a$, большая ось направлена по $Oy$, длины осей $2a=4\sqrt3$ и $2b=8$. Тогда $c=\sqrt{b^2-a^2}=2$, фокусы $F_1(1;0)$ и $F_2(1;-4)$, эксцентриситет
           $$\varepsilon=\frac{c}{b}=\frac12.$$
-          Через инварианты: $\delta=\begin{vmatrix}4&0\\0&3\end{vmatrix}=12>0$, $\;\Delta=\begin{vmatrix}4&0&-4\\0&3&6\\-4&6&-32\end{vmatrix}=-576\ne0$, $\;I_1=7$, $\;\Delta\cdot I_1<0$ — эллипс. Каноническое уравнение $\lambda_1x'^2+\lambda_2y'^2+\dfrac{\Delta}{\delta}=0$ даёт $4x'^2+3y'^2=48$ — тот же результат.
+          Через инварианты: $I_2=\begin{vmatrix}4&0\\0&3\end{vmatrix}=12>0$, $\;K_3=\begin{vmatrix}4&0&-4\\0&3&6\\-4&6&-32\end{vmatrix}=-576\ne0$, $\;I_1=7$, $\;I_1 K_3<0$ — эллипс. Каноническое уравнение $\lambda_1x'^2+\lambda_2y'^2+\dfrac{K_3}{I_2}=0$ даёт $4x'^2+3y'^2=48$ — тот же результат.
         </div>
         <svg class="prax-fig" viewBox="0 0 440 483" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Эллипс с центром C(1;−2), большой осью вдоль Oy, фокусами F1(1;0) и F2(1;−4)">
           <line x1="45.1" y1="455.0" x2="45.1" y2="28.3" stroke="var(--border)" stroke-width="1"/>
