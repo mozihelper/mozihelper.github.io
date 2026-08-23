@@ -1479,7 +1479,7 @@ details.topic-group .topic-link {
 }
 .explain::before {
   /* Правка №110 (замечания, стр. 11): «ПОЯСНЕНИЕ» → «ЗАМЕЧАНИЕ» во всех блоках */
-  content: '(замечание) ';
+  content: 'Замечание. ';
   color: var(--purple-light);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   font-size: 0.78rem;
@@ -1584,7 +1584,7 @@ details.topic-group .topic-link {
   font-style: normal;
 }
 .note::before {
-  content: 'NB. ';
+  content: 'Замечание. ';
   color: var(--accent);
   font-weight: 600;
   font-style: normal;
@@ -9175,6 +9175,8 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();renderL
 </div>
 
 <!-- П11 -->
+<!-- Правка (стр. 20, красное): З.11 — вместо буквы c выписаны координаты,
+     обозначение плоскости π убрано, черта над OM заменена стрелкой -->
 <div class="q-card" data-q="111" data-text="практика плоскость через точку и прямую нормаль общее уравнение анно">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">11</span>
@@ -9185,28 +9187,28 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();renderL
     <div class="def-block">
       <div class="section-tag">Условие</div>
       <div class="def-text">
-        Составьте общее уравнение плоскости $\pi$, проходящей через точку $M_0(-1;1;-5)$ и прямую $L=c(1;0;-2)+t\cdot a(1;-2;1)$, заданную параметрически.
+        Составьте общее уравнение плоскости, проходящей через точку $M_0(-1;1;-5)$ и прямую $L=(1;0;-2)+t\,(1;-2;1)$, заданную параметрически.
       </div>
     </div>
     <div class="derivation collapsed">
       <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Решение</span><span class="deriv-hint"></span></div>
       <div class="deriv-body">
         <div class="def-text">
-          Для уравнения плоскости достаточно точки (это $M_0$) и нормали $\bar n$. Обозначим её координаты $\bar n\{p;\,q;\,r\}$. Нормаль перпендикулярна любому вектору в плоскости — в частности, направляющему вектору $\bar a\{1;-2;1\}$ и вектору $M_0-c=\{-2;1;-3\}$. Составим однородную систему
-          $$\begin{cases}(\bar a,\,\bar n)=p-2q+r=0,\\ (M_0-c,\,\bar n)=-2p+q-3r=0.\end{cases}$$
+          Для уравнения плоскости достаточно точки (это $M_0$) и нормали $\bar n$. Обозначим её координаты $\bar n\{p;\,q;\,r\}$. Нормаль перпендикулярна любому вектору в плоскости — в частности, направляющему вектору $\bar a\{1;-2;1\}$ и вектору $M_0-(1;0;-2)=\{-2;1;-3\}$. Составим однородную систему
+          $$\begin{cases}(\bar a,\,\bar n)=p-2q+r=0,\\ \big(M_0-(1;0;-2),\,\bar n\big)=-2p+q-3r=0.\end{cases}$$
           Из первого уравнения $p=2q-r$; подстановка во второе даёт $-3q-r=0$, то есть $r=-3q$, $p=5q$. При $q=1$ получаем $\bar n\{5;1;-3\}$.
           <br><br>
-          Точка $M(x;y;z)$ лежит в плоскости тогда и только тогда, когда $(\bar n,\,\overline{OM})=(\bar n,\,\overline{OM_0})$, то есть
+          Точка $M(x;y;z)$ лежит в плоскости тогда и только тогда, когда $(\bar n,\,\overrightarrow{OM})=(\bar n,\,\overrightarrow{OM_0})$, то есть
           $$5x+y-3z=5\cdot(-1)+1-3\cdot(-5)=11.$$
         </div>
         <svg class="prax-fig" viewBox="0 0 460 232" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Плоскость через точку M0 и прямую L: нормаль n перпендикулярна направляющему вектору a и вектору M0 минус c">
           <polygon points="58,176 224,104 424,140 258,216" fill="var(--bg-elev)" fill-opacity="0.55" stroke="var(--ink-soft)" stroke-width="1.5"/>
-          <text x="70" y="208" font-size="15" fill="var(--ink-soft)" font-family="inherit" text-anchor="start" font-style="italic" font-weight="600">π</text>
+          <text x="70" y="208" font-size="15" fill="var(--ink-soft)" font-family="inherit" text-anchor="start" font-style="italic" font-weight="600">L, M₀</text>
           <line x1="96" y1="172" x2="392" y2="126" stroke="var(--accent)" stroke-width="2.5"/>
           <polygon points="392,126 380,123 382,133" fill="var(--accent)"/>
           <text x="398" y="124" font-size="14" fill="var(--accent)" font-family="inherit" text-anchor="start" font-style="italic" font-weight="600">L</text>
           <circle cx="168" cy="161" r="3.8" fill="var(--ink)"/>
-          <text x="120" y="150" font-size="12" fill="var(--ink)" font-family="inherit" text-anchor="start">c(1;0;−2)</text>
+          <text x="120" y="150" font-size="12" fill="var(--ink)" font-family="inherit" text-anchor="start">(1;0;−2)</text>
           <line x1="238" y1="150" x2="310" y2="139" stroke="var(--ink)" stroke-width="2"/>
           <polygon points="310,139 298,136 300,146" fill="var(--ink)"/>
           <text x="262" y="136" font-size="12" fill="var(--ink)" font-family="inherit" text-anchor="start" font-style="italic">a(1;−2;1)</text>
@@ -10138,19 +10140,19 @@ const BASICS_TERMS = [
   },
   {
     t: 'Скалярное произведение',
-    d: 'Операция $\(x, y\)$, сопоставляющая паре векторов число, со свойствами: симметричность (или эрмитовость), линейность по аргументу, положительная определённость ($\(x, x\) > 0$ при $x \\ne 0$).'
+    d: 'Операция $\\langle x, y\\rangle$, сопоставляющая паре векторов число, со свойствами: симметричность (или эрмитовость), линейность по аргументу, положительная определённость ($\\langle x, x\\rangle > 0$ при $x \\ne 0$).'
   },
   {
     t: 'Евклидово пространство',
-    d: 'Вещественное векторное пространство со скалярным произведением. Позволяет говорить о длинах $|x| = \\sqrt{\(x, x\)}$ и углах между векторами.'
+    d: 'Вещественное векторное пространство со скалярным произведением. Позволяет говорить о длинах $|x| = \\sqrt{\\langle x, x\\rangle}$ и углах между векторами.'
   },
   {
     t: 'Ортогональность',
-    d: 'Векторы ортогональны, если $\(x, y\) = 0$. Ортонормированный базис (ОНБ) — базис из попарно ортогональных векторов единичной длины.'
+    d: 'Векторы ортогональны, если $\\langle x, y\\rangle = 0$. Ортонормированный базис (ОНБ) — базис из попарно ортогональных векторов единичной длины.'
   },
   {
     t: 'Норма (длина) вектора',
-    d: '$|x| = \\sqrt{\(x, x\)}$. Удовлетворяет неравенству треугольника $|x + y| \\le |x| + |y|$ и неравенству Коши–Буняковского $|\(x, y\)| \\le |x|\\,|y|$.'
+    d: '$|x| = \\sqrt{\\langle x, x\\rangle}$. Удовлетворяет неравенству треугольника $|x + y| \\le |x| + |y|$ и неравенству Коши–Буняковского $|\\langle x, y\\rangle| \\le |x|\\,|y|$.'
   },
   {
     t: 'Система линейных уравнений (СЛУ)',
@@ -10395,7 +10397,7 @@ var BASICS_QUIZ = [
       n: 0, q: 'Что такое <b>скалярное произведение</b>?',
       opts: [
         'Произведение длин векторов',
-        'Операция $\(x, y\)$, дающая число, с симметрией, линейностью и положительной определённостью',
+        'Операция $\\langle x, y\\rangle$, дающая число, с симметрией, линейностью и положительной определённостью',
         'Векторное произведение',
         'Сумма координат'
       ],
@@ -10406,7 +10408,7 @@ var BASICS_QUIZ = [
       n: 0, q: 'Когда два вектора <b>ортогональны</b>?',
       opts: [
         'Когда они коллинеарны',
-        'Когда $\(x, y\) = 0$',
+        'Когда $\\langle x, y\\rangle = 0$',
         'Когда имеют равную длину',
         'Когда один из них нулевой'
       ],
@@ -10438,13 +10440,13 @@ var BASICS_QUIZ = [
     {
       n: 0, q: 'Что такое <b>норма (длина)</b> вектора?',
       opts: [
-        '$\(x, x\)$',
-        '$\\sqrt{\(x, x\)}$',
+        '$\\langle x, x\\rangle$',
+        '$\\sqrt{\\langle x, x\\rangle}$',
         'Сумма координат',
         'Наибольшая координата'
       ],
       correct: 1,
-      exp: '$|x| = \\sqrt{\(x, x\)}$. Подчиняется неравенству треугольника и неравенству Коши–Буняковского.'
+      exp: '$|x| = \\sqrt{\\langle x, x\\rangle}$. Подчиняется неравенству треугольника и неравенству Коши–Буняковского.'
     }
   ];
 
@@ -11896,5 +11898,6 @@ html.sweeping #msGear,html.arriving #msGear{opacity:0;pointer-events:none}
   sync();
 })();
 </script>
+<div class="site-credit" style="text-align:center;padding:22px 16px 30px;font-size:13px;line-height:1.5;color:var(--ink-soft,#888)">Разработчик: студент 1-го курса экономического факультета СПбГУ Александр Мозин</div>
 </body>
 </html>

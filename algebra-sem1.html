@@ -1497,7 +1497,7 @@ details.topic-group .topic-link {
 }
 .explain::before {
   /* Правка №110 (замечания, стр. 11): «ПОЯСНЕНИЕ» → «ЗАМЕЧАНИЕ» во всех блоках */
-  content: '(замечание) ';
+  content: 'Замечание. ';
   color: var(--purple-light);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   font-size: 0.78rem;
@@ -1602,7 +1602,7 @@ details.topic-group .topic-link {
   font-style: normal;
 }
 .note::before {
-  content: 'NB. ';
+  content: 'Замечание. ';
   color: var(--accent);
   font-weight: 600;
   font-style: normal;
@@ -3170,7 +3170,7 @@ html.arriving .backdrop,html.arriving .sidebar{
     <div class="def-block">
       <div class="section-tag">Состояния многоатомной молекулы</div>
       <div class="def-text">
-        Молекулу рассматривают как систему частиц (атомных ядер) вблизи положения устойчивого равновесия. Любое малое колебание молекулы есть суперпозиция <span class="em">нормальных колебаний</span>; их частоты во многом определяются внутренней симметрией молекулы. Симметрия молекулярной структуры описывается <span class="term">точечной группой молекулы</span>, а параметры колебаний — её неприводимыми представлениями и характерами.
+        Молекулу рассматривают как систему частиц (атомных ядер) вблизи положения устойчивого равновесия. Любое малое колебание молекулы есть суперпозиция <span class="em">нормальных колебаний</span>; их частоты во многом определяются внутренней симметрией молекулы. Симметрия молекулярной структуры описывается <span class="term">точечной группой молекулы</span>: именно она определяет, какие нормальные колебания возможны и как они связаны между собой.
         <ul class="props">
           <li>молекула воды $\mathrm{H_2O}$ — четверная группа Клейна;</li>
           <li>молекула фосфора $\mathrm{P_4}$ (тетраэдр) — симметрическая группа $S_4$ порядка $24$.</li>
@@ -3289,7 +3289,7 @@ html.arriving .backdrop,html.arriving .sidebar{
     <div class="def-block">
       <div class="section-tag">Пустое множество</div>
       <div class="def-text">
-        <span class="term">Пустое множество</span> $\varnothing$ — множество, совсем не содержащее элементов. По определению оно входит в число подмножеств любого множества: $\varnothing\subseteq S$ для всякого $S$.
+        <span class="term">Пустое множество</span> $\varnothing$ — множество, не содержащее <span class="em">никаких</span> элементов. По определению оно входит в число подмножеств любого множества: $\varnothing\subseteq S$ для всякого $S$.
       </div>
     </div>
 
@@ -3314,7 +3314,7 @@ html.arriving .backdrop,html.arriving .sidebar{
 </div>
 
 <!-- 7. Пересечение, объединение, разность -->
-<div class="q-card" data-q="7" data-text="объединение пересечение разность множеств теоретико-множественные операции">
+<div class="q-card" data-q="7" data-text="объединение пересечение разность множеств теоретико-множественные операции симметрическая разность исключающее или">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">7</span>
     <span class="q-title">Пересечение, объединение, разность двух множеств</span>
@@ -3347,8 +3347,19 @@ html.arriving .backdrop,html.arriving .sidebar{
       </div>
     </div>
 
+    <div class="def-block">
+      <div class="section-tag">Симметрическая разность</div>
+      <div class="def-text">
+        <span class="term">Симметрическая разность</span> множеств $S$ и $T$ — множество элементов, принадлежащих <span class="em">ровно одному</span> из них:
+        $$S\,\triangle\,T = (S\setminus T)\cup(T\setminus S) = (S\cup T)\setminus(S\cap T).$$
+        В отличие от обычной разности, она <span class="em">симметрична</span>: $S\,\triangle\,T = T\,\triangle\,S$.
+      </div>
+    </div>
+
     <div class="explain">
       Связки «и», «или», «не» в определениях операций над множествами в точности соответствуют логическим операциям. «Или» здесь <span class="em">не исключающее</span>: элемент, лежащий сразу в обоих множествах, входит и в объединение. Разность, в отличие от пересечения и объединения, <span class="em">несимметрична</span>: вообще говоря, $S\setminus T\ne T\setminus S$.
+      <br><br>
+      <span class="em">Исключающее «или»</span> — связка «либо одно, либо другое, но не оба сразу»: высказывание «$x\in S$ либо $x\in T$» истинно ровно тогда, когда $x$ лежит в одном из множеств и не лежит в другом. Объединению отвечает обычное («включающее») «или», а исключающему — как раз симметрическая разность.
     </div>
 
     <div class="src-ref">Кострикин, ч. 1, с. 34</div>
@@ -3370,7 +3381,9 @@ html.arriving .backdrop,html.arriving .sidebar{
       <div class="def-text">
         <span class="term">Декартовым (прямым) произведением</span> множеств $X$ и $Y$ называется множество всех <span class="em">упорядоченных пар</span>:
         $$X\times Y = \{(x,y)\mid x\in X,\;y\in Y\}.$$
-        Две пары равны по определению покоординатно: $(x_1,y_1)=(x_2,y_2)\iff x_1=x_2$ и $y_1=y_2$. Для конечных множеств $|X\times Y| = |X|\cdot|Y|$.
+        Две пары равны по определению покоординатно: $(x_1,y_1)=(x_2,y_2)\iff x_1=x_2$ и $y_1=y_2$. Для конечного множества $A$ через $|A|$ обозначают <span class="term">число его элементов</span> (мощность). Каждая пара из $X\times Y$ однозначно задаётся выбором первой координаты из $X$ и второй из $Y$, поэтому для конечных $X$ и $Y$
+        $$|X\times Y| = |X|\cdot|Y|.$$
+        Например, при $|X|=3$ и $|Y|=4$ пар ровно $12$.
       </div>
     </div>
 
@@ -7930,7 +7943,7 @@ html.arriving .backdrop,html.arriving .sidebar{
 <div class="q-card" data-q="149" data-text="теорема существование инвариантных подпространств одномерное двумерное вещественный оператор">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">149</span>
-    <span class="q-title">Теорема о существовании инвариантных подпространств линейного оператора над векторным пространством V над ℝ</span>
+    <span class="q-title">Теорема о существовании инвариантных подпространств линейного оператора над векторным пространством V над <b>ℝ</b></span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -7982,7 +7995,7 @@ html.arriving .backdrop,html.arriving .sidebar{
 <div class="q-card" data-q="151" data-text="скалярное произведение вычисление сумма произведений координат стандартное">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">151</span>
-    <span class="q-title">Скалярное произведение. Вычисление скалярного произведения векторов из ℝⁿ и ℝ³</span>
+    <span class="q-title">Скалярное произведение. Вычисление скалярного произведения векторов из <b>ℝⁿ</b> и <b>ℝ³</b></span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -11043,5 +11056,6 @@ html.sweeping #msGear,html.arriving #msGear{opacity:0;pointer-events:none}
   sync();
 })();
 </script>
+<div class="site-credit" style="text-align:center;padding:22px 16px 30px;font-size:13px;line-height:1.5;color:var(--ink-soft,#888)">Разработчик: студент 1-го курса экономического факультета СПбГУ Александр Мозин</div>
 </body>
 </html>
