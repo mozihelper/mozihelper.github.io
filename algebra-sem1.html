@@ -6611,17 +6611,21 @@ html.arriving .backdrop,html.arriving .sidebar{
     <div class="def-block">
       <div class="section-tag">Определение</div>
       <div class="def-text">
-        Пусть $B:V\times W\to F$ — билинейная форма, $\{e_1,\ldots,e_m\}$ — базис $V$, $\{f_1,\ldots,f_n\}$ — базис $W$. <span class="term">Матрицей формы</span> называется матрица $B=(b_{ij})_{m\times n}$, где
-        $$b_{ij}=B(e_i,f_j).$$
+        Пусть $B:V\times V\to\mathbb{R}$ — билинейная форма, $\{e_1,\ldots,e_n\}$ — базис $V$. <span class="term">Матрицей формы</span> в этом базисе называется матрица $F=(f_{ij})$ порядка $n$, составленная из значений формы на базисных векторах:
+        $$f_{ij}=B(e_i,e_j).$$
+        Матрица определяет форму полностью: зная все $f_{ij}$, можно вычислить $B(v,w)$ для любых векторов.
       </div>
     </div>
 
     <div class="def-block">
       <div class="section-tag">Значение формы</div>
       <div class="def-text">
-        Если $v=\sum x_i e_i$, $w=\sum y_j f_j$, то
-        $$B(v,w)=\sum_{i=1}^{m}\sum_{j=1}^{n}b_{ij}x_i y_j=x^\top B\,y,$$
-        где $x=(x_1,\ldots,x_m)^\top$, $y=(y_1,\ldots,y_n)^\top$.
+        Пусть $v=\sum_i x_i e_i$ и $w=\sum_j y_j e_j$, а $x=(x_1,\ldots,x_n)^\top$, $y=(y_1,\ldots,y_n)^\top$ — их координатные столбцы. Раскроем $B(v,w)$ по билинейности: сначала вынесем коэффициенты из первого аргумента, затем из второго:
+        $$B(v,w)=B\Bigl(\sum_i x_i e_i,\ \sum_j y_j e_j\Bigr)=\sum_i x_i\,B\Bigl(e_i,\ \sum_j y_j e_j\Bigr)=\sum_{i}\sum_{j} x_i\,B(e_i,e_j)\,y_j.$$
+        Но $B(e_i,e_j)=f_{ij}$, поэтому
+        $$B(v,w)=\sum_{i=1}^{n}\sum_{j=1}^{n}f_{ij}\,x_i y_j=x^\top F\,y.$$
+        Если форма симметрична и оба аргумента совпадают, получается матричная запись квадратичной формы:
+        $$B(v,v)=x^\top F\,x.$$
       </div>
     </div>
 
@@ -6667,9 +6671,8 @@ html.arriving .backdrop,html.arriving .sidebar{
     <div class="thm-box">
       <div class="thm-label">Теорема</div>
       <div class="def-text">
-        Пусть $B:V\times W\to F$ — билинейная форма; $C$ — матрица перехода в $V$ от старого базиса $(e_i)$ к новому $(e_k')$ ($e_k'=\sum_i c_{ik}e_i$), $D$ — матрица перехода в $W$ ($f_l'=\sum_j d_{jl}f_j$). Если $B$ — матрица формы в старых базисах, $B'$ — в новых, то
-        $$B'=C^\top B\,D.$$
-        В частном случае $V=W$ с одной матрицей перехода $C$: $\;B'=C^\top B\,C$.
+        Пусть $B:V\times V\to\mathbb{R}$ — билинейная форма, $A$ — матрица перехода от старого базиса $(e_i)$ к новому $(e_k')$, то есть $e_k'=\sum_i a_{ik}e_i$. Если $F$ — матрица формы в старом базисе, $F'$ — в новом, то
+        $$F'=A^\top F A.$$
       </div>
     </div>
 
@@ -6677,11 +6680,15 @@ html.arriving .backdrop,html.arriving .sidebar{
       <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Доказательство</span><span class="deriv-hint"></span></div>
       <div class="deriv-body">
       <div class="def-text">
-        По определению матрицы формы в новых базисах $b_{kl}'=B(e_k',f_l')$. Подставим разложения новых базисных векторов и воспользуемся билинейностью:
-        $$b_{kl}'=B\!\left(\sum_{i}c_{ik}e_i,\ \sum_{j}d_{jl}f_j\right)=\sum_{i}\sum_{j}c_{ik}\,B(e_i,f_j)\,d_{jl}=\sum_{i,j}c_{ik}\,b_{ij}\,d_{jl}.$$
-        Правая часть — покомпонентная запись произведения $C^\top B D$, поэтому $B'=C^\top B D$. При $V=W$ и $D=C$ получаем $B'=C^\top B C$.
+        По определению матрицы формы в новом базисе $f_{kl}'=B(e_k',e_l')$. Подставим разложения новых базисных векторов и воспользуемся билинейностью — сначала по первому аргументу, затем по второму:
+        $$f_{kl}'=B\!\left(\sum_{i}a_{ik}e_i,\ \sum_{j}a_{jl}e_j\right)=\sum_{i}\sum_{j}a_{ik}\,B(e_i,e_j)\,a_{jl}=\sum_{i,j}a_{ik}\,f_{ij}\,a_{jl}.$$
+        В правой части индекс $i$ у первого множителя стоит первым, то есть $a_{ik}=(A^\top)_{ki}$. Значит, это покомпонентная запись произведения $A^\top F A$, откуда $F'=A^\top F A$. $\blacksquare$
       </div>
       </div>
+    </div>
+
+    <div class="note">
+      Тот же вывод проходит и для формы $B:V\times W\to F$, заданной на паре разных пространств. Если $A$ — матрица перехода в $V$, а $D$ — матрица перехода в $W$, то $F'=A^\top F D$. Случай $V=W$, $D=A$ — частный.
     </div>
 
 
@@ -6711,18 +6718,20 @@ html.arriving .backdrop,html.arriving .sidebar{
     <div class="def-block">
       <div class="section-tag">Определение 1 (основное)</div>
       <div class="def-text">
-        Функция $Q:V\to F$ называется <span class="term">квадратичной формой</span>, если существует билинейная форма $B:V\times V\to F$ (не обязательно симметричная) такая, что
-        $$Q(v)=B(v,v)\quad\forall v\in V.$$
+        Функция $q:V\to\mathbb{R}$ называется <span class="term">квадратичной формой</span>, если существует симметричная билинейная форма $f:V\times V\to\mathbb{R}$ такая, что
+        $$q(v)=f(v,v)\quad\forall v\in V.$$
+        В координатах относительно базиса это записывается матрицей формы $A$:
+        $$q(x)=x^\top A\,x=\sum_{i,j=1}^{n}a_{ij}x_i x_j,\qquad a_{ij}=a_{ji}.$$
       </div>
     </div>
 
     <div class="def-block">
-      <div class="section-tag">Определение 2 (при char F ≠ 2)</div>
+      <div class="section-tag">Эквивалентное описание</div>
       <div class="def-text">
         Квадратичная форма характеризуется свойствами:
         <ul class="props">
-          <li>$Q(\lambda v)=\lambda^2 Q(v)$ для всех $\lambda\in F$, $v\in V$;</li>
-          <li>функция $B(v,w)=\dfrac{1}{2}\bigl[Q(v+w)-Q(v)-Q(w)\bigr]$ является билинейной (и автоматически симметричной).</li>
+          <li>$q(\lambda v)=\lambda^2 q(v)$ для всех $\lambda\in\mathbb{R}$, $v\in V$;</li>
+          <li>функция $f(v,w)=\dfrac{1}{2}\bigl[q(v+w)-q(v)-q(w)\bigr]$ является билинейной (и автоматически симметричной).</li>
         </ul>
       </div>
     </div>
@@ -6767,10 +6776,10 @@ html.arriving .backdrop,html.arriving .sidebar{
       <div class="def-text">
         Между квадратичными формами и симметричными билинейными формами на $V$ существует взаимно однозначное соответствие:
         <ul class="props">
-          <li><span class="em">поляризация</span> (от квадратичной к симметричной билинейной): $\;B_Q(v,w)=\dfrac{1}{2}\bigl[Q(v+w)-Q(v)-Q(w)\bigr]$;</li>
-          <li><span class="em">от билинейной к квадратичной:</span> $\;Q_B(v)=B(v,v)$.</li>
+          <li><span class="em">поляризация</span> (от квадратичной к симметричной билинейной): $\;f_q(v,w)=\dfrac{1}{2}\bigl[q(v+w)-q(v)-q(w)\bigr]$;</li>
+          <li><span class="em">от билинейной к квадратичной:</span> $\;q_f(v)=f(v,v)$.</li>
         </ul>
-        Эти отображения взаимно обратны: $Q_{B_Q}=Q$ и $B_{Q_B}=B$.
+        Эти отображения взаимно обратны: $q_{f_q}=q$ и $f_{q_f}=f$. Поэтому симметричную билинейную форму и отвечающую ей квадратичную можно считать двумя записями одного объекта: по любой из них однозначно восстанавливается другая, и матрица у них одна и та же.
       </div>
     </div>
 
@@ -6811,7 +6820,7 @@ html.arriving .backdrop,html.arriving .sidebar{
 <div class="q-card" data-q="107" data-text="диагональный канонический вид квадратичной билинейной формы лагранж невырожденная замена">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">107</span>
-    <span class="q-title">Диагональный вид квадратичной формы. Диагональный вид билинейной формы</span>
+    <span class="q-title">Диагональный вид билинейной формы. Диагональный вид квадратичной формы</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -6827,12 +6836,6 @@ html.arriving .backdrop,html.arriving .sidebar{
       </div>
     </div>
 
-    <div class="thm-box">
-      <div class="thm-label">Теорема (метод Лагранжа)</div>
-      <div class="def-text">
-        Всякую квадратичную форму над полем характеристики, отличной от 2, можно привести к диагональному виду с помощью невырожденной линейной замены переменных.
-      </div>
-    </div>
 
     <div class="def-block">
       <div class="section-tag">Диагональный вид билинейной формы</div>
@@ -6934,6 +6937,10 @@ html.arriving .backdrop,html.arriving .sidebar{
       </div>
     </div>
 
+    <div class="note">
+      Теорема доказывается <span class="em">конструктивно</span>: метод Лагранжа (вопрос 110) не только доказывает существование такого базиса, но и явно его строит — последовательным выделением полных квадратов. Поэтому доказательство теоремы и есть описание метода; отдельного неконструктивного рассуждения не требуется.
+    </div>
+
 
     <div class="src-ref">Кострикин, ч. 2, с. 46–47</div>
   </div>
@@ -6951,7 +6958,7 @@ html.arriving .backdrop,html.arriving .sidebar{
     <div class="def-block">
       <div class="section-tag">Алгоритм (конструктивное доказательство)</div>
       <div class="def-text">
-        Дана квадратичная форма от $n$ переменных над полем характеристики $\neq 2$: $\;Q(x_1,\ldots,x_n)=\sum_{i,j=1}^{n}a_{ij}x_i x_j$, $a_{ij}=a_{ji}$.
+        Дана квадратичная форма от $n$ вещественных переменных: $\;q(x_1,\ldots,x_n)=\sum_{i,j=1}^{n}a_{ij}x_i x_j$, $a_{ij}=a_{ji}$.
         <br><span class="em">Шаг 1.</span> Если $Q\equiv 0$ — процесс завершён; иначе переходим к шагу 2.
         <br><span class="em">Шаг 2, случай A:</span> существует переменная с ненулевым квадратным коэффициентом $a_{kk}\neq 0$ (без ограничения общности $k=1$). Выделяем все члены с $x_1$:
         $$Q=a_{11}x_1^2+2x_1(a_{12}x_2+\cdots+a_{1n}x_n)+Q_1(x_2,\ldots,x_n),$$
@@ -7041,7 +7048,7 @@ html.arriving .backdrop,html.arriving .sidebar{
 </div>
 
 <!-- 114. Классификация квадратичных форм -->
-<div class="q-card" data-q="114" data-text="классификация квадратичных форм положительно отрицательно определённая неопределённая полуопределённая сигнатура индекс инерции">
+<div class="q-card" data-q="114" data-text="классификация квадратичных форм положительно отрицательно определённая неопределённая сигнатура индекс инерции">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">114</span>
     <span class="q-title">Классификация квадратичных форм (с примерами)</span>
@@ -7075,9 +7082,9 @@ html.arriving .backdrop,html.arriving .sidebar{
       <div class="section-tag">II. Вырожденные формы ($r\lt n$)</div>
       <div class="def-text">
         <ul class="props">
-          <li><span class="em">положительно полуопределённые</span> — $p=r,\;s=0$; пример $x_1^2+x_2^2$ в $\mathbb{R}^3$ ($r=2,\;p=2,\;s=0$);</li>
-          <li><span class="em">отрицательно полуопределённые</span> — $p=0,\;s=r$; пример $-x_1^2-x_2^2$ в $\mathbb{R}^3$;</li>
-          <li><span class="em">неопределённые вырожденные</span> — $p\gt 0,\;s\gt 0$; пример $x_1^2-x_2^2$ в $\mathbb{R}^3$ ($r=2,\;p=1,\;s=1$).</li>
+          <li>$p=r,\;s=0$: форма принимает только неотрицательные значения, но обращается в нуль не только на нулевом векторе; пример $x_1^2+x_2^2$ в $\mathbb{R}^3$ ($r=2$);</li>
+          <li>$p=0,\;s=r$: симметрично, пример $-x_1^2-x_2^2$ в $\mathbb{R}^3$;</li>
+          <li>$p\gt 0,\;s\gt 0$: форма меняет знак; пример $x_1^2-x_2^2$ в $\mathbb{R}^3$ ($r=2,\;p=1,\;s=1$).</li>
         </ul>
       </div>
     </div>
