@@ -6086,7 +6086,15 @@ html.arriving .backdrop,html.arriving .sidebar{
       <div class="def-text">
         Пусть в $n$-мерном пространстве $V$ заданы два базиса $E=\{e_1,\ldots,e_n\}$ и $F=\{f_1,\ldots,f_n\}$. Если векторы нового базиса $F$ выражаются через старый базис $E$ формулами
         $$f_j=\sum_{i=1}^{n}c_{ij}e_i,\quad j=1,\ldots,n,$$
-        то квадратная матрица $C=(c_{ij})$ порядка $n$ называется <span class="term">матрицей перехода от базиса $E$ к базису $F$</span>. Столбцы матрицы $C$ — это координаты векторов $f_j$ в базисе $E$. Матричная запись: $F=EC$.
+        то квадратная матрица $C=(c_{ij})$ порядка $n$ называется <span class="term">матрицей перехода от базиса $E$ к базису $F$</span>. Столбцы матрицы $C$ — это координаты векторов $f_j$ в базисе $E$.
+        <br><br>
+        Если записать базисы строками из векторов, соотношение принимает вид
+        $$F=EC,\qquad\text{откуда}\qquad E=FC^{-1}$$
+        (матрица перехода невырождена, поэтому $C^{-1}$ существует). Переход между базисами удобно изображать стрелкой:
+        $$e_1,\ldots,e_n\;\xrightarrow{\;C\;}\;e_1',\ldots,e_n'.$$
+        Координаты вектора при этом преобразуются <span class="em">в обратную сторону</span>: если $x$ — столбец координат в старом базисе, а $x'$ — в новом, то
+        $$x=Cx',\qquad x'=C^{-1}x.$$
+        Причина в том, что вектор один и тот же: $Ex=x_1e_1+\ldots+x_ne_n=F x'=ECx'$, и из единственности разложения по базису $x=Cx'$.
       </div>
     </div>
 
@@ -6305,13 +6313,19 @@ html.arriving .backdrop,html.arriving .sidebar{
       <div class="def-text">
         Для суммы $U_1+U_2+\cdots+U_k$ следующие условия эквивалентны:
         <ol style="padding-left:1.4rem;margin:0.5rem 0;">
-          <li>сумма является прямой (по определению);</li>
+          <li>сумма является прямой;</li>
           <li>из равенства $u_1+u_2+\cdots+u_k=0$, где $u_i\in U_i$, следует $u_1=u_2=\cdots=u_k=0$;</li>
           <li>для любого $i=1,2,\ldots,k$ выполняется
             $$U_i\cap(U_1+\cdots+U_{i-1}+U_{i+1}+\cdots+U_k)=\{0\}$$
             (пересечение каждого подпространства с суммой всех остальных тривиально).</li>
         </ol>
       </div>
+    </div>
+
+    <div class="note">
+      При $k\ge 3$ попарной тривиальности пересечений <span class="em">недостаточно</span>: из $U_i\cap U_j=\{0\}$ при всех $i\neq j$ прямота суммы не следует. Пример: в $\mathbb{R}^2$ возьмём три различные прямые через начало координат
+      $$U_1=\langle(1,0)\rangle,\qquad U_2=\langle(0,1)\rangle,\qquad U_3=\langle(1,1)\rangle.$$
+      Любые две из них пересекаются только по нулю, однако $(1,0)+(0,1)-(1,1)=0$ — нетривиальное представление нуля. Сумма $U_1+U_2+U_3=\mathbb{R}^2$ не является прямой: её размерность $2$, а сумма размерностей слагаемых равна $3$. Поэтому в условии 3 и берётся пересечение с суммой <span class="em">всех</span> остальных подпространств, а не с каждым по отдельности.
     </div>
 
 
@@ -6366,7 +6380,7 @@ html.arriving .backdrop,html.arriving .sidebar{
   <div class="questions-list">
 
 <!-- 93. Полилинейное отображение -->
-<div class="q-card" data-q="93" data-text="полилинейное отображение n-линейное линейно по каждому аргументу фиксированные">
+<div class="q-card" data-q="93" data-text="полилинейное отображение линейно по каждому аргументу фиксированные">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">93</span>
     <span class="q-title">Полилинейное отображение</span>
@@ -6379,7 +6393,7 @@ html.arriving .backdrop,html.arriving .sidebar{
       <div class="def-text">
         Пусть $V_1,V_2,\ldots,V_n$ и $W$ — векторные пространства над одним полем. Отображение
         $$\varphi:V_1\times V_2\times\cdots\times V_n\to W$$
-        называется <span class="term">полилинейным</span> ($n$-линейным), если для каждого индекса $i$ ($1\le i\le n$) и любых фиксированных $a_1\in V_1,\ldots,a_{i-1}\in V_{i-1},a_{i+1}\in V_{i+1},\ldots,a_n\in V_n$ отображение
+        называется <span class="term">полилинейным</span>, если для каждого индекса $i$ ($1\le i\le n$) и любых фиксированных $a_1\in V_1,\ldots,a_{i-1}\in V_{i-1},a_{i+1}\in V_{i+1},\ldots,a_n\in V_n$ отображение
         $$x\mapsto\varphi(a_1,\ldots,a_{i-1},x,a_{i+1},\ldots,a_n)$$
         является линейным отображением из $V_i$ в $W$. Иначе говоря, $\varphi$ линейно по каждому аргументу при фиксированных остальных.
       </div>
@@ -6391,7 +6405,7 @@ html.arriving .backdrop,html.arriving .sidebar{
 </div>
 
 <!-- 94. Полилинейная форма -->
-<div class="q-card" data-q="94" data-text="полилинейная форма n-линейная форма значения в поле линейная форма">
+<div class="q-card" data-q="94" data-text="полилинейная форма значения вещественные линейная форма">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">94</span>
     <span class="q-title">Полилинейная форма</span>
@@ -6402,11 +6416,11 @@ html.arriving .backdrop,html.arriving .sidebar{
     <div class="def-block">
       <div class="section-tag">Определение</div>
       <div class="def-text">
-        Пусть $V_1,V_2,\ldots,V_n$ — векторные пространства над одним полем $F$. Отображение
-        $$f:V_1\times V_2\times\cdots\times V_n\to F$$
-        называется <span class="term">$n$-линейной (полилинейной) формой</span>, если при фиксированных значениях всех аргументов, кроме одного, оно линейно по этому аргументу: для любого $i$ ($1\le i\le n$) и любых фиксированных $a_j\in V_j$ ($j\neq i$) функция
+        Пусть $V$ — векторное пространство над $\mathbb{R}$. Отображение
+        $$f:\underbrace{V\times V\times\cdots\times V}_{n}=V^{\,n}\to\mathbb{R}$$
+        называется <span class="term">полилинейной формой</span>, если при фиксированных значениях всех аргументов, кроме одного, оно линейно по этому аргументу: для любого $i$ ($1\le i\le n$) и любых фиксированных $a_j\in V$ ($j\neq i$) функция
         $$\varphi_i(x)=f(a_1,\ldots,a_{i-1},x,a_{i+1},\ldots,a_n)$$
-        является линейной формой на $V_i$.
+        является линейной формой на $V$. При $n=2$ получается билинейная форма, при $n=1$ — обычная линейная форма.
       </div>
     </div>
 
@@ -6427,7 +6441,7 @@ html.arriving .backdrop,html.arriving .sidebar{
     <div class="def-block">
       <div class="section-tag">Симметричная форма</div>
       <div class="def-text">
-        Пусть $V$ — векторное пространство над полем $F$ характеристики, отличной от 2, и $f:\underbrace{V\times\cdots\times V}_{n}\to F$ — $n$-линейная форма. Форма $f$ называется <span class="term">симметричной</span>, если для любой перестановки $\sigma\in S_n$
+        Пусть $V$ — векторное пространство над $\mathbb{R}$ и $f:\underbrace{V\times\cdots\times V}_{n}\to\mathbb{R}$ — полилинейная форма. Форма $f$ называется <span class="term">симметричной</span>, если для любой перестановки $\sigma\in S_n$
         $$f(v_{\sigma(1)},\ldots,v_{\sigma(n)})=f(v_1,\ldots,v_n)\quad\forall v_1,\ldots,v_n\in V.$$
         Эквивалентно (достаточно проверки на транспозициях):
         $$f(\ldots,v_i,\ldots,v_j,\ldots)=f(\ldots,v_j,\ldots,v_i,\ldots)\quad\forall\,1\le i\lt j\le n.$$
@@ -6528,7 +6542,7 @@ html.arriving .backdrop,html.arriving .sidebar{
       <div class="section-tag">Следствия</div>
       <div class="def-text">
         <ul class="props">
-          <li>$B(0,w)=0$ и $B(v,0)=0$ для любых $v,w$ (подстановка нулевого вектора);</li>
+          <li>$B(0,w)=0$ и $B(v,0)=0$ для любых $v,w$. Действительно, по линейности по первому аргументу $B(0,w)=B(0\cdot 0,w)=0\cdot B(0,w)=0$; для второго аргумента рассуждение то же;</li>
           <li>в координатах относительно базиса $\;B(v,w)=[v]^{\top}B\,[w]$, где $B=(b_{ij})$, $b_{ij}=B(e_i,e_j)$ — матрица формы;</li>
           <li>при замене базиса с матрицей перехода $C$ матрица формы преобразуется по закону $\;B'=C^{\top}B\,C$.</li>
         </ul>
@@ -7074,7 +7088,7 @@ html.arriving .backdrop,html.arriving .sidebar{
 </div>
 
 <!-- 115. Угловые миноры -->
-<div class="q-card" data-q="115" data-text="угловые главные миноры матрицы квадратичной формы левые верхние подматрицы определители">
+<div class="q-card" data-q="115" data-text="угловые миноры матрицы квадратичной формы левые верхние подматрицы определители">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">115</span>
     <span class="q-title">Угловые миноры матрицы квадратичной формы</span>
@@ -7085,7 +7099,7 @@ html.arriving .backdrop,html.arriving .sidebar{
     <div class="def-block">
       <div class="section-tag">Определение</div>
       <div class="def-text">
-        Пусть $Q(x)=x^\top A x$ с симметричной матрицей $A=(a_{ij})$ размера $n\times n$. <span class="term">Угловыми (главными) минорами</span> матрицы $A$ называются определители её левых верхних подматриц:
+        Пусть $Q(x)=x^\top A x$ с симметричной матрицей $A=(a_{ij})$ размера $n\times n$. <span class="term">Угловыми минорами</span> матрицы $A$ называются определители её левых верхних подматриц:
         $$\Delta_1=a_{11},\quad \Delta_2=\begin{vmatrix}a_{11} & a_{12}\\a_{21} & a_{22}\end{vmatrix},\quad \Delta_3=\begin{vmatrix}a_{11} & a_{12} & a_{13}\\a_{21} & a_{22} & a_{23}\\a_{31} & a_{32} & a_{33}\end{vmatrix},\;\ldots,\;\Delta_n=\det A.$$
       </div>
     </div>
@@ -7096,7 +7110,7 @@ html.arriving .backdrop,html.arriving .sidebar{
 </div>
 
 <!-- 116. Критерий Сильвестра (положительная определённость) -->
-<div class="q-card" data-q="116" data-text="критерий сильвестра положительная определённость главные угловые миноры положительны">
+<div class="q-card" data-q="116" data-text="критерий сильвестра положительная определённость угловые миноры положительны">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">116</span>
     <span class="q-title">Критерий Сильвестра положительной определённости квадратичной формы</span>
@@ -7107,7 +7121,7 @@ html.arriving .backdrop,html.arriving .sidebar{
     <div class="thm-box">
       <div class="thm-label">Критерий Сильвестра</div>
       <div class="def-text">
-        Квадратичная форма $q$ на $n$-мерном вещественном векторном пространстве $V$ является <span class="term">положительно определённой</span> тогда и только тогда, когда все её угловые (главные) миноры положительны.
+        Квадратичная форма $q$ на $n$-мерном вещественном векторном пространстве $V$ является <span class="term">положительно определённой</span> тогда и только тогда, когда все её угловые миноры положительны.
       </div>
     </div>
 
@@ -7128,7 +7142,7 @@ html.arriving .backdrop,html.arriving .sidebar{
     <div class="thm-box">
       <div class="thm-label">Критерий Сильвестра (отрицательная определённость)</div>
       <div class="def-text">
-        Квадратичная форма $Q(x)=x^\top A x$ с симметричной матрицей $A$ отрицательно определена тогда и только тогда, когда её угловые (главные) миноры $\Delta_k$ удовлетворяют условиям
+        Квадратичная форма $Q(x)=x^\top A x$ с симметричной матрицей $A$ отрицательно определена тогда и только тогда, когда её угловые миноры $\Delta_k$ удовлетворяют условиям
         $$\Delta_1\lt 0,\quad \Delta_2\gt 0,\quad \Delta_3\lt 0,\quad \Delta_4\gt 0,\quad\ldots,$$
         то есть миноры чётного порядка положительны, а нечётного порядка — отрицательны.
       </div>
