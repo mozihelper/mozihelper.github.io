@@ -5005,9 +5005,29 @@ html.arriving .backdrop,html.arriving .sidebar{
           <li>$\operatorname{rang}A^T=\operatorname{rang}A$;</li>
           <li>$\operatorname{rang}(\lambda A)=\operatorname{rang}A,\;\lambda\neq 0$;</li>
           <li>$\operatorname{rang}(AB)\le\operatorname{rang}A,\quad \operatorname{rang}(AB)\le\operatorname{rang}B$;</li>
-          <li>$\operatorname{rang}(A+B)\le\operatorname{rang}A+\operatorname{rang}B$.</li>
+          <li>$\operatorname{rang}(A+B)\le\operatorname{rang}A+\operatorname{rang}B$;</li>
+          <li>$\operatorname{rang}(A^TA)=\operatorname{rang}A$;</li>
+          <li>$\operatorname{rang}(AB)=\operatorname{rang}A$, если $B$ квадратная и $\det B\neq 0$.</li>
         </ul>
       </div>
+    </div>
+
+    <div class="derivation">
+      <div class="derivation-title" onclick="toggleProof(this)"><span>Доказательство двух последних свойств</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
+      <div class="def-text">
+        <span class="em">$\operatorname{rang}(A^TA)=\operatorname{rang}A$.</span> Достаточно показать, что системы $Ax=0$ и $A^TAx=0$ имеют одно и то же множество решений. Если $Ax=0$, то и $A^TAx=0$. Обратно, пусть $A^TAx=0$; умножим слева на $x^T$:
+        $$x^TA^TAx=(Ax)^T(Ax)=\|Ax\|^2=0,$$
+        откуда $Ax=0$. Значит, ядра совпадают, и по теореме о связи размерностей (вопрос 63)
+        $$n-\operatorname{rang}(A^TA)=n-\operatorname{rang}A.$$
+        <br><br>
+        <span class="em">$\operatorname{rang}(AB)=\operatorname{rang}A$ при $\det B\neq 0$.</span> По общему свойству $\operatorname{rang}(AB)\le\operatorname{rang}A$. С другой стороны, $B$ обратима, поэтому $A=(AB)B^{-1}$, и по тому же свойству $\operatorname{rang}A\le\operatorname{rang}(AB)$. Из двух неравенств следует равенство. $\blacksquare$
+      </div>
+      </div>
+    </div>
+
+    <div class="note">
+      Ранг можно определять двумя способами: как максимальное число линейно независимых строк (столбцов) матрицы и как наибольший порядок отличного от нуля минора. Второй способ удобен для вычислений — по методу окаймляющих миноров (вопрос 79): найдя ненулевой минор порядка $k$, достаточно проверить только окаймляющие его миноры порядка $k+1$, а не все подряд.
     </div>
 
 
@@ -5588,6 +5608,41 @@ html.arriving .backdrop,html.arriving .sidebar{
       <div class="def-text">
         Для $A=\begin{pmatrix}a_{11} & a_{12} & a_{13}\\a_{21} & a_{22} & a_{23}\\a_{31} & a_{32} & a_{33}\end{pmatrix}$:
         $$\begin{aligned}\det A={}&a_{11}a_{22}a_{33}+a_{12}a_{23}a_{31}+a_{13}a_{21}a_{32}\\&-a_{13}a_{22}a_{31}-a_{11}a_{23}a_{32}-a_{12}a_{21}a_{33}.\end{aligned}$$
+        <br>
+        Слагаемые удобно запоминать по рисунку: со знаком «плюс» берутся главная диагональ и два треугольника с основаниями, ей параллельными; со знаком «минус» — побочная диагональ и два треугольника, параллельные ей.
+        <div class="fig-block" style="text-align:center;margin:0.6rem 0">
+        <svg viewBox="0 0 420 190" style="max-width:420px;width:100%" xmlns="http://www.w3.org/2000/svg">
+          <g font-size="15" fill="currentColor" text-anchor="middle">
+            <text x="42" y="150" font-weight="600" font-size="13">со знаком «+»</text>
+            <text x="290" y="150" font-weight="600" font-size="13">со знаком «−»</text>
+          </g>
+          <g stroke="currentColor" stroke-width="1.6" fill="none" opacity="0.85">
+            <path d="M18 30 L66 66 L114 102"/>
+            <path d="M66 30 L114 66 L18 66 Z"/>
+            <path d="M114 30 L18 102 L66 102 Z" opacity="0"/>
+            <path d="M114 30 L66 102 L18 66" opacity="0"/>
+            <path d="M18 102 L66 102 L114 66 Z"/>
+          </g>
+          <g stroke="currentColor" stroke-width="1.6" fill="none" opacity="0.85">
+            <path d="M266 102 L314 66 L362 30"/>
+            <path d="M266 30 L314 66 L362 66 Z" opacity="0"/>
+            <path d="M266 66 L314 30 L362 66 Z"/>
+            <path d="M266 66 L314 102 L362 102 Z" opacity="0"/>
+            <path d="M266 102 L314 102 L362 66 Z" opacity="0"/>
+            <path d="M266 30 L314 30 L362 66 Z" opacity="0"/>
+            <path d="M266 66 L314 102 L362 30" opacity="0"/>
+            <path d="M362 102 L314 102 L266 66 Z"/>
+          </g>
+          <g fill="currentColor">
+            <circle cx="18" cy="30" r="3.6"/><circle cx="66" cy="30" r="3.6"/><circle cx="114" cy="30" r="3.6"/>
+            <circle cx="18" cy="66" r="3.6"/><circle cx="66" cy="66" r="3.6"/><circle cx="114" cy="66" r="3.6"/>
+            <circle cx="18" cy="102" r="3.6"/><circle cx="66" cy="102" r="3.6"/><circle cx="114" cy="102" r="3.6"/>
+            <circle cx="266" cy="30" r="3.6"/><circle cx="314" cy="30" r="3.6"/><circle cx="362" cy="30" r="3.6"/>
+            <circle cx="266" cy="66" r="3.6"/><circle cx="314" cy="66" r="3.6"/><circle cx="362" cy="66" r="3.6"/>
+            <circle cx="266" cy="102" r="3.6"/><circle cx="314" cy="102" r="3.6"/><circle cx="362" cy="102" r="3.6"/>
+          </g>
+        </svg>
+        </div>
       </div>
     </div>
 
@@ -5598,6 +5653,11 @@ html.arriving .backdrop,html.arriving .sidebar{
         $$\det A=\sum_{k=1}^{n}a_{ik}A_{ik}=\sum_{k=1}^{n}(-1)^{i+k}a_{ik}M_{ik}\quad(\text{по строке }i),$$
         $$\det A=\sum_{k=1}^{n}a_{kj}A_{kj}=\sum_{k=1}^{n}(-1)^{k+j}a_{kj}M_{kj}\quad(\text{по столбцу }j),$$
         где $M_{ik}$ — минор элемента $a_{ik}$, а $A_{ik}=(-1)^{i+k}M_{ik}$ — его алгебраическое дополнение.
+        <br><br>
+        Важно, что элементы берутся с алгебраическими дополнениями <span class="em">своей</span> строки. Если же взять элементы $i$-й строки, а дополнения — $j$-й ($j\neq i$), сумма обратится в нуль:
+        $$\sum_{k=1}^{n}a_{ik}A_{jk}=\delta_{ij}\det A,\qquad
+        \delta_{ij}=\begin{cases}1,& i=j,\\ 0,& i\neq j.\end{cases}$$
+        Причина простая: при $i\neq j$ эта сумма есть разложение по $j$-й строке определителя матрицы, у которой $j$-я строка заменена на $i$-ю. В такой матрице две одинаковые строки, значит её определитель равен нулю. Именно это равенство даёт $A\widetilde{A}=\det A\cdot E$ (вопрос 76).
       </div>
     </div>
 
@@ -5734,6 +5794,15 @@ html.arriving .backdrop,html.arriving .sidebar{
       </div>
     </div>
 
+    <div class="def-block">
+      <div class="section-tag">Следствие</div>
+      <div class="def-text">
+        Из равенства $A^{-1}=\dfrac{\widetilde{A}}{\det A}$ сразу получается основное свойство союзной матрицы:
+        $$A\widetilde{A}=\widetilde{A}A=\det A\cdot E.$$
+        Оно верно для <span class="em">любой</span> квадратной матрицы, в том числе вырожденной: при $\det A=0$ обе части обращаются в нулевую матрицу.
+      </div>
+    </div>
+
 
     <div class="src-ref">Кострикин, ч. 1, с. 121–122</div>
   </div>
@@ -5807,7 +5876,7 @@ html.arriving .backdrop,html.arriving .sidebar{
     <div class="def-block">
       <div class="section-tag">Определение</div>
       <div class="def-text">
-        Минор $M'$ называется <span class="term">окаймляющим</span> для минора $M$, если $M'$ получается из $M$ приписыванием одной крайней строки (первой или последней) и одного крайнего столбца.
+        Минор $M$ порядка $k$ получается из матрицы $A$ вычёркиванием всех строк и столбцов, кроме выбранных $k$ строк и $k$ столбцов. Минор $M'$ порядка $k+1$ называется <span class="term">окаймляющим</span> для $M$, если он получается из матрицы $A$ вычёркиванием на одну строку и на один столбец меньше, то есть все строки и столбцы минора $M$ входят и в $M'$.
       </div>
     </div>
 
@@ -5971,7 +6040,7 @@ html.arriving .backdrop,html.arriving .sidebar{
     <div class="def-block">
       <div class="section-tag">Формально</div>
       <div class="def-text">
-        Если $\dim V=n$ и векторы $v_1,\ldots,v_k$ ($k\le n$) линейно независимы, то существуют векторы $v_{k+1},\ldots,v_n$ такие, что система $\{v_1,\ldots,v_k,v_{k+1},\ldots,v_n\}$ образует базис $V$.
+        Если $k<n=\dim V$ и векторы $v_1,\ldots,v_k$ линейно независимы, то существуют векторы $v_{k+1},\ldots,v_n$ такие, что система $\{v_1,\ldots,v_k,v_{k+1},\ldots,v_n\}$ образует базис $V$.
       </div>
     </div>
 
@@ -5981,7 +6050,7 @@ html.arriving .backdrop,html.arriving .sidebar{
 </div>
 
 <!-- 85. Координаты вектора в базисе -->
-<div class="q-card" data-q="85" data-text="координаты вектора в базисе упорядоченный базис единственный набор разложение">
+<div class="q-card" data-q="85" data-text="координаты вектора в базисе единственный набор разложение">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">85</span>
     <span class="q-title">Координаты вектора в данном базисе</span>
@@ -5992,7 +6061,7 @@ html.arriving .backdrop,html.arriving .sidebar{
     <div class="def-block">
       <div class="section-tag">Определение</div>
       <div class="def-text">
-        Пусть $E=(e_1,\ldots,e_n)$ — упорядоченный базис векторного пространства $V$. Для любого вектора $x\in V$ существует <span class="em">единственный</span> набор чисел $(x_1,\ldots,x_n)$ такой, что
+        Пусть $E=(e_1,\ldots,e_n)$ — базис векторного пространства $V$. Для любого вектора $x\in V$ существует <span class="em">единственный</span> набор чисел $(x_1,\ldots,x_n)$ такой, что
         $$x=x_1 e_1+\ldots+x_n e_n.$$
         Эти числа $x_i$ называются <span class="term">координатами вектора $x$ в базисе $E$</span>. Единственность набора $(x_1,\ldots,x_n)$ следует из линейной независимости базиса.
       </div>
