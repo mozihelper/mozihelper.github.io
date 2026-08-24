@@ -2942,26 +2942,21 @@ html.arriving .topic-header, html.arriving .q-card { opacity: 1; }
     </div>
 
     <div class="example-card">
-      <div class="example-card-title from-lecture">Примеры из лекции</div>
+      <div class="example-card-title from-lecture">Примеры</div>
       <div class="example-card-body">
-        <strong>1а.</strong> Пусть $\Omega$ — произвольное множество, $M(\Omega)$ — множество всех его преобразований в себя. Тогда $(M(\Omega), \circ, e_\Omega)$ — моноид, где $\circ$ — композиция отображений, $e_\Omega$ — тождественное отображение.
+        <strong>1.</strong> Пусть $\Omega$ — произвольное множество, $M(\Omega)$ — множество всех его преобразований в себя. Тогда $(M(\Omega), \circ, e_\Omega)$ — моноид, где $\circ$ — композиция отображений, $e_\Omega$ — тождественное отображение.
         <br><br>
         <strong>2.</strong> Пусть $P(\Omega)$ — множество всех подмножеств $\Omega$. Тогда $(P(\Omega), \cup, \varnothing)$ и $(P(\Omega), \cap, \Omega)$ — коммутативные моноиды.
         <br><br>
         <strong>3.</strong> $(M_n(\mathbb{R}), +, O)$ — коммутативный моноид с нейтральным элементом $O$ — нулевой матрицей. $(M_n(\mathbb{R}), \cdot, E)$ — некоммутативный моноид с единичной матрицей $E$.
         <br><br>
         <strong>4.</strong> $n\mathbb{Z} = \{nm \mid m\in\mathbb{Z}\}$. Тогда $(n\mathbb{Z}, +, 0)$ — коммутативный моноид, $(n\mathbb{Z}, \cdot)$ — коммутативная полугруппа (без единицы, ведь $1\notin n\mathbb{Z}$ при $n\gt 1$).
-      </div>
-    </div>
-
-    <div class="example-card">
-      <div class="example-card-title my-example">Самые простые примеры от меня</div>
-      <div class="example-card-body">
-        <strong>Моноид:</strong> $(\mathbb{N}_0, +, 0)$ — натуральные числа с нулём по сложению. Ассоциативность сложения известна со школы, $0$ — нейтральный: $0+n=n+0=n$.
         <br><br>
-        <strong>Полугруппа, не являющаяся моноидом:</strong> $(\mathbb{N}, +)$ — натуральные без нуля. Сложение ассоциативно, но нет нейтрального элемента: единственный кандидат $0$ не лежит в $\mathbb{N}$.
+        <strong>5.</strong> $(\mathbb{N}_0, +, 0)$ — натуральные числа с нулём по сложению. Ассоциативность сложения известна со школы, $0$ — нейтральный: $0+n=n+0=n$.
         <br><br>
-        <strong>Моноид с буквами:</strong> множество всех конечных слов из букв $\{a, b\}$ с операцией «приписать справа», нейтральный элемент — пустое слово $\varepsilon$. Например, $ab*ba = abba$.
+        <strong>6.</strong> $(\mathbb{N}, +)$ — пример полугруппы, не являющейся моноидом: — натуральные без нуля. Сложение ассоциативно, но нет нейтрального элемента: единственный кандидат $0$ не лежит в $\mathbb{N}$.
+        <br><br>
+        <strong>7.</strong> Моноид слов: множество всех конечных слов из букв $\{a, b\}$ с операцией «приписать справа», нейтральный элемент — пустое слово $\varepsilon$. Например, $ab*ba = abba$.
       </div>
     </div>
 
@@ -3119,7 +3114,7 @@ html.arriving .topic-header, html.arriving .q-card { opacity: 1; }
 <div class="q-card" data-q="5" data-text="полная линейная группа специальная симметрическая мультипликативная GL SL Sn">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">05</span>
-    <span class="q-title">Примеры специальных групп: $GL_n$, $SL_n$, $S_n$, $\mathbb{R}^*$, $\mathbb{Q}^*$</span>
+    <span class="q-title">Примеры специальных групп: $GL_{\boldsymbol{n}}$, $SL_{\boldsymbol{n}}$, $S_{\boldsymbol{n}}$, $\boldsymbol{\mathbb{R}}^*$, $\boldsymbol{\mathbb{Q}}^*$</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -4653,7 +4648,7 @@ html.arriving .topic-header, html.arriving .q-card { opacity: 1; }
 <div class="q-card" data-q="35" data-text="нормальная форма матрицы линейный оператор треугольная подобие">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">35</span>
-    <span class="q-title">Постановка задачи о нормальной форме матрицы линейного оператора. Теорема о треугольной матрице</span>
+    <span class="q-title">Постановка задачи о нормальной форме матрицы линейного оператора. Теорема о приведении матрицы линейного оператора к треугольному виду</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -4678,7 +4673,7 @@ html.arriving .topic-header, html.arriving .q-card { opacity: 1; }
     </div>
 
     <div class="thm-box">
-      <div class="thm-label">Теорема (о треугольной матрице ЛО)</div>
+      <div class="thm-label">Теорема (о приведении матрицы линейного оператора к треугольному виду)</div>
       <div class="def-text">
         Матрица любого линейного оператора подобна некоторой матрице треугольного вида (над алгебраически замкнутым полем, в частности над $\mathbb{C}$).
       </div>
@@ -4955,7 +4950,7 @@ html.arriving .topic-header, html.arriving .q-card { opacity: 1; }
       <div class="example-card-body">
         $A = \begin{pmatrix}1 & 0\\ 0 & 2\end{pmatrix}$. $\chi_A(t) = (t-1)(t-2)$.
         <br>
-        Проверка Г–К: $\chi_A(A) = (A - E)(A - 2E) = \begin{pmatrix}0&0\\0&1\end{pmatrix}\begin{pmatrix}-1&0\\0&0\end{pmatrix} = 0$. ✓
+        Проверка теоремы Гамильтона–Кэли: $\chi_A(A) = (A - E)(A - 2E) = \begin{pmatrix}0&0\\0&1\end{pmatrix}\begin{pmatrix}-1&0\\0&0\end{pmatrix} = 0$. ✓
       </div>
     </div>
 
@@ -5025,7 +5020,7 @@ html.arriving .topic-header, html.arriving .q-card { opacity: 1; }
 <div class="q-card" data-q="43" data-text="алгоритм жорданова нормальная форма базис образы степени оператора">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">43</span>
-    <span class="q-title">Алгоритм нахождения ЖНФ и жорданова базиса через образы степеней оператора $\mathcal{A} - \lambda\mathcal{E}$ (с примером)</span>
+    <span class="q-title">Алгоритм нахождения жордановой нормальной формы и жорданова базиса через образы степеней оператора $\mathcal{A} - \lambda\mathcal{E}$</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -5067,7 +5062,7 @@ html.arriving .topic-header, html.arriving .q-card { opacity: 1; }
 <div class="q-card" data-q="44" data-text="жорданова цепочка присоединённый циклическое алгебраическая геометрическая кратность">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">44</span>
-    <span class="q-title">Жорданова цепочка, присоединённый вектор, циклическое подпространство. Связь алгебраической и геометрической кратности с ЖНФ</span>
+    <span class="q-title">Жорданова цепочка, присоединённый вектор, циклическое подпространство. Связь алгебраической и геометрической кратности с жордановой нормальной формой</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -5555,7 +5550,7 @@ html.arriving .topic-header, html.arriving .q-card { opacity: 1; }
       <div class="def-text">
         Линейный оператор $\mathcal{A}\colon V \to V$ называется <span class="term">симметрическим (самосопряжённым)</span>, если $\mathcal{A}^* = \mathcal{A}$, то есть
         $$(\mathcal{A} x, y) \;=\; (x, \mathcal{A} y) \quad \forall x, y \in V.$$
-        Эквивалентно: матрица $\mathcal{A}$ в ОНБ симметрическая, $A^T = A$.
+        Эквивалентно: матрица оператора $\mathcal{A}$ в ортонормированном базисе (ОНБ) симметрическая, $A^{\top} = A$.
       </div>
     </div>
 
@@ -6996,7 +6991,7 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();paint(t
 <div class="q-card" data-q="76" data-text="применение векторной алгебры расстояние от точки до прямой между прямыми параллелограмм параллелепипед">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">76</span>
-    <span class="q-title">Применение векторной алгебры для решения задач: расстояние от точки до прямой, расстояние между прямыми</span>
+    <span class="q-title">Применение векторной алгебры: расстояние от точки до прямой и расстояние между скрещивающимися прямыми</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
