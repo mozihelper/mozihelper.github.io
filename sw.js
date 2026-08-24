@@ -2,7 +2,7 @@
    Страницы (HTML) берём СНАЧАЛА ИЗ СЕТИ и лишь при её отсутствии из кэша:
    при cache-first обновлённый сайт не доезжал до тех, кто уже заходил.
    Всё остальное (шрифты, PDF, MathJax, иконки) — сначала из кэша, это неизменяемые файлы. */
-const CACHE = 'mozi-v80';
+const CACHE = 'mozi-v82';
 const FILES = 'mozi-files';   /* материалы, сохранённые пользователем: не чистится при обновлениях */
 const SHELL = [
   './',
@@ -10,6 +10,7 @@ const SHELL = [
   './algebra-sem1.html',
   './quiz-sem1.js',
   './quiz-sem2.js',
+  './tasks-sem2.js',
   './algebra-sem2.html',
   './literatura.html',
   './links.html',
