@@ -9508,6 +9508,91 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();renderL
     </div>
   </section>
 
+<!-- DEMO PAGE — демонстрационные варианты экзаменационных билетов -->
+<section class="topic-page" id="page-demo">
+  <div class="topic-header">
+    <div class="topic-eyebrow">Подготовка к экзамену</div>
+    <h1 class="topic-title">Демонстрационные билеты</h1>
+  </div>
+  <style>
+  #page-demo .demo-list{padding-left:1.5rem;margin:.4rem 0}
+  #page-demo .demo-list>li{margin:0 0 1.15rem;line-height:1.55}
+  #page-demo .demo-ref{margin-top:.4rem;font-size:.86em;color:var(--ink-mute)}
+  #page-demo .demo-ref a{color:var(--ruby);cursor:pointer;text-decoration:none;border-bottom:1px dotted currentColor}
+  #page-demo .demo-ref a:hover{opacity:.75}
+  </style>
+  <div class="questions-list">
+    <p style="color:var(--ink-soft);margin:0 0 1.4rem">
+      Демонстрационные варианты экзаменационных заданий, 2-й семестр, 26/27 учебный год.
+      Задания 1–5 — теоретические, 6–10 — вычислительные. У теоретических заданий указано,
+      в каких вопросах курса разобран нужный материал.
+    </p>
+
+<div class="q-card" data-q="demoV3" data-text="демобилет демонстрационный вариант экзамен билет В3">
+  <div class="q-head" onclick="toggleCard(this)">
+    <span class="q-num">В3</span>
+    <span class="q-title">Билет №В3 — 2-й семестр</span>
+    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  </div>
+  <div class="q-body">
+    <div class="def-block">
+      <div class="section-tag">Теоретическая часть</div>
+      <div class="def-text"><ol class="demo-list">
+        <li>Поясните, почему множество квадратных матриц порядка $n$ является некоммутативным кольцом с единицей.<div class="demo-ref">Разобрано: <a onclick="goToQuestion('t1', 7)">вопрос 7</a> · <a onclick="goToQuestion('t1', 9)">вопрос 9</a></div></li>
+        <li>В каком виде ищется разложение правильной рациональной дроби на сумму простейших над $\mathbb{R}$?<div class="demo-ref">Разобрано: <a onclick="goToQuestion('t3', 33)">вопрос 33</a> · <a onclick="goToQuestion('t3', 32)">вопрос 32</a></div></li>
+        <li>Докажите, что если $J$ — жорданова нормальная форма матрицы $A$, то $J+\alpha E$ — жорданова нормальная форма матрицы $A+\alpha E$.<div class="demo-ref">Разобрано: <a onclick="goToQuestion('t4', 44)">вопрос 44</a> · <a onclick="goToQuestion('t4', 43)">вопрос 43</a></div></li>
+        <li>Покажите, что произведение гиперплоскости на ненулевое число (множество векторов вида $\lambda x$, $\lambda\in\mathbb{R}$, $x$ — вектор гиперплоскости) есть гиперплоскость.<div class="demo-ref">Разобрано: <a onclick="goToQuestion('t5', 57)">вопрос 57</a> · <a onclick="goToQuestion('t5', 59)">вопрос 59</a></div></li>
+        <li>Дайте классификацию центральносимметричных поверхностей второго порядка.<div class="demo-ref">Разобрано: <a onclick="goToQuestion('t6', 89)">вопрос 89</a> · <a onclick="goToQuestion('t6', 90)">вопрос 90</a></div></li>
+      </ol></div>
+    </div>
+    <div class="def-block">
+      <div class="section-tag">Задачи</div>
+      <div class="def-text"><ol class="demo-list" start="6">
+        <li>Вычислите $\dfrac{(-1+i\sqrt{3})^{15}}{(1-i)^{20}}+\dfrac{(-1-i\sqrt{3})^{15}}{(1+i)^{20}}$.<div class="demo-ref">Разобрано: <a onclick="goToQuestion('t2', 13)">вопрос 13</a></div></li>
+        <li>Разложите многочлен $x^{2n}+x^{n}+1$ на неприводимые вещественные множители.<div class="demo-ref">Разобрано: <a onclick="goToQuestion('t3', 25)">вопрос 25</a> · <a onclick="goToQuestion('t3', 26)">вопрос 26</a></div></li>
+        <li>Найдите жорданову нормальную форму и жорданов базис для матрицы $\begin{pmatrix}-4&amp;2&amp;10\\-4&amp;3&amp;7\\-3&amp;1&amp;7\end{pmatrix}$.<div class="demo-ref">Разобрано: <a onclick="goToQuestion('t4', 43)">вопрос 43</a> · <a onclick="goToQuestion('t4', 45)">вопрос 45</a></div></li>
+        <li>Найдите угол между плоскостями $3x+y-2z+4=0$ и $x-7y+2z=0$.<div class="demo-ref">Разобрано: <a onclick="goToQuestion('t5', 70)">вопрос 70</a> · <a onclick="goToQuestion('t5', 73)">вопрос 73</a></div></li>
+        <li>Дан круговой конус $(\mathbf{a}\mathbf{r})^2=a^2r^2\cos^2\lambda$, $\lambda=\text{const}$. При каком условии прямая $\mathbf{r}=\mathbf{r}_0+\mathbf{b}t$ проходит через вершину конуса?<div class="demo-ref">Разобрано: <a onclick="goToQuestion('t6', 90)">вопрос 90</a> · <a onclick="goToQuestion('t5', 71)">вопрос 71</a></div></li>
+      </ol></div>
+    </div>
+    <div class="note">Решения не приводятся намеренно. Ссылки ведут к теории, на которой задание основано.</div>
+  </div>
+</div>
+
+<div class="q-card" data-q="demoV14" data-text="демобилет демонстрационный вариант экзамен билет В14">
+  <div class="q-head" onclick="toggleCard(this)">
+    <span class="q-num">В14</span>
+    <span class="q-title">Билет №В14 — 2-й семестр</span>
+    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  </div>
+  <div class="q-body">
+    <div class="def-block">
+      <div class="section-tag">Теоретическая часть</div>
+      <div class="def-text"><ol class="demo-list">
+        <li>Выведите формулу Муавра.<div class="demo-ref">Разобрано: <a onclick="goToQuestion('t2', 13)">вопрос 13</a></div></li>
+        <li>Сформулируйте теорему о числе корней многочлена и теорему о тождестве двух многочленов.<div class="demo-ref">Разобрано: <a onclick="goToQuestion('t3', 25)">вопрос 25</a> · <a onclick="goToQuestion('t3', 26)">вопрос 26</a></div></li>
+        <li>Опишите алгоритм нахождения жордановой нормальной формы и жорданова базиса через образы степеней оператора $\mathcal{A}-\lambda\mathcal{E}$.<div class="demo-ref">Разобрано: <a onclick="goToQuestion('t4', 43)">вопрос 43</a></div></li>
+        <li>Сформулируйте теорему о взаимном расположении плоскостей в пространстве.<div class="demo-ref">Разобрано: <a onclick="goToQuestion('t5', 72)">вопрос 72</a></div></li>
+        <li>Запишите каноническое уравнение однополостного гиперболоида. Что собой представляют его сечения координатными плоскостями?<div class="demo-ref">Разобрано: <a onclick="goToQuestion('t6', 90)">вопрос 90</a> · <a onclick="goToQuestion('t6', 91)">вопрос 91</a></div></li>
+      </ol></div>
+    </div>
+    <div class="def-block">
+      <div class="section-tag">Задачи</div>
+      <div class="def-text"><ol class="demo-list" start="6">
+        <li>С помощью комплексных чисел покажите, что $\cos\frac{\pi}{11}+\cos\frac{3\pi}{11}+\cos\frac{5\pi}{11}+\cos\frac{7\pi}{11}+\cos\frac{9\pi}{11}=\frac{1}{2}$.<div class="demo-ref">Разобрано: <a onclick="goToQuestion('t2', 13)">вопрос 13</a> · <a onclick="goToQuestion('t2', 14)">вопрос 14</a></div></li>
+        <li>Для $f(x)=x^4+2x^3-x^2-4x-2$ и $g(x)=x^4+x^3-x^2-2x-2$, пользуясь алгоритмом Евклида, подберите $M(x)$ и $N(x)$ так, чтобы $f(x)M(x)+g(x)N(x)=\varphi(x)$, где $\varphi(x)$ — НОД $f$ и $g$.<div class="demo-ref">Разобрано: <a onclick="goToQuestion('t3', 23)">вопрос 23</a> · <a onclick="goToQuestion('t3', 24)">вопрос 24</a></div></li>
+        <li>Найдите собственные значения и корневые подпространства линейного оператора, заданного в некотором базисе матрицей $\begin{pmatrix}4&amp;-5&amp;2\\5&amp;-7&amp;3\\6&amp;-9&amp;4\end{pmatrix}$.<div class="demo-ref">Разобрано: <a onclick="goToQuestion('t4', 42)">вопрос 42</a> · <a onclick="goToQuestion('t4', 43)">вопрос 43</a></div></li>
+        <li>Установите, лежит ли прямая $\dfrac{x-12}{4}=\dfrac{y-9}{3}=\dfrac{z-1}{1}$ в плоскости $3x+5y-z-2=0$, параллельна ей или пересекает её; в последнем случае найдите точку пересечения.<div class="demo-ref">Разобрано: <a onclick="goToQuestion('t5', 74)">вопрос 74</a> · <a onclick="goToQuestion('t5', 70)">вопрос 70</a></div></li>
+        <li>Составьте уравнение плоскости, проходящей через точку пересечения плоскостей $x-y=0$, $x+y-2z+1=0$, $2x+z-4=0$, и проходящей через ось $Oy$.<div class="demo-ref">Разобрано: <a onclick="goToQuestion('t5', 70)">вопрос 70</a> · <a onclick="goToQuestion('t5', 67)">вопрос 67</a></div></li>
+      </ol></div>
+    </div>
+    <div class="note">Решения не приводятся намеренно. Ссылки ведут к теории, на которой задание основано.</div>
+  </div>
+</div>
+
+  </div>
+</section>
+
 </main>
 
 <!-- ========== TAB BAR: только то, что реально есть в этом файле ========== -->
@@ -9725,6 +9810,7 @@ function buildSidebar() {
     <a class="side-nav-item is-home" onclick="showTopic('start')">${sideIcon('home')}<span class="side-nav-label">На главную</span></a>
     <a class="side-nav-item" onclick="openQuizMenu()">${sideIcon('quiz')}<span class="side-nav-label">Подготовка</span></a>
     <a class="side-nav-item" onclick="showTopic('practice')">${sideIcon('practice')}<span class="side-nav-label">Практика</span></a>
+      <a class="side-nav-item" onclick="showTopic('demo')">${sideIcon('quiz')}<span class="side-nav-label">Демобилеты</span></a>
     <a class="side-nav-item" onclick="showTopic('basics')">${sideIcon('book')}<span class="side-nav-label">Базовые термины</span></a>
     <a class="side-nav-item" href="literatura.html">${sideIcon('book')}<span class="side-nav-label">Литература</span></a>
     <a class="side-nav-item" href="lekcii-sem2.html"><svg class="side-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span class="side-nav-label">Лекции (презентации)</span></a>
@@ -11221,7 +11307,7 @@ else{window.addEventListener("resize",function(){if(cv.clientWidth>0){fit();pain
   };
 
   /* ───── ПЕРЕКЛЮЧЕНИЕ ЭКРАНОВ ───── */
-  var SCREENS = ['start','ticket','quiz','practice','basics'];
+  var SCREENS = ['start','ticket','quiz','practice','basics','demo'];
 
   function showScreen(id){
     if (id !== 'ticket') putCardBack();
