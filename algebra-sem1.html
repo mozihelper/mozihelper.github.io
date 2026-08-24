@@ -4442,7 +4442,7 @@ html.arriving .backdrop,html.arriving .sidebar{
       <div class="def-text">
         Пусть $V=\mathbb{R}^n$. Для любых $x,y,z\in V$ и любых $\alpha,\beta\in\mathbb{R}$ выполняются:
         <ul class="props">
-          <li>коммутативность сложения: $x+y=y+x$;</li>
+          <li>коммутативность относительно сложения: $x+y=y+x$;</li>
           <li>ассоциативность сложения: $(x+y)+z=x+(y+z)$;</li>
           <li>существование нулевого вектора: существует $0\in V$ такой, что $x+0=x$;</li>
           <li>существование противоположного вектора: для каждого $x\in V$ существует $(-x)\in V$ такой, что $x+(-x)=0$;</li>
@@ -4524,13 +4524,13 @@ html.arriving .backdrop,html.arriving .sidebar{
     <div class="def-block">
       <div class="section-tag">Определение</div>
       <div class="def-text">
-        <span class="term">Линейной оболочкой</span> системы векторов $S=\{a_1,a_2,\ldots,a_k\}$ называется множество всех линейных комбинаций этих векторов. Обозначение: $L(S)$, $\langle a_1,a_2,\ldots,a_k\rangle$. Если $a_1,\ldots,a_k\in V$, то
-        $$L(S)=\{\lambda_1 a_1+\lambda_2 a_2+\cdots+\lambda_k a_k\mid \lambda_1,\ldots,\lambda_k\in\mathbb{R}\}.$$
+        <span class="term">Линейной оболочкой</span> системы векторов $S=\{a_1,a_2,\ldots,a_k\}$ называется множество всех линейных комбинаций этих векторов. Обозначение: $\langle a_1,a_2,\ldots,a_k\rangle$. Если $a_1,\ldots,a_k\in V$, то
+        $$\langle a_1,a_2,\ldots,a_k\rangle=\{\lambda_1 a_1+\lambda_2 a_2+\cdots+\lambda_k a_k\mid \lambda_1,\ldots,\lambda_k\in\mathbb{R}\}.$$
       </div>
     </div>
 
     <div class="explain">
-      Линейная оболочка $\langle S\rangle$ сама является подпространством в $V$ — причём <span class="em">наименьшим</span> подпространством, содержащим все векторы системы $S$. Угловые скобки $\langle\,\cdot\,\rangle$ зарезервированы именно за линейной оболочкой.
+      Линейная оболочка сама является подпространством в $V$ — причём <span class="em">наименьшим</span> подпространством, содержащим все векторы системы $S$. Угловые скобки $\langle\,\cdot\,\rangle$ зарезервированы именно за линейной оболочкой.
     </div>
 
 
@@ -4620,6 +4620,13 @@ html.arriving .backdrop,html.arriving .sidebar{
           <li>она линейно независима;</li>
           <li>её линейная оболочка совпадает с $V$: $\;\langle X_1,\ldots,X_r\rangle=V$.</li>
         </ul>
+      </div>
+    </div>
+
+    <div class="def-block">
+      <div class="section-tag">Эквивалентная формулировка</div>
+      <div class="def-text">
+        Базис — это наибольшая линейно независимая система векторов $V$, которую уже нельзя расширить: добавление к ней любого вектора из $V$ делает систему линейно зависимой.
       </div>
     </div>
 
@@ -4713,14 +4720,14 @@ html.arriving .backdrop,html.arriving .sidebar{
       <div class="def-text">
         <span class="term">Базис</span> — минимальная (по включению) порождающая (полная) система векторов пространства $V$.
         <ul class="props">
-          <li><span class="em">Порождаемость:</span> любой вектор $v\in V$ представим линейной комбинацией векторов системы: $\;\forall v\in V\;\exists\{\alpha_i\}:\;v=\sum\alpha_i e_i$;</li>
+          <li><span class="em">Порождаемость:</span> любой вектор $v\in V$ представим <span class="em">в виде</span> линейной комбинации векторов системы: $\;\forall v\in V\;\exists\{\alpha_i\}:\;v=\sum\alpha_i e_i$;</li>
           <li><span class="em">Минимальность:</span> ни один вектор нельзя удалить, не нарушив свойство порождать всё пространство $V$.</li>
         </ul>
       </div>
     </div>
 
     <div class="explain">
-      Базис — это наименьший набор векторов, достаточный для получения всего пространства (полнота) и не содержащий лишних элементов (минимальность).
+      Базис — это наименьший набор векторов, достаточный для получения всего пространства, и при этом не содержащий лишних элементов (минимальность).
     </div>
 
 
@@ -4774,7 +4781,7 @@ html.arriving .backdrop,html.arriving .sidebar{
       <div class="def-text">
         Обозначим через $A^{(j)}$ ($j$ — верхний индекс в круглых скобках) <span class="em">$j$-й столбец</span> матрицы $A$.
         <br><br>
-        <span class="term">Пространство столбцов</span> (или <span class="em">образ</span>) матрицы $A$ — линейная оболочка её столбцов $\langle A^{(1)},\ldots,A^{(n)}\rangle$ (в литературе также $\operatorname{Col}(A)$, $R(A)$):
+        <span class="term">Пространство столбцов</span> матрицы $A$ — линейная оболочка её столбцов $\langle A^{(1)},\ldots,A^{(n)}\rangle$ (в литературе также $\operatorname{Col}(A)$, $R(A)$):
         $$\langle A^{(1)},\ldots,A^{(n)}\rangle=\{y\in\mathbb{R}^m\mid \exists x\in\mathbb{R}^n:\,y=Ax\}\subset\mathbb{R}^m.$$
       </div>
     </div>
@@ -4790,6 +4797,10 @@ html.arriving .backdrop,html.arriving .sidebar{
       </div>
     </div>
 
+
+    <div class="note">
+      Пространство столбцов совпадает с образом линейного отображения $x\mapsto Ax$, поэтому его часто обозначают $\operatorname{Im}A$. Это обозначение появится в вопросе 119, когда будет введено ядро и образ линейного отображения.
+    </div>
 
     <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
   </div>
@@ -4888,7 +4899,7 @@ html.arriving .backdrop,html.arriving .sidebar{
 <div class="q-card" data-q="53" data-text="теорема кронекера капелли совместность определённость единственность ранг расширенная матрица доказательство">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">53</span>
-    <span class="q-title">Теорема Кронекера–Капелли (с доказательством). Теорема об определённости СЛАУ (с доказательством)</span>
+    <span class="q-title">Теорема Кронекера–Капелли. Теорема об определённости СЛАУ</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -4961,6 +4972,15 @@ html.arriving .backdrop,html.arriving .sidebar{
           <li><span class="em">аддитивность:</span> $f(v_1+v_2)=f(v_1)+f(v_2)$ для любых $v_1,v_2\in V$;</li>
           <li><span class="em">однородность:</span> $f(\lambda v)=\lambda f(v)$ для любого вектора $v\in V$ и любого скаляра $\lambda$ из основного поля.</li>
         </ul>
+      </div>
+    </div>
+
+    <div class="def-block">
+      <div class="section-tag">Эквивалентное определение</div>
+      <div class="def-text">
+        Оба условия объединяются в одно: отображение $f\colon V\to W$ линейно, если
+        $$f(\alpha x+\beta y)=\alpha f(x)+\beta f(y)\qquad \forall\alpha,\beta\in\mathbb{R},\;\forall x,y\in V.$$
+        Аддитивность получается при $\alpha=\beta=1$, однородность — при $\beta=0$.
       </div>
     </div>
 
@@ -5154,7 +5174,7 @@ html.arriving .backdrop,html.arriving .sidebar{
   <div class="q-body">
 
     <div class="def-block">
-      <div class="section-tag">Алгоритм (метод Гаусса–Жордана)</div>
+      <div class="section-tag">Алгоритм</div>
       <div class="def-text">
         <ol style="padding-left:1.4rem;margin:0.5rem 0;">
           <li>Составить блочную матрицу размера $n\times 2n$: $\;(A\mid E)$, где $E$ — единичная матрица порядка $n$.</li>
@@ -5172,6 +5192,10 @@ html.arriving .backdrop,html.arriving .sidebar{
       </div>
     </div>
 
+
+    <div class="note">
+      Этот алгоритм — частный случай $PQ$-приведения (вопрос 61). Элементарные преобразования строк равносильны умножению слева на элементарные матрицы: если $E_k\cdots E_1 A=E$, то $E_k\cdots E_1=A^{-1}$. Именно поэтому те же преобразования, применённые к приписанной справа единичной матрице, дают $A^{-1}$: блок $E$ превращается в $E_k\cdots E_1 E=A^{-1}$.
+    </div>
 
     <div class="src-ref">Кострикин, ч. 1, с. 94–95</div>
   </div>
@@ -5199,7 +5223,7 @@ html.arriving .backdrop,html.arriving .sidebar{
     <div class="thm-box">
       <div class="thm-label">Теорема</div>
       <div class="def-text">
-        Пусть дана однородная система линейных алгебраических уравнений (ОСЛАУ) $Ax=0$, где $A$ — матрица коэффициентов размера $m\times n$. Пространство решений $V$ этой системы является линейным подпространством в $\mathbb{R}^n$, и его размерность связана с рангом матрицы $A$ формулой
+        Пусть дана однородная система линейных алгебраических уравнений (ОСЛАУ) $Ax=0$, где $A$ — матрица коэффициентов размера $m\times n$. Пространство решений $V$ этой системы является векторным подпространством в $\mathbb{R}^n$, и его размерность связана с рангом матрицы $A$ формулой
         $$\dim V=n-\operatorname{rang}A.$$
       </div>
     </div>
@@ -5226,7 +5250,7 @@ html.arriving .backdrop,html.arriving .sidebar{
           <li>векторы $f_1,f_2,\ldots,f_k$ линейно независимы;</li>
           <li>любое решение системы является линейной комбинацией этих векторов.</li>
         </ul>
-        Иными словами, ФСР — это базис пространства решений; в ней ровно $k=n-\operatorname{rang}A$ векторов.
+        Иными словами, ФСР — это <span class="em">любой</span> базис пространства решений ОСЛАУ; в ней ровно $k=n-\operatorname{rang}A$ векторов. Фундаментальная система определена не однозначно: базисов у пространства решений много, и каждый из них является ФСР.
       </div>
     </div>
 
