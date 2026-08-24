@@ -1947,7 +1947,7 @@ html.sweeping .curtain, html.arriving .curtain { will-change: transform; }
 /* ── нижний таб-бар ── */
 .tabbar {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
-  display: grid; grid-template-columns: repeat(4, 1fr);
+  display: grid; grid-template-columns: repeat(5, 1fr);
   background: var(--topbar-bg);
   backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
   border-top: 1px solid var(--border);
@@ -2622,7 +2622,7 @@ html.arriving .topic-header, html.arriving .q-card { opacity: 1; }
   .tabbar {
     left: 50%; right: auto; bottom: 22px;
     transform: translateX(-50%);
-    grid-template-columns: repeat(4, auto);
+    grid-template-columns: repeat(5, auto);
     border: 1px solid var(--border);
     box-shadow: var(--shadow-elev);
     padding-bottom: 0;
@@ -9609,6 +9609,10 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();renderL
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
     <span>Практика</span>
   </button>
+  <button class="tab" data-tab="demo" onclick="showTopic('demo')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>
+    <span>Демо</span>
+  </button>
   <button class="tab" data-tab="basics" onclick="showTopic('basics')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
     <span>База</span>
@@ -9810,7 +9814,6 @@ function buildSidebar() {
     <a class="side-nav-item is-home" onclick="showTopic('start')">${sideIcon('home')}<span class="side-nav-label">На главную</span></a>
     <a class="side-nav-item" onclick="openQuizMenu()">${sideIcon('quiz')}<span class="side-nav-label">Подготовка</span></a>
     <a class="side-nav-item" onclick="showTopic('practice')">${sideIcon('practice')}<span class="side-nav-label">Практика</span></a>
-      <a class="side-nav-item" onclick="showTopic('demo')">${sideIcon('quiz')}<span class="side-nav-label">Демобилеты</span></a>
     <a class="side-nav-item" onclick="showTopic('basics')">${sideIcon('book')}<span class="side-nav-label">Базовые термины</span></a>
     <a class="side-nav-item" href="literatura.html">${sideIcon('book')}<span class="side-nav-label">Литература</span></a>
     <a class="side-nav-item" href="lekcii-sem2.html"><svg class="side-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span class="side-nav-label">Лекции (презентации)</span></a>
