@@ -11064,11 +11064,10 @@ if ('serviceWorker' in navigator) {
   function syncChrome(id){
     var lab = document.getElementById('tbBackLabel');
     if (lab) lab.textContent = (id === 'start') ? 'Семестры' : 'Билеты';
-    if (id === 'start' || id === 'ticket') {
-      document.querySelectorAll('.tab').forEach(function(b){
-        b.classList.toggle('on', b.getAttribute('data-tab') === 'start');
-      });
-    }
+    document.querySelectorAll('.tab').forEach(function(b){
+      var tb = b.getAttribute('data-tab');
+      b.classList.toggle('on', tb === id || (id === 'ticket' && tb === 'start'));
+    });
     var bar = document.getElementById('tabbar');
     if (bar) bar.classList.remove('hide');
   }
