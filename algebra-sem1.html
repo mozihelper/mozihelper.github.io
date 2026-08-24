@@ -3058,7 +3058,7 @@ html.arriving .backdrop,html.arriving .sidebar{
 </div>
 
 <!-- 2. Идея линейности -->
-<div class="q-card" data-q="2" data-text="идея линейности линейные уравнения системы нагретая пластинка линейные методы все разделы математики математический анализ производная касательная касательная плоскость дифференциал приближение леонтьев международная торговля матрица на вектор">
+<div class="q-card" data-q="2" data-text="идея линейности линейные уравнения системы линейные методы все разделы математики математический анализ производная касательная касательная плоскость дифференциал приближение леонтьев международная торговля матрица на вектор">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">2</span>
     <span class="q-title">Идея линейности в математике</span>
@@ -3077,12 +3077,8 @@ html.arriving .backdrop,html.arriving .sidebar{
       </div>
     </div>
 
-    <div class="example-card">
-      <div class="example-card-title my-example">Модельная задача: нагретая пластинка</div>
-      <div class="example-card-body">
-        На пластинку нанесена квадратная сетка; её вершины делятся на <span class="em">граничные</span> (лежащие на контурах) и <span class="em">внутренние</span>. При любом нагревании или охлаждении температура в каждой внутренней вершине равна среднему арифметическому температур четырёх ближайших вершин. Если граничные температуры заданы, то относительно температур во внутренних вершинах возникает система линейных уравнений, а вопрос о существовании и единственности распределения температур — это вопрос о разрешимости и определённости этой линейной системы.
-      </div>
-    </div>
+    <!-- Правка (стр. 1): задача о нагретой пластинке убрана по замечанию
+     Г. Н. Клюшникова — предназначена для доп. материала -->
 
     <div class="explain">
       Усложнение при переходе от простейших систем к общим имеет принципиальное значение: системы линейных уравнений встречаются буквально во всех разделах математики, а <span class="term">линейные методы</span>, конечным продуктом которых часто являются решения линейных систем, составляют её наиболее развитую часть. Теория систем такого вида послужила в конце XIX века прототипом для создания теории интегральных уравнений.
@@ -7408,7 +7404,7 @@ html.arriving .backdrop,html.arriving .sidebar{
 </div>
 
 <!-- 128. Теорема о существовании минимального многочлена -->
-<div class="q-card" data-q="128" data-text="теорема существование минимального многочлена степень алгебра обратимость свободный член">
+<div class="q-card" data-q="128" data-text="теорема существование минимального многочлена обратимость свободный член">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">128</span>
     <span class="q-title">Теорема о существовании минимального многочлена линейного оператора</span>
@@ -7419,7 +7415,7 @@ html.arriving .backdrop,html.arriving .sidebar{
     <div class="thm-box">
       <div class="thm-label">Теорема</div>
       <div class="def-text">
-        Для всякого линейного оператора $A$ существует минимальный многочлен $\mu_A(t)$; его степень совпадает с размерностью алгебры $K[A]$. Оператор $A$ обратим тогда и только тогда, когда свободный член $\mu_m$ многочлена
+        Для всякого линейного оператора $A$ существует минимальный многочлен $\mu_A(t)$. Оператор $A$ обратим тогда и только тогда, когда свободный член $\mu_m$ многочлена
         $$\mu_A(t)=t^m+\mu_1 t^{m-1}+\mu_2 t^{m-2}+\dots+\mu_{m-1}t+\mu_m$$
         отличен от нуля.
       </div>
@@ -7463,7 +7459,7 @@ html.arriving .backdrop,html.arriving .sidebar{
     <div class="def-block">
       <div class="section-tag">Определение</div>
       <div class="def-text">
-        Линейный оператор $A$ называется <span class="term">нильпотентным</span>, если $A^m=0$ для некоторого $m\gt 0$; наименьшее такое натуральное $m$ называется <span class="term">индексом нильпотентности</span>.
+        Линейный оператор $A$ называется <span class="term">нильпотентным</span>, если $A^m=\mathcal{O}$ для некоторого $m\in\mathbb{N}$; наименьшее такое $m$ называется <span class="term">индексом нильпотентности</span>.
       </div>
     </div>
 
@@ -7485,31 +7481,35 @@ html.arriving .backdrop,html.arriving .sidebar{
       <div class="thm-label">Теорема</div>
       <div class="def-text">
         Матрица $A'$ линейного оператора $\mathcal{A}$ в базисе $\{e_1',\ldots,e_n'\}$ получается из матрицы $A$ того же оператора в базисе $\{e_1,\ldots,e_n\}$ по формуле
-        $$A'=B^{-1}A B,$$
-        где $B$ — матрица перехода от $(e_i)$ к $(e_i')$.
+        $$A'=C^{-1}AC,$$
+        где $C$ — матрица перехода от $(e_1,\ldots,e_n)$ к $(e_1',\ldots,e_n')$.
       </div>
     </div>
 
     <div class="derivation collapsed">
       <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Доказательство</span><span class="deriv-hint"></span></div>
       <div class="deriv-body">
-      <div class="def-text">
-        Пусть $x$ — произвольный вектор, $y=\mathcal{A}x$. Обозначим через $[x]$ и $[x]'$ столбцы координат вектора $x$ в старом и новом базисах соответственно. По определению матрицы оператора в каждом из базисов
-        $$[y]=A\,[x],\qquad [y]'=A'\,[x]'.$$
-        По теореме о преобразовании координат при переходе к новому базису (вопрос 87) координатные столбцы связаны матрицей перехода $B$:
-        $$[x]=B\,[x]',\qquad [y]=B\,[y]'.$$
-        Подставим эти выражения в первое равенство:
-        $$B\,[y]'=A\,B\,[x]'.$$
-        Матрица перехода невырождена, поэтому существует $B^{-1}$; умножая обе части слева на $B^{-1}$, получаем
-        $$[y]'=B^{-1}A\,B\,[x]'.$$
-        Сравнивая с равенством $[y]'=A'[x]'$, видим, что матрицы $A'$ и $B^{-1}AB$ дают один и тот же результат на координатном столбце $[x]'$ <span class="em">любого</span> вектора $x$. В частности, взяв в качестве $x$ векторы нового базиса, получим, что столбцы этих матриц совпадают. Следовательно,
-        $$A'=B^{-1}A B.\qquad\blacksquare$$
-      </div>
+        <div class="def-text">
+          Пусть $x$ — координатный столбец произвольного вектора в старом базисе, $x'$ — его координатный столбец в новом. Обозначим $y=\mathcal{A}x$ и $y'$ — координатные столбцы образа в тех же базисах. По определению матрицы оператора
+          $$y=Ax,\qquad y'=A'x',$$
+          а по правилу преобразования координат (вопрос 87)
+          $$x=Cx',\qquad y=Cy'.$$
+          Подставляя, получаем цепочку
+          $$ACx'=Ax=y=Cy'=CA'x'.$$
+          Последнее равенство верно для любого столбца $x'$, а матрица перехода $C$ обратима, поэтому
+          $$A'=C^{-1}AC.\qquad\blacksquare$$
+        </div>
       </div>
     </div>
 
     <div class="explain">
-      Матрицы $A$ и $A'$, связанные соотношением $A'=B^{-1}AB$ с невырожденной $B$, называются <span class="term">подобными</span>. Таким образом, матрицы одного и того же оператора в разных базисах подобны, и наоборот: подобные матрицы задают один оператор в разных базисах. Именно поэтому величины, не меняющиеся при переходе к подобной матрице (определитель, след, характеристический многочлен, ранг), являются характеристиками самого оператора, а не выбранного базиса.
+      Матрицы $A$ и $A'$, связанные соотношением $A'=C^{-1}AC$ с невырожденной $C$, называются <span class="term">подобными</span>. Матрицы одного и того же оператора в разных базисах подобны, и наоборот: подобные матрицы задают один оператор в разных базисах.
+      <br><br>
+      Отсюда следует, что величины, не меняющиеся при переходе к подобной матрице, являются характеристиками самого оператора, а не базиса. Проверим это для определителя и характеристического многочлена:
+      $$\det A'=\det(C^{-1}AC)=\det C^{-1}\cdot\det A\cdot\det C=\det A,$$
+      поскольку $\det C^{-1}=(\det C)^{-1}$. Далее,
+      $$\chi_{A'}(t)=\det(tE-C^{-1}AC)=\det\!\big(C^{-1}(tE-A)C\big)=\det(tE-A)=\chi_A(t),$$
+      где использовано $tE=C^{-1}(tE)C$. Так как след равен взятому со знаком коэффициенту характеристического многочлена при $t^{n-1}$, он тоже не меняется. Ранг сохраняется потому, что умножение на невырожденную матрицу его не меняет.
     </div>
 
     <div class="src-ref">Г. Н. Клюшников, лекции 10–11 «Линейные операторы»</div>
@@ -8044,6 +8044,19 @@ html.arriving .backdrop,html.arriving .sidebar{
     </div>
 
 
+    <div class="def-block">
+      <div class="section-tag">Эквивалентная запись</div>
+      <div class="def-text">
+        Те же свойства записывают короче: для любых $x,y,z\in V$ и любых $\alpha,\beta\in\mathbb{R}$
+        <ul class="props">
+          <li>$(x,y)=(y,x)$;</li>
+          <li>$(\alpha x+\beta y,\,z)=\alpha(x,z)+\beta(y,z)$;</li>
+          <li>$(x,x)\gt 0$ для всех $x\neq 0$.</li>
+        </ul>
+        Вторая строка объединяет аддитивность и однородность по первому аргументу, третья равносильна четвёртому свойству выше.
+      </div>
+    </div>
+
     <div class="src-ref">Г. Н. Клюшников, лекция 12 «Евклидовы пространства»</div>
   </div>
 </div>
@@ -8087,7 +8100,7 @@ html.arriving .backdrop,html.arriving .sidebar{
       </div>
     </div>
 
-    <div class="derivation collapsed">
+    <div class="derivation">
       <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Доказательство</span><span class="deriv-hint"></span></div>
       <div class="deriv-body">
       <div class="def-text">
@@ -8157,7 +8170,7 @@ html.arriving .backdrop,html.arriving .sidebar{
       </div>
     </div>
 
-    <div class="derivation collapsed">
+    <div class="derivation">
       <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Доказательство</span><span class="deriv-hint"></span></div>
       <div class="deriv-body">
       <div class="def-text">
@@ -8174,7 +8187,7 @@ html.arriving .backdrop,html.arriving .sidebar{
       </div>
     </div>
 
-    <div class="derivation collapsed">
+    <div class="derivation">
       <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Доказательство</span><span class="deriv-hint"></span></div>
       <div class="deriv-body">
       <div class="def-text">
@@ -8211,7 +8224,7 @@ html.arriving .backdrop,html.arriving .sidebar{
     <div class="def-block">
       <div class="section-tag">Ортонормированный базис</div>
       <div class="def-text">
-        Если, кроме того, $(e_i,e_i)=1$ при $i=1,2,\ldots,n$, то базис называется <span class="term">ортонормированным</span> (ортонормальным).
+        Если, кроме того, $(e_i,e_i)=1$ при $i=1,2,\ldots,n$, то базис называется <span class="term">ортонормированным</span>.
       </div>
     </div>
 
@@ -8236,7 +8249,7 @@ html.arriving .backdrop,html.arriving .sidebar{
       </div>
     </div>
 
-    <div class="derivation collapsed">
+    <div class="derivation">
       <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Доказательство</span><span class="deriv-hint"></span></div>
       <div class="deriv-body">
       <div class="def-text">
@@ -8327,7 +8340,7 @@ html.arriving .backdrop,html.arriving .sidebar{
 <div class="q-card" data-q="162" data-text="процесс ортогонализации грама шмидта линейно независимые ортонормированная система оболочки">
   <div class="q-head" onclick="toggleCard(this)">
     <span class="q-num">162</span>
-    <span class="q-title">Процесс ортогонализации Грама–Шмидта</span>
+    <span class="q-title">Процесс ортогонализации Грама–Шмидта в евклидовом векторном пространстве</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
   <div class="q-body">
@@ -8410,7 +8423,7 @@ html.arriving .backdrop,html.arriving .sidebar{
       </div>
     </div>
 
-    <div class="derivation collapsed">
+    <div class="derivation">
       <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Нахождение коэффициентов</span><span class="deriv-hint"></span></div>
       <div class="deriv-body">
       <div class="def-text">
