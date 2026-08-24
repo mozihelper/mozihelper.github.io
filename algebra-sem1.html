@@ -3153,15 +3153,12 @@ html.arriving .backdrop,html.arriving .sidebar{
         Почти триста лет попытки «решить в радикалах» общее уравнение пятой степени были безуспешны. В 1813 г. А. Руффини и в 1827 г. (независимо и строго) Н. Абель доказали: общее уравнение
         $$x^n + a_1x^{n-1} + \ldots + a_n = 0\qquad\text{при } n>4$$
         <span class="em">неразрешимо в радикалах</span>.
+        <br><br>
+        Универсальный критерий разрешимости дал Э. Галуа — см. вопрос 173 в разделе «Дополнительный материал».
       </div>
     </div>
 
-    <div class="def-block">
-      <div class="section-tag">Критерий Галуа</div>
-      <div class="def-text">
-        Универсальный критерий дал Э. Галуа (1831 г.): каждому уравнению степени $n$ он сопоставил <span class="term">поле разложения</span> и конечную группу его автоморфизмов (порядка не более $n!$) — <span class="term">группу Галуа</span>. Уравнение разрешимо в радикалах <span class="em">тогда и только тогда</span>, когда его группа Галуа разрешима. Например, уравнению $x^5-x-1=0$ отвечает группа Галуа, изоморфная симметрической группе $S_5$ порядка $120$; она неразрешима — значит, неразрешимо в радикалах и само уравнение. Так из этой задачи выросла теория групп.
-      </div>
-    </div>
+    <!-- Правка (стр. 1): критерий Галуа перенесён в «Дополнительный материал», вопрос 173 -->
 
     <div class="def-block">
       <div class="section-tag">Состояния многоатомной молекулы</div>
@@ -5179,6 +5176,12 @@ html.arriving .backdrop,html.arriving .sidebar{
       </div>
     </div>
 
+    <div class="note">
+      Отсюда сразу следует важное утверждение: <span class="em">всякая невырожденная матрица есть произведение элементарных матриц.</span> Действительно, равенство
+      $$A=P_1^{-1}\cdots P_m^{-1}\cdot Q_n^{-1}\cdots Q_1^{-1}$$
+      уже записывает $A$ в таком виде — матрица, обратная к элементарной, сама элементарна (обратное к перестановке строк — та же перестановка, к умножению строки на $\lambda\neq 0$ — умножение на $1/\lambda$, к прибавлению строки с коэффициентом $\mu$ — прибавление с коэффициентом $-\mu$). На этом же наблюдении основан алгоритм нахождения обратной матрицы через элементарные преобразования (вопрос 62).
+    </div>
+
 
     <div class="src-ref">Кострикин, ч. 1, с. 92–95</div>
   </div>
@@ -5357,10 +5360,18 @@ html.arriving .backdrop,html.arriving .sidebar{
           <li>$\operatorname{rang}A=n$?
             <ul class="props">
               <li><span class="em">Да</span> → система определённая (единственное решение);</li>
-              <li><span class="em">Нет</span> → система неопределённая (бесконечно много решений).</li>
+              <li><span class="em">Нет</span> → система неопределённая (бесконечно много решений), переходим к пункту 3.</li>
+            </ul>
+          </li>
+          <li>Пусть $r=\operatorname{rang}A<n$. Выбираем базисный минор порядка $r$; неизвестные, отвечающие его столбцам, объявляем <span class="term">главными</span> (их $r$ штук), остальные $n-r$ — <span class="term">свободными</span>.
+            <ul class="props">
+              <li>свободным неизвестным придаём произвольные значения;</li>
+              <li>главные выражаются через них однозначно — из системы, оставшейся после отбрасывания уравнений, не вошедших в базисный минор;</li>
+              <li>число свободных неизвестных $n-r$ и есть размерность пространства решений соответствующей ОСЛАУ (вопрос 63).</li>
             </ul>
           </li>
         </ol>
+        Общее решение записывается как сумма частного решения неоднородной системы и общего решения ОСЛАУ, разложенного по ФСР (вопрос 64).
       </div>
     </div>
 
@@ -5398,10 +5409,37 @@ html.arriving .backdrop,html.arriving .sidebar{
     <div class="def-block">
       <div class="section-tag">Комбинаторно-аналитическое</div>
       <div class="def-text">
-        Определитель матрицы $A=(a_{ij})$ порядка $n$ есть алгебраическая сумма $n!$ слагаемых вида
+        Определитель матрицы $A=(a_{ij})$ порядка $n$ есть алгебраическая сумма $n!$ слагаемых. Каждое слагаемое — произведение $n$ элементов матрицы, взятых <span class="em">по одному из каждой строки и по одному из каждого столбца</span>, со знаком:
         $$\varepsilon(\sigma)\cdot a_{1\sigma(1)}a_{2\sigma(2)}\ldots a_{n\sigma(n)},$$
         где $\varepsilon(\sigma)$ — знак перестановки, а суммирование ведётся по всем перестановкам $\sigma\in S_n$:
         $$\det A=\sum_{\sigma\in S_n}\varepsilon(\sigma)\,a_{1\sigma(1)}a_{2\sigma(2)}\cdots a_{n\sigma(n)}.$$
+        Перестановка $\sigma$ как раз и указывает, из какого столбца берётся элемент для каждой строки; разным перестановкам отвечают разные наборы, и всего их $n!$. При $n=3$ получается $3!=6$ слагаемых — те самые, что даёт правило треугольников (вопрос 72):
+        <div class="fig-block" style="text-align:center;margin:0.6rem 0">
+        <svg viewBox="0 0 470 150" style="max-width:470px;width:100%" xmlns="http://www.w3.org/2000/svg">
+          <g font-size="13" fill="currentColor" text-anchor="middle">
+            <text x="62" y="140">$\sigma=(1,2,3)$</text>
+            <text x="235" y="140">$\sigma=(2,3,1)$</text>
+            <text x="408" y="140">$\sigma=(3,1,2)$</text>
+          </g>
+          <g fill="currentColor" opacity="0.28">
+            <circle cx="20" cy="30" r="4"/><circle cx="62" cy="30" r="4"/><circle cx="104" cy="30" r="4"/>
+            <circle cx="20" cy="66" r="4"/><circle cx="62" cy="66" r="4"/><circle cx="104" cy="66" r="4"/>
+            <circle cx="20" cy="102" r="4"/><circle cx="62" cy="102" r="4"/><circle cx="104" cy="102" r="4"/>
+            <circle cx="193" cy="30" r="4"/><circle cx="235" cy="30" r="4"/><circle cx="277" cy="30" r="4"/>
+            <circle cx="193" cy="66" r="4"/><circle cx="235" cy="66" r="4"/><circle cx="277" cy="66" r="4"/>
+            <circle cx="193" cy="102" r="4"/><circle cx="235" cy="102" r="4"/><circle cx="277" cy="102" r="4"/>
+            <circle cx="366" cy="30" r="4"/><circle cx="408" cy="30" r="4"/><circle cx="450" cy="30" r="4"/>
+            <circle cx="366" cy="66" r="4"/><circle cx="408" cy="66" r="4"/><circle cx="450" cy="66" r="4"/>
+            <circle cx="366" cy="102" r="4"/><circle cx="408" cy="102" r="4"/><circle cx="450" cy="102" r="4"/>
+          </g>
+          <g fill="currentColor">
+            <circle cx="20" cy="30" r="6"/><circle cx="62" cy="66" r="6"/><circle cx="104" cy="102" r="6"/>
+            <circle cx="235" cy="30" r="6"/><circle cx="277" cy="66" r="6"/><circle cx="193" cy="102" r="6"/>
+            <circle cx="450" cy="30" r="6"/><circle cx="366" cy="66" r="6"/><circle cx="408" cy="102" r="6"/>
+          </g>
+        </svg>
+        </div>
+        Закрашенные кружки — выбранные элементы: в каждой строке и в каждом столбце ровно один.
       </div>
     </div>
 
@@ -5468,7 +5506,20 @@ html.arriving .backdrop,html.arriving .sidebar{
       <div class="derivation-title" onclick="toggleProof(this)"><svg class="deriv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>Доказательство</span><span class="deriv-hint"></span></div>
       <div class="deriv-body">
       <div class="def-text">
-        Основано на формуле определителя через сумму по перестановкам: каждое слагаемое содержит ровно один элемент из строки $i$, поэтому множители $\alpha$ и $\beta$ выносятся за знак суммы.
+        Удобно доказать два утверждения по отдельности.
+        <br><br>
+        <span class="em">Однородность.</span> Пусть $i$-я строка умножена на $\alpha$. В формуле
+        $$\det A=\sum_{\sigma\in S_n}\varepsilon_\sigma\,a_{1\sigma(1)}\cdots a_{i\sigma(i)}\cdots a_{n\sigma(n)}$$
+        каждое слагаемое содержит ровно один множитель из $i$-й строки — это $a_{i\sigma(i)}$. Он заменяется на $\alpha a_{i\sigma(i)}$, значит каждое слагаемое умножается на $\alpha$, и множитель выносится за знак суммы:
+        $$\det\begin{pmatrix}\vdots\\ \alpha A_i\\ \vdots\end{pmatrix}=\alpha\det A.$$
+        <br>
+        <span class="em">Аддитивность.</span> Пусть $i$-я строка есть сумма двух строк: $a_{ik}=a_{ik}'+a_{ik}''$. Тогда в каждом слагаемом множитель из $i$-й строки распадается на два:
+        $$\varepsilon_\sigma\,a_{1\sigma(1)}\cdots\bigl(a_{i\sigma(i)}'+a_{i\sigma(i)}''\bigr)\cdots a_{n\sigma(n)}
+        =\varepsilon_\sigma\,a_{1\sigma(1)}\cdots a_{i\sigma(i)}'\cdots a_{n\sigma(n)}
+        +\varepsilon_\sigma\,a_{1\sigma(1)}\cdots a_{i\sigma(i)}''\cdots a_{n\sigma(n)}.$$
+        Суммируя по всем $\sigma$ и группируя, получаем
+        $$\det\begin{pmatrix}\vdots\\ A_i'+A_i''\\ \vdots\end{pmatrix}=\det\begin{pmatrix}\vdots\\ A_i'\\ \vdots\end{pmatrix}+\det\begin{pmatrix}\vdots\\ A_i''\\ \vdots\end{pmatrix}.$$
+        Вместе эти два утверждения и дают полилинейность. $\blacksquare$
       </div>
       </div>
     </div>
@@ -5476,7 +5527,8 @@ html.arriving .backdrop,html.arriving .sidebar{
     <div class="thm-box">
       <div class="thm-label">Свойство 3 — кососимметричность</div>
       <div class="def-text">
-        При перестановке любых двух строк определитель меняет знак на противоположный:
+        При перестановке любых двух строк определитель меняет знак на противоположный. Геометрически это <span class="em">смена ориентации</span>: перестановка двух векторов-строк переводит правую тройку (репер) в левую, а ориентированный объём при этом меняет знак, сохраняя абсолютную величину.
+        <br><br>
         $$\det\begin{pmatrix}A_1\\\vdots\\A_i\\\vdots\\A_j\\\vdots\\A_n\end{pmatrix}=-\det\begin{pmatrix}A_1\\\vdots\\A_j\\\vdots\\A_i\\\vdots\\A_n\end{pmatrix}.$$
       </div>
     </div>
@@ -5828,6 +5880,22 @@ html.arriving .backdrop,html.arriving .sidebar{
       </div>
     </div>
 
+    <div class="example-card">
+      <div class="example-card-title my-example">Пример</div>
+      <div class="example-card-body">
+        Решим систему
+        $$\begin{cases}2x_1+x_2=5,\\ x_1+3x_2=10.\end{cases}$$
+        Здесь $A=\begin{pmatrix}2&1\\1&3\end{pmatrix}$, $b=\begin{pmatrix}5\\10\end{pmatrix}$, и
+        $$\det A=2\cdot 3-1\cdot 1=5\neq 0,$$
+        значит формулы Крамера применимы. Заменяем поочерёдно столбцы:
+        $$\det A_1=\begin{vmatrix}5&1\\10&3\end{vmatrix}=15-10=5,\qquad
+        \det A_2=\begin{vmatrix}2&5\\1&10\end{vmatrix}=20-5=15.$$
+        Отсюда
+        $$x_1=\frac{5}{5}=1,\qquad x_2=\frac{15}{5}=3.$$
+        Проверка: $2\cdot 1+3=5$ и $1+3\cdot 3=10$ — верно.
+      </div>
+    </div>
+
 
     <div class="src-ref">Кострикин, ч. 1, с. 123–124</div>
   </div>
@@ -6003,6 +6071,29 @@ html.arriving .backdrop,html.arriving .sidebar{
           <li><span class="em">Главные (базисные) переменные</span> ($r$ штук) соответствуют столбцам базисного минора;</li>
           <li><span class="em">Свободные переменные</span> ($n-r$ штук) — остальные переменные, принимающие произвольные значения.</li>
         </ul>
+      </div>
+    </div>
+
+    <div class="example-card">
+      <div class="example-card-title my-example">Пример</div>
+      <div class="example-card-body">
+        Исследуем систему
+        $$\begin{cases}x_1+2x_2-x_3=1,\\ 2x_1+4x_2+x_3=5,\\ 3x_1+6x_2=6.\end{cases}$$
+        Матрица коэффициентов $A=\begin{pmatrix}1&2&-1\\2&4&1\\3&6&0\end{pmatrix}$. Первый и второй столбцы пропорциональны, поэтому $\det A=0$ и $\operatorname{rang}A\le 2$. Минор из первого и третьего столбцов первых двух строк
+        $$\begin{vmatrix}1&-1\\2&1\end{vmatrix}=1+2=3\neq 0,$$
+        значит $r=\operatorname{rang}A=2$; это и есть базисный минор.
+        <br><br>
+        Проверим совместность: у расширенной матрицы окаймляющий минор
+        $$\begin{vmatrix}1&-1&1\\2&1&5\\3&0&6\end{vmatrix}=1(6-0)+1(12-15)+1(0-3)=6-3-3=0,$$
+        и других окаймляющих нет, поэтому $\operatorname{rang}(A\mid b)=2=\operatorname{rang}A$ — система совместна. Так как $r=2<3=n$, она неопределённая.
+        <br><br>
+        Столбцам базисного минора отвечают $x_1$ и $x_3$ — это главные переменные; $x_2$ свободная. Отбрасываем третье уравнение (его строка не вошла в базисный минор) и переносим $x_2$ вправо:
+        $$\begin{cases}x_1-x_3=1-2x_2,\\ 2x_1+x_3=5-4x_2.\end{cases}$$
+        Складывая, получаем $3x_1=6-6x_2$, то есть $x_1=2-2x_2$, и тогда $x_3=x_1-1+2x_2=1$.
+        <br><br>
+        Общее решение: $\;(x_1,x_2,x_3)=(2-2t,\;t,\;1)$, $t\in\mathbb{R}$. В виде «частное решение плюс ФСР»:
+        $$\begin{pmatrix}2\\0\\1\end{pmatrix}+t\begin{pmatrix}-2\\1\\0\end{pmatrix}.$$
+        Размерность пространства решений ОСЛАУ равна $n-r=3-2=1$ — согласуется с вопросом 63.
       </div>
     </div>
 
@@ -8834,6 +8925,106 @@ html.arriving .backdrop,html.arriving .sidebar{
   </div>
 </section>
 
+<section class="topic-page" id="page-s26">
+  <div class="topic-header">
+    <div class="topic-eyebrow">Дополнительная тема</div>
+    <h1 class="topic-title">Дополнительный материал</h1>
+  </div>
+  <div class="questions-list">
+
+<!-- 171. Основные обозначения -->
+<div class="q-card" data-q="171" data-text="основные обозначения символы квантор всеобщности существования пересечение объединение разность пустое множество множества чисел">
+  <div class="q-head" onclick="toggleCard(this)">
+    <span class="q-num">171</span>
+    <span class="q-title">Основные обозначения</span>
+    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  </div>
+  <div class="q-body">
+    <div class="def-block">
+      <div class="section-tag">Логические символы</div>
+      <div class="def-text">
+        <ul class="props">
+          <li>$\forall$ — квантор всеобщности, «для любого», «для всех»;</li>
+          <li>$\exists$ — квантор существования, «существует», «найдётся»;</li>
+          <li>$\exists!$ — «существует единственный»;</li>
+          <li>$\Rightarrow$ — «следует», «влечёт»; $\Leftrightarrow$ (или $\iff$) — «тогда и только тогда», равносильность;</li>
+          <li>$\;:\;$ или $\mid$ — «такой, что» (в записи множеств и кванторов).</li>
+        </ul>
+      </div>
+    </div>
+    <div class="def-block">
+      <div class="section-tag">Операции над множествами</div>
+      <div class="def-text">
+        <ul class="props">
+          <li>$\in$ — принадлежит; $\notin$ — не принадлежит;</li>
+          <li>$\subseteq$ — подмножество; $\subset$ — собственное подмножество;</li>
+          <li>$\cap$ — пересечение; $\cup$ — объединение;</li>
+          <li>$\setminus$ — разность; $\triangle$ — симметрическая разность (вопрос 7);</li>
+          <li>$\varnothing$ — пустое множество; $|X|$ — число элементов конечного множества $X$;</li>
+          <li>$X\times Y$ — декартово произведение (вопрос 8).</li>
+        </ul>
+      </div>
+    </div>
+    <div class="def-block">
+      <div class="section-tag">Числовые множества и прочее</div>
+      <div class="def-text">
+        <ul class="props">
+          <li>$\mathbb{N}$, $\mathbb{Z}$, $\mathbb{Q}$, $\mathbb{R}$, $\mathbb{C}$ — натуральные, целые, рациональные, вещественные, комплексные числа;</li>
+          <li>$\langle a_1,\ldots,a_k\rangle$ — линейная оболочка системы векторов (вопрос 41);</li>
+          <li>$\operatorname{rang}A$ — ранг матрицы; $\det A$ — определитель; $A^\top$ — транспонированная матрица;</li>
+          <li>$\operatorname{Ker}f$, $\operatorname{Im}f$ — ядро и образ линейного отображения (вопрос 119);</li>
+          <li>$\oplus$ — прямая сумма подпространств; $U^\perp$ — ортогональное дополнение.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note">
+      Эти обозначения используются по всему курсу, в том числе во втором семестре. Список собран сюда, чтобы не искать их по отдельным вопросам.
+    </div>
+  </div>
+</div>
+
+<!-- 172. Задача о нагретой пластинке -->
+<div class="q-card" data-q="172" data-text="нагретая пластинка модельная задача сетка граничные внутренние вершины среднее арифметическое температур">
+  <div class="q-head" onclick="toggleCard(this)">
+    <span class="q-num">172</span>
+    <span class="q-title">Модельная задача: нагретая пластинка</span>
+    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  </div>
+  <div class="q-body">
+    <div class="def-block">
+      <div class="def-text">
+        На пластинку нанесена квадратная сетка; её вершины делятся на <span class="em">граничные</span> (лежащие на контурах) и <span class="em">внутренние</span>. При любом нагревании или охлаждении температура в каждой внутренней вершине равна среднему арифметическому температур четырёх ближайших вершин. Если граничные температуры заданы, то относительно температур во внутренних вершинах возникает система линейных уравнений, а вопрос о существовании и единственности распределения температур — это вопрос о разрешимости и определённости этой линейной системы.
+      </div>
+    </div>
+    <div class="note">
+      Пример того, как линейные системы возникают вне алгебры. К экзаменационным вопросам не относится — см. вопрос 2 «Идея линейности в математике».
+    </div>
+  </div>
+</div>
+
+<!-- 173. Критерий Галуа -->
+<div class="q-card" data-q="173" data-text="критерий галуа разрешимость уравнений в радикалах группа галуа поле разложения абель руффини">
+  <div class="q-head" onclick="toggleCard(this)">
+    <span class="q-num">173</span>
+    <span class="q-title">Критерий Галуа разрешимости уравнений в радикалах</span>
+    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  </div>
+  <div class="q-body">
+    <div class="def-block">
+      <div class="section-tag">Критерий Галуа</div>
+      <div class="def-text">
+Универсальный критерий дал Э. Галуа (1831 г.): каждому уравнению степени $n$ он сопоставил <span class="term">поле разложения</span> и конечную группу его автоморфизмов (порядка не более $n!$) — <span class="term">группу Галуа</span>. Уравнение разрешимо в радикалах <span class="em">тогда и только тогда</span>, когда его группа Галуа разрешима. Например, уравнению $x^5-x-1=0$ отвечает группа Галуа, изоморфная симметрической группе $S_5$ порядка $120$; она неразрешима — значит, неразрешимо в радикалах и само уравнение. Так из этой задачи выросла теория групп.
+      </div>
+    </div>
+    <div class="note">
+      Понятия группы и разрешимой группы вводятся во втором семестре — см. тему «Группы, кольца, поля». К экзаменационным вопросам первого семестра не относится; связан с вопросом 3 «Модельные задачи алгебры».
+    </div>
+  </div>
+</div>
+
+  </div>
+</section>
+
 </main>
 
 <!-- ========== TAB BAR ==========
@@ -9211,6 +9402,16 @@ const TOPICS = [
     questions: [
       { n: 169, t: "Модель Леонтьева многоотраслевой экономики (балансовый анализ)" },
       { n: 170, t: "Модель Леонтьева: пример балансового расчёта" },
+    ]
+  },
+  {
+    id: "s26",
+    title: "Дополнительный материал",
+    subtitle: "Дополнительная тема",
+    questions: [
+      { n: 171, t: "Основные обозначения" },
+      { n: 172, t: "Модельная задача: нагретая пластинка" },
+      { n: 173, t: "Критерий Галуа разрешимости уравнений в радикалах" },
     ]
   },
 ];
