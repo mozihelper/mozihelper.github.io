@@ -7316,7 +7316,6 @@ function LD(x1,y1,x2,y2,fr,c,w,a){if(fr<=0)return;L(x1,y1,x1+(x2-x1)*fr,y1+(y2-y
 var cx=340,cy=215,A=210,B=130,Cc=165;
 var F1=[cx-Cc,cy],F2=[cx+Cc,cy];
 function E(th){return [cx+A*Math.cos(th),cy-B*Math.sin(th)];}
-var CURVE=[];for(var k=0;k<=120;k++)CURVE.push(E(k/120*2*Math.PI));
 
 function setup(p){
   var ax=eC(cl(p/0.55));
@@ -7335,24 +7334,30 @@ function sumBar(r1,r2){var bx=158,by=400,sc=372/(2*A);var w1=r1*sc,w2=r2*sc;
 
 function figDraw(ph,t){ctx.clearRect(0,0,Wd,Ht);var te=eC(t);
   setup(ph===0?t:1);
-  if(ph>=1)PLf(CURVE,ph===1?te:1,C.blue,2.6,ph===1?1:0.95);
-  if(ph>=2){
-    var th=(ph>=3)?(Math.PI/2+2*Math.PI*te):Math.PI/2;
-    var M=E(th);var g=(ph===2)?te:1;
+  if(ph>=1){
+    var th0=Math.PI/2;
+    // кривая НЕ рисуется заранее: она возникает как след точки M
+    var frac=(ph===2)?te:(ph>=3?1:0);
+    if(frac>0){var pts=[],n=Math.max(2,Math.round(120*frac));
+      for(var i=0;i<=n;i++)pts.push(E(th0+2*Math.PI*(i/120)));
+      PLf(pts,1,C.blue,2.6,ph>=3?0.95:1);}
+    var th=(ph===2)?(th0+2*Math.PI*te):th0;
+    var M=E(th);var g=(ph===1)?te:1;
     var M1=[lerp(F1[0],M[0],g),lerp(F1[1],M[1],g)],M2=[lerp(F2[0],M[0],g),lerp(F2[1],M[1],g)];
     L(F1[0],F1[1],M1[0],M1[1],C.blue,2.4,1);
     L(F2[0],F2[1],M2[0],M2[1],C.mm,2.4,1);
     if(g>0.15){TX("r\u2081",(F1[0]+M[0])/2-8,(F1[1]+M[1])/2-4,C.blue,13,"center",g);TX("r\u2082",(F2[0]+M[0])/2+8,(F2[1]+M[1])/2-4,C.mm,13,"center",g);}
     DOT(M[0],M[1],5.5,C.ink,1);TX("M",M[0]+(M[0]<cx?-14:10),M[1]-8,C.ink,14,"center",1);
-    if(ph>=3)sumBar(dist(F1,M),dist(F2,M));
+    if(g>0.6)sumBar(dist(F1,M),dist(F2,M));
+    if(ph>=3)TX("\u044d\u043b\u043b\u0438\u043f\u0441",cx+A-52,cy-B-12,C.blue,15,"center",te);
   }
 }
 
 var PH=[
-  {d:2400,cap:"\u0414\u0432\u0430 \u0444\u043e\u043a\u0443\u0441\u0430 F\u2081 \u0438 F\u2082"},
-  {d:2800,cap:"\u0427\u0435\u0440\u0442\u0438\u043c \u044d\u043b\u043b\u0438\u043f\u0441"},
-  {d:2400,cap:"\u0424\u043e\u043a\u0430\u043b\u044c\u043d\u044b\u0435 \u0440\u0430\u0434\u0438\u0443\u0441\u044b r\u2081 \u0438 r\u2082"},
-  {d:6000,cap:"\u0421\u0443\u043c\u043c\u0430 r\u2081 + r\u2082 = 2a \u043f\u043e\u0441\u0442\u043e\u044f\u043d\u043d\u0430"}
+  {d:2400,cap:"\u0414\u0430\u043d\u044b \u0434\u0432\u0430 \u0444\u043e\u043a\u0443\u0441\u0430 F\u2081 \u0438 F\u2082"},
+  {d:2800,cap:"\u0411\u0435\u0440\u0451\u043c \u0442\u043e\u0447\u043a\u0443 M \u0442\u0430\u043a, \u0447\u0442\u043e r\u2081 + r\u2082 = 2a"},
+  {d:7000,cap:"\u0414\u0432\u0438\u0433\u0430\u0435\u043c M, \u0441\u043e\u0445\u0440\u0430\u043d\u044f\u044f \u0441\u0443\u043c\u043c\u0443 \u043f\u043e\u0441\u0442\u043e\u044f\u043d\u043d\u043e\u0439"},
+  {d:2600,cap:"\u0421\u043b\u0435\u0434 \u0442\u043e\u0447\u043a\u0438 M \u2014 \u044d\u0442\u043e \u044d\u043b\u043b\u0438\u043f\u0441"}
 ];
 var pi=0,lt=0,running=false,started=false,inited=false,raf=null,t0=0;
 function $(s){return card.querySelector(s);}
