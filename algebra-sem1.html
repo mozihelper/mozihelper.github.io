@@ -3154,11 +3154,11 @@ html.arriving .backdrop,html.arriving .sidebar{
         $$x^n + a_1x^{n-1} + \ldots + a_n = 0\qquad\text{при } n>4$$
         <span class="em">неразрешимо в радикалах</span>.
         <br><br>
-        Универсальный критерий разрешимости дал Э. Галуа — см. вопрос 173 в разделе «Дополнительный материал».
+        Универсальный критерий разрешимости дал Э. Галуа — см. вопрос 93 во <a href="algebra-sem2.html">2-м семестре</a>, глава IX.
       </div>
     </div>
 
-    <!-- Правка (стр. 1): критерий Галуа перенесён в «Дополнительный материал», вопрос 173 -->
+    <!-- Критерий Галуа перенесён во 2-й семестр (вопрос 93) по письму Г. Н. Клюшникова -->
 
     <div class="def-block">
       <div class="section-tag">Состояния многоатомной молекулы</div>
@@ -4411,351 +4411,7 @@ html.arriving .backdrop,html.arriving .sidebar{
   </div>
 </section>
 
-<section class="topic-page" id="page-s7">
-  <div class="topic-header">
-    <div class="topic-eyebrow">Глава II</div>
-    <h1 class="topic-title">Векторные пространства и базис</h1>
-  </div>
-  <div class="questions-list">
 
-<!-- 38. Понятие векторного пространства -->
-<div class="q-card" data-q="38" data-text="векторное пространство строк аксиомы коммутативность ассоциативность нулевой противоположный дистрибутивность унитарность">
-  <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">38</span>
-    <span class="q-title">Понятие векторного пространства</span>
-    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-  </div>
-  <div class="q-body">
-
-    <div class="def-block">
-      <div class="section-tag">Определение</div>
-      <div class="def-text">
-        <span class="term">Векторным пространством строк длины $n$ над $\mathbb{R}$</span> называется множество всех строк (упорядоченных наборов) из $n$ действительных чисел, обозначаемое $\mathbb{R}^n$.
-      </div>
-    </div>
-
-    <div class="def-block">
-      <div class="section-tag">Аксиомы</div>
-      <div class="def-text">
-        Пусть $V=\mathbb{R}^n$. Для любых $x,y,z\in V$ и любых $\alpha,\beta\in\mathbb{R}$ выполняются:
-        <ul class="props">
-          <li>коммутативность относительно сложения: $x+y=y+x$;</li>
-          <li>ассоциативность сложения: $(x+y)+z=x+(y+z)$;</li>
-          <li>существование нулевого вектора: существует $0\in V$ такой, что $x+0=x$;</li>
-          <li>существование противоположного вектора: для каждого $x\in V$ существует $(-x)\in V$ такой, что $x+(-x)=0$;</li>
-          <li>ассоциативность умножения на скаляр: $(\alpha\beta)x=\alpha(\beta x)$;</li>
-          <li>дистрибутивность относительно суммы скаляров: $(\alpha+\beta)x=\alpha x+\beta x$;</li>
-          <li>дистрибутивность относительно суммы векторов: $\alpha(x+y)=\alpha x+\alpha y$;</li>
-          <li>унитарность: $1\cdot x=x$ (где $1$ — единица поля $\mathbb{R}$).</li>
-        </ul>
-      </div>
-    </div>
-
-
-    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
-  </div>
-</div>
-
-<!-- 39. Примеры векторных пространств -->
-<div class="q-card" data-q="39" data-text="примеры векторных пространств матрицы непрерывные функции многочлены">
-  <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">39</span>
-    <span class="q-title">Примеры векторных пространств</span>
-    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-  </div>
-  <div class="q-body">
-
-    <div class="example-card">
-      <div class="example-card-title my-example">Примеры</div>
-      <div class="example-card-body">
-        <ul class="props">
-          <li>$\mathbb{R}^{12}$ — 12-мерное пространство вещественных векторов-столбцов (или строк);</li>
-          <li>$M_{5\times 4}(\mathbb{R})$ — пространство вещественных матриц размера $5\times 4$;</li>
-          <li>$C[a,b]$ — пространство непрерывных функций на отрезке $[a,b]$;</li>
-          <li>$P_2(\mathbb{R})$ — пространство вещественных многочленов степени не выше второй.</li>
-        </ul>
-      </div>
-    </div>
-
-
-    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
-  </div>
-</div>
-
-<!-- 40. Линейная комбинация векторов -->
-<div class="q-card" data-q="40" data-text="линейная комбинация векторов коэффициенты скаляры">
-  <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">40</span>
-    <span class="q-title">Линейная комбинация векторов</span>
-    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-  </div>
-  <div class="q-body">
-
-    <div class="def-block">
-      <div class="section-tag">Определение</div>
-      <div class="def-text">
-        <span class="term">Линейной комбинацией</span> векторов $v_1,v_2,\ldots,v_n$ называется выражение вида
-        $$\alpha_1 v_1+\alpha_2 v_2+\cdots+\alpha_n v_n,$$
-        где $\alpha_1,\alpha_2,\ldots,\alpha_n$ — числа (скаляры), называемые <span class="em">коэффициентами</span> линейной комбинации.
-      </div>
-    </div>
-
-    <div class="explain">
-      Комбинация, в которой все коэффициенты равны нулю, называется <span class="em">тривиальной</span>; она всегда даёт нулевой вектор. Если же хотя бы один коэффициент отличен от нуля, комбинацию называют <span class="em">нетривиальной</span> — это различие лежит в основе понятия линейной зависимости (следующая карточка).
-    </div>
-
-
-    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
-  </div>
-</div>
-
-<!-- 41. Линейная оболочка системы векторов -->
-<div class="q-card" data-q="41" data-text="линейная оболочка системы векторов множество линейных комбинаций порождающая">
-  <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">41</span>
-    <span class="q-title">Линейная оболочка системы векторов</span>
-    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-  </div>
-  <div class="q-body">
-
-    <div class="def-block">
-      <div class="section-tag">Определение</div>
-      <div class="def-text">
-        <span class="term">Линейной оболочкой</span> системы векторов $S=\{a_1,a_2,\ldots,a_k\}$ называется множество всех линейных комбинаций этих векторов. Обозначение: $\langle a_1,a_2,\ldots,a_k\rangle$. Если $a_1,\ldots,a_k\in V$, то
-        $$\langle a_1,a_2,\ldots,a_k\rangle=\{\lambda_1 a_1+\lambda_2 a_2+\cdots+\lambda_k a_k\mid \lambda_1,\ldots,\lambda_k\in\mathbb{R}\}.$$
-      </div>
-    </div>
-
-    <div class="explain">
-      Линейная оболочка сама является подпространством в $V$ — причём <span class="em">наименьшим</span> подпространством, содержащим все векторы системы $S$. Угловые скобки $\langle\,\cdot\,\rangle$ зарезервированы именно за линейной оболочкой.
-    </div>
-
-
-    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
-  </div>
-</div>
-
-<!-- 42. Линейно зависимые и независимые системы -->
-<div class="q-card" data-q="42" data-text="линейно зависимые независимые системы векторов нетривиальная зависимость">
-  <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">42</span>
-    <span class="q-title">Линейно зависимые и линейно независимые системы векторов</span>
-    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-  </div>
-  <div class="q-body">
-
-    <div class="def-block">
-      <div class="section-tag">Линейно зависимая</div>
-      <div class="def-text">
-        Система векторов $X_1,\ldots,X_k$ пространства $\mathbb{R}^n$ называется <span class="term">линейно зависимой</span>, если найдутся числа $\alpha_1,\ldots,\alpha_k$, не все равные нулю, такие что
-        $$\alpha_1 X_1+\alpha_2 X_2+\ldots+\alpha_k X_k=0$$
-        (справа — нулевой вектор). Такую линейную зависимость называют <span class="em">нетривиальной</span>.
-      </div>
-    </div>
-
-    <div class="def-block">
-      <div class="section-tag">Линейно независимая</div>
-      <div class="def-text">
-        Если же
-        $$\alpha_1 X_1+\alpha_2 X_2+\ldots+\alpha_k X_k=0\;\implies\;\alpha_1=\alpha_2=\ldots=\alpha_k=0,$$
-        то векторы $X_1,X_2,\ldots,X_k$ называются <span class="term">линейно независимыми</span>.
-      </div>
-    </div>
-
-    <div class="explain">
-      Два простых следствия из определения: система, содержащая нулевой вектор, всегда линейно зависима (достаточно взять при нём коэффициент $1$, при остальных — $0$); один вектор линейно зависим тогда и только тогда, когда он нулевой.
-    </div>
-
-
-    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
-  </div>
-</div>
-
-<!-- 43. Теорема о ЛЗ и ЛНЗ системах -->
-<div class="q-card" data-q="43" data-text="теорема линейно зависимые независимые подсистема часть выражается через остальные">
-  <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">43</span>
-    <span class="q-title">Теорема о линейно зависимых и линейно независимых системах</span>
-    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-  </div>
-  <div class="q-body">
-
-    <div class="thm-box">
-      <div class="thm-label">Теорема</div>
-      <div class="def-text">
-        Имеют место следующие утверждения:
-        <ul class="props">
-          <li><span class="em">i)</span> система векторов $\{X_1,\ldots,X_k\}$ с линейно зависимой подсистемой сама линейно зависима;</li>
-          <li><span class="em">ii)</span> любая часть линейно независимой системы векторов $\{X_1,\ldots,X_k\}$ линейно независима;</li>
-          <li><span class="em">iii)</span> среди линейно зависимых векторов $X_1,\ldots,X_k$ хотя бы один является линейной комбинацией остальных;</li>
-          <li><span class="em">iv)</span> если один из векторов $X_1,\ldots,X_k$ выражается через остальные, то векторы $X_1,\ldots,X_k$ линейно зависимы;</li>
-          <li><span class="em">v)</span> если векторы $X_1,\ldots,X_k$ линейно независимы, а $X_1,\ldots,X_k,X$ линейно зависимы, то $X$ — линейная комбинация векторов $X_1,\ldots,X_k$;</li>
-          <li><span class="em">vi)</span> если векторы $X_1,\ldots,X_k$ линейно независимы и вектор $X_{k+1}$ нельзя через них выразить, то система $X_1,\ldots,X_k,X_{k+1}$ линейно независима.</li>
-        </ul>
-      </div>
-    </div>
-
-
-    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
-  </div>
-</div>
-
-<!-- 44. Понятие базиса -->
-<div class="q-card" data-q="44" data-text="базис линейно независимая система линейная оболочка совпадает порождает">
-  <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">44</span>
-    <span class="q-title">Понятие базиса</span>
-    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-  </div>
-  <div class="q-body">
-
-    <div class="def-block">
-      <div class="section-tag">Определение</div>
-      <div class="def-text">
-        Пусть $V$ — ненулевая линейная оболочка в $\mathbb{R}^n$. Система векторов $X_1,\ldots,X_r\in V$ называется <span class="term">базисом</span> для $V$, если:
-        <ul class="props">
-          <li>она линейно независима;</li>
-          <li>её линейная оболочка совпадает с $V$: $\;\langle X_1,\ldots,X_r\rangle=V$.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="def-block">
-      <div class="section-tag">Эквивалентная формулировка</div>
-      <div class="def-text">
-        Базис — это наибольшая линейно независимая система векторов $V$, которую уже нельзя расширить: добавление к ней любого вектора из $V$ делает систему линейно зависимой.
-      </div>
-    </div>
-
-    <div class="explain">
-      Ключевое свойство базиса: каждый вектор $X\in V$ разлагается по базису <span class="em">единственным образом</span>, $X=\alpha_1 X_1+\cdots+\alpha_r X_r$. Коэффициенты $\alpha_1,\ldots,\alpha_r$ называются координатами вектора $X$ в этом базисе.
-    </div>
-
-
-    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
-  </div>
-</div>
-
-<!-- 45. Лемма о ЛНЗ системе и базисе -->
-<div class="q-card" data-q="45" data-text="лемма линейно независимая система базис размерность s меньше или равно r">
-  <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">45</span>
-    <span class="q-title">Лемма о линейно независимой системе и базисе</span>
-    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-  </div>
-  <div class="q-body">
-
-    <div class="thm-box">
-      <div class="thm-label">Лемма</div>
-      <div class="def-text">
-        Пусть $V$ — линейная оболочка в $\mathbb{R}^n$ с базисом $X_1,\ldots,X_r$, и $Y_1,\ldots,Y_s$ — линейно независимая система векторов из $V$. Тогда $s\le r$.
-      </div>
-    </div>
-
-    <div class="def-block">
-      <div class="section-tag">Обозначения</div>
-      <div class="def-text">
-        <ul class="props">
-          <li>$r=\dim V$ — размерность пространства $V$, т.е. максимальное число линейно независимых векторов в $V$ (например, $\dim\mathbb{R}^3=3$);</li>
-          <li>$s$ — число векторов в линейно независимой системе $\{Y_1,\ldots,Y_s\}$; всегда $s\le r$. Если $s=r$, то система образует базис $V$.</li>
-        </ul>
-      </div>
-    </div>
-
-
-    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
-  </div>
-</div>
-
-<!-- 46. Теорема о базисе. Размерность -->
-<div class="q-card" data-q="46" data-text="теорема о базисе размерность линейной оболочки конечный базис все базисы одно число">
-  <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">46</span>
-    <span class="q-title">Теорема о базисе. Размерность линейной оболочки</span>
-    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-  </div>
-  <div class="q-body">
-
-    <div class="thm-box">
-      <div class="thm-label">Теорема</div>
-      <div class="def-text">
-        Каждая ненулевая линейная оболочка $V\subset\mathbb{R}^n$ обладает конечным базисом. Все базисы оболочки $V$ состоят из одного и того же числа $r\le n$ векторов (это число называется <span class="term">размерностью оболочки $V$</span> и обозначается $\dim V$).
-      </div>
-    </div>
-
-
-    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
-  </div>
-</div>
-
-<!-- 47. Два подхода к определению базиса -->
-<div class="q-card" data-q="47" data-text="два подхода базис максимальная линейно независимая минимальная порождающая полная система">
-  <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">47</span>
-    <span class="q-title">Два подхода к определению базиса (через линейно независимые и через порождающие системы)</span>
-    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-  </div>
-  <div class="q-body">
-
-    <div class="def-block">
-      <div class="section-tag">Через линейную независимость</div>
-      <div class="def-text">
-        <span class="term">Базис</span> — максимальная (по включению) линейно независимая система векторов пространства $V$.
-        <ul class="props">
-          <li><span class="em">Линейная независимость:</span> ни один вектор системы не выражается линейной комбинацией остальных;</li>
-          <li><span class="em">Максимальность:</span> при добавлении любого вектора $v\in V$, не входящего в систему, она становится линейно зависимой.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="explain">
-      Базис — это наибольшая возможная система, которую уже нельзя расширить.
-    </div>
-
-    <div class="def-block">
-      <div class="section-tag">Через порождающие системы</div>
-      <div class="def-text">
-        <span class="term">Базис</span> — минимальная (по включению) порождающая (полная) система векторов пространства $V$.
-        <ul class="props">
-          <li><span class="em">Порождаемость:</span> любой вектор $v\in V$ представим <span class="em">в виде</span> линейной комбинации векторов системы: $\;\forall v\in V\;\exists\{\alpha_i\}:\;v=\sum\alpha_i e_i$;</li>
-          <li><span class="em">Минимальность:</span> ни один вектор нельзя удалить, не нарушив свойство порождать всё пространство $V$.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="explain">
-      Базис — это наименьший набор векторов, достаточный для получения всего пространства, и при этом не содержащий лишних элементов (минимальность).
-    </div>
-
-
-    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
-  </div>
-</div>
-
-<!-- 48. Условие совместности СЛАУ через столбцы -->
-<div class="q-card" data-q="48" data-text="условие совместности слау линейная комбинация столбцов матрицы правые части критерий">
-  <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">48</span>
-    <span class="q-title">Формулировка условия совместности СЛАУ с помощью линейной комбинации столбцов матрицы СЛАУ</span>
-    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-  </div>
-  <div class="q-body">
-
-    <div class="thm-box">
-      <div class="thm-label">Критерий совместности</div>
-      <div class="def-text">
-        Система линейных уравнений $Ax=b$ совместна (имеет хотя бы одно решение) тогда и только тогда, когда вектор правых частей $b$ представим в виде линейной комбинации столбцов матрицы $A$:
-        $$\exists\,x_1,x_2,\ldots,x_n\in\mathbb{R}:\;b=x_1 a_1+x_2 a_2+\ldots+x_n a_n.$$
-      </div>
-    </div>
-
-
-    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
-  </div>
-</div>
-
-  </div>
-</section>
 
 <section class="topic-page" id="page-s8">
   <div class="topic-header">
@@ -4764,10 +4420,10 @@ html.arriving .backdrop,html.arriving .sidebar{
   </div>
   <div class="questions-list">
 
-<!-- 49. Пространства строк и столбцов матрицы -->
-<div class="q-card" data-q="49" data-text="пространство столбцов строк матрицы образ col row линейная оболочка">
+<!-- 38. Пространства строк и столбцов матрицы -->
+<div class="q-card" data-q="38" data-text="пространство столбцов строк матрицы образ col row линейная оболочка">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">49</span>
+    <span class="q-num">38</span>
     <span class="q-title">Пространства строк и столбцов матрицы</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -4803,10 +4459,10 @@ html.arriving .backdrop,html.arriving .sidebar{
   </div>
 </div>
 
-<!-- 50. Вертикальный и горизонтальный ранг -->
-<div class="q-card" data-q="50" data-text="вертикальный горизонтальный ранг столбцовый строчный максимальное число линейно независимых">
+<!-- 39. Вертикальный и горизонтальный ранг -->
+<div class="q-card" data-q="39" data-text="вертикальный горизонтальный ранг столбцовый строчный максимальное число линейно независимых">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">50</span>
+    <span class="q-num">39</span>
     <span class="q-title">Вертикальный и горизонтальный ранг матрицы</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -4833,10 +4489,10 @@ html.arriving .backdrop,html.arriving .sidebar{
   </div>
 </div>
 
-<!-- 51. Сохранение ранга при преобразованиях строк -->
-<div class="q-card" data-q="51" data-text="сохранение ранга элементарные преобразования строк линейная оболочка зависимости столбцов">
+<!-- 40. Сохранение ранга при преобразованиях строк -->
+<div class="q-card" data-q="40" data-text="сохранение ранга элементарные преобразования строк линейная оболочка зависимости столбцов">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">51</span>
+    <span class="q-num">40</span>
     <span class="q-title">Сохранение вертикального и горизонтального ранга матрицы при элементарных преобразованиях над строками</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -4864,10 +4520,10 @@ html.arriving .backdrop,html.arriving .sidebar{
   </div>
 </div>
 
-<!-- 52. Теорема о равенстве рангов и вычислении ранга -->
-<div class="q-card" data-q="52" data-text="теорема равенство строчного столбцового ранга вычисление ступенчатый вид ненулевые строки">
+<!-- 41. Теорема о равенстве рангов и вычислении ранга -->
+<div class="q-card" data-q="41" data-text="теорема равенство строчного столбцового ранга вычисление ступенчатый вид ненулевые строки">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">52</span>
+    <span class="q-num">41</span>
     <span class="q-title">Теорема о равенстве вертикального и горизонтального ранга матрицы. Теорема о вычислении ранга матрицы приведением её к ступенчатому виду</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -4892,10 +4548,10 @@ html.arriving .backdrop,html.arriving .sidebar{
   </div>
 </div>
 
-<!-- 53. Кронекер-Капелли и определённость СЛАУ -->
-<div class="q-card" data-q="53" data-text="теорема кронекера капелли совместность определённость единственность ранг расширенная матрица доказательство">
+<!-- 42. Кронекер-Капелли и определённость СЛАУ -->
+<div class="q-card" data-q="42" data-text="теорема кронекера капелли совместность определённость единственность ранг расширенная матрица доказательство">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">53</span>
+    <span class="q-num">42</span>
     <span class="q-title">Теорема Кронекера–Капелли. Теорема об определённости СЛАУ</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -4952,10 +4608,10 @@ html.arriving .backdrop,html.arriving .sidebar{
   </div>
 </div>
 
-<!-- 54. Понятие линейного отображения -->
-<div class="q-card" data-q="54" data-text="линейное отображение аддитивность однородность векторные пространства скаляр">
+<!-- 43. Понятие линейного отображения -->
+<div class="q-card" data-q="43" data-text="линейное отображение аддитивность однородность векторные пространства скаляр">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">54</span>
+    <span class="q-num">43</span>
     <span class="q-title">Понятие линейного отображения</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -4986,10 +4642,10 @@ html.arriving .backdrop,html.arriving .sidebar{
   </div>
 </div>
 
-<!-- 55. Свойства ранга матрицы -->
-<div class="q-card" data-q="55" data-text="свойства ранга матрицы транспонирование произведение сумма неравенства">
+<!-- 44. Свойства ранга матрицы -->
+<div class="q-card" data-q="44" data-text="свойства ранга матрицы транспонирование произведение сумма неравенства">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">55</span>
+    <span class="q-num">44</span>
     <span class="q-title">Свойства ранга матрицы</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -5015,7 +4671,7 @@ html.arriving .backdrop,html.arriving .sidebar{
       <div class="def-text">
         <span class="em">$\operatorname{rang}(A^TA)=\operatorname{rang}A$.</span> Достаточно показать, что системы $Ax=0$ и $A^TAx=0$ имеют одно и то же множество решений. Если $Ax=0$, то и $A^TAx=0$. Обратно, пусть $A^TAx=0$; умножим слева на $x^T$:
         $$x^TA^TAx=(Ax)^T(Ax)=\|Ax\|^2=0,$$
-        откуда $Ax=0$. Значит, ядра совпадают, и по теореме о связи размерностей (вопрос 63)
+        откуда $Ax=0$. Значит, ядра совпадают, и по теореме о связи размерностей (вопрос 52)
         $$n-\operatorname{rang}(A^TA)=n-\operatorname{rang}A.$$
         <br><br>
         <span class="em">$\operatorname{rang}(AB)=\operatorname{rang}A$ при $\det B\neq 0$.</span> По общему свойству $\operatorname{rang}(AB)\le\operatorname{rang}A$. С другой стороны, $B$ обратима, поэтому $A=(AB)B^{-1}$, и по тому же свойству $\operatorname{rang}A\le\operatorname{rang}(AB)$. Из двух неравенств следует равенство. $\blacksquare$
@@ -5024,7 +4680,7 @@ html.arriving .backdrop,html.arriving .sidebar{
     </div>
 
     <div class="note">
-      Ранг можно определять двумя способами: как максимальное число линейно независимых строк (столбцов) матрицы и как наибольший порядок отличного от нуля минора. Второй способ удобен для вычислений — по методу окаймляющих миноров (вопрос 79): найдя ненулевой минор порядка $k$, достаточно проверить только окаймляющие его миноры порядка $k+1$, а не все подряд.
+      Ранг можно определять двумя способами: как максимальное число линейно независимых строк (столбцов) матрицы и как наибольший порядок отличного от нуля минора. Второй способ удобен для вычислений — по методу окаймляющих миноров (вопрос 68): найдя ненулевой минор порядка $k$, достаточно проверить только окаймляющие его миноры порядка $k+1$, а не все подряд.
     </div>
 
 
@@ -5042,10 +4698,10 @@ html.arriving .backdrop,html.arriving .sidebar{
   </div>
   <div class="questions-list">
 
-<!-- 56. Обратная матрица -->
-<div class="q-card" data-q="56" data-text="обратная матрица определение единичная произведение порядок квадратная">
+<!-- 45. Обратная матрица -->
+<div class="q-card" data-q="45" data-text="обратная матрица определение единичная произведение порядок квадратная">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">56</span>
+    <span class="q-num">45</span>
     <span class="q-title">Обратная матрица</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -5065,10 +4721,10 @@ html.arriving .backdrop,html.arriving .sidebar{
   </div>
 </div>
 
-<!-- 57. Невырожденная матрица -->
-<div class="q-card" data-q="57" data-text="невырожденная матрица определитель отличен от нуля квадратная">
+<!-- 46. Невырожденная матрица -->
+<div class="q-card" data-q="46" data-text="невырожденная матрица определитель отличен от нуля квадратная">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">57</span>
+    <span class="q-num">46</span>
     <span class="q-title">Невырожденная матрица</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -5090,10 +4746,10 @@ html.arriving .backdrop,html.arriving .sidebar{
   </div>
 </div>
 
-<!-- 58. Теорема о связи обратимости и невырожденности -->
-<div class="q-card" data-q="58" data-text="теорема связь обратимость невырожденность определитель обратима тогда и только тогда">
+<!-- 47. Теорема о связи обратимости и невырожденности -->
+<div class="q-card" data-q="47" data-text="теорема связь обратимость невырожденность определитель обратима тогда и только тогда">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">58</span>
+    <span class="q-num">47</span>
     <span class="q-title">Теорема о связи обратимости и невырожденности матрицы</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -5111,10 +4767,10 @@ html.arriving .backdrop,html.arriving .sidebar{
   </div>
 </div>
 
-<!-- 59. Обратная к произведению -->
-<div class="q-card" data-q="59" data-text="обратная к произведению невырожденных матриц формула порядок">
+<!-- 48. Обратная к произведению -->
+<div class="q-card" data-q="48" data-text="обратная к произведению невырожденных матриц формула порядок">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">59</span>
+    <span class="q-num">48</span>
     <span class="q-title">Вычисление матрицы, обратной к произведению невырожденных матриц</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -5133,10 +4789,10 @@ html.arriving .backdrop,html.arriving .sidebar{
   </div>
 </div>
 
-<!-- 60. Транспонированная к произведению -->
-<div class="q-card" data-q="60" data-text="транспонированная к произведению матриц формула">
+<!-- 49. Транспонированная к произведению -->
+<div class="q-card" data-q="49" data-text="транспонированная к произведению матриц формула">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">60</span>
+    <span class="q-num">49</span>
     <span class="q-title">Вычисление матрицы, транспонированной к произведению матриц</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -5155,10 +4811,10 @@ html.arriving .backdrop,html.arriving .sidebar{
   </div>
 </div>
 
-<!-- 61. Алгоритм PQ-приведения -->
-<div class="q-card" data-q="61" data-text="алгоритм PQ-приведение нормальный вид элементарные преобразования строк столбцов обратная">
+<!-- 50. Алгоритм PQ-приведения -->
+<div class="q-card" data-q="50" data-text="алгоритм PQ-приведение нормальный вид элементарные преобразования строк столбцов обратная">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">61</span>
+    <span class="q-num">50</span>
     <span class="q-title">Алгоритм PQ-приведения матрицы к нормальному виду</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -5179,7 +4835,7 @@ html.arriving .backdrop,html.arriving .sidebar{
     <div class="note">
       Отсюда сразу следует важное утверждение: <span class="em">всякая невырожденная матрица есть произведение элементарных матриц.</span> Действительно, равенство
       $$A=P_1^{-1}\cdots P_m^{-1}\cdot Q_n^{-1}\cdots Q_1^{-1}$$
-      уже записывает $A$ в таком виде — матрица, обратная к элементарной, сама элементарна (обратное к перестановке строк — та же перестановка, к умножению строки на $\lambda\neq 0$ — умножение на $1/\lambda$, к прибавлению строки с коэффициентом $\mu$ — прибавление с коэффициентом $-\mu$). На этом же наблюдении основан алгоритм нахождения обратной матрицы через элементарные преобразования (вопрос 62).
+      уже записывает $A$ в таком виде — матрица, обратная к элементарной, сама элементарна (обратное к перестановке строк — та же перестановка, к умножению строки на $\lambda\neq 0$ — умножение на $1/\lambda$, к прибавлению строки с коэффициентом $\mu$ — прибавление с коэффициентом $-\mu$). На этом же наблюдении основан алгоритм нахождения обратной матрицы через элементарные преобразования (вопрос 51).
     </div>
 
 
@@ -5187,10 +4843,10 @@ html.arriving .backdrop,html.arriving .sidebar{
   </div>
 </div>
 
-<!-- 62. Алгоритм нахождения обратной (Гаусс-Жордан) -->
-<div class="q-card" data-q="62" data-text="алгоритм обратная матрица элементарные преобразования строк гаусс жордан блочная матрица">
+<!-- 51. Алгоритм нахождения обратной (Гаусс-Жордан) -->
+<div class="q-card" data-q="51" data-text="алгоритм обратная матрица элементарные преобразования строк гаусс жордан блочная матрица">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">62</span>
+    <span class="q-num">51</span>
     <span class="q-title">Алгоритм нахождения обратной матрицы с помощью элементарных преобразований строк</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -5217,7 +4873,7 @@ html.arriving .backdrop,html.arriving .sidebar{
 
 
     <div class="note">
-      Этот алгоритм — частный случай $PQ$-приведения (вопрос 61). Элементарные преобразования строк равносильны умножению слева на элементарные матрицы: если $E_k\cdots E_1 A=E$, то $E_k\cdots E_1=A^{-1}$. Именно поэтому те же преобразования, применённые к приписанной справа единичной матрице, дают $A^{-1}$: блок $E$ превращается в $E_k\cdots E_1 E=A^{-1}$.
+      Этот алгоритм — частный случай $PQ$-приведения (вопрос 50). Элементарные преобразования строк равносильны умножению слева на элементарные матрицы: если $E_k\cdots E_1 A=E$, то $E_k\cdots E_1=A^{-1}$. Именно поэтому те же преобразования, применённые к приписанной справа единичной матрице, дают $A^{-1}$: блок $E$ превращается в $E_k\cdots E_1 E=A^{-1}$.
     </div>
 
     <div class="src-ref">Кострикин, ч. 1, с. 94–95</div>
@@ -5234,10 +4890,10 @@ html.arriving .backdrop,html.arriving .sidebar{
   </div>
   <div class="questions-list">
 
-<!-- 63. Теорема о размерности пространства решений ОСЛАУ -->
-<div class="q-card" data-q="63" data-text="теорема размерность пространства решений ослау ранг подпространство dim V = n - rang">
+<!-- 52. Теорема о размерности пространства решений ОСЛАУ -->
+<div class="q-card" data-q="52" data-text="теорема размерность пространства решений ослау ранг подпространство dim V = n - rang">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">63</span>
+    <span class="q-num">52</span>
     <span class="q-title">Теорема о связи размерностей пространства решений ОСЛАУ и ранга матрицы СЛАУ</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -5256,10 +4912,10 @@ html.arriving .backdrop,html.arriving .sidebar{
   </div>
 </div>
 
-<!-- 64. Фундаментальная система решений ОСЛАУ -->
-<div class="q-card" data-q="64" data-text="фундаментальная система решений фср ослау линейно независимые решения комбинация">
+<!-- 53. Фундаментальная система решений ОСЛАУ -->
+<div class="q-card" data-q="53" data-text="фундаментальная система решений фср ослау линейно независимые решения комбинация">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">64</span>
+    <span class="q-num">53</span>
     <span class="q-title">Фундаментальная система решений ОСЛАУ</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -5282,10 +4938,10 @@ html.arriving .backdrop,html.arriving .sidebar{
   </div>
 </div>
 
-<!-- 65. Общее решение неоднородной СЛАУ -->
-<div class="q-card" data-q="65" data-text="общее решение неоднородной слау структура частное общее однородной теорема">
+<!-- 54. Общее решение неоднородной СЛАУ -->
+<div class="q-card" data-q="54" data-text="общее решение неоднородной слау структура частное общее однородной теорема">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">65</span>
+    <span class="q-num">54</span>
     <span class="q-title">Общее решение неоднородной СЛАУ</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -5305,10 +4961,10 @@ html.arriving .backdrop,html.arriving .sidebar{
   </div>
 </div>
 
-<!-- 66. Метод Гаусса -->
-<div class="q-card" data-q="66" data-text="метод гаусса прямой обратный ход ступенчатый вид элементарные преобразования совместность ранг">
+<!-- 55. Метод Гаусса -->
+<div class="q-card" data-q="55" data-text="метод гаусса прямой обратный ход ступенчатый вид элементарные преобразования совместность ранг">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">66</span>
+    <span class="q-num">55</span>
     <span class="q-title">Метод Гаусса решения СЛАУ</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -5338,10 +4994,10 @@ html.arriving .backdrop,html.arriving .sidebar{
   </div>
 </div>
 
-<!-- 67. Схема исследования произвольной СЛАУ -->
-<div class="q-card" data-q="67" data-text="схема исследования слау rang совместность определённость единственное бесконечно решений">
+<!-- 56. Схема исследования произвольной СЛАУ -->
+<div class="q-card" data-q="56" data-text="схема исследования слау rang совместность определённость единственное бесконечно решений">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">67</span>
+    <span class="q-num">56</span>
     <span class="q-title">Схема исследования произвольной СЛАУ</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -5367,11 +5023,11 @@ html.arriving .backdrop,html.arriving .sidebar{
             <ul class="props">
               <li>свободным неизвестным придаём произвольные значения;</li>
               <li>главные выражаются через них однозначно — из системы, оставшейся после отбрасывания уравнений, не вошедших в базисный минор;</li>
-              <li>число свободных неизвестных $n-r$ и есть размерность пространства решений соответствующей ОСЛАУ (вопрос 63).</li>
+              <li>число свободных неизвестных $n-r$ и есть размерность пространства решений соответствующей ОСЛАУ (вопрос 52).</li>
             </ul>
           </li>
         </ol>
-        Общее решение записывается как сумма частного решения неоднородной системы и общего решения ОСЛАУ, разложенного по ФСР (вопрос 64).
+        Общее решение записывается как сумма частного решения неоднородной системы и общего решения ОСЛАУ, разложенного по ФСР (вопрос 53).
       </div>
     </div>
 
@@ -5390,10 +5046,10 @@ html.arriving .backdrop,html.arriving .sidebar{
   </div>
   <div class="questions-list">
 
-<!-- 68. Понятие определителя -->
-<div class="q-card" data-q="68" data-text="определитель геометрическое комбинаторное аксиоматическое рекуррентное ориентированный объём перестановки знак">
+<!-- 57. Понятие определителя -->
+<div class="q-card" data-q="57" data-text="определитель геометрическое комбинаторное аксиоматическое рекуррентное ориентированный объём перестановки знак">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">68</span>
+    <span class="q-num">57</span>
     <span class="q-title">Понятие определителя</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -5413,7 +5069,7 @@ html.arriving .backdrop,html.arriving .sidebar{
         $$\varepsilon(\sigma)\cdot a_{1\sigma(1)}a_{2\sigma(2)}\ldots a_{n\sigma(n)},$$
         где $\varepsilon(\sigma)$ — знак перестановки, а суммирование ведётся по всем перестановкам $\sigma\in S_n$:
         $$\det A=\sum_{\sigma\in S_n}\varepsilon(\sigma)\,a_{1\sigma(1)}a_{2\sigma(2)}\cdots a_{n\sigma(n)}.$$
-        Перестановка $\sigma$ как раз и указывает, из какого столбца берётся элемент для каждой строки; разным перестановкам отвечают разные наборы, и всего их $n!$. При $n=3$ получается $3!=6$ слагаемых — те самые, что даёт правило треугольников (вопрос 72):
+        Перестановка $\sigma$ как раз и указывает, из какого столбца берётся элемент для каждой строки; разным перестановкам отвечают разные наборы, и всего их $n!$. При $n=3$ получается $3!=6$ слагаемых — те самые, что даёт правило треугольников (вопрос 61):
         <div class="fig-block" style="text-align:center;margin:0.6rem 0">
         <svg viewBox="0 0 470 150" style="max-width:470px;width:100%" xmlns="http://www.w3.org/2000/svg">
           <g font-size="13" fill="currentColor" text-anchor="middle">
@@ -5467,10 +5123,10 @@ html.arriving .backdrop,html.arriving .sidebar{
   </div>
 </div>
 
-<!-- 69. Свойства определителей (с док-вами) -->
-<div class="q-card" data-q="69" data-text="свойства определителей транспонирование полилинейность кососимметричность одинаковые строки нулевая треугольная доказательства">
+<!-- 58. Свойства определителей (с док-вами) -->
+<div class="q-card" data-q="58" data-text="свойства определителей транспонирование полилинейность кососимметричность одинаковые строки нулевая треугольная доказательства">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">69</span>
+    <span class="q-num">58</span>
     <span class="q-title">Свойства определителей (с доказательствами)</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -5608,10 +5264,10 @@ html.arriving .backdrop,html.arriving .sidebar{
   </div>
 </div>
 
-<!-- 70. Минор -->
-<div class="q-card" data-q="70" data-text="минор элемента вычёркивание строки столбца определитель">
+<!-- 59. Минор -->
+<div class="q-card" data-q="59" data-text="минор элемента вычёркивание строки столбца определитель">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">70</span>
+    <span class="q-num">59</span>
     <span class="q-title">Минор</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -5639,10 +5295,10 @@ html.arriving .backdrop,html.arriving .sidebar{
   </div>
 </div>
 
-<!-- 71. Алгебраическое дополнение -->
-<div class="q-card" data-q="71" data-text="алгебраическое дополнение минор знак определитель порядка">
+<!-- 60. Алгебраическое дополнение -->
+<div class="q-card" data-q="60" data-text="алгебраическое дополнение минор знак определитель порядка">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">71</span>
+    <span class="q-num">60</span>
     <span class="q-title">Алгебраическое дополнение</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -5662,10 +5318,10 @@ html.arriving .backdrop,html.arriving .sidebar{
   </div>
 </div>
 
-<!-- 72. Формулы 2x2, 3x3, разложение -->
-<div class="q-card" data-q="72" data-text="вычисление определителя 2х2 3х3 правило треугольников саррюса разложение по строке столбцу">
+<!-- 61. Формулы 2x2, 3x3, разложение -->
+<div class="q-card" data-q="61" data-text="вычисление определителя 2х2 3х3 правило треугольников саррюса разложение по строке столбцу">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">72</span>
+    <span class="q-num">61</span>
     <span class="q-title">Формулы для вычисления определителей 2×2 и 3×3. Правило треугольников. Вычисление определителя матрицы разложением по элементам строки или столбца</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -5733,7 +5389,7 @@ html.arriving .backdrop,html.arriving .sidebar{
         Важно, что элементы берутся с алгебраическими дополнениями <span class="em">своей</span> строки. Если же взять элементы $i$-й строки, а дополнения — $j$-й ($j\neq i$), сумма обратится в нуль:
         $$\sum_{k=1}^{n}a_{ik}A_{jk}=\delta_{ij}\det A,\qquad
         \delta_{ij}=\begin{cases}1,& i=j,\\ 0,& i\neq j.\end{cases}$$
-        Причина простая: при $i\neq j$ эта сумма есть разложение по $j$-й строке определителя матрицы, у которой $j$-я строка заменена на $i$-ю. В такой матрице две одинаковые строки, значит её определитель равен нулю. Именно это равенство даёт $A\widetilde{A}=\det A\cdot E$ (вопрос 76).
+        Причина простая: при $i\neq j$ эта сумма есть разложение по $j$-й строке определителя матрицы, у которой $j$-я строка заменена на $i$-ю. В такой матрице две одинаковые строки, значит её определитель равен нулю. Именно это равенство даёт $A\widetilde{A}=\det A\cdot E$ (вопрос 65).
       </div>
     </div>
 
@@ -5742,10 +5398,10 @@ html.arriving .backdrop,html.arriving .sidebar{
   </div>
 </div>
 
-<!-- 73. Вычисление приведением к треугольному виду -->
-<div class="q-card" data-q="73" data-text="вычисление определителя треугольный вид элементарные преобразования метод">
+<!-- 62. Вычисление приведением к треугольному виду -->
+<div class="q-card" data-q="62" data-text="вычисление определителя треугольный вид элементарные преобразования метод">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">73</span>
+    <span class="q-num">62</span>
     <span class="q-title">Вычисление определителя матрицы приведением её к треугольному виду. Метод элементарных преобразований</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -5783,10 +5439,10 @@ html.arriving .backdrop,html.arriving .sidebar{
   </div>
 </div>
 
-<!-- 74. Специальные приёмы -->
-<div class="q-card" data-q="74" data-text="специальные приёмы рекуррентные соотношения мультипликативность определителя произведение">
+<!-- 63. Специальные приёмы -->
+<div class="q-card" data-q="63" data-text="специальные приёмы рекуррентные соотношения мультипликативность определителя произведение">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">74</span>
+    <span class="q-num">63</span>
     <span class="q-title">Использование специальных приёмов для вычисления определителей: метод рекуррентных соотношений, мультипликативность определителя</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -5813,10 +5469,10 @@ html.arriving .backdrop,html.arriving .sidebar{
   </div>
 </div>
 
-<!-- 75. Союзная матрица -->
-<div class="q-card" data-q="75" data-text="союзная присоединённая матрица алгебраические дополнения обратная транспонированная">
+<!-- 64. Союзная матрица -->
+<div class="q-card" data-q="64" data-text="союзная присоединённая матрица алгебраические дополнения обратная транспонированная">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">75</span>
+    <span class="q-num">64</span>
     <span class="q-title">Союзная матрица</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -5845,10 +5501,10 @@ html.arriving .backdrop,html.arriving .sidebar{
   </div>
 </div>
 
-<!-- 76. Обратная через союзную -->
-<div class="q-card" data-q="76" data-text="обратная матрица союзная алгебраические дополнения определитель шаги">
+<!-- 65. Обратная через союзную -->
+<div class="q-card" data-q="65" data-text="обратная матрица союзная алгебраические дополнения определитель шаги">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">76</span>
+    <span class="q-num">65</span>
     <span class="q-title">Вычисление обратной матрицы с помощью союзной матрицы</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -5884,10 +5540,10 @@ html.arriving .backdrop,html.arriving .sidebar{
   </div>
 </div>
 
-<!-- 77. Теорема Крамера -->
-<div class="q-card" data-q="77" data-text="теорема крамера формулы крамера квадратная система определитель замена столбца">
+<!-- 66. Теорема Крамера -->
+<div class="q-card" data-q="66" data-text="теорема крамера формулы крамера квадратная система определитель замена столбца">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">77</span>
+    <span class="q-num">66</span>
     <span class="q-title">Теорема Крамера</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -5935,10 +5591,10 @@ html.arriving .backdrop,html.arriving .sidebar{
   </div>
   <div class="questions-list">
 
-<!-- 78. Минор k-го порядка -->
-<div class="q-card" data-q="78" data-text="минор k-го порядка определитель пересечение выбранных строк столбцов">
+<!-- 67. Минор k-го порядка -->
+<div class="q-card" data-q="67" data-text="минор k-го порядка определитель пересечение выбранных строк столбцов">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">78</span>
+    <span class="q-num">67</span>
     <span class="q-title">Минор k-го порядка</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -5956,10 +5612,10 @@ html.arriving .backdrop,html.arriving .sidebar{
   </div>
 </div>
 
-<!-- 79. Окаймляющий минор -->
-<div class="q-card" data-q="79" data-text="окаймляющий минор приписывание крайней строки столбца первой последней">
+<!-- 68. Окаймляющий минор -->
+<div class="q-card" data-q="68" data-text="окаймляющий минор приписывание крайней строки столбца первой последней">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">79</span>
+    <span class="q-num">68</span>
     <span class="q-title">Окаймляющий минор</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -5977,10 +5633,10 @@ html.arriving .backdrop,html.arriving .sidebar{
   </div>
 </div>
 
-<!-- 80. Теорема о минорном ранге. Метод окаймляющих миноров -->
-<div class="q-card" data-q="80" data-text="теорема минорный ранг наибольший порядок ненулевого минора метод окаймляющих миноров">
+<!-- 69. Теорема о минорном ранге. Метод окаймляющих миноров -->
+<div class="q-card" data-q="69" data-text="теорема минорный ранг наибольший порядок ненулевого минора метод окаймляющих миноров">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">80</span>
+    <span class="q-num">69</span>
     <span class="q-title">Теорема о минорном ранге матрицы. Метод окаймляющих миноров</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -6005,10 +5661,10 @@ html.arriving .backdrop,html.arriving .sidebar{
   </div>
 </div>
 
-<!-- 81. Свойства ранга матрицы -->
-<div class="q-card" data-q="81" data-text="свойства ранга матрицы транспонирование произведение сумма неравенства">
+<!-- 70. Свойства ранга матрицы -->
+<div class="q-card" data-q="70" data-text="свойства ранга матрицы транспонирование произведение сумма неравенства">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">81</span>
+    <span class="q-num">70</span>
     <span class="q-title">Свойства ранга матрицы</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -6031,10 +5687,10 @@ html.arriving .backdrop,html.arriving .sidebar{
   </div>
 </div>
 
-<!-- 82. Методы вычисления ранга -->
-<div class="q-card" data-q="82" data-text="методы вычисления ранга гаусс окаймляющие миноры элементарные преобразования канонический вид">
+<!-- 71. Методы вычисления ранга -->
+<div class="q-card" data-q="71" data-text="методы вычисления ранга гаусс окаймляющие миноры элементарные преобразования канонический вид">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">82</span>
+    <span class="q-num">71</span>
     <span class="q-title">Методы вычисления ранга матрицы</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -6068,10 +5724,10 @@ html.arriving .backdrop,html.arriving .sidebar{
   </div>
 </div>
 
-<!-- 83. Применение определителей к СЛАУ -->
-<div class="q-card" data-q="83" data-text="применение определителей слау базисный минор главные свободные переменные совместность единственность крамер">
+<!-- 72. Применение определителей к СЛАУ -->
+<div class="q-card" data-q="72" data-text="применение определителей слау базисный минор главные свободные переменные совместность единственность крамер">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">83</span>
+    <span class="q-num">72</span>
     <span class="q-title">Применение определителей к решению произвольной СЛАУ. Главные и свободные переменные. Базисный минор</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -6117,7 +5773,353 @@ html.arriving .backdrop,html.arriving .sidebar{
         <br><br>
         Общее решение: $\;(x_1,x_2,x_3)=(2-2t,\;t,\;1)$, $t\in\mathbb{R}$. В виде «частное решение плюс ФСР»:
         $$\begin{pmatrix}2\\0\\1\end{pmatrix}+t\begin{pmatrix}-2\\1\\0\end{pmatrix}.$$
-        Размерность пространства решений ОСЛАУ равна $n-r=3-2=1$ — согласуется с вопросом 63.
+        Размерность пространства решений ОСЛАУ равна $n-r=3-2=1$ — согласуется с вопросом 52.
+      </div>
+    </div>
+
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
+  </div>
+</div>
+
+  </div>
+</section>
+
+<section class="topic-page" id="page-s7">
+  <div class="topic-header">
+    <div class="topic-eyebrow">Глава II</div>
+    <h1 class="topic-title">Векторные пространства и базис</h1>
+  </div>
+  <div class="questions-list">
+
+<!-- 73. Понятие векторного пространства -->
+<div class="q-card" data-q="73" data-text="векторное пространство строк аксиомы коммутативность ассоциативность нулевой противоположный дистрибутивность унитарность">
+  <div class="q-head" onclick="toggleCard(this)">
+    <span class="q-num">73</span>
+    <span class="q-title">Понятие векторного пространства</span>
+    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  </div>
+  <div class="q-body">
+
+    <div class="def-block">
+      <div class="section-tag">Определение</div>
+      <div class="def-text">
+        <span class="term">Векторным пространством строк длины $n$ над $\mathbb{R}$</span> называется множество всех строк (упорядоченных наборов) из $n$ действительных чисел, обозначаемое $\mathbb{R}^n$.
+      </div>
+    </div>
+
+    <div class="def-block">
+      <div class="section-tag">Аксиомы</div>
+      <div class="def-text">
+        Пусть $V=\mathbb{R}^n$. Для любых $x,y,z\in V$ и любых $\alpha,\beta\in\mathbb{R}$ выполняются:
+        <ul class="props">
+          <li>коммутативность относительно сложения: $x+y=y+x$;</li>
+          <li>ассоциативность сложения: $(x+y)+z=x+(y+z)$;</li>
+          <li>существование нулевого вектора: существует $0\in V$ такой, что $x+0=x$;</li>
+          <li>существование противоположного вектора: для каждого $x\in V$ существует $(-x)\in V$ такой, что $x+(-x)=0$;</li>
+          <li>ассоциативность умножения на скаляр: $(\alpha\beta)x=\alpha(\beta x)$;</li>
+          <li>дистрибутивность относительно суммы скаляров: $(\alpha+\beta)x=\alpha x+\beta x$;</li>
+          <li>дистрибутивность относительно суммы векторов: $\alpha(x+y)=\alpha x+\alpha y$;</li>
+          <li>унитарность: $1\cdot x=x$ (где $1$ — единица поля $\mathbb{R}$).</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
+  </div>
+</div>
+
+<!-- 74. Примеры векторных пространств -->
+<div class="q-card" data-q="74" data-text="примеры векторных пространств матрицы непрерывные функции многочлены">
+  <div class="q-head" onclick="toggleCard(this)">
+    <span class="q-num">74</span>
+    <span class="q-title">Примеры векторных пространств</span>
+    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  </div>
+  <div class="q-body">
+
+    <div class="example-card">
+      <div class="example-card-title my-example">Примеры</div>
+      <div class="example-card-body">
+        <ul class="props">
+          <li>$\mathbb{R}^{12}$ — 12-мерное пространство вещественных векторов-столбцов (или строк);</li>
+          <li>$M_{5\times 4}(\mathbb{R})$ — пространство вещественных матриц размера $5\times 4$;</li>
+          <li>$C[a,b]$ — пространство непрерывных функций на отрезке $[a,b]$;</li>
+          <li>$P_2(\mathbb{R})$ — пространство вещественных многочленов степени не выше второй.</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
+  </div>
+</div>
+
+<!-- 75. Линейная комбинация векторов -->
+<div class="q-card" data-q="75" data-text="линейная комбинация векторов коэффициенты скаляры">
+  <div class="q-head" onclick="toggleCard(this)">
+    <span class="q-num">75</span>
+    <span class="q-title">Линейная комбинация векторов</span>
+    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  </div>
+  <div class="q-body">
+
+    <div class="def-block">
+      <div class="section-tag">Определение</div>
+      <div class="def-text">
+        <span class="term">Линейной комбинацией</span> векторов $v_1,v_2,\ldots,v_n$ называется выражение вида
+        $$\alpha_1 v_1+\alpha_2 v_2+\cdots+\alpha_n v_n,$$
+        где $\alpha_1,\alpha_2,\ldots,\alpha_n$ — числа (скаляры), называемые <span class="em">коэффициентами</span> линейной комбинации.
+      </div>
+    </div>
+
+    <div class="explain">
+      Комбинация, в которой все коэффициенты равны нулю, называется <span class="em">тривиальной</span>; она всегда даёт нулевой вектор. Если же хотя бы один коэффициент отличен от нуля, комбинацию называют <span class="em">нетривиальной</span> — это различие лежит в основе понятия линейной зависимости (следующая карточка).
+    </div>
+
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
+  </div>
+</div>
+
+<!-- 76. Линейная оболочка системы векторов -->
+<div class="q-card" data-q="76" data-text="линейная оболочка системы векторов множество линейных комбинаций порождающая">
+  <div class="q-head" onclick="toggleCard(this)">
+    <span class="q-num">76</span>
+    <span class="q-title">Линейная оболочка системы векторов</span>
+    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  </div>
+  <div class="q-body">
+
+    <div class="def-block">
+      <div class="section-tag">Определение</div>
+      <div class="def-text">
+        <span class="term">Линейной оболочкой</span> системы векторов $S=\{a_1,a_2,\ldots,a_k\}$ называется множество всех линейных комбинаций этих векторов. Обозначение: $\langle a_1,a_2,\ldots,a_k\rangle$. Если $a_1,\ldots,a_k\in V$, то
+        $$\langle a_1,a_2,\ldots,a_k\rangle=\{\lambda_1 a_1+\lambda_2 a_2+\cdots+\lambda_k a_k\mid \lambda_1,\ldots,\lambda_k\in\mathbb{R}\}.$$
+      </div>
+    </div>
+
+    <div class="explain">
+      Линейная оболочка сама является подпространством в $V$ — причём <span class="em">наименьшим</span> подпространством, содержащим все векторы системы $S$. Угловые скобки $\langle\,\cdot\,\rangle$ зарезервированы именно за линейной оболочкой.
+    </div>
+
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
+  </div>
+</div>
+
+<!-- 77. Линейно зависимые и независимые системы -->
+<div class="q-card" data-q="77" data-text="линейно зависимые независимые системы векторов нетривиальная зависимость">
+  <div class="q-head" onclick="toggleCard(this)">
+    <span class="q-num">77</span>
+    <span class="q-title">Линейно зависимые и линейно независимые системы векторов</span>
+    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  </div>
+  <div class="q-body">
+
+    <div class="def-block">
+      <div class="section-tag">Линейно зависимая</div>
+      <div class="def-text">
+        Система векторов $X_1,\ldots,X_k$ пространства $\mathbb{R}^n$ называется <span class="term">линейно зависимой</span>, если найдутся числа $\alpha_1,\ldots,\alpha_k$, не все равные нулю, такие что
+        $$\alpha_1 X_1+\alpha_2 X_2+\ldots+\alpha_k X_k=0$$
+        (справа — нулевой вектор). Такую линейную зависимость называют <span class="em">нетривиальной</span>.
+      </div>
+    </div>
+
+    <div class="def-block">
+      <div class="section-tag">Линейно независимая</div>
+      <div class="def-text">
+        Если же
+        $$\alpha_1 X_1+\alpha_2 X_2+\ldots+\alpha_k X_k=0\;\implies\;\alpha_1=\alpha_2=\ldots=\alpha_k=0,$$
+        то векторы $X_1,X_2,\ldots,X_k$ называются <span class="term">линейно независимыми</span>.
+      </div>
+    </div>
+
+    <div class="explain">
+      Два простых следствия из определения: система, содержащая нулевой вектор, всегда линейно зависима (достаточно взять при нём коэффициент $1$, при остальных — $0$); один вектор линейно зависим тогда и только тогда, когда он нулевой.
+    </div>
+
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
+  </div>
+</div>
+
+<!-- 78. Теорема о ЛЗ и ЛНЗ системах -->
+<div class="q-card" data-q="78" data-text="теорема линейно зависимые независимые подсистема часть выражается через остальные">
+  <div class="q-head" onclick="toggleCard(this)">
+    <span class="q-num">78</span>
+    <span class="q-title">Теорема о линейно зависимых и линейно независимых системах</span>
+    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  </div>
+  <div class="q-body">
+
+    <div class="thm-box">
+      <div class="thm-label">Теорема</div>
+      <div class="def-text">
+        Имеют место следующие утверждения:
+        <ul class="props">
+          <li><span class="em">i)</span> система векторов $\{X_1,\ldots,X_k\}$ с линейно зависимой подсистемой сама линейно зависима;</li>
+          <li><span class="em">ii)</span> любая часть линейно независимой системы векторов $\{X_1,\ldots,X_k\}$ линейно независима;</li>
+          <li><span class="em">iii)</span> среди линейно зависимых векторов $X_1,\ldots,X_k$ хотя бы один является линейной комбинацией остальных;</li>
+          <li><span class="em">iv)</span> если один из векторов $X_1,\ldots,X_k$ выражается через остальные, то векторы $X_1,\ldots,X_k$ линейно зависимы;</li>
+          <li><span class="em">v)</span> если векторы $X_1,\ldots,X_k$ линейно независимы, а $X_1,\ldots,X_k,X$ линейно зависимы, то $X$ — линейная комбинация векторов $X_1,\ldots,X_k$;</li>
+          <li><span class="em">vi)</span> если векторы $X_1,\ldots,X_k$ линейно независимы и вектор $X_{k+1}$ нельзя через них выразить, то система $X_1,\ldots,X_k,X_{k+1}$ линейно независима.</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
+  </div>
+</div>
+
+<!-- 79. Понятие базиса -->
+<div class="q-card" data-q="79" data-text="базис линейно независимая система линейная оболочка совпадает порождает">
+  <div class="q-head" onclick="toggleCard(this)">
+    <span class="q-num">79</span>
+    <span class="q-title">Понятие базиса</span>
+    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  </div>
+  <div class="q-body">
+
+    <div class="def-block">
+      <div class="section-tag">Определение</div>
+      <div class="def-text">
+        Пусть $V$ — ненулевая линейная оболочка в $\mathbb{R}^n$. Система векторов $X_1,\ldots,X_r\in V$ называется <span class="term">базисом</span> для $V$, если:
+        <ul class="props">
+          <li>она линейно независима;</li>
+          <li>её линейная оболочка совпадает с $V$: $\;\langle X_1,\ldots,X_r\rangle=V$.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="def-block">
+      <div class="section-tag">Эквивалентная формулировка</div>
+      <div class="def-text">
+        Базис — это наибольшая линейно независимая система векторов $V$, которую уже нельзя расширить: добавление к ней любого вектора из $V$ делает систему линейно зависимой.
+      </div>
+    </div>
+
+    <div class="explain">
+      Ключевое свойство базиса: каждый вектор $X\in V$ разлагается по базису <span class="em">единственным образом</span>, $X=\alpha_1 X_1+\cdots+\alpha_r X_r$. Коэффициенты $\alpha_1,\ldots,\alpha_r$ называются координатами вектора $X$ в этом базисе.
+    </div>
+
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
+  </div>
+</div>
+
+<!-- 80. Лемма о ЛНЗ системе и базисе -->
+<div class="q-card" data-q="80" data-text="лемма линейно независимая система базис размерность s меньше или равно r">
+  <div class="q-head" onclick="toggleCard(this)">
+    <span class="q-num">80</span>
+    <span class="q-title">Лемма о линейно независимой системе и базисе</span>
+    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  </div>
+  <div class="q-body">
+
+    <div class="thm-box">
+      <div class="thm-label">Лемма</div>
+      <div class="def-text">
+        Пусть $V$ — линейная оболочка в $\mathbb{R}^n$ с базисом $X_1,\ldots,X_r$, и $Y_1,\ldots,Y_s$ — линейно независимая система векторов из $V$. Тогда $s\le r$.
+      </div>
+    </div>
+
+    <div class="def-block">
+      <div class="section-tag">Обозначения</div>
+      <div class="def-text">
+        <ul class="props">
+          <li>$r=\dim V$ — размерность пространства $V$, т.е. максимальное число линейно независимых векторов в $V$ (например, $\dim\mathbb{R}^3=3$);</li>
+          <li>$s$ — число векторов в линейно независимой системе $\{Y_1,\ldots,Y_s\}$; всегда $s\le r$. Если $s=r$, то система образует базис $V$.</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
+  </div>
+</div>
+
+<!-- 81. Теорема о базисе. Размерность -->
+<div class="q-card" data-q="81" data-text="теорема о базисе размерность линейной оболочки конечный базис все базисы одно число">
+  <div class="q-head" onclick="toggleCard(this)">
+    <span class="q-num">81</span>
+    <span class="q-title">Теорема о базисе. Размерность линейной оболочки</span>
+    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  </div>
+  <div class="q-body">
+
+    <div class="thm-box">
+      <div class="thm-label">Теорема</div>
+      <div class="def-text">
+        Каждая ненулевая линейная оболочка $V\subset\mathbb{R}^n$ обладает конечным базисом. Все базисы оболочки $V$ состоят из одного и того же числа $r\le n$ векторов (это число называется <span class="term">размерностью оболочки $V$</span> и обозначается $\dim V$).
+      </div>
+    </div>
+
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
+  </div>
+</div>
+
+<!-- 82. Два подхода к определению базиса -->
+<div class="q-card" data-q="82" data-text="два подхода базис максимальная линейно независимая минимальная порождающая полная система">
+  <div class="q-head" onclick="toggleCard(this)">
+    <span class="q-num">82</span>
+    <span class="q-title">Два подхода к определению базиса (через линейно независимые и через порождающие системы)</span>
+    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  </div>
+  <div class="q-body">
+
+    <div class="def-block">
+      <div class="section-tag">Через линейную независимость</div>
+      <div class="def-text">
+        <span class="term">Базис</span> — максимальная (по включению) линейно независимая система векторов пространства $V$.
+        <ul class="props">
+          <li><span class="em">Линейная независимость:</span> ни один вектор системы не выражается линейной комбинацией остальных;</li>
+          <li><span class="em">Максимальность:</span> при добавлении любого вектора $v\in V$, не входящего в систему, она становится линейно зависимой.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="explain">
+      Базис — это наибольшая возможная система, которую уже нельзя расширить.
+    </div>
+
+    <div class="def-block">
+      <div class="section-tag">Через порождающие системы</div>
+      <div class="def-text">
+        <span class="term">Базис</span> — минимальная (по включению) порождающая (полная) система векторов пространства $V$.
+        <ul class="props">
+          <li><span class="em">Порождаемость:</span> любой вектор $v\in V$ представим <span class="em">в виде</span> линейной комбинации векторов системы: $\;\forall v\in V\;\exists\{\alpha_i\}:\;v=\sum\alpha_i e_i$;</li>
+          <li><span class="em">Минимальность:</span> ни один вектор нельзя удалить, не нарушив свойство порождать всё пространство $V$.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="explain">
+      Базис — это наименьший набор векторов, достаточный для получения всего пространства, и при этом не содержащий лишних элементов (минимальность).
+    </div>
+
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 3 «Матрицы: ранг, пространства строк и столбцов»</div>
+  </div>
+</div>
+
+<!-- 83. Условие совместности СЛАУ через столбцы -->
+<div class="q-card" data-q="83" data-text="условие совместности слау линейная комбинация столбцов матрицы правые части критерий">
+  <div class="q-head" onclick="toggleCard(this)">
+    <span class="q-num">83</span>
+    <span class="q-title">Формулировка условия совместности СЛАУ с помощью линейной комбинации столбцов матрицы СЛАУ</span>
+    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  </div>
+  <div class="q-body">
+
+    <div class="thm-box">
+      <div class="thm-label">Критерий совместности</div>
+      <div class="def-text">
+        Система линейных уравнений $Ax=b$ совместна (имеет хотя бы одно решение) тогда и только тогда, когда вектор правых частей $b$ представим в виде линейной комбинации столбцов матрицы $A$:
+        $$\exists\,x_1,x_2,\ldots,x_n\in\mathbb{R}:\;b=x_1 a_1+x_2 a_2+\ldots+x_n a_n.$$
       </div>
     </div>
 
@@ -8977,60 +8979,12 @@ html.arriving .backdrop,html.arriving .sidebar{
   <div class="questions-list">
 
 <!-- 171. Основные обозначения -->
-<div class="q-card" data-q="171" data-text="основные обозначения символы квантор всеобщности существования пересечение объединение разность пустое множество множества чисел">
-  <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">171</span>
-    <span class="q-title">Основные обозначения</span>
-    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-  </div>
-  <div class="q-body">
-    <div class="def-block">
-      <div class="section-tag">Логические символы</div>
-      <div class="def-text">
-        <ul class="props">
-          <li>$\forall$ — квантор всеобщности, «для любого», «для всех»;</li>
-          <li>$\exists$ — квантор существования, «существует», «найдётся»;</li>
-          <li>$\exists!$ — «существует единственный»;</li>
-          <li>$\Rightarrow$ — «следует», «влечёт»; $\Leftrightarrow$ (или $\iff$) — «тогда и только тогда», равносильность;</li>
-          <li>$\;:\;$ или $\mid$ — «такой, что» (в записи множеств и кванторов).</li>
-        </ul>
-      </div>
-    </div>
-    <div class="def-block">
-      <div class="section-tag">Операции над множествами</div>
-      <div class="def-text">
-        <ul class="props">
-          <li>$\in$ — принадлежит; $\notin$ — не принадлежит;</li>
-          <li>$\subseteq$ — подмножество; $\subset$ — собственное подмножество;</li>
-          <li>$\cap$ — пересечение; $\cup$ — объединение;</li>
-          <li>$\setminus$ — разность; $\triangle$ — симметрическая разность (вопрос 7);</li>
-          <li>$\varnothing$ — пустое множество; $|X|$ — число элементов конечного множества $X$;</li>
-          <li>$X\times Y$ — декартово произведение (вопрос 8).</li>
-        </ul>
-      </div>
-    </div>
-    <div class="def-block">
-      <div class="section-tag">Числовые множества и прочее</div>
-      <div class="def-text">
-        <ul class="props">
-          <li>$\mathbb{N}$, $\mathbb{Z}$, $\mathbb{Q}$, $\mathbb{R}$, $\mathbb{C}$ — натуральные, целые, рациональные, вещественные, комплексные числа;</li>
-          <li>$\langle a_1,\ldots,a_k\rangle$ — линейная оболочка системы векторов (вопрос 41);</li>
-          <li>$\operatorname{rang}A$ — ранг матрицы; $\det A$ — определитель; $A^\top$ — транспонированная матрица;</li>
-          <li>$\operatorname{Ker}f$, $\operatorname{Im}f$ — ядро и образ линейного отображения (вопрос 119);</li>
-          <li>$\oplus$ — прямая сумма подпространств; $U^\perp$ — ортогональное дополнение.</li>
-        </ul>
-      </div>
-    </div>
-    <div class="note">
-      Эти обозначения используются по всему курсу, в том числе во втором семестре. Список собран сюда, чтобы не искать их по отдельным вопросам.
-    </div>
-  </div>
-</div>
+
 
 <!-- 172. Задача о нагретой пластинке -->
-<div class="q-card" data-q="172" data-text="нагретая пластинка модельная задача сетка граничные внутренние вершины среднее арифметическое температур">
+<div class="q-card" data-q="171" data-text="нагретая пластинка модельная задача сетка граничные внутренние вершины среднее арифметическое температур">
   <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">172</span>
+    <span class="q-num">171</span>
     <span class="q-title">Модельная задача: нагретая пластинка</span>
     <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
@@ -9047,24 +9001,7 @@ html.arriving .backdrop,html.arriving .sidebar{
 </div>
 
 <!-- 173. Критерий Галуа -->
-<div class="q-card" data-q="173" data-text="критерий галуа разрешимость уравнений в радикалах группа галуа поле разложения абель руффини">
-  <div class="q-head" onclick="toggleCard(this)">
-    <span class="q-num">173</span>
-    <span class="q-title">Критерий Галуа разрешимости уравнений в радикалах</span>
-    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-  </div>
-  <div class="q-body">
-    <div class="def-block">
-      <div class="section-tag">Критерий Галуа</div>
-      <div class="def-text">
-Универсальный критерий дал Э. Галуа (1831 г.): каждому уравнению степени $n$ он сопоставил <span class="term">поле разложения</span> и конечную группу его автоморфизмов (порядка не более $n!$) — <span class="term">группу Галуа</span>. Уравнение разрешимо в радикалах <span class="em">тогда и только тогда</span>, когда его группа Галуа разрешима. Например, уравнению $x^5-x-1=0$ отвечает группа Галуа, изоморфная симметрической группе $S_5$ порядка $120$; она неразрешима — значит, неразрешимо в радикалах и само уравнение. Так из этой задачи выросла теория групп.
-      </div>
-    </div>
-    <div class="note">
-      Понятия группы и разрешимой группы вводятся во втором семестре — см. тему «Группы, кольца, поля». К экзаменационным вопросам первого семестра не относится; связан с вопросом 3 «Модельные задачи алгебры».
-    </div>
-  </div>
-</div>
+
 
   </div>
 </section>
@@ -9102,7 +9039,7 @@ html.arriving .backdrop,html.arriving .sidebar{
       <div class="def-text">
         <ol class="demo-list">
         <li>Для множества рациональных чисел $\mathbb{Q}$ напишите: а) какое-либо подмножество $\mathbb{Q}$; б) какое-либо множество, подмножеством которого является $\mathbb{Q}$.<div class="demo-ref">Разобрано: <a onclick="goToQuestion('s2', 5)">вопрос 5</a></div></li>
-        <li>Как соотносятся вертикальный и горизонтальный ранг матрицы? Как вычислить ранг матрицы приведением её к ступенчатому виду? Сформулируйте соответствующие теоремы.<div class="demo-ref">Разобрано: <a onclick="goToQuestion('s8', 50)">вопрос 50</a> · <a onclick="goToQuestion('s8', 52)">вопрос 52</a></div></li>
+        <li>Как соотносятся вертикальный и горизонтальный ранг матрицы? Как вычислить ранг матрицы приведением её к ступенчатому виду? Сформулируйте соответствующие теоремы.<div class="demo-ref">Разобрано: <a onclick="goToQuestion('s8', 39)">вопрос 39</a> · <a onclick="goToQuestion('s8', 41)">вопрос 41</a></div></li>
         <li>Опишите метод Лагранжа приведения квадратичной формы к диагональному виду.<div class="demo-ref">Разобрано: <a onclick="goToQuestion('s17', 110)">вопрос 110</a></div></li>
         <li>Как связаны между собой характеристические многочлены подобных матриц?<div class="demo-ref">Разобрано: <a onclick="goToQuestion('s20', 141)">вопрос 141</a></div></li>
         <li>Запишите неравенство Коши–Буняковского для стандартного скалярного произведения.<div class="demo-ref">Разобрано: <a onclick="goToQuestion('s22', 154)">вопрос 154</a></div></li>
@@ -9114,10 +9051,10 @@ html.arriving .backdrop,html.arriving .sidebar{
       <div class="def-text">
         <ol class="demo-list" start="6">
         <li>Вычислить произведение матриц $\begin{pmatrix}3&amp;0&amp;1&amp;-1\end{pmatrix}\begin{pmatrix}1&amp;0\\-1&amp;1\\0&amp;2\\-3&amp;0\end{pmatrix}\begin{pmatrix}1&amp;2&amp;-3\\0&amp;1&amp;-1\end{pmatrix}\begin{pmatrix}1\\2\\3\end{pmatrix}$.<div class="demo-ref">Разобрано: <a onclick="goToQuestion('s5', 30)">вопрос 30</a></div></li>
-        <li>Расписав определитель матрицы $3\times3$ по правилу «треугольников», докажите, что если элементы какой-либо строки равны нулю, то определитель равен нулю.<div class="demo-ref">Разобрано: <a onclick="goToQuestion('s11', 72)">вопрос 72</a></div></li>
-        <li>Найдите обратную матрицу $A^{-1}$ для $A=\begin{pmatrix}1&amp;0&amp;-1\\2&amp;1&amp;0\\-1&amp;1&amp;0\end{pmatrix}$.<div class="demo-ref">Разобрано: <a onclick="goToQuestion('s9', 62)">вопрос 62</a> · <a onclick="goToQuestion('s11', 76)">вопрос 76</a></div></li>
-        <li>При каком значении параметра $p$ матрица $\begin{pmatrix}2&amp;2&amp;p&amp;1\\5&amp;1&amp;-2&amp;3\\-2&amp;2&amp;2&amp;1\\1&amp;4&amp;-1&amp;2\end{pmatrix}$ имеет наименьший ранг?<div class="demo-ref">Разобрано: <a onclick="goToQuestion('s12', 82)">вопрос 82</a></div></li>
-        <li>Решите ОСЛАУ $\begin{cases}x_1-2x_3+x_4=0,\\ x_1-4x_3-x_4=0,\\ -x_1+2x_2-4x_3-x_4=0.\end{cases}$<div class="demo-ref">Разобрано: <a onclick="goToQuestion('s10', 64)">вопрос 64</a> · <a onclick="goToQuestion('s10', 66)">вопрос 66</a></div></li>
+        <li>Расписав определитель матрицы $3\times3$ по правилу «треугольников», докажите, что если элементы какой-либо строки равны нулю, то определитель равен нулю.<div class="demo-ref">Разобрано: <a onclick="goToQuestion('s11', 61)">вопрос 61</a></div></li>
+        <li>Найдите обратную матрицу $A^{-1}$ для $A=\begin{pmatrix}1&amp;0&amp;-1\\2&amp;1&amp;0\\-1&amp;1&amp;0\end{pmatrix}$.<div class="demo-ref">Разобрано: <a onclick="goToQuestion('s9', 51)">вопрос 51</a> · <a onclick="goToQuestion('s11', 65)">вопрос 65</a></div></li>
+        <li>При каком значении параметра $p$ матрица $\begin{pmatrix}2&amp;2&amp;p&amp;1\\5&amp;1&amp;-2&amp;3\\-2&amp;2&amp;2&amp;1\\1&amp;4&amp;-1&amp;2\end{pmatrix}$ имеет наименьший ранг?<div class="demo-ref">Разобрано: <a onclick="goToQuestion('s12', 71)">вопрос 71</a></div></li>
+        <li>Решите ОСЛАУ $\begin{cases}x_1-2x_3+x_4=0,\\ x_1-4x_3-x_4=0,\\ -x_1+2x_2-4x_3-x_4=0.\end{cases}$<div class="demo-ref">Разобрано: <a onclick="goToQuestion('s10', 53)">вопрос 53</a> · <a onclick="goToQuestion('s10', 55)">вопрос 55</a></div></li>
         </ol>
       </div>
     </div>
@@ -9139,8 +9076,8 @@ html.arriving .backdrop,html.arriving .sidebar{
       <div class="section-tag">Теоретическая часть</div>
       <div class="def-text">
         <ol class="demo-list">
-        <li>Векторы $e_1,e_2,e_3$ образуют линейно независимую систему. Будет ли система $\{e_2,e_3\}$ линейно независимой? Почему?<div class="demo-ref">Разобрано: <a onclick="goToQuestion('s7', 42)">вопрос 42</a> · <a onclick="goToQuestion('s7', 43)">вопрос 43</a></div></li>
-        <li>С помощью элементарных преобразований строк ищут обратную к вырожденной матрице. На каком этапе преобразования закончатся?<div class="demo-ref">Разобрано: <a onclick="goToQuestion('s9', 62)">вопрос 62</a> · <a onclick="goToQuestion('s9', 56)">вопрос 56</a></div></li>
+        <li>Векторы $e_1,e_2,e_3$ образуют линейно независимую систему. Будет ли система $\{e_2,e_3\}$ линейно независимой? Почему?<div class="demo-ref">Разобрано: <a onclick="goToQuestion('s7', 77)">вопрос 77</a> · <a onclick="goToQuestion('s7', 78)">вопрос 78</a></div></li>
+        <li>С помощью элементарных преобразований строк ищут обратную к вырожденной матрице. На каком этапе преобразования закончатся?<div class="demo-ref">Разобрано: <a onclick="goToQuestion('s9', 51)">вопрос 51</a> · <a onclick="goToQuestion('s9', 45)">вопрос 45</a></div></li>
         <li>Сформулируйте теорему о размерности суммы подпространств.<div class="demo-ref">Разобрано: <a onclick="goToQuestion('s14', 89)">вопрос 89</a></div></li>
         <li>Какой оператор называется оператором подобия? Докажите, что оператор подобия является линейным оператором.<div class="demo-ref">Разобрано: <a onclick="goToQuestion('s18', 125)">вопрос 125</a></div></li>
         <li>Почему любую ортонормированную систему векторов евклидова пространства можно дополнить до ортонормированного базиса?<div class="demo-ref">Разобрано: <a onclick="goToQuestion('s23', 162)">вопрос 162</a> · <a onclick="goToQuestion('s22', 159)">вопрос 159</a></div></li>
@@ -9152,10 +9089,10 @@ html.arriving .backdrop,html.arriving .sidebar{
       <div class="def-text">
         <ol class="demo-list" start="6">
         <li>Вычислить произведение матриц $\begin{pmatrix}-2&amp;4&amp;-3\\-3&amp;-2&amp;1\\-3&amp;-1&amp;2\end{pmatrix}\begin{pmatrix}7&amp;4&amp;5\\4&amp;5&amp;6\\1&amp;1&amp;2\end{pmatrix}$.<div class="demo-ref">Разобрано: <a onclick="goToQuestion('s5', 30)">вопрос 30</a></div></li>
-        <li>Вычислите определитель методом элементарных преобразований: $\begin{vmatrix}1&amp;2&amp;-3&amp;1\\4&amp;6&amp;-2&amp;4\\4&amp;-2&amp;1&amp;0\\6&amp;4&amp;4&amp;6\end{vmatrix}$.<div class="demo-ref">Разобрано: <a onclick="goToQuestion('s11', 70)">вопрос 70</a></div></li>
-        <li>Найдите обратную матрицу $A^{-1}$ для $A=\begin{pmatrix}1&amp;a&amp;a^2&amp;a^3\\0&amp;1&amp;a&amp;a^2\\0&amp;0&amp;1&amp;a\\0&amp;0&amp;0&amp;1\end{pmatrix}$.<div class="demo-ref">Разобрано: <a onclick="goToQuestion('s9', 62)">вопрос 62</a></div></li>
-        <li>Найдите ранг матрицы $A=\begin{pmatrix}0&amp;-1&amp;3&amp;0&amp;-2\\-2&amp;0&amp;1&amp;-1&amp;0\\0&amp;3&amp;0&amp;2&amp;1\\-4&amp;0&amp;-1&amp;0&amp;-1\\-6&amp;2&amp;3&amp;1&amp;-2\end{pmatrix}$.<div class="demo-ref">Разобрано: <a onclick="goToQuestion('s12', 82)">вопрос 82</a></div></li>
-        <li>Решите ОСЛАУ $\begin{cases}3x_1-6x_2+4x_3+2x_4=0,\\ 2x_1-4x_2+5x_3+3x_4=0,\\ 4x_1-8x_2+17x_3+11x_4=0.\end{cases}$<div class="demo-ref">Разобрано: <a onclick="goToQuestion('s10', 64)">вопрос 64</a> · <a onclick="goToQuestion('s10', 66)">вопрос 66</a></div></li>
+        <li>Вычислите определитель методом элементарных преобразований: $\begin{vmatrix}1&amp;2&amp;-3&amp;1\\4&amp;6&amp;-2&amp;4\\4&amp;-2&amp;1&amp;0\\6&amp;4&amp;4&amp;6\end{vmatrix}$.<div class="demo-ref">Разобрано: <a onclick="goToQuestion('s11', 59)">вопрос 59</a></div></li>
+        <li>Найдите обратную матрицу $A^{-1}$ для $A=\begin{pmatrix}1&amp;a&amp;a^2&amp;a^3\\0&amp;1&amp;a&amp;a^2\\0&amp;0&amp;1&amp;a\\0&amp;0&amp;0&amp;1\end{pmatrix}$.<div class="demo-ref">Разобрано: <a onclick="goToQuestion('s9', 51)">вопрос 51</a></div></li>
+        <li>Найдите ранг матрицы $A=\begin{pmatrix}0&amp;-1&amp;3&amp;0&amp;-2\\-2&amp;0&amp;1&amp;-1&amp;0\\0&amp;3&amp;0&amp;2&amp;1\\-4&amp;0&amp;-1&amp;0&amp;-1\\-6&amp;2&amp;3&amp;1&amp;-2\end{pmatrix}$.<div class="demo-ref">Разобрано: <a onclick="goToQuestion('s12', 71)">вопрос 71</a></div></li>
+        <li>Решите ОСЛАУ $\begin{cases}3x_1-6x_2+4x_3+2x_4=0,\\ 2x_1-4x_2+5x_3+3x_4=0,\\ 4x_1-8x_2+17x_3+11x_4=0.\end{cases}$<div class="demo-ref">Разобрано: <a onclick="goToQuestion('s10', 53)">вопрос 53</a> · <a onclick="goToQuestion('s10', 55)">вопрос 55</a></div></li>
         </ol>
       </div>
     </div>
@@ -9209,7 +9146,7 @@ const TOPICS = [
   {
     id: "s1",
     title: "Предмет и модельные задачи алгебры",
-    subtitle: "Введение",
+    subtitle: "Глава I. Введение. Истоки алгебры",
     questions: [
       { n: 1, t: "Предмет алгебры" },
       { n: 2, t: "Идея линейности в математике" },
@@ -9220,7 +9157,7 @@ const TOPICS = [
   {
     id: "s2",
     title: "Множества",
-    subtitle: "Глава I",
+    subtitle: "Глава I. Введение. Истоки алгебры",
     questions: [
       { n: 5, t: "Множество, подмножество, элементы множества" },
       { n: 6, t: "Пустое множество. Собственное подмножество. Совпадающие множества" },
@@ -9231,7 +9168,7 @@ const TOPICS = [
   {
     id: "s3",
     title: "Отображения",
-    subtitle: "Глава I",
+    subtitle: "Глава I. Введение. Истоки алгебры",
     questions: [
       { n: 9, t: "Понятие отображения. Область определения и область значений отображения" },
       { n: 10, t: "Образ и прообраз отображения" },
@@ -9246,7 +9183,7 @@ const TOPICS = [
   {
     id: "s4",
     title: "Перестановки",
-    subtitle: "Глава I",
+    subtitle: "Глава I. Введение. Истоки алгебры",
     questions: [
       { n: 17, t: "Понятие перестановки" },
       { n: 18, t: "Перестановка как группа элементов" },
@@ -9261,7 +9198,7 @@ const TOPICS = [
   {
     id: "s5",
     title: "Матрицы",
-    subtitle: "Глава II",
+    subtitle: "Глава II. Матрицы и СЛАУ",
     questions: [
       { n: 25, t: "Понятие матрицы. Размер матрицы. Элементы матрицы. Главная диагональ. Равные матрицы" },
       { n: 26, t: "Квадратная, диагональная, единичная, нулевая, треугольная матрицы" },
@@ -9274,7 +9211,7 @@ const TOPICS = [
   {
     id: "s6",
     title: "Системы линейных уравнений",
-    subtitle: "Глава II",
+    subtitle: "Глава II. Матрицы и СЛАУ",
     questions: [
       { n: 31, t: "Определение СЛАУ" },
       { n: 32, t: "Матричная форма записи СЛАУ. Расширенная матрица СЛАУ" },
@@ -9286,97 +9223,97 @@ const TOPICS = [
     ]
   },
   {
-    id: "s7",
-    title: "Векторные пространства и базис",
-    subtitle: "Глава II",
-    questions: [
-      { n: 38, t: "Понятие векторного пространства" },
-      { n: 39, t: "Примеры векторных пространств" },
-      { n: 40, t: "Линейная комбинация векторов" },
-      { n: 41, t: "Линейная оболочка системы векторов" },
-      { n: 42, t: "Линейно зависимые и линейно независимые системы векторов" },
-      { n: 43, t: "Теорема о линейно зависимых и линейно независимых системах" },
-      { n: 44, t: "Понятие базиса" },
-      { n: 45, t: "Лемма о линейно независимой системе и базисе" },
-      { n: 46, t: "Теорема о базисе. Размерность линейной оболочки" },
-      { n: 47, t: "Два подхода к определению базиса (через линейно независимые и через порождающие системы)" },
-      { n: 48, t: "Формулировка условия совместности СЛАУ с помощью линейной комбинации столбцов матрицы СЛАУ" },
-    ]
-  },
-  {
     id: "s8",
     title: "Ранг матрицы",
-    subtitle: "Глава II",
+    subtitle: "Глава II. Матрицы и СЛАУ",
     questions: [
-      { n: 49, t: "Пространства строк и столбцов матрицы" },
-      { n: 50, t: "Вертикальный и горизонтальный ранг матрицы" },
-      { n: 51, t: "Сохранение вертикального и горизонтального ранга матрицы при элементарных преобразованиях над строками" },
-      { n: 52, t: "Теорема о равенстве вертикального и горизонтального ранга матрицы. Теорема о вычислении ранга матрицы приведением её к ступенчатому виду" },
-      { n: 53, t: "Теорема Кронекера–Капелли (с доказательством). Теорема об определённости СЛАУ (с доказательством)" },
-      { n: 54, t: "Понятие линейного отображения" },
-      { n: 55, t: "Свойства ранга матрицы" },
+      { n: 38, t: "Пространства строк и столбцов матрицы" },
+      { n: 39, t: "Вертикальный и горизонтальный ранг матрицы" },
+      { n: 40, t: "Сохранение вертикального и горизонтального ранга матрицы при элементарных преобразованиях над строками" },
+      { n: 41, t: "Теорема о равенстве вертикального и горизонтального ранга матрицы. Теорема о вычислении ранга матрицы приведением её к ступенчатому виду" },
+      { n: 42, t: "Теорема Кронекера–Капелли (с доказательством). Теорема об определённости СЛАУ (с доказательством)" },
+      { n: 43, t: "Понятие линейного отображения" },
+      { n: 44, t: "Свойства ранга матрицы" },
     ]
   },
   {
     id: "s9",
     title: "Обратная матрица",
-    subtitle: "Глава II",
+    subtitle: "Глава II. Матрицы и СЛАУ",
     questions: [
-      { n: 56, t: "Обратная матрица" },
-      { n: 57, t: "Невырожденная матрица" },
-      { n: 58, t: "Теорема о связи обратимости и невырожденности матрицы" },
-      { n: 59, t: "Вычисление матрицы, обратной к произведению невырожденных матриц" },
-      { n: 60, t: "Вычисление матрицы, транспонированной к произведению матриц" },
-      { n: 61, t: "Алгоритм PQ-приведения матрицы к нормальному виду" },
-      { n: 62, t: "Алгоритм нахождения обратной матрицы с помощью элементарных преобразований строк" },
+      { n: 45, t: "Обратная матрица" },
+      { n: 46, t: "Невырожденная матрица" },
+      { n: 47, t: "Теорема о связи обратимости и невырожденности матрицы" },
+      { n: 48, t: "Вычисление матрицы, обратной к произведению невырожденных матриц" },
+      { n: 49, t: "Вычисление матрицы, транспонированной к произведению матриц" },
+      { n: 50, t: "Алгоритм PQ-приведения матрицы к нормальному виду" },
+      { n: 51, t: "Алгоритм нахождения обратной матрицы с помощью элементарных преобразований строк" },
     ]
   },
   {
     id: "s10",
     title: "ОСЛАУ и метод Гаусса",
-    subtitle: "Глава II",
+    subtitle: "Глава II. Матрицы и СЛАУ",
     questions: [
-      { n: 63, t: "Теорема о связи размерностей пространства решений ОСЛАУ и ранга матрицы СЛАУ" },
-      { n: 64, t: "Фундаментальная система решений ОСЛАУ" },
-      { n: 65, t: "Общее решение неоднородной СЛАУ" },
-      { n: 66, t: "Метод Гаусса решения СЛАУ" },
-      { n: 67, t: "Схема исследования произвольной СЛАУ" },
+      { n: 52, t: "Теорема о связи размерностей пространства решений ОСЛАУ и ранга матрицы СЛАУ" },
+      { n: 53, t: "Фундаментальная система решений ОСЛАУ" },
+      { n: 54, t: "Общее решение неоднородной СЛАУ" },
+      { n: 55, t: "Метод Гаусса решения СЛАУ" },
+      { n: 56, t: "Схема исследования произвольной СЛАУ" },
     ]
   },
   {
     id: "s11",
     title: "Определители",
-    subtitle: "Глава IV",
+    subtitle: "Глава III. Определители",
     questions: [
-      { n: 68, t: "Понятие определителя" },
-      { n: 69, t: "Свойства определителей (с доказательствами)" },
-      { n: 70, t: "Минор" },
-      { n: 71, t: "Алгебраическое дополнение" },
-      { n: 72, t: "Формулы для вычисления определителей 2×2 и 3×3. Правило треугольников. Вычисление определителя матрицы разложением по элементам строки или столбца" },
-      { n: 73, t: "Вычисление определителя матрицы приведением её к треугольному виду. Метод элементарных преобразований" },
-      { n: 74, t: "Использование специальных приёмов для вычисления определителей: метод рекуррентных соотношений, мультипликативность определителя" },
-      { n: 75, t: "Союзная матрица" },
-      { n: 76, t: "Вычисление обратной матрицы с помощью союзной матрицы" },
-      { n: 77, t: "Теорема Крамера" },
+      { n: 57, t: "Понятие определителя" },
+      { n: 58, t: "Свойства определителей (с доказательствами)" },
+      { n: 59, t: "Минор" },
+      { n: 60, t: "Алгебраическое дополнение" },
+      { n: 61, t: "Формулы для вычисления определителей 2×2 и 3×3. Правило треугольников. Вычисление определителя матрицы разложением по элементам строки или столбца" },
+      { n: 62, t: "Вычисление определителя матрицы приведением её к треугольному виду. Метод элементарных преобразований" },
+      { n: 63, t: "Использование специальных приёмов для вычисления определителей: метод рекуррентных соотношений, мультипликативность определителя" },
+      { n: 64, t: "Союзная матрица" },
+      { n: 65, t: "Вычисление обратной матрицы с помощью союзной матрицы" },
+      { n: 66, t: "Теорема Крамера" },
     ]
   },
   {
     id: "s12",
     title: "Миноры и ранг",
-    subtitle: "Глава IV",
+    subtitle: "Глава III. Определители",
     questions: [
-      { n: 78, t: "Минор k-го порядка" },
-      { n: 79, t: "Окаймляющий минор" },
-      { n: 80, t: "Теорема о минорном ранге матрицы. Метод окаймляющих миноров" },
-      { n: 81, t: "Свойства ранга матрицы" },
-      { n: 82, t: "Методы вычисления ранга матрицы" },
-      { n: 83, t: "Применение определителей к решению произвольной СЛАУ. Главные и свободные переменные. Базисный минор" },
+      { n: 67, t: "Минор k-го порядка" },
+      { n: 68, t: "Окаймляющий минор" },
+      { n: 69, t: "Теорема о минорном ранге матрицы. Метод окаймляющих миноров" },
+      { n: 70, t: "Свойства ранга матрицы" },
+      { n: 71, t: "Методы вычисления ранга матрицы" },
+      { n: 72, t: "Применение определителей к решению произвольной СЛАУ. Главные и свободные переменные. Базисный минор" },
+    ]
+  },
+  {
+    id: "s7",
+    title: "Векторные пространства и базис",
+    subtitle: "Глава IV. Векторные пространства",
+    questions: [
+      { n: 73, t: "Понятие векторного пространства" },
+      { n: 74, t: "Примеры векторных пространств" },
+      { n: 75, t: "Линейная комбинация векторов" },
+      { n: 76, t: "Линейная оболочка системы векторов" },
+      { n: 77, t: "Линейно зависимые и линейно независимые системы векторов" },
+      { n: 78, t: "Теорема о линейно зависимых и линейно независимых системах" },
+      { n: 79, t: "Понятие базиса" },
+      { n: 80, t: "Лемма о линейно независимой системе и базисе" },
+      { n: 81, t: "Теорема о базисе. Размерность линейной оболочки" },
+      { n: 82, t: "Два подхода к определению базиса (через линейно независимые и через порождающие системы)" },
+      { n: 83, t: "Формулировка условия совместности СЛАУ с помощью линейной комбинации столбцов матрицы СЛАУ" },
     ]
   },
   {
     id: "s13",
     title: "Базис и координаты",
-    subtitle: "Глава IV",
+    subtitle: "Глава IV. Векторные пространства",
     questions: [
       { n: 84, t: "Теорема о дополнении до базиса" },
       { n: 85, t: "Координаты вектора в данном базисе" },
@@ -9387,7 +9324,7 @@ const TOPICS = [
   {
     id: "s14",
     title: "Сумма подпространств",
-    subtitle: "Глава IV",
+    subtitle: "Глава IV. Векторные пространства",
     questions: [
       { n: 88, t: "Сумма подпространств" },
       { n: 89, t: "Теорема о размерности суммы подпространств" },
@@ -9399,7 +9336,7 @@ const TOPICS = [
   {
     id: "s15",
     title: "Полилинейные и билинейные формы",
-    subtitle: "Глава V",
+    subtitle: "Глава V. Билинейные и квадратичные формы",
     questions: [
       { n: 93, t: "Полилинейное отображение" },
       { n: 94, t: "Полилинейная форма" },
@@ -9416,7 +9353,7 @@ const TOPICS = [
   {
     id: "s16",
     title: "Квадратичные формы",
-    subtitle: "Глава V",
+    subtitle: "Глава V. Билинейные и квадратичные формы",
     questions: [
       { n: 103, t: "Квадратичная форма" },
       { n: 104, t: "Ранг квадратичной формы" },
@@ -9429,7 +9366,7 @@ const TOPICS = [
   {
     id: "s17",
     title: "Приведение и классификация квадратичных форм",
-    subtitle: "Глава V",
+    subtitle: "Глава V. Билинейные и квадратичные формы",
     questions: [
       { n: 109, t: "Теорема о приведении квадратичной формы к диагональному виду" },
       { n: 110, t: "Метод Лагранжа приведения квадратичной формы к диагональному виду" },
@@ -9445,7 +9382,7 @@ const TOPICS = [
   {
     id: "s18",
     title: "Линейные отображения",
-    subtitle: "Глава VI",
+    subtitle: "Глава VI. Линейные операторы",
     questions: [
       { n: 118, t: "Ядро и образ линейного отображения" },
       { n: 119, t: "Свойства ядра и образа линейного отображения" },
@@ -9460,7 +9397,7 @@ const TOPICS = [
   {
     id: "s19",
     title: "Минимальный многочлен и инвариантные подпространства",
-    subtitle: "Глава VI",
+    subtitle: "Глава VI. Линейные операторы",
     questions: [
       { n: 126, t: "Аннулирующий многочлен линейного оператора (с примерами)" },
       { n: 127, t: "Минимальный многочлен линейного оператора (с примерами)" },
@@ -9476,7 +9413,7 @@ const TOPICS = [
   {
     id: "s20",
     title: "Собственные значения и векторы",
-    subtitle: "Глава VI",
+    subtitle: "Глава VI. Линейные операторы",
     questions: [
       { n: 135, t: "Собственный вектор линейного оператора" },
       { n: 136, t: "Собственное значение линейного оператора" },
@@ -9494,7 +9431,7 @@ const TOPICS = [
   {
     id: "s21",
     title: "Диагонализируемость",
-    subtitle: "Глава VI",
+    subtitle: "Глава VI. Линейные операторы",
     questions: [
       { n: 146, t: "Диагонализируемость линейного оператора" },
       { n: 147, t: "Достаточное условие диагонализируемости линейного оператора" },
@@ -9505,7 +9442,7 @@ const TOPICS = [
   {
     id: "s22",
     title: "Евклидовы пространства",
-    subtitle: "Глава VII",
+    subtitle: "Глава VII. Евклидовы пространства",
     questions: [
       { n: 150, t: "Евклидово векторное пространство" },
       { n: 151, t: "Скалярное произведение. Вычисление скалярного произведения векторов из ℝⁿ и ℝ³" },
@@ -9522,7 +9459,7 @@ const TOPICS = [
   {
     id: "s23",
     title: "Ортогональные проекции и дополнения",
-    subtitle: "Глава VII",
+    subtitle: "Глава VII. Евклидовы пространства",
     questions: [
       { n: 160, t: "Проекция вектора на подпространство" },
       { n: 161, t: "Ортогональное дополнение к вектору и к подпространству" },
@@ -9535,7 +9472,7 @@ const TOPICS = [
   {
     id: "s24",
     title: "Модель международной торговли",
-    subtitle: "Глава VIII",
+    subtitle: "Глава VIII. Применение линейной алгебры в экономике",
     questions: [
       { n: 166, t: "Модель международной торговли (постановка задачи)" },
       { n: 167, t: "Структурная матрица торговли (значение элементов, связь между элементами)" },
@@ -9545,7 +9482,7 @@ const TOPICS = [
   {
     id: "s25",
     title: "Экономическая модель Леонтьева",
-    subtitle: "Дополнительная тема",
+    subtitle: "Глава VIII. Применение линейной алгебры в экономике",
     questions: [
       { n: 169, t: "Модель Леонтьева многоотраслевой экономики (балансовый анализ)" },
       { n: 170, t: "Модель Леонтьева: пример балансового расчёта" },
@@ -9554,11 +9491,9 @@ const TOPICS = [
   {
     id: "s26",
     title: "Дополнительный материал",
-    subtitle: "Дополнительная тема",
+    subtitle: "Общий материал",
     questions: [
-      { n: 171, t: "Основные обозначения" },
-      { n: 172, t: "Модельная задача: нагретая пластинка" },
-      { n: 173, t: "Критерий Галуа разрешимости уравнений в радикалах" },
+      { n: 171, t: "Модельная задача: нагретая пластинка" },
     ]
   },
 ];
@@ -9609,7 +9544,8 @@ function buildSidebar() {
 
     <div class="side-section-title">Материал</div>
     <a class="side-nav-item is-home" onclick="showTopic('start')">${sideIcon('home')}<span class="side-nav-label">На главную</span></a>
-    <a class="side-nav-item" href="literatura.html">${sideIcon('book')}<span class="side-nav-label">Литература</span></a>
+    <a class="side-nav-item" href="oboznacheniya.html">${sideIcon('book')}<span class="side-nav-label">Обозначения</span></a>
+      <a class="side-nav-item" href="literatura.html">${sideIcon('book')}<span class="side-nav-label">Литература</span></a>
     <a class="side-nav-item" href="lekcii-sem1.html"><svg class="side-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span class="side-nav-label">Лекции (презентации)</span></a>
     <a class="side-nav-item" href="links.html"><svg class="side-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span class="side-nav-label">Полезные ссылки</span></a>
   `;

@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="ru" data-theme="dusk">
+<html lang="ru" data-theme="dusk" data-motion="full">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>MoziHelper</title>
+<title>MoziHelper — Основные обозначения</title>
 <script>(function(){var h=document.documentElement;try{h.setAttribute('data-theme',localStorage.getItem('la_theme')||'dusk');h.setAttribute('data-motion',localStorage.getItem('la_motion')||'full');/* оформление применяем до первой отрисовки, иначе шторка мелькает прежним цветом */if(localStorage.getItem('la_old')==='1')h.setAttribute('data-old','1');if(localStorage.getItem('la_warm')==='1')h.setAttribute('data-warm','1');var _fs=localStorage.getItem('la_fs');if(_fs&&_fs!=='m')h.setAttribute('data-fs',_fs);if(sessionStorage.getItem('la_sweep')){sessionStorage.removeItem('la_sweep');h.classList.add('arriving','no-intro');}}catch(e){h.setAttribute('data-theme','dusk');h.setAttribute('data-motion','full');}})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;700&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ═══ Old mode: спокойный синий вместо оранжевого ═════════════════
    Работает поверх любой темы — и тёмной, и светлой. Меняется акцент,
@@ -33,25 +33,23 @@ html[data-old="1"][data-theme="paper"]{
 }
 
 
-/*TOKENS*/
 [data-theme="dusk"]{
   --bg:#0c0c0e; --bg-2:#141416; --ink:#f2f0ec; --ink-2:#94918b; --ink-3:#5c5a55;
   --rule:#26262a; --hot:#ff4a24; --hot-2:#ff4a24; --hot-ink:#fff; --flood:#ff4a24;
+  --bar:rgba(12,12,14,.86);
   color-scheme:dark;
 }
 [data-theme="paper"]{
   --bg:#f7f4ef; --bg-2:#ffffff; --ink:#101012; --ink-2:#5a5852; --ink-3:#94918a;
   --rule:#dedad2; --hot:#e03c14; --hot-2:#e03c14; --hot-ink:#fff; --flood:#e03c14;
+  --bar:rgba(247,244,239,.88);
   color-scheme:light;
 }
-/*ENDTOKENS*/
-
 *{margin:0;padding:0;box-sizing:border-box}
-body{max-width:100%;overflow-x:hidden}
 html{background:var(--bg);-webkit-text-size-adjust:100%}
 body{
   font-family:'Golos Text',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
-  background:var(--bg);color:var(--ink);min-height:100svh;overflow-x:hidden;
+  background:var(--bg);color:var(--ink);min-height:100svh;line-height:1.5;
   -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
   transition:background .45s ease,color .45s ease;
 }
@@ -59,26 +57,24 @@ a{color:var(--hot)}
 a:hover{color:var(--ink)}
 ::selection{background:var(--hot);color:var(--hot-ink)}
 
-.page{
-  position:relative;min-height:100svh;
-  display:grid;grid-template-rows:1fr auto;justify-items:center;
-  padding:calc(env(safe-area-inset-top,0px) + 72px) 0 calc(env(safe-area-inset-bottom,0px) + 10px);
-  text-align:center;
+/* ── верхняя панель ── */
+.topbar{
+  position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:14px;
+  padding:calc(env(safe-area-inset-top,0px) + 10px) 18px 10px;
+  background:var(--bar);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--rule);
 }
-.gut{width:100%;padding-inline:20px}
+.topbar-home{
+  margin-right:auto;display:inline-flex;align-items:center;gap:9px;min-height:46px;
+  font-size:.92rem;font-weight:500;color:var(--ink-2);text-decoration:none;
+  transition:color .22s ease;-webkit-tap-highlight-color:transparent;
+}
+.topbar-home:hover{color:var(--ink)}
+.topbar-home svg{flex-shrink:0;transition:transform .3s cubic-bezier(.2,.9,.2,1)}
+.topbar-home:hover svg{transform:translateX(-3px)}
 
-/* ── переключатель темы: в углу, зона нажатия 46px ── */
-.top{
-  position:absolute;z-index:5;
-  top:calc(env(safe-area-inset-top,0px) + 18px);
-  right:calc(env(safe-area-inset-right,0px) + 16px);
-  opacity:0;animation:fd .55s ease .1s forwards;
-}
-.tsw{position:relative;display:inline-flex;border:1px solid var(--rule)}
-.tsw-knob{
-  position:absolute;top:0;bottom:0;left:0;width:50%;background:var(--hot);
-  transition:transform .42s cubic-bezier(.65,0,.15,1);
-}
+.tsw{position:relative;display:inline-flex;flex-shrink:0;border:1px solid var(--rule)}
+.tsw-knob{position:absolute;top:0;bottom:0;left:0;width:50%;background:var(--hot);transition:transform .42s cubic-bezier(.65,0,.15,1)}
 [data-theme="paper"] .tsw-knob{transform:translateX(100%)}
 .tsw-b{
   position:relative;z-index:1;border:0;background:transparent;cursor:pointer;font-family:inherit;
@@ -93,144 +89,74 @@ a:hover{color:var(--ink)}
 [data-theme="paper"] .tsw-b[data-t="paper"]{color:var(--hot-ink)}
 .tsw-b:focus-visible{outline:2px solid var(--hot);outline-offset:4px}
 
-/* ── центральный блок ── */
-.core{
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  width:100%;max-width:980px;padding-block:4px;
-}
+main{max-width:760px;margin:0 auto;padding:34px 20px calc(env(safe-area-inset-bottom,0px) + 64px)}
 
-.wm{
-  display:block;width:100%;overflow:hidden;
+/* ── титул страницы ── */
+.page-title{
   font-family:'Unbounded',sans-serif;font-weight:400;
-  line-height:1;letter-spacing:-.02em;
-  padding:.1em 0 .18em;font-size:52px;
-  visibility:hidden;
+  font-size:clamp(1.55rem,7vw,2.3rem);line-height:1.08;letter-spacing:-.03em;
+  margin-bottom:12px;
+  opacity:0;transform:translateY(10px);
+  animation:rise .8s cubic-bezier(.16,1,.3,1) .05s forwards;
 }
-.wm.fitted{visibility:visible}
-.wm .i{
-  display:inline-block;white-space:nowrap;
+.page-sub{
+  color:var(--ink-2);font-size:.95rem;margin-bottom:34px;max-width:46ch;text-wrap:pretty;
+  opacity:0;animation:fd .7s ease .28s forwards;
 }
-.wm .hot{font-weight:700;letter-spacing:-.05em;color:var(--hot)}
-
-.kicker{
-  margin-top:15px;font-size:.665rem;font-weight:500;letter-spacing:.26em;
-  text-transform:uppercase;color:var(--ink-2);
-  opacity:0;animation:fd .7s ease .66s forwards;
-}
-
-.resume{
-  display:none;align-items:center;gap:11px;margin-top:20px;padding:12px 16px;
-  background:var(--bg-2);border:1px solid var(--rule);
-  color:var(--ink);text-decoration:none;font-size:.86rem;max-width:100%;min-height:46px;
-  transition:border-color .24s ease;
-}
-.resume.on{display:inline-flex;opacity:0;animation:fd .6s ease .8s forwards}
-.resume:hover{border-color:var(--hot);color:var(--ink)}
-.resume:focus-visible{outline:2px solid var(--hot);outline-offset:3px}
-.resume em{font-style:normal;font-size:.6rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--hot-2);flex-shrink:0}
-.resume span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-
-/* ── два билета ── */
-.picks{
-  margin-top:32px;width:100%;display:grid;grid-template-columns:1fr;
-  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
-}
-.pick{
-  position:relative;overflow:hidden;
-  display:flex;align-items:center;justify-content:flex-start;gap:16px;
-  padding:24px 20px 25px 26px;min-height:88px;
-  text-decoration:none;color:inherit;text-align:left;
-  opacity:0;animation:fd .72s ease var(--d,0s) forwards;
-  -webkit-tap-highlight-color:transparent;
-}
-.pick + .pick{border-top:1px solid var(--rule)}
-.pick::before{
-  content:'';position:absolute;inset:0;background:var(--hot);
-  transform:translateY(101%);transition:transform .46s cubic-bezier(.66,0,.2,1);
-}
-.pick>*{position:relative;z-index:1}
-.pick:hover::before,.pick:active::before{transform:none}
-.pick:hover,.pick:active{color:var(--hot-ink)}
-.pick:focus-visible{outline:3px solid var(--hot);outline-offset:-3px}
-
-.rn{
-  font-family:'Unbounded',sans-serif;font-weight:700;
-  font-size:2.45rem;line-height:.94;letter-spacing:-.045em;color:var(--hot-2);
-  min-width:1.4em;flex-shrink:0;
-  transition:color .3s ease,transform .46s cubic-bezier(.2,1.2,.4,1);
-}
-.pick:hover .rn,.pick:active .rn{color:var(--hot-ink);transform:translateX(4px)}
-.pl{
-  font-size:1.1rem;font-weight:500;letter-spacing:-.012em;
-  transition:color .3s ease,transform .46s cubic-bezier(.2,1.2,.4,1) .045s;
-}
-.pick:hover .pl,.pick:active .pl{transform:translateX(4px)}
-
-/* ── подвал ── */
-.tailer{
-  display:flex;align-items:center;justify-content:center;
-  flex-wrap:wrap;gap:0 0;row-gap:4px;max-width:100%;
-  opacity:0;animation:fd .7s ease 1.16s forwards;
-}
-.tl{
-  position:relative;display:inline-flex;align-items:center;justify-content:center;
-  color:var(--ink-2);text-decoration:none;
-  font-size:.92rem;font-weight:500;padding:14px 16px;min-height:46px;
-  transition:color .24s ease;-webkit-tap-highlight-color:transparent;
-}
-.tl::after{
-  content:'';position:absolute;left:16px;right:16px;bottom:13px;height:1.5px;background:var(--hot-2);
-  transform:scaleX(0);transform-origin:left;
-  transition:transform .38s cubic-bezier(.2,.9,.2,1);
-}
-.tl:hover{color:var(--ink)}
-.tl:hover::after{transform:scaleX(1)}
-.tl:focus-visible{outline:2px solid var(--hot);outline-offset:0}
-.sep{width:1px;height:13px;background:var(--rule);flex-shrink:0}
-@media (max-width:520px){
-  /* два в ряд: «Литература · Лекции I» и «Лекции II · Полезные ссылки» */
-  .tailer{max-width:340px;margin-inline:auto}
-  .tailer .sep:nth-of-type(2){display:none;width:100%;height:0}
-}
-
+@keyframes rise{to{opacity:1;transform:none}}
 @keyframes fd{to{opacity:1}}
 
-.flood{position:fixed;inset:0;z-index:99;background:var(--flood);transform:translateY(100%);pointer-events:none}
-body.leaving .flood{transform:none;transition:transform .42s cubic-bezier(.66,0,.2,1)}
+/* ── книга: строка, а не карточка ── */
+.res{
+  display:flex;flex-direction:column;align-items:flex-start;gap:9px;
+  padding:22px 0 24px;border-bottom:1px solid var(--rule);
+}
+.res-title{
+  font-size:1.06rem;font-weight:600;line-height:1.34;letter-spacing:-.013em;
+  text-wrap:pretty;transition:color .25s ease;
+}
+.res-cite{color:var(--ink-2);font-size:.855rem;line-height:1.62;text-wrap:pretty}
+.res:hover .res-title{color:var(--hot-2)}
 
-@media (min-width:760px){
-  .gut{padding-inline:56px}
-  .page{padding-top:82px;padding-bottom:22px}
-  .core{padding-block:14px}
-  .picks{margin-top:48px;grid-template-columns:1fr 1fr}
-  .pick{padding:38px 28px 40px 40px;min-height:0;gap:22px}
-  .pick + .pick{border-top:0;border-left:1px solid var(--rule)}
-  .rn{font-size:3.4rem}
-  .pl{font-size:1.26rem}
-  .kicker{margin-top:20px}
+/* ── кнопка: та же заливка снизу вверх, что на билетах главной ── */
+.dl{
+  position:relative;margin-top:3px;
+  display:inline-flex;align-items:center;gap:9px;min-height:46px;padding:12px 17px;
+  font-family:inherit;font-size:.855rem;font-weight:500;letter-spacing:.01em;
+  color:var(--ink);text-decoration:none;border:1px solid var(--rule);
+  background-image:linear-gradient(var(--hot),var(--hot));
+  background-repeat:no-repeat;background-position:0 100%;background-size:100% 0;
+  transition:background-size .42s cubic-bezier(.66,0,.2,1),color .3s ease .04s,border-color .3s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.dl svg{width:15px;height:15px;flex-shrink:0}
+.dl:hover,.dl:active{color:var(--hot-ink);border-color:var(--hot);background-size:100% 100%}
+.dl:focus-visible{outline:2px solid var(--hot);outline-offset:3px}
+.dl.is-dl svg{animation:dlBounce .52s cubic-bezier(.34,1.56,.64,1)}
+@keyframes dlBounce{
+  0%{transform:translateY(0)}
+  35%{transform:translateY(4px)}
+  70%{transform:translateY(-2px)}
+  100%{transform:translateY(0)}
 }
 
-/* короткий экран (телефон лёжа) — не ломаем, просто ужимаем ритм */
-@media (max-height:560px){
-  .page{padding-top:64px}
-  .picks{margin-top:22px}
-  .pick{min-height:74px;padding-block:18px}
-  .kicker{margin-top:11px}
+/* ── разделитель раздела ── */
+.section-head{
+  margin:46px 0 2px;padding-top:32px;border-top:1px solid var(--rule);
+  font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--hot-2);
 }
 
-/* спокойный режим — только по собственному флагу la_motion="calm",
-   системная настройка «уменьшить движение» анимации больше не глушит */
-[data-motion="calm"] *{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important}
-[data-motion="calm"] .top,[data-motion="calm"] .kicker,[data-motion="calm"] .pick,
-[data-motion="calm"] .tailer,[data-motion="calm"] .resume.on{opacity:1}
+/* ── появление при прокрутке ── */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.22,1,.36,1)}
+.reveal.in{opacity:1;transform:none}
 
-.curtain{
-  position:fixed;inset:0;z-index:98;background:var(--hot);
-  transform:translate3d(0,100%,0);pointer-events:none;will-change:transform;contain:strict;
-}
+/* ── шторка смены темы и уход со страницы ── */
+.curtain,.flood{position:fixed;inset:0;background:var(--flood);transform:translate3d(0,100%,0);pointer-events:none}
+.curtain{z-index:98;will-change:transform;contain:strict}
+.flood{z-index:99}
 .curtain.up{transform:translate3d(0,0,0);transition:transform .42s cubic-bezier(.65,0,.25,1)}
 .curtain.out{transform:translate3d(0,-100%,0);transition:transform .5s cubic-bezier(.35,0,.15,1)}
-
 /* ── приход под шторкой: контент уже отрисован, полотно просто уезжает ── */
 html.arriving .curtain{
   transform:translate3d(0,0,0);
@@ -241,19 +167,22 @@ html.arriving .curtain.out{transform:translate3d(0,-100%,0);transition:transform
 html.arriving *,html.arriving *::before,html.arriving *::after{animation:none!important;transition:none!important}
 @keyframes curtainAway{to{transform:translate3d(0,-100%,0)}}
 html.sweeping,html.sweeping body{transition:none!important}
-html.no-intro .top,html.no-intro .kicker,html.no-intro .pick,
-html.no-intro .tailer,html.no-intro .resume.on{opacity:1!important;animation:none!important}
+html.no-intro .page-title,html.no-intro .page-sub{opacity:1!important;transform:none!important;animation:none!important}
+html.no-intro .reveal{opacity:1!important;transform:none!important;transition:none!important}
+body.leaving .flood{transform:none;transition:transform .42s cubic-bezier(.66,0,.2,1)}
 
-/* Страховка: что бы ни насчитал скрипт, надпись не выходит за пределы экрана
-   и не создаёт горизонтальной прокрутки. */
-.wm{max-width:100%;}
-body{max-width:100%;}
+@media (min-width:760px){
+  .topbar{padding:14px 34px}
+  main{padding:52px 34px 96px}
+  .page-sub{margin-bottom:44px}
+  .res{padding:26px 0 28px}
+  .res-title{font-size:1.14rem}
+  .res-cite{font-size:.885rem}
+}
 
-/* Ничто на главной не может быть шире экрана: раньше один широкий элемент
-   растягивал страницу, и всё центрированное съезжало вбок. */
-body{max-width:100%;}
-.page,.core,.gut,.picks,.wm,.kicker,.resume,.tailer{max-width:100%;min-width:0;}
-.wm{overflow:hidden;}
+[data-motion="calm"] *{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important}
+[data-motion="calm"] .page-title,[data-motion="calm"] .page-sub{opacity:1;transform:none}
+[data-motion="calm"] .reveal{opacity:1;transform:none}
 
 
 /* ═══ Плавность шторки на iOS ═════════════════════════════════════
@@ -277,171 +206,195 @@ html.sweeping .sidebar,html.arriving .topbar,html.arriving .tabbar,
 html.arriving .backdrop,html.arriving .sidebar{
   -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
 }
+
+/* блоки карточек, перенесённые из семестра */
+/* Content blocks inside body */
+.def-block {
+  margin: 1.2rem 0 0.5rem;
+}
+.section-tag {
+  display: inline-block;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--purple-light);
+  padding: 0.25rem 0.6rem;
+  background: var(--purple-glow);
+  border: 1px solid var(--purple-deep);
+  border-radius: 8px;
+  margin-bottom: 0.7rem;
+}
+.def-text {
+  color: var(--ink);
+  font-size: 1.04rem;
+  line-height: 1.85;
+  font-weight: 400;
+  letter-spacing: 0.005em;
+}
+.def-text + .def-text { margin-top: 0.9rem; }
+.def-text .term {
+  color: var(--purple-light);
+  font-weight: 600;
+}
+.def-text .em {
+  font-style: normal;
+  color: var(--accent);
+}
+.thm-box {
+  margin: 1rem 0;
+  padding: 1.1rem 1.3rem;
+  background: var(--purple-glow);
+  border: 1px solid var(--ruby);
+  border-left-width: 3px;
+  border-radius: 8px;
+}
+.thm-label {
+  display: inline-block;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-size: 1.05rem;
+  font-style: normal;
+  color: var(--ruby);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.thm-label::before { content: ''; }
+.note {
+  margin: 0.8rem 0;
+  padding: 0.7rem 1rem;
+  border-left: 2px solid var(--accent);
+  background: var(--purple-glow);
+  border-radius: 0 6px 6px 0;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  font-style: normal;
+}
+.note::before {
+  content: 'Замечание. ';
+  color: var(--accent);
+  font-weight: 600;
+  font-style: normal;
+}
+ul.props {
+  margin: 0.5rem 0;
+  padding: 0;
+  list-style: none;
+}
+ul.props li {
+  padding: 0.3rem 0 0.3rem 1.3rem;
+  position: relative;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+ul.props li::before {
+  content: '◆';
+  position: absolute;
+  left: 0;
+  color: var(--purple);
+  font-size: 0.7rem;
+  top: 0.6rem;
+}
+/* Контейнеры контента: ничего не выпирает за пределы, длинные слова переносятся */
+.q-card, .q-body, .def-block, .def-text, .explain, .thm-box, .example-card,
+.example-card-body, .derivation, .formula-display, .note, .topic-page,
+.props li, ol li {
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  box-sizing: border-box;
+}
+/* Блоки, где может жить широкая блочная формула — позволяем скролл по X */
+.formula-display, .example-card-body, .def-text, .explain,
+.thm-box, .derivation, .note {
+  overflow-x: auto;
+  overflow-y: visible;
+  -webkit-overflow-scrolling: touch;
+}
+/* Списки внутри def-text не должны прижиматься к краю */
+.def-text ol, .def-text ul { padding-left: 1.3rem; }
+.def-text { font-size: 0.95rem; line-height: 1.65; }
+.thm-box { padding: 0.9rem 1rem; }
+.def-text { font-size: 0.9rem; }
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#0c0c0e" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#f7f4ef" media="(prefers-color-scheme: light)">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
-<!-- Экран запуска приложения на iPhone: без них при старте с домашнего
-     экрана виден белый промельк. Каждая картинка — под своё разрешение. -->
-<link rel="apple-touch-startup-image" href="splash/splash-750x1334.png" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)">
-<link rel="apple-touch-startup-image" href="splash/splash-1242x2208.png" media="(device-width:414px) and (device-height:736px) and (-webkit-device-pixel-ratio:3)">
-<link rel="apple-touch-startup-image" href="splash/splash-1125x2436.png" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)">
-<link rel="apple-touch-startup-image" href="splash/splash-828x1792.png" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)">
-<link rel="apple-touch-startup-image" href="splash/splash-1242x2688.png" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:3)">
-<link rel="apple-touch-startup-image" href="splash/splash-1170x2532.png" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)">
-<link rel="apple-touch-startup-image" href="splash/splash-1284x2778.png" media="(device-width:428px) and (device-height:926px) and (-webkit-device-pixel-ratio:3)">
-<link rel="apple-touch-startup-image" href="splash/splash-1179x2556.png" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)">
-<link rel="apple-touch-startup-image" href="splash/splash-1290x2796.png" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)">
-<link rel="apple-touch-startup-image" href="splash/splash-1206x2622.png" media="(device-width:402px) and (device-height:874px) and (-webkit-device-pixel-ratio:3)">
-<link rel="apple-touch-startup-image" href="splash/splash-1320x2868.png" media="(device-width:440px) and (device-height:956px) and (-webkit-device-pixel-ratio:3)">
-<!-- Запасные варианты: если строгое условие не сработало. -->
-<link rel="apple-touch-startup-image" href="splash/splash-750x1334.png" media="(device-width:375px) and (device-height:667px)">
-<link rel="apple-touch-startup-image" href="splash/splash-1242x2208.png" media="(device-width:414px) and (device-height:736px)">
-<link rel="apple-touch-startup-image" href="splash/splash-1125x2436.png" media="(device-width:375px) and (device-height:812px)">
-<link rel="apple-touch-startup-image" href="splash/splash-1242x2688.png" media="(device-width:414px) and (device-height:896px)">
-<link rel="apple-touch-startup-image" href="splash/splash-1170x2532.png" media="(device-width:390px) and (device-height:844px)">
-<link rel="apple-touch-startup-image" href="splash/splash-1284x2778.png" media="(device-width:428px) and (device-height:926px)">
-<link rel="apple-touch-startup-image" href="splash/splash-1179x2556.png" media="(device-width:393px) and (device-height:852px)">
-<link rel="apple-touch-startup-image" href="splash/splash-1290x2796.png" media="(device-width:430px) and (device-height:932px)">
-<link rel="apple-touch-startup-image" href="splash/splash-1206x2622.png" media="(device-width:402px) and (device-height:874px)">
-<link rel="apple-touch-startup-image" href="splash/splash-1320x2868.png" media="(device-width:440px) and (device-height:956px)">
-
 <meta name="apple-mobile-web-app-title" content="MoziHelper">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="icon-192.png" type="image/png">
 </head>
 <body>
-<div class="flood" aria-hidden="true"></div>
 <div class="curtain" id="curtain" aria-hidden="true"></div>
+<div class="flood" aria-hidden="true"></div>
 
-<div class="page">
-
-  <div class="top">
+  <header class="topbar">
+    <a class="topbar-home" href="index.html"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg><span>На главную</span></a>
     <div class="tsw" role="group" aria-label="Тема оформления">
       <span class="tsw-knob" aria-hidden="true"></span>
       <button class="tsw-b" data-t="dusk" onclick="pickTheme(event,'dusk')">Ночь</button>
       <button class="tsw-b" data-t="paper" onclick="pickTheme(event,'paper')">День</button>
     </div>
-  </div>
+  </header>
 
-  <main class="core gut">
-    <h1 class="wm" id="wm" aria-label="MoziHelper"><span class="i">Mozi<span class="hot">Helper</span></span></h1>
-    <p class="kicker">Выберите семестр</p>
-    <a class="resume" id="resume" href="#"><em>Продолжить</em><span id="resumeTitle"></span></a>
+  <main>
+    <h1 class="page-title">Основные обозначения</h1>
+    <p class="page-sub">Общий материал: символы и сокращения, принятые в обоих семестрах курса.</p>
 
-    <nav class="picks">
-      <a class="pick" href="algebra-sem1.html" style="--d:.88s">
-        <span class="rn">I</span>
-        <span class="pl">1 семестр</span>
-      </a>
-      <a class="pick" href="algebra-sem2.html" style="--d:.98s">
-        <span class="rn">II</span>
-        <span class="pl">2 семестр</span>
-      </a>
-    </nav>
+<div class="def-block">
+      <div class="section-tag">Логические символы</div>
+      <div class="def-text">
+        <ul class="props">
+          <li>$\forall$ — квантор всеобщности, «для любого», «для всех»;</li>
+          <li>$\exists$ — квантор существования, «существует», «найдётся»;</li>
+          <li>$\exists!$ — «существует единственный»;</li>
+          <li>$\Rightarrow$ — «следует», «влечёт»; $\Leftrightarrow$ (или $\iff$) — «тогда и только тогда», равносильность;</li>
+          <li>$\;:\;$ или $\mid$ — «такой, что» (в записи множеств и кванторов).</li>
+        </ul>
+      </div>
+    </div>
+    <div class="def-block">
+      <div class="section-tag">Операции над множествами</div>
+      <div class="def-text">
+        <ul class="props">
+          <li>$\in$ — принадлежит; $\notin$ — не принадлежит;</li>
+          <li>$\subseteq$ — подмножество; $\subset$ — собственное подмножество;</li>
+          <li>$\cap$ — пересечение; $\cup$ — объединение;</li>
+          <li>$\setminus$ — разность; $\triangle$ — симметрическая разность (вопрос 7);</li>
+          <li>$\varnothing$ — пустое множество; $|X|$ — число элементов конечного множества $X$;</li>
+          <li>$X\times Y$ — декартово произведение (вопрос 8).</li>
+        </ul>
+      </div>
+    </div>
+    <div class="def-block">
+      <div class="section-tag">Числовые множества и прочее</div>
+      <div class="def-text">
+        <ul class="props">
+          <li>$\mathbb{N}$, $\mathbb{Z}$, $\mathbb{Q}$, $\mathbb{R}$, $\mathbb{C}$ — натуральные, целые, рациональные, вещественные, комплексные числа;</li>
+          <li>$\langle a_1,\ldots,a_k\rangle$ — линейная оболочка системы векторов (вопрос 76);</li>
+          <li>$\operatorname{rang}A$ — ранг матрицы; $\det A$ — определитель; $A^\top$ — транспонированная матрица;</li>
+          <li>$\operatorname{Ker}f$, $\operatorname{Im}f$ — ядро и образ линейного отображения (вопрос 119);</li>
+          <li>$\oplus$ — прямая сумма подпространств; $U^\perp$ — ортогональное дополнение.</li>
+        </ul>
+      </div>
+    </div>
   </main>
 
-  <div class="tailer">
-    <a class="tl" href="oboznacheniya.html">Обозначения</a>
-    <span class="sep" aria-hidden="true"></span>
-    <a class="tl" href="literatura.html">Литература</a>
-    <span class="sep" aria-hidden="true"></span>
-    <a class="tl" href="lekcii-sem1.html">Лекции I</a>
-    <span class="sep" aria-hidden="true"></span>
-    <a class="tl" href="lekcii-sem2.html">Лекции II</a>
-    <span class="sep" aria-hidden="true"></span>
-    <a class="tl" href="links.html">Полезные ссылки</a>
-  </div>
-
-</div>
-
 <script>
-/* ── подгонка логотипа: одна строка, размер под ширину колонки ──
-   меряем не сам заголовок (он в overflow:hidden), а образец за экраном */
-(function(){
-  var wm=document.getElementById('wm'),inner=wm.firstElementChild,t=null;
-  var probe=document.createElement('span');
-  probe.innerHTML=inner.innerHTML;
-  probe.setAttribute('aria-hidden','true');
-  probe.style.cssText='position:fixed;left:-99999px;top:0;white-space:nowrap;'+
-    'font-family:Unbounded,sans-serif;font-weight:400;font-size:100px;letter-spacing:-.02em;'+
-    'pointer-events:none;visibility:hidden';
-  var ph=probe.querySelector('.hot');
-  if(ph)ph.style.cssText='font-weight:700;letter-spacing:-.05em';
-  document.body.appendChild(probe);
-
-  function fit(){
-    /* НЕ доверяем clientWidth вслепую: если у страницы есть горизонтальное переполнение,
-       он больше экрана — и логотип раздувается ещё сильнее. Ограничиваем шириной viewport. */
-    var vw = window.visualViewport ? window.visualViewport.width : window.innerWidth;
-    var avail = Math.min(wm.clientWidth || vw, vw - 24);
-    if(avail <= 0) return;
-    var w = probe.getBoundingClientRect().width;
-    if(!w) return;
-    /* на телефоне логотип почти во всю колонку, на десктопе — сдержанно */
-    var factor = avail < 600 ? 0.94 : 0.56;
-    var size = Math.min(100 * Math.min(avail, 1000) * factor / w, 124);
-    wm.style.fontSize = size.toFixed(2) + 'px';
-    /* дожимаем, пока строка не влезет — одного прохода на iOS не хватает */
-    for(var i = 0; i < 6; i++){
-      var over = inner.getBoundingClientRect().width - avail;
-      if(over <= 0.5) break;
-      size = size * avail / (avail + over) * 0.995;
-      wm.style.fontSize = size.toFixed(2) + 'px';
-    }
-    wm.classList.add('fitted');
-    /* Показываем надпись в любом случае: если измерение вдруг не сработает,
-       она не должна остаться невидимой. */
-  }
-  fit();
-  requestAnimationFrame(fit);
-  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);
-  setTimeout(function(){ if(!wm.classList.contains('fitted')) wm.classList.add('fitted'); },600);
-  /* Safari сообщает о готовности шрифтов раньше, чем реально применит Unbounded:
-     размер считался по системному шрифту, а после подмены надпись становилась
-     шире и выходила за экран. Пересчитываем именно после загрузки начертаний. */
-  if(document.fonts&&document.fonts.load){
-    try{
-      Promise.all([document.fonts.load('400 100px Unbounded'),
-                   document.fonts.load('700 100px Unbounded')])
-        .then(function(){ fit(); requestAnimationFrame(fit); })
-        .catch(function(){});
-    }catch(e){}
-  }
-  addEventListener('resize',function(){clearTimeout(t);t=setTimeout(fit,90);},{passive:true});
-  /* Встроенные браузеры (Telegram, открытие из закладок) сообщают итоговую ширину
-     не сразу и часто без события resize — надпись оставалась подогнанной под чужой
-     размер и вылезала за экран. Следим за шириной самого контейнера: он меняется
-     при любом изменении окна, а от размера шрифта не зависит, поэтому зацикливания нет. */
-  if (window.ResizeObserver && wm.parentElement) {
-    var lastBox = 0;
-    new ResizeObserver(function (entries) {
-      var w = Math.round(entries[0].contentRect.width);
-      if (w === lastBox || !w) return;
-      lastBox = w;
-      clearTimeout(t); t = setTimeout(fit, 60);
-    }).observe(wm.parentElement);
-  }
-  addEventListener('orientationchange',function(){setTimeout(fit,220);});
-})();
-
 function calm(){return document.documentElement.getAttribute('data-motion')==='calm';}
 function applyTheme(n){
   document.documentElement.setAttribute('data-theme',n);
   try{localStorage.setItem('la_theme',n);}catch(e){}
 }
-function pickTheme(ev,next){
-  if((document.documentElement.getAttribute('data-theme')||'dusk')===next)return;
+function sweep(mid){
   var c=document.getElementById('curtain');
-  if(!c||calm()){applyTheme(next);return;}
-  if(c.dataset.busy)return;
+  if(!c||calm()||c.dataset.busy){if(mid)mid();return;}
   c.dataset.busy='1';
   c.classList.remove('out');c.classList.add('up');
   setTimeout(function(){
-    applyTheme(next);
+    if(mid)mid();
     c.classList.add('out');
     setTimeout(function(){
       c.style.transition='none';c.classList.remove('up','out');
@@ -449,27 +402,11 @@ function pickTheme(ev,next){
     },470);
   },400);
 }
+function pickTheme(ev,next){
+  if((document.documentElement.getAttribute('data-theme')||'dusk')===next)return;
+  sweep(function(){applyTheme(next);});
+}
 
-(function(){
-  try{
-    var raw=localStorage.getItem('la_last');if(!raw)return;
-    var d=JSON.parse(raw);if(!d||!d.href||!d.title)return;
-    var a=document.getElementById('resume');
-    a.href=d.href;document.getElementById('resumeTitle').textContent=d.title;
-    a.classList.add('on');
-  }catch(e){}
-})();
-
-(function(){
-  if(calm())return;
-  document.querySelectorAll('a[href]:not([target])').forEach(function(a){
-    a.addEventListener('click',function(e){
-      var href=a.getAttribute('href');
-      if(!href||href.charAt(0)==='#'||e.metaKey||e.ctrlKey||e.shiftKey)return;
-      e.preventDefault();leavePage(href);
-    });
-  });
-})();
 /* ── Переход между страницами одним движением ──
    Уходящая страница закрывает экран шторкой и НЕ уводит её обратно;
    доигрывает уже новая страница (флаг la_sweep → html.arriving),
@@ -503,6 +440,52 @@ function finishArrival(){
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',finishArrival);
 else finishArrival();
 
+/* появление карточек волной */
+(function(){
+  var items=document.querySelectorAll('.res, .section-head');
+  if(calm()||!('IntersectionObserver' in window)){
+    items.forEach(function(el){el.classList.add('reveal','in');});
+    return;
+  }
+  items.forEach(function(el){el.classList.add('reveal');});
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(!en.isIntersecting)return;
+      var el=en.target;
+      el.style.transitionDelay=(el._d||0)+'ms';
+      el.classList.add('in');
+      io.unobserve(el);
+    });
+  },{rootMargin:'0px 0px -8% 0px',threshold:.08});
+  items.forEach(function(el,i){el._d=(i%4)*70;io.observe(el);});
+})();
+
+/* отскок иконки при скачивании */
+(function(){
+  if(calm())return;
+  document.querySelectorAll('.dl').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      btn.classList.remove('is-dl');
+      void btn.offsetWidth;
+      btn.classList.add('is-dl');
+    });
+  });
+})();
+
+/* уход со страницы и открытие PDF — той же шторкой.
+   Если PDF не открывается, а скачивается, шторка сама уходит за верх и страница остаётся */
+(function(){
+  if(calm())return;
+  document.querySelectorAll('a[href$=".html"], a[href$=".pdf"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      if(e.metaKey||e.ctrlKey||e.shiftKey||a.target)return;
+      var href=a.getAttribute('href');
+      if(!href)return;
+      e.preventDefault();
+      leavePage(href);
+    });
+  });
+})();
 </script>
 <script>
 /* офлайн-режим: сайт открывается без сети */
@@ -620,18 +603,6 @@ if ('serviceWorker' in navigator) {
   background:var(--hot, var(--accent, #ff4a24));color:var(--hot-ink,#fff);cursor:pointer;white-space:nowrap;}
 .mozi-app .x{background:transparent;color:var(--ink-3, var(--ink-mute, #687081));font-size:1.25rem;padding:2px 6px;font-weight:400;}
 @media (min-width:640px){.mozi-app{left:auto;right:22px;max-width:400px;}}
-
-/* ═══ Тёплый оттенок для чтения перед сном ═══════════════════════
-   Смещает палитру в янтарную сторону: меньше синего свечения, глазам
-   спокойнее ночью. Работает поверх любой темы, переключается отдельно. */
-html[data-warm="1"][data-theme="dusk"]{
-  --bg:#14100c; --bg-2:#1c1712; --ink:#f2e8da; --ink-2:#b0a494; --ink-3:#6d6459;
-  --rule:#2f2820; --topbar-bg:rgba(20,16,12,.88);
-}
-html[data-warm="1"][data-theme="paper"]{
-  --bg:#f7f0e2; --bg-2:#fffaf0; --ink:#191510; --ink-2:#5f574a; --ink-3:#98907f;
-  --rule:#e0d6c2; --topbar-bg:rgba(247,240,226,.88);
-}
 </style>
 
 <div class="mozi-app" id="moziApp" role="dialog" aria-live="polite">
@@ -700,6 +671,109 @@ html[data-warm="1"][data-theme="paper"]{
     else hide(true);
   });
   no.addEventListener('click', function(){ hide(mode === 'install'); });
+})();
+</script>
+
+<style>
+/* ═══ Сохранение материалов для работы без интернета ═══ */
+.mozi-off{margin:26px auto 34px;max-width:720px;padding:16px 18px;border-radius:14px;
+  background:var(--bg-2, var(--bg-elev, var(--bg-card, #15161a)));border:1px solid var(--rule, var(--border, #2a2f38));}
+.mozi-off h3{margin:0 0 4px;font-size:.95rem;color:var(--ink, #eceef2);}
+.mozi-off p{margin:0 0 12px;font-size:.85rem;color:var(--ink-2, var(--ink-soft, #a4abb8));line-height:1.45;}
+.mozi-off button{border:0;border-radius:10px;padding:10px 16px;font-size:.9rem;font-weight:600;
+  background:var(--hot, var(--accent, #ff4a24));color:var(--hot-ink,#fff);cursor:pointer;}
+.mozi-off button:disabled{opacity:.55;cursor:default;}
+.mozi-off .bar{height:6px;border-radius:4px;background:var(--rule, var(--border, #2a2f38));overflow:hidden;margin-top:12px;display:none;}
+.mozi-off .bar i{display:block;height:100%;width:0;background:var(--hot, var(--accent, #ff4a24));transition:width .25s ease;}
+.mozi-off .st{margin-top:8px;font-size:.82rem;color:var(--ink-2, var(--ink-soft, #a4abb8));}
+
+/* ═══ Тёплый оттенок для чтения перед сном ═══════════════════════
+   Смещает палитру в янтарную сторону: меньше синего свечения, глазам
+   спокойнее ночью. Работает поверх любой темы, переключается отдельно. */
+html[data-warm="1"][data-theme="dusk"]{
+  --bg:#14100c; --bg-2:#1c1712; --ink:#f2e8da; --ink-2:#b0a494; --ink-3:#6d6459;
+  --rule:#2f2820; --topbar-bg:rgba(20,16,12,.88);
+}
+html[data-warm="1"][data-theme="paper"]{
+  --bg:#f7f0e2; --bg-2:#fffaf0; --ink:#191510; --ink-2:#5f574a; --ink-3:#98907f;
+  --rule:#e0d6c2; --topbar-bg:rgba(247,240,226,.88);
+}
+</style>
+<div class="mozi-off" id="moziOff">
+  <h3>Читать без интернета</h3>
+  <p id="moziOffText">Сохранить материалы этой страницы в память устройства — потом они открываются без сети.</p>
+  <button id="moziOffGo" type="button">Сохранить</button>
+  <div class="bar" id="moziOffBar"><i></i></div>
+  <div class="st" id="moziOffSt"></div>
+</div>
+<script>
+/* Скачивает файлы этой страницы в тот же кэш, из которого работает офлайн-режим.
+   По требованию, а не автоматически: материалы весят много, и решать должен
+   пользователь. Уже сохранённые файлы повторно не качаются. */
+(function () {
+  var box = document.getElementById('moziOff');
+  if (!box || !('caches' in window)) { if (box) box.style.display='none'; return; }
+  var go = document.getElementById('moziOffGo'),
+      bar = document.getElementById('moziOffBar'),
+      fill = bar.firstElementChild,
+      st = document.getElementById('moziOffSt'),
+      txt = document.getElementById('moziOffText');
+
+  function files() {
+    var out = [], seen = {};
+    var links = document.querySelectorAll('a[href$=".pdf"], a[href*=".pdf?"]');
+    for (var i = 0; i < links.length; i++) {
+      var h = links[i].getAttribute('href');
+      if (h && !seen[h] && !/^https?:\/\//i.test(h)) { seen[h] = 1; out.push(h); }
+    }
+    return out;
+  }
+
+  var list = files();
+  if (!list.length) { box.style.display = 'none'; return; }
+  txt.textContent = 'Сохранить материалы этой страницы (' + list.length + ' шт.) в память устройства — потом они открываются без сети.';
+
+  /* Показываем, сколько уже сохранено */
+  caches.open('mozi-files').then(function (c) {
+    var done = 0;
+    return Promise.all(list.map(function (u) {
+      return c.match(u).then(function (m) { if (m) done++; });
+    })).then(function () {
+      if (done === list.length) { st.textContent = 'Все материалы уже сохранены'; go.disabled = true; go.textContent = 'Сохранено'; }
+      else if (done) st.textContent = 'Уже сохранено: ' + done + ' из ' + list.length;
+    });
+  }).catch(function(){});
+
+  go.addEventListener('click', function () {
+    go.disabled = true; go.textContent = 'Сохраняю…';
+    bar.style.display = 'block';
+    caches.open('mozi-files').then(function (c) {
+      var done = 0, failed = 0;
+      function step(i) {
+        if (i >= list.length) {
+          st.textContent = failed ? ('Сохранено ' + done + ' из ' + list.length + ', не удалось: ' + failed)
+                                  : 'Готово — материалы доступны без интернета';
+          go.textContent = failed ? 'Повторить' : 'Сохранено';
+          go.disabled = !failed;
+          return;
+        }
+        c.match(list[i]).then(function (hit) {
+          if (hit) { done++; next(i); return; }
+          fetch(list[i], { cache: 'reload' }).then(function (res) {
+            if (res && res.ok) return c.put(list[i], res).then(function(){ done++; });
+            failed++;
+          }).catch(function () { failed++; }).then(function () { next(i); });
+        });
+      }
+      function next(i) {
+        var p = Math.round((i + 1) / list.length * 100);
+        fill.style.width = p + '%';
+        st.textContent = 'Сохранено ' + (i + 1) + ' из ' + list.length;
+        setTimeout(function () { step(i + 1); }, 30);
+      }
+      step(0);
+    }).catch(function () { st.textContent = 'Не удалось сохранить'; go.disabled = false; go.textContent = 'Повторить'; });
+  });
 })();
 </script>
 <script>
@@ -881,5 +955,112 @@ html.sweeping #msGear,html.arriving #msGear{opacity:0;pointer-events:none}
 })();
 </script>
 <div class="site-credit" style="text-align:center;padding:22px 16px 30px;font-size:13px;line-height:1.5;color:var(--ink-soft,#888)">Разработчик: студент 1-го курса экономического факультета СПбГУ Александр Мозин</div>
+<!-- MathJax для красивого отображения формул как в LaTeX -->
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true,
+    tags: 'none'
+  },
+  svg: { fontCache: 'global' },
+  options: {
+    skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+  },
+  startup: {
+    // ВАЖНО: не рендерим формулы во всех 92 карточках при загрузке.
+    // Memory-bomb на iOS Safari (страница падала при тапе по полю поиска).
+    // Каждая тема типсетится лениво — при showTopic() / toggleCard().
+    typeset: true,
+    ready: () => {
+      MathJax.startup.defaultReady();
+      window.mathJaxLoaded = true;
+      document.body && document.body.classList.add('mathjax-ready');
+      /* Переход по кнопке «Продолжить» открывает карточку сразу при загрузке —
+         в этот момент MathJax ещё не готов, и формулы оставались нетронутыми.
+         Догоняем: как только библиотека поднялась, типсетим открытое. */
+      setTimeout(function () {
+        try {
+          var t = document.getElementById('ticketBody');
+          if (!t || !t.children.length) t = document.querySelector('.q-card.open');
+          if (t && MathJax.typesetPromise) MathJax.typesetPromise([t]).catch(function () {});
+        } catch (e) {}
+      }, 120);
+    }
+  }
+};
+// Загружаем MathJax асинхронно — страница не должна висеть в ожидании
+(function loadMathJax() {
+  var cdns = [
+    'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js',
+    'https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.js',
+    'https://unpkg.com/mathjax@3/es5/tex-svg.js'
+  ];
+  var i = 0;
+  function tryNext() {
+    if (i >= cdns.length) return;
+    var s = document.createElement('script');
+    s.src = cdns[i];
+    s.async = true;
+    s.onerror = function() { i++; tryNext(); };
+    document.head.appendChild(s);
+  }
+  tryNext();
+})();
+</script>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true,
+    tags: 'none'
+  },
+  svg: { fontCache: 'global' },
+  options: {
+    skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+  },
+  startup: {
+    // ВАЖНО: не рендерим формулы во всех 92 карточках при загрузке.
+    // Memory-bomb на iOS Safari (страница падала при тапе по полю поиска).
+    // Каждая тема типсетится лениво — при showTopic() / toggleCard().
+    typeset: false,
+    ready: () => {
+      MathJax.startup.defaultReady();
+      window.mathJaxLoaded = true;
+      document.body && document.body.classList.add('mathjax-ready');
+      /* Переход по кнопке «Продолжить» открывает карточку сразу при загрузке —
+         в этот момент MathJax ещё не готов, и формулы оставались нетронутыми.
+         Догоняем: как только библиотека поднялась, типсетим открытое. */
+      setTimeout(function () {
+        try {
+          var t = document.getElementById('ticketBody');
+          if (!t || !t.children.length) t = document.querySelector('.q-card.open');
+          if (t && MathJax.typesetPromise) MathJax.typesetPromise([t]).catch(function () {});
+        } catch (e) {}
+      }, 120);
+    }
+  }
+};
+// Загружаем MathJax асинхронно — страница не должна висеть в ожидании
+(function loadMathJax() {
+  var cdns = [
+    'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js',
+    'https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.js',
+    'https://unpkg.com/mathjax@3/es5/tex-svg.js'
+  ];
+  var i = 0;
+  function tryNext() {
+    if (i >= cdns.length) return;
+    var s = document.createElement('script');
+    s.src = cdns[i];
+    s.async = true;
+    s.onerror = function() { i++; tryNext(); };
+    document.head.appendChild(s);
+  }
+  tryNext();
+})();
+</script>
 </body>
 </html>

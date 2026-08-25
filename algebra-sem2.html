@@ -8818,6 +8818,59 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();renderL
     </div>
   </section>
 
+<section class="topic-page" id="page-t7">
+  <div class="topic-header">
+    <div class="topic-eyebrow">Общий материал</div>
+    <h1 class="topic-title">Дополнительный материал</h1>
+  </div>
+  <div class="questions-list">
+
+<div class="q-card" data-q="93" data-text="критерий галуа разрешимость уравнений в радикалах разрешимая группа изоморфизм групп абель руффини">
+  <div class="q-head" onclick="toggleCard(this)">
+    <span class="q-num">93</span>
+    <span class="q-title">Критерий Галуа разрешимости уравнений в радикалах</span>
+    <button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  </div>
+  <div class="q-body">
+    <div class="def-block">
+      <div class="section-tag">Изоморфизм групп</div>
+      <div class="def-text">
+        Группы $(G,*)$ и $(H,\circ)$ называются <span class="term">изоморфными</span>, если существует биекция $\varphi\colon G\to H$, сохраняющая операцию:
+        $$\varphi(a*b)=\varphi(a)\circ\varphi(b)\qquad\forall a,b\in G.$$
+        Такое отображение называется <span class="term">изоморфизмом</span>. Изоморфные группы устроены одинаково: различаются лишь обозначениями элементов, а все групповые свойства у них общие.
+      </div>
+    </div>
+
+    <div class="def-block">
+      <div class="section-tag">Разрешимая группа</div>
+      <div class="def-text">
+        Группа $G$ называется <span class="term">разрешимой</span>, если существует цепочка подгрупп
+        $$\{e\}=G_0\subset G_1\subset\dots\subset G_k=G,$$
+        в которой каждая предыдущая нормальна в следующей, а все факторгруппы $G_{i+1}/G_i$ абелевы.
+        <br><br>
+        Смысл названия виден из критерия ниже: разрешимость группы отвечает возможности «разобрать» решение уравнения на цепочку простых шагов — извлечений корней.
+      </div>
+    </div>
+
+    <div class="def-block">
+      <div class="section-tag">Критерий Галуа</div>
+      <div class="def-text">
+Универсальный критерий дал Э. Галуа (1831 г.): каждому уравнению степени $n$ он сопоставил <span class="term">поле разложения</span> и конечную группу его автоморфизмов (порядка не более $n!$) — <span class="term">группу Галуа</span>. Уравнение разрешимо в радикалах <span class="em">тогда и только тогда</span>, когда его группа Галуа разрешима. Например, уравнению $x^5-x-1=0$ отвечает группа Галуа, изоморфная симметрической группе $S_5$ порядка $120$; она неразрешима — значит, неразрешимо в радикалах и само уравнение. Так из этой задачи выросла теория групп.
+      </div>
+    </div>
+
+    <div class="note">
+      Группы $S_n$ при $n\le 4$ разрешимы — отсюда формулы Кардано и метод Феррари. Начиная с $n=5$ группа $S_n$ неразрешима, и это объясняет теорему Абеля–Руффини: общего решения в радикалах для степени выше четвёртой не существует (см. 1-й семестр, вопрос 3).
+    </div>
+
+    <div class="src-ref">Кострикин А. И., ч. 3, гл. «Теория Галуа»</div>
+  </div>
+</div>
+
+  </div>
+</section>
+
+
   <!-- PRACTICE PAGE — семинарские задачи с решениями -->
   <section class="topic-page" id="page-practice">
     <div class="topic-header">
@@ -8883,8 +8936,8 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();renderL
 
     function esc(s){ return String(s == null ? '' : s); }
 
-    function cardHTML(task) {
-      var num = String(task.num);
+    function cardHTML(task, seq) {
+      var num = seq < 10 ? '0' + seq : String(seq);
       var kw = (task.title + ' ' + task.source + ' ' + TOPIC[task.topic]).toLowerCase()
                  .replace(/[$\\{}^_]/g, ' ');
       var h = [];
@@ -8941,10 +8994,10 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();renderL
         var d = ORDER.indexOf(a.topic) - ORDER.indexOf(b.topic);
         return d || a.level - b.level || a.num - b.num;
       });
-      var out = '', cur = null;
+      var out = '', cur = null, seq = 0;
       list.forEach(function (x) {
         if (x.topic !== cur) { cur = x.topic; out += '<div class="prax-sub">' + TOPIC[cur] + '</div>'; }
-        out += cardHTML(x);
+        out += cardHTML(x, ++seq);
       });
       host.innerHTML = out || '<div class="prax-empty">По этим условиям задач нет.</div>';
       var c = document.getElementById('praxCount');
@@ -9168,7 +9221,7 @@ const TOPICS = [
   {
     id: 't1',
     title: 'Теоретико-групповые конструкции',
-    subtitle: 'Глава IX',
+    subtitle: 'Глава IX. Общие теоретико-групповые конструкции',
     questions: [
       { n: 1,  t: 'Полугруппа и моноид' },
       { n: 2,  t: 'Степени в коммутативном моноиде' },
@@ -9185,7 +9238,7 @@ const TOPICS = [
   {
     id: 't2',
     title: 'Комплексные числа',
-    subtitle: 'Глава II',
+    subtitle: 'Глава X. Комплексные числа',
     questions: [
       { n: 11, t: 'Формы записи. Модуль, аргумент' },
       { n: 12, t: 'Арифметические действия' },
@@ -9196,7 +9249,7 @@ const TOPICS = [
   {
     id: 't3',
     title: 'Многочлены',
-    subtitle: 'Глава XI',
+    subtitle: 'Глава XI. Многочлены',
     questions: [
       { n: 15, t: 'Одночлен, многочлен. Действия' },
       { n: 16, t: 'Кольцо многочленов' },
@@ -9223,7 +9276,7 @@ const TOPICS = [
   {
     id: 't4',
     title: 'Жордановы нормальные формы',
-    subtitle: 'Глава XII',
+    subtitle: 'Глава XII. Жорданова нормальная форма',
     questions: [
       { n: 35, t: 'Постановка задачи. Треугольная' },
       { n: 36, t: 'ЛО простой структуры' },
@@ -9252,7 +9305,7 @@ const TOPICS = [
   {
     id: 't5',
     title: 'Линейная алгебра и аналитическая геометрия',
-    subtitle: 'Глава XIII',
+    subtitle: 'Глава XIII. Линейная алгебра и аналитическая геометрия',
     questions: [
       { n: 57, t: 'Линейное аффинное многообразие' },
       { n: 58, t: 'Свойства ЛМ' },
@@ -9279,7 +9332,7 @@ const TOPICS = [
   {
     id: 't6',
     title: 'Кривые и поверхности 2-го порядка',
-    subtitle: 'Лекции 25–26',
+    subtitle: 'Глава XIII. Линейная алгебра и аналитическая геометрия',
     questions: [
       { n: 77, t: 'Подходы к построению КВП' },
       { n: 78, t: 'Эллипс' },
@@ -9297,6 +9350,14 @@ const TOPICS = [
       { n: 90, t: 'Классификация ПВП' },
       { n: 91, t: 'Прямолинейные образующие' },
       { n: 92, t: 'Приведение к осям симметрии' },
+    ]
+  },
+  {
+    id: 't7',
+    title: 'Дополнительный материал',
+    subtitle: 'Общий материал',
+    questions: [
+      { n: 93, t: 'Критерий Галуа разрешимости уравнений в радикалах' },
     ]
   }
 ];
@@ -9351,7 +9412,8 @@ function buildSidebar() {
     <a class="side-nav-item" onclick="openQuizMenu()">${sideIcon('quiz')}<span class="side-nav-label">Подготовка</span></a>
     <a class="side-nav-item" onclick="showTopic('practice')">${sideIcon('practice')}<span class="side-nav-label">Практика</span></a>
     <a class="side-nav-item" onclick="showTopic('basics')">${sideIcon('book')}<span class="side-nav-label">Базовые термины</span></a>
-    <a class="side-nav-item" href="literatura.html">${sideIcon('book')}<span class="side-nav-label">Литература</span></a>
+    <a class="side-nav-item" href="oboznacheniya.html">${sideIcon('book')}<span class="side-nav-label">Обозначения</span></a>
+      <a class="side-nav-item" href="literatura.html">${sideIcon('book')}<span class="side-nav-label">Литература</span></a>
     <a class="side-nav-item" href="lekcii-sem2.html"><svg class="side-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span class="side-nav-label">Лекции (презентации)</span></a>
     <a class="side-nav-item" href="links.html"><svg class="side-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span class="side-nav-label">Полезные ссылки</span></a>
   `;
