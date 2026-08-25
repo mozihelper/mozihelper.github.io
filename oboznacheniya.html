@@ -627,14 +627,23 @@ if ('serviceWorker' in navigator) {
       deferred = null, mode = null;
 
   function inApp(){ return matchMedia('(display-mode: standalone)').matches || navigator.standalone === true; }
-  function muted(){ try { return localStorage.getItem('mozi_app_off') === '1'; } catch(e){ return false; } }
+  /* отказ запоминаем на 30 дней, а не навсегда: иначе один случайный
+     клик по крестику навсегда лишал бы возможности установить приложение */
+  function muted(){
+    try {
+      var v = localStorage.getItem('mozi_app_off');
+      if (!v) return false;
+      if (v === '1') { localStorage.removeItem('mozi_app_off'); return false; }
+      return (Date.now() - Number(v)) < 30 * 24 * 3600 * 1000;
+    } catch(e){ return false; }
+  }
   function show(kind, t, s, btn){
     mode = kind; title.textContent = t; text.textContent = s; go.textContent = btn;
     box.classList.add('on');
   }
   function hide(save){
     box.classList.remove('on');
-    if (save) { try { localStorage.setItem('mozi_app_off','1'); } catch(e){} }
+    if (save) { try { localStorage.setItem('mozi_app_off', String(Date.now())); } catch(e){} }
   }
 
   /* ── установка ── */
@@ -671,6 +680,28 @@ if ('serviceWorker' in navigator) {
     else hide(true);
   });
   no.addEventListener('click', function(){ hide(mode === 'install'); });
+
+  /* Установка по требованию — из меню. Работает и после того,
+     как баннер был закрыт: способ поставить приложение должен быть всегда. */
+  window.moziInstall = function () {
+    if (inApp()) { alert('MoziHelper уже установлен и запущен как приложение.'); return; }
+    if (deferred) {
+      deferred.prompt();
+      deferred.userChoice.then(function(){ deferred = null; hide(false); });
+      return;
+    }
+    var ua = navigator.userAgent;
+    var msg;
+    if (/iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1))
+      msg = 'Safari: нажмите «Поделиться», затем «На экран «Домой»».';
+    else if (/Firefox/.test(ua))
+      msg = 'Firefox не умеет устанавливать веб-приложения. Откройте сайт в Chrome, Edge или Яндекс.Браузере.';
+    else if (/Android/.test(ua))
+      msg = 'Меню браузера (три точки) → «Установить приложение».';
+    else
+      msg = 'Chrome или Edge: значок установки в правой части адресной строки, либо меню (три точки) → «Установить MoziHelper».\n\nЕсли пункта нет — обновите страницу с Ctrl+Shift+R и попробуйте снова.';
+    alert(msg);
+  };
 })();
 </script>
 

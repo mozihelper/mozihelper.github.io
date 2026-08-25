@@ -9412,7 +9412,8 @@ function buildSidebar() {
     <a class="side-nav-item" onclick="openQuizMenu()">${sideIcon('quiz')}<span class="side-nav-label">Подготовка</span></a>
     <a class="side-nav-item" onclick="showTopic('practice')">${sideIcon('practice')}<span class="side-nav-label">Практика</span></a>
     <a class="side-nav-item" onclick="showTopic('basics')">${sideIcon('book')}<span class="side-nav-label">Базовые термины</span></a>
-    <a class="side-nav-item" href="oboznacheniya.html">${sideIcon('book')}<span class="side-nav-label">Обозначения</span></a>
+    <a class="side-nav-item" onclick="moziInstall()">${sideIcon('devices')}<span class="side-nav-label">Установить приложение</span></a>
+      <a class="side-nav-item" href="oboznacheniya.html">${sideIcon('book')}<span class="side-nav-label">Обозначения</span></a>
       <a class="side-nav-item" href="literatura.html">${sideIcon('book')}<span class="side-nav-label">Литература</span></a>
     <a class="side-nav-item" href="lekcii-sem2.html"><svg class="side-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span class="side-nav-label">Лекции (презентации)</span></a>
     <a class="side-nav-item" href="links.html"><svg class="side-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span class="side-nav-label">Полезные ссылки</span></a>
@@ -11462,14 +11463,23 @@ html[data-warm="1"][data-theme="paper"]{
       deferred = null, mode = null;
 
   function inApp(){ return matchMedia('(display-mode: standalone)').matches || navigator.standalone === true; }
-  function muted(){ try { return localStorage.getItem('mozi_app_off') === '1'; } catch(e){ return false; } }
+  /* отказ запоминаем на 30 дней, а не навсегда: иначе один случайный
+     клик по крестику навсегда лишал бы возможности установить приложение */
+  function muted(){
+    try {
+      var v = localStorage.getItem('mozi_app_off');
+      if (!v) return false;
+      if (v === '1') { localStorage.removeItem('mozi_app_off'); return false; }
+      return (Date.now() - Number(v)) < 30 * 24 * 3600 * 1000;
+    } catch(e){ return false; }
+  }
   function show(kind, t, s, btn){
     mode = kind; title.textContent = t; text.textContent = s; go.textContent = btn;
     box.classList.add('on');
   }
   function hide(save){
     box.classList.remove('on');
-    if (save) { try { localStorage.setItem('mozi_app_off','1'); } catch(e){} }
+    if (save) { try { localStorage.setItem('mozi_app_off', String(Date.now())); } catch(e){} }
   }
 
   /* ── установка ── */
@@ -11506,6 +11516,28 @@ html[data-warm="1"][data-theme="paper"]{
     else hide(true);
   });
   no.addEventListener('click', function(){ hide(mode === 'install'); });
+
+  /* Установка по требованию — из меню. Работает и после того,
+     как баннер был закрыт: способ поставить приложение должен быть всегда. */
+  window.moziInstall = function () {
+    if (inApp()) { alert('MoziHelper уже установлен и запущен как приложение.'); return; }
+    if (deferred) {
+      deferred.prompt();
+      deferred.userChoice.then(function(){ deferred = null; hide(false); });
+      return;
+    }
+    var ua = navigator.userAgent;
+    var msg;
+    if (/iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1))
+      msg = 'Safari: нажмите «Поделиться», затем «На экран «Домой»».';
+    else if (/Firefox/.test(ua))
+      msg = 'Firefox не умеет устанавливать веб-приложения. Откройте сайт в Chrome, Edge или Яндекс.Браузере.';
+    else if (/Android/.test(ua))
+      msg = 'Меню браузера (три точки) → «Установить приложение».';
+    else
+      msg = 'Chrome или Edge: значок установки в правой части адресной строки, либо меню (три точки) → «Установить MoziHelper».\n\nЕсли пункта нет — обновите страницу с Ctrl+Shift+R и попробуйте снова.';
+    alert(msg);
+  };
 })();
 </script>
 <script>
