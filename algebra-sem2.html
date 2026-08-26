@@ -1947,7 +1947,7 @@ html.sweeping .curtain, html.arriving .curtain { will-change: transform; }
 /* ── нижний таб-бар ── */
 .tabbar {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
-  display: grid; grid-template-columns: repeat(5, 1fr);
+  display: grid; grid-template-columns: repeat(4, 1fr);
   background: var(--topbar-bg);
   backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
   border-top: 1px solid var(--border);
@@ -2622,7 +2622,7 @@ html.arriving .topic-header, html.arriving .q-card { opacity: 1; }
   .tabbar {
     left: 50%; right: auto; bottom: 22px;
     transform: translateX(-50%);
-    grid-template-columns: repeat(5, auto);
+    grid-template-columns: repeat(4, auto);
     border: 1px solid var(--border);
     box-shadow: var(--shadow-elev);
     padding-bottom: 0;
@@ -8872,7 +8872,201 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();renderL
 
 
   <!-- PRACTICE PAGE — семинарские задачи с решениями -->
-  <section class="topic-page" id="page-practice">
+  
+<!-- PREP — подготовка: теория, задачи, конструктор вариантов -->
+<section class="topic-page" id="page-prep">
+  <div class="topic-header">
+    <div class="topic-eyebrow">Подготовка к экзамену</div>
+    <h1 class="topic-title">Подготовка</h1>
+  </div>
+
+  <style>
+  #page-prep .pr-modes{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:1.4rem 0 1.8rem}
+  @media(max-width:640px){#page-prep .pr-modes{grid-template-columns:1fr}}
+  #page-prep .pr-card{padding:1.1rem 1.2rem;border:1px solid var(--border);border-radius:10px;
+    background:var(--bg-card);cursor:pointer;transition:border-color .15s,transform .12s;text-align:left}
+  #page-prep .pr-card:hover{border-color:var(--ruby);transform:translateY(-1px)}
+  #page-prep .pr-card.on{border-color:var(--ruby);box-shadow:inset 0 0 0 1px var(--ruby)}
+  #page-prep .pr-card b{display:block;font-size:1.02rem;margin-bottom:.3rem;color:var(--ink)}
+  #page-prep .pr-card span{font-size:.86rem;color:var(--ink-mute);line-height:1.45}
+  #page-prep .pr-pane{display:none}
+  #page-prep .pr-pane.on{display:block}
+  #page-prep .pr-bar{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin:0 0 1.4rem}
+  #page-prep .pr-btn{padding:9px 17px;border:1px solid var(--border);border-radius:7px;
+    background:var(--bg-card);color:var(--ink);font-size:.92rem;font-weight:500;cursor:pointer}
+  #page-prep .pr-btn:hover{border-color:var(--ruby)}
+  #page-prep .pr-btn.main{background:var(--ruby);border-color:var(--ruby);color:var(--white)}
+  #page-prep .pr-hint{font-size:.85rem;color:var(--ink-mute)}
+  #page-prep .pr-var{border:1px solid var(--border);border-radius:10px;padding:1.5rem 1.6rem;background:var(--bg-card)}
+  #page-prep .pr-var h3{margin:0 0 .3rem;font-size:1.12rem;color:var(--ink)}
+  #page-prep .pr-sub{font-size:.84rem;color:var(--ink-mute);margin:0 0 1.3rem}
+  #page-prep .pr-part{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ink-mute);margin:1.4rem 0 .6rem}
+  #page-prep .pr-list{counter-reset:v;list-style:none;padding:0;margin:0}
+  #page-prep .pr-list li{counter-increment:v;position:relative;padding:0 0 0 2.3rem;margin:0 0 1rem;
+    line-height:1.6;color:var(--ink)}
+  #page-prep .pr-list li::before{content:counter(v) ".";position:absolute;left:0;top:0;
+    color:var(--ruby);font-weight:600;font-size:.95rem}
+  #page-prep .pr-tag{display:block;font-size:.78rem;color:var(--ink-mute);margin-top:.25rem}
+  @media print{
+    body>*:not(#page-prep){display:none!important}
+    #page-prep .pr-modes,#page-prep .pr-bar,.tabbar,.topbar{display:none!important}
+    #page-prep .pr-var{border:none;padding:0}
+  }
+  </style>
+
+  <div class="pr-modes">
+    <button class="pr-card on" data-pane="var">
+      <b>Собрать вариант</b>
+      <span>Экзаменационный билет: пять теоретических вопросов и пять задач из разных тем</span>
+    </button>
+    <button class="pr-card" data-pane="theory">
+      <b>Теория</b>
+      <span>Викторина по темам курса с разбором каждого ответа</span>
+    </button>
+    <button class="pr-card" data-pane="tasks">
+      <b>Задачи</b>
+      <span>Разобранные задачи из задачников с пошаговым решением</span>
+    </button>
+  </div>
+
+  <div class="pr-pane on" data-pane="var">
+    <div class="pr-bar">
+      <button class="pr-btn main" id="prGen">Собрать вариант</button>
+      <button class="pr-btn" id="prPrint">Распечатать</button>
+      <span class="pr-hint" id="prHint">Пять теоретических вопросов и пять задач из разных тем; сложность задач сбалансирована.</span>
+    </div>
+    <div id="prVar"></div>
+  </div>
+
+  <div class="pr-pane" data-pane="theory">
+    <div class="pr-bar">
+      <button class="pr-btn main" onclick="openQuizMenu()">Открыть викторину</button>
+      <span class="pr-hint">Вопросы сгруппированы по темам; после ответа показывается разбор.</span>
+    </div>
+  </div>
+
+  <div class="pr-pane" data-pane="tasks">
+    <div class="pr-bar">
+      <button class="pr-btn main" onclick="showScreen('practice')">Открыть задачи</button>
+      <span class="pr-hint" id="prTasksHint">Задачи с полным разбором, с фильтрами по теме и сложности.</span>
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    var TH = {t1:'Группы, кольца, поля', t2:'Комплексные числа', t3:'Многочлены',
+              t4:'Жордановы формы и операторы', t5:'Линейная алгебра и геометрия',
+              t6:'Кривые и поверхности 2-го порядка'};
+    var ORDER = ['t1','t2','t3','t4','t5','t6'];
+
+    /* переключение режимов */
+    var host = document.getElementById('page-prep');
+    host.addEventListener('click', function (e) {
+      var c = e.target.closest('.pr-card');
+      if (!c) return;
+      host.querySelectorAll('.pr-card').forEach(function (n) { n.classList.remove('on'); });
+      host.querySelectorAll('.pr-pane').forEach(function (n) { n.classList.remove('on'); });
+      c.classList.add('on');
+      host.querySelector('.pr-pane[data-pane="' + c.dataset.pane + '"]').classList.add('on');
+    });
+
+    function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
+
+    /* теоретические вопросы курса, разложенные по темам */
+    function theoryPool() {
+      var pool = {};
+      if (typeof TOPICS === 'undefined') return pool;
+      TOPICS.forEach(function (tp) {
+        if (!TH[tp.id]) return;                    /* доп. материал в вариант не идёт */
+        pool[tp.id] = (pool[tp.id] || []).concat(tp.questions || []);
+      });
+      return pool;
+    }
+
+    function taskPool() {
+      var pool = {};
+      if (typeof TASKS_SEM2 === 'undefined') return pool;
+      TASKS_SEM2.forEach(function (x) { (pool[x.topic] = pool[x.topic] || []).push(x); });
+      return pool;
+    }
+
+    function build() {
+      var box = document.getElementById('prVar');
+      var TP = theoryPool(), KP = taskPool();
+      var themesT = ORDER.filter(function (k) { return (TP[k] || []).length; });
+      var themesK = ORDER.filter(function (k) { return (KP[k] || []).length; });
+      if (themesT.length < 5 || !themesK.length) {
+        box.innerHTML = '<p class="pr-hint">База ещё загружается, попробуйте через мгновение.</p>';
+        return;
+      }
+
+      /* пять тем для теории: как в демонстрационных вариантах — из разных глав */
+      var tt = themesT.slice();
+      while (tt.length > 5) tt.splice(Math.floor(Math.random() * tt.length), 1);
+      var theory = tt.map(function (k) { return { th: k, q: pick(TP[k]) }; });
+
+      /* Задачи: по одной из каждой темы, но с балансом сложности —
+         половина варианта простая, половина повышенной трудности.
+         Уровень 3 считаем сложным, уровни 1–2 — простыми. */
+      function ofLevel(k, hard) {
+        return (KP[k] || []).filter(function (x) { return hard ? x.level === 3 : x.level < 3; });
+      }
+      var wantHard = Math.random() < 0.5 ? 2 : 3;   /* 2 или 3 из пяти */
+      var themesHard = themesK.filter(function (k) { return ofLevel(k, true).length; });
+      var tasks = [], used = {};
+      /* сначала набираем сложные из разных тем */
+      var pool = themesHard.slice();
+      while (tasks.length < wantHard && pool.length) {
+        var kh = pool.splice(Math.floor(Math.random() * pool.length), 1)[0];
+        tasks.push({ th: kh, x: pick(ofLevel(kh, true)) });
+        used[kh] = 1;
+      }
+      /* остальные позиции — простые задачи из ещё не занятых тем */
+      var rest = themesK.filter(function (k) { return !used[k] && ofLevel(k, false).length; });
+      while (tasks.length < 5 && rest.length) {
+        var ke = rest.splice(Math.floor(Math.random() * rest.length), 1)[0];
+        tasks.push({ th: ke, x: pick(ofLevel(ke, false)) });
+        used[ke] = 1;
+      }
+      /* если тем не хватило — добираем любыми, не повторяя задачу */
+      while (tasks.length < 5) {
+        var ka = pick(themesK), c2 = pick(KP[ka]);
+        if (!tasks.some(function (o) { return o.x.id === c2.id; })) tasks.push({ th: ka, x: c2 });
+      }
+      tasks.sort(function (a, b) { return ORDER.indexOf(a.th) - ORDER.indexOf(b.th); });
+
+      var num = 'В' + (100 + Math.floor(Math.random() * 900));
+      var h = ['<div class="pr-var">'];
+      h.push('<h3>Вариант №' + num + '</h3>');
+      h.push('<p class="pr-sub">Линейная алгебра, 2-й семестр. Пять теоретических вопросов и пять задач.</p>');
+      h.push('<div class="pr-part">Теоретическая часть</div><ol class="pr-list">');
+      theory.forEach(function (o) {
+        h.push('<li>' + o.q.t + '<span class="pr-tag">' + TH[o.th] + '</span></li>');
+      });
+      h.push('</ol><div class="pr-part">Задачи</div><ol class="pr-list">');
+      tasks.forEach(function (o) {
+        h.push('<li>' + o.x.statement + '<span class="pr-tag">' + TH[o.th] + '</span></li>');
+      });
+      h.push('</ol></div>');
+      box.innerHTML = h.join('');
+      if (window.MathJax && window.MathJax.typesetPromise)
+        window.MathJax.typesetPromise([box]).catch(function () {});
+    }
+
+    document.getElementById('prGen').addEventListener('click', build);
+    document.getElementById('prPrint').addEventListener('click', function () { window.print(); });
+
+    window.buildPrep = function () {
+      if (typeof window.loadTasksBase === 'function') {
+        window.loadTasksBase().then(function () { build(); });
+      } else { build(); }
+    };
+  })();
+  </script>
+</section>
+
+<section class="topic-page" id="page-practice">
     <div class="topic-header">
       <div class="topic-eyebrow">Семинары · задачи с решениями</div>
       <h1 class="topic-title">Практика</h1>
@@ -9190,13 +9384,9 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();renderL
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
     <span>Билеты</span>
   </button>
-  <button class="tab" data-tab="quiz" onclick="openQuizMenu()">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M9.2 9.1a2.9 2.9 0 1 1 4.1 2.7c-.8.4-1.3 1.1-1.3 2v.3"/><line x1="12" y1="17.6" x2="12" y2="17.61"/></svg>
-    <span>Квизы</span>
-  </button>
-  <button class="tab" data-tab="practice" onclick="showTopic('practice')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
-    <span>Практика</span>
+  <button class="tab" data-tab="prep" onclick="showScreen('prep')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+    <span>Подготовка</span>
   </button>
   <button class="tab" data-tab="demo" onclick="showTopic('demo')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>
@@ -9409,7 +9599,7 @@ function buildSidebar() {
 
     <div class="side-section-title">Материал</div>
     <a class="side-nav-item is-home" onclick="showTopic('start')">${sideIcon('home')}<span class="side-nav-label">На главную</span></a>
-    <a class="side-nav-item" onclick="openQuizMenu()">${sideIcon('quiz')}<span class="side-nav-label">Подготовка</span></a>
+    <a class="side-nav-item" onclick="showScreen('prep')">${sideIcon('quiz')}<span class="side-nav-label">Подготовка</span></a>
     <a class="side-nav-item" onclick="showTopic('practice')">${sideIcon('practice')}<span class="side-nav-label">Практика</span></a>
     <a class="side-nav-item" onclick="showTopic('basics')">${sideIcon('book')}<span class="side-nav-label">Базовые термины</span></a>
     <a class="side-nav-item" onclick="moziInstall()">${sideIcon('devices')}<span class="side-nav-label">Установить приложение</span></a>
@@ -10909,7 +11099,7 @@ else{window.addEventListener("resize",function(){if(cv.clientWidth>0){fit();pain
   };
 
   /* ───── ПЕРЕКЛЮЧЕНИЕ ЭКРАНОВ ───── */
-  var SCREENS = ['start','ticket','quiz','practice','basics','demo'];
+  var SCREENS = ['start','ticket','quiz','practice','basics','demo','prep'];
 
   function showScreen(id){
     if (id !== 'ticket') putCardBack();
@@ -10923,7 +11113,8 @@ else{window.addEventListener("resize",function(){if(cv.clientWidth>0){fit();pain
       try { buildBasics(); } catch(e) {}
       enhanceBasics();
     }
-    if (id === 'practice') { if (typeof buildPractice === 'function') { try { buildPractice(); } catch(e){} } enhancePractice(); }
+    if (id === 'prep' && typeof buildPrep === 'function') { try { buildPrep(); } catch(e){} }
+      if (id === 'practice') { if (typeof buildPractice === 'function') { try { buildPractice(); } catch(e){} } enhancePractice(); }
     if (id !== 'quiz') window.dqCloseSheet();
     window.scrollTo({ top: 0, behavior: 'instant' });
     syncChrome(id);
