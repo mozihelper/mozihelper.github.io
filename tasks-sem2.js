@@ -1,10 +1,197 @@
 /* ============================================================
-   tasks-sem2.js — база практических задач, 2-й семестр.
-   Каждая задача: условие, пошаговый разбор, ответ, источник.
-   Поля topic и level используются конструктором вариантов.
-   topic: t1..t6 — как в TOPIC_NAMES из quiz-sem2.js
-   level: 1 — базовая, 2 — средняя, 3 — повышенной сложности
+   tasks-sem2.js — практика 2-го семестра.
+   Структура: раздел курса → тип задачи → задачи.
+   Внутри типа задачи идут от экзаменационных к учебным.
+   Источники перечислены на экране «Практика» одной строкой.
    ============================================================ */
+
+var TASK_SECTIONS = [
+  {
+    "id": "r1",
+    "title": "Комплексные числа",
+    "topic": "t2",
+    "types": [
+      {
+        "id": "r1-1",
+        "no": 1,
+        "title": "Извлечение корней $n$-й степени",
+        "count": 8
+      },
+      {
+        "id": "r1-2",
+        "no": 2,
+        "title": "Геометрические места точек",
+        "count": 2
+      },
+      {
+        "id": "r1-3",
+        "no": 3,
+        "title": "Формула Муавра и тождества",
+        "count": 4
+      }
+    ]
+  },
+  {
+    "id": "r2",
+    "title": "Многочлены",
+    "topic": "t3",
+    "types": [
+      {
+        "id": "r2-1",
+        "no": 1,
+        "title": "Деление с остатком",
+        "count": 2
+      },
+      {
+        "id": "r2-2",
+        "no": 2,
+        "title": "Кратные корни",
+        "count": 2
+      },
+      {
+        "id": "r2-3",
+        "no": 3,
+        "title": "Разложение на неприводимые множители",
+        "count": 1
+      },
+      {
+        "id": "r2-4",
+        "no": 4,
+        "title": "Алгоритм Евклида и наибольший общий делитель",
+        "count": 3
+      },
+      {
+        "id": "r2-5",
+        "no": 5,
+        "title": "Разложение рациональной дроби на простейшие",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": "r3",
+    "title": "Жорданова нормальная форма и операторы",
+    "topic": "t4",
+    "types": [
+      {
+        "id": "r3-1",
+        "no": 1,
+        "title": "Жорданова форма и жорданов базис",
+        "count": 2
+      },
+      {
+        "id": "r3-2",
+        "no": 2,
+        "title": "Собственные значения и корневые подпространства",
+        "count": 1
+      },
+      {
+        "id": "r3-3",
+        "no": 3,
+        "title": "Минимальный многочлен",
+        "count": 1
+      },
+      {
+        "id": "r3-4",
+        "no": 4,
+        "title": "Самосопряжённые операторы",
+        "count": 4
+      },
+      {
+        "id": "r3-5",
+        "no": 5,
+        "title": "Квадратичная форма к главным осям",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": "r4",
+    "title": "Прямые, плоскости и многообразия",
+    "topic": "t5",
+    "types": [
+      {
+        "id": "r4-1",
+        "no": 1,
+        "title": "Прямая, заданная системой уравнений",
+        "count": 2
+      },
+      {
+        "id": "r4-2",
+        "no": 2,
+        "title": "Плоскость через точку и прямую",
+        "count": 3
+      },
+      {
+        "id": "r4-3",
+        "no": 3,
+        "title": "Взаимное расположение прямой и плоскости",
+        "count": 6
+      },
+      {
+        "id": "r4-4",
+        "no": 4,
+        "title": "Угол между плоскостями",
+        "count": 4
+      },
+      {
+        "id": "r4-5",
+        "no": 5,
+        "title": "Плоскость, параллельная данной",
+        "count": 1
+      },
+      {
+        "id": "r4-6",
+        "no": 6,
+        "title": "Плоскость через линию пересечения",
+        "count": 2
+      },
+      {
+        "id": "r4-7",
+        "no": 7,
+        "title": "Взаимное расположение трёх плоскостей",
+        "count": 1
+      },
+      {
+        "id": "r4-8",
+        "no": 8,
+        "title": "Линейные многообразия",
+        "count": 2
+      },
+      {
+        "id": "r4-9",
+        "no": 9,
+        "title": "Точки и расстояния на плоскости",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": "r5",
+    "title": "Кривые и поверхности второго порядка",
+    "topic": "t6",
+    "types": [
+      {
+        "id": "r5-1",
+        "no": 1,
+        "title": "Кривые второго порядка",
+        "count": 4
+      },
+      {
+        "id": "r5-2",
+        "no": 2,
+        "title": "Поверхности второго порядка",
+        "count": 2
+      },
+      {
+        "id": "r5-3",
+        "no": 3,
+        "title": "Касательная к кривой второго порядка",
+        "count": 1
+      }
+    ]
+  }
+];
 
 var TASKS_SEM2 = [
   {
@@ -34,7 +221,8 @@ var TASKS_SEM2 = [
     ],
     "answer": "$$z=z_6=\\sqrt[18]{12}\\left(\\cos\\frac{79\\pi}{54}+i\\sin\\frac{79\\pi}{54}\\right).$$",
     "figure": "<svg class=\"prax-fig\" viewBox=\"0 0 430 402\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Девять корней девятой степени на окружности радиуса 12 в степени 1/18; выделен корень z6 с наименьшей мнимой частью\">\n          <line x1=\"107.0\" y1=\"376.0\" x2=\"107.0\" y2=\"26.1\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"323.0\" y1=\"376.0\" x2=\"323.0\" y2=\"26.1\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"26.0\" y1=\"309.0\" x2=\"404.0\" y2=\"309.0\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"26.0\" y1=\"93.0\" x2=\"404.0\" y2=\"93.0\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"26.0\" y1=\"201.0\" x2=\"404.0\" y2=\"201.0\" stroke=\"var(--ink-soft)\" stroke-width=\"1.5\"/>\n          <polygon points=\"404.0,201.0 395.0,197.0 395.0,205.0\" fill=\"var(--ink-soft)\"/>\n          <line x1=\"215.0\" y1=\"376.0\" x2=\"215.0\" y2=\"26.1\" stroke=\"var(--ink-soft)\" stroke-width=\"1.5\"/>\n          <polygon points=\"215.0,26.1 211.0,35.1 219.0,35.1\" fill=\"var(--ink-soft)\"/>\n          <text x=\"400.0\" y=\"217.0\" font-size=\"12.5\" fill=\"var(--ink-soft)\" font-family=\"inherit\" text-anchor=\"end\" font-style=\"italic\">Re z</text>\n          <text x=\"223.0\" y=\"36.1\" font-size=\"12.5\" fill=\"var(--ink-soft)\" font-family=\"inherit\" text-anchor=\"start\" font-style=\"italic\">Im z</text>\n          <text x=\"210.0\" y=\"215.0\" font-size=\"11\" fill=\"var(--ink-soft)\" font-family=\"inherit\" text-anchor=\"end\">O</text>\n          <text x=\"107.0\" y=\"215.0\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"middle\">-1</text>\n          <text x=\"323.0\" y=\"215.0\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"middle\">1</text>\n          <text x=\"209.0\" y=\"313.0\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"end\">-1</text>\n          <text x=\"209.0\" y=\"97.0\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"end\">1</text>\n          <circle cx=\"215.0\" cy=\"201.0\" r=\"124.0\" fill=\"none\" stroke=\"var(--ink-mute)\" stroke-width=\"1.4\" stroke-dasharray=\"5 4\"/>\n          <line x1=\"215.0\" y1=\"201.0\" x2=\"328.8\" y2=\"151.9\" stroke=\"var(--ink-mute)\" stroke-width=\"1.3\" stroke-dasharray=\"4 4\"/>\n          <text x=\"277.9\" y=\"172.45\" font-size=\"11.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"start\">R = ¹⁸√12</text>\n          <path d=\"M 266.6 178.8 A 56.2 56.2 0 0 0 240.2 150.9\" fill=\"none\" stroke=\"var(--ink-mute)\" stroke-width=\"1.2\"/>\n          <text x=\"271.6\" y=\"151.7\" font-size=\"11\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"middle\">2π/9</text>\n          <circle cx=\"328.8\" cy=\"151.9\" r=\"3.2\" fill=\"var(--ink-soft)\"/>\n          <circle cx=\"270.6\" cy=\"90.2\" r=\"3.2\" fill=\"var(--ink-soft)\"/>\n          <circle cx=\"186.4\" cy=\"80.4\" r=\"3.2\" fill=\"var(--ink-soft)\"/>\n          <circle cx=\"115.5\" cy=\"127.0\" r=\"3.2\" fill=\"var(--ink-soft)\"/>\n          <circle cx=\"91.2\" cy=\"208.2\" r=\"3.2\" fill=\"var(--ink-soft)\"/>\n          <circle cx=\"124.8\" cy=\"286.1\" r=\"3.2\" fill=\"var(--ink-soft)\"/>\n          <circle cx=\"200.6\" cy=\"324.2\" r=\"5\" fill=\"var(--accent)\"/>\n          <circle cx=\"283.1\" cy=\"304.6\" r=\"3.2\" fill=\"var(--ink-soft)\"/>\n          <circle cx=\"333.8\" cy=\"236.6\" r=\"3.2\" fill=\"var(--ink-soft)\"/>\n          <text x=\"335.8\" y=\"153.9\" font-size=\"12\" fill=\"var(--ink)\" font-family=\"inherit\" text-anchor=\"start\">z₀</text>\n          <text x=\"274.6\" y=\"84.2\" font-size=\"12\" fill=\"var(--ink)\" font-family=\"inherit\" text-anchor=\"start\">z₁</text>\n          <text x=\"196.6\" y=\"346.2\" font-size=\"12.5\" fill=\"var(--accent)\" font-family=\"inherit\" text-anchor=\"middle\" font-weight=\"600\">z₆ — наименьшая Im</text>\n        </svg>",
-    "block": "b1"
+    "section": "r1",
+    "type": "r1-1"
   },
   {
     "id": "n201",
@@ -62,7 +250,8 @@ var TASKS_SEM2 = [
       }
     ],
     "answer": "$$z_0=\\sqrt[18]{2}\\left(\\cos\\Bigl(-\\frac{\\pi}{12}\\Bigr)+i\\sin\\Bigl(-\\frac{\\pi}{12}\\Bigr)\\right),\\qquad \\operatorname{Re}z_0\\approx1{,}004.$$",
-    "block": "b1"
+    "section": "r1",
+    "type": "r1-1"
   },
   {
     "id": "n222",
@@ -90,7 +279,8 @@ var TASKS_SEM2 = [
       }
     ],
     "answer": "$$z_3=\\sqrt[6]{3}\\left(\\cos\\frac{11\\pi}{12}+i\\sin\\frac{11\\pi}{12}\\right),\\qquad \\operatorname{Re}z_3\\approx-1{,}16.$$",
-    "block": "b1"
+    "section": "r1",
+    "type": "r1-1"
   },
   {
     "id": "n245",
@@ -118,7 +308,8 @@ var TASKS_SEM2 = [
       }
     ],
     "answer": "$$z_5=\\cos\\frac{10\\pi}{7}+i\\sin\\frac{10\\pi}{7},\\qquad \\operatorname{Im}z_5\\approx-0{,}975.$$",
-    "block": "b1"
+    "section": "r1",
+    "type": "r1-1"
   },
   {
     "id": "r5g",
@@ -146,7 +337,8 @@ var TASKS_SEM2 = [
       }
     ],
     "answer": "$$z_{5}=\\sqrt[9]{3\\sqrt2}\\left(\\cos\\dfrac{13\\pi}{12}+i\\sin\\dfrac{13\\pi}{12}\\right),\\qquad \\text{значение}\\approx-1{,}13.$$",
-    "block": "b1"
+    "section": "r1",
+    "type": "r1-1"
   },
   {
     "id": "r5d",
@@ -174,7 +366,8 @@ var TASKS_SEM2 = [
       }
     ],
     "answer": "$$z_{1}=\\sqrt[5]{4}\\left(\\cos\\dfrac{7\\pi}{20}+i\\sin\\dfrac{7\\pi}{20}\\right),\\qquad \\text{значение}\\approx1{,}18.$$",
-    "block": "b1"
+    "section": "r1",
+    "type": "r1-1"
   },
   {
     "id": "r5e",
@@ -202,7 +395,8 @@ var TASKS_SEM2 = [
       }
     ],
     "answer": "$$z_{0}=\\sqrt[10]{2}\\left(\\cos-\\dfrac{3\\pi}{20}+i\\sin-\\dfrac{3\\pi}{20}\\right),\\qquad \\text{значение}\\approx0{,}96.$$",
-    "block": "b1"
+    "section": "r1",
+    "type": "r1-1"
   },
   {
     "id": "r5zh",
@@ -230,7 +424,8 @@ var TASKS_SEM2 = [
       }
     ],
     "answer": "$$z_{6}=\\sqrt[8]{2}\\left(\\cos\\dfrac{17\\pi}{12}+i\\sin\\dfrac{17\\pi}{12}\\right),\\qquad \\text{значение}\\approx-1{,}05.$$",
-    "block": "b1"
+    "section": "r1",
+    "type": "r1-1"
   },
   {
     "id": "p102",
@@ -255,7 +450,8 @@ var TASKS_SEM2 = [
     ],
     "answer": "Геометрическое место точек — прямая $y=-x+1$.",
     "figure": "<svg class=\"prax-fig\" viewBox=\"0 0 430 430\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Прямая y равно минус x плюс 1 на координатной плоскости\">\n          <line x1=\"62.6\" y1=\"404.0\" x2=\"62.6\" y2=\"26.0\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"123.5\" y1=\"404.0\" x2=\"123.5\" y2=\"26.0\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"245.5\" y1=\"404.0\" x2=\"245.5\" y2=\"26.0\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"306.5\" y1=\"404.0\" x2=\"306.5\" y2=\"26.0\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"367.4\" y1=\"404.0\" x2=\"367.4\" y2=\"26.0\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"26.0\" y1=\"367.4\" x2=\"404.0\" y2=\"367.4\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"26.0\" y1=\"306.5\" x2=\"404.0\" y2=\"306.5\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"26.0\" y1=\"184.5\" x2=\"404.0\" y2=\"184.5\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"26.0\" y1=\"123.5\" x2=\"404.0\" y2=\"123.5\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"26.0\" y1=\"62.6\" x2=\"404.0\" y2=\"62.6\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"26.0\" y1=\"245.5\" x2=\"404.0\" y2=\"245.5\" stroke=\"var(--ink-soft)\" stroke-width=\"1.5\"/>\n          <polygon points=\"404.0,245.5 395.0,241.5 395.0,249.5\" fill=\"var(--ink-soft)\"/>\n          <line x1=\"184.5\" y1=\"404.0\" x2=\"184.5\" y2=\"26.0\" stroke=\"var(--ink-soft)\" stroke-width=\"1.5\"/>\n          <polygon points=\"184.5,26.0 180.5,35.0 188.5,35.0\" fill=\"var(--ink-soft)\"/>\n          <text x=\"400.0\" y=\"261.5\" font-size=\"12.5\" fill=\"var(--ink-soft)\" font-family=\"inherit\" text-anchor=\"end\" font-style=\"italic\">x</text>\n          <text x=\"192.5\" y=\"36.0\" font-size=\"12.5\" fill=\"var(--ink-soft)\" font-family=\"inherit\" text-anchor=\"start\" font-style=\"italic\">y</text>\n          <text x=\"179.5\" y=\"259.5\" font-size=\"11\" fill=\"var(--ink-soft)\" font-family=\"inherit\" text-anchor=\"end\">O</text>\n          <text x=\"62.6\" y=\"259.5\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"middle\">-2</text>\n          <text x=\"123.5\" y=\"259.5\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"middle\">-1</text>\n          <text x=\"245.5\" y=\"259.5\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"middle\">1</text>\n          <text x=\"306.5\" y=\"259.5\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"middle\">2</text>\n          <text x=\"367.4\" y=\"259.5\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"middle\">3</text>\n          <text x=\"178.5\" y=\"371.4\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"end\">-2</text>\n          <text x=\"178.5\" y=\"310.5\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"end\">-1</text>\n          <text x=\"178.5\" y=\"188.5\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"end\">1</text>\n          <text x=\"178.5\" y=\"127.5\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"end\">2</text>\n          <text x=\"178.5\" y=\"66.6\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"end\">3</text>\n          <line x1=\"38.2\" y1=\"38.2\" x2=\"391.8\" y2=\"391.8\" stroke=\"var(--accent)\" stroke-width=\"2.6\"/>\n          <circle cx=\"184.5\" cy=\"184.5\" r=\"3.6\" fill=\"var(--ink)\"/>\n          <circle cx=\"245.5\" cy=\"245.5\" r=\"3.6\" fill=\"var(--ink)\"/>\n          <text x=\"132.5\" y=\"182.5\" font-size=\"12.5\" fill=\"var(--ink)\" font-family=\"inherit\" text-anchor=\"start\">(0;1)</text>\n          <text x=\"253.5\" y=\"263.5\" font-size=\"12.5\" fill=\"var(--ink)\" font-family=\"inherit\" text-anchor=\"start\">(1;0)</text>\n          <text x=\"315.6\" y=\"282.1\" font-size=\"13.5\" fill=\"var(--accent)\" font-family=\"inherit\" text-anchor=\"start\" font-style=\"italic\" font-weight=\"600\">y = −x + 1</text>\n        </svg>",
-    "block": "b2"
+    "section": "r1",
+    "type": "r1-2"
   },
   {
     "id": "n203",
@@ -279,7 +475,8 @@ var TASKS_SEM2 = [
       }
     ],
     "answer": "Прямая $x+3y=4$, то есть $y=\\dfrac{4-x}{3}$.",
-    "block": "b2"
+    "section": "r1",
+    "type": "r1-2"
   },
   {
     "id": "n202",
@@ -303,35 +500,37 @@ var TASKS_SEM2 = [
       }
     ],
     "answer": "$-\\dfrac{i}{2}$.",
-    "block": "b3"
+    "section": "r1",
+    "type": "r1-3"
   },
   {
-    "id": "n246",
+    "id": "v166",
     "topic": "t2",
-    "level": 2,
+    "level": 3,
     "num": 12,
-    "title": "Формулы для $\\cos3\\varphi$ и $\\sin3\\varphi$ через Муавра",
-    "statement": "С помощью формулы Муавра выведите выражения для $\\cos3\\varphi$ и $\\sin3\\varphi$ через $\\cos\\varphi$ и $\\sin\\varphi$.",
+    "title": "Сумма косинусов $\\cos\\frac{2\\pi}{11}+\\dots+\\cos\\frac{10\\pi}{11}$",
+    "statement": "С помощью комплексных чисел покажите, что $$\\cos\\frac{2\\pi}{11}+\\cos\\frac{4\\pi}{11}+\\cos\\frac{6\\pi}{11}+\\cos\\frac{8\\pi}{11}+\\cos\\frac{10\\pi}{11}=-\\frac12.$$",
     "steps": [
       {
-        "q": "Записать одно число двумя способами",
-        "a": "По формуле Муавра $(\\cos\\varphi+i\\sin\\varphi)^3=\\cos3\\varphi+i\\sin3\\varphi$. С другой стороны, левую часть можно раскрыть по формуле куба суммы."
+        "q": "Увидеть корни из единицы",
+        "a": "Углы $\\dfrac{2\\pi k}{11}$ при $k=1,\\dots,5$ — это аргументы корней одиннадцатой степени из единицы. Обозначим $\\varepsilon_k=\\cos\\dfrac{2\\pi k}{11}+i\\sin\\dfrac{2\\pi k}{11}$; все одиннадцать корней — это $\\varepsilon_0=1,\\varepsilon_1,\\dots,\\varepsilon_{10}$."
       },
       {
-        "q": "Раскрыть скобку",
-        "a": "$$(\\cos\\varphi+i\\sin\\varphi)^3=\\cos^3\\varphi+3i\\cos^2\\varphi\\sin\\varphi-3\\cos\\varphi\\sin^2\\varphi-i\\sin^3\\varphi,$$ где учтено $i^2=-1$, $i^3=-i$."
+        "q": "Использовать теорему Виета",
+        "a": "Корни удовлетворяют уравнению $z^{11}-1=0$. Коэффициент при $z^{10}$ нулевой, поэтому сумма всех корней равна нулю: $$1+\\varepsilon_1+\\varepsilon_2+\\dots+\\varepsilon_{10}=0.$$"
       },
       {
-        "q": "Приравнять вещественные и мнимые части",
-        "a": "$$\\cos3\\varphi=\\cos^3\\varphi-3\\cos\\varphi\\sin^2\\varphi,\\qquad \\sin3\\varphi=3\\cos^2\\varphi\\sin\\varphi-\\sin^3\\varphi.$$"
+        "q": "Свернуть сопряжённые пары",
+        "a": "Корни $\\varepsilon_k$ и $\\varepsilon_{11-k}$ сопряжены, поэтому их сумма вещественна: $$\\varepsilon_k+\\varepsilon_{11-k}=2\\cos\\frac{2\\pi k}{11}.$$ Разбивая десять ненулевых корней на пять таких пар, получаем $$1+2\\sum_{k=1}^{5}\\cos\\frac{2\\pi k}{11}=0.$$"
       },
       {
-        "q": "Привести к привычному виду",
-        "a": "Подставляя $\\sin^2\\varphi=1-\\cos^2\\varphi$, получаем $\\cos3\\varphi=4\\cos^3\\varphi-3\\cos\\varphi$; аналогично $\\sin3\\varphi=3\\sin\\varphi-4\\sin^3\\varphi$."
+        "q": "Выразить сумму",
+        "a": "Отсюда $\\displaystyle\\sum_{k=1}^{5}\\cos\\frac{2\\pi k}{11}=-\\frac12$ — это и есть требуемое равенство."
       }
     ],
-    "answer": "$\\cos3\\varphi=4\\cos^3\\varphi-3\\cos\\varphi$, $\\;\\sin3\\varphi=3\\sin\\varphi-4\\sin^3\\varphi$.",
-    "block": "b3"
+    "answer": "Сумма равна $-\\dfrac12$; проверка численно даёт $-0{,}5$.",
+    "section": "r1",
+    "type": "r1-3"
   },
   {
     "id": "n219",
@@ -359,35 +558,37 @@ var TASKS_SEM2 = [
       }
     ],
     "answer": "Проверка при $n=4$: $C_4^0-C_4^2+C_4^4=1-6+1=-4$, и $2^{2}\\cos\\pi=-4$ — совпадает.",
-    "block": "b3"
+    "section": "r1",
+    "type": "r1-3"
   },
   {
-    "id": "v166",
+    "id": "n246",
     "topic": "t2",
-    "level": 3,
+    "level": 2,
     "num": 14,
-    "title": "Сумма косинусов $\\cos\\frac{2\\pi}{11}+\\dots+\\cos\\frac{10\\pi}{11}$",
-    "statement": "С помощью комплексных чисел покажите, что $$\\cos\\frac{2\\pi}{11}+\\cos\\frac{4\\pi}{11}+\\cos\\frac{6\\pi}{11}+\\cos\\frac{8\\pi}{11}+\\cos\\frac{10\\pi}{11}=-\\frac12.$$",
+    "title": "Формулы для $\\cos3\\varphi$ и $\\sin3\\varphi$ через Муавра",
+    "statement": "С помощью формулы Муавра выведите выражения для $\\cos3\\varphi$ и $\\sin3\\varphi$ через $\\cos\\varphi$ и $\\sin\\varphi$.",
     "steps": [
       {
-        "q": "Увидеть корни из единицы",
-        "a": "Углы $\\dfrac{2\\pi k}{11}$ при $k=1,\\dots,5$ — это аргументы корней одиннадцатой степени из единицы. Обозначим $\\varepsilon_k=\\cos\\dfrac{2\\pi k}{11}+i\\sin\\dfrac{2\\pi k}{11}$; все одиннадцать корней — это $\\varepsilon_0=1,\\varepsilon_1,\\dots,\\varepsilon_{10}$."
+        "q": "Записать одно число двумя способами",
+        "a": "По формуле Муавра $(\\cos\\varphi+i\\sin\\varphi)^3=\\cos3\\varphi+i\\sin3\\varphi$. С другой стороны, левую часть можно раскрыть по формуле куба суммы."
       },
       {
-        "q": "Использовать теорему Виета",
-        "a": "Корни удовлетворяют уравнению $z^{11}-1=0$. Коэффициент при $z^{10}$ нулевой, поэтому сумма всех корней равна нулю: $$1+\\varepsilon_1+\\varepsilon_2+\\dots+\\varepsilon_{10}=0.$$"
+        "q": "Раскрыть скобку",
+        "a": "$$(\\cos\\varphi+i\\sin\\varphi)^3=\\cos^3\\varphi+3i\\cos^2\\varphi\\sin\\varphi-3\\cos\\varphi\\sin^2\\varphi-i\\sin^3\\varphi,$$ где учтено $i^2=-1$, $i^3=-i$."
       },
       {
-        "q": "Свернуть сопряжённые пары",
-        "a": "Корни $\\varepsilon_k$ и $\\varepsilon_{11-k}$ сопряжены, поэтому их сумма вещественна: $$\\varepsilon_k+\\varepsilon_{11-k}=2\\cos\\frac{2\\pi k}{11}.$$ Разбивая десять ненулевых корней на пять таких пар, получаем $$1+2\\sum_{k=1}^{5}\\cos\\frac{2\\pi k}{11}=0.$$"
+        "q": "Приравнять вещественные и мнимые части",
+        "a": "$$\\cos3\\varphi=\\cos^3\\varphi-3\\cos\\varphi\\sin^2\\varphi,\\qquad \\sin3\\varphi=3\\cos^2\\varphi\\sin\\varphi-\\sin^3\\varphi.$$"
       },
       {
-        "q": "Выразить сумму",
-        "a": "Отсюда $\\displaystyle\\sum_{k=1}^{5}\\cos\\frac{2\\pi k}{11}=-\\frac12$ — это и есть требуемое равенство."
+        "q": "Привести к привычному виду",
+        "a": "Подставляя $\\sin^2\\varphi=1-\\cos^2\\varphi$, получаем $\\cos3\\varphi=4\\cos^3\\varphi-3\\cos\\varphi$; аналогично $\\sin3\\varphi=3\\sin\\varphi-4\\sin^3\\varphi$."
       }
     ],
-    "answer": "Сумма равна $-\\dfrac12$; проверка численно даёт $-0{,}5$.",
-    "block": "b3"
+    "answer": "$\\cos3\\varphi=4\\cos^3\\varphi-3\\cos\\varphi$, $\\;\\sin3\\varphi=3\\sin\\varphi-4\\sin^3\\varphi$.",
+    "section": "r1",
+    "type": "r1-3"
   },
   {
     "id": "p103",
@@ -411,7 +612,8 @@ var TASKS_SEM2 = [
       }
     ],
     "answer": "$$R(x)=x+2.$$",
-    "block": "b4"
+    "section": "r2",
+    "type": "r2-1"
   },
   {
     "id": "n204",
@@ -435,7 +637,8 @@ var TASKS_SEM2 = [
       }
     ],
     "answer": "$R_3(x)=x+1$.",
-    "block": "b4"
+    "section": "r2",
+    "type": "r2-1"
   },
   {
     "id": "p104",
@@ -459,7 +662,8 @@ var TASKS_SEM2 = [
       }
     ],
     "answer": "$a=1$, $b=2$; кратность корня $x_0=1$ равна $2$.",
-    "block": "b5"
+    "section": "r2",
+    "type": "r2-2"
   },
   {
     "id": "n205",
@@ -487,7 +691,8 @@ var TASKS_SEM2 = [
       }
     ],
     "answer": "$a=1$, $b=2$.",
-    "block": "b5"
+    "section": "r2",
+    "type": "r2-2"
   },
   {
     "id": "n226",
@@ -515,69 +720,14 @@ var TASKS_SEM2 = [
       }
     ],
     "answer": "$$x^6+1=(x^2+1)(x^2-\\sqrt3\\,x+1)(x^2+\\sqrt3\\,x+1).$$",
-    "block": "b6"
-  },
-  {
-    "id": "n206",
-    "topic": "t3",
-    "level": 3,
-    "num": 20,
-    "title": "НОД алгоритмом Евклида и его линейное представление",
-    "statement": "Для $f(x)=x^3+2x^2-x-2$ и $g(x)=x^3-3x^2-x+3$ найдите наибольший общий делитель и подберите многочлены $M(x)$, $N(x)$, для которых $f(x)M(x)+g(x)N(x)=\\varphi(x)$, где $\\varphi$ — этот НОД.",
-    "steps": [
-      {
-        "q": "Первый шаг алгоритма Евклида",
-        "a": "Степени равны, поэтому делим $f$ на $g$: частное $1$, остаток $$r_1(x)=f(x)-g(x)=5x^2-5=5(x^2-1).$$"
-      },
-      {
-        "q": "Второй шаг",
-        "a": "Делим $g$ на $x^2-1$ (числовой множитель $5$ на НОД не влияет): $$x^3-3x^2-x+3=(x^2-1)(x-3),$$ остаток нулевой. Значит алгоритм закончен."
-      },
-      {
-        "q": "Выписать НОД",
-        "a": "$\\varphi(x)=x^2-1$ — последний ненулевой остаток, нормированный на старший коэффициент $1$."
-      },
-      {
-        "q": "Собрать линейное представление",
-        "a": "Из первого шага $x^2-1=\\dfrac{1}{5}\\bigl(f(x)-g(x)\\bigr)$, то есть $M(x)=\\dfrac15$, $N(x)=-\\dfrac15$."
-      }
-    ],
-    "answer": "$\\varphi(x)=x^2-1$, $\\;M(x)=\\tfrac15$, $\\;N(x)=-\\tfrac15$.",
-    "block": "b7"
-  },
-  {
-    "id": "n216",
-    "topic": "t3",
-    "level": 2,
-    "num": 21,
-    "title": "НОД многочленов алгоритмом Евклида (два шага)",
-    "statement": "Найдите наибольший общий делитель многочленов $$f(x)=x^4-x^3-x^2-x-2,\\qquad g(x)=x^3-3x^2+x-3.$$",
-    "steps": [
-      {
-        "q": "Первое деление",
-        "a": "Делим $f$ на $g$ уголком: частное $x+2$, остаток $$r_1(x)=4x^2+4=4(x^2+1).$$"
-      },
-      {
-        "q": "Второе деление",
-        "a": "Числовой множитель $4$ на НОД не влияет, поэтому делим $g$ на $x^2+1$: $$x^3-3x^2+x-3=(x^2+1)(x-3),$$ остаток нулевой — алгоритм закончен."
-      },
-      {
-        "q": "Выписать ответ",
-        "a": "Последний ненулевой остаток, нормированный на старший коэффициент $1$, и есть НОД."
-      },
-      {
-        "q": "Проверить",
-        "a": "$f(x)=(x-2)(x+1)(x^2+1)$, $\\;g(x)=(x-3)(x^2+1)$. Общий множитель ровно один — $x^2+1$. Заметьте: над $\\mathbb{R}$ он неприводим, а над $\\mathbb{C}$ распался бы на $(x-i)(x+i)$."
-      }
-    ],
-    "answer": "$\\varphi(x)=x^2+1$.",
-    "block": "b7"
+    "section": "r2",
+    "type": "r2-3"
   },
   {
     "id": "v167",
     "topic": "t3",
     "level": 2,
-    "num": 22,
+    "num": 20,
     "title": "НОД и его линейное представление",
     "statement": "Известно, что $f(x)=x^5+3x^4+x^3+x^2+3x+1$, $\\;g(x)=x^4+2x^3+x+2$. Пользуясь алгоритмом Евклида, подберите многочлены $M(x)$ и $N(x)$ так, чтобы $f(x)M(x)+g(x)N(x)=\\varphi(x)$, где $\\varphi(x)$ — наибольший общий делитель $f$ и $g$.",
     "steps": [
@@ -603,7 +753,66 @@ var TASKS_SEM2 = [
       }
     ],
     "answer": "$\\varphi(x)=x^3+1$, $\\;M(x)=-1$, $\\;N(x)=x+1$.",
-    "block": "b7"
+    "section": "r2",
+    "type": "r2-4"
+  },
+  {
+    "id": "n206",
+    "topic": "t3",
+    "level": 3,
+    "num": 21,
+    "title": "НОД алгоритмом Евклида и его линейное представление",
+    "statement": "Для $f(x)=x^3+2x^2-x-2$ и $g(x)=x^3-3x^2-x+3$ найдите наибольший общий делитель и подберите многочлены $M(x)$, $N(x)$, для которых $f(x)M(x)+g(x)N(x)=\\varphi(x)$, где $\\varphi$ — этот НОД.",
+    "steps": [
+      {
+        "q": "Первый шаг алгоритма Евклида",
+        "a": "Степени равны, поэтому делим $f$ на $g$: частное $1$, остаток $$r_1(x)=f(x)-g(x)=5x^2-5=5(x^2-1).$$"
+      },
+      {
+        "q": "Второй шаг",
+        "a": "Делим $g$ на $x^2-1$ (числовой множитель $5$ на НОД не влияет): $$x^3-3x^2-x+3=(x^2-1)(x-3),$$ остаток нулевой. Значит алгоритм закончен."
+      },
+      {
+        "q": "Выписать НОД",
+        "a": "$\\varphi(x)=x^2-1$ — последний ненулевой остаток, нормированный на старший коэффициент $1$."
+      },
+      {
+        "q": "Собрать линейное представление",
+        "a": "Из первого шага $x^2-1=\\dfrac{1}{5}\\bigl(f(x)-g(x)\\bigr)$, то есть $M(x)=\\dfrac15$, $N(x)=-\\dfrac15$."
+      }
+    ],
+    "answer": "$\\varphi(x)=x^2-1$, $\\;M(x)=\\tfrac15$, $\\;N(x)=-\\tfrac15$.",
+    "section": "r2",
+    "type": "r2-4"
+  },
+  {
+    "id": "n216",
+    "topic": "t3",
+    "level": 2,
+    "num": 22,
+    "title": "НОД многочленов алгоритмом Евклида (два шага)",
+    "statement": "Найдите наибольший общий делитель многочленов $$f(x)=x^4-x^3-x^2-x-2,\\qquad g(x)=x^3-3x^2+x-3.$$",
+    "steps": [
+      {
+        "q": "Первое деление",
+        "a": "Делим $f$ на $g$ уголком: частное $x+2$, остаток $$r_1(x)=4x^2+4=4(x^2+1).$$"
+      },
+      {
+        "q": "Второе деление",
+        "a": "Числовой множитель $4$ на НОД не влияет, поэтому делим $g$ на $x^2+1$: $$x^3-3x^2+x-3=(x^2+1)(x-3),$$ остаток нулевой — алгоритм закончен."
+      },
+      {
+        "q": "Выписать ответ",
+        "a": "Последний ненулевой остаток, нормированный на старший коэффициент $1$, и есть НОД."
+      },
+      {
+        "q": "Проверить",
+        "a": "$f(x)=(x-2)(x+1)(x^2+1)$, $\\;g(x)=(x-3)(x^2+1)$. Общий множитель ровно один — $x^2+1$. Заметьте: над $\\mathbb{R}$ он неприводим, а над $\\mathbb{C}$ распался бы на $(x-i)(x+i)$."
+      }
+    ],
+    "answer": "$\\varphi(x)=x^2+1$.",
+    "section": "r2",
+    "type": "r2-4"
   },
   {
     "id": "n225",
@@ -635,7 +844,8 @@ var TASKS_SEM2 = [
       }
     ],
     "answer": "$$\\frac{3}{x-1}-\\frac{2x}{x^2+1}.$$",
-    "block": "b7"
+    "section": "r2",
+    "type": "r2-5"
   },
   {
     "id": "n207",
@@ -667,7 +877,8 @@ var TASKS_SEM2 = [
       }
     ],
     "answer": "$$C=\\begin{pmatrix}1&1&-1\\\\-2&0&1\\\\1&0&0\\end{pmatrix},\\qquad J=\\begin{pmatrix}3&1&0\\\\0&3&0\\\\0&0&3\\end{pmatrix}.$$",
-    "block": "b8"
+    "section": "r3",
+    "type": "r3-1"
   },
   {
     "id": "a205",
@@ -695,13 +906,72 @@ var TASKS_SEM2 = [
       }
     ],
     "answer": "$J=J_4(0)$; жорданов базис $\\;1,\\ x,\\ \\dfrac{x^2}{2},\\ \\dfrac{x^3}{6}$.",
-    "block": "b8"
+    "section": "r3",
+    "type": "r3-1"
+  },
+  {
+    "id": "n208",
+    "topic": "t4",
+    "level": 2,
+    "num": 26,
+    "title": "Собственные значения и корневые подпространства",
+    "statement": "Найдите собственные значения и корневые подпространства линейного оператора, заданного матрицей $$A=\\begin{pmatrix}3&-1&0\\\\1&1&0\\\\0&0&5\\end{pmatrix}.$$",
+    "steps": [
+      {
+        "q": "Характеристический многочлен",
+        "a": "Матрица клеточно-диагональна, поэтому $\\chi_A(t)=\\bigl((t-3)(t-1)+1\\bigr)(t-5)=(t-2)^2(t-5)$. Собственные значения: $\\lambda_1=2$ кратности $2$ и $\\lambda_2=5$ кратности $1$."
+      },
+      {
+        "q": "Сравнить кратности для $\\lambda_1=2$",
+        "a": "$\\operatorname{rg}(A-2E)=2$, значит геометрическая кратность равна $3-2=1$, а алгебраическая — $2$. Они не совпадают, поэтому оператор не диагонализируем и корневое подпространство шире собственного."
+      },
+      {
+        "q": "Найти корневое подпространство $K_2$",
+        "a": "$\\operatorname{Ker}(A-2E)=\\langle(1;1;0)^T\\rangle$, а $\\operatorname{Ker}(A-2E)^2=\\langle(1;0;0)^T,\\,(0;1;0)^T\\rangle$ — размерность выросла до $2$ и совпала с алгебраической кратностью, дальше расти некуда."
+      },
+      {
+        "q": "Найти $K_5$",
+        "a": "Для простого собственного значения корневое подпространство совпадает с собственным: $K_5=\\operatorname{Ker}(A-5E)=\\langle(0;0;1)^T\\rangle$."
+      }
+    ],
+    "answer": "$K_2=\\langle(1;0;0)^T,(0;1;0)^T\\rangle$ размерности $2$, $\\;K_5=\\langle(0;0;1)^T\\rangle$ размерности $1$; $\\;V=K_2\\oplus K_5$.",
+    "section": "r3",
+    "type": "r3-2"
+  },
+  {
+    "id": "n215",
+    "topic": "t4",
+    "level": 2,
+    "num": 27,
+    "title": "Минимальный многочлен матрицы",
+    "statement": "Найдите минимальный многочлен матрицы $$A=\\begin{pmatrix}4&0&1\\\\0&3&0\\\\1&0&4\\end{pmatrix}.$$",
+    "steps": [
+      {
+        "q": "Найти характеристический многочлен",
+        "a": "Раскрывая определитель $\\det(A-tE)$ по второй строке, получаем $$\\chi_A(t)=(3-t)\\bigl((4-t)^2-1\\bigr)=(3-t)(3-t)(5-t),$$ то есть с точностью до знака $\\chi_A(t)=(t-3)^2(t-5)$."
+      },
+      {
+        "q": "Ограничить перебор",
+        "a": "Минимальный многочлен делит характеристический и содержит все его различные корни. Значит кандидаты только два: $$(t-3)(t-5)\\qquad\\text{и}\\qquad (t-3)^2(t-5).$$ Начинаем с меньшего по степени."
+      },
+      {
+        "q": "Проверить кандидата",
+        "a": "$$A-3E=\\begin{pmatrix}1&0&1\\\\0&0&0\\\\1&0&1\\end{pmatrix},\\qquad A-5E=\\begin{pmatrix}-1&0&1\\\\0&-2&0\\\\1&0&-1\\end{pmatrix}.$$ Их произведение — нулевая матрица, значит многочлен $(t-3)(t-5)$ аннулирующий."
+      },
+      {
+        "q": "Сделать вывод",
+        "a": "Меньшей степени быть не может: аннулирующий многочлен обязан делиться на $(t-3)$ и на $(t-5)$. Заодно отсюда следует, что оператор диагонализируем — минимальный многочлен не имеет кратных корней."
+      }
+    ],
+    "answer": "$\\mu_A(t)=(t-3)(t-5)=t^2-8t+15$.",
+    "section": "r3",
+    "type": "r3-3"
   },
   {
     "id": "a201",
     "topic": "t4",
     "level": 3,
-    "num": 26,
+    "num": 28,
     "title": "Матрица самосопряжённого оператора по одному собственному вектору",
     "statement": "Укажите пример матрицы $A_e$ такого самосопряжённого оператора $\\mathcal{A}\\ne k\\cdot\\mathcal{E}$ в пространстве $E^2$, что $\\mathcal{A}f_1=3f_1$, где $f_1=(3;2)$.",
     "steps": [
@@ -727,13 +997,14 @@ var TASKS_SEM2 = [
       }
     ],
     "answer": "$$A_e=\\frac{1}{13}\\begin{pmatrix}27&18\\\\18&12\\end{pmatrix}.$$",
-    "block": "b9"
+    "section": "r3",
+    "type": "r3-4"
   },
   {
     "id": "a202",
     "topic": "t4",
     "level": 3,
-    "num": 27,
+    "num": 29,
     "title": "Самосопряжённый оператор в $E^3$ по двум собственным векторам",
     "statement": "Укажите пример матрицы $A_e$ невырожденного самосопряжённого оператора $\\mathcal{A}$ в пространстве $E^3$, для которого $$\\mathcal{A}f_1=2f_1,\\qquad \\mathcal{A}f_2=-3f_2,\\qquad f_1=(1;0;-1),\\ f_2=(1;-2;1).$$",
     "steps": [
@@ -759,13 +1030,14 @@ var TASKS_SEM2 = [
       }
     ],
     "answer": "$$A_e=\\frac16\\begin{pmatrix}5&8&-7\\\\8&-10&8\\\\-7&8&5\\end{pmatrix}.$$",
-    "block": "b9"
+    "section": "r3",
+    "type": "r3-4"
   },
   {
     "id": "a203",
     "topic": "t4",
     "level": 2,
-    "num": 28,
+    "num": 30,
     "title": "Самосопряжённый оператор по двум собственным парам",
     "statement": "Приведите пример матрицы $A_e$ в стандартном базисе такого невырожденного самосопряжённого оператора $\\mathcal{A}\\ne\\alpha\\mathcal{E}$ в $E^3$, для которого $$\\lambda_1=2,\\ f_1=(2;1;-1),\\qquad \\lambda_2=1,\\ f_2=(1;-1;1).$$",
     "steps": [
@@ -787,13 +1059,14 @@ var TASKS_SEM2 = [
       }
     ],
     "answer": "$$A_e=\\frac16\\begin{pmatrix}10&2&-2\\\\2&13&5\\\\-2&5&13\\end{pmatrix}.$$ Матрица симметрична, определитель отличен от нуля.",
-    "block": "b9"
+    "section": "r3",
+    "type": "r3-4"
   },
   {
     "id": "a204",
     "topic": "t4",
     "level": 1,
-    "num": 29,
+    "num": 31,
     "title": "Существует ли самосопряжённый оператор с данными собственными векторами",
     "statement": "В евклидовом пространстве в базисе $e$ заданы векторы $f_1$ и $f_2$. Существует ли невырожденный самосопряжённый оператор $\\mathcal{A}\\ne\\alpha\\mathcal{E}$, для которого они собственные? Если существует — укажите пример матрицы. $$\\text{а) } f_1=(1;1),\\ f_2=(1;-1);\\qquad \\text{б) } f_1=(1;2),\\ f_2=(0;3).$$",
     "steps": [
@@ -811,41 +1084,14 @@ var TASKS_SEM2 = [
       }
     ],
     "answer": "а) существует, например $A_e=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$; б) не существует.",
-    "block": "b9"
-  },
-  {
-    "id": "n208",
-    "topic": "t4",
-    "level": 2,
-    "num": 30,
-    "title": "Собственные значения и корневые подпространства",
-    "statement": "Найдите собственные значения и корневые подпространства линейного оператора, заданного матрицей $$A=\\begin{pmatrix}3&-1&0\\\\1&1&0\\\\0&0&5\\end{pmatrix}.$$",
-    "steps": [
-      {
-        "q": "Характеристический многочлен",
-        "a": "Матрица клеточно-диагональна, поэтому $\\chi_A(t)=\\bigl((t-3)(t-1)+1\\bigr)(t-5)=(t-2)^2(t-5)$. Собственные значения: $\\lambda_1=2$ кратности $2$ и $\\lambda_2=5$ кратности $1$."
-      },
-      {
-        "q": "Сравнить кратности для $\\lambda_1=2$",
-        "a": "$\\operatorname{rg}(A-2E)=2$, значит геометрическая кратность равна $3-2=1$, а алгебраическая — $2$. Они не совпадают, поэтому оператор не диагонализируем и корневое подпространство шире собственного."
-      },
-      {
-        "q": "Найти корневое подпространство $K_2$",
-        "a": "$\\operatorname{Ker}(A-2E)=\\langle(1;1;0)^T\\rangle$, а $\\operatorname{Ker}(A-2E)^2=\\langle(1;0;0)^T,\\,(0;1;0)^T\\rangle$ — размерность выросла до $2$ и совпала с алгебраической кратностью, дальше расти некуда."
-      },
-      {
-        "q": "Найти $K_5$",
-        "a": "Для простого собственного значения корневое подпространство совпадает с собственным: $K_5=\\operatorname{Ker}(A-5E)=\\langle(0;0;1)^T\\rangle$."
-      }
-    ],
-    "answer": "$K_2=\\langle(1;0;0)^T,(0;1;0)^T\\rangle$ размерности $2$, $\\;K_5=\\langle(0;0;1)^T\\rangle$ размерности $1$; $\\;V=K_2\\oplus K_5$.",
-    "block": "b10"
+    "section": "r3",
+    "type": "r3-4"
   },
   {
     "id": "v168",
     "topic": "t4",
     "level": 3,
-    "num": 31,
+    "num": 32,
     "title": "Приведение квадратичной формы к главным осям",
     "statement": "Используя спектральную теорему для симметрического линейного оператора, найдите ортогональное преобразование, приводящее квадратичную форму $$q(\\mathbf{x})=6x^2+5y^2+7z^2-4xy+4xz$$ к главным осям.",
     "steps": [
@@ -871,35 +1117,8 @@ var TASKS_SEM2 = [
       }
     ],
     "answer": "$q=3x'^2+6y'^2+9z'^2$ при ортогональной замене с матрицей $U=\\tfrac13\\begin{pmatrix}-2&-1&2\\\\-2&2&-1\\\\1&2&2\\end{pmatrix}$.",
-    "block": "b11"
-  },
-  {
-    "id": "n215",
-    "topic": "t4",
-    "level": 2,
-    "num": 32,
-    "title": "Минимальный многочлен матрицы",
-    "statement": "Найдите минимальный многочлен матрицы $$A=\\begin{pmatrix}4&0&1\\\\0&3&0\\\\1&0&4\\end{pmatrix}.$$",
-    "steps": [
-      {
-        "q": "Найти характеристический многочлен",
-        "a": "Раскрывая определитель $\\det(A-tE)$ по второй строке, получаем $$\\chi_A(t)=(3-t)\\bigl((4-t)^2-1\\bigr)=(3-t)(3-t)(5-t),$$ то есть с точностью до знака $\\chi_A(t)=(t-3)^2(t-5)$."
-      },
-      {
-        "q": "Ограничить перебор",
-        "a": "Минимальный многочлен делит характеристический и содержит все его различные корни. Значит кандидаты только два: $$(t-3)(t-5)\\qquad\\text{и}\\qquad (t-3)^2(t-5).$$ Начинаем с меньшего по степени."
-      },
-      {
-        "q": "Проверить кандидата",
-        "a": "$$A-3E=\\begin{pmatrix}1&0&1\\\\0&0&0\\\\1&0&1\\end{pmatrix},\\qquad A-5E=\\begin{pmatrix}-1&0&1\\\\0&-2&0\\\\1&0&-1\\end{pmatrix}.$$ Их произведение — нулевая матрица, значит многочлен $(t-3)(t-5)$ аннулирующий."
-      },
-      {
-        "q": "Сделать вывод",
-        "a": "Меньшей степени быть не может: аннулирующий многочлен обязан делиться на $(t-3)$ и на $(t-5)$. Заодно отсюда следует, что оператор диагонализируем — минимальный многочлен не имеет кратных корней."
-      }
-    ],
-    "answer": "$\\mu_A(t)=(t-3)(t-5)=t^2-8t+15$.",
-    "block": "b12"
+    "section": "r3",
+    "type": "r3-5"
   },
   {
     "id": "p112",
@@ -924,7 +1143,8 @@ var TASKS_SEM2 = [
     ],
     "answer": "$$L\\colon\\ \\frac{x+1}{1}=\\frac{y+1}{1}=\\frac{z}{1}.$$",
     "figure": "<svg class=\"prax-fig\" viewBox=\"0 0 460 226\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Две плоскости пересекаются по прямой L с направляющим вектором a(1;1;1) и точкой c(−1;−1;0)\">\n          <polygon points=\"44,64 236,36 320,168 128,196\" fill=\"var(--bg-elev)\" fill-opacity=\"0.5\" stroke=\"var(--ink-soft)\" stroke-width=\"1.5\"/>\n          <polygon points=\"150,38 428,78 344,206 66,166\" fill=\"var(--bg-elev)\" fill-opacity=\"0.5\" stroke=\"var(--ink-soft)\" stroke-width=\"1.5\"/>\n          <text x=\"58\" y=\"60\" font-size=\"12\" fill=\"var(--ink-soft)\" font-family=\"inherit\" text-anchor=\"start\" font-style=\"italic\">π₁: 2x−5y+3z=3</text>\n          <text x=\"316\" y=\"66\" font-size=\"12\" fill=\"var(--ink-soft)\" font-family=\"inherit\" text-anchor=\"start\" font-style=\"italic\">π₂: −3x+5y−2z=−2</text>\n          <line x1=\"196\" y1=\"44\" x2=\"266\" y2=\"192\" stroke=\"var(--accent)\" stroke-width=\"2.8\"/>\n          <polygon points=\"266,192 254,186 262,180\" fill=\"var(--accent)\"/>\n          <text x=\"272\" y=\"196\" font-size=\"14.5\" fill=\"var(--accent)\" font-family=\"inherit\" text-anchor=\"start\" font-style=\"italic\" font-weight=\"600\">L</text>\n          <line x1=\"214\" y1=\"82\" x2=\"238\" y2=\"133\" stroke=\"var(--ink)\" stroke-width=\"2.2\"/>\n          <polygon points=\"238,133 227,128 234,122\" fill=\"var(--ink)\"/>\n          <text x=\"244\" y=\"108\" font-size=\"12.5\" fill=\"var(--ink)\" font-family=\"inherit\" text-anchor=\"start\" font-style=\"italic\" font-weight=\"600\">a(1;1;1)</text>\n          <circle cx=\"228\" cy=\"112\" r=\"4\" fill=\"var(--ink)\"/>\n          <text x=\"148\" y=\"122\" font-size=\"12\" fill=\"var(--ink)\" font-family=\"inherit\" text-anchor=\"start\">c(−1;−1;0)</text>\n        </svg>",
-    "block": "b13"
+    "section": "r4",
+    "type": "r4-1"
   },
   {
     "id": "n252",
@@ -953,7 +1173,8 @@ var TASKS_SEM2 = [
     ],
     "answer": "$\\bar a=(-1;4;3)$; $\\;\\dfrac{x-7/3}{-1}=\\dfrac{y+1/3}{4}=\\dfrac{z}{3}$.",
     "figure": "<svg class=\"prax-fig\" viewBox=\"0 0 460 330\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Прямая как пересечение двух плоскостей; направляющий вектор — векторное произведение нормалей\"><path d=\"M82,192 L318,252 L378,168 L142,108 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.45\" stroke=\"var(--border)\" stroke-width=\"1.4\"/><path d=\"M90,275 L310,169 L370,85 L150,191 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.45\" stroke=\"var(--border)\" stroke-width=\"1.4\"/><line x1=\"190.0\" y1=\"214.0\" x2=\"272.0\" y2=\"146.0\" stroke=\"var(--accent)\" stroke-width=\"2.4\"/><circle cx=\"214.0\" cy=\"194.0\" r=\"5\" fill=\"var(--ruby)\"/><text x=\"200.0\" y=\"186.0\" fill=\"var(--ruby)\" font-size=\"12.5\" text-anchor=\"middle\" font-style=\"italic\">M</text><text x=\"210.0\" y=\"190.0\" fill=\"var(--ruby)\" font-size=\"9.5\" text-anchor=\"middle\">₀</text><line x1=\"214.0\" y1=\"194.0\" x2=\"268.0\" y2=\"150.0\" stroke=\"var(--accent)\" stroke-width=\"1.6\"/><line x1=\"268.0\" y1=\"150.0\" x2=\"263.6\" y2=\"157.9\" stroke=\"var(--accent)\" stroke-width=\"1.6\"/><line x1=\"268.0\" y1=\"150.0\" x2=\"259.4\" y2=\"152.7\" stroke=\"var(--accent)\" stroke-width=\"1.6\"/><text x=\"284.0\" y=\"142.0\" fill=\"var(--accent)\" font-size=\"12\" text-anchor=\"start\">a = n₁ × n₂</text><text x=\"230.0\" y=\"300.0\" fill=\"var(--ink-soft)\" font-size=\"11.5\" text-anchor=\"middle\">точка на прямой + направляющий вектор → канонический вид</text></svg>",
-    "block": "b13"
+    "section": "r4",
+    "type": "r4-1"
   },
   {
     "id": "p111",
@@ -982,7 +1203,8 @@ var TASKS_SEM2 = [
     ],
     "answer": "$5x+y-3z=11$.",
     "figure": "<svg class=\"prax-fig\" viewBox=\"0 0 460 232\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Плоскость через точку M0 и прямую L: нормаль n перпендикулярна направляющему вектору a и вектору M0 минус c\">\n          <polygon points=\"58,176 224,104 424,140 258,216\" fill=\"var(--bg-elev)\" fill-opacity=\"0.55\" stroke=\"var(--ink-soft)\" stroke-width=\"1.5\"/>\n          <text x=\"70\" y=\"208\" font-size=\"15\" fill=\"var(--ink-soft)\" font-family=\"inherit\" text-anchor=\"start\" font-style=\"italic\" font-weight=\"600\">L, M₀</text>\n          <line x1=\"96\" y1=\"172\" x2=\"392\" y2=\"126\" stroke=\"var(--accent)\" stroke-width=\"2.5\"/>\n          <polygon points=\"392,126 380,123 382,133\" fill=\"var(--accent)\"/>\n          <text x=\"398\" y=\"124\" font-size=\"14\" fill=\"var(--accent)\" font-family=\"inherit\" text-anchor=\"start\" font-style=\"italic\" font-weight=\"600\">L</text>\n          <circle cx=\"168\" cy=\"161\" r=\"3.8\" fill=\"var(--ink)\"/>\n          <text x=\"120\" y=\"150\" font-size=\"12\" fill=\"var(--ink)\" font-family=\"inherit\" text-anchor=\"start\">(1;0;−2)</text>\n          <line x1=\"238\" y1=\"150\" x2=\"310\" y2=\"139\" stroke=\"var(--ink)\" stroke-width=\"2\"/>\n          <polygon points=\"310,139 298,136 300,146\" fill=\"var(--ink)\"/>\n          <text x=\"262\" y=\"136\" font-size=\"12\" fill=\"var(--ink)\" font-family=\"inherit\" text-anchor=\"start\" font-style=\"italic\">a(1;−2;1)</text>\n          <circle cx=\"316\" cy=\"196\" r=\"3.8\" fill=\"var(--ink)\"/>\n          <text x=\"326\" y=\"202\" font-size=\"12\" fill=\"var(--ink)\" font-family=\"inherit\" text-anchor=\"start\">M₀(−1;1;−5)</text>\n          <line x1=\"168\" y1=\"161\" x2=\"316\" y2=\"196\" stroke=\"var(--ink-mute)\" stroke-width=\"1.5\" stroke-dasharray=\"5 4\"/>\n          <text x=\"216\" y=\"190\" font-size=\"11.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"start\" font-style=\"italic\">M₀ − c</text>\n          <line x1=\"252\" y1=\"158\" x2=\"252\" y2=\"52\" stroke=\"var(--ink)\" stroke-width=\"2\"/>\n          <polygon points=\"252,52 247,64 257,64\" fill=\"var(--ink)\"/>\n          <circle cx=\"252\" cy=\"158\" r=\"2.6\" fill=\"var(--ink)\"/>\n          <text x=\"260\" y=\"62\" font-size=\"12.5\" fill=\"var(--ink)\" font-family=\"inherit\" text-anchor=\"start\" font-style=\"italic\" font-weight=\"600\">n(5;1;−3)</text>\n        </svg>",
-    "block": "b14"
+    "section": "r4",
+    "type": "r4-2"
   },
   {
     "id": "p10a",
@@ -1011,7 +1233,8 @@ var TASKS_SEM2 = [
     ],
     "answer": "$-5x+2y-3z=-7$, или $5x-2y+3z=7$.",
     "figure": "<svg class=\"prax-fig\" viewBox=\"0 0 460 232\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Плоскость через точку M0 и прямую L: нормаль n перпендикулярна направляющему вектору a и вектору M0 минус c\">\n          <polygon points=\"58,176 224,104 424,140 258,216\" fill=\"var(--bg-elev)\" fill-opacity=\"0.55\" stroke=\"var(--ink-soft)\" stroke-width=\"1.5\"/>\n          <text x=\"70\" y=\"208\" font-size=\"15\" fill=\"var(--ink-soft)\" font-family=\"inherit\" text-anchor=\"start\" font-style=\"italic\" font-weight=\"600\">L, M₀</text>\n          <line x1=\"96\" y1=\"172\" x2=\"392\" y2=\"126\" stroke=\"var(--accent)\" stroke-width=\"2.5\"/>\n          <polygon points=\"392,126 380,123 382,133\" fill=\"var(--accent)\"/>\n          <text x=\"398\" y=\"124\" font-size=\"14\" fill=\"var(--accent)\" font-family=\"inherit\" text-anchor=\"start\" font-style=\"italic\" font-weight=\"600\">L</text>\n          <circle cx=\"168\" cy=\"161\" r=\"3.8\" fill=\"var(--ink)\"/>\n          <text x=\"120\" y=\"150\" font-size=\"12\" fill=\"var(--ink)\" font-family=\"inherit\" text-anchor=\"start\">(1;0;−2)</text>\n          <line x1=\"238\" y1=\"150\" x2=\"310\" y2=\"139\" stroke=\"var(--ink)\" stroke-width=\"2\"/>\n          <polygon points=\"310,139 298,136 300,146\" fill=\"var(--ink)\"/>\n          <text x=\"262\" y=\"136\" font-size=\"12\" fill=\"var(--ink)\" font-family=\"inherit\" text-anchor=\"start\" font-style=\"italic\">a(1;−2;1)</text>\n          <circle cx=\"316\" cy=\"196\" r=\"3.8\" fill=\"var(--ink)\"/>\n          <text x=\"326\" y=\"202\" font-size=\"12\" fill=\"var(--ink)\" font-family=\"inherit\" text-anchor=\"start\">M₀(−1;1;−5)</text>\n          <line x1=\"168\" y1=\"161\" x2=\"316\" y2=\"196\" stroke=\"var(--ink-mute)\" stroke-width=\"1.5\" stroke-dasharray=\"5 4\"/>\n          <text x=\"216\" y=\"190\" font-size=\"11.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"start\" font-style=\"italic\">M₀ − c</text>\n          <line x1=\"252\" y1=\"158\" x2=\"252\" y2=\"52\" stroke=\"var(--ink)\" stroke-width=\"2\"/>\n          <polygon points=\"252,52 247,64 257,64\" fill=\"var(--ink)\"/>\n          <circle cx=\"252\" cy=\"158\" r=\"2.6\" fill=\"var(--ink)\"/>\n          <text x=\"260\" y=\"62\" font-size=\"12.5\" fill=\"var(--ink)\" font-family=\"inherit\" text-anchor=\"start\" font-style=\"italic\" font-weight=\"600\">n(5;1;−3)</text>\n        </svg>",
-    "block": "b14"
+    "section": "r4",
+    "type": "r4-2"
   },
   {
     "id": "p10b",
@@ -1044,13 +1267,44 @@ var TASKS_SEM2 = [
     ],
     "answer": "$-2x+3y-z=3$, или $2x-3y+z=-3$.",
     "figure": "<svg class=\"prax-fig\" viewBox=\"0 0 460 232\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Плоскость через точку M0 и прямую L: нормаль n перпендикулярна направляющему вектору a и вектору M0 минус c\">\n          <polygon points=\"58,176 224,104 424,140 258,216\" fill=\"var(--bg-elev)\" fill-opacity=\"0.55\" stroke=\"var(--ink-soft)\" stroke-width=\"1.5\"/>\n          <text x=\"70\" y=\"208\" font-size=\"15\" fill=\"var(--ink-soft)\" font-family=\"inherit\" text-anchor=\"start\" font-style=\"italic\" font-weight=\"600\">L, M₀</text>\n          <line x1=\"96\" y1=\"172\" x2=\"392\" y2=\"126\" stroke=\"var(--accent)\" stroke-width=\"2.5\"/>\n          <polygon points=\"392,126 380,123 382,133\" fill=\"var(--accent)\"/>\n          <text x=\"398\" y=\"124\" font-size=\"14\" fill=\"var(--accent)\" font-family=\"inherit\" text-anchor=\"start\" font-style=\"italic\" font-weight=\"600\">L</text>\n          <circle cx=\"168\" cy=\"161\" r=\"3.8\" fill=\"var(--ink)\"/>\n          <text x=\"120\" y=\"150\" font-size=\"12\" fill=\"var(--ink)\" font-family=\"inherit\" text-anchor=\"start\">(1;0;−2)</text>\n          <line x1=\"238\" y1=\"150\" x2=\"310\" y2=\"139\" stroke=\"var(--ink)\" stroke-width=\"2\"/>\n          <polygon points=\"310,139 298,136 300,146\" fill=\"var(--ink)\"/>\n          <text x=\"262\" y=\"136\" font-size=\"12\" fill=\"var(--ink)\" font-family=\"inherit\" text-anchor=\"start\" font-style=\"italic\">a(1;−2;1)</text>\n          <circle cx=\"316\" cy=\"196\" r=\"3.8\" fill=\"var(--ink)\"/>\n          <text x=\"326\" y=\"202\" font-size=\"12\" fill=\"var(--ink)\" font-family=\"inherit\" text-anchor=\"start\">M₀(−1;1;−5)</text>\n          <line x1=\"168\" y1=\"161\" x2=\"316\" y2=\"196\" stroke=\"var(--ink-mute)\" stroke-width=\"1.5\" stroke-dasharray=\"5 4\"/>\n          <text x=\"216\" y=\"190\" font-size=\"11.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"start\" font-style=\"italic\">M₀ − c</text>\n          <line x1=\"252\" y1=\"158\" x2=\"252\" y2=\"52\" stroke=\"var(--ink)\" stroke-width=\"2\"/>\n          <polygon points=\"252,52 247,64 257,64\" fill=\"var(--ink)\"/>\n          <circle cx=\"252\" cy=\"158\" r=\"2.6\" fill=\"var(--ink)\"/>\n          <text x=\"260\" y=\"62\" font-size=\"12.5\" fill=\"var(--ink)\" font-family=\"inherit\" text-anchor=\"start\" font-style=\"italic\" font-weight=\"600\">n(5;1;−3)</text>\n        </svg>",
-    "block": "b14"
+    "section": "r4",
+    "type": "r4-2"
+  },
+  {
+    "id": "v169",
+    "topic": "t5",
+    "level": 1,
+    "num": 38,
+    "title": "Прямая и плоскость: случай параллельности",
+    "statement": "Установите, лежит ли прямая $$\\frac{x+1}{2}=\\frac{y-3}{4}=\\frac{z}{3}$$ в плоскости $3x-3y+2z-5=0$, параллельна ей или пересекает её; в последнем случае найдите точку пересечения.",
+    "steps": [
+      {
+        "q": "Выписать данные",
+        "a": "Направляющий вектор прямой $\\bar a=(2;4;3)$, точка на ней $M_0(-1;3;0)$; нормаль плоскости $\\bar n=(3;-3;2)$."
+      },
+      {
+        "q": "Проверить условие параллельности",
+        "a": "$$(\\bar a,\\bar n)=2\\cdot3+4\\cdot(-3)+3\\cdot2=6-12+6=0.$$ Скалярное произведение нулевое, значит направляющий вектор перпендикулярен нормали: прямая либо параллельна плоскости, либо целиком в ней лежит."
+      },
+      {
+        "q": "Различить два случая",
+        "a": "Достаточно проверить одну точку прямой. Подставляем $M_0(-1;3;0)$: $$3\\cdot(-1)-3\\cdot3+2\\cdot0-5=-3-9-5=-17\\ne0.$$ Точка не принадлежит плоскости."
+      },
+      {
+        "q": "Сделать вывод",
+        "a": "Раз прямая не пересекает плоскость и хотя бы одна её точка вне плоскости — прямая параллельна плоскости и общих точек с ней не имеет."
+      }
+    ],
+    "answer": "Прямая параллельна плоскости; общих точек нет.",
+    "figure": "<svg class=\"prax-fig\" viewBox=\"0 0 460 320\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Прямая, параллельная плоскости\"><path d=\"M68,252 L324,252 L392,168 L136,168 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.45\" stroke=\"var(--border)\" stroke-width=\"1.4\"/><line x1=\"90\" y1=\"120\" x2=\"376\" y2=\"120\" stroke=\"var(--accent)\" stroke-width=\"2.4\"/><text x=\"80\" y=\"116\" fill=\"var(--accent)\" font-size=\"13\" text-anchor=\"middle\" font-style=\"italic\">L</text><line x1=\"230\" y1=\"120\" x2=\"278\" y2=\"120\" stroke=\"var(--accent)\" stroke-width=\"1.5\"/><line x1=\"278\" y1=\"120\" x2=\"269.6\" y2=\"123.3\" stroke=\"var(--accent)\" stroke-width=\"1.5\"/><line x1=\"278\" y1=\"120\" x2=\"269.6\" y2=\"116.7\" stroke=\"var(--accent)\" stroke-width=\"1.5\"/><text x=\"292\" y=\"116\" fill=\"var(--accent)\" font-size=\"13\" text-anchor=\"start\" font-style=\"italic\">a</text><line x1=\"230\" y1=\"210\" x2=\"286\" y2=\"152\" stroke=\"var(--ink-soft)\" stroke-width=\"1.5\"/><line x1=\"286\" y1=\"152\" x2=\"282.6\" y2=\"160.3\" stroke=\"var(--ink-soft)\" stroke-width=\"1.5\"/><line x1=\"286\" y1=\"152\" x2=\"277.8\" y2=\"155.7\" stroke=\"var(--ink-soft)\" stroke-width=\"1.5\"/><text x=\"296\" y=\"146\" fill=\"var(--ink-soft)\" font-size=\"13\" text-anchor=\"start\" font-style=\"italic\">n</text><line x1=\"230\" y1=\"120\" x2=\"230\" y2=\"206\" stroke=\"var(--ink-soft)\" stroke-width=\"1.4\" stroke-dasharray=\"5 4\"/><text x=\"214\" y=\"170\" fill=\"var(--ink-soft)\" font-size=\"12.5\" text-anchor=\"end\" font-style=\"italic\">d</text><text x=\"230\" y=\"286\" fill=\"var(--ink-soft)\" font-size=\"11.5\" text-anchor=\"middle\">(a, n) = 0 и точка прямой вне плоскости —</text><text x=\"230\" y=\"303\" fill=\"var(--ink-soft)\" font-size=\"11.5\" text-anchor=\"middle\">прямая параллельна плоскости</text></svg>",
+    "section": "r4",
+    "type": "r4-3"
   },
   {
     "id": "g12a",
     "topic": "t5",
     "level": 1,
-    "num": 38,
+    "num": 39,
     "title": "Прямая и плоскость: пункт а)",
     "statement": "Установите, как взаимно расположены в пространстве плоскость $\\pi$ и прямая $L$. Если они пересекаются, найдите точку пересечения.$$\\pi:\\ 2x+y-3z=-3,\\qquad L=c(2;-1;4)+t\\,a(1;-2;2).$$",
     "steps": [
@@ -1077,13 +1331,14 @@ var TASKS_SEM2 = [
     ],
     "answer": "Прямая пересекает плоскость в точке $M(1;1;2)$.",
     "figure": "<svg class=\"prax-fig\" viewBox=\"0 0 460 330\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Прямая пересекает плоскость в одной точке\"><path d=\"M62,253 L322,253 L398,137 L138,137 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.55\" stroke=\"var(--border)\" stroke-width=\"1.4\"/><line x1=\"120.0\" y1=\"78.0\" x2=\"330.0\" y2=\"292.0\" stroke=\"var(--accent)\" stroke-width=\"2.2\"/><circle cx=\"230.0\" cy=\"190.0\" r=\"5\" fill=\"var(--ruby)\"/><text x=\"258.0\" y=\"186.0\" fill=\"var(--ruby)\" font-size=\"11.5\" text-anchor=\"start\">точка пересечения</text><line x1=\"190.0\" y1=\"148.0\" x2=\"232.0\" y2=\"106.0\" stroke=\"var(--ink-soft)\" stroke-width=\"1.5\"/><line x1=\"232.0\" y1=\"106.0\" x2=\"228.5\" y2=\"114.3\" stroke=\"var(--ink-soft)\" stroke-width=\"1.5\"/><line x1=\"232.0\" y1=\"106.0\" x2=\"223.7\" y2=\"109.5\" stroke=\"var(--ink-soft)\" stroke-width=\"1.5\"/><text x=\"196.0\" y=\"96.0\" fill=\"var(--ink-soft)\" font-size=\"13\" text-anchor=\"middle\" font-style=\"italic\">a</text><line x1=\"230.0\" y1=\"190.0\" x2=\"296.0\" y2=\"132.0\" stroke=\"var(--border)\" stroke-width=\"1.5\"/><line x1=\"296.0\" y1=\"132.0\" x2=\"291.9\" y2=\"140.0\" stroke=\"var(--border)\" stroke-width=\"1.5\"/><line x1=\"296.0\" y1=\"132.0\" x2=\"287.5\" y2=\"135.0\" stroke=\"var(--border)\" stroke-width=\"1.5\"/><text x=\"306.0\" y=\"126.0\" fill=\"var(--ink-soft)\" font-size=\"13\" text-anchor=\"start\" font-style=\"italic\">n</text><text x=\"120.0\" y=\"66.0\" fill=\"var(--accent)\" font-size=\"13\" text-anchor=\"middle\" font-style=\"italic\">L</text><text x=\"230.0\" y=\"300.0\" fill=\"var(--ink-soft)\" font-size=\"11.5\" text-anchor=\"middle\">(a, n) ≠ 0 — прямая не параллельна плоскости</text></svg>",
-    "block": "b15"
+    "section": "r4",
+    "type": "r4-3"
   },
   {
     "id": "g12b",
     "topic": "t5",
     "level": 1,
-    "num": 39,
+    "num": 40,
     "title": "Прямая и плоскость: пункт б)",
     "statement": "Установите, как взаимно расположены в пространстве плоскость $\\pi$ и прямая $L$. Если они пересекаются, найдите точку пересечения.$$\\pi:\\ x+2y-z=1,\\qquad L=c(3;-1;-2)+t\\,a(3;-1;1).$$",
     "steps": [
@@ -1106,13 +1361,14 @@ var TASKS_SEM2 = [
     ],
     "answer": "Прямая параллельна плоскости; общих точек нет.",
     "figure": "<svg class=\"prax-fig\" viewBox=\"0 0 460 320\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Прямая, параллельная плоскости\"><path d=\"M68,252 L324,252 L392,168 L136,168 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.45\" stroke=\"var(--border)\" stroke-width=\"1.4\"/><line x1=\"90\" y1=\"120\" x2=\"376\" y2=\"120\" stroke=\"var(--accent)\" stroke-width=\"2.4\"/><text x=\"80\" y=\"116\" fill=\"var(--accent)\" font-size=\"13\" text-anchor=\"middle\" font-style=\"italic\">L</text><line x1=\"230\" y1=\"120\" x2=\"278\" y2=\"120\" stroke=\"var(--accent)\" stroke-width=\"1.5\"/><line x1=\"278\" y1=\"120\" x2=\"269.6\" y2=\"123.3\" stroke=\"var(--accent)\" stroke-width=\"1.5\"/><line x1=\"278\" y1=\"120\" x2=\"269.6\" y2=\"116.7\" stroke=\"var(--accent)\" stroke-width=\"1.5\"/><text x=\"292\" y=\"116\" fill=\"var(--accent)\" font-size=\"13\" text-anchor=\"start\" font-style=\"italic\">a</text><line x1=\"230\" y1=\"210\" x2=\"286\" y2=\"152\" stroke=\"var(--ink-soft)\" stroke-width=\"1.5\"/><line x1=\"286\" y1=\"152\" x2=\"282.6\" y2=\"160.3\" stroke=\"var(--ink-soft)\" stroke-width=\"1.5\"/><line x1=\"286\" y1=\"152\" x2=\"277.8\" y2=\"155.7\" stroke=\"var(--ink-soft)\" stroke-width=\"1.5\"/><text x=\"296\" y=\"146\" fill=\"var(--ink-soft)\" font-size=\"13\" text-anchor=\"start\" font-style=\"italic\">n</text><line x1=\"230\" y1=\"120\" x2=\"230\" y2=\"206\" stroke=\"var(--ink-soft)\" stroke-width=\"1.4\" stroke-dasharray=\"5 4\"/><text x=\"214\" y=\"170\" fill=\"var(--ink-soft)\" font-size=\"12.5\" text-anchor=\"end\" font-style=\"italic\">d</text><text x=\"230\" y=\"286\" fill=\"var(--ink-soft)\" font-size=\"11.5\" text-anchor=\"middle\">(a, n) = 0 и точка прямой вне плоскости —</text><text x=\"230\" y=\"303\" fill=\"var(--ink-soft)\" font-size=\"11.5\" text-anchor=\"middle\">прямая параллельна плоскости</text></svg>",
-    "block": "b15"
+    "section": "r4",
+    "type": "r4-3"
   },
   {
     "id": "g12v",
     "topic": "t5",
     "level": 2,
-    "num": 40,
+    "num": 41,
     "title": "Прямая и плоскость: пункт в)",
     "statement": "Установите, как взаимно расположены в пространстве плоскость $\\pi$ и прямая $L$. Если они пересекаются, найдите точку пересечения.$$\\pi:\\ x+2y-z=0,\\qquad L=\\begin{cases}2x-2y+3z=-1,\\\\ -3x+2y-2z=3\\end{cases}.$$",
     "steps": [
@@ -1139,13 +1395,14 @@ var TASKS_SEM2 = [
     ],
     "answer": "Прямая пересекает плоскость в точке $M(-1;1;1)$.",
     "figure": "<svg class=\"prax-fig\" viewBox=\"0 0 460 330\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Прямая пересекает плоскость в одной точке\"><path d=\"M62,253 L322,253 L398,137 L138,137 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.55\" stroke=\"var(--border)\" stroke-width=\"1.4\"/><line x1=\"120.0\" y1=\"78.0\" x2=\"330.0\" y2=\"292.0\" stroke=\"var(--accent)\" stroke-width=\"2.2\"/><circle cx=\"230.0\" cy=\"190.0\" r=\"5\" fill=\"var(--ruby)\"/><text x=\"258.0\" y=\"186.0\" fill=\"var(--ruby)\" font-size=\"11.5\" text-anchor=\"start\">точка пересечения</text><line x1=\"190.0\" y1=\"148.0\" x2=\"232.0\" y2=\"106.0\" stroke=\"var(--ink-soft)\" stroke-width=\"1.5\"/><line x1=\"232.0\" y1=\"106.0\" x2=\"228.5\" y2=\"114.3\" stroke=\"var(--ink-soft)\" stroke-width=\"1.5\"/><line x1=\"232.0\" y1=\"106.0\" x2=\"223.7\" y2=\"109.5\" stroke=\"var(--ink-soft)\" stroke-width=\"1.5\"/><text x=\"196.0\" y=\"96.0\" fill=\"var(--ink-soft)\" font-size=\"13\" text-anchor=\"middle\" font-style=\"italic\">a</text><line x1=\"230.0\" y1=\"190.0\" x2=\"296.0\" y2=\"132.0\" stroke=\"var(--border)\" stroke-width=\"1.5\"/><line x1=\"296.0\" y1=\"132.0\" x2=\"291.9\" y2=\"140.0\" stroke=\"var(--border)\" stroke-width=\"1.5\"/><line x1=\"296.0\" y1=\"132.0\" x2=\"287.5\" y2=\"135.0\" stroke=\"var(--border)\" stroke-width=\"1.5\"/><text x=\"306.0\" y=\"126.0\" fill=\"var(--ink-soft)\" font-size=\"13\" text-anchor=\"start\" font-style=\"italic\">n</text><text x=\"120.0\" y=\"66.0\" fill=\"var(--accent)\" font-size=\"13\" text-anchor=\"middle\" font-style=\"italic\">L</text><text x=\"230.0\" y=\"300.0\" fill=\"var(--ink-soft)\" font-size=\"11.5\" text-anchor=\"middle\">(a, n) ≠ 0 — прямая не параллельна плоскости</text></svg>",
-    "block": "b15"
+    "section": "r4",
+    "type": "r4-3"
   },
   {
     "id": "g12g",
     "topic": "t5",
     "level": 2,
-    "num": 41,
+    "num": 42,
     "title": "Прямая и плоскость: пункт г)",
     "statement": "Установите, как взаимно расположены в пространстве плоскость $\\pi$ и прямая $L$. Если они пересекаются, найдите точку пересечения.$$\\pi=c(1;-1;1)+t\\,a(1;-3;0)+s\\,b(0;2;1),\\qquad L=c(2;-2;2)+t\\,a(2;0;3).$$",
     "steps": [
@@ -1168,13 +1425,14 @@ var TASKS_SEM2 = [
     ],
     "answer": "Прямая целиком лежит в плоскости.",
     "figure": "<svg class=\"prax-fig\" viewBox=\"0 0 460 320\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Прямая целиком лежит в плоскости\"><path d=\"M68,248 L322,248 L392,150 L138,150 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.45\" stroke=\"var(--border)\" stroke-width=\"1.4\"/><line x1=\"96\" y1=\"222\" x2=\"366\" y2=\"176\" stroke=\"var(--accent)\" stroke-width=\"2.4\"/><circle cx=\"150\" cy=\"213\" r=\"4.5\" fill=\"var(--ruby)\"/><circle cx=\"300\" cy=\"187\" r=\"4.5\" fill=\"var(--ruby)\"/><text x=\"380\" y=\"170\" fill=\"var(--accent)\" font-size=\"13\" font-style=\"italic\">L</text><text x=\"230\" y=\"286\" fill=\"var(--ink-soft)\" font-size=\"11.5\" text-anchor=\"middle\">(a, n) = 0 и точка прямой принадлежит плоскости —</text><text x=\"230\" y=\"303\" fill=\"var(--ink-soft)\" font-size=\"11.5\" text-anchor=\"middle\">прямая целиком лежит в плоскости</text></svg>",
-    "block": "b15"
+    "section": "r4",
+    "type": "r4-3"
   },
   {
     "id": "g12d",
     "topic": "t5",
     "level": 1,
-    "num": 42,
+    "num": 43,
     "title": "Прямая и плоскость: пункт д)",
     "statement": "Установите, как взаимно расположены в пространстве плоскость $\\pi$ и прямая $L$. Если они пересекаются, найдите точку пересечения.$$\\pi:\\ x-y-2z=5,\\qquad L=c(-1;0;3)+t\\,a(-1;1;2).$$",
     "steps": [
@@ -1201,13 +1459,40 @@ var TASKS_SEM2 = [
     ],
     "answer": "Прямая пересекает плоскость в точке $M(1;-2;-1)$.",
     "figure": "<svg class=\"prax-fig\" viewBox=\"0 0 460 330\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Прямая пересекает плоскость в одной точке\"><path d=\"M62,253 L322,253 L398,137 L138,137 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.55\" stroke=\"var(--border)\" stroke-width=\"1.4\"/><line x1=\"120.0\" y1=\"78.0\" x2=\"330.0\" y2=\"292.0\" stroke=\"var(--accent)\" stroke-width=\"2.2\"/><circle cx=\"230.0\" cy=\"190.0\" r=\"5\" fill=\"var(--ruby)\"/><text x=\"258.0\" y=\"186.0\" fill=\"var(--ruby)\" font-size=\"11.5\" text-anchor=\"start\">точка пересечения</text><line x1=\"190.0\" y1=\"148.0\" x2=\"232.0\" y2=\"106.0\" stroke=\"var(--ink-soft)\" stroke-width=\"1.5\"/><line x1=\"232.0\" y1=\"106.0\" x2=\"228.5\" y2=\"114.3\" stroke=\"var(--ink-soft)\" stroke-width=\"1.5\"/><line x1=\"232.0\" y1=\"106.0\" x2=\"223.7\" y2=\"109.5\" stroke=\"var(--ink-soft)\" stroke-width=\"1.5\"/><text x=\"196.0\" y=\"96.0\" fill=\"var(--ink-soft)\" font-size=\"13\" text-anchor=\"middle\" font-style=\"italic\">a</text><line x1=\"230.0\" y1=\"190.0\" x2=\"296.0\" y2=\"132.0\" stroke=\"var(--border)\" stroke-width=\"1.5\"/><line x1=\"296.0\" y1=\"132.0\" x2=\"291.9\" y2=\"140.0\" stroke=\"var(--border)\" stroke-width=\"1.5\"/><line x1=\"296.0\" y1=\"132.0\" x2=\"287.5\" y2=\"135.0\" stroke=\"var(--border)\" stroke-width=\"1.5\"/><text x=\"306.0\" y=\"126.0\" fill=\"var(--ink-soft)\" font-size=\"13\" text-anchor=\"start\" font-style=\"italic\">n</text><text x=\"120.0\" y=\"66.0\" fill=\"var(--accent)\" font-size=\"13\" text-anchor=\"middle\" font-style=\"italic\">L</text><text x=\"230.0\" y=\"300.0\" fill=\"var(--ink-soft)\" font-size=\"11.5\" text-anchor=\"middle\">(a, n) ≠ 0 — прямая не параллельна плоскости</text></svg>",
-    "block": "b15"
+    "section": "r4",
+    "type": "r4-3"
+  },
+  {
+    "id": "n230",
+    "topic": "t5",
+    "level": 1,
+    "num": 44,
+    "title": "Угол между плоскостями",
+    "statement": "Найдите угол между плоскостями $2x-y+2z-3=0$ и $x+2y-2z+1=0$.",
+    "steps": [
+      {
+        "q": "Свести к углу между нормалями",
+        "a": "Двугранный угол между плоскостями равен углу между их нормалями (или дополняет его до $\\pi$). Чтобы получить острый угол, берут модуль скалярного произведения."
+      },
+      {
+        "q": "Выписать нормали",
+        "a": "$\\bar n_1=(2;-1;2)$, $\\;\\bar n_2=(1;2;-2)$; $\\;|\\bar n_1|=|\\bar n_2|=3$."
+      },
+      {
+        "q": "Вычислить косинус",
+        "a": "$$\\cos\\varphi=\\frac{|(\\bar n_1,\\bar n_2)|}{|\\bar n_1|\\,|\\bar n_2|}=\\frac{|2-2-4|}{9}=\\frac{4}{9}.$$"
+      }
+    ],
+    "answer": "$\\varphi=\\arccos\\dfrac{4}{9}\\approx63^\\circ38'$.",
+    "figure": "<svg class=\"prax-fig\" viewBox=\"0 0 460 330\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Угол между двумя плоскостями равен углу между их нормалями\"><path d=\"M85,187 L315,253 L375,173 L145,107 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.4\" stroke=\"var(--accent)\" stroke-width=\"1.5\"/><path d=\"M90,269 L310,171 L370,91 L150,189 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.4\" stroke=\"var(--ruby)\" stroke-width=\"1.5\"/><line x1=\"230.0\" y1=\"180.0\" x2=\"196.0\" y2=\"92.0\" stroke=\"var(--accent)\" stroke-width=\"1.8\"/><line x1=\"196.0\" y1=\"92.0\" x2=\"202.1\" y2=\"98.6\" stroke=\"var(--accent)\" stroke-width=\"1.8\"/><line x1=\"196.0\" y1=\"92.0\" x2=\"195.9\" y2=\"101.0\" stroke=\"var(--accent)\" stroke-width=\"1.8\"/><line x1=\"230.0\" y1=\"180.0\" x2=\"300.0\" y2=\"116.0\" stroke=\"var(--ruby)\" stroke-width=\"1.8\"/><line x1=\"300.0\" y1=\"116.0\" x2=\"296.1\" y2=\"124.1\" stroke=\"var(--ruby)\" stroke-width=\"1.8\"/><line x1=\"300.0\" y1=\"116.0\" x2=\"291.6\" y2=\"119.2\" stroke=\"var(--ruby)\" stroke-width=\"1.8\"/><text x=\"186.0\" y=\"84.0\" fill=\"var(--accent)\" font-size=\"13\" text-anchor=\"middle\" font-style=\"italic\">n</text><text x=\"194.0\" y=\"88.0\" fill=\"var(--accent)\" font-size=\"10\" text-anchor=\"middle\">₁</text><text x=\"310.0\" y=\"110.0\" fill=\"var(--ruby)\" font-size=\"13\" text-anchor=\"middle\" font-style=\"italic\">n</text><text x=\"318.0\" y=\"114.0\" fill=\"var(--ruby)\" font-size=\"10\" text-anchor=\"middle\">₂</text><path d=\"M210,140 A 52 52 0 0 1 268,148\" fill=\"none\" stroke=\"var(--ink-soft)\" stroke-width=\"1.4\"/><text x=\"240.0\" y=\"128.0\" fill=\"var(--ink)\" font-size=\"13.5\" text-anchor=\"middle\">φ</text><text x=\"230.0\" y=\"302.0\" fill=\"var(--ink-soft)\" font-size=\"12\" text-anchor=\"middle\">cos φ = |(n₁, n₂)| / (|n₁||n₂|)</text></svg>",
+    "section": "r4",
+    "type": "r4-4"
   },
   {
     "id": "g17a",
     "topic": "t5",
     "level": 1,
-    "num": 43,
+    "num": 45,
     "title": "Угол между плоскостями: пункт а)",
     "statement": "Найдите угол $\\varphi$ между плоскостями $\\pi_1$ и $\\pi_2$.$$\\pi_1:\\ x-y+z=2,\\qquad \\pi_2:\\ 3x-y-4z=2.$$",
     "steps": [
@@ -1226,13 +1511,14 @@ var TASKS_SEM2 = [
     ],
     "answer": "$\\varphi=90^\\circ$. Плоскости перпендикулярны.",
     "figure": "<svg class=\"prax-fig\" viewBox=\"0 0 460 330\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Угол между двумя плоскостями равен углу между их нормалями\"><path d=\"M85,187 L315,253 L375,173 L145,107 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.4\" stroke=\"var(--accent)\" stroke-width=\"1.5\"/><path d=\"M90,269 L310,171 L370,91 L150,189 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.4\" stroke=\"var(--ruby)\" stroke-width=\"1.5\"/><line x1=\"230.0\" y1=\"180.0\" x2=\"196.0\" y2=\"92.0\" stroke=\"var(--accent)\" stroke-width=\"1.8\"/><line x1=\"196.0\" y1=\"92.0\" x2=\"202.1\" y2=\"98.6\" stroke=\"var(--accent)\" stroke-width=\"1.8\"/><line x1=\"196.0\" y1=\"92.0\" x2=\"195.9\" y2=\"101.0\" stroke=\"var(--accent)\" stroke-width=\"1.8\"/><line x1=\"230.0\" y1=\"180.0\" x2=\"300.0\" y2=\"116.0\" stroke=\"var(--ruby)\" stroke-width=\"1.8\"/><line x1=\"300.0\" y1=\"116.0\" x2=\"296.1\" y2=\"124.1\" stroke=\"var(--ruby)\" stroke-width=\"1.8\"/><line x1=\"300.0\" y1=\"116.0\" x2=\"291.6\" y2=\"119.2\" stroke=\"var(--ruby)\" stroke-width=\"1.8\"/><text x=\"186.0\" y=\"84.0\" fill=\"var(--accent)\" font-size=\"13\" text-anchor=\"middle\" font-style=\"italic\">n</text><text x=\"194.0\" y=\"88.0\" fill=\"var(--accent)\" font-size=\"10\" text-anchor=\"middle\">₁</text><text x=\"310.0\" y=\"110.0\" fill=\"var(--ruby)\" font-size=\"13\" text-anchor=\"middle\" font-style=\"italic\">n</text><text x=\"318.0\" y=\"114.0\" fill=\"var(--ruby)\" font-size=\"10\" text-anchor=\"middle\">₂</text><path d=\"M210,140 A 52 52 0 0 1 268,148\" fill=\"none\" stroke=\"var(--ink-soft)\" stroke-width=\"1.4\"/><text x=\"240.0\" y=\"128.0\" fill=\"var(--ink)\" font-size=\"13.5\" text-anchor=\"middle\">φ</text><text x=\"230.0\" y=\"302.0\" fill=\"var(--ink-soft)\" font-size=\"12\" text-anchor=\"middle\">cos φ = |(n₁, n₂)| / (|n₁||n₂|)</text></svg>",
-    "block": "b16"
+    "section": "r4",
+    "type": "r4-4"
   },
   {
     "id": "g17b",
     "topic": "t5",
     "level": 1,
-    "num": 44,
+    "num": 46,
     "title": "Угол между плоскостями: пункт б)",
     "statement": "Найдите угол $\\varphi$ между плоскостями $\\pi_1$ и $\\pi_2$.$$\\pi_1:\\ 2x+y+z=-1,\\qquad \\pi_2:\\ x+2y-z=3.$$",
     "steps": [
@@ -1251,13 +1537,14 @@ var TASKS_SEM2 = [
     ],
     "answer": "$\\varphi=60^\\circ$.",
     "figure": "<svg class=\"prax-fig\" viewBox=\"0 0 460 330\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Угол между двумя плоскостями равен углу между их нормалями\"><path d=\"M85,187 L315,253 L375,173 L145,107 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.4\" stroke=\"var(--accent)\" stroke-width=\"1.5\"/><path d=\"M90,269 L310,171 L370,91 L150,189 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.4\" stroke=\"var(--ruby)\" stroke-width=\"1.5\"/><line x1=\"230.0\" y1=\"180.0\" x2=\"196.0\" y2=\"92.0\" stroke=\"var(--accent)\" stroke-width=\"1.8\"/><line x1=\"196.0\" y1=\"92.0\" x2=\"202.1\" y2=\"98.6\" stroke=\"var(--accent)\" stroke-width=\"1.8\"/><line x1=\"196.0\" y1=\"92.0\" x2=\"195.9\" y2=\"101.0\" stroke=\"var(--accent)\" stroke-width=\"1.8\"/><line x1=\"230.0\" y1=\"180.0\" x2=\"300.0\" y2=\"116.0\" stroke=\"var(--ruby)\" stroke-width=\"1.8\"/><line x1=\"300.0\" y1=\"116.0\" x2=\"296.1\" y2=\"124.1\" stroke=\"var(--ruby)\" stroke-width=\"1.8\"/><line x1=\"300.0\" y1=\"116.0\" x2=\"291.6\" y2=\"119.2\" stroke=\"var(--ruby)\" stroke-width=\"1.8\"/><text x=\"186.0\" y=\"84.0\" fill=\"var(--accent)\" font-size=\"13\" text-anchor=\"middle\" font-style=\"italic\">n</text><text x=\"194.0\" y=\"88.0\" fill=\"var(--accent)\" font-size=\"10\" text-anchor=\"middle\">₁</text><text x=\"310.0\" y=\"110.0\" fill=\"var(--ruby)\" font-size=\"13\" text-anchor=\"middle\" font-style=\"italic\">n</text><text x=\"318.0\" y=\"114.0\" fill=\"var(--ruby)\" font-size=\"10\" text-anchor=\"middle\">₂</text><path d=\"M210,140 A 52 52 0 0 1 268,148\" fill=\"none\" stroke=\"var(--ink-soft)\" stroke-width=\"1.4\"/><text x=\"240.0\" y=\"128.0\" fill=\"var(--ink)\" font-size=\"13.5\" text-anchor=\"middle\">φ</text><text x=\"230.0\" y=\"302.0\" fill=\"var(--ink-soft)\" font-size=\"12\" text-anchor=\"middle\">cos φ = |(n₁, n₂)| / (|n₁||n₂|)</text></svg>",
-    "block": "b16"
+    "section": "r4",
+    "type": "r4-4"
   },
   {
     "id": "g17v",
     "topic": "t5",
     "level": 1,
-    "num": 45,
+    "num": 47,
     "title": "Угол между плоскостями: пункт в)",
     "statement": "Найдите угол $\\varphi$ между плоскостями $\\pi_1$ и $\\pi_2$.$$\\pi_1:\\ x-2y+z=3,\\qquad \\pi_2:\\ y-z=-5.$$",
     "steps": [
@@ -1276,13 +1563,14 @@ var TASKS_SEM2 = [
     ],
     "answer": "$\\varphi=30^\\circ$.",
     "figure": "<svg class=\"prax-fig\" viewBox=\"0 0 460 330\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Угол между двумя плоскостями равен углу между их нормалями\"><path d=\"M85,187 L315,253 L375,173 L145,107 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.4\" stroke=\"var(--accent)\" stroke-width=\"1.5\"/><path d=\"M90,269 L310,171 L370,91 L150,189 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.4\" stroke=\"var(--ruby)\" stroke-width=\"1.5\"/><line x1=\"230.0\" y1=\"180.0\" x2=\"196.0\" y2=\"92.0\" stroke=\"var(--accent)\" stroke-width=\"1.8\"/><line x1=\"196.0\" y1=\"92.0\" x2=\"202.1\" y2=\"98.6\" stroke=\"var(--accent)\" stroke-width=\"1.8\"/><line x1=\"196.0\" y1=\"92.0\" x2=\"195.9\" y2=\"101.0\" stroke=\"var(--accent)\" stroke-width=\"1.8\"/><line x1=\"230.0\" y1=\"180.0\" x2=\"300.0\" y2=\"116.0\" stroke=\"var(--ruby)\" stroke-width=\"1.8\"/><line x1=\"300.0\" y1=\"116.0\" x2=\"296.1\" y2=\"124.1\" stroke=\"var(--ruby)\" stroke-width=\"1.8\"/><line x1=\"300.0\" y1=\"116.0\" x2=\"291.6\" y2=\"119.2\" stroke=\"var(--ruby)\" stroke-width=\"1.8\"/><text x=\"186.0\" y=\"84.0\" fill=\"var(--accent)\" font-size=\"13\" text-anchor=\"middle\" font-style=\"italic\">n</text><text x=\"194.0\" y=\"88.0\" fill=\"var(--accent)\" font-size=\"10\" text-anchor=\"middle\">₁</text><text x=\"310.0\" y=\"110.0\" fill=\"var(--ruby)\" font-size=\"13\" text-anchor=\"middle\" font-style=\"italic\">n</text><text x=\"318.0\" y=\"114.0\" fill=\"var(--ruby)\" font-size=\"10\" text-anchor=\"middle\">₂</text><path d=\"M210,140 A 52 52 0 0 1 268,148\" fill=\"none\" stroke=\"var(--ink-soft)\" stroke-width=\"1.4\"/><text x=\"240.0\" y=\"128.0\" fill=\"var(--ink)\" font-size=\"13.5\" text-anchor=\"middle\">φ</text><text x=\"230.0\" y=\"302.0\" fill=\"var(--ink-soft)\" font-size=\"12\" text-anchor=\"middle\">cos φ = |(n₁, n₂)| / (|n₁||n₂|)</text></svg>",
-    "block": "b16"
+    "section": "r4",
+    "type": "r4-4"
   },
   {
     "id": "n217",
     "topic": "t5",
     "level": 2,
-    "num": 46,
+    "num": 48,
     "title": "Плоскость, параллельная данной и удалённая от точки",
     "statement": "Составьте уравнения плоскостей, параллельных плоскости $x-2y+2z+3=0$ и отстоящих от точки $M(2;1;-1)$ на расстояние $2$.",
     "steps": [
@@ -1305,158 +1593,14 @@ var TASKS_SEM2 = [
     ],
     "answer": "$x-2y+2z+8=0$ и $x-2y+2z-4=0$.",
     "figure": "<svg class=\"prax-fig\" viewBox=\"0 0 460 340\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Две плоскости, параллельные данной, по разные стороны от точки M\"><path d=\"M82,140 L318,140 L378,80 L142,80 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.5\" stroke=\"var(--border)\" stroke-width=\"1.4\"/><path d=\"M82,230 L318,230 L378,170 L142,170 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.5\" stroke=\"var(--accent)\" stroke-width=\"1.4\"/><path d=\"M82,320 L318,320 L378,260 L142,260 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.5\" stroke=\"var(--border)\" stroke-width=\"1.4\"/><circle cx=\"230.0\" cy=\"200.0\" r=\"5\" fill=\"var(--ruby)\"/><text x=\"230.0\" y=\"194.0\" fill=\"var(--ink)\" font-size=\"12.5\" text-anchor=\"middle\"></text><text x=\"212.0\" y=\"205.0\" fill=\"var(--ruby)\" font-size=\"13\" text-anchor=\"middle\" font-style=\"italic\">M</text><line x1=\"230.0\" y1=\"200.0\" x2=\"230.0\" y2=\"110.0\" stroke=\"var(--ink-soft)\" stroke-width=\"1.5\" stroke-dasharray=\"4 4\"/><line x1=\"230.0\" y1=\"200.0\" x2=\"230.0\" y2=\"290.0\" stroke=\"var(--ink-soft)\" stroke-width=\"1.5\" stroke-dasharray=\"4 4\"/><text x=\"244.0\" y=\"158.0\" fill=\"var(--ink-soft)\" font-size=\"12.5\" text-anchor=\"start\" font-style=\"italic\">d</text><text x=\"244.0\" y=\"250.0\" fill=\"var(--ink-soft)\" font-size=\"12.5\" text-anchor=\"start\" font-style=\"italic\">d</text><text x=\"360.0\" y=\"106.0\" fill=\"var(--ink-soft)\" font-size=\"11.5\" text-anchor=\"start\">D = 8</text><text x=\"360.0\" y=\"296.0\" fill=\"var(--ink-soft)\" font-size=\"11.5\" text-anchor=\"start\">D = −4</text><text x=\"230.0\" y=\"325.0\" fill=\"var(--ink-soft)\" font-size=\"11.5\" text-anchor=\"middle\">решений два — по одному с каждой стороны</text></svg>",
-    "block": "b17"
-  },
-  {
-    "id": "p109",
-    "topic": "t5",
-    "level": 2,
-    "num": 47,
-    "title": "Линейное многообразие в $P_4[x]$: $p(-1)=-p(1)$, $p'(1)=3$",
-    "statement": "В пространстве многочленов степени не выше четырёх задайте в параметрическом виде многообразие $H$, ограниченное условиями $p(-1)=-p(1)$ и $p'(1)=3$. Укажите его размерность.",
-    "steps": [
-      {
-        "q": "Перевести условия в уравнения на коэффициенты",
-        "a": "Пусть $p(x)=a_0+a_1x+a_2x^2+a_3x^3+a_4x^4$. Условие $p(-1)=-p(1)$ даёт $a_0-a_1+a_2-a_3+a_4=-a_0-a_1-a_2-a_3-a_4$, после сокращения — $a_0+a_2+a_4=0$. Условие $p'(1)=3$ даёт второе уравнение."
-      },
-      {
-        "q": "Записать систему",
-        "a": "$$\\begin{cases}a_0+a_2+a_4=0,\\\\[2pt] a_1+2a_2+3a_3+4a_4=3.\\end{cases}$$ Её ранг равен $2$, неизвестных пять, значит размерность многообразия $5-2=3$."
-      },
-      {
-        "q": "Найти частное решение",
-        "a": "Годится $c=(0;3;0;0;0)$, то есть многочлен $p_0(x)=3x$."
-      },
-      {
-        "q": "Найти ФСР однородной системы",
-        "a": "$$f_1=(1;2;-1;0;0),\\quad f_2=(0;3;0;-1;0),\\quad f_3=(1;4;0;0;-1),$$ им отвечают многочлены $p_1(x)=-x^2+2x+1$, $p_2(x)=-x^3+3x$, $p_3(x)=-x^4+4x+1$."
-      }
-    ],
-    "answer": "$H=p_0(x)+L\\{p_1(x),\\,p_2(x),\\,p_3(x)\\}$, $\\;\\dim H=3$.",
-    "figure": "<svg class=\"prax-fig\" viewBox=\"0 0 460 330\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Линейное многообразие: подпространство L, сдвинутое на вектор c\"><path d=\"M78,270 L318,270 L382,194 L142,194 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.45\" stroke=\"var(--border)\" stroke-width=\"1.5\"/><path d=\"M78,170 L318,170 L382,94 L142,94 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.35\" stroke=\"var(--accent)\" stroke-width=\"1.5\"/><circle cx=\"230\" cy=\"232\" r=\"4.5\" fill=\"var(--ink-soft)\"/><text x=\"214\" y=\"248\" fill=\"var(--ink-soft)\" font-size=\"12\" text-anchor=\"middle\">0</text><line x1=\"230\" y1=\"232\" x2=\"230\" y2=\"136\" stroke=\"var(--ruby)\" stroke-width=\"1.8\"/><line x1=\"230\" y1=\"136\" x2=\"233.3\" y2=\"144.4\" stroke=\"var(--ruby)\" stroke-width=\"1.8\"/><line x1=\"230\" y1=\"136\" x2=\"226.7\" y2=\"144.4\" stroke=\"var(--ruby)\" stroke-width=\"1.8\"/><text x=\"244\" y=\"188\" fill=\"var(--ruby)\" font-size=\"13\" text-anchor=\"start\" font-style=\"italic\">c</text><circle cx=\"230\" cy=\"132\" r=\"5\" fill=\"var(--ruby)\"/><text x=\"230\" y=\"300\" fill=\"var(--ink-soft)\" font-size=\"11.5\" text-anchor=\"middle\">многообразие H = c + L — подпространство, сдвинутое на вектор c</text><text x=\"348\" y=\"238\" fill=\"var(--border)\" font-size=\"13\" text-anchor=\"start\" font-style=\"italic\">L</text><text x=\"348\" y=\"138\" fill=\"var(--accent)\" font-size=\"13\" text-anchor=\"start\" font-style=\"italic\">H</text></svg>",
-    "block": "b18"
-  },
-  {
-    "id": "n232",
-    "topic": "t5",
-    "level": 2,
-    "num": 48,
-    "title": "Многообразие, заданное СЛАУ",
-    "statement": "Многообразие, представленное в форме СЛАУ, задайте в параметрическом виде $H=c+L\\{a_1,\\ldots,a_k\\}$ и укажите его размерность: $$H:\\ \\begin{cases}3x+4y-5z=1,\\\\ 2x+3y+2z=5.\\end{cases}$$",
-    "steps": [
-      {
-        "q": "Найти ранг",
-        "a": "Строки $(3;4;-5)$ и $(2;3;2)$ не пропорциональны, значит ранг равен $2$. Неизвестных три, поэтому размерность многообразия $3-2=1$ — это прямая."
-      },
-      {
-        "q": "Найти направляющее подпространство",
-        "a": "Решаем однородную систему $3x+4y-5z=0$, $2x+3y+2z=0$. Умножим первое на $3$, второе на $4$ и вычтем: $9x+12y-15z-8x-12y-8z=0$, то есть $x=23z$. Тогда из второго $y=-16z$."
-      },
-      {
-        "q": "Выписать ФСР",
-        "a": "При $z=1$ получаем $a_1=(23;-16;1)$."
-      },
-      {
-        "q": "Найти частное решение",
-        "a": "Положим $z=0$: $3x+4y=1$, $2x+3y=5$. Отсюда $x=-17$, $y=13$, то есть $c=(-17;13;0)$."
-      }
-    ],
-    "answer": "$H=(-17;13;0)+L\\{(23;-16;1)\\}$, $\\;\\dim H=1$.",
-    "figure": "<svg class=\"prax-fig\" viewBox=\"0 0 460 330\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Линейное многообразие как сдвиг подпространства решений однородной системы\"><path d=\"M78,270 L318,270 L382,194 L142,194 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.45\" stroke=\"var(--border)\" stroke-width=\"1.5\"/><path d=\"M78,170 L318,170 L382,94 L142,94 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.35\" stroke=\"var(--accent)\" stroke-width=\"1.5\"/><circle cx=\"230\" cy=\"232\" r=\"4.5\" fill=\"var(--ink-soft)\"/><text x=\"214\" y=\"248\" fill=\"var(--ink-soft)\" font-size=\"12\" text-anchor=\"middle\">0</text><line x1=\"230\" y1=\"232\" x2=\"230\" y2=\"136\" stroke=\"var(--ruby)\" stroke-width=\"1.8\"/><line x1=\"230\" y1=\"136\" x2=\"233.3\" y2=\"144.4\" stroke=\"var(--ruby)\" stroke-width=\"1.8\"/><line x1=\"230\" y1=\"136\" x2=\"226.7\" y2=\"144.4\" stroke=\"var(--ruby)\" stroke-width=\"1.8\"/><text x=\"244\" y=\"188\" fill=\"var(--ruby)\" font-size=\"13\" text-anchor=\"start\" font-style=\"italic\">c</text><circle cx=\"230\" cy=\"132\" r=\"5\" fill=\"var(--ruby)\"/><text x=\"230\" y=\"300\" fill=\"var(--ink-soft)\" font-size=\"11.5\" text-anchor=\"middle\">многообразие H = c + L — подпространство, сдвинутое на вектор c</text><text x=\"348\" y=\"238\" fill=\"var(--border)\" font-size=\"13\" text-anchor=\"start\" font-style=\"italic\">L</text><text x=\"348\" y=\"138\" fill=\"var(--accent)\" font-size=\"13\" text-anchor=\"start\" font-style=\"italic\">H</text></svg>",
-    "block": "b18"
-  },
-  {
-    "id": "p110",
-    "topic": "t5",
-    "level": 1,
-    "num": 49,
-    "title": "Точка прямой, равноудалённая от $M_1(3;4)$ и $M_2(0;-5)$",
-    "statement": "Найдите на прямой $L\\colon 2x+3y=6$ точку $M(x;y)$, равноудалённую от точек $M_1(3;4)$ и $M_2(0;-5)$.",
-    "steps": [
-      {
-        "q": "Записать условие равноудалённости",
-        "a": "Удобнее приравнять квадраты расстояний, чтобы не тащить корни: $|M_1M|^2=|M_2M|^2$."
-      },
-      {
-        "q": "Составить систему",
-        "a": "$$\\begin{cases}2x+3y=6,\\\\ (x-3)^2+(y-4)^2=x^2+(y+5)^2.\\end{cases}$$"
-      },
-      {
-        "q": "Упростить второе уравнение",
-        "a": "Раскрывая квадраты: $-6x-8y+25=10y+25$, то есть $x=-3y$. Это уравнение серединного перпендикуляра к отрезку $M_1M_2$."
-      },
-      {
-        "q": "Подставить в уравнение прямой",
-        "a": "$-6y+3y=6$, откуда $y=-2$ и $x=6$."
-      }
-    ],
-    "answer": "$M(6;-2)$.",
-    "figure": "<svg class=\"prax-fig\" viewBox=\"0 0 460 497\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Прямая L, точки M1 и M2 и равноудалённая от них точка M(6;−2) на прямой; пунктиром серединный перпендикуляр\">\n          <line x1=\"43.0\" y1=\"469.0\" x2=\"43.0\" y2=\"27.6\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"80.4\" y1=\"469.0\" x2=\"80.4\" y2=\"27.6\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"155.2\" y1=\"469.0\" x2=\"155.2\" y2=\"27.6\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"192.6\" y1=\"469.0\" x2=\"192.6\" y2=\"27.6\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"230.0\" y1=\"469.0\" x2=\"230.0\" y2=\"27.6\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"267.4\" y1=\"469.0\" x2=\"267.4\" y2=\"27.6\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"304.8\" y1=\"469.0\" x2=\"304.8\" y2=\"27.6\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"342.2\" y1=\"469.0\" x2=\"342.2\" y2=\"27.6\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"379.6\" y1=\"469.0\" x2=\"379.6\" y2=\"27.6\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"417.0\" y1=\"469.0\" x2=\"417.0\" y2=\"27.6\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"454.0\" x2=\"432.0\" y2=\"454.0\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"416.6\" x2=\"432.0\" y2=\"416.6\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"379.2\" x2=\"432.0\" y2=\"379.2\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"341.8\" x2=\"432.0\" y2=\"341.8\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"304.4\" x2=\"432.0\" y2=\"304.4\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"267.0\" x2=\"432.0\" y2=\"267.0\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"192.2\" x2=\"432.0\" y2=\"192.2\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"154.8\" x2=\"432.0\" y2=\"154.8\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"117.4\" x2=\"432.0\" y2=\"117.4\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"80.0\" x2=\"432.0\" y2=\"80.0\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"42.6\" x2=\"432.0\" y2=\"42.6\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"229.6\" x2=\"432.0\" y2=\"229.6\" stroke=\"var(--ink-soft)\" stroke-width=\"1.5\"/>\n          <polygon points=\"432.0,229.6 423.0,225.6 423.0,233.6\" fill=\"var(--ink-soft)\"/>\n          <line x1=\"117.8\" y1=\"469.0\" x2=\"117.8\" y2=\"27.6\" stroke=\"var(--ink-soft)\" stroke-width=\"1.5\"/>\n          <polygon points=\"117.8,27.6 113.8,36.6 121.8,36.6\" fill=\"var(--ink-soft)\"/>\n          <text x=\"428.0\" y=\"245.6\" font-size=\"12.5\" fill=\"var(--ink-soft)\" font-family=\"inherit\" text-anchor=\"end\" font-style=\"italic\">x</text>\n          <text x=\"125.8\" y=\"37.6\" font-size=\"12.5\" fill=\"var(--ink-soft)\" font-family=\"inherit\" text-anchor=\"start\" font-style=\"italic\">y</text>\n          <text x=\"112.8\" y=\"243.6\" font-size=\"11\" fill=\"var(--ink-soft)\" font-family=\"inherit\" text-anchor=\"end\">O</text>\n          <text x=\"43.0\" y=\"243.6\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"middle\">-2</text>\n          <text x=\"192.6\" y=\"243.6\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"middle\">2</text>\n          <text x=\"267.4\" y=\"243.6\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"middle\">4</text>\n          <text x=\"342.2\" y=\"243.6\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"middle\">6</text>\n          <text x=\"111.8\" y=\"458.0\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"end\">-6</text>\n          <text x=\"111.8\" y=\"383.2\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"end\">-4</text>\n          <text x=\"111.8\" y=\"308.4\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"end\">-2</text>\n          <text x=\"111.8\" y=\"158.8\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"end\">2</text>\n          <text x=\"111.8\" y=\"84.0\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"end\">4</text>\n          <line x1=\"35.5\" y1=\"99.9\" x2=\"424.5\" y2=\"359.3\" stroke=\"var(--accent)\" stroke-width=\"2.6\"/>\n          <line x1=\"35.5\" y1=\"202.2\" x2=\"424.5\" y2=\"331.8\" stroke=\"var(--ink-mute)\" stroke-width=\"1.6\" stroke-dasharray=\"6 5\"/>\n          <line x1=\"342.2\" y1=\"304.4\" x2=\"230.0\" y2=\"80.0\" stroke=\"var(--ink-soft)\" stroke-width=\"1.5\" stroke-dasharray=\"3 4\"/>\n          <line x1=\"342.2\" y1=\"304.4\" x2=\"117.8\" y2=\"416.6\" stroke=\"var(--ink-soft)\" stroke-width=\"1.5\" stroke-dasharray=\"3 4\"/>\n          <line x1=\"280.7\" y1=\"194.9\" x2=\"291.5\" y2=\"189.5\" stroke=\"var(--ink)\" stroke-width=\"1.6\"/>\n          <line x1=\"232.7\" y1=\"365.9\" x2=\"227.3\" y2=\"355.1\" stroke=\"var(--ink)\" stroke-width=\"1.6\"/>\n          <circle cx=\"230.0\" cy=\"80.0\" r=\"3.6\" fill=\"var(--ink)\"/>\n          <circle cx=\"117.8\" cy=\"416.6\" r=\"3.6\" fill=\"var(--ink)\"/>\n          <circle cx=\"342.2\" cy=\"304.4\" r=\"4.6\" fill=\"var(--accent)\"/>\n          <text x=\"238.0\" y=\"74.0\" font-size=\"12.5\" fill=\"var(--ink)\" font-family=\"inherit\" text-anchor=\"start\" font-weight=\"600\">M₁(3;4)</text>\n          <text x=\"127.8\" y=\"422.6\" font-size=\"12.5\" fill=\"var(--ink)\" font-family=\"inherit\" text-anchor=\"start\" font-weight=\"600\">M₂(0;−5)</text>\n          <text x=\"352.2\" y=\"296.4\" font-size=\"12.5\" fill=\"var(--accent)\" font-family=\"inherit\" text-anchor=\"start\" font-weight=\"600\">M(6;−2)</text>\n          <text x=\"39.2\" y=\"88.9\" font-size=\"12.5\" fill=\"var(--accent)\" font-family=\"inherit\" text-anchor=\"start\" font-style=\"italic\" font-weight=\"600\">L: 2x + 3y = 6</text>\n          <text x=\"312.3\" y=\"268.9\" font-size=\"11.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"start\" font-style=\"italic\">x = −3y</text>\n        </svg>",
-    "block": "b19"
-  },
-  {
-    "id": "n218",
-    "topic": "t5",
-    "level": 2,
-    "num": 50,
-    "title": "Взаимное расположение трёх плоскостей",
-    "statement": "Определите взаимное расположение плоскостей $$x+y-z=1,\\qquad 2x-y+z=2,\\qquad 3x=3.$$",
-    "steps": [
-      {
-        "q": "Свести к вопросу о рангах",
-        "a": "Общие точки трёх плоскостей — это решения системы из трёх уравнений. По теореме Кронекера–Капелли всё определяется рангами матрицы $A$ и расширенной матрицы $(A\\mid b)$."
-      },
-      {
-        "q": "Вычислить ранги",
-        "a": "$$A=\\begin{pmatrix}1&1&-1\\\\2&-1&1\\\\3&0&0\\end{pmatrix},\\qquad (A\\mid b)=\\left(\\begin{array}{ccc|c}1&1&-1&1\\\\2&-1&1&2\\\\3&0&0&3\\end{array}\\right).$$ Третья строка равна сумме первых двух — и в матрице, и в столбце свободных членов. Поэтому $\\operatorname{rg}A=\\operatorname{rg}(A\\mid b)=2$."
-      },
-      {
-        "q": "Истолковать результат",
-        "a": "Ранги равны — система совместна; ранг $2$ при трёх неизвестных даёт $3-2=1$ свободную переменную, то есть множество решений одномерно."
-      },
-      {
-        "q": "Найти саму прямую",
-        "a": "Из третьего уравнения $x=1$; подставляя в первое, получаем $y-z=0$, то есть $y=z=t$."
-      }
-    ],
-    "answer": "Три плоскости пересекаются по общей прямой $x=1$, $y=z=t$ (образуют пучок). Общих точек бесконечно много.",
-    "figure": "<svg class=\"prax-fig\" viewBox=\"0 0 460 330\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Три плоскости, проходящие через общую прямую — пучок\"><path d=\"M68,219 L324,219 L392,131 L136,131 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.45\" stroke=\"var(--border)\" stroke-width=\"1.4\"/><path d=\"M83,159 L309,279 L377,191 L151,71 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.45\" stroke=\"var(--border)\" stroke-width=\"1.4\"/><path d=\"M85,283 L307,155 L375,67 L153,195 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.45\" stroke=\"var(--accent)\" stroke-width=\"1.4\"/><line x1=\"196.0\" y1=\"219.0\" x2=\"264.0\" y2=\"131.0\" stroke=\"var(--ruby)\" stroke-width=\"2.4\"/><text x=\"276.0\" y=\"126.0\" fill=\"var(--ruby)\" font-size=\"11.5\" text-anchor=\"start\">общая прямая</text><text x=\"230.0\" y=\"300.0\" fill=\"var(--ink-soft)\" font-size=\"11.5\" text-anchor=\"middle\">все плоскости пучка проходят через одну прямую</text></svg>",
-    "block": "b20"
-  },
-  {
-    "id": "n254",
-    "topic": "t5",
-    "level": 2,
-    "num": 51,
-    "title": "Пучок плоскостей",
-    "statement": "Составьте уравнение плоскости, проходящей через линию пересечения плоскостей $x+2y-z+1=0$ и $2x-y+3z-4=0$, а также через начало координат.",
-    "steps": [
-      {
-        "q": "Записать уравнение пучка",
-        "a": "Любая плоскость, проходящая через линию пересечения двух данных, имеет вид $$(x+2y-z+1)+\\lambda(2x-y+3z-4)=0$$ при некотором $\\lambda$ (кроме самой второй плоскости). Причина: точки линии пересечения обращают в нуль обе скобки сразу."
-      },
-      {
-        "q": "Подставить точку",
-        "a": "Начало координат $O(0;0;0)$: первая скобка даёт $1$, вторая $-4$. Условие $1+\\lambda\\cdot(-4)=0$ даёт $\\lambda=\\dfrac14$."
-      },
-      {
-        "q": "Собрать уравнение",
-        "a": "$$(x+2y-z+1)+\\frac14(2x-y+3z-4)=0.$$ Умножая на $4$: $4x+8y-4z+4+2x-y+3z-4=0$."
-      },
-      {
-        "q": "Проверить",
-        "a": "$6x+7y-z=0$ проходит через начало координат. Возьмём точку линии пересечения: при $z=0$ из системы $x+2y=-1$, $2x-y=4$ получаем $(1{,}4;\\,-1{,}2;\\,0)$, и $6\\cdot1{,}4+7\\cdot(-1{,}2)=8{,}4-8{,}4=0$."
-      }
-    ],
-    "answer": "$6x+7y-z=0$.",
-    "figure": "<svg class=\"prax-fig\" viewBox=\"0 0 460 330\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Пучок плоскостей: плоскость через линию пересечения двух данных\"><path d=\"M68,219 L324,219 L392,131 L136,131 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.45\" stroke=\"var(--border)\" stroke-width=\"1.4\"/><path d=\"M83,159 L309,279 L377,191 L151,71 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.45\" stroke=\"var(--border)\" stroke-width=\"1.4\"/><path d=\"M85,283 L307,155 L375,67 L153,195 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.45\" stroke=\"var(--accent)\" stroke-width=\"1.4\"/><line x1=\"196.0\" y1=\"219.0\" x2=\"264.0\" y2=\"131.0\" stroke=\"var(--ruby)\" stroke-width=\"2.4\"/><text x=\"276.0\" y=\"126.0\" fill=\"var(--ruby)\" font-size=\"11.5\" text-anchor=\"start\">общая прямая</text><text x=\"230.0\" y=\"300.0\" fill=\"var(--ink-soft)\" font-size=\"11.5\" text-anchor=\"middle\">все плоскости пучка проходят через одну прямую</text></svg>",
-    "block": "b20"
+    "section": "r4",
+    "type": "r4-5"
   },
   {
     "id": "v1610",
     "topic": "t5",
     "level": 2,
-    "num": 52,
+    "num": 49,
     "title": "Плоскость через точку пересечения трёх плоскостей, параллельная $Oxz$",
     "statement": "Составьте уравнение плоскости, проходящей через точку пересечения плоскостей $x-y=0$, $x+y-2z+1=0$, $2x+z-4=0$ и параллельной плоскости $Oxz$.",
     "steps": [
@@ -1479,13 +1623,164 @@ var TASKS_SEM2 = [
     ],
     "answer": "$y=\\dfrac76$.",
     "figure": "<svg class=\"prax-fig\" viewBox=\"0 0 460 320\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Плоскость, параллельная координатной плоскости Oxz\"><path d=\"M76,154 L324,154 L384,86 L136,86 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.4\" stroke=\"var(--accent)\" stroke-width=\"1.6\"/><path d=\"M76,264 L324,264 L384,196 L136,196 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.3\" stroke=\"var(--border)\" stroke-width=\"1.3\"/><circle cx=\"230\" cy=\"120\" r=\"5\" fill=\"var(--ruby)\"/><text x=\"230\" y=\"106\" fill=\"var(--ruby)\" font-size=\"13\" text-anchor=\"middle\" font-style=\"italic\">M</text><text x=\"352\" y=\"116\" fill=\"var(--accent)\" font-size=\"11.5\" text-anchor=\"start\">искомая</text><text x=\"352\" y=\"226\" fill=\"var(--ink-soft)\" font-size=\"11.5\" text-anchor=\"start\">Oxz</text><line x1=\"230\" y1=\"120\" x2=\"230\" y2=\"228\" stroke=\"var(--ink-soft)\" stroke-width=\"1.4\" stroke-dasharray=\"5 4\"/><line x1=\"150\" y1=\"175\" x2=\"150\" y2=\"130\" stroke=\"var(--ink-soft)\" stroke-width=\"1.4\"/><line x1=\"150\" y1=\"130\" x2=\"153.3\" y2=\"138.4\" stroke=\"var(--ink-soft)\" stroke-width=\"1.4\"/><line x1=\"150\" y1=\"130\" x2=\"146.7\" y2=\"138.4\" stroke=\"var(--ink-soft)\" stroke-width=\"1.4\"/><text x=\"140\" y=\"160\" fill=\"var(--ink-soft)\" font-size=\"12\" text-anchor=\"end\" font-style=\"italic\">y</text><text x=\"230\" y=\"290\" fill=\"var(--ink-soft)\" font-size=\"11.5\" text-anchor=\"middle\">параллельность Oxz означает постоянство y</text></svg>",
-    "block": "b20"
+    "section": "r4",
+    "type": "r4-6"
+  },
+  {
+    "id": "n254",
+    "topic": "t5",
+    "level": 2,
+    "num": 50,
+    "title": "Пучок плоскостей",
+    "statement": "Составьте уравнение плоскости, проходящей через линию пересечения плоскостей $x+2y-z+1=0$ и $2x-y+3z-4=0$, а также через начало координат.",
+    "steps": [
+      {
+        "q": "Записать уравнение пучка",
+        "a": "Любая плоскость, проходящая через линию пересечения двух данных, имеет вид $$(x+2y-z+1)+\\lambda(2x-y+3z-4)=0$$ при некотором $\\lambda$ (кроме самой второй плоскости). Причина: точки линии пересечения обращают в нуль обе скобки сразу."
+      },
+      {
+        "q": "Подставить точку",
+        "a": "Начало координат $O(0;0;0)$: первая скобка даёт $1$, вторая $-4$. Условие $1+\\lambda\\cdot(-4)=0$ даёт $\\lambda=\\dfrac14$."
+      },
+      {
+        "q": "Собрать уравнение",
+        "a": "$$(x+2y-z+1)+\\frac14(2x-y+3z-4)=0.$$ Умножая на $4$: $4x+8y-4z+4+2x-y+3z-4=0$."
+      },
+      {
+        "q": "Проверить",
+        "a": "$6x+7y-z=0$ проходит через начало координат. Возьмём точку линии пересечения: при $z=0$ из системы $x+2y=-1$, $2x-y=4$ получаем $(1{,}4;\\,-1{,}2;\\,0)$, и $6\\cdot1{,}4+7\\cdot(-1{,}2)=8{,}4-8{,}4=0$."
+      }
+    ],
+    "answer": "$6x+7y-z=0$.",
+    "figure": "<svg class=\"prax-fig\" viewBox=\"0 0 460 330\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Пучок плоскостей: плоскость через линию пересечения двух данных\"><path d=\"M68,219 L324,219 L392,131 L136,131 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.45\" stroke=\"var(--border)\" stroke-width=\"1.4\"/><path d=\"M83,159 L309,279 L377,191 L151,71 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.45\" stroke=\"var(--border)\" stroke-width=\"1.4\"/><path d=\"M85,283 L307,155 L375,67 L153,195 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.45\" stroke=\"var(--accent)\" stroke-width=\"1.4\"/><line x1=\"196.0\" y1=\"219.0\" x2=\"264.0\" y2=\"131.0\" stroke=\"var(--ruby)\" stroke-width=\"2.4\"/><text x=\"276.0\" y=\"126.0\" fill=\"var(--ruby)\" font-size=\"11.5\" text-anchor=\"start\">общая прямая</text><text x=\"230.0\" y=\"300.0\" fill=\"var(--ink-soft)\" font-size=\"11.5\" text-anchor=\"middle\">все плоскости пучка проходят через одну прямую</text></svg>",
+    "section": "r4",
+    "type": "r4-6"
+  },
+  {
+    "id": "n218",
+    "topic": "t5",
+    "level": 2,
+    "num": 51,
+    "title": "Взаимное расположение трёх плоскостей",
+    "statement": "Определите взаимное расположение плоскостей $$x+y-z=1,\\qquad 2x-y+z=2,\\qquad 3x=3.$$",
+    "steps": [
+      {
+        "q": "Свести к вопросу о рангах",
+        "a": "Общие точки трёх плоскостей — это решения системы из трёх уравнений. По теореме Кронекера–Капелли всё определяется рангами матрицы $A$ и расширенной матрицы $(A\\mid b)$."
+      },
+      {
+        "q": "Вычислить ранги",
+        "a": "$$A=\\begin{pmatrix}1&1&-1\\\\2&-1&1\\\\3&0&0\\end{pmatrix},\\qquad (A\\mid b)=\\left(\\begin{array}{ccc|c}1&1&-1&1\\\\2&-1&1&2\\\\3&0&0&3\\end{array}\\right).$$ Третья строка равна сумме первых двух — и в матрице, и в столбце свободных членов. Поэтому $\\operatorname{rg}A=\\operatorname{rg}(A\\mid b)=2$."
+      },
+      {
+        "q": "Истолковать результат",
+        "a": "Ранги равны — система совместна; ранг $2$ при трёх неизвестных даёт $3-2=1$ свободную переменную, то есть множество решений одномерно."
+      },
+      {
+        "q": "Найти саму прямую",
+        "a": "Из третьего уравнения $x=1$; подставляя в первое, получаем $y-z=0$, то есть $y=z=t$."
+      }
+    ],
+    "answer": "Три плоскости пересекаются по общей прямой $x=1$, $y=z=t$ (образуют пучок). Общих точек бесконечно много.",
+    "figure": "<svg class=\"prax-fig\" viewBox=\"0 0 460 330\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Три плоскости, проходящие через общую прямую — пучок\"><path d=\"M68,219 L324,219 L392,131 L136,131 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.45\" stroke=\"var(--border)\" stroke-width=\"1.4\"/><path d=\"M83,159 L309,279 L377,191 L151,71 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.45\" stroke=\"var(--border)\" stroke-width=\"1.4\"/><path d=\"M85,283 L307,155 L375,67 L153,195 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.45\" stroke=\"var(--accent)\" stroke-width=\"1.4\"/><line x1=\"196.0\" y1=\"219.0\" x2=\"264.0\" y2=\"131.0\" stroke=\"var(--ruby)\" stroke-width=\"2.4\"/><text x=\"276.0\" y=\"126.0\" fill=\"var(--ruby)\" font-size=\"11.5\" text-anchor=\"start\">общая прямая</text><text x=\"230.0\" y=\"300.0\" fill=\"var(--ink-soft)\" font-size=\"11.5\" text-anchor=\"middle\">все плоскости пучка проходят через одну прямую</text></svg>",
+    "section": "r4",
+    "type": "r4-7"
+  },
+  {
+    "id": "p109",
+    "topic": "t5",
+    "level": 2,
+    "num": 52,
+    "title": "Линейное многообразие в $P_4[x]$: $p(-1)=-p(1)$, $p'(1)=3$",
+    "statement": "В пространстве многочленов степени не выше четырёх задайте в параметрическом виде многообразие $H$, ограниченное условиями $p(-1)=-p(1)$ и $p'(1)=3$. Укажите его размерность.",
+    "steps": [
+      {
+        "q": "Перевести условия в уравнения на коэффициенты",
+        "a": "Пусть $p(x)=a_0+a_1x+a_2x^2+a_3x^3+a_4x^4$. Условие $p(-1)=-p(1)$ даёт $a_0-a_1+a_2-a_3+a_4=-a_0-a_1-a_2-a_3-a_4$, после сокращения — $a_0+a_2+a_4=0$. Условие $p'(1)=3$ даёт второе уравнение."
+      },
+      {
+        "q": "Записать систему",
+        "a": "$$\\begin{cases}a_0+a_2+a_4=0,\\\\[2pt] a_1+2a_2+3a_3+4a_4=3.\\end{cases}$$ Её ранг равен $2$, неизвестных пять, значит размерность многообразия $5-2=3$."
+      },
+      {
+        "q": "Найти частное решение",
+        "a": "Годится $c=(0;3;0;0;0)$, то есть многочлен $p_0(x)=3x$."
+      },
+      {
+        "q": "Найти ФСР однородной системы",
+        "a": "$$f_1=(1;2;-1;0;0),\\quad f_2=(0;3;0;-1;0),\\quad f_3=(1;4;0;0;-1),$$ им отвечают многочлены $p_1(x)=-x^2+2x+1$, $p_2(x)=-x^3+3x$, $p_3(x)=-x^4+4x+1$."
+      }
+    ],
+    "answer": "$H=p_0(x)+L\\{p_1(x),\\,p_2(x),\\,p_3(x)\\}$, $\\;\\dim H=3$.",
+    "figure": "<svg class=\"prax-fig\" viewBox=\"0 0 460 330\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Линейное многообразие: подпространство L, сдвинутое на вектор c\"><path d=\"M78,270 L318,270 L382,194 L142,194 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.45\" stroke=\"var(--border)\" stroke-width=\"1.5\"/><path d=\"M78,170 L318,170 L382,94 L142,94 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.35\" stroke=\"var(--accent)\" stroke-width=\"1.5\"/><circle cx=\"230\" cy=\"232\" r=\"4.5\" fill=\"var(--ink-soft)\"/><text x=\"214\" y=\"248\" fill=\"var(--ink-soft)\" font-size=\"12\" text-anchor=\"middle\">0</text><line x1=\"230\" y1=\"232\" x2=\"230\" y2=\"136\" stroke=\"var(--ruby)\" stroke-width=\"1.8\"/><line x1=\"230\" y1=\"136\" x2=\"233.3\" y2=\"144.4\" stroke=\"var(--ruby)\" stroke-width=\"1.8\"/><line x1=\"230\" y1=\"136\" x2=\"226.7\" y2=\"144.4\" stroke=\"var(--ruby)\" stroke-width=\"1.8\"/><text x=\"244\" y=\"188\" fill=\"var(--ruby)\" font-size=\"13\" text-anchor=\"start\" font-style=\"italic\">c</text><circle cx=\"230\" cy=\"132\" r=\"5\" fill=\"var(--ruby)\"/><text x=\"230\" y=\"300\" fill=\"var(--ink-soft)\" font-size=\"11.5\" text-anchor=\"middle\">многообразие H = c + L — подпространство, сдвинутое на вектор c</text><text x=\"348\" y=\"238\" fill=\"var(--border)\" font-size=\"13\" text-anchor=\"start\" font-style=\"italic\">L</text><text x=\"348\" y=\"138\" fill=\"var(--accent)\" font-size=\"13\" text-anchor=\"start\" font-style=\"italic\">H</text></svg>",
+    "section": "r4",
+    "type": "r4-8"
+  },
+  {
+    "id": "n232",
+    "topic": "t5",
+    "level": 2,
+    "num": 53,
+    "title": "Многообразие, заданное СЛАУ",
+    "statement": "Многообразие, представленное в форме СЛАУ, задайте в параметрическом виде $H=c+L\\{a_1,\\ldots,a_k\\}$ и укажите его размерность: $$H:\\ \\begin{cases}3x+4y-5z=1,\\\\ 2x+3y+2z=5.\\end{cases}$$",
+    "steps": [
+      {
+        "q": "Найти ранг",
+        "a": "Строки $(3;4;-5)$ и $(2;3;2)$ не пропорциональны, значит ранг равен $2$. Неизвестных три, поэтому размерность многообразия $3-2=1$ — это прямая."
+      },
+      {
+        "q": "Найти направляющее подпространство",
+        "a": "Решаем однородную систему $3x+4y-5z=0$, $2x+3y+2z=0$. Умножим первое на $3$, второе на $4$ и вычтем: $9x+12y-15z-8x-12y-8z=0$, то есть $x=23z$. Тогда из второго $y=-16z$."
+      },
+      {
+        "q": "Выписать ФСР",
+        "a": "При $z=1$ получаем $a_1=(23;-16;1)$."
+      },
+      {
+        "q": "Найти частное решение",
+        "a": "Положим $z=0$: $3x+4y=1$, $2x+3y=5$. Отсюда $x=-17$, $y=13$, то есть $c=(-17;13;0)$."
+      }
+    ],
+    "answer": "$H=(-17;13;0)+L\\{(23;-16;1)\\}$, $\\;\\dim H=1$.",
+    "figure": "<svg class=\"prax-fig\" viewBox=\"0 0 460 330\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Линейное многообразие как сдвиг подпространства решений однородной системы\"><path d=\"M78,270 L318,270 L382,194 L142,194 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.45\" stroke=\"var(--border)\" stroke-width=\"1.5\"/><path d=\"M78,170 L318,170 L382,94 L142,94 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.35\" stroke=\"var(--accent)\" stroke-width=\"1.5\"/><circle cx=\"230\" cy=\"232\" r=\"4.5\" fill=\"var(--ink-soft)\"/><text x=\"214\" y=\"248\" fill=\"var(--ink-soft)\" font-size=\"12\" text-anchor=\"middle\">0</text><line x1=\"230\" y1=\"232\" x2=\"230\" y2=\"136\" stroke=\"var(--ruby)\" stroke-width=\"1.8\"/><line x1=\"230\" y1=\"136\" x2=\"233.3\" y2=\"144.4\" stroke=\"var(--ruby)\" stroke-width=\"1.8\"/><line x1=\"230\" y1=\"136\" x2=\"226.7\" y2=\"144.4\" stroke=\"var(--ruby)\" stroke-width=\"1.8\"/><text x=\"244\" y=\"188\" fill=\"var(--ruby)\" font-size=\"13\" text-anchor=\"start\" font-style=\"italic\">c</text><circle cx=\"230\" cy=\"132\" r=\"5\" fill=\"var(--ruby)\"/><text x=\"230\" y=\"300\" fill=\"var(--ink-soft)\" font-size=\"11.5\" text-anchor=\"middle\">многообразие H = c + L — подпространство, сдвинутое на вектор c</text><text x=\"348\" y=\"238\" fill=\"var(--border)\" font-size=\"13\" text-anchor=\"start\" font-style=\"italic\">L</text><text x=\"348\" y=\"138\" fill=\"var(--accent)\" font-size=\"13\" text-anchor=\"start\" font-style=\"italic\">H</text></svg>",
+    "section": "r4",
+    "type": "r4-8"
+  },
+  {
+    "id": "p110",
+    "topic": "t5",
+    "level": 1,
+    "num": 54,
+    "title": "Точка прямой, равноудалённая от $M_1(3;4)$ и $M_2(0;-5)$",
+    "statement": "Найдите на прямой $L\\colon 2x+3y=6$ точку $M(x;y)$, равноудалённую от точек $M_1(3;4)$ и $M_2(0;-5)$.",
+    "steps": [
+      {
+        "q": "Записать условие равноудалённости",
+        "a": "Удобнее приравнять квадраты расстояний, чтобы не тащить корни: $|M_1M|^2=|M_2M|^2$."
+      },
+      {
+        "q": "Составить систему",
+        "a": "$$\\begin{cases}2x+3y=6,\\\\ (x-3)^2+(y-4)^2=x^2+(y+5)^2.\\end{cases}$$"
+      },
+      {
+        "q": "Упростить второе уравнение",
+        "a": "Раскрывая квадраты: $-6x-8y+25=10y+25$, то есть $x=-3y$. Это уравнение серединного перпендикуляра к отрезку $M_1M_2$."
+      },
+      {
+        "q": "Подставить в уравнение прямой",
+        "a": "$-6y+3y=6$, откуда $y=-2$ и $x=6$."
+      }
+    ],
+    "answer": "$M(6;-2)$.",
+    "figure": "<svg class=\"prax-fig\" viewBox=\"0 0 460 497\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Прямая L, точки M1 и M2 и равноудалённая от них точка M(6;−2) на прямой; пунктиром серединный перпендикуляр\">\n          <line x1=\"43.0\" y1=\"469.0\" x2=\"43.0\" y2=\"27.6\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"80.4\" y1=\"469.0\" x2=\"80.4\" y2=\"27.6\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"155.2\" y1=\"469.0\" x2=\"155.2\" y2=\"27.6\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"192.6\" y1=\"469.0\" x2=\"192.6\" y2=\"27.6\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"230.0\" y1=\"469.0\" x2=\"230.0\" y2=\"27.6\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"267.4\" y1=\"469.0\" x2=\"267.4\" y2=\"27.6\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"304.8\" y1=\"469.0\" x2=\"304.8\" y2=\"27.6\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"342.2\" y1=\"469.0\" x2=\"342.2\" y2=\"27.6\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"379.6\" y1=\"469.0\" x2=\"379.6\" y2=\"27.6\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"417.0\" y1=\"469.0\" x2=\"417.0\" y2=\"27.6\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"454.0\" x2=\"432.0\" y2=\"454.0\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"416.6\" x2=\"432.0\" y2=\"416.6\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"379.2\" x2=\"432.0\" y2=\"379.2\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"341.8\" x2=\"432.0\" y2=\"341.8\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"304.4\" x2=\"432.0\" y2=\"304.4\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"267.0\" x2=\"432.0\" y2=\"267.0\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"192.2\" x2=\"432.0\" y2=\"192.2\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"154.8\" x2=\"432.0\" y2=\"154.8\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"117.4\" x2=\"432.0\" y2=\"117.4\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"80.0\" x2=\"432.0\" y2=\"80.0\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"42.6\" x2=\"432.0\" y2=\"42.6\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"229.6\" x2=\"432.0\" y2=\"229.6\" stroke=\"var(--ink-soft)\" stroke-width=\"1.5\"/>\n          <polygon points=\"432.0,229.6 423.0,225.6 423.0,233.6\" fill=\"var(--ink-soft)\"/>\n          <line x1=\"117.8\" y1=\"469.0\" x2=\"117.8\" y2=\"27.6\" stroke=\"var(--ink-soft)\" stroke-width=\"1.5\"/>\n          <polygon points=\"117.8,27.6 113.8,36.6 121.8,36.6\" fill=\"var(--ink-soft)\"/>\n          <text x=\"428.0\" y=\"245.6\" font-size=\"12.5\" fill=\"var(--ink-soft)\" font-family=\"inherit\" text-anchor=\"end\" font-style=\"italic\">x</text>\n          <text x=\"125.8\" y=\"37.6\" font-size=\"12.5\" fill=\"var(--ink-soft)\" font-family=\"inherit\" text-anchor=\"start\" font-style=\"italic\">y</text>\n          <text x=\"112.8\" y=\"243.6\" font-size=\"11\" fill=\"var(--ink-soft)\" font-family=\"inherit\" text-anchor=\"end\">O</text>\n          <text x=\"43.0\" y=\"243.6\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"middle\">-2</text>\n          <text x=\"192.6\" y=\"243.6\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"middle\">2</text>\n          <text x=\"267.4\" y=\"243.6\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"middle\">4</text>\n          <text x=\"342.2\" y=\"243.6\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"middle\">6</text>\n          <text x=\"111.8\" y=\"458.0\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"end\">-6</text>\n          <text x=\"111.8\" y=\"383.2\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"end\">-4</text>\n          <text x=\"111.8\" y=\"308.4\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"end\">-2</text>\n          <text x=\"111.8\" y=\"158.8\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"end\">2</text>\n          <text x=\"111.8\" y=\"84.0\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"end\">4</text>\n          <line x1=\"35.5\" y1=\"99.9\" x2=\"424.5\" y2=\"359.3\" stroke=\"var(--accent)\" stroke-width=\"2.6\"/>\n          <line x1=\"35.5\" y1=\"202.2\" x2=\"424.5\" y2=\"331.8\" stroke=\"var(--ink-mute)\" stroke-width=\"1.6\" stroke-dasharray=\"6 5\"/>\n          <line x1=\"342.2\" y1=\"304.4\" x2=\"230.0\" y2=\"80.0\" stroke=\"var(--ink-soft)\" stroke-width=\"1.5\" stroke-dasharray=\"3 4\"/>\n          <line x1=\"342.2\" y1=\"304.4\" x2=\"117.8\" y2=\"416.6\" stroke=\"var(--ink-soft)\" stroke-width=\"1.5\" stroke-dasharray=\"3 4\"/>\n          <line x1=\"280.7\" y1=\"194.9\" x2=\"291.5\" y2=\"189.5\" stroke=\"var(--ink)\" stroke-width=\"1.6\"/>\n          <line x1=\"232.7\" y1=\"365.9\" x2=\"227.3\" y2=\"355.1\" stroke=\"var(--ink)\" stroke-width=\"1.6\"/>\n          <circle cx=\"230.0\" cy=\"80.0\" r=\"3.6\" fill=\"var(--ink)\"/>\n          <circle cx=\"117.8\" cy=\"416.6\" r=\"3.6\" fill=\"var(--ink)\"/>\n          <circle cx=\"342.2\" cy=\"304.4\" r=\"4.6\" fill=\"var(--accent)\"/>\n          <text x=\"238.0\" y=\"74.0\" font-size=\"12.5\" fill=\"var(--ink)\" font-family=\"inherit\" text-anchor=\"start\" font-weight=\"600\">M₁(3;4)</text>\n          <text x=\"127.8\" y=\"422.6\" font-size=\"12.5\" fill=\"var(--ink)\" font-family=\"inherit\" text-anchor=\"start\" font-weight=\"600\">M₂(0;−5)</text>\n          <text x=\"352.2\" y=\"296.4\" font-size=\"12.5\" fill=\"var(--accent)\" font-family=\"inherit\" text-anchor=\"start\" font-weight=\"600\">M(6;−2)</text>\n          <text x=\"39.2\" y=\"88.9\" font-size=\"12.5\" fill=\"var(--accent)\" font-family=\"inherit\" text-anchor=\"start\" font-style=\"italic\" font-weight=\"600\">L: 2x + 3y = 6</text>\n          <text x=\"312.3\" y=\"268.9\" font-size=\"11.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"start\" font-style=\"italic\">x = −3y</text>\n        </svg>",
+    "section": "r4",
+    "type": "r4-9"
   },
   {
     "id": "p113",
     "topic": "t6",
     "level": 2,
-    "num": 53,
+    "num": 55,
     "title": "Эллипс $4x^2+3y^2-8x+12y-32=0$",
     "statement": "Показать, что уравнение $4x^2+3y^2-8x+12y-32=0$ определяет эллипс; найти его оси, координаты центра и эксцентриситет.",
     "steps": [
@@ -1508,13 +1803,14 @@ var TASKS_SEM2 = [
     ],
     "answer": "Центр $C(1;-2)$, оси $2a=4\\sqrt3$ и $2b=8$, эксцентриситет $\\varepsilon=\\tfrac12$.",
     "figure": "<svg class=\"prax-fig\" viewBox=\"0 0 440 483\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Эллипс с центром C(1;−2), большой осью вдоль Oy, фокусами F1(1;0) и F2(1;−4)\">\n          <line x1=\"45.1\" y1=\"455.0\" x2=\"45.1\" y2=\"28.3\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"87.7\" y1=\"455.0\" x2=\"87.7\" y2=\"28.3\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"130.4\" y1=\"455.0\" x2=\"130.4\" y2=\"28.3\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"215.7\" y1=\"455.0\" x2=\"215.7\" y2=\"28.3\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"258.4\" y1=\"455.0\" x2=\"258.4\" y2=\"28.3\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"301.1\" y1=\"455.0\" x2=\"301.1\" y2=\"28.3\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"343.7\" y1=\"455.0\" x2=\"343.7\" y2=\"28.3\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"386.4\" y1=\"455.0\" x2=\"386.4\" y2=\"28.3\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"416.6\" x2=\"412.0\" y2=\"416.6\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"373.9\" x2=\"412.0\" y2=\"373.9\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"331.3\" x2=\"412.0\" y2=\"331.3\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"288.6\" x2=\"412.0\" y2=\"288.6\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"245.9\" x2=\"412.0\" y2=\"245.9\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"203.3\" x2=\"412.0\" y2=\"203.3\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"117.9\" x2=\"412.0\" y2=\"117.9\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"75.3\" x2=\"412.0\" y2=\"75.3\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"32.6\" x2=\"412.0\" y2=\"32.6\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"160.6\" x2=\"412.0\" y2=\"160.6\" stroke=\"var(--ink-soft)\" stroke-width=\"1.5\"/>\n          <polygon points=\"412.0,160.6 403.0,156.6 403.0,164.6\" fill=\"var(--ink-soft)\"/>\n          <line x1=\"173.1\" y1=\"455.0\" x2=\"173.1\" y2=\"28.3\" stroke=\"var(--ink-soft)\" stroke-width=\"1.5\"/>\n          <polygon points=\"173.1,28.3 169.1,37.3 177.1,37.3\" fill=\"var(--ink-soft)\"/>\n          <text x=\"408.0\" y=\"176.6\" font-size=\"12.5\" fill=\"var(--ink-soft)\" font-family=\"inherit\" text-anchor=\"end\" font-style=\"italic\">x</text>\n          <text x=\"181.1\" y=\"38.3\" font-size=\"12.5\" fill=\"var(--ink-soft)\" font-family=\"inherit\" text-anchor=\"start\" font-style=\"italic\">y</text>\n          <text x=\"168.1\" y=\"174.6\" font-size=\"11\" fill=\"var(--ink-soft)\" font-family=\"inherit\" text-anchor=\"end\">O</text>\n          <text x=\"87.7\" y=\"174.6\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"middle\">-2</text>\n          <text x=\"258.4\" y=\"174.6\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"middle\">2</text>\n          <text x=\"343.7\" y=\"174.6\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"middle\">4</text>\n          <text x=\"167.1\" y=\"420.6\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"end\">-6</text>\n          <text x=\"167.1\" y=\"335.3\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"end\">-4</text>\n          <text x=\"167.1\" y=\"249.9\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"end\">-2</text>\n          <text x=\"167.1\" y=\"79.3\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"end\">2</text>\n          <line x1=\"215.7\" y1=\"442.2\" x2=\"215.7\" y2=\"49.7\" stroke=\"var(--ink-mute)\" stroke-width=\"1.4\" stroke-dasharray=\"6 5\"/>\n          <line x1=\"46.6\" y1=\"245.9\" x2=\"384.9\" y2=\"245.9\" stroke=\"var(--ink-mute)\" stroke-width=\"1.4\" stroke-dasharray=\"6 5\"/>\n          <ellipse cx=\"215.7\" cy=\"245.9\" rx=\"147.8\" ry=\"170.7\" fill=\"none\" stroke=\"var(--accent)\" stroke-width=\"2.6\"/>\n          <circle cx=\"215.7\" cy=\"245.9\" r=\"4\" fill=\"var(--ink)\"/>\n          <text x=\"224.7\" y=\"238.9\" font-size=\"12.5\" fill=\"var(--ink)\" font-family=\"inherit\" text-anchor=\"start\" font-weight=\"600\">C(1;−2)</text>\n          <circle cx=\"215.7\" cy=\"160.6\" r=\"3.4\" fill=\"var(--ink-soft)\"/>\n          <circle cx=\"215.7\" cy=\"331.3\" r=\"3.4\" fill=\"var(--ink-soft)\"/>\n          <text x=\"224.7\" y=\"164.6\" font-size=\"12.5\" fill=\"var(--ink-soft)\" font-family=\"inherit\" text-anchor=\"start\">F₁(1;0)</text>\n          <text x=\"224.7\" y=\"335.3\" font-size=\"12.5\" fill=\"var(--ink-soft)\" font-family=\"inherit\" text-anchor=\"start\">F₂(1;−4)</text>\n          <circle cx=\"215.7\" cy=\"75.3\" r=\"2.6\" fill=\"var(--ink-mute)\"/>\n          <circle cx=\"215.7\" cy=\"416.6\" r=\"2.6\" fill=\"var(--ink-mute)\"/>\n          <circle cx=\"67.9\" cy=\"245.9\" r=\"2.6\" fill=\"var(--ink-mute)\"/>\n          <circle cx=\"363.5\" cy=\"245.9\" r=\"2.6\" fill=\"var(--ink-mute)\"/>\n          <text x=\"157.7\" y=\"75.3\" font-size=\"11.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"start\" font-style=\"italic\">b = 4</text>\n          <text x=\"339.5\" y=\"265.9\" font-size=\"11.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"start\" font-style=\"italic\">a = 2√3</text>\n        </svg>",
-    "block": "b21"
+    "section": "r5",
+    "type": "r5-1"
   },
   {
     "id": "n213",
     "topic": "t6",
     "level": 3,
-    "num": 54,
+    "num": 56,
     "title": "Эллипс $24x^2+49y^2=1176$",
     "statement": "Дано уравнение эллипса $24x^2+49y^2=1176$. Найдите: 1) длины полуосей; 2) координаты фокусов; 3) эксцентриситет; 4) уравнения директрис и расстояние между ними; 5) точки эллипса, расстояние от которых до левого фокуса $F_1$ равно $12$.",
     "steps": [
@@ -1541,13 +1837,14 @@ var TASKS_SEM2 = [
     ],
     "answer": "$a=7$, $b=2\\sqrt6$; $F_{1,2}(\\mp5;0)$; $\\varepsilon=\\tfrac57$; директрисы $x=\\pm\\tfrac{49}{5}$, расстояние $19{,}6$; искомая точка $A(7;0)$.",
     "figure": "<svg class=\"prax-fig\" viewBox=\"0 0 460 400\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Эллипс с центром (2;3), полуоси 2 и 3\"><line x1=\"14.0\" y1=\"164.0\" x2=\"14.0\" y2=\"436.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"48.0\" y1=\"164.0\" x2=\"48.0\" y2=\"436.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"82.0\" y1=\"164.0\" x2=\"82.0\" y2=\"436.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"116.0\" y1=\"164.0\" x2=\"116.0\" y2=\"436.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"150.0\" y1=\"164.0\" x2=\"150.0\" y2=\"436.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"184.0\" y1=\"164.0\" x2=\"184.0\" y2=\"436.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"218.0\" y1=\"164.0\" x2=\"218.0\" y2=\"436.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"252.0\" y1=\"164.0\" x2=\"252.0\" y2=\"436.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"286.0\" y1=\"164.0\" x2=\"286.0\" y2=\"436.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"14.0\" y1=\"164.0\" x2=\"286.0\" y2=\"164.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"14.0\" y1=\"198.0\" x2=\"286.0\" y2=\"198.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"14.0\" y1=\"232.0\" x2=\"286.0\" y2=\"232.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"14.0\" y1=\"266.0\" x2=\"286.0\" y2=\"266.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"14.0\" y1=\"300.0\" x2=\"286.0\" y2=\"300.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"14.0\" y1=\"334.0\" x2=\"286.0\" y2=\"334.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"14.0\" y1=\"368.0\" x2=\"286.0\" y2=\"368.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"14.0\" y1=\"402.0\" x2=\"286.0\" y2=\"402.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"14.0\" y1=\"436.0\" x2=\"286.0\" y2=\"436.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"14.0\" y1=\"300.0\" x2=\"294.0\" y2=\"300.0\" stroke=\"var(--ink-soft)\" stroke-width=\"1.4\"/><line x1=\"294.0\" y1=\"300.0\" x2=\"285.6\" y2=\"303.3\" stroke=\"var(--ink-soft)\" stroke-width=\"1.4\"/><line x1=\"294.0\" y1=\"300.0\" x2=\"285.6\" y2=\"296.7\" stroke=\"var(--ink-soft)\" stroke-width=\"1.4\"/><line x1=\"150.0\" y1=\"436.0\" x2=\"150.0\" y2=\"156.0\" stroke=\"var(--ink-soft)\" stroke-width=\"1.4\"/><line x1=\"150.0\" y1=\"156.0\" x2=\"153.3\" y2=\"164.4\" stroke=\"var(--ink-soft)\" stroke-width=\"1.4\"/><line x1=\"150.0\" y1=\"156.0\" x2=\"146.7\" y2=\"164.4\" stroke=\"var(--ink-soft)\" stroke-width=\"1.4\"/><text x=\"290.0\" y=\"317.0\" fill=\"var(--ink-soft)\" font-size=\"12\" text-anchor=\"middle\" font-style=\"italic\">x</text><text x=\"136.0\" y=\"159.0\" fill=\"var(--ink-soft)\" font-size=\"12\" text-anchor=\"middle\" font-style=\"italic\">y</text><text x=\"140.0\" y=\"316.0\" fill=\"var(--ink-soft)\" font-size=\"11.5\" text-anchor=\"middle\">O</text><ellipse cx=\"218.0\" cy=\"198.0\" rx=\"68.0\" ry=\"102.0\" fill=\"none\" stroke=\"var(--accent)\" stroke-width=\"2.2\"/><circle cx=\"218.0\" cy=\"198.0\" r=\"5\" fill=\"var(--ruby)\"/><text x=\"228.0\" y=\"218.0\" fill=\"var(--ruby)\" font-size=\"12\" text-anchor=\"start\">C(2;3)</text><line x1=\"150.0\" y1=\"198.0\" x2=\"286.0\" y2=\"198.0\" stroke=\"var(--ink-soft)\" stroke-width=\"1.3\" stroke-dasharray=\"4 3\"/><line x1=\"218.0\" y1=\"96.0\" x2=\"218.0\" y2=\"300.0\" stroke=\"var(--ink-soft)\" stroke-width=\"1.3\" stroke-dasharray=\"4 3\"/><text x=\"258.0\" y=\"190.0\" fill=\"var(--ink-soft)\" font-size=\"11.5\" text-anchor=\"middle\">a = 2</text><text x=\"192.0\" y=\"136.0\" fill=\"var(--ink-soft)\" font-size=\"11.5\" text-anchor=\"end\">b = 3</text><text x=\"230.0\" y=\"385.0\" fill=\"var(--ink-soft)\" font-size=\"11.5\" text-anchor=\"middle\">большая ось вертикальна: b > a</text></svg>",
-    "block": "b21"
+    "section": "r5",
+    "type": "r5-1"
   },
   {
     "id": "n233",
     "topic": "t6",
     "level": 2,
-    "num": 55,
+    "num": 57,
     "title": "Гипербола $5x^2-4y^2=20$",
     "statement": "Дано уравнение гиперболы $5x^2-4y^2=20$. Найдите: 1) длины полуосей; 2) координаты фокусов; 3) эксцентриситет; 4) уравнения асимптот и директрис; 5) фокальные радиусы точки $M(3;2{,}5)$.",
     "steps": [
@@ -1574,13 +1871,14 @@ var TASKS_SEM2 = [
     ],
     "answer": "$a=2$, $b=\\sqrt5$; $F_{1,2}(\\mp3;0)$; $\\varepsilon=\\tfrac32$; асимптоты $y=\\pm\\tfrac{\\sqrt5}{2}x$; директрисы $x=\\pm\\tfrac43$; $r_1=6{,}5$, $r_2=2{,}5$.",
     "figure": "<svg class=\"prax-fig\" viewBox=\"0 0 460 400\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Гипербола с центром (1;−2), полуоси 4 и 3, асимптоты\"><line x1=\"44.0\" y1=\"46.0\" x2=\"44.0\" y2=\"354.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"66.0\" y1=\"46.0\" x2=\"66.0\" y2=\"354.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"88.0\" y1=\"46.0\" x2=\"88.0\" y2=\"354.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"110.0\" y1=\"46.0\" x2=\"110.0\" y2=\"354.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"132.0\" y1=\"46.0\" x2=\"132.0\" y2=\"354.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"154.0\" y1=\"46.0\" x2=\"154.0\" y2=\"354.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"176.0\" y1=\"46.0\" x2=\"176.0\" y2=\"354.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"198.0\" y1=\"46.0\" x2=\"198.0\" y2=\"354.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"220.0\" y1=\"46.0\" x2=\"220.0\" y2=\"354.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"242.0\" y1=\"46.0\" x2=\"242.0\" y2=\"354.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"264.0\" y1=\"46.0\" x2=\"264.0\" y2=\"354.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"286.0\" y1=\"46.0\" x2=\"286.0\" y2=\"354.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"308.0\" y1=\"46.0\" x2=\"308.0\" y2=\"354.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"330.0\" y1=\"46.0\" x2=\"330.0\" y2=\"354.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"352.0\" y1=\"46.0\" x2=\"352.0\" y2=\"354.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"374.0\" y1=\"46.0\" x2=\"374.0\" y2=\"354.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"396.0\" y1=\"46.0\" x2=\"396.0\" y2=\"354.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"44.0\" y1=\"46.0\" x2=\"396.0\" y2=\"46.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"44.0\" y1=\"68.0\" x2=\"396.0\" y2=\"68.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"44.0\" y1=\"90.0\" x2=\"396.0\" y2=\"90.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"44.0\" y1=\"112.0\" x2=\"396.0\" y2=\"112.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"44.0\" y1=\"134.0\" x2=\"396.0\" y2=\"134.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"44.0\" y1=\"156.0\" x2=\"396.0\" y2=\"156.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"44.0\" y1=\"178.0\" x2=\"396.0\" y2=\"178.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"44.0\" y1=\"200.0\" x2=\"396.0\" y2=\"200.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"44.0\" y1=\"222.0\" x2=\"396.0\" y2=\"222.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"44.0\" y1=\"244.0\" x2=\"396.0\" y2=\"244.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"44.0\" y1=\"266.0\" x2=\"396.0\" y2=\"266.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"44.0\" y1=\"288.0\" x2=\"396.0\" y2=\"288.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"44.0\" y1=\"310.0\" x2=\"396.0\" y2=\"310.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"44.0\" y1=\"332.0\" x2=\"396.0\" y2=\"332.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"44.0\" y1=\"354.0\" x2=\"396.0\" y2=\"354.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"44.0\" y1=\"200.0\" x2=\"404.0\" y2=\"200.0\" stroke=\"var(--ink-soft)\" stroke-width=\"1.4\"/><line x1=\"404.0\" y1=\"200.0\" x2=\"395.6\" y2=\"203.3\" stroke=\"var(--ink-soft)\" stroke-width=\"1.4\"/><line x1=\"404.0\" y1=\"200.0\" x2=\"395.6\" y2=\"196.7\" stroke=\"var(--ink-soft)\" stroke-width=\"1.4\"/><line x1=\"220.0\" y1=\"354.0\" x2=\"220.0\" y2=\"38.0\" stroke=\"var(--ink-soft)\" stroke-width=\"1.4\"/><line x1=\"220.0\" y1=\"38.0\" x2=\"223.3\" y2=\"46.4\" stroke=\"var(--ink-soft)\" stroke-width=\"1.4\"/><line x1=\"220.0\" y1=\"38.0\" x2=\"216.7\" y2=\"46.4\" stroke=\"var(--ink-soft)\" stroke-width=\"1.4\"/><text x=\"400.0\" y=\"217.0\" fill=\"var(--ink-soft)\" font-size=\"12\" text-anchor=\"middle\" font-style=\"italic\">x</text><text x=\"206.0\" y=\"41.0\" fill=\"var(--ink-soft)\" font-size=\"12\" text-anchor=\"middle\" font-style=\"italic\">y</text><text x=\"210.0\" y=\"216.0\" fill=\"var(--ink-soft)\" font-size=\"11.5\" text-anchor=\"middle\">O</text><line x1=\"70.0\" y1=\"88.0\" x2=\"370.0\" y2=\"312.0\" stroke=\"var(--ink-soft)\" stroke-width=\"1.4\" stroke-dasharray=\"6 4\"/><line x1=\"70.0\" y1=\"312.0\" x2=\"370.0\" y2=\"88.0\" stroke=\"var(--ink-soft)\" stroke-width=\"1.4\" stroke-dasharray=\"6 4\"/><path d=\"M393.4,312.1 L384.1,303.9 L375.4,296.1 L367.4,288.7 L360.0,281.7 L353.2,275.0 L347.0,268.7 L341.3,262.6 L336.2,256.9 L331.5,251.3 L327.3,246.0 L323.5,240.9 L320.2,235.9 L317.3,231.1 L314.8,226.4 L312.7,221.8 L311.0,217.4 L309.7,213.0 L308.7,208.6 L308.2,204.3 L308.0,200.0 L308.2,195.7 L308.7,191.4 L309.7,187.0 L311.0,182.6 L312.7,178.2 L314.8,173.6 L317.3,168.9 L320.2,164.1 L323.5,159.1 L327.3,154.0 L331.5,148.7 L336.2,143.1 L341.3,137.4 L347.0,131.3 L353.2,125.0 L360.0,118.3 L367.4,111.3 L375.4,103.9 L384.1,96.1 L393.4,87.9\" fill=\"none\" stroke=\"var(--accent)\" stroke-width=\"2.2\"/><path d=\"M46.6,312.1 L55.9,303.9 L64.6,296.1 L72.6,288.7 L80.0,281.7 L86.8,275.0 L93.0,268.7 L98.7,262.6 L103.8,256.9 L108.5,251.3 L112.7,246.0 L116.5,240.9 L119.8,235.9 L122.7,231.1 L125.2,226.4 L127.3,221.8 L129.0,217.4 L130.3,213.0 L131.3,208.6 L131.8,204.3 L132.0,200.0 L131.8,195.7 L131.3,191.4 L130.3,187.0 L129.0,182.6 L127.3,178.2 L125.2,173.6 L122.7,168.9 L119.8,164.1 L116.5,159.1 L112.7,154.0 L108.5,148.7 L103.8,143.1 L98.7,137.4 L93.0,131.3 L86.8,125.0 L80.0,118.3 L72.6,111.3 L64.6,103.9 L55.9,96.1 L46.6,87.9\" fill=\"none\" stroke=\"var(--accent)\" stroke-width=\"2.2\"/><circle cx=\"220.0\" cy=\"200.0\" r=\"5\" fill=\"var(--ruby)\"/><text x=\"228.0\" y=\"220.0\" fill=\"var(--ruby)\" font-size=\"11.5\" text-anchor=\"start\">C(1;−2)</text><text x=\"340.0\" y=\"100.0\" fill=\"var(--ink-soft)\" font-size=\"11\" text-anchor=\"middle\">y+2 = ¾(x−1)</text><text x=\"230.0\" y=\"388.0\" fill=\"var(--ink-soft)\" font-size=\"11.5\" text-anchor=\"middle\">c = √(a²+b²) = 5,  ε = 5/4</text></svg>",
-    "block": "b21"
+    "section": "r5",
+    "type": "r5-1"
   },
   {
     "id": "n234",
     "topic": "t6",
     "level": 2,
-    "num": 56,
+    "num": 58,
     "title": "Парабола $y=-2x^2+8x-5$: вершина, фокус, директриса",
     "statement": "Найдите вершину, фокус и директрису параболы $y=-2x^2+8x-5$, постройте эскиз графика.",
     "steps": [
@@ -1603,42 +1901,14 @@ var TASKS_SEM2 = [
     ],
     "answer": "Вершина $(2;3)$, фокус $F\\left(2;2\\tfrac78\\right)$, директриса $y=3\\tfrac18$; ветви направлены вниз.",
     "figure": "<svg class=\"prax-fig\" viewBox=\"0 0 460 400\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Парабола y=-2x^2+8x-5: вершина, фокус, директриса\"><line x1=\"48.0\" y1=\"62.0\" x2=\"48.0\" y2=\"334.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"82.0\" y1=\"62.0\" x2=\"82.0\" y2=\"334.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"116.0\" y1=\"62.0\" x2=\"116.0\" y2=\"334.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"150.0\" y1=\"62.0\" x2=\"150.0\" y2=\"334.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"184.0\" y1=\"62.0\" x2=\"184.0\" y2=\"334.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"218.0\" y1=\"62.0\" x2=\"218.0\" y2=\"334.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"252.0\" y1=\"62.0\" x2=\"252.0\" y2=\"334.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"286.0\" y1=\"62.0\" x2=\"286.0\" y2=\"334.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"48.0\" y1=\"334.0\" x2=\"286.0\" y2=\"334.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"48.0\" y1=\"300.0\" x2=\"286.0\" y2=\"300.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"48.0\" y1=\"266.0\" x2=\"286.0\" y2=\"266.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"48.0\" y1=\"232.0\" x2=\"286.0\" y2=\"232.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"48.0\" y1=\"198.0\" x2=\"286.0\" y2=\"198.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"48.0\" y1=\"164.0\" x2=\"286.0\" y2=\"164.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"48.0\" y1=\"130.0\" x2=\"286.0\" y2=\"130.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"48.0\" y1=\"96.0\" x2=\"286.0\" y2=\"96.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"48.0\" y1=\"62.0\" x2=\"286.0\" y2=\"62.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"48.0\" y1=\"300.0\" x2=\"294.0\" y2=\"300.0\" stroke=\"var(--ink-soft)\" stroke-width=\"1.4\"/><line x1=\"150.0\" y1=\"334.0\" x2=\"150.0\" y2=\"54.0\" stroke=\"var(--ink-soft)\" stroke-width=\"1.4\"/><text x=\"290.0\" y=\"317.0\" fill=\"var(--ink-soft)\" font-size=\"12\" text-anchor=\"middle\" font-style=\"italic\">x</text><text x=\"136.0\" y=\"58.0\" fill=\"var(--ink-soft)\" font-size=\"12\" text-anchor=\"middle\" font-style=\"italic\">y</text><text x=\"140.0\" y=\"316.0\" fill=\"var(--ink-soft)\" font-size=\"11.5\" text-anchor=\"middle\">O</text><path d=\"M169.4,337.1 L171.6,324.7 L173.8,312.9 L176.0,301.7 L178.2,291.1 L180.4,281.0 L182.6,271.5 L184.8,262.6 L187.1,254.3 L189.3,246.6 L191.5,239.4 L193.7,232.8 L195.9,226.7 L198.1,221.3 L200.3,216.4 L202.5,212.1 L204.7,208.3 L206.9,205.2 L209.2,202.6 L211.4,200.6 L213.6,199.1 L215.8,198.3 L218.0,198.0 L220.2,198.3 L222.4,199.1 L224.6,200.6 L226.8,202.6 L229.1,205.2 L231.3,208.3 L233.5,212.1 L235.7,216.4 L237.9,221.3 L240.1,226.7 L242.3,232.8 L244.5,239.4 L246.7,246.6 L248.9,254.3 L251.2,262.6 L253.4,271.5 L255.6,281.0 L257.8,291.1 L260.0,301.7 L262.2,312.9 L264.4,324.7 L266.6,337.1\" fill=\"none\" stroke=\"var(--accent)\" stroke-width=\"2.2\"/><circle cx=\"218\" cy=\"198\" r=\"5\" fill=\"var(--ruby)\"/><text x=\"230.0\" y=\"190.0\" fill=\"var(--ruby)\" font-size=\"11.5\" text-anchor=\"start\">вершина (2;3)</text><circle cx=\"218\" cy=\"202.2\" r=\"4.5\" fill=\"var(--accent)\"/><text x=\"230.0\" y=\"218.2\" fill=\"var(--accent)\" font-size=\"12.5\" text-anchor=\"start\" font-style=\"italic\">F</text><line x1=\"61.6\" y1=\"193.8\" x2=\"272.4\" y2=\"193.8\" stroke=\"var(--ink-soft)\" stroke-width=\"1.6\" stroke-dasharray=\"5 4\"/><text x=\"61.6\" y=\"185.8\" fill=\"var(--ink-soft)\" font-size=\"11\" text-anchor=\"start\">директриса</text><line x1=\"218.0\" y1=\"75.6\" x2=\"218.0\" y2=\"320.4\" stroke=\"var(--ink-soft)\" stroke-width=\"1.2\" stroke-dasharray=\"3 4\"/><text x=\"208.0\" y=\"82.4\" fill=\"var(--ink-soft)\" font-size=\"11\" text-anchor=\"end\">ось</text><text x=\"230.0\" y=\"388.0\" fill=\"var(--ink-soft)\" font-size=\"11.5\" text-anchor=\"middle\">ветви вниз: перед квадратом минус</text></svg>",
-    "block": "b21"
-  },
-  {
-    "id": "p114",
-    "topic": "t6",
-    "level": 3,
-    "num": 57,
-    "title": "Касательная плоскость к гиперболическому параболоиду: две прямые",
-    "statement": "Дан гиперболический параболоид $x^2-\\dfrac{y^2}{4}=z$ и одна из его касательных плоскостей $10x-2y-z-21=0$. Найдите уравнения двух прямых, по которым плоскость пересекает параболоид.",
-    "steps": [
-      {
-        "q": "Исключить одну переменную",
-        "a": "Точки линии пересечения удовлетворяют обоим уравнениям. Подставим $z=10x-2y-21$ в уравнение параболоида: $$x^2-\\frac{y^2}{4}=10x-2y-21\\;\\Leftrightarrow\\;4x^2-y^2-40x+8y+84=0.$$"
-      },
-      {
-        "q": "Разложить на множители",
-        "a": "$$4x^2-y^2-40x+8y+84=(2x-y-6)(2x+y-14)=0.$$ Произведение равно нулю — значит линия пересечения распадается на две прямые."
-      },
-      {
-        "q": "Выписать прямые системами",
-        "a": "$$L_1\\colon\\begin{cases}10x-2y-z=21,\\\\ 2x-y=6,\\end{cases}\\qquad L_2\\colon\\begin{cases}10x-2y-z=21,\\\\ 2x+y=14.\\end{cases}$$"
-      },
-      {
-        "q": "Привести к каноническому виду",
-        "a": "Для $L_1$ возьмём две точки: при $z=0$ — $M_1\\!\\left(\\tfrac32;-3;0\\right)$, при $y=0$ — $M_2(3;0;9)$; направляющий вектор $\\overrightarrow{M_1M_2}=\\tfrac32(1;2;6)$. Для $L_2$ направляющий вектор проще найти как векторное произведение нормалей: $(10;-2;-1)\\times(2;1;0)=(1;-2;14)$."
-      }
-    ],
-    "answer": "$$L_1\\colon\\ \\frac{x-3}{1}=\\frac{y}{2}=\\frac{z-9}{6},\\qquad L_2\\colon\\ \\frac{x-5}{1}=\\frac{y-4}{-2}=\\frac{z-21}{14}.$$ Обе проходят через точку касания $M(5;4;21)$ — это прямолинейные образующие параболоида.",
-    "figure": "<svg class=\"prax-fig\" viewBox=\"0 0 460 232\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Гиперболический параболоид, касательная плоскость и две прямые L1 и L2, по которым она пересекает поверхность; точка касания M(5;4;21)\">\n          <path d=\"M 92 74 Q 230 146 368 74\" fill=\"none\" stroke=\"var(--ink-soft)\" stroke-width=\"1.7\"/>\n          <path d=\"M 62 128 Q 230 212 398 128\" fill=\"none\" stroke=\"var(--ink-soft)\" stroke-width=\"1.7\"/>\n          <path d=\"M 92 74 Q 42 94 62 128\" fill=\"none\" stroke=\"var(--ink-soft)\" stroke-width=\"1.7\"/>\n          <path d=\"M 368 74 Q 418 94 398 128\" fill=\"none\" stroke=\"var(--ink-soft)\" stroke-width=\"1.7\"/>\n          <path d=\"M 77 101 Q 230 180 383 101\" fill=\"none\" stroke=\"var(--ink-mute)\" stroke-width=\"1.2\" stroke-dasharray=\"5 4\"/>\n          <path d=\"M 230 110 Q 218 138 230 170\" fill=\"none\" stroke=\"var(--ink-mute)\" stroke-width=\"1.2\" stroke-dasharray=\"5 4\"/>\n          <polygon points=\"96,104 348,88 364,178 112,194\" fill=\"var(--bg-elev)\" fill-opacity=\"0.4\" stroke=\"var(--ink-mute)\" stroke-width=\"1.2\" stroke-dasharray=\"6 5\"/>\n          <text x=\"120\" y=\"118\" font-size=\"11.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"start\" font-style=\"italic\">π: 10x−2y−z=21</text>\n          <line x1=\"112\" y1=\"180\" x2=\"352\" y2=\"98\" stroke=\"var(--accent)\" stroke-width=\"2.5\"/>\n          <line x1=\"112\" y1=\"98\" x2=\"352\" y2=\"180\" stroke=\"var(--accent)\" stroke-width=\"2.5\"/>\n          <text x=\"358\" y=\"96\" font-size=\"13.5\" fill=\"var(--accent)\" font-family=\"inherit\" text-anchor=\"start\" font-style=\"italic\" font-weight=\"600\">L₁</text>\n          <text x=\"358\" y=\"188\" font-size=\"13.5\" fill=\"var(--accent)\" font-family=\"inherit\" text-anchor=\"start\" font-style=\"italic\" font-weight=\"600\">L₂</text>\n          <circle cx=\"232\" cy=\"139\" r=\"4.4\" fill=\"var(--ink)\"/>\n          <text x=\"240\" y=\"158\" font-size=\"12.5\" fill=\"var(--ink)\" font-family=\"inherit\" text-anchor=\"start\" font-weight=\"600\">M(5;4;21)</text>\n        </svg>",
-    "block": "b22"
+    "section": "r5",
+    "type": "r5-1"
   },
   {
     "id": "n235",
     "topic": "t6",
     "level": 2,
-    "num": 58,
+    "num": 59,
     "title": "Сечения однополостного гиперболоида координатными плоскостями",
     "statement": "Запишите канонические уравнения сечений поверхности $\\dfrac{x^2}{4}+\\dfrac{y^2}{9}-z^2=1$ координатными плоскостями и назовите их тип.",
     "steps": [
@@ -1661,13 +1931,44 @@ var TASKS_SEM2 = [
     ],
     "answer": "$z=0$ — эллипс $\\tfrac{x^2}{4}+\\tfrac{y^2}{9}=1$; $\\;y=0$ и $x=0$ — гиперболы $\\tfrac{x^2}{4}-z^2=1$ и $\\tfrac{y^2}{9}-z^2=1$.",
     "figure": "<svg class=\"prax-fig\" viewBox=\"0 0 460 380\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Сечения однополостного гиперболоида координатными плоскостями\"><line x1=\"210.0\" y1=\"250.0\" x2=\"148.0\" y2=\"292.0\" stroke=\"var(--ink-soft)\" stroke-width=\"1.3\"/><line x1=\"148.0\" y1=\"292.0\" x2=\"153.0\" y2=\"284.5\" stroke=\"var(--ink-soft)\" stroke-width=\"1.3\"/><line x1=\"148.0\" y1=\"292.0\" x2=\"156.8\" y2=\"290.1\" stroke=\"var(--ink-soft)\" stroke-width=\"1.3\"/><line x1=\"210.0\" y1=\"250.0\" x2=\"320.0\" y2=\"250.0\" stroke=\"var(--ink-soft)\" stroke-width=\"1.3\"/><line x1=\"320.0\" y1=\"250.0\" x2=\"311.6\" y2=\"253.3\" stroke=\"var(--ink-soft)\" stroke-width=\"1.3\"/><line x1=\"320.0\" y1=\"250.0\" x2=\"311.6\" y2=\"246.7\" stroke=\"var(--ink-soft)\" stroke-width=\"1.3\"/><line x1=\"210.0\" y1=\"250.0\" x2=\"210.0\" y2=\"138.0\" stroke=\"var(--ink-soft)\" stroke-width=\"1.3\"/><line x1=\"210.0\" y1=\"138.0\" x2=\"213.3\" y2=\"146.4\" stroke=\"var(--ink-soft)\" stroke-width=\"1.3\"/><line x1=\"210.0\" y1=\"138.0\" x2=\"206.7\" y2=\"146.4\" stroke=\"var(--ink-soft)\" stroke-width=\"1.3\"/><text x=\"140.0\" y=\"302.0\" fill=\"var(--ink-soft)\" font-size=\"12\" text-anchor=\"middle\" font-style=\"italic\">x</text><text x=\"328.0\" y=\"255.0\" fill=\"var(--ink-soft)\" font-size=\"12\" text-anchor=\"middle\" font-style=\"italic\">y</text><text x=\"199.0\" y=\"132.0\" fill=\"var(--ink-soft)\" font-size=\"12\" text-anchor=\"middle\" font-style=\"italic\">z</text><ellipse cx=\"210.0\" cy=\"110.0\" rx=\"78.0\" ry=\"23.4\" fill=\"var(--bg-soft)\" fill-opacity=\"0.35\" stroke=\"var(--accent)\" stroke-width=\"1.5\"/><ellipse cx=\"210.0\" cy=\"150.0\" rx=\"60.7\" ry=\"18.2\" fill=\"none\" stroke=\"var(--border)\" stroke-width=\"1.5\"/><ellipse cx=\"210.0\" cy=\"190.0\" rx=\"60.7\" ry=\"18.2\" fill=\"none\" stroke=\"var(--border)\" stroke-width=\"1.5\"/><ellipse cx=\"210.0\" cy=\"230.0\" rx=\"78.0\" ry=\"23.4\" fill=\"var(--bg-soft)\" fill-opacity=\"0.35\" stroke=\"var(--accent)\" stroke-width=\"1.5\"/><path d=\"M132,110 C158,150 158,190 132,230\" fill=\"none\" stroke=\"var(--accent)\" stroke-width=\"2\"/><path d=\"M288,110 C262,150 262,190 288,230\" fill=\"none\" stroke=\"var(--accent)\" stroke-width=\"2\"/><ellipse cx=\"210.0\" cy=\"170.0\" rx=\"52.0\" ry=\"16.0\" fill=\"none\" stroke=\"var(--ruby)\" stroke-width=\"2.2\"/><text x=\"210.0\" y=\"200.0\" fill=\"var(--ruby)\" font-size=\"11.5\" text-anchor=\"middle\">горловой эллипс</text><text x=\"230.0\" y=\"348.0\" fill=\"var(--ink-soft)\" font-size=\"11.5\" text-anchor=\"middle\">z = 0 — эллипс;  x = 0 и y = 0 — гиперболы</text></svg>",
-    "block": "b22"
+    "section": "r5",
+    "type": "r5-2"
+  },
+  {
+    "id": "p114",
+    "topic": "t6",
+    "level": 3,
+    "num": 60,
+    "title": "Касательная плоскость к гиперболическому параболоиду: две прямые",
+    "statement": "Дан гиперболический параболоид $x^2-\\dfrac{y^2}{4}=z$ и одна из его касательных плоскостей $10x-2y-z-21=0$. Найдите уравнения двух прямых, по которым плоскость пересекает параболоид.",
+    "steps": [
+      {
+        "q": "Исключить одну переменную",
+        "a": "Точки линии пересечения удовлетворяют обоим уравнениям. Подставим $z=10x-2y-21$ в уравнение параболоида: $$x^2-\\frac{y^2}{4}=10x-2y-21\\;\\Leftrightarrow\\;4x^2-y^2-40x+8y+84=0.$$"
+      },
+      {
+        "q": "Разложить на множители",
+        "a": "$$4x^2-y^2-40x+8y+84=(2x-y-6)(2x+y-14)=0.$$ Произведение равно нулю — значит линия пересечения распадается на две прямые."
+      },
+      {
+        "q": "Выписать прямые системами",
+        "a": "$$L_1\\colon\\begin{cases}10x-2y-z=21,\\\\ 2x-y=6,\\end{cases}\\qquad L_2\\colon\\begin{cases}10x-2y-z=21,\\\\ 2x+y=14.\\end{cases}$$"
+      },
+      {
+        "q": "Привести к каноническому виду",
+        "a": "Для $L_1$ возьмём две точки: при $z=0$ — $M_1\\!\\left(\\tfrac32;-3;0\\right)$, при $y=0$ — $M_2(3;0;9)$; направляющий вектор $\\overrightarrow{M_1M_2}=\\tfrac32(1;2;6)$. Для $L_2$ направляющий вектор проще найти как векторное произведение нормалей: $(10;-2;-1)\\times(2;1;0)=(1;-2;14)$."
+      }
+    ],
+    "answer": "$$L_1\\colon\\ \\frac{x-3}{1}=\\frac{y}{2}=\\frac{z-9}{6},\\qquad L_2\\colon\\ \\frac{x-5}{1}=\\frac{y-4}{-2}=\\frac{z-21}{14}.$$ Обе проходят через точку касания $M(5;4;21)$ — это прямолинейные образующие параболоида.",
+    "figure": "<svg class=\"prax-fig\" viewBox=\"0 0 460 232\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Гиперболический параболоид, касательная плоскость и две прямые L1 и L2, по которым она пересекает поверхность; точка касания M(5;4;21)\">\n          <path d=\"M 92 74 Q 230 146 368 74\" fill=\"none\" stroke=\"var(--ink-soft)\" stroke-width=\"1.7\"/>\n          <path d=\"M 62 128 Q 230 212 398 128\" fill=\"none\" stroke=\"var(--ink-soft)\" stroke-width=\"1.7\"/>\n          <path d=\"M 92 74 Q 42 94 62 128\" fill=\"none\" stroke=\"var(--ink-soft)\" stroke-width=\"1.7\"/>\n          <path d=\"M 368 74 Q 418 94 398 128\" fill=\"none\" stroke=\"var(--ink-soft)\" stroke-width=\"1.7\"/>\n          <path d=\"M 77 101 Q 230 180 383 101\" fill=\"none\" stroke=\"var(--ink-mute)\" stroke-width=\"1.2\" stroke-dasharray=\"5 4\"/>\n          <path d=\"M 230 110 Q 218 138 230 170\" fill=\"none\" stroke=\"var(--ink-mute)\" stroke-width=\"1.2\" stroke-dasharray=\"5 4\"/>\n          <polygon points=\"96,104 348,88 364,178 112,194\" fill=\"var(--bg-elev)\" fill-opacity=\"0.4\" stroke=\"var(--ink-mute)\" stroke-width=\"1.2\" stroke-dasharray=\"6 5\"/>\n          <text x=\"120\" y=\"118\" font-size=\"11.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"start\" font-style=\"italic\">π: 10x−2y−z=21</text>\n          <line x1=\"112\" y1=\"180\" x2=\"352\" y2=\"98\" stroke=\"var(--accent)\" stroke-width=\"2.5\"/>\n          <line x1=\"112\" y1=\"98\" x2=\"352\" y2=\"180\" stroke=\"var(--accent)\" stroke-width=\"2.5\"/>\n          <text x=\"358\" y=\"96\" font-size=\"13.5\" fill=\"var(--accent)\" font-family=\"inherit\" text-anchor=\"start\" font-style=\"italic\" font-weight=\"600\">L₁</text>\n          <text x=\"358\" y=\"188\" font-size=\"13.5\" fill=\"var(--accent)\" font-family=\"inherit\" text-anchor=\"start\" font-style=\"italic\" font-weight=\"600\">L₂</text>\n          <circle cx=\"232\" cy=\"139\" r=\"4.4\" fill=\"var(--ink)\"/>\n          <text x=\"240\" y=\"158\" font-size=\"12.5\" fill=\"var(--ink)\" font-family=\"inherit\" text-anchor=\"start\" font-weight=\"600\">M(5;4;21)</text>\n        </svg>",
+    "section": "r5",
+    "type": "r5-2"
   },
   {
     "id": "n220",
     "topic": "t6",
     "level": 3,
-    "num": 59,
+    "num": 61,
     "title": "Уравнение касательной к параболе",
     "statement": "Записав уравнение прямой в виде $y=kx+b$ и пользуясь тем, что касательная имеет с параболой ровно одну общую точку, выведите уравнение касательной к параболе $y^2=2px$ в точке $(x_0;y_0)$.",
     "steps": [
@@ -1694,153 +1995,14 @@ var TASKS_SEM2 = [
     ],
     "answer": "$$y_0y=p(x+x_0).$$ Случай $k=0$ (прямая $y=\\text{const}$) даёт вершину и разбирается отдельно.",
     "figure": "<svg class=\"prax-fig\" viewBox=\"0 0 460 380\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Касательная к параболе имеет с ней ровно одну общую точку\"><line x1=\"8.0\" y1=\"64.0\" x2=\"8.0\" y2=\"336.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"42.0\" y1=\"64.0\" x2=\"42.0\" y2=\"336.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"76.0\" y1=\"64.0\" x2=\"76.0\" y2=\"336.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"110.0\" y1=\"64.0\" x2=\"110.0\" y2=\"336.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"144.0\" y1=\"64.0\" x2=\"144.0\" y2=\"336.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"178.0\" y1=\"64.0\" x2=\"178.0\" y2=\"336.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"212.0\" y1=\"64.0\" x2=\"212.0\" y2=\"336.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"8.0\" y1=\"64.0\" x2=\"212.0\" y2=\"64.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"8.0\" y1=\"98.0\" x2=\"212.0\" y2=\"98.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"8.0\" y1=\"132.0\" x2=\"212.0\" y2=\"132.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"8.0\" y1=\"166.0\" x2=\"212.0\" y2=\"166.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"8.0\" y1=\"200.0\" x2=\"212.0\" y2=\"200.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"8.0\" y1=\"234.0\" x2=\"212.0\" y2=\"234.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"8.0\" y1=\"268.0\" x2=\"212.0\" y2=\"268.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"8.0\" y1=\"302.0\" x2=\"212.0\" y2=\"302.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"8.0\" y1=\"336.0\" x2=\"212.0\" y2=\"336.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"8.0\" y1=\"200.0\" x2=\"220.0\" y2=\"200.0\" stroke=\"var(--ink-soft)\" stroke-width=\"1.4\"/><line x1=\"220.0\" y1=\"200.0\" x2=\"211.6\" y2=\"203.3\" stroke=\"var(--ink-soft)\" stroke-width=\"1.4\"/><line x1=\"220.0\" y1=\"200.0\" x2=\"211.6\" y2=\"196.7\" stroke=\"var(--ink-soft)\" stroke-width=\"1.4\"/><line x1=\"110.0\" y1=\"336.0\" x2=\"110.0\" y2=\"56.0\" stroke=\"var(--ink-soft)\" stroke-width=\"1.4\"/><line x1=\"110.0\" y1=\"56.0\" x2=\"113.3\" y2=\"64.4\" stroke=\"var(--ink-soft)\" stroke-width=\"1.4\"/><line x1=\"110.0\" y1=\"56.0\" x2=\"106.7\" y2=\"64.4\" stroke=\"var(--ink-soft)\" stroke-width=\"1.4\"/><text x=\"216.0\" y=\"217.0\" fill=\"var(--ink-soft)\" font-size=\"12\" text-anchor=\"middle\" font-style=\"italic\">x</text><text x=\"96.0\" y=\"59.0\" fill=\"var(--ink-soft)\" font-size=\"12\" text-anchor=\"middle\" font-style=\"italic\">y</text><text x=\"100.0\" y=\"216.0\" fill=\"var(--ink-soft)\" font-size=\"11.5\" text-anchor=\"middle\">O</text><path d=\"M208.3,315.6 L201.8,311.8 L195.6,307.9 L189.6,304.1 L183.9,300.2 L178.3,296.4 L173.0,292.5 L167.9,288.7 L163.0,284.9 L158.3,281.0 L153.8,277.2 L149.5,273.3 L145.5,269.5 L141.7,265.7 L138.1,261.8 L134.7,258.0 L131.5,254.1 L128.6,250.3 L125.9,246.4 L123.3,242.6 L121.0,238.8 L119.0,234.9 L117.1,231.1 L115.5,227.2 L114.0,223.4 L112.8,219.5 L111.8,215.7 L111.0,211.9 L110.5,208.0 L110.1,204.2 L110.0,200.3 L110.1,196.5 L110.4,192.7 L110.9,188.8 L111.7,185.0 L112.6,181.1 L113.8,177.3 L115.2,173.4 L116.8,169.6 L118.6,165.8 L120.7,161.9 L122.9,158.1 L125.4,154.2 L128.1,150.4 L131.0,146.6 L134.1,142.7 L137.5,138.9 L141.0,135.0 L144.8,131.2 L148.8,127.3 L153.0,123.5 L157.5,119.7 L162.1,115.8 L167.0,112.0 L172.1,108.1 L177.4,104.3 L182.9,100.4 L188.6,96.6 L194.6,92.8 L200.7,88.9 L207.1,85.1\" fill=\"none\" stroke=\"var(--accent)\" stroke-width=\"2.2\"/><circle cx=\"144.0\" cy=\"132.0\" r=\"5\" fill=\"var(--ruby)\"/><text x=\"154.0\" y=\"122.0\" fill=\"var(--ruby)\" font-size=\"11.5\" text-anchor=\"start\">M(x₀;y₀)</text><line x1=\"44.0\" y1=\"232.0\" x2=\"294.0\" y2=\"-18.0\" stroke=\"var(--ruby)\" stroke-width=\"2\"/><text x=\"230.0\" y=\"366.0\" fill=\"var(--ink-soft)\" font-size=\"11.5\" text-anchor=\"middle\">условие касания: дискриминант равен нулю</text></svg>",
-    "block": "b23"
-  }
-];
-;
-
-var TASK_BLOCKS = [
-  {
-    "id": "b1",
-    "topic": "t2",
-    "title": "Извлечение корней из комплексного числа",
-    "source": "Анно Е. И. «Задачи по линейной алгебре», ч. I, с. 148 и 151"
-  },
-  {
-    "id": "b2",
-    "topic": "t2",
-    "title": "Геометрические места точек на комплексной плоскости",
-    "source": "Анно Е. И. «Задачи по линейной алгебре», ч. I, с. 148 и 151"
-  },
-  {
-    "id": "b3",
-    "topic": "t2",
-    "title": "Формула Муавра и тождества",
-    "source": "Анно Е. И. «Задачи по линейной алгебре», ч. I, с. 150 и 153"
-  },
-  {
-    "id": "b4",
-    "topic": "t3",
-    "title": "Деление многочленов и остатки",
-    "source": "Анно Е. И. «Задачи по линейной алгебре», ч. I, с. 160 и 162"
-  },
-  {
-    "id": "b5",
-    "topic": "t3",
-    "title": "Кратные корни многочлена",
-    "source": "Анно Е. И. «Задачи по линейной алгебре», ч. I, с. 160 и 162"
-  },
-  {
-    "id": "b6",
-    "topic": "t3",
-    "title": "Разложение на неприводимые множители",
-    "source": "Анно Е. И. «Задачи по линейной алгебре», ч. I, с. 165"
-  },
-  {
-    "id": "b7",
-    "topic": "t3",
-    "title": "Дополнительные задачи",
-    "source": "Составлены по программе курса; в задачниках Анно и Лунгу этих типов нет"
-  },
-  {
-    "id": "b8",
-    "topic": "t4",
-    "title": "Жорданова нормальная форма и жорданов базис",
-    "source": "Анно Е. И. «Задачи по линейной алгебре», ч. II, с. 121"
-  },
-  {
-    "id": "b9",
-    "topic": "t4",
-    "title": "Самосопряжённые операторы",
-    "source": "Анно Е. И. «Задачи по линейной алгебре», ч. II, с. 131 и 139"
-  },
-  {
-    "id": "b10",
-    "topic": "t4",
-    "title": "Собственные значения и корневые подпространства",
-    "source": "Анно Е. И. «Задачи по линейной алгебре», ч. II, с. 82"
-  },
-  {
-    "id": "b11",
-    "topic": "t4",
-    "title": "Квадратичная форма к главным осям",
-    "source": "Анно Е. И. «Задачи по линейной алгебре», ч. II, с. 158"
-  },
-  {
-    "id": "b12",
-    "topic": "t4",
-    "title": "Дополнительные задачи",
-    "source": "Составлены по программе курса; в задачниках Анно и Лунгу этого типа нет"
-  },
-  {
-    "id": "b13",
-    "topic": "t5",
-    "title": "Прямая, заданная системой уравнений",
-    "source": "Анно Е. И. «Задачи по линейной алгебре», ч. I, с. 27 и 29"
-  },
-  {
-    "id": "b14",
-    "topic": "t5",
-    "title": "Плоскость через точку и прямую",
-    "source": "Анно Е. И. «Задачи по линейной алгебре», ч. I, с. 26 и 31"
-  },
-  {
-    "id": "b15",
-    "topic": "t5",
-    "title": "Взаимное расположение прямой и плоскости",
-    "source": "Анно Е. И. «Задачи по линейной алгебре», ч. I, с. 31"
-  },
-  {
-    "id": "b16",
-    "topic": "t5",
-    "title": "Угол между плоскостями",
-    "source": "Анно Е. И. «Задачи по линейной алгебре», ч. I, с. 32"
-  },
-  {
-    "id": "b17",
-    "topic": "t5",
-    "title": "Плоскость, параллельная данной",
-    "source": "Анно Е. И. «Задачи по линейной алгебре», ч. I, с. 32"
-  },
-  {
-    "id": "b18",
-    "topic": "t5",
-    "title": "Линейные многообразия",
-    "source": "Анно Е. И. «Задачи по линейной алгебре», ч. I, с. 86–87 и 91"
-  },
-  {
-    "id": "b19",
-    "topic": "t5",
-    "title": "Точки и расстояния на плоскости",
-    "source": "Анно Е. И. «Задачи по линейной алгебре», ч. I, с. 21"
-  },
-  {
-    "id": "b20",
-    "topic": "t5",
-    "title": "Дополнительные задачи",
-    "source": "Составлены по программе курса; в задачниках Анно и Лунгу этих типов нет"
-  },
-  {
-    "id": "b21",
-    "topic": "t6",
-    "title": "Кривые второго порядка",
-    "source": "Лунгу К. Н. «Сборник задач по высшей математике», 1 курс, с. 152, 158–159 и 166"
-  },
-  {
-    "id": "b22",
-    "topic": "t6",
-    "title": "Поверхности второго порядка",
-    "source": "Лунгу К. Н. «Сборник задач по высшей математике», 1 курс, с. 220–222"
-  },
-  {
-    "id": "b23",
-    "topic": "t6",
-    "title": "Дополнительные задачи",
-    "source": "Составлены по программе курса; в задачниках Анно и Лунгу этого типа нет"
+    "section": "r5",
+    "type": "r5-3"
   }
 ];
 
-/* Индексы для быстрого отбора */
+var TASK_BY_ID = {};
+TASKS_SEM2.forEach(function (t) { TASK_BY_ID[t.id] = t; });
+
 var TASKS_BY_TOPIC = {};
 var TASKS_BY_LEVEL = {};
 TASKS_SEM2.forEach(function (t) {
@@ -1848,13 +2010,10 @@ TASKS_SEM2.forEach(function (t) {
   (TASKS_BY_LEVEL[t.level] = TASKS_BY_LEVEL[t.level] || []).push(t.id);
 });
 
-var TASK_BY_ID = {};
-TASKS_SEM2.forEach(function (t) { TASK_BY_ID[t.id] = t; });
-
 if (typeof window !== 'undefined') {
-  window.TASK_BLOCKS = TASK_BLOCKS;
   window.TASKS_SEM2 = TASKS_SEM2;
+  window.TASK_SECTIONS = TASK_SECTIONS;
+  window.TASK_BY_ID = TASK_BY_ID;
   window.TASKS_BY_TOPIC = TASKS_BY_TOPIC;
   window.TASKS_BY_LEVEL = TASKS_BY_LEVEL;
-  window.TASK_BY_ID = TASK_BY_ID;
 }

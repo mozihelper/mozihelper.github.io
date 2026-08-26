@@ -9072,7 +9072,14 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();renderL
       <h1 class="topic-title">Практика</h1>
     </div>
     <p class="prax-intro">
-      Задачи с полным разбором. У каждой можно посмотреть краткий ход решения — план из нескольких пунктов и ответ — либо подробный разбор, где шаги открываются по одному. Источник указан у каждой задачи; в геометрических есть чертёж.
+      Задачи с полным разбором, сгруппированные по разделам курса и типам. У каждой можно
+      посмотреть краткий ход решения — план из нескольких пунктов и ответ — либо подробный
+      разбор, где шаги открываются по одному. В геометрических задачах есть чертёж.
+    </p>
+    <p class="prax-srcnote">
+      <b>Источники.</b> Условия задач взяты из задачников: Анно Е. И. «Задачи по линейной
+      алгебре», части I и II (МГУ, экономический факультет) и Лунгу К. Н. «Сборник задач
+      по высшей математике», 1 курс. Отдельные задачи составлены по программе курса.
     </p>
 
   <style>
@@ -9113,13 +9120,16 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();renderL
     background:var(--bg-soft);border:1px solid var(--border-soft)}
   #page-practice .prax-ans-t{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
     color:var(--ink-mute);margin-bottom:.35rem}
-  #page-practice .prax-block{margin:1.9rem 0 .7rem;padding:.85rem 1.1rem;border-left:3px solid var(--ruby);
-    background:var(--bg-soft);border-radius:0 8px 8px 0}
-  #page-practice .prax-block-h{display:flex;align-items:baseline;gap:.7rem;font-size:1.02rem;
-    font-weight:600;color:var(--ink)}
-  #page-practice .prax-block-n{margin-left:auto;font-size:.78rem;font-weight:400;color:var(--ink-mute);
-    white-space:nowrap}
-  #page-practice .prax-block-s{margin-top:.3rem;font-size:.83rem;color:var(--ink-mute);line-height:1.45}
+  #page-practice .prax-sec{margin:2.6rem 0 .2rem;font-size:1.24rem;font-weight:600;color:var(--ink);
+    padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+  #page-practice .prax-sec:first-child{margin-top:.6rem}
+  #page-practice .prax-type{display:flex;align-items:baseline;gap:.6rem;margin:1.5rem 0 .55rem}
+  #page-practice .prax-type-n{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--white);background:var(--ruby);padding:2px 8px;border-radius:4px;white-space:nowrap}
+  #page-practice .prax-type-t{font-size:1.01rem;font-weight:600;color:var(--ink)}
+  #page-practice .prax-type-c{margin-left:auto;font-size:.78rem;color:var(--ink-mute);white-space:nowrap}
+  #page-practice .prax-srcnote{margin:1.1rem 0 0;padding:.7rem .95rem;border:1px solid var(--border-soft);
+    border-radius:7px;font-size:.83rem;color:var(--ink-mute);line-height:1.5}
   #page-practice .prax-empty{color:var(--ink-mute);padding:2rem 0;text-align:center}
   </style>
     <div class="prax-filters" id="praxTopics"></div>
@@ -9194,23 +9204,28 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();renderL
         var d = ORDER.indexOf(a.topic) - ORDER.indexOf(b.topic);
         return d || a.level - b.level || a.num - b.num;
       });
-      var BL = {}; (window.TASK_BLOCKS || []).forEach(function (b) { BL[b.id] = b; });
-      var out = '', curT = null, curB = null, seq = 0;
+      var SEC = {}, TY = {};
+      (window.TASK_SECTIONS || []).forEach(function (s) {
+        SEC[s.id] = s;
+        (s.types || []).forEach(function (y) { TY[y.id] = y; });
+      });
+      function plural(n) {
+        var a = n % 10, b = n % 100;
+        return n + ' задач' + (a === 1 && b !== 11 ? 'а' : (a >= 2 && a <= 4 && (b < 10 || b >= 20) ? 'и' : ''));
+      }
+      var out = '', curS = null, curY = null, seq = 0;
       list.forEach(function (x) {
-        if (x.topic !== curT) {
-          curT = x.topic; curB = null;
-          out += '<div class="prax-sub">' + TOPIC[curT] + '</div>';
+        if (x.section !== curS) {
+          curS = x.section; curY = null;
+          out += '<div class="prax-sec">' + ((SEC[curS] || {}).title || '') + '</div>';
         }
-        if (x.block !== curB) {
-          curB = x.block;
-          var b = BL[curB] || {};
-          var cnt = list.filter(function (y) { return y.block === curB; }).length;
-          out += '<div class="prax-block">' +
-                 '<div class="prax-block-h">' + (b.title || '') +
-                 '<span class="prax-block-n">' + cnt + ' задач' +
-                 (cnt % 10 === 1 && cnt % 100 !== 11 ? 'а' : (cnt % 10 >= 2 && cnt % 10 <= 4 && (cnt % 100 < 10 || cnt % 100 >= 20) ? 'и' : '')) +
-                 '</span></div>' +
-                 '<div class="prax-block-s">' + (b.source || '') + '</div></div>';
+        if (x.type !== curY) {
+          curY = x.type;
+          var y = TY[curY] || {};
+          var cnt = list.filter(function (z) { return z.type === curY; }).length;
+          out += '<div class="prax-type"><span class="prax-type-n">Тип ' + (y.no || '') + '</span>' +
+                 '<span class="prax-type-t">' + (y.title || '') + '</span>' +
+                 '<span class="prax-type-c">' + plural(cnt) + '</span></div>';
         }
         out += cardHTML(x, ++seq);
       });
