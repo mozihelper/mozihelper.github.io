@@ -986,7 +986,6 @@ html.sweeping #msGear,html.arriving #msGear{opacity:0;pointer-events:none}
 })();
 </script>
 <div class="site-credit" style="text-align:center;padding:22px 16px 30px;font-size:13px;line-height:1.5;color:var(--ink-soft,#888)">Разработчик: студент 1-го курса экономического факультета СПбГУ Александр Мозин</div>
-<!-- MathJax для красивого отображения формул как в LaTeX -->
 <script>
 window.MathJax = {
   tex: {
@@ -1004,59 +1003,6 @@ window.MathJax = {
     // Memory-bomb на iOS Safari (страница падала при тапе по полю поиска).
     // Каждая тема типсетится лениво — при showTopic() / toggleCard().
     typeset: true,
-    ready: () => {
-      MathJax.startup.defaultReady();
-      window.mathJaxLoaded = true;
-      document.body && document.body.classList.add('mathjax-ready');
-      /* Переход по кнопке «Продолжить» открывает карточку сразу при загрузке —
-         в этот момент MathJax ещё не готов, и формулы оставались нетронутыми.
-         Догоняем: как только библиотека поднялась, типсетим открытое. */
-      setTimeout(function () {
-        try {
-          var t = document.getElementById('ticketBody');
-          if (!t || !t.children.length) t = document.querySelector('.q-card.open');
-          if (t && MathJax.typesetPromise) MathJax.typesetPromise([t]).catch(function () {});
-        } catch (e) {}
-      }, 120);
-    }
-  }
-};
-// Загружаем MathJax асинхронно — страница не должна висеть в ожидании
-(function loadMathJax() {
-  var cdns = [
-    'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js',
-    'https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.js',
-    'https://unpkg.com/mathjax@3/es5/tex-svg.js'
-  ];
-  var i = 0;
-  function tryNext() {
-    if (i >= cdns.length) return;
-    var s = document.createElement('script');
-    s.src = cdns[i];
-    s.async = true;
-    s.onerror = function() { i++; tryNext(); };
-    document.head.appendChild(s);
-  }
-  tryNext();
-})();
-</script>
-<script>
-window.MathJax = {
-  tex: {
-    inlineMath: [['$', '$'], ['\\(', '\\)']],
-    displayMath: [['$$', '$$'], ['\\[', '\\]']],
-    processEscapes: true,
-    tags: 'none'
-  },
-  svg: { fontCache: 'global' },
-  options: {
-    skipHtmlTags: ['script','noscript','style','textarea','pre','code']
-  },
-  startup: {
-    // ВАЖНО: не рендерим формулы во всех 92 карточках при загрузке.
-    // Memory-bomb на iOS Safari (страница падала при тапе по полю поиска).
-    // Каждая тема типсетится лениво — при showTopic() / toggleCard().
-    typeset: false,
     ready: () => {
       MathJax.startup.defaultReady();
       window.mathJaxLoaded = true;
