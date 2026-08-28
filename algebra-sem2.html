@@ -9128,10 +9128,20 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();renderL
     color:var(--white);background:var(--ruby);padding:2px 8px;border-radius:4px;white-space:nowrap}
   #page-practice .prax-type-t{font-size:1.01rem;font-weight:600;color:var(--ink)}
   #page-practice .prax-type-c{margin-left:auto;font-size:.78rem;color:var(--ink-mute);white-space:nowrap}
+  #page-practice .prax-mk{flex-shrink:0;font-size:.82rem;line-height:1;margin-right:.1rem}
+  #page-practice .pm-exam{color:var(--ruby)}
+  #page-practice .pm-list{color:var(--accent)}
+  #page-practice .pm-book{color:var(--ink-mute)}
+  #page-practice .prax-legend{margin:.7rem 0 0;font-size:.82rem;color:var(--ink-mute);line-height:1.9}
   #page-practice .prax-srcnote{margin:1.1rem 0 0;padding:.7rem .95rem;border:1px solid var(--border-soft);
     border-radius:7px;font-size:.83rem;color:var(--ink-mute);line-height:1.5}
   #page-practice .prax-empty{color:var(--ink-mute);padding:2rem 0;text-align:center}
   </style>
+    <p class="prax-legend">
+      <span class="prax-mk pm-exam">&#9733;</span> задача с экзамена &nbsp;·&nbsp;
+      <span class="prax-mk pm-list">&#9633;</span> из списка преподавателя и демонстрационных вариантов &nbsp;·&nbsp;
+      <span class="prax-mk pm-book">&#9675;</span> из задачника
+    </p>
     <div class="prax-filters" id="praxTopics"></div>
     <div class="prax-filters" id="praxLevels"></div>
     <p class="prax-count" id="praxCount"></p>
@@ -9149,13 +9159,16 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();renderL
 
     function cardHTML(task, seq) {
       var num = seq < 10 ? '0' + seq : String(seq);
-      var kw = (task.title + ' ' + task.source + ' ' + TOPIC[task.topic]).toLowerCase()
+      var kw = (task.title + ' ' + TOPIC[task.topic]).toLowerCase()
                  .replace(/[$\\{}^_]/g, ' ');
       var h = [];
       h.push('<div class="q-card" data-q="' + task.id + '" data-lvl="' + task.level +
              '" data-topic="' + task.topic + '" data-text="практика ' + kw + '">');
       h.push('<div class="q-head" onclick="toggleCard(this)">');
       h.push('<span class="q-num">' + num + '</span>');
+      var MK = {exam: ['pm-exam', '\u2605'], list: ['pm-list', '\u25A1'], book: ['pm-book', '\u25CB']};
+      var mk = MK[task.mark] || MK.book;
+      h.push('<span class="prax-mk ' + mk[0] + '">' + mk[1] + '</span>');
       h.push('<span class="q-title">' + esc(task.title) + '</span>');
       h.push('<span class="prax-meta"><span class="prax-lvl" data-l="' + task.level + '">' +
              LVL[task.level] + '</span></span>');

@@ -181,7 +181,7 @@ var TASK_SECTIONS = [
         "id": "r5-1",
         "no": 1,
         "title": "Кривые второго порядка",
-        "count": 4
+        "count": 6
       },
       {
         "id": "r5-2",
@@ -2536,10 +2536,72 @@ var TASKS_SEM2 = [
     "mark": "list"
   },
   {
+    "id": "e329",
+    "level": 1,
+    "title": "Эллипс $16x^2+25y^2-400=0$",
+    "statement": "Найдите полуоси, координаты фокусов, эксцентриситет и уравнения директрис эллипса $16x^2+25y^2-400=0$.",
+    "steps": [
+      {
+        "q": "Привести к каноническому виду",
+        "a": "Переносим свободный член и делим на $400$: $$\\frac{16x^2}{400}+\\frac{25y^2}{400}=1\\;\\Longleftrightarrow\\;\\frac{x^2}{25}+\\frac{y^2}{16}=1.$$"
+      },
+      {
+        "q": "Прочитать полуоси",
+        "a": "$a^2=25$, $b^2=16$, то есть $a=5$, $b=4$. Так как $a>b$, большая ось лежит вдоль $Ox$, и фокусы будут на ней."
+      },
+      {
+        "q": "Найти фокусы",
+        "a": "$c^2=a^2-b^2=25-16=9$, значит $c=3$ и $F_1(-3;0)$, $F_2(3;0)$."
+      },
+      {
+        "q": "Эксцентриситет и директрисы",
+        "a": "$\\varepsilon=\\dfrac{c}{a}=\\dfrac35<1$; директрисы $x=\\pm\\dfrac{a}{\\varepsilon}=\\pm\\dfrac{5}{3/5}=\\pm\\dfrac{25}{3}$."
+      }
+    ],
+    "answer": "$a=5$, $b=4$; $F_{1,2}(\\mp3;0)$; $\\varepsilon=\\tfrac35$; директрисы $x=\\pm\\tfrac{25}{3}$.",
+    "figure": "<svg class=\"prax-fig\" viewBox=\"0 0 440 483\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Эллипс с центром C(1;−2), большой осью вдоль Oy, фокусами F1(1;0) и F2(1;−4)\">\n          <line x1=\"45.1\" y1=\"455.0\" x2=\"45.1\" y2=\"28.3\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"87.7\" y1=\"455.0\" x2=\"87.7\" y2=\"28.3\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"130.4\" y1=\"455.0\" x2=\"130.4\" y2=\"28.3\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"215.7\" y1=\"455.0\" x2=\"215.7\" y2=\"28.3\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"258.4\" y1=\"455.0\" x2=\"258.4\" y2=\"28.3\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"301.1\" y1=\"455.0\" x2=\"301.1\" y2=\"28.3\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"343.7\" y1=\"455.0\" x2=\"343.7\" y2=\"28.3\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"386.4\" y1=\"455.0\" x2=\"386.4\" y2=\"28.3\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"416.6\" x2=\"412.0\" y2=\"416.6\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"373.9\" x2=\"412.0\" y2=\"373.9\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"331.3\" x2=\"412.0\" y2=\"331.3\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"288.6\" x2=\"412.0\" y2=\"288.6\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"245.9\" x2=\"412.0\" y2=\"245.9\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"203.3\" x2=\"412.0\" y2=\"203.3\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"117.9\" x2=\"412.0\" y2=\"117.9\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"75.3\" x2=\"412.0\" y2=\"75.3\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"32.6\" x2=\"412.0\" y2=\"32.6\" stroke=\"var(--border)\" stroke-width=\"1\"/>\n          <line x1=\"28.0\" y1=\"160.6\" x2=\"412.0\" y2=\"160.6\" stroke=\"var(--ink-soft)\" stroke-width=\"1.5\"/>\n          <polygon points=\"412.0,160.6 403.0,156.6 403.0,164.6\" fill=\"var(--ink-soft)\"/>\n          <line x1=\"173.1\" y1=\"455.0\" x2=\"173.1\" y2=\"28.3\" stroke=\"var(--ink-soft)\" stroke-width=\"1.5\"/>\n          <polygon points=\"173.1,28.3 169.1,37.3 177.1,37.3\" fill=\"var(--ink-soft)\"/>\n          <text x=\"408.0\" y=\"176.6\" font-size=\"12.5\" fill=\"var(--ink-soft)\" font-family=\"inherit\" text-anchor=\"end\" font-style=\"italic\">x</text>\n          <text x=\"181.1\" y=\"38.3\" font-size=\"12.5\" fill=\"var(--ink-soft)\" font-family=\"inherit\" text-anchor=\"start\" font-style=\"italic\">y</text>\n          <text x=\"168.1\" y=\"174.6\" font-size=\"11\" fill=\"var(--ink-soft)\" font-family=\"inherit\" text-anchor=\"end\">O</text>\n          <text x=\"87.7\" y=\"174.6\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"middle\">-2</text>\n          <text x=\"258.4\" y=\"174.6\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"middle\">2</text>\n          <text x=\"343.7\" y=\"174.6\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"middle\">4</text>\n          <text x=\"167.1\" y=\"420.6\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"end\">-6</text>\n          <text x=\"167.1\" y=\"335.3\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"end\">-4</text>\n          <text x=\"167.1\" y=\"249.9\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"end\">-2</text>\n          <text x=\"167.1\" y=\"79.3\" font-size=\"10.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"end\">2</text>\n          <line x1=\"215.7\" y1=\"442.2\" x2=\"215.7\" y2=\"49.7\" stroke=\"var(--ink-mute)\" stroke-width=\"1.4\" stroke-dasharray=\"6 5\"/>\n          <line x1=\"46.6\" y1=\"245.9\" x2=\"384.9\" y2=\"245.9\" stroke=\"var(--ink-mute)\" stroke-width=\"1.4\" stroke-dasharray=\"6 5\"/>\n          <ellipse cx=\"215.7\" cy=\"245.9\" rx=\"147.8\" ry=\"170.7\" fill=\"none\" stroke=\"var(--accent)\" stroke-width=\"2.6\"/>\n          <circle cx=\"215.7\" cy=\"245.9\" r=\"4\" fill=\"var(--ink)\"/>\n          <text x=\"224.7\" y=\"238.9\" font-size=\"12.5\" fill=\"var(--ink)\" font-family=\"inherit\" text-anchor=\"start\" font-weight=\"600\">C(1;−2)</text>\n          <circle cx=\"215.7\" cy=\"160.6\" r=\"3.4\" fill=\"var(--ink-soft)\"/>\n          <circle cx=\"215.7\" cy=\"331.3\" r=\"3.4\" fill=\"var(--ink-soft)\"/>\n          <text x=\"224.7\" y=\"164.6\" font-size=\"12.5\" fill=\"var(--ink-soft)\" font-family=\"inherit\" text-anchor=\"start\">F₁(1;0)</text>\n          <text x=\"224.7\" y=\"335.3\" font-size=\"12.5\" fill=\"var(--ink-soft)\" font-family=\"inherit\" text-anchor=\"start\">F₂(1;−4)</text>\n          <circle cx=\"215.7\" cy=\"75.3\" r=\"2.6\" fill=\"var(--ink-mute)\"/>\n          <circle cx=\"215.7\" cy=\"416.6\" r=\"2.6\" fill=\"var(--ink-mute)\"/>\n          <circle cx=\"67.9\" cy=\"245.9\" r=\"2.6\" fill=\"var(--ink-mute)\"/>\n          <circle cx=\"363.5\" cy=\"245.9\" r=\"2.6\" fill=\"var(--ink-mute)\"/>\n          <text x=\"157.7\" y=\"75.3\" font-size=\"11.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"start\" font-style=\"italic\">b = 4</text>\n          <text x=\"339.5\" y=\"265.9\" font-size=\"11.5\" fill=\"var(--ink-mute)\" font-family=\"inherit\" text-anchor=\"start\" font-style=\"italic\">a = 2√3</text>\n        </svg>",
+    "topic": "t6",
+    "section": "r5",
+    "type": "r5-1",
+    "mark": "book",
+    "num": 77
+  },
+  {
+    "id": "p3105",
+    "level": 1,
+    "title": "Парабола $x^2=4y$",
+    "statement": "Дана парабола $x^2=4y$. Найдите координаты её фокуса, уравнение директрисы и длину фокального радиуса точки $M(4;4)$.",
+    "steps": [
+      {
+        "q": "Сравнить с каноническим уравнением",
+        "a": "Квадрат стоит при $x$, поэтому ось параболы вертикальна, а каноническая форма — $x^2=2py$. Отсюда $2p=4$ и $p=2$: ветви направлены вверх, вершина в начале координат."
+      },
+      {
+        "q": "Найти фокус",
+        "a": "Фокус лежит на оси на расстоянии $\\dfrac{p}{2}=1$ от вершины внутрь параболы: $F(0;1)$."
+      },
+      {
+        "q": "Записать директрису",
+        "a": "Директриса симметрична фокусу относительно вершины: $y=-\\dfrac{p}{2}=-1$."
+      },
+      {
+        "q": "Найти фокальный радиус",
+        "a": "По определению параболы расстояние до фокуса равно расстоянию до директрисы: $$r=y_M+\\frac{p}{2}=4+1=5.$$ Проверка напрямую: $\\sqrt{(4-0)^2+(4-1)^2}=\\sqrt{16+9}=5$."
+      }
+    ],
+    "answer": "$F(0;1)$, директриса $y=-1$, фокальный радиус $r=5$.",
+    "figure": "<svg class=\"prax-fig\" viewBox=\"0 0 460 400\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Парабола y=-2x^2+8x-5: вершина, фокус, директриса\"><line x1=\"48.0\" y1=\"62.0\" x2=\"48.0\" y2=\"334.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"82.0\" y1=\"62.0\" x2=\"82.0\" y2=\"334.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"116.0\" y1=\"62.0\" x2=\"116.0\" y2=\"334.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"150.0\" y1=\"62.0\" x2=\"150.0\" y2=\"334.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"184.0\" y1=\"62.0\" x2=\"184.0\" y2=\"334.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"218.0\" y1=\"62.0\" x2=\"218.0\" y2=\"334.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"252.0\" y1=\"62.0\" x2=\"252.0\" y2=\"334.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"286.0\" y1=\"62.0\" x2=\"286.0\" y2=\"334.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"48.0\" y1=\"334.0\" x2=\"286.0\" y2=\"334.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"48.0\" y1=\"300.0\" x2=\"286.0\" y2=\"300.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"48.0\" y1=\"266.0\" x2=\"286.0\" y2=\"266.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"48.0\" y1=\"232.0\" x2=\"286.0\" y2=\"232.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"48.0\" y1=\"198.0\" x2=\"286.0\" y2=\"198.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"48.0\" y1=\"164.0\" x2=\"286.0\" y2=\"164.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"48.0\" y1=\"130.0\" x2=\"286.0\" y2=\"130.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"48.0\" y1=\"96.0\" x2=\"286.0\" y2=\"96.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"48.0\" y1=\"62.0\" x2=\"286.0\" y2=\"62.0\" stroke=\"var(--border)\" stroke-width=\"1\"/><line x1=\"48.0\" y1=\"300.0\" x2=\"294.0\" y2=\"300.0\" stroke=\"var(--ink-soft)\" stroke-width=\"1.4\"/><line x1=\"150.0\" y1=\"334.0\" x2=\"150.0\" y2=\"54.0\" stroke=\"var(--ink-soft)\" stroke-width=\"1.4\"/><text x=\"290.0\" y=\"317.0\" fill=\"var(--ink-soft)\" font-size=\"12\" text-anchor=\"middle\" font-style=\"italic\">x</text><text x=\"136.0\" y=\"58.0\" fill=\"var(--ink-soft)\" font-size=\"12\" text-anchor=\"middle\" font-style=\"italic\">y</text><text x=\"140.0\" y=\"316.0\" fill=\"var(--ink-soft)\" font-size=\"11.5\" text-anchor=\"middle\">O</text><path d=\"M169.4,337.1 L171.6,324.7 L173.8,312.9 L176.0,301.7 L178.2,291.1 L180.4,281.0 L182.6,271.5 L184.8,262.6 L187.1,254.3 L189.3,246.6 L191.5,239.4 L193.7,232.8 L195.9,226.7 L198.1,221.3 L200.3,216.4 L202.5,212.1 L204.7,208.3 L206.9,205.2 L209.2,202.6 L211.4,200.6 L213.6,199.1 L215.8,198.3 L218.0,198.0 L220.2,198.3 L222.4,199.1 L224.6,200.6 L226.8,202.6 L229.1,205.2 L231.3,208.3 L233.5,212.1 L235.7,216.4 L237.9,221.3 L240.1,226.7 L242.3,232.8 L244.5,239.4 L246.7,246.6 L248.9,254.3 L251.2,262.6 L253.4,271.5 L255.6,281.0 L257.8,291.1 L260.0,301.7 L262.2,312.9 L264.4,324.7 L266.6,337.1\" fill=\"none\" stroke=\"var(--accent)\" stroke-width=\"2.2\"/><circle cx=\"218\" cy=\"198\" r=\"5\" fill=\"var(--ruby)\"/><text x=\"230.0\" y=\"190.0\" fill=\"var(--ruby)\" font-size=\"11.5\" text-anchor=\"start\">вершина (2;3)</text><circle cx=\"218\" cy=\"202.2\" r=\"4.5\" fill=\"var(--accent)\"/><text x=\"230.0\" y=\"218.2\" fill=\"var(--accent)\" font-size=\"12.5\" text-anchor=\"start\" font-style=\"italic\">F</text><line x1=\"61.6\" y1=\"193.8\" x2=\"272.4\" y2=\"193.8\" stroke=\"var(--ink-soft)\" stroke-width=\"1.6\" stroke-dasharray=\"5 4\"/><text x=\"61.6\" y=\"185.8\" fill=\"var(--ink-soft)\" font-size=\"11\" text-anchor=\"start\">директриса</text><line x1=\"218.0\" y1=\"75.6\" x2=\"218.0\" y2=\"320.4\" stroke=\"var(--ink-soft)\" stroke-width=\"1.2\" stroke-dasharray=\"3 4\"/><text x=\"208.0\" y=\"82.4\" fill=\"var(--ink-soft)\" font-size=\"11\" text-anchor=\"end\">ось</text><text x=\"230.0\" y=\"388.0\" fill=\"var(--ink-soft)\" font-size=\"11.5\" text-anchor=\"middle\">ветви вниз: перед квадратом минус</text></svg>",
+    "topic": "t6",
+    "section": "r5",
+    "type": "r5-1",
+    "mark": "book",
+    "num": 78
+  },
+  {
     "id": "n233",
     "topic": "t6",
     "level": 2,
-    "num": 77,
+    "num": 79,
     "title": "Гипербола $5x^2-4y^2=20$",
     "statement": "Дано уравнение гиперболы $5x^2-4y^2=20$. Найдите: 1) длины полуосей; 2) координаты фокусов; 3) эксцентриситет; 4) уравнения асимптот и директрис; 5) фокальные радиусы точки $M(3;2{,}5)$.",
     "steps": [
@@ -2574,7 +2636,7 @@ var TASKS_SEM2 = [
     "id": "n234",
     "topic": "t6",
     "level": 2,
-    "num": 78,
+    "num": 80,
     "title": "Парабола $y=-2x^2+8x-5$: вершина, фокус, директриса",
     "statement": "Найдите вершину, фокус и директрису параболы $y=-2x^2+8x-5$, постройте эскиз графика.",
     "steps": [
@@ -2605,7 +2667,7 @@ var TASKS_SEM2 = [
     "id": "n213",
     "topic": "t6",
     "level": 3,
-    "num": 79,
+    "num": 81,
     "title": "Эллипс $24x^2+49y^2=1176$",
     "statement": "Дано уравнение эллипса $24x^2+49y^2=1176$. Найдите: 1) длины полуосей; 2) координаты фокусов; 3) эксцентриситет; 4) уравнения директрис и расстояние между ними; 5) точки эллипса, расстояние от которых до левого фокуса $F_1$ равно $12$.",
     "steps": [
@@ -2640,7 +2702,7 @@ var TASKS_SEM2 = [
     "id": "n235",
     "topic": "t6",
     "level": 2,
-    "num": 80,
+    "num": 82,
     "title": "Сечения однополостного гиперболоида координатными плоскостями",
     "statement": "Запишите канонические уравнения сечений поверхности $\\dfrac{x^2}{4}+\\dfrac{y^2}{9}-z^2=1$ координатными плоскостями и назовите их тип.",
     "steps": [
@@ -2671,7 +2733,7 @@ var TASKS_SEM2 = [
     "id": "p114",
     "topic": "t6",
     "level": 3,
-    "num": 81,
+    "num": 83,
     "title": "Касательная плоскость к гиперболическому параболоиду: две прямые",
     "statement": "Дан гиперболический параболоид $x^2-\\dfrac{y^2}{4}=z$ и одна из его касательных плоскостей $10x-2y-z-21=0$. Найдите уравнения двух прямых, по которым плоскость пересекает параболоид.",
     "steps": [
@@ -2726,7 +2788,8 @@ var TASKS_SEM2 = [
     "topic": "t6",
     "section": "r5",
     "mark": "book",
-    "num": 82
+    "num": 84,
+    "figure": "<svg class=\"prax-fig\" viewBox=\"0 0 460 340\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Две плоскости, касающиеся сферы\"><circle cx=\"230\" cy=\"165\" r=\"82\" fill=\"none\" stroke=\"var(--accent)\" stroke-width=\"2\"/><ellipse cx=\"230\" cy=\"165\" rx=\"82\" ry=\"24\" fill=\"none\" stroke=\"var(--border)\" stroke-width=\"1.2\" stroke-dasharray=\"4 4\"/><circle cx=\"230\" cy=\"165\" r=\"4.5\" fill=\"var(--ink)\"/><text x=\"216\" y=\"178\" fill=\"var(--ink)\" font-size=\"12\" text-anchor=\"middle\">O</text><path d=\"M96,88 L300,44 L364,86 L160,130 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.5\" stroke=\"var(--ruby)\" stroke-width=\"1.5\"/><path d=\"M96,246 L300,202 L364,244 L160,288 Z\" fill=\"var(--bg-soft)\" fill-opacity=\"0.5\" stroke=\"var(--ruby)\" stroke-width=\"1.5\"/><line x1=\"230\" y1=\"165\" x2=\"230\" y2=\"86\" stroke=\"var(--ink-soft)\" stroke-width=\"1.5\" stroke-dasharray=\"5 4\"/><line x1=\"230\" y1=\"165\" x2=\"230\" y2=\"244\" stroke=\"var(--ink-soft)\" stroke-width=\"1.5\" stroke-dasharray=\"5 4\"/><text x=\"244\" y=\"128\" fill=\"var(--ink-soft)\" font-size=\"12.5\" text-anchor=\"start\" font-style=\"italic\">R</text><text x=\"244\" y=\"212\" fill=\"var(--ink-soft)\" font-size=\"12.5\" text-anchor=\"start\" font-style=\"italic\">R</text><circle cx=\"230\" cy=\"86\" r=\"4\" fill=\"var(--ruby)\"/><circle cx=\"230\" cy=\"244\" r=\"4\" fill=\"var(--ruby)\"/><text x=\"376\" y=\"80\" fill=\"var(--ruby)\" font-size=\"11.5\" text-anchor=\"start\">p = 27</text><text x=\"376\" y=\"250\" fill=\"var(--ruby)\" font-size=\"11.5\" text-anchor=\"start\">p = −27</text><text x=\"230\" y=\"318\" fill=\"var(--ink-soft)\" font-size=\"11.5\" text-anchor=\"middle\">расстояние от центра до плоскости равно радиусу</text></svg>"
   },
   {
     "id": "s556",
@@ -2761,7 +2824,7 @@ var TASKS_SEM2 = [
     "topic": "t6",
     "section": "r5",
     "mark": "book",
-    "num": 83
+    "num": 85
   },
   {
     "id": "s5510",
@@ -2792,13 +2855,13 @@ var TASKS_SEM2 = [
     "topic": "t6",
     "section": "r5",
     "mark": "book",
-    "num": 84
+    "num": 86
   },
   {
     "id": "n220",
     "topic": "t6",
     "level": 3,
-    "num": 85,
+    "num": 87,
     "title": "Уравнение касательной к параболе",
     "statement": "Записав уравнение прямой в виде $y=kx+b$ и пользуясь тем, что касательная имеет с параболой ровно одну общую точку, выведите уравнение касательной к параболе $y^2=2px$ в точке $(x_0;y_0)$.",
     "steps": [
