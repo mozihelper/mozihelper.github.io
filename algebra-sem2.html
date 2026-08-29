@@ -9263,14 +9263,21 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();renderL
         return (fTopic === 'all' || x.topic === fTopic) &&
                (fLevel === 'all' || String(x.level) === fLevel);
       });
-      list.sort(function (a, b) {
-        var d = ORDER.indexOf(a.topic) - ORDER.indexOf(b.topic);
-        return d || a.level - b.level || a.num - b.num;
+      var SEC = {}, TY = {}, SORD = {}, TORD = {};
+      (window.TASK_SECTIONS || []).forEach(function (s, si) {
+        SEC[s.id] = s; SORD[s.id] = si;
+        (s.types || []).forEach(function (y) { TY[y.id] = y; TORD[y.id] = y.no || 0; });
       });
-      var SEC = {}, TY = {};
-      (window.TASK_SECTIONS || []).forEach(function (s) {
-        SEC[s.id] = s;
-        (s.types || []).forEach(function (y) { TY[y.id] = y; });
+      /* Порядок как в оглавлении: раздел, затем тип по номеру, внутри типа —
+         сначала экзаменационные, потом из списка, потом из задачников.
+         По сложности сортировать нельзя: типы разрывались бы на куски. */
+      var MKR = { exam: 0, list: 1, book: 2 };
+      list.sort(function (a, b) {
+        return ((SORD[a.section] || 0) - (SORD[b.section] || 0)) ||
+               ((TORD[a.type] || 0) - (TORD[b.type] || 0)) ||
+               ((MKR[a.mark] === undefined ? 2 : MKR[a.mark]) -
+                (MKR[b.mark] === undefined ? 2 : MKR[b.mark])) ||
+               (a.num - b.num);
       });
       function plural(n) {
         var a = n % 10, b = n % 100;
@@ -9298,8 +9305,14 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();renderL
       var lst0 = document.getElementById('praxList'); var page = (lst0 && lst0.closest('.praxhost')) || document.getElementById('page-practice');
       if (page) page.dataset.praxed = '';
       if (typeof enhancePractice === 'function') { try { enhancePractice(); } catch (e) {} }
-      if (window.MathJax && window.MathJax.typesetPromise)
-        window.MathJax.typesetPromise([host]).catch(function () {});
+      /* Формулы рисуем только в шапках: их немного и они видны сразу.
+         Тело карточки типсетит toggleCard при первом открытии — иначе
+         браузер пересчитывает разом больше сотни задач и вкладка подвисает. */
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        var heads = Array.prototype.slice.call(
+          host.querySelectorAll('.q-head, .prax-sec, .prax-type'));
+        if (heads.length) window.MathJax.typesetPromise(heads).catch(function () {});
+      }
     }
 
     function buildFilters() {
