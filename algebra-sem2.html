@@ -8912,6 +8912,7 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();renderL
   #page-prep .pr-part{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
     color:var(--ink-mute);margin:1.4rem 0 .6rem}
   #page-prep .pr-list{counter-reset:v;list-style:none;padding:0;margin:0}
+  #page-prep .pr-list.pr-cont{counter-reset:v 5}
   #page-prep .pr-list li{counter-increment:v;position:relative;padding:0 0 0 2.3rem;margin:0 0 1rem;
     line-height:1.6;color:var(--ink)}
   #page-prep .pr-list li::before{content:counter(v) ".";position:absolute;left:0;top:0;
@@ -8920,13 +8921,28 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();renderL
   /* Печать. Прятать соседей по body нельзя: вкладка лежит внутри <main>,
      и правило скрывало бы её вместе с контейнером. Поэтому гасим всё
      через visibility и возвращаем видимость только самому варианту. */
+  /* Печать. Гасим страницу через visibility (display сломал бы вложенность),
+     принудительно делаем всё чёрным — иначе на тёмной теме формулы уходят
+     в белый по белому, — и ужимаем вёрстку, чтобы билет влезал на лист. */
   @media print{
     body *{visibility:hidden!important}
     #prVar,#prVar *{visibility:visible!important}
     #prVar{position:absolute;left:0;top:0;width:100%;margin:0;padding:0}
+    #prVar,#prVar *{color:#000!important;background:transparent!important;
+      border-color:#000!important;text-shadow:none!important}
+    #prVar mjx-container,#prVar mjx-container *{color:#000!important}
+    #prVar svg,#prVar svg *{fill:#000!important;stroke:#000!important}
     #prVar .pr-var{border:none;padding:0;background:none}
+    #prVar h3{font-size:13pt;margin:0 0 2pt}
+    #prVar .pr-sub{font-size:8.5pt;margin:0 0 8pt}
+    #prVar .pr-part{font-size:7.5pt;margin:9pt 0 4pt;letter-spacing:.1em}
+    #prVar .pr-list li{font-size:9.5pt;line-height:1.35;margin:0 0 5pt;padding-left:16pt;
+      break-inside:avoid}
+    #prVar .pr-list li::before{font-size:9pt}
+    #prVar .pr-tag{display:none}
+    #prVar mjx-container[display="true"]{margin:2pt 0!important}
     .tabbar,.topbar,.sidebar,.backdrop{display:none!important}
-    @page{margin:18mm}
+    @page{margin:14mm}
   }
   </style>
 
@@ -9061,7 +9077,7 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();renderL
       theory.forEach(function (o) {
         h.push('<li>' + o.q.t + '<span class="pr-tag">' + TH[o.th] + '</span></li>');
       });
-      h.push('</ol><div class="pr-part">Задачи</div><ol class="pr-list">');
+      h.push('</ol><div class="pr-part">Задачи</div><ol class="pr-list pr-cont">');
       tasks.forEach(function (o) {
         h.push('<li>' + o.x.statement + '<span class="pr-tag">' + TH[o.th] + '</span></li>');
       });
@@ -10936,8 +10952,7 @@ else{window.addEventListener("resize",function(){if(cv.clientWidth>0){fit();pain
     var html = '';
     TOPICS.forEach(function(tp, i){
       html += '<div class="tl-group-head" data-group="' + tp.id + '">'
-           +    '<div class="tl-group-eyebrow">Тема ' + (ROMAN[i] || (i+1))
-           +      (tp.subtitle ? ' · ' + esc(tp.subtitle) : '') + '</div>'
+           +    '<div class="tl-group-eyebrow">' + esc(tp.subtitle || ('Тема ' + (ROMAN[i] || (i+1)))) + '</div>'
            +    '<div class="tl-group-title">' + esc(tp.title) + '</div>'
            +    '<div class="tl-bar"><i></i></div>'
            +    '<div class="tl-group-meta"></div>'
@@ -11150,7 +11165,7 @@ else{window.addEventListener("resize",function(){if(cv.clientWidth>0){fit();pain
     document.getElementById('tkNum').textContent = pad(n);
     document.getElementById('tkOf').textContent = 'из ' + TK.length;
     document.getElementById('tkEyebrow').textContent =
-      'Тема ' + (ROMAN[ti] || (ti+1)) + ' · ' + e.topicTitle;
+      e.topicSub || e.topicTitle;
     document.getElementById('tkTitle').innerHTML = e.t;
 
     var prev = TK[idx-1], next = TK[idx+1];
