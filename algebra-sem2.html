@@ -2568,16 +2568,26 @@ html.arriving .topic-header, html.arriving .q-card { opacity: 1; }
   .prax-solve > .prax-figwrap .prax-fig { margin: 0; max-width: none; }
 }
 .prax-figwrap { min-width: 0; }
-#page-practice .prax-sub {
+#page-prep .prax-sub {
   position: sticky; top: 56px; z-index: 30;
   margin: 2.6rem 0 1.1rem; padding: 12px 0 11px;
   background: var(--bg); letter-spacing: .18em;
 }
-#page-practice .prax-sub::before {
+  #page-practice .prax-sub {
+  position: sticky; top: 56px; z-index: 30;
+  margin: 2.6rem 0 1.1rem; padding: 12px 0 11px;
+  background: var(--bg); letter-spacing: .18em;
+}
+#page-prep .prax-sub::before {
   content: ''; position: absolute; left: -20px; right: -20px; top: 0; bottom: 0;
   background: var(--bg); z-index: -1;
 }
-#page-practice .prax-intro { color: var(--ink-soft); }
+  #page-practice .prax-sub::before {
+  content: ''; position: absolute; left: -20px; right: -20px; top: 0; bottom: 0;
+  background: var(--bg); z-index: -1;
+}
+#page-prep .prax-intro { color: var(--ink-soft); }
+  #page-practice .prax-intro { color: var(--ink-soft); }
 
 /* ══ ЧЕРТЕЖИ ПРАКТИКИ ══
    Было: тонкие линии и подписи в 9–10px — на телефоне неразборчиво.
@@ -2688,6 +2698,7 @@ html.arriving .topic-header, html.arriving .q-card { opacity: 1; }
   .bs-search { max-width: 520px; }
   #basicsList { max-width: 76ch; }
 
+  #page-prep .prax-sub { top: 64px; }
   #page-practice .prax-sub { top: 64px; }
   .prax-solve { grid-template-columns: minmax(0, 1fr) minmax(0, 44%); gap: 34px; }
   .prax-solve > .prax-figwrap { top: 92px; }
@@ -8897,6 +8908,13 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();renderL
   #page-prep .pr-btn:hover{border-color:var(--ruby)}
   #page-prep .pr-btn.main{background:var(--ruby);border-color:var(--ruby);color:var(--white)}
   #page-prep .pr-hint{font-size:.85rem;color:var(--ink-mute)}
+  #page-prep .pr-themes{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+  #page-prep .pr-theme{padding:.95rem 1.1rem;border:1px solid var(--border);border-radius:9px;
+    background:var(--bg-card);cursor:pointer;text-align:left;transition:border-color .15s,transform .12s}
+  #page-prep .pr-theme:hover{border-color:var(--ruby);transform:translateY(-1px)}
+  #page-prep .pr-theme b{display:block;font-size:.98rem;color:var(--ink);margin-bottom:.25rem}
+  #page-prep .pr-theme span{font-size:.82rem;color:var(--ink-mute)}
+  #page-prep .prax-filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 1rem}
   #page-prep .pr-var{border:1px solid var(--border);border-radius:10px;padding:1.5rem 1.6rem;background:var(--bg-card)}
   #page-prep .pr-var h3{margin:0 0 .3rem;font-size:1.12rem;color:var(--ink)}
   #page-prep .pr-sub{font-size:.84rem;color:var(--ink-mute);margin:0 0 1.3rem}
@@ -8940,17 +8958,15 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();renderL
   </div>
 
   <div class="pr-pane" data-pane="theory">
-    <div class="pr-bar">
-      <button class="pr-btn main" onclick="openQuizMenu()">Открыть викторину</button>
-      <span class="pr-hint">Вопросы сгруппированы по темам; после ответа показывается разбор.</span>
-    </div>
+    <p class="pr-hint" style="margin:0 0 1rem">Выберите главу — вопросы открываются по одному, после ответа показывается разбор.</p>
+    <div class="pr-themes" id="prThemes"></div>
   </div>
 
   <div class="pr-pane" data-pane="tasks">
-    <div class="pr-bar">
-      <button class="pr-btn main" onclick="showScreen('practice')">Открыть задачи</button>
-      <span class="pr-hint" id="prTasksHint">Задачи с полным разбором, с фильтрами по теме и сложности.</span>
-    </div>
+    <div class="prax-filters" id="praxTopics"></div>
+    <div class="prax-filters" id="praxLevels"></div>
+    <p class="prax-count" id="praxCount"></p>
+    <div class="questions-list" id="praxList"></div>
   </div>
 
   <script>
@@ -8969,6 +8985,10 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();renderL
       host.querySelectorAll('.pr-pane').forEach(function (n) { n.classList.remove('on'); });
       c.classList.add('on');
       host.querySelector('.pr-pane[data-pane="' + c.dataset.pane + '"]').classList.add('on');
+      if (c.dataset.pane === 'tasks' && typeof buildPractice === 'function') {
+        try { buildPractice(); } catch (e) {}
+      }
+      if (c.dataset.pane === 'theory') buildThemes();
     });
 
     function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
@@ -9054,13 +9074,36 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();renderL
         window.MathJax.typesetPromise([box]).catch(function () {});
     }
 
+    function buildThemes() {
+      var box = document.getElementById('prThemes');
+      if (!box || box.dataset.done === '1') return;
+      var names = (typeof THEME_NAMES !== 'undefined') ? THEME_NAMES : null;
+      if (!names) { box.innerHTML = '<p class="pr-hint">База вопросов ещё загружается…</p>'; return; }
+      var h = [];
+      Object.keys(names).forEach(function (k) {
+        var cnt = 0;
+        if (typeof TICKET_THEME !== 'undefined') {
+          Object.keys(TICKET_THEME).forEach(function (n) { if (String(TICKET_THEME[n]) === String(k)) cnt++; });
+        }
+        h.push('<button class="pr-theme" data-theme="' + k + '"><b>' + names[k] + '</b>' +
+               '<span>' + (cnt ? cnt + ' вопросов курса' : 'вопросы курса') + '</span></button>');
+      });
+      box.innerHTML = h.join('');
+      box.dataset.done = '1';
+      box.addEventListener('click', function (e) {
+        var b = e.target.closest('.pr-theme');
+        if (!b) return;
+        if (typeof openQuizMenu === 'function') { openQuizMenu(b.dataset.theme); }
+      });
+    }
+
     document.getElementById('prGen').addEventListener('click', build);
     document.getElementById('prPrint').addEventListener('click', function () { window.print(); });
 
     window.buildPrep = function () {
       if (typeof window.loadTasksBase === 'function') {
-        window.loadTasksBase().then(function () { build(); });
-      } else { build(); }
+        window.loadTasksBase().then(function () { build(); buildThemes(); });
+      } else { build(); buildThemes(); }
     };
   })();
   </script>
@@ -9083,63 +9126,110 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();renderL
     </p>
 
   <style>
+  #page-prep .prax-filters{display:flex;flex-wrap:wrap;gap:8px;margin:1.2rem 0 1.6rem}
   #page-practice .prax-filters{display:flex;flex-wrap:wrap;gap:8px;margin:1.2rem 0 1.6rem}
+  #page-prep .prax-chip{padding:6px 13px;border:1px solid var(--border);border-radius:999px;
+    background:var(--bg-card);color:var(--ink-soft);font-size:.85rem;cursor:pointer;
+    transition:border-color .15s,color .15s,background .15s;user-select:none}
   #page-practice .prax-chip{padding:6px 13px;border:1px solid var(--border);border-radius:999px;
     background:var(--bg-card);color:var(--ink-soft);font-size:.85rem;cursor:pointer;
     transition:border-color .15s,color .15s,background .15s;user-select:none}
+  #page-prep .prax-chip:hover{border-color:var(--ruby)}
   #page-practice .prax-chip:hover{border-color:var(--ruby)}
+  #page-prep .prax-chip.on{background:var(--ruby);border-color:var(--ruby);color:var(--white)}
   #page-practice .prax-chip.on{background:var(--ruby);border-color:var(--ruby);color:var(--white)}
+  #page-prep .prax-count{color:var(--ink-mute);font-size:.85rem;margin:0 0 1rem}
   #page-practice .prax-count{color:var(--ink-mute);font-size:.85rem;margin:0 0 1rem}
+  #page-prep .prax-meta{display:flex;gap:7px;align-items:center;margin-left:auto;flex-shrink:0}
   #page-practice .prax-meta{display:flex;gap:7px;align-items:center;margin-left:auto;flex-shrink:0}
+  #page-prep .prax-lvl{font-size:.7rem;letter-spacing:.06em;padding:2px 8px;border-radius:999px;
+    border:1px solid var(--border);color:var(--ink-mute);white-space:nowrap}
   #page-practice .prax-lvl{font-size:.7rem;letter-spacing:.06em;padding:2px 8px;border-radius:999px;
     border:1px solid var(--border);color:var(--ink-mute);white-space:nowrap}
+  #page-prep .prax-lvl[data-l="1"]{color:#2e7d5b;border-color:#2e7d5b66}
   #page-practice .prax-lvl[data-l="1"]{color:#2e7d5b;border-color:#2e7d5b66}
+  #page-prep .prax-lvl[data-l="2"]{color:#a8791c;border-color:#a8791c66}
   #page-practice .prax-lvl[data-l="2"]{color:#a8791c;border-color:#a8791c66}
+  #page-prep .prax-lvl[data-l="3"]{color:var(--ruby);border-color:var(--ruby)}
   #page-practice .prax-lvl[data-l="3"]{color:var(--ruby);border-color:var(--ruby)}
+  #page-prep .prax-modes{display:flex;gap:9px;margin:1.1rem 0 .2rem;flex-wrap:wrap}
   #page-practice .prax-modes{display:flex;gap:9px;margin:1.1rem 0 .2rem;flex-wrap:wrap}
+  #page-prep .prax-btn{padding:8px 16px;border:1px solid var(--border);border-radius:7px;
+    background:var(--bg-card);color:var(--ink);font-size:.9rem;font-weight:500;cursor:pointer;
+    transition:border-color .15s,background .15s}
   #page-practice .prax-btn{padding:8px 16px;border:1px solid var(--border);border-radius:7px;
     background:var(--bg-card);color:var(--ink);font-size:.9rem;font-weight:500;cursor:pointer;
     transition:border-color .15s,background .15s}
+  #page-prep .prax-btn:hover{border-color:var(--ruby)}
   #page-practice .prax-btn:hover{border-color:var(--ruby)}
+  #page-prep .prax-btn.on{background:var(--ruby);border-color:var(--ruby);color:var(--white)}
   #page-practice .prax-btn.on{background:var(--ruby);border-color:var(--ruby);color:var(--white)}
+  #page-prep .prax-pane{display:none;margin-top:1rem}
   #page-practice .prax-pane{display:none;margin-top:1rem}
+  #page-prep .prax-pane.on{display:block}
   #page-practice .prax-pane.on{display:block}
+  #page-prep .prax-plan{counter-reset:pl;list-style:none;padding:0;margin:.2rem 0 0}
   #page-practice .prax-plan{counter-reset:pl;list-style:none;padding:0;margin:.2rem 0 0}
+  #page-prep .prax-plan li{counter-increment:pl;position:relative;padding:0 0 0 2.1rem;margin:0 0 .65rem;
+    line-height:1.5;color:var(--ink-soft)}
   #page-practice .prax-plan li{counter-increment:pl;position:relative;padding:0 0 0 2.1rem;margin:0 0 .65rem;
     line-height:1.5;color:var(--ink-soft)}
+  #page-prep .prax-plan li::before{content:counter(pl);position:absolute;left:0;top:0;
+    width:1.45rem;height:1.45rem;border-radius:50%;border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;font-size:.72rem;color:var(--ink-mute)}
   #page-practice .prax-plan li::before{content:counter(pl);position:absolute;left:0;top:0;
     width:1.45rem;height:1.45rem;border-radius:50%;border:1px solid var(--border);
     display:flex;align-items:center;justify-content:center;font-size:.72rem;color:var(--ink-mute)}
+  #page-prep .prax-step{border-left:2px solid var(--border-soft);padding:.15rem 0 .15rem 1.1rem;
+    margin:0 0 1.15rem}
   #page-practice .prax-step{border-left:2px solid var(--border-soft);padding:.15rem 0 .15rem 1.1rem;
     margin:0 0 1.15rem}
+  #page-prep .prax-step-h{font-weight:600;color:var(--ink);margin-bottom:.4rem;font-size:.97rem}
   #page-practice .prax-step-h{font-weight:600;color:var(--ink);margin-bottom:.4rem;font-size:.97rem}
+  #page-prep .prax-step-h b{color:var(--ruby);font-weight:600;margin-right:.45rem}
   #page-practice .prax-step-h b{color:var(--ruby);font-weight:600;margin-right:.45rem}
+  #page-prep .prax-step-b{color:var(--ink-soft);line-height:1.62}
   #page-practice .prax-step-b{color:var(--ink-soft);line-height:1.62}
+  #page-prep .prax-next{margin:.2rem 0 .6rem}
   #page-practice .prax-next{margin:.2rem 0 .6rem}
+  #page-prep .prax-ans{margin-top:1.1rem;padding:.85rem 1.1rem;border-radius:7px;
+    background:var(--bg-soft);border:1px solid var(--border-soft)}
   #page-practice .prax-ans{margin-top:1.1rem;padding:.85rem 1.1rem;border-radius:7px;
     background:var(--bg-soft);border:1px solid var(--border-soft)}
+  #page-prep .prax-ans-t{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ink-mute);margin-bottom:.35rem}
   #page-practice .prax-ans-t{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
     color:var(--ink-mute);margin-bottom:.35rem}
+  #page-prep .prax-sec{margin:2.6rem 0 .2rem;font-size:1.24rem;font-weight:600;color:var(--ink);
+    padding-bottom:.5rem;border-bottom:1px solid var(--border)}
   #page-practice .prax-sec{margin:2.6rem 0 .2rem;font-size:1.24rem;font-weight:600;color:var(--ink);
     padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+  #page-prep .prax-sec:first-child{margin-top:.6rem}
   #page-practice .prax-sec:first-child{margin-top:.6rem}
+  #page-prep .prax-type{display:flex;align-items:baseline;gap:.6rem;margin:1.5rem 0 .55rem}
   #page-practice .prax-type{display:flex;align-items:baseline;gap:.6rem;margin:1.5rem 0 .55rem}
+  #page-prep .prax-type-n{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--white);background:var(--ruby);padding:2px 8px;border-radius:4px;white-space:nowrap}
   #page-practice .prax-type-n{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
     color:var(--white);background:var(--ruby);padding:2px 8px;border-radius:4px;white-space:nowrap}
+  #page-prep .prax-type-t{font-size:1.01rem;font-weight:600;color:var(--ink)}
   #page-practice .prax-type-t{font-size:1.01rem;font-weight:600;color:var(--ink)}
+  #page-prep .prax-type-c{margin-left:auto;font-size:.78rem;color:var(--ink-mute);white-space:nowrap}
   #page-practice .prax-type-c{margin-left:auto;font-size:.78rem;color:var(--ink-mute);white-space:nowrap}
+  #page-prep .prax-mk{flex-shrink:0;font-size:.82rem;line-height:1;margin-right:.1rem}
   #page-practice .prax-mk{flex-shrink:0;font-size:.82rem;line-height:1;margin-right:.1rem}
   #page-practice .pm-exam{color:var(--ruby)}
   #page-practice .pm-list{color:var(--accent)}
   #page-practice .pm-book{color:var(--ink-mute)}
+  #page-prep .prax-srcnote{margin:1.1rem 0 0;padding:.7rem .95rem;border:1px solid var(--border-soft);
+    border-radius:7px;font-size:.83rem;color:var(--ink-mute);line-height:1.5}
   #page-practice .prax-srcnote{margin:1.1rem 0 0;padding:.7rem .95rem;border:1px solid var(--border-soft);
     border-radius:7px;font-size:.83rem;color:var(--ink-mute);line-height:1.5}
+  #page-prep .prax-empty{color:var(--ink-mute);padding:2rem 0;text-align:center}
   #page-practice .prax-empty{color:var(--ink-mute);padding:2rem 0;text-align:center}
   </style>
-    <div class="prax-filters" id="praxTopics"></div>
-    <div class="prax-filters" id="praxLevels"></div>
-    <p class="prax-count" id="praxCount"></p>
-    <div class="questions-list" id="praxList"></div>
+    <p class="prax-count">Задачи перенесены во вкладку «Подготовка» → «Задачи».</p>
+
 
   <script>
   (function () {
@@ -9239,7 +9329,7 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();renderL
       host.innerHTML = out || '<div class="prax-empty">По этим условиям задач нет.</div>';
       var c = document.getElementById('praxCount');
       if (c) c.textContent = 'Показано задач: ' + list.length + ' из ' + TASKS_SEM2.length + '.';
-      var page = document.getElementById('page-practice');
+      var page = document.getElementById('page-prep') || document.getElementById('page-practice');
       if (page) page.dataset.praxed = '';
       if (typeof enhancePractice === 'function') { try { enhancePractice(); } catch (e) {} }
       if (window.MathJax && window.MathJax.typesetPromise)
@@ -9274,7 +9364,17 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();renderL
 
     /* переключение режимов и пошаговый показ */
     document.addEventListener('click', function (e) {
-      var btn = e.target.closest('#page-practice .prax-btn');
+      var btn = e.target.closest('#page-prep .prax-btn');
+      if (!btn) return;
+      var body = btn.closest('.q-body');
+      if (!body) return;
+
+      if (btn.dataset.mode) {
+        var want = btn.dataset.mode;
+        var pane = body.querySelector('.prax-pane[data-pane="' + want + '"]');
+        var isOn = btn.classList.contains('on');
+        body.querySelectorAll('.prax-btn[data-mode]').forEach(function (n) { n.classList.remove('on'); }
+  #page-practice .prax-btn');
       if (!btn) return;
       var body = btn.closest('.q-body');
       if (!body) return;
