@@ -8903,6 +8903,9 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();renderL
   #page-prep .pr-theme:hover{border-color:var(--ruby);transform:translateY(-1px)}
   #page-prep .pr-theme b{display:block;font-size:.97rem;color:var(--ink);margin-bottom:.22rem}
   #page-prep .pr-theme span{font-size:.81rem;color:var(--ink-mute)}
+  #page-prep .pr-skel{cursor:default;opacity:.7;animation:prPulse 1.2s ease-in-out infinite}
+  #page-prep .pr-skel:hover{border-color:var(--border);transform:none}
+  @keyframes prPulse{0%,100%{opacity:.55}50%{opacity:.9}}
   #page-prep .pr-var{border:1px solid var(--border);border-radius:10px;padding:1.5rem 1.6rem;background:var(--bg-card)}
   #page-prep .pr-var h3{margin:0 0 .3rem;font-size:1.12rem;color:var(--ink)}
   #page-prep .pr-sub{font-size:.84rem;color:var(--ink-mute);margin:0 0 1.3rem}
@@ -9062,12 +9065,24 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();renderL
         window.MathJax.typesetPromise([box]).catch(function () {});
     }
 
-    var themesReady = false;
+    var themesReady = false, quizReady = (typeof THEME_NAMES !== 'undefined');
+    function markThemesReady() {
+      var box = document.getElementById('prThemes');
+      if (!box) return;
+      themesReady = false;
+      buildThemes();
+      box.classList.remove('is-loading');
+    }
     function buildThemes() {
       var box = document.getElementById('prThemes');
       if (!box || themesReady) return;
       if (typeof THEME_NAMES === 'undefined') {
-        box.innerHTML = '<p class="pr-hint">База вопросов ещё загружается…</p>';
+        box.classList.add('is-loading');
+        box.innerHTML = '<div class="pr-theme pr-skel"><b>Загружаем вопросы…</b>' +
+          '<span>База весит около мегабайта, это занимает пару секунд</span></div>';
+        if (typeof window.loadQuizBase === 'function') {
+          window.loadQuizBase().then(function () { quizReady = true; markThemesReady(); });
+        }
         return;
       }
       var cnt = {};
@@ -9088,7 +9103,7 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();renderL
     }
     document.addEventListener('click', function (e) {
       var b = e.target.closest('#prThemes .pr-theme');
-      if (!b) return;
+      if (!b || b.classList.contains('pr-skel')) return;
       if (typeof openQuizMenu === 'function') openQuizMenu(b.dataset.theme);
     });
 
@@ -9096,6 +9111,12 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();renderL
     document.getElementById('prPrint').addEventListener('click', function () { window.print(); });
 
     window.buildPrep = function () {
+      /* База викторины весит больше мегабайта. Начинаем качать её сразу
+         при входе во вкладку, пока человек читает плитки, — иначе
+         ожидание приходится на момент нажатия. */
+      if (typeof window.loadQuizBase === 'function') {
+        window.loadQuizBase().then(function () { quizReady = true; markThemesReady(); });
+      }
       if (typeof window.loadTasksBase === 'function') {
         window.loadTasksBase().then(function () { build(); buildThemes(); });
       } else { build(); buildThemes(); }
