@@ -8917,10 +8917,16 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();renderL
   #page-prep .pr-list li::before{content:counter(v) ".";position:absolute;left:0;top:0;
     color:var(--ruby);font-weight:600;font-size:.95rem}
   #page-prep .pr-tag{display:block;font-size:.78rem;color:var(--ink-mute);margin-top:.25rem}
+  /* Печать. Прятать соседей по body нельзя: вкладка лежит внутри <main>,
+     и правило скрывало бы её вместе с контейнером. Поэтому гасим всё
+     через visibility и возвращаем видимость только самому варианту. */
   @media print{
-    body>*:not(#page-prep){display:none!important}
-    #page-prep .pr-modes,#page-prep .pr-bar,.tabbar,.topbar{display:none!important}
-    #page-prep .pr-var{border:none;padding:0}
+    body *{visibility:hidden!important}
+    #prVar,#prVar *{visibility:visible!important}
+    #prVar{position:absolute;left:0;top:0;width:100%;margin:0;padding:0}
+    #prVar .pr-var{border:none;padding:0;background:none}
+    .tabbar,.topbar,.sidebar,.backdrop{display:none!important}
+    @page{margin:18mm}
   }
   </style>
 
@@ -9108,7 +9114,17 @@ if(window.ResizeObserver){new ResizeObserver(function(){if(inited){fit();renderL
     });
 
     document.getElementById('prGen').addEventListener('click', build);
-    document.getElementById('prPrint').addEventListener('click', function () { window.print(); });
+    document.getElementById('prPrint').addEventListener('click', function () {
+      var box = document.getElementById('prVar');
+      /* Если вариант ещё не собирали, печатать нечего — соберём и подождём,
+         пока MathJax отрисует формулы, иначе на лист уйдёт голый TeX. */
+      if (!box || !box.innerHTML.trim()) {
+        build();
+        setTimeout(function () { window.print(); }, 400);
+        return;
+      }
+      window.print();
+    });
 
     window.buildPrep = function () {
       /* База викторины весит больше мегабайта. Начинаем качать её сразу
