@@ -538,11 +538,54 @@ if ('serviceWorker' in navigator) {
 </script>
 <script>
 (function () {
+  var URL_BASE = "https://mozihelper-counter.mozihelper.workers.dev";
+
+  /* Идентификатор вкладки: нужен, чтобы сигнал о выходе попал
+     ровно в ту же запись, что и сигнал о входе. */
+  var sid = Math.random().toString(36).slice(2, 10);
+  var start = Date.now();
+  var page = location.pathname;
+  var sent = false;
+
+  function body(extra) {
+    var o = { sid: sid, ts: start, p: page };
+    if (extra) for (var k in extra) o[k] = extra[k];
+    return JSON.stringify(o);
+  }
+
   try {
-    fetch("https://mozihelper-counter.mozihelper.workers.dev/hit", { method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ p: location.pathname }), keepalive: true, cache: "no-store"
+    fetch(URL_BASE + "/hit", {
+      method: "POST",
+      headers: { "Content-Type": "text/plain" },
+      body: body(),
+      keepalive: true,
+      cache: "no-store"
     }).catch(function () {});
   } catch (e) {}
+
+  /* Выход шлём через sendBeacon: обычный fetch при закрытии вкладки
+     не успевает уйти. Тип text/plain выбран намеренно — с json
+     браузер сначала отправил бы предварительный запрос CORS,
+     который при закрытии вкладки тоже не успевает. */
+  function bye() {
+    if (sent) return;
+    sent = true;
+    var payload = body({ end: Date.now() });
+    try {
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon(URL_BASE + "/bye",
+          new Blob([payload], { type: "text/plain" }));
+      } else {
+        fetch(URL_BASE + "/bye", { method: "POST", body: payload, keepalive: true })
+          .catch(function () {});
+      }
+    } catch (e) {}
+  }
+
+  addEventListener("pagehide", bye);
+  addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "hidden") bye();
+  });
 })();
 </script>
 
