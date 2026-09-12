@@ -1601,6 +1601,12 @@ details.topic-group .topic-link {
   color: var(--ink-soft);
   font-style: normal;
 }
+.quote { margin: .9rem 0 .2rem; padding: .75rem 1rem .75rem 1.1rem;
+  border-left: 3px solid var(--accent); background: var(--bg-soft);
+  border-radius: 0 8px 8px 0; color: var(--ink-soft); font-style: italic; line-height: 1.62; }
+.quote-who { display: block; margin-top: .45rem; font-style: normal; font-size: .84rem;
+  color: var(--ink-mute); letter-spacing: .02em; }
+.quote-who::before { content: '— '; }
 .note::before {
   content: 'Замечание. ';
   color: var(--accent);
@@ -3052,6 +3058,41 @@ html.arriving .backdrop,html.arriving .sidebar{
 
     <div class="explain">
       Один и тот же набор правил действия описывает разные по природе объекты — числа, многочлены, матрицы, перестановки. Поэтому алгебру интересуют не сами объекты, а законы операций над ними и структуры, которые эти законы порождают.
+      </div>
+    </div>
+
+    <div class="def-block">
+      <div class="section-tag">Связь с геометрией</div>
+      <div class="def-text">
+        Граница между алгеброй и геометрией условна: одно и то же утверждение часто можно доказать и тем, и другим языком.
+        <div class="quote">
+          «В современной математике не имеет большого значения, представлен результат в виде теоремы «чистой» геометрии или при помощи аналитической геометрии в виде алгебраической теоремы».
+          <span class="quote-who">Н. Бурбаки</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="def-block">
+      <div class="section-tag">Связь с физикой</div>
+      <div class="def-text">
+        <div class="quote">
+          «Современная физика требует всё более абстрактной математики и развития её основ. Так, неевклидова геометрия и некоммутативная алгебра, считавшиеся одно время просто плодом воображения или увлечения логическими рассуждениями, теперь признаны весьма необходимыми для описания общей картины физического мира».
+          <span class="quote-who">П. Дирак</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="def-block">
+      <div class="section-tag">Связь с экономикой</div>
+      <div class="def-text">
+        Алгебра стала важнейшим инструментом изучения законов общества и экономики. Алгебраическими методами получены результаты практически всех лауреатов Нобелевской премии по экономике XX века: <span class="em">Л. Канторовича, В. Леонтьева, П. Самуэльсона, Р. Солоу, Д. Хикса, Д. Нэша, Р. Зельтена</span>.
+      </div>
+    </div>
+
+    <div class="def-block">
+      <div class="section-tag">Путь развития</div>
+      <div class="def-text">
+        Со времён Древнего Вавилона и Древнего Египта алгебра прошла долгий путь: от арифметических действий на простейших множествах и формул в геометрических и астрономических расчётах — через теорию уравнений — к аксиоматическому и гораздо более абстрактному построению.
     </div>
 
   </div>
@@ -3194,6 +3235,15 @@ html.arriving .backdrop,html.arriving .sidebar{
   <div class="q-body">
 
     <div class="def-block">
+      <div class="section-tag">Общая постановка</div>
+      <div class="def-text">
+        Пусть в пространстве $A$ заданы $m+1$ линейных функций $f_1,\ldots,f_m,f\colon A\to\mathbb{R}$. Требуется найти точки $a$, удовлетворяющие условиям
+        $$f_1(a)\ge0,\quad\ldots,\quad f_m(a)\ge0,$$
+        для которых функция $f$ принимает наибольшее возможное значение. Неравенства задают выпуклый многогранник, а максимум линейной функции на нём достигается в вершине — отсюда и название задачи.
+      </div>
+    </div>
+
+    <div class="def-block">
       <div class="section-tag">Оптимальный по прибыли вектор производства</div>
       <div class="def-text">
         У предприятия $m$ видов ресурсов; выпускается $n$ видов продукции. <span class="term">Вектор производства</span> — $(x_1,\ldots,x_n)$. На единицу продукта $j$ нужно $a_{ij}$ единиц ресурса $i$, запас которого ограничен величиной $b_i$. Остаток каждого ресурса неотрицателен:
@@ -3220,7 +3270,33 @@ html.arriving .backdrop,html.arriving .sidebar{
 
     <div class="src-ref">Кострикин, ч. 2, с. 315–316, 321–322</div>
 
-  </div>
+  
+    <div class="def-block">
+      <div class="section-tag">Рентабельность фабрики</div>
+      <div class="def-text">
+        <span class="term">Утверждение.</span> Если для некоторого $k$ выполнено $\displaystyle\sum_{j=1}^{n}a_{jk}<1$, то фабрика $F_k$ работает рентабельно.
+      </div>
+    </div>
+
+    <div class="derivation">
+      <div class="derivation-title" onclick="toggleProof(this)"><span>Доказательство</span><span class="deriv-hint"></span></div>
+      <div class="deriv-body">
+      <div class="def-text">
+        Сумма $\sum_{j}a_{jk}$ — это общее количество ресурсов, необходимое для производства единицы $k$-го продукта. Потребляться не может больше, чем производится: иначе фабрика тратила бы на выпуск единицы товара больше единицы. Значит условие $\sum_j a_{jk}<1$ и означает рентабельность. $\blacksquare$
+      </div>
+      </div>
+    </div>
+
+    <div class="def-block">
+      <div class="section-tag">Разрешимость задачи планирования</div>
+      <div class="def-text">
+        <span class="term">Теорема.</span> Если все фабрики работают рентабельно, то задача планирования разрешима, причём единственным способом.
+      </div>
+      <div class="note">
+        Систему для $y_j$ можно записать в матричном виде, и все элементы матриц окажутся неотрицательными — отсюда название задачи о неотрицательных матрицах.
+      </div>
+    </div>
+</div>
 </div>
 
   </div>
