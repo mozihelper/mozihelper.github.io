@@ -3339,11 +3339,20 @@ html.arriving .backdrop,html.arriving .sidebar{
     <div class="def-block">
       <div class="section-tag">Элемент</div>
       <div class="def-text">
-        <span class="term">Элемент множества</span> — объект, входящий в данное множество. Подмножество часто выделяют свойством, присущим только его элементам, например $\{\,n\in\mathbb{Z}\mid n=2m,\ m\in\mathbb{Z}\,\}$ — множество всех чётных чисел.
+        <span class="term">Элемент множества</span> — объект, входящий в данное множество. Подмножество часто выделяют свойством, присущим только его элементам.
       </div>
     </div>
 
-    <div class="src-ref">Кострикин, ч. 1, с. 33–34</div>
+    <div class="example-card"><div class="example-card-title">Примеры (из лекции)</div><div class="example-card-body">
+      <ul class="props">
+        <li>множество чётных целых чисел $\{\,n\in\mathbb{Z}\mid \exists\,m\in\mathbb{Z}:\ n=2m\,\}$;</li>
+        <li>множество натуральных чисел $\mathbb{N}=\{\,n\in\mathbb{Z}\mid n>0\,\}$;</li>
+        <li>множество всех факультетов университета.</li>
+      </ul>
+      Первые два множества заданы свойством элементов, третье — по смыслу: природа элементов роли не играет.
+    </div></div>
+
+    <div class="src-ref">Г. Н. Клюшников, лекция 2 «Множества и отображения. Перестановки»; Кострикин, ч. 1, с. 33–34</div>
 
   </div>
 </div>
@@ -3379,7 +3388,7 @@ html.arriving .backdrop,html.arriving .sidebar{
       </div>
     </div>
 
-    <div class="src-ref">Кострикин, ч. 1, с. 33–34</div>
+    <div class="src-ref">Г. Н. Клюшников, лекция 2 «Множества и отображения. Перестановки»; Кострикин, ч. 1, с. 33–34</div>
 
   </div>
 </div>
@@ -3415,6 +3424,7 @@ html.arriving .backdrop,html.arriving .sidebar{
       <div class="def-text">
         <span class="term">Разность</span> множеств $S$ и $T$ — множество элементов $S$, не входящих в $T$:
         $$S\setminus T = \{\,x \mid (x\in S)\ \text{и}\ (x\notin T)\,\}.$$
+        В частном случае, когда $T\subset S$, разность $S\setminus T$ называют <span class="term">дополнением к $T$ в $S$</span>.
       </div>
     </div>
 
@@ -3433,7 +3443,7 @@ html.arriving .backdrop,html.arriving .sidebar{
       <span class="em">Исключающее «или»</span> — связка «либо одно, либо другое, но не оба сразу»: высказывание «$x\in S$ либо $x\in T$» истинно ровно тогда, когда $x$ лежит в одном из множеств и не лежит в другом. Объединению отвечает обычное («включающее») «или», а исключающему — как раз симметрическая разность.
     </div>
 
-    <div class="src-ref">Кострикин, ч. 1, с. 34</div>
+    <div class="src-ref">Г. Н. Клюшников, лекция 2 «Множества и отображения. Перестановки»; Кострикин, ч. 1, с. 34</div>
 
   </div>
 </div>
@@ -3471,7 +3481,7 @@ html.arriving .backdrop,html.arriving .sidebar{
       Ключевое слово — <span class="em">упорядоченные</span>: в паре важен порядок, поэтому $(x,y)$ и $(y,x)$ — это, вообще говоря, разные элементы, и $X\times Y\ne Y\times X$. Привычная плоскость — это $\mathbb{R}\times\mathbb{R}=\mathbb{R}^2$, множество пар координат точки.
     </div>
 
-    <div class="src-ref">Кострикин, ч. 1, с. 35</div>
+    <div class="src-ref">Г. Н. Клюшников, лекция 2 «Множества и отображения. Перестановки»; Кострикин, ч. 1, с. 35</div>
 
   </div>
 </div>
@@ -3520,7 +3530,7 @@ html.arriving .backdrop,html.arriving .sidebar{
       Задание <span class="em">и</span> области определения $X$, <span class="em">и</span> области значений $Y$ — существенная часть определения отображения. Одно и то же правило $x\mapsto x^2$ задаёт <span class="em">разные</span> отображения: $\mathbb{R}\to\mathbb{R}$, $\mathbb{R}\to\mathbb{R}_{\ge 0}$ и $\mathbb{R}_{>0}\to\mathbb{R}_{>0}$ ведут себя по-разному, хотя формула одна.
     </div>
 
-    <div class="src-ref">Кострикин, ч. 1, с. 35–36</div>
+    <div class="src-ref">Г. Н. Клюшников, лекция 2 «Множества и отображения. Перестановки»; Кострикин, ч. 1, с. 35–36</div>
 
   </div>
 </div>
@@ -3547,7 +3557,9 @@ html.arriving .backdrop,html.arriving .sidebar{
       <div class="def-text">
         <span class="term">Прообразом</span> элемента $y\in Y$ называется множество всех его прообразов:
         $$f^{-1}(y) = \{\,x\in X\mid f(x)=y\,\}.$$
-        Более общо, <span class="term">полный прообраз</span> подмножества $S\subseteq Y$ — это $f^{-1}(S)=\{\,x\in X\mid f(x)\in S\,\}$. Если $y\in Y\setminus\operatorname{Im}f$, то $f^{-1}(y)=\varnothing$.
+        Более общо, <span class="term">полный прообраз</span> подмножества $Y_0\subseteq Y$ — это
+        $$f^{-1}(Y_0)=\{\,x\in X\mid f(x)\in Y_0\,\}=\bigcup_{y\in Y_0} f^{-1}(y),$$
+        то есть полный прообраз множества распадается в объединение прообразов его отдельных элементов. Если $y\in Y\setminus\operatorname{Im}f$, то $f^{-1}(y)=\varnothing$.
       </div>
     </div>
 
@@ -3555,7 +3567,7 @@ html.arriving .backdrop,html.arriving .sidebar{
       Образ идёт «вперёд» (от $x$ к $f(x)$) и всегда однозначен; прообраз идёт «назад» и может содержать ноль, один или много элементов. Запись $f^{-1}(y)$ здесь означает <span class="em">множество</span> прообразов и не предполагает существования обратного отображения.
     </div>
 
-    <div class="src-ref">Кострикин, ч. 1, с. 36</div>
+    <div class="src-ref">Г. Н. Клюшников, лекция 2 «Множества и отображения. Перестановки»; Кострикин, ч. 1, с. 36</div>
 
   </div>
 </div>
@@ -3574,6 +3586,7 @@ html.arriving .backdrop,html.arriving .sidebar{
       <div class="def-text">
         <span class="term">Сюръективное</span> отображение $f:X\to Y$ (отображение «на») — когда образ совпадает со всей областью значений, $\operatorname{Im}f = Y$; равносильно: каждый $y\in Y$ есть образ хотя бы одного $x$:
         $$\forall y\in Y\;\exists x\in X:\; f(x)=y.$$
+        Значит, для сюръекции элементов в $Y$ не больше, чем в $X$.
       </div>
     </div>
 
@@ -3582,6 +3595,7 @@ html.arriving .backdrop,html.arriving .sidebar{
       <div class="def-text">
         <span class="term">Инъективное</span> отображение $f:X\to Y$ — разным элементам $X$ соответствуют разные элементы $Y$:
         $$x\ne x' \;\Rightarrow\; f(x)\ne f(x').$$
+        Значит, при инъекции элементов в $Y$ не меньше, чем в $X$.
       </div>
     </div>
 
@@ -3597,7 +3611,14 @@ html.arriving .backdrop,html.arriving .sidebar{
     </div>
 
     <div class="example-card">
-      <div class="example-card-title from-lecture">Пример (Кострикин)</div>
+      <div class="example-card-title">Пример (из лекции)</div>
+      <div class="example-card-body">
+        Биекция «стулья — студенты»: все студенты сидят на стульях, и свободных стульев не осталось. Если кто-то стоит — не сюръекция со стороны стульев; если остались свободные стулья — не инъекция «на» них. Ровно в том случае, когда нет ни стоящих, ни пустых стульев, соответствие взаимно однозначно.
+      </div>
+    </div>
+
+    <div class="example-card">
+      <div class="example-card-title">Пример (Кострикин)</div>
       <div class="example-card-body">
         Одно правило $x\mapsto x^2$ задаёт три разных отображения:
         <ul class="props">
@@ -3608,7 +3629,7 @@ html.arriving .backdrop,html.arriving .sidebar{
       </div>
     </div>
 
-    <div class="src-ref">Кострикин, ч. 1, с. 36</div>
+    <div class="src-ref">Г. Н. Клюшников, лекция 2 «Множества и отображения. Перестановки»; Кострикин, ч. 1, с. 36</div>
 
   </div>
 </div>
@@ -3632,7 +3653,7 @@ html.arriving .backdrop,html.arriving .sidebar{
     <div class="def-block">
       <div class="section-tag">Вложение</div>
       <div class="def-text">
-        Если $X$ — подмножество в $Y$ ($X\subseteq Y$), то <span class="term">вложением</span> называется отображение $\iota:X\to Y$, сопоставляющее каждому $x\in X$ тот же самый элемент, но уже рассматриваемый во множестве $Y$. Вложение всегда инъективно.
+        Если $X$ — подмножество в $Y$ ($X\subseteq Y$), то <span class="term">вложением</span> называется отображение $\iota:X\to Y$ (в лекции оно обозначено буквой $i$), сопоставляющее каждому $x\in X$ тот же самый элемент, но уже рассматриваемый во множестве $Y$. Вложение всегда инъективно.
       </div>
     </div>
 
@@ -3643,7 +3664,7 @@ html.arriving .backdrop,html.arriving .sidebar{
       </div>
     </div>
 
-    <div class="src-ref">Кострикин, ч. 1, с. 36</div>
+    <div class="src-ref">Г. Н. Клюшников, лекция 2 «Множества и отображения. Перестановки»; Кострикин, ч. 1, с. 36</div>
 
   </div>
 </div>
@@ -3673,7 +3694,7 @@ html.arriving .backdrop,html.arriving .sidebar{
       Композиция, вообще говоря, <span class="em">некоммутативна</span>: $fg\ne gf$. Например, для $X=\{a,b\}$ возьмём $f(a)=b,\ f(b)=a$ и $g(a)=g(b)=a$; тогда $fg$ и $gf$ — разные преобразования.
     </div>
 
-    <div class="src-ref">Кострикин, ч. 1, с. 37</div>
+    <div class="src-ref">Г. Н. Клюшников, лекция 2 «Множества и отображения. Перестановки»; Кострикин, ч. 1, с. 37</div>
 
   </div>
 </div>
@@ -3706,7 +3727,7 @@ html.arriving .backdrop,html.arriving .sidebar{
       </div>
     </div>
 
-    <div class="src-ref">Кострикин, ч. 1, с. 37–38</div>
+    <div class="src-ref">Г. Н. Клюшников, лекция 2 «Множества и отображения. Перестановки»; Кострикин, ч. 1, с. 37–38</div>
 
   </div>
 </div>
@@ -3730,7 +3751,7 @@ html.arriving .backdrop,html.arriving .sidebar{
     </div>
 
     <div class="thm-box">
-      <div class="thm-label">Критерий обратимости (теорема 2)</div>
+      <div class="thm-label">Теорема 1 (критерий обратимости)</div>
       <div class="def-text">
         Отображение $f:X\to Y$ имеет обратное <span class="em">тогда и только тогда</span>, когда $f$ биективно.
       </div>
@@ -3744,7 +3765,7 @@ html.arriving .backdrop,html.arriving .sidebar{
       </div>
     </div>
 
-    <div class="src-ref">Кострикин, ч. 1, с. 38–39</div>
+    <div class="src-ref">Г. Н. Клюшников, лекция 2 «Множества и отображения. Перестановки»; Кострикин, ч. 1, с. 38–39</div>
 
   </div>
 </div>
@@ -3759,14 +3780,14 @@ html.arriving .backdrop,html.arriving .sidebar{
   <div class="q-body">
 
     <div class="thm-box">
-      <div class="thm-label">Теорема (для конечного множества)</div>
+      <div class="thm-label">Теорема 2</div>
       <div class="def-text">
         Если $X$ — конечное множество и преобразование $f:X\to X$ <span class="em">инъективно</span>, то оно <span class="em">биективно</span>.
       </div>
     </div>
 
     <div class="thm-box">
-      <div class="thm-label">Теорема (двойственная)</div>
+      <div class="thm-label">Теорема 3</div>
       <div class="def-text">
         Если $X$ — конечное множество и преобразование $f:X\to X$ <span class="em">сюръективно</span>, то оно <span class="em">биективно</span>.
       </div>
@@ -3776,7 +3797,7 @@ html.arriving .backdrop,html.arriving .sidebar{
       Для конечного множества $X$ свойства инъективности, сюръективности и биективности преобразования $f:X\to X$ <span class="em">равносильны</span>: ни одно не может выполняться без двух других. Для бесконечных множеств это уже не так: отображение «следования» $\sigma:\mathbb{N}\to\mathbb{N}$, $\sigma(n)=n+1$, инъективно, но не сюръективно (единица не является ничьим образом).
     </div>
 
-    <div class="src-ref">Кострикин, ч. 1, с. 39</div>
+    <div class="src-ref">Г. Н. Клюшников, лекция 2 «Множества и отображения. Перестановки»; Кострикин, ч. 1, с. 39</div>
 
   </div>
 </div>
@@ -3796,10 +3817,12 @@ html.arriving .backdrop,html.arriving .sidebar{
   <div class="q-head" onclick="toggleCard(this)"><span class="q-num">17</span><span class="q-title">Понятие перестановки</span><button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></div>
   <div class="q-body">
     <div class="def-block"><div class="section-tag">Перестановка</div><div class="def-text">
-      Пусть $\Omega$ — конечное множество из $n$ элементов; природа элементов несущественна, поэтому считают $\Omega=\{1,2,\ldots,n\}$. <span class="term">Перестановками</span> называют все взаимно однозначные преобразования $\Omega\to\Omega$; обозначают их строчными греческими буквами, а единичное преобразование — буквой $e$. Перестановку $\pi$ записывают двумя строками, явно указывая все образы:
+      Пусть $\Omega$ — конечное множество из $n$ элементов; природа элементов несущественна, поэтому считают $\Omega=\{1,2,\ldots,n\}$. Множество всех биекций $\Omega\to\Omega$ обозначают
+      $$S_n=S(\Omega),$$
+      а его элементы называют <span class="term">перестановками</span>. Обозначают их строчными греческими буквами, единичное преобразование — буквой $e$. Перестановка $\pi$ сопоставляет элементу $i$ элемент $\pi(i)$; запись: $\pi:i\mapsto\pi(i)$. Явно все образы указывают двумя строками:
       $$\pi=\begin{pmatrix}1&2&\cdots&n\\ \pi(1)&\pi(2)&\cdots&\pi(n)\end{pmatrix}.$$
     </div></div>
-    <div class="src-ref">Кострикин, ч. 1, с. 50–51</div>
+    <div class="src-ref">Г. Н. Клюшников, лекция 2 «Множества и отображения. Перестановки»; Кострикин, ч. 1, с. 50–51</div>
   </div>
 </div>
 
@@ -3819,10 +3842,16 @@ html.arriving .backdrop,html.arriving .sidebar{
     </div></div>
 
     <div class="def-block"><div class="section-tag">Свойства. Симметрическая группа</div><div class="def-text">
-      Умножение перестановок обладает тремя свойствами: оно <span class="em">ассоциативно</span> $(\alpha\beta)\gamma=\alpha(\beta\gamma)$; есть <span class="em">единичный элемент</span> $e$, $\pi e=\pi=e\pi$; у каждой $\pi$ есть <span class="em">обратная</span> $\pi^{-1}$, $\pi\pi^{-1}=\pi^{-1}\pi=e$. Эти свойства дают основание называть $S_n$ <span class="term">группой</span>. Множество всех перестановок с операцией умножения называется <span class="term">симметрической группой степени $n$</span>. Её порядок:
+      Умножение перестановок обладает тремя свойствами:
+      <ol style="padding-left:1.4rem;margin:0.5rem 0;">
+        <li>ассоциативность: $(\alpha\beta)\gamma=\alpha(\beta\gamma)$;</li>
+        <li>существует единичный элемент: $\exists\,e:\ \pi e=e\pi=\pi$ для всех $\pi\in S_n$;</li>
+        <li>у каждого элемента есть обратный: $\forall\,\pi\in S_n\ \exists\,\pi^{-1}:\ \pi\pi^{-1}=\pi^{-1}\pi=e$.</li>
+      </ol>
+      <span class="term">Группой</span> называют любое множество с операцией, обладающей этими тремя свойствами. В частности, $S_n$ — группа; её называют <span class="term">симметрической группой степени $n$</span>. Её порядок:
       $$\bigl|S_n\bigr|=n!.$$
     </div></div>
-    <div class="src-ref">Кострикин, ч. 1, с. 51–52</div>
+    <div class="src-ref">Г. Н. Клюшников, лекция 2 «Множества и отображения. Перестановки»; Кострикин, ч. 1, с. 51–52</div>
   </div>
 </div>
 
@@ -3831,7 +3860,7 @@ html.arriving .backdrop,html.arriving .sidebar{
   <div class="q-head" onclick="toggleCard(this)"><span class="q-num">19</span><span class="q-title">Независимый цикл длины L (определение)</span><button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></div>
   <div class="q-body">
     <div class="def-block"><div class="section-tag">Цикл длины L</div><div class="def-text">
-      <span class="term">Циклом длины $L$</span> называется перестановка $\sigma\in S_n$, действующая по правилу
+      <span class="term">Независимым циклом длины $L$</span> называется перестановка $n$ элементов, которая переводит 1-й отмеченный элемент во 2-й, 2-й в 3-й, …, $(L-1)$-й в $L$-й, $L$-й в 1-й, а остальные элементы оставляет на своих местах. Формально: $\sigma\in S_n$ действует по правилу
       $$\sigma(a_1)=a_2,\;\sigma(a_2)=a_3,\;\ldots,\;\sigma(a_{L-1})=a_L,\;\sigma(a_L)=a_1,$$
       а все остальные элементы оставляющая на месте ($a_1,\ldots,a_L$ — различные числа из $\{1,\ldots,n\}$). Запись цикла определена с точностью до <span class="em">циклического сдвига</span>: $(a_1\,a_2\,\ldots\,a_L)=(a_2\,a_3\,\ldots\,a_L\,a_1)=\ldots$
     </div></div>
@@ -3840,10 +3869,10 @@ html.arriving .backdrop,html.arriving .sidebar{
       Два цикла называются <span class="term">независимыми (непересекающимися)</span>, если у них нет общих перемещаемых символов. Независимые циклы <span class="em">перестановочны</span> (их можно умножать в любом порядке).
     </div></div>
 
-    <div class="example-card"><div class="example-card-title from-lecture">Пример (Кострикин)</div><div class="example-card-body">
-      Перестановка $(2\ 3\ 4\ 1)=(3\ 4\ 1\ 2)=(4\ 1\ 2\ 3)$ — цикл длины 4. Перестановка $(1\ 4)(2\ 3)$ — произведение двух независимых циклов длины 2.
+    <div class="example-card"><div class="example-card-title">Пример (из лекции)</div><div class="example-card-body">
+      $(2\ 3\ 4\ 1)$ — перестановка, действующая по правилу $2\to3,\ 3\to4,\ 4\to1,\ 1\to2$: цикл длины 4. Его запись определена с точностью до циклического сдвига: $(2\ 3\ 4\ 1)=(3\ 4\ 1\ 2)=(4\ 1\ 2\ 3)$. А $(1\ 4)(2\ 3)$ — произведение двух независимых циклов длины 2.
     </div></div>
-    <div class="src-ref">Кострикин, ч. 1, с. 53</div>
+    <div class="src-ref">Г. Н. Клюшников, лекция 2 «Множества и отображения. Перестановки»; Кострикин, ч. 1, с. 53</div>
   </div>
 </div>
 
@@ -3852,13 +3881,13 @@ html.arriving .backdrop,html.arriving .sidebar{
   <div class="q-head" onclick="toggleCard(this)"><span class="q-num">20</span><span class="q-title">Порядок перестановки</span><button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></div>
   <div class="q-body">
     <div class="def-block"><div class="section-tag">Определение</div><div class="def-text">
-      <span class="term">Порядком перестановки</span> $\pi\in S_n$ называется наименьшее натуральное число $q$ такое, что $\pi^{q}=e$ (где $e$ — единичная перестановка); тогда все различные степени $\pi$ исчерпываются множеством $\{e,\pi,\pi^{2},\ldots,\pi^{q-1}\}$.
+      <span class="term">Порядком перестановки</span> $\pi\in S_n$ называется наименьшее $s\in\mathbb{N}$ такое, что $\pi^{s}=e$ (где $e$ — единичная перестановка); тогда все различные степени $\pi$ исчерпываются множеством $\{e,\pi,\pi^{2},\ldots,\pi^{s-1}\}$.
     </div></div>
 
     <div class="explain">
       Порядок перестановки равен <span class="em">наименьшему общему кратному</span> длин независимых циклов в её разложении. Так, у перестановок $\sigma$ и $\tau$ из примера выше порядки равны $4$ и $2$ соответственно.
     </div>
-    <div class="src-ref">Кострикин, ч. 1, с. 53</div>
+    <div class="src-ref">Г. Н. Клюшников, лекция 2 «Множества и отображения. Перестановки»; Кострикин, ч. 1, с. 53</div>
   </div>
 </div>
 
@@ -3873,7 +3902,7 @@ html.arriving .backdrop,html.arriving .sidebar{
       $$\begin{pmatrix}1&2&3&4&5&6&7&8\\2&3&4&5&1&7&6&8\end{pmatrix}=(1\ 2\ 3\ 4\ 5)(6\ 7),$$
       циклы длины 1 (неподвижный символ 8) в записи опускают.
     </div></div>
-    <div class="src-ref">Кострикин, ч. 1, с. 55</div>
+    <div class="src-ref">Г. Н. Клюшников, лекция 2 «Множества и отображения. Перестановки»; Кострикин, ч. 1, с. 55</div>
   </div>
 </div>
 
@@ -3883,6 +3912,10 @@ html.arriving .backdrop,html.arriving .sidebar{
   <div class="q-body">
     <div class="def-block"><div class="section-tag">Транспозиция</div><div class="def-text">
       <span class="term">Транспозицией</span> называется цикл длины 2. Любая транспозиция имеет вид $\tau=(i\ j)$: она меняет местами символы $i$ и $j$ и оставляет на месте все остальные.
+    </div></div>
+
+    <div class="thm-box"><div class="thm-label">Утверждение</div><div class="def-text">
+      Любой цикл длины $>2$ представляется в виде произведения транспозиций.
     </div></div>
 
     <div class="thm-box"><div class="thm-label">Следствие (из теоремы 1)</div><div class="def-text">
@@ -3905,7 +3938,7 @@ html.arriving .backdrop,html.arriving .sidebar{
       В $S_4$ одну и ту же перестановку можно записать по-разному:
       $$(1\ 2\ 3)=(1\ 3)(1\ 2)=(2\ 3)(1\ 3)=(1\ 3)(2\ 4)(1\ 2)(1\ 4).$$
     </div></div>
-    <div class="src-ref">Кострикин, ч. 1, с. 55</div>
+    <div class="src-ref">Г. Н. Клюшников, лекция 2 «Множества и отображения. Перестановки»; Кострикин, ч. 1, с. 55</div>
   </div>
 </div>
 
@@ -3914,12 +3947,12 @@ html.arriving .backdrop,html.arriving .sidebar{
   <div class="q-head" onclick="toggleCard(this)"><span class="q-num">23</span><span class="q-title">Теорема о знаке перестановки</span><button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></div>
   <div class="q-body">
     <div class="thm-box"><div class="thm-label">Теорема</div><div class="def-text">
-      Пусть $\pi\in S_n$ и $\pi=\tau_1\tau_2\ldots\tau_k$ — произвольное разложение в произведение транспозиций. Тогда число
-      $$\varepsilon(\pi)=(-1)^k$$
-      (<span class="em">знак</span>, или чётность) полностью определяется самой $\pi$ и не зависит от способа разложения. Кроме того, знак мультипликативен:
-      $$\varepsilon(\alpha\beta)=\varepsilon(\alpha)\,\varepsilon(\beta)\quad\forall\,\alpha,\beta\in S_n.$$
+      Пусть $\pi\in S_n$ и $\pi=\tau_1\ldots\tau_m$, где $\tau_k$, $k=1,\ldots,m$ — транспозиции. Тогда число
+      $$\varepsilon_\pi=(-1)^m,$$
+      называемое <span class="em">знаком</span>, или <span class="em">чётностью</span>, полностью определяется перестановкой $\pi$ и не зависит от способа разложения $\pi$ на транспозиции. Кроме того, знак произведения перестановок равен произведению знаков:
+      $$\varepsilon_{\alpha\beta}=\varepsilon_\alpha\,\varepsilon_\beta\quad\forall\,\alpha,\beta\in S_n.$$
     </div></div>
-    <div class="src-ref">Кострикин, ч. 1, с. 56</div>
+    <div class="src-ref">Г. Н. Клюшников, лекция 2 «Множества и отображения. Перестановки»; Кострикин, ч. 1, с. 56</div>
   </div>
 </div>
 
@@ -3928,25 +3961,31 @@ html.arriving .backdrop,html.arriving .sidebar{
   <div class="q-head" onclick="toggleCard(this)"><span class="q-num">24</span><span class="q-title">Чётные и нечётные перестановки. Правила определения знака перестановки</span><button class="q-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></div>
   <div class="q-body">
     <div class="def-block"><div class="section-tag">Чётные и нечётные</div><div class="def-text">
-      Перестановка $\pi\in S_n$ называется <span class="term">чётной</span>, если её знак $\varepsilon(\pi)=1$, и <span class="term">нечётной</span>, если $\varepsilon(\pi)=-1$. Все транспозиции — нечётные перестановки.
+      Перестановка $\pi\in S_n$ называется <span class="term">чётной</span>, если её знак $\varepsilon_\pi=1$, и <span class="term">нечётной</span>, если $\varepsilon_\pi=-1$. Все транспозиции — нечётные перестановки: транспозиция есть произведение одной транспозиции, поэтому её знак равен $(-1)^1=-1$.
     </div></div>
 
     <div class="def-block"><div class="section-tag">Правило по транспозициям</div><div class="def-text">
-      Если дано какое-либо разложение $\pi=\tau_1\tau_2\ldots\tau_k$ в произведение транспозиций, то
-      $$\varepsilon(\pi)=(-1)^{k}.$$
+      Если дано какое-либо разложение $\pi=\tau_1\tau_2\ldots\tau_m$ в произведение транспозиций, то
+      $$\varepsilon_\pi=(-1)^{m}.$$
       Знак не зависит от выбора разложения (теорема о знаке).
     </div></div>
 
     <div class="def-block"><div class="section-tag">Правило по циклам</div><div class="def-text">
-      Цикл длины $l$ имеет знак $(-1)^{l-1}$ (он есть произведение $l-1$ транспозиций). Если $\pi$ разложена в независимые циклы длин $l_1,l_2,\ldots,l_m$, то по мультипликативности знака
-      $$\varepsilon(\pi)=(-1)^{\,(l_1-1)+(l_2-1)+\cdots+(l_m-1)}.$$
+      Цикл длины $l$ имеет знак $(-1)^{l-1}$ (он есть произведение $l-1$ транспозиций). Если $\pi=C_1\ldots C_m$ — разложение в независимые циклы длин $l_1,l_2,\ldots,l_m$, то по мультипликативности знака
+      $$\varepsilon_\pi=(-1)^{A},\qquad A=\sum_{j=1}^{m}\bigl(l_j-1\bigr).$$
+    </div></div>
+
+    <div class="def-block"><div class="section-tag">Знак обратной перестановки</div><div class="def-text">
+      Для любой $\sigma\in S_n$
+      $$\varepsilon_{\sigma^{-1}}=\varepsilon_\sigma.$$
+      Действительно, если $\sigma=\tau_1\ldots\tau_m$, то $\sigma^{-1}=\tau_m\ldots\tau_1$ (каждая транспозиция обратна самой себе), то есть разлагается в то же число транспозиций.
     </div></div>
 
     <div class="example-card"><div class="example-card-title from-lecture">Пример (Кострикин)</div><div class="example-card-body">
-      $\pi=(1\ 5\ 2\ 4\ 7)(3\ 6\ 9\ 8)(10\ 11)$ имеет циклы длин $l_1=5,\ l_2=4,\ l_3=2$, поэтому
-      $$\varepsilon(\pi)=(-1)^{4+3+1}=1\quad(\pi\text{ — чётная}).$$
+      $\pi=(1\ 5\ 2\ 4\ 7)(3\ 6\ 9\ 8)(10\ 11)$ имеет циклы длин $l_1=5,\ l_2=4,\ l_3=2$, поэтому $A=4+3+1=8$ и
+      $$\varepsilon_\pi=(-1)^{8}=1\quad(\pi\text{ — чётная}).$$
     </div></div>
-    <div class="src-ref">Кострикин, ч. 1, с. 56–57</div>
+    <div class="src-ref">Г. Н. Клюшников, лекция 2 «Множества и отображения. Перестановки»; Кострикин, ч. 1, с. 56–57</div>
   </div>
 </div>
 
@@ -5144,9 +5183,9 @@ html.arriving .backdrop,html.arriving .sidebar{
       <div class="section-tag">Комбинаторно-аналитическое</div>
       <div class="def-text">
         Определитель матрицы $A=(a_{ij})$ порядка $n$ есть алгебраическая сумма $n!$ слагаемых. Каждое слагаемое — произведение $n$ элементов матрицы, взятых <span class="em">по одному из каждой строки и по одному из каждого столбца</span>, со знаком:
-        $$\varepsilon(\sigma)\cdot a_{1\sigma(1)}a_{2\sigma(2)}\ldots a_{n\sigma(n)},$$
-        где $\varepsilon(\sigma)$ — знак перестановки, а суммирование ведётся по всем перестановкам $\sigma\in S_n$:
-        $$\det A=\sum_{\sigma\in S_n}\varepsilon(\sigma)\,a_{1\sigma(1)}a_{2\sigma(2)}\cdots a_{n\sigma(n)}.$$
+        $$\varepsilon_\sigma\cdot a_{1\sigma(1)}a_{2\sigma(2)}\ldots a_{n\sigma(n)},$$
+        где $\varepsilon_\sigma$ — знак перестановки, а суммирование ведётся по всем перестановкам $\sigma\in S_n$:
+        $$\det A=\sum_{\sigma\in S_n}\varepsilon_\sigma\,a_{1\sigma(1)}a_{2\sigma(2)}\cdots a_{n\sigma(n)}.$$
         Перестановка $\sigma$ как раз и указывает, из какого столбца берётся элемент для каждой строки; разным перестановкам отвечают разные наборы, и всего их $n!$. При $n=3$ получается $3!=6$ слагаемых — те самые, что даёт правило треугольников (вопрос 61):
         <div class="fig-block" style="text-align:center;margin:0.6rem 0">
         <svg viewBox="0 0 470 150" style="max-width:470px;width:100%" xmlns="http://www.w3.org/2000/svg">
@@ -6647,8 +6686,8 @@ html.arriving .backdrop,html.arriving .sidebar{
       <div class="section-tag">Кососимметричная (знакопеременная)</div>
       <div class="def-text">
         Форма $f$ называется <span class="term">кососимметричной</span> (знакопеременной), если для любой перестановки $\sigma\in S_n$
-        $$f(v_{\sigma(1)},\ldots,v_{\sigma(n)})=\varepsilon(\sigma)\cdot f(v_1,\ldots,v_n),$$
-        где $\varepsilon(\sigma)$ — знак перестановки. Эквивалентно (на транспозициях):
+        $$f(v_{\sigma(1)},\ldots,v_{\sigma(n)})=\varepsilon_\sigma\cdot f(v_1,\ldots,v_n),$$
+        где $\varepsilon_\sigma$ — знак перестановки. Эквивалентно (на транспозициях):
         $$f(\ldots,v_i,\ldots,v_j,\ldots)=-f(\ldots,v_j,\ldots,v_i,\ldots)\quad\forall\,1\le i\lt j\le n.$$
       </div>
     </div>
